@@ -61,6 +61,7 @@ module.exports = function(config) {
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/oi.select/dist/select-tpls.min.js',
+            'bower_components/angular-mailto/angular-mailto.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",

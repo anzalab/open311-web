@@ -51,6 +51,7 @@ angular
       if ($scope.servicerequest) {
         _.reverse($scope.servicerequest.comments =
           _.sortBy($scope.servicerequest.comments, 'createdAt'));
+        $scope.mailTo = ServiceRequest.toEmail($scope.servicerequest);
       }
       $scope.create = false;
     };
@@ -59,7 +60,8 @@ angular
      * cancel create operation
      */
     $scope.cancel = function () {
-      $scope.servicerequest = _.first($scope.servicerequests);
+      // $scope.servicerequest = _.first($scope.servicerequests);
+      $scope.select(_.first($scope.servicerequests));
       $scope.create = false;
     };
 
@@ -70,7 +72,8 @@ angular
       if (assignee) {
         $scope.servicerequest.assignee = assignee._id;
         $scope.servicerequest.$update().then(function (response) {
-          $scope.servicerequest = response;
+          // $scope.servicerequest = response;
+          $scope.select(response);
           $scope.updated = true;
           $rootScope.$broadcast('app:servicerequests:reload');
         });
@@ -120,7 +123,8 @@ angular
         });
 
         $scope.servicerequest.$update().then(function (response) {
-          $scope.servicerequest = response;
+          $scope.select(response);
+          // $scope.servicerequest = response;
           //sort comment in desc order
           if ($scope.servicerequest) {
             _.reverse($scope.servicerequest.comments =
@@ -140,7 +144,8 @@ angular
         $scope.servicerequest.priority = priority;
       }
       $scope.servicerequest.$update().then(function (response) {
-        $scope.servicerequest = response;
+        // $scope.servicerequest = response;
+        $scope.select(response);
         $scope.updated = true;
         $rootScope.$broadcast('app:servicerequests:reload');
       });
@@ -152,7 +157,8 @@ angular
         $scope.servicerequest.status = status;
       }
       $scope.servicerequest.$update().then(function (response) {
-        $scope.servicerequest = response;
+        // $scope.servicerequest = response;
+        $scope.select(response);
         $scope.updated = true;
         $rootScope.$broadcast('app:servicerequests:reload');
       });
@@ -231,7 +237,8 @@ angular
         if ($scope.updated) {
           $scope.updated = false;
         } else {
-          $scope.servicerequest = _.first($scope.servicerequests);
+          // $scope.servicerequest = _.first($scope.servicerequests);
+          $scope.select(_.first($scope.servicerequests));
         }
         $scope.total = response.total;
         $scope.spin = false;

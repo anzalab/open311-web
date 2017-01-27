@@ -31,7 +31,8 @@ angular
     'ngCsv',
     'angular-theme-spinner',
     'monospaced.elastic',
-    'oi.select'
+    'oi.select',
+    'uz.mailto'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,

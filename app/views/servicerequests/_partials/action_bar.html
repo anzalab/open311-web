@@ -1,13 +1,13 @@
 <!-- start servicerequest detail action bar -->
 <ul class="nav navbar-nav">
-    <li class="nav-item p-r">
-        <a class="nav-link text-muted" title="Send Reply to the Reporter">
+    <li class="nav-item">
+        <a ng-if="mailTo" href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
             <span class="nav-text">
                 <i class="icon-action-undo"></i>
             </span>
         </a>
     </li>
-    <li class="nav-item b-l p-l p-r">
+    <!-- <li class="nav-item b-l p-l p-r">
         <a class="nav-link text-muted no-border" title="People on Issue">
             <span class="nav-text">
                 <i class="icon-people"></i>
@@ -42,6 +42,6 @@
                 <i class="fa fa-trash-o"></i>
             </span>
         </a>
-    </li>
+    </li> -->
 </ul>
 <!-- end servicerequest detail action bar -->
