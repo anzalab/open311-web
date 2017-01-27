@@ -202,12 +202,19 @@ angular
     };
 
 
+    $scope.load = function (query) {
+      $scope.find(query);
+    };
+
+
     /**
      * @description load servicerequests
      */
-    $scope.find = function () {
+    $scope.find = function (query) {
       //start sho spinner
       $scope.spin = true;
+
+      query = _.merge({}, query);
 
       ServiceRequest.find({
         page: $scope.page,
@@ -215,6 +222,7 @@ angular
         sort: {
           createdAt: -1
         },
+        query: query,
         q: $scope.q
       }).then(function (response) {
         //update scope with servicerequests when done loading

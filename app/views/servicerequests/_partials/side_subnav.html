@@ -17,14 +17,24 @@
     <div class="row-row">
         <div class="row-body scrollable hover">
             <div class="row-inner">
-               <!-- TODO add view all -->
+                <!-- start view all -->
+                <div class="p-a-md nav-active-white" style="padding-bottom: 0rem;padding-left: 1.2rem">
+                    <ul class="nav">
+                        <li class="nav-item m-b-xs">
+                            <a ng-click="load()" class="nav-link text-muted block" title="View All Issues">
+                            All
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end view all -->
                 <!-- start services menu -->
                 <div class="p-a-md">
                     <div class="m-b text-muted text-xs">Services</div>
                     <div class="nav-active-white">
                         <ul class="nav">
                             <li class="nav-item m-b-xs" ng-repeat="service in services">
-                                <a class="nav-link text-muted block">
+                                <a ng-click="load({service:service._id})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{service.color}}">23</span> {{service.name}}
                                 </a>
                             </li>
@@ -38,20 +48,20 @@
                     <div class="nav-active-white">
                         <ul class="nav">
                             <li class="nav-item m-b-xs">
-                                <a class="nav-link text-muted block">
+                                <a ng-click="load({'status.name':'Open'})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded">23</span>Open</a>
                             </li>
                             <li class="nav-item m-b-xs">
-                                <a class="nav-link text-muted block">
+                                <a ng-click="load({'status.name':'In Progress'})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label primary rounded">2</span> In Progress</a>
                             </li>
                             <li class="nav-item m-b-xs">
-                                <a class="nav-link text-muted block">
+                                <a ng-click="load({'status.name':'Pending'})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label warning rounded">4</span> Pending
                                 </a>
                             </li>
                             <li class="nav-item m-b-xs">
-                                <a class="nav-link text-muted block"><span class="pull-right text-sm label success rounded">1</span>Closed
+                                <a ng-click="load({'status.name':'Closed'})" class="nav-link text-muted block"><span class="pull-right text-sm label success rounded">1</span>Closed
                                 </a>
                             </li>
                         </ul>
