@@ -1,0 +1,82 @@
+<!-- start aside -->
+<div class="navside" data-layout="column">
+    <!-- start brand details -->
+    <div class="navbar no-radius">
+        <a href="index.html" class="navbar-brand">
+            <img src="images/logo.png" alt="." class="hide">
+            <span class="hidden-folded inline">aside</span>
+        </a>
+    </div>
+    <!-- end brand details -->
+    <!-- start menu actions -->
+    <div data-flex class="hide-scroll">
+        <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
+            <ul class="nav" data-ui-nav>
+                <li class="nav-header hidden-folded">
+                    <span class="text-xs">Main</span>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.issues.list" class="b-default" title="Issues & Service Request">
+                        <span class="nav-label">
+                            <b class="label label-xs rounded danger"></b>
+                        </span>
+                        <span class="nav-icon">
+                            <i class="ion-chatbubble-working"></i>
+                        </span>
+                        <span class="nav-text">Issues</span>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="#" class="b-default" title="Summary Reports">
+                        <span class="nav-icon">
+                            <i class="ion-pie-graph"></i>
+                        </span>
+                        <span class="nav-text">Reports</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a ng-click="onCreateIssue()" class="b-default" title="Report New Issue or Service Request">
+                        <span class="nav-icon">
+                            <i class="ion-plus-circled"></i>
+                        </span>
+                        <span class="nav-text">New Issue</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- end menu actions -->
+    <!-- start profile actions -->
+    <div data-flex-no-shrink>
+        <div uib-dropdown class="nav-fold dropup" title="{{party.name}}">
+            <a uib-dropdown-toggle data-toggle="dropdown">
+                <div class="pull-left">
+                    <div class="inline">
+                        <letter-avatar title="{{party.name}}" data="{{party.name}}" height="60" width="60" shape="round" class="avatar w-40">
+                        </letter-avatar>
+                    </div>
+                </div>
+                <div class="clear hidden-folded p-x">
+                    <span class="block _500 text-muted">Jean Reyes</span>
+                    <div class="progress-xxs m-y-sm lt progress">
+                        <div class="progress-bar info" style="width: 15%">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
+                <a class="dropdown-item" href="#" title="My Profile">
+                    <span>Profile</span>
+                </a>
+                <a class="dropdown-item" href="#" title="System Settings">
+                    <span>Settings</span>
+                </a>
+                <a ng-show="isAuthenticated" ng-show="isAuthenticated" data-signout title="Signout" class="dropdown-item" title="Signout">
+                    Sign out
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- end profile actions -->
+</div>
+<!-- end aside -->

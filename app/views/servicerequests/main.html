@@ -1,0 +1,22 @@
+<!-- start servicerequest layout -->
+<div class="app-body">
+    <div class="app-body-inner">
+        <!-- start main servicerequest content -->
+        <div class="row-col">
+            <!-- start side subnav -->
+            <div ng-include="'views/servicerequests/_partials/side_subnav.html'" class="col-xs-3 w modal fade aside aside-md servicerequests-aside" id="subnav"></div>
+            <!-- end side subnav -->
+            <!-- start servicerequests list -->
+            <div ng-include="'views/servicerequests/_partials/list.html'" class="col-xs-3 w-xl modal fade aside aside-sm b-r servicerequests-list" id="list"></div>
+            <!-- end servicerequests list -->
+            <!-- start servicerequest detail -->
+            <div ng-include="'views/servicerequests/_partials/detail.html'" ng-show="!create" class="col-xs-6 bg servicerequest" id="detail"></div>
+            <!-- end servicerequest detail -->
+            <!-- start servicerequest create ui -->
+            <div ng-include="'views/servicerequests/_partials/create.html'" ng-show="create" class="col-xs-6 bg servicerequest" id="detail"></div>
+            <!-- end servicerequest create ui -->
+        </div>
+        <!-- end main servicerequest content -->
+    </div>
+</div>
+<!-- end servicerequest layout -->

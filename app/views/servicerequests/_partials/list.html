@@ -1,0 +1,63 @@
+<!-- start servicerequests list -->
+<div class="row-col lt">
+    <!-- start servicerequests list search -->
+    <div class="p-a b-b search-servicerequests">
+        <form>
+            <div class="input-group">
+                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Issues ..." required="">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm no-shadow" type="button">
+                        <i class="ti-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <!-- end servicerequest list search -->
+    <!-- start servicerequest listing -->
+    <div class="row-row">
+        <div class="row-body scrollable hover">
+            <div class="row-inner">
+                <div class="list" data-ui-list="info">
+                    <div ng-click="select(servicerequest)" class="list-item list-item-padded" ng-repeat="servicerequest in servicerequests" title="{{servicerequest.description}}" style="border-left: 2px solid {{servicerequest.priority.color || '#f3c111'}}">
+                        <div class="list-left">
+                            <span class="w-40 avatar circle">
+                                <letter-avatar title="Status & Area" 
+                                data="{{servicerequest.jurisdiction.name}}" 
+                                    height="60" width="60" shape="round"
+                                    color="{{servicerequest.status.color}}">
+                                </letter-avatar>
+                            </span>
+                        </div>
+                        <div class="list-body">
+                            <span class="pull-right text-xs text-muted">
+                                {{servicerequest.createdAt  | date:'dd MMM yyyy'}}
+                            </span>
+                            <div class="item-title">
+                                <a href="#" class="_500">{{servicerequest.service.name}} 
+                                <br/><span class="font-size-12">#{{servicerequest.code}}</span></a>
+                            </div>
+                            <small class="block text-muted text-ellipsis">
+                                {{servicerequest.description}}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end servicerequest listing -->
+    <!-- TODO use infinite scroll insteady of pagination -->
+    <div class="p-x-md p-y">
+        <div class="btn-group pull-right">
+            <a href="#" class="btn btn-default btn-xs">
+                <i class="fa fa-fw fa-angle-left"></i>
+            </a>
+            <a href="#" class="btn btn-default btn-xs">
+                <i class="fa fa-fw fa-angle-right"></i>
+            </a>
+        </div>
+        <span class="text-sm text-muted">Total: {{total}}</span>
+    </div>
+</div>
+<!-- end servicerequests list -->

@@ -1,0 +1,51 @@
+<!-- start side navbar -->
+<div class="page-aside-switch" ng-click="switch()">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+</div>
+<div class="page-aside-inner">
+    <h5 ui-sref="app.dashboard" title="Dashboard" tooltip-placement="bottom" class="page-aside-title pointer brand-color font-size-16">
+            {{ENV.title}}<strong class="font-size-10 brand-color">{{ENV.version}}</strong>
+        </h5>
+    <section class="page-aside-section">
+        <h5 class="page-aside-title">Main</h5>
+        <div class="list-group">
+            <a show-if-has-permits="Customer:view" ui-sref="app.customers.list" ui-sref-active="active" title="Customers" class="list-group-item">
+                <i class="icon icon-people" aria-hidden="true"></i>Customers
+            </a>
+            <a show-if-has-permits="Product:view" ui-sref="app.products.list" ui-sref-active="active" title="Products" class="list-group-item">
+                <i class="icon icon-layers" aria-hidden="true"></i>Products
+            </a>
+            <a show-if-has-permits="Licence:view" ui-sref="app.licences.list" ui-sref-active="active" title="Licences &amp; Features" class="list-group-item">
+                <i class="icon icon-map" aria-hidden="true"></i>Licences
+            </a>
+            <a show-if-has-permits="Licence:view" ui-sref="app.bills.list" ui-sref-active="active" title="Bills &amp; Receipts" class="list-group-item">
+                <i class="icon ti-wallet" aria-hidden="true"></i>Bills
+            </a>
+            <a show-if-has-permits="Entitlement:view" ui-sref="app.entitlements.list" ui-sref-active="active" title="Entitlements" class="list-group-item">
+                <i class="icon icon-cursor" aria-hidden="true"></i>Entitlements
+            </a>
+            <a show-if-has-permits="Activation:view" ui-sref="app.activations.list" ui-sref-active="active" title="Device Activations" class="list-group-item">
+                <i class="icon icon-location-pin" aria-hidden="true"></i>Activations
+            </a>
+        </div>
+    </section>
+    <section class="page-aside-section">
+        <h5 class="page-aside-title">Manage</h5>
+        <div class="list-group">
+            <a show-if-has-permits="User:view" ui-sref="app.parties.list" ui-sref-active="active" title="Manage Users" class="list-group-item">
+                <i class="icon icon-people" aria-hidden="true"></i>Users
+            </a>
+            <a show-if-has-permits="Setting:view" ui-sref="app.settings" ui-sref-active="active" title="Settings" class="list-group-item">
+                <i class="icon icon-settings" aria-hidden="true"></i>Settings
+            </a>
+            <a ng-show="isAuthenticated" ui-sref="app.profile" ui-sref-active="active" title="My Profile" class="list-group-item" title="Profile">
+                <i class="icon ti-user" aria-hidden="true"></i>Profile
+            </a>
+            <a ng-show="isAuthenticated" ng-show="isAuthenticated" href="#" data-signout title="Signout" class="list-group-item">
+                <i class="icon icon-login" aria-hidden="true"></i>Signout
+            </a>
+        </div>
+    </section>
+</div>
+<!-- end side navbar -->

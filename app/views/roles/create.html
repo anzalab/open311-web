@@ -1,0 +1,66 @@
+<!-- start role create -->
+<!-- start role create page header-->
+<div ng-show="role" class="page-header">
+    <div class="page-header-actions">
+        <button ng-click="onEdit()" ng-hide="edit" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Click to edit role">
+            <i class="icon icon-pencil" aria-hidden="true"></i>
+        </button>
+        <button ng-click="block()" ng-show="edit && !role.deletedAt && role._id" type="button" class="btn btn-danger btn-md empty-btn" title="Click to block a role">
+            Block
+        </button>
+        <button ng-click="unblock()" ng-show="edit && role.deletedAt && role._id" type="button" class="btn btn-success btn-md empty-btn" title="Click to unblock a role">
+            Unblock
+        </button>
+        <button ng-disabled="roleForm.$invalid || !role.name" ng-click="save()" ng-show="edit" type="button" class="btn btn-primary btn-md empty-btn" title="Click to save role">
+            Save
+        </button>
+        <button ng-click="delete(role)" ng-show="edit && role._id" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Delete role permanently">
+            <i class="icon icon-trash" aria-hidden="true"></i>
+        </button>
+        <button ui-sref="app.roles.list" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Cancel role edits">
+            <i class="icon ti-close" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+<!-- end role create page header-->
+<!-- start role create page content -->
+<div class="page-content page-content-table">
+    <div class="container role">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 margin-top-60">
+                <form name="roleForm" class="form-layout" autocomplete="off" novalidate>
+                    <div class="form-inputs">
+                        <div class="form-group form-material floating">
+                            <input ng-disabled="!edit" ng-model="role.name" ng-required type="text" name="name" class="form-control" title="Full Name" />
+                            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label" title="Full Name">Name</label>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group form-material floating">
+                        <textarea ng-disabled="!edit" ng-model="role.description" msd-elastic name="description" class="form-control" rows="{{edit ? 2 : 1}}">
+                        </textarea>
+                        <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Description</label>
+                    </div>
+                    <br/>
+                    <div class="form-inputs">
+                        <div class="form-group">
+                            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit,'party-role-label':edit}" class="floating-label">Permissions</label>
+                            <div class="row">
+                                <div class="col-md-3" ng-repeat="permission in grouped">
+                                    <h1>{{permission.resource}}</h1>
+                                    <div class="checkbox-custom checkbox-primary" ng-repeat="permit in permission.permits | orderBy : resource">
+                                        <input ng-show="edit" type="checkbox" checklist-model="role._assigned" checklist-value="permit._id">
+                                        <label title="{{permit.description}}">{{permit.resource}} {{permit.action}}</label>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end role create content -->
+<!-- end role create -->

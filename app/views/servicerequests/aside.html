@@ -1,0 +1,40 @@
+<!-- start customer aside -->
+<div class="page-aside-switch" ng-click="switch()">
+    <i class="icon wb-chevron-left" aria-hidden="true"></i>
+    <i class="icon wb-chevron-right" aria-hidden="true"></i>
+</div>
+<div class="page-aside-inner" data-plugin="pageAsideScroll">
+    <h5 ui-sref="app.dashboard" title="Dashboard" tooltip-placement="bottom" class="page-aside-title pointer brand-color font-size-16">
+            ShuleDirect<strong class="font-size-10 brand-color">drm</strong>
+        </h5>
+    <div data-role="container">
+        <div data-role="content">
+            <div class="page-aside-section">
+                <h5 class="page-aside-title">Main</h5>
+                <div class="list-group">
+                    <a ui-sref="app.dashboard" ui-sref-active="active" title="Go to Dashboard" class="list-group-item">
+                        <i class="icon icon-globe-alt" aria-hidden="true"></i>Dashboard
+                    </a>
+                    <a show-if-has-permits="User:view" ui-sref="app.parties.list" ui-sref-active="active" title="Users" class="list-group-item">
+                        <i class="icon icon-people" aria-hidden="true"></i>Users
+                    </a>
+                    <a show-if-has-permits="Role:view" ui-sref="app.roles.list" ui-sref-active="active" title="Roles" class="list-group-item">
+                        <i class="icon icon-key" aria-hidden="true"></i>Roles
+                    </a>
+                </div>
+            </div>
+            <div class="page-aside-section">
+                <h5 class="page-aside-title">Quicks</h5>
+                <div class="list-group has-actions">
+                    <a show-if-has-permits="User:create" class="list-group-item" ui-sref="app.parties.create" ui-sref-active="active" title="Click to add new user">
+                        <i class="icon icon-user-follow" aria-hidden="true"></i>New User
+                    </a>
+                    <a show-if-has-permits="Role:create" class="list-group-item" ui-sref="app.roles.create" ui-sref-active="active" title="Click to add new role">
+                        <i class="icon ti-plus" aria-hidden="true"></i>New Role
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end customer aside -->

@@ -1,0 +1,106 @@
+{
+  "name": "open311-web",
+  "version": "0.1.0",
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-bootstrap": "^2.4.0",
+    "angular-loading-bar": "~0.8.0",
+    "angular-resource": "~1.4.9",
+    "angular-sanitize": "~1.4.9",
+    "angular-ui-router": "^0.4.0",
+    "simple-line-icons": "~2.2.3",
+    "ng-notify": "~0.8.0",
+    "themify-icons": "~0.1.2",
+    "Ionicons": "ionicons#^2.0.1",
+    "lato": "https://github.com/lykmapipo/lato.git#~0.3.1",
+    "angucomplete-alt": "~2.1.0",
+    "bootstrap": "v4.0.0-alpha.6",
+    "open-iconic": "https://github.com/iconic/open-iconic.git#~1.1.1",
+    "angularPrint": "~0.3.8",
+    "web-icons": "*",
+    "jquery.nicescroll": "https://github.com/inuyaksa/jquery.nicescroll.git#master",
+    "angular-morris-chart": "https://github.com/stewones/angular-morris-chart.git#~1.2.0",
+    "ng-dialog": "~0.6.0",
+    "checklist-model": "~0.9.0",
+    "angular-base64-upload": "~0.1.19",
+    "angular-prompt": "~1.1.1",
+    "awesome-bootstrap-checkbox": "~0.3.7",
+    "lodash": "~4.13.1",
+    "ui-listView": "~0.0.8",
+    "ng-aa": "~0.3.0",
+    "ng-csv": "~0.3.6",
+    "angular-theme-spinner": "~1.2.3",
+    "angular-elastic": "~2.5.1",
+    "angular-dynamic-locale": "^0.1.32",
+    "angular-translate": "^2.13.1",
+    "ngToast": "ngtoast#^2.0.0",
+    "angular-animate": "^1.6.1",
+    "font-awesome": "fontawesome#^4.7.0",
+    "oi.select": "^0.2.21"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.0"
+  },
+  "appPath": "app",
+  "moduleName": "open311-web",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css"
+      ]
+    },
+    "angular-bootstrap": {
+      "main": [
+        "ui-bootstrap.js",
+        "ui-bootstrap-tpls.js"
+      ]
+    },
+    "open-iconic": {
+      "main": [
+        "font/css/open-iconic-bootstrap.css"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css"
+      ]
+    },
+    "angular-morris-chart": {
+      "main": [
+        "src/angular-morris-chart.js"
+      ]
+    },
+    "morris.js": {
+      "main": [
+        "morris.js",
+        "morris.css"
+      ],
+      "dependencies": {
+        "jquery": ">= 2.1.0",
+        "raphael": ">= 2.0"
+      }
+    },
+    "angular-theme-spinner": {
+      "main": [
+        "dist/angular-theme-spinner.js",
+        "dist/angular-theme-spinner.min.css"
+      ]
+    },
+    "ng-csv": {
+      "main": [
+        "build/ng-csv.js"
+      ]
+    },
+    "ui-listView": {
+      "main": [
+        "dist/ui-listView.js",
+        "dist/ui-listView.css"
+      ]
+    },
+    "jquery.nicescroll": {
+      "main": [
+        "jquery.nicescroll.js"
+      ]
+    }
+  }
+}

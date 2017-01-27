@@ -1,0 +1,28 @@
+<!-- start forgot password -->
+<div class="page-login-v3 layout-full">
+    <div class="page animsition vertical-align text-center">
+        <div class="page-content vertical-align-middle">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="brand margin-top-80 margin-bottom-40">
+                        <h2 class="brand-text text-blue-600 font-size-20">{{ENV.title}}<strong class="text-blue-600 font-size-10">{{ENV.version}}</strong></h2>
+                    </div>
+                    <p class="text-center font-size-12 margin-bottom-60 text-grey-700">Enter your e-mail address below to reset your password</p>
+                    <form ng-submit="forgot()" name="forgotForm" role="form" autocomplete="off">
+                        <div class="form-group form-material floating">
+                            <input type="email" class="form-control" name="email" ng-model="user.email" ng-required/>
+                            <label class="floating-label">Email</label>
+                        </div>
+                        <div class="form-group clearfix">
+                            <a class="pull-right text-blue-600" ui-sref="signin" title="Click to signin to your current account">
+                                Signin to your Account
+                            </a>
+                        </div>
+                        <button ng-disabled="forgotForm.$invalid || !user.email" type="submit" class="btn btn-primary btn-block btn-lg margin-top-40">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end forgot password-->

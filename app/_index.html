@@ -1,0 +1,256 @@
+<!doctype html>
+<html ng-app="ng311">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ENV.title}} | {{ENV.description}}</title>
+    <meta name="description" content="{{ENV.description}}" />
+    <meta name="author" content="{{ENV.owner}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="bower_components/ng-notify/src/styles/ng-notify.css" />
+    <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
+    <link rel="stylesheet" href="bower_components/themify-icons/ie7/ie7.css" />
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/open-iconic/font/css/open-iconic-bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angularPrint/angularPrint.css" />
+    <link rel="stylesheet" href="bower_components/web-icons/css/web-icons.css" />
+    <link rel="stylesheet" href="bower_components/morris.js/morris.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+    <link rel="stylesheet" href="bower_components/ui-listView/dist/ui-listView.css" />
+    <link rel="stylesheet" href="bower_components/angular-theme-spinner/dist/angular-theme-spinner.min.css" />
+    <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/dropbox-bootstrap.css">
+    <link rel="stylesheet" href="styles/ng-gallery.css">
+    <link rel="stylesheet" href="styles/dropbox-bootstrap-overrides.css">
+    <link rel="stylesheet" href="styles/dropbox.css">
+    <link rel="stylesheet" href="styles/dropbox-color.css">
+    <link rel="stylesheet" href="styles/dropbox-page.css">
+    <link rel="stylesheet" href="styles/dropbox-width.css">
+    <link rel="stylesheet" href="styles/dropbox-height.css">
+    <link rel="stylesheet" href="styles/dropbox-margin.css">
+    <link rel="stylesheet" href="styles/dropbox-padding.css">
+    <link rel="stylesheet" href="styles/dropbox-radio-checkbox.css">
+    <link rel="stylesheet" href="styles/dropbox-material.css">
+    <link rel="stylesheet" href="styles/dropbox-table.css">
+    <link rel="stylesheet" href="styles/dropbox-widget.css">
+    <link rel="stylesheet" href="styles/file-upload.css">
+    <link rel="stylesheet" href="styles/overrides.css">
+    <link rel="stylesheet" href="styles/issues.css">
+    <!-- endbuild -->
+</head>
+
+<body ng-controller="MainCtrl">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div ui-view></div>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ng-notify/src/scripts/ng-notify.js"></script>
+    <script src="bower_components/themify-icons/ie7/ie7.js"></script>
+    <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+    <script src="bower_components/angularPrint/angularPrint.js"></script>
+    <script src="bower_components/jquery.nicescroll/jquery.nicescroll.js"></script>
+    <script src="bower_components/eve-raphael/eve.js"></script>
+    <script src="bower_components/raphael/raphael.min.js"></script>
+    <script src="bower_components/morris.js/morris.js"></script>
+    <script src="bower_components/angular-morris-chart/src/angular-morris-chart.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="bower_components/angular-prompt/dist/angular-prompt.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/ui-listView/dist/ui-listView.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+    <script src="bower_components/ng-aa/dist/ng-aa.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.js"></script>
+    <script src="bower_components/angular-theme-spinner/dist/angular-theme-spinner.js"></script>
+    <script src="bower_components/angular-elastic/elastic.js"></script>
+    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/ngToast/dist/ngToast.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <!-- states -->
+    <script src="scripts/states/auth.js"></script>
+    <!-- end states -->
+    <!-- services -->
+    <script src="scripts/services/utils.js"></script>
+    <script src="scripts/services/permission.js"></script>
+    <!-- end services -->
+    <!-- common controllers -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/app.js"></script>
+    <script src="scripts/controllers/auth/change.js"></script>
+    <script src="scripts/controllers/auth/forgot.js"></script>
+    <script src="scripts/controllers/auth/recover.js"></script>
+    <script src="scripts/controllers/auth/profile.js"></script>
+    <!-- end common controllers -->
+    <!-- directives -->
+    <script src="scripts/directives/letteravatar.js"></script>
+    <script src="scripts/directives/ng-gallery.js"></script>
+    <!-- end directives -->
+    <!--start dashboard resource-->
+    <script src="scripts/states/dashboard.js"></script>
+    <script src="scripts/controllers/dashboard.js"></script>
+    <!--end dashboard resource-->
+    <!-- start issue resources -->
+    <script src="scripts/services/issue.js"></script>
+    <script src="scripts/controllers/issues/create.js"></script>
+    <script src="scripts/controllers/issues/index.js"></script>
+    <script src="scripts/controllers/issues/main.js"></script>
+    <script src="scripts/controllers/issues/show.js"></script>
+    <script src="scripts/states/issue.js"></script>
+    <!-- end issue resources -->
+    <!-- start group resources -->
+    <script src="scripts/services/group.js"></script>
+    <script src="scripts/controllers/groups/create.js"></script>
+    <script src="scripts/controllers/groups/index.js"></script>
+    <script src="scripts/controllers/groups/main.js"></script>
+    <script src="scripts/controllers/groups/show.js"></script>
+    <script src="scripts/states/group.js"></script>
+    <!-- end group resources -->
+    <!-- start service resources -->
+    <script src="scripts/services/service.js"></script>
+    <script src="scripts/controllers/services/create.js"></script>
+    <script src="scripts/controllers/services/index.js"></script>
+    <script src="scripts/controllers/services/main.js"></script>
+    <script src="scripts/controllers/services/show.js"></script>
+    <script src="scripts/states/service.js"></script>
+    <!-- end service resources -->
+    <!-- start jurisdiction resources -->
+    <script src="scripts/services/jurisdiction.js"></script>
+    <script src="scripts/controllers/jurisdictions/create.js"></script>
+    <script src="scripts/controllers/jurisdictions/index.js"></script>
+    <script src="scripts/controllers/jurisdictions/main.js"></script>
+    <script src="scripts/controllers/jurisdictions/show.js"></script>
+    <script src="scripts/states/jurisdiction.js"></script>
+    <!-- end jurisdiction resources -->
+    <!-- start customer resources -->
+    <script src="scripts/services/customer.js"></script>
+    <script src="scripts/controllers/customers/create.js"></script>
+    <script src="scripts/controllers/customers/index.js"></script>
+    <script src="scripts/controllers/customers/main.js"></script>
+    <script src="scripts/controllers/customers/show.js"></script>
+    <script src="scripts/states/customer.js"></script>
+    <!-- end customer resources -->
+    <!-- start role resources -->
+    <script src="scripts/services/role.js"></script>
+    <script src="scripts/controllers/roles/create.js"></script>
+    <script src="scripts/controllers/roles/edit.js"></script>
+    <script src="scripts/controllers/roles/index.js"></script>
+    <script src="scripts/controllers/roles/main.js"></script>
+    <script src="scripts/controllers/roles/show.js"></script>
+    <script src="scripts/states/role.js"></script>
+    <!-- end role resources -->
+    <!-- start feature resource -->
+    <script src="scripts/services/feature.js"></script>
+    <script src="scripts/controllers/features/create.js"></script>
+    <script src="scripts/controllers/features/index.js"></script>
+    <script src="scripts/controllers/features/main.js"></script>
+    <script src="scripts/controllers/features/show.js"></script>
+    <script src="scripts/states/feature.js"></script>
+    <!-- end feature resources -->
+    <!-- start feature resource -->
+    <script src="scripts/controllers/productFeatures/create.js"></script>
+    <script src="scripts/controllers/productFeatures/index.js"></script>
+    <script src="scripts/controllers/productFeatures/main.js"></script>
+    <script src="scripts/controllers/productFeatures/show.js"></script>
+    <script src="scripts/states/productFeature.js"></script>
+    <!-- end feature resources -->
+    <!-- start product resources -->
+    <script src="scripts/services/product.js"></script>
+    <script src="scripts/controllers/products/create.js"></script>
+    <script src="scripts/controllers/products/index.js"></script>
+    <script src="scripts/controllers/products/main.js"></script>
+    <script src="scripts/controllers/products/show.js"></script>
+    <script src="scripts/controllers/products/entitle.js"></script>
+    <script src="scripts/controllers/products/features.js"></script>
+    <script src="scripts/states/product.js"></script>
+    <!-- end product resources -->
+    <!-- start licence resources -->
+    <script src="scripts/services/licence.js"></script>
+    <script src="scripts/controllers/licences/create.js"></script>
+    <script src="scripts/controllers/licences/index.js"></script>
+    <script src="scripts/controllers/licences/main.js"></script>
+    <script src="scripts/controllers/licences/show.js"></script>
+    <script src="scripts/controllers/licences/features.js"></script>
+    <script src="scripts/states/licence.js"></script>
+    <!-- end licence resources -->
+    <!-- start receipt resources -->
+    <script src="scripts/services/receipt.js"></script>
+    <script src="scripts/controllers/receipts/create.js"></script>
+    <script src="scripts/controllers/receipts/index.js"></script>
+    <script src="scripts/controllers/receipts/main.js"></script>
+    <script src="scripts/controllers/receipts/show.js"></script>
+    <script src="scripts/states/receipt.js"></script>
+    <!-- end receipt resources -->
+    <!-- start party resources -->
+    <script src="scripts/services/party.js"></script>
+    <script src="scripts/controllers/parties/create.js"></script>
+    <script src="scripts/controllers/parties/index.js"></script>
+    <script src="scripts/controllers/parties/main.js"></script>
+    <script src="scripts/controllers/parties/show.js"></script>
+    <script src="scripts/states/party.js"></script>
+    <!-- end party resources -->
+    <!-- start entitlement resource -->
+    <script src="scripts/services/entitlement.js"></script>
+    <script src="scripts/controllers/entitlements/create.js"></script>
+    <script src="scripts/controllers/entitlements/index.js"></script>
+    <script src="scripts/controllers/entitlements/main.js"></script>
+    <script src="scripts/controllers/entitlements/show.js"></script>
+    <script src="scripts/states/entitlement.js"></script>
+    <!-- end entitlement resources -->
+    <!-- start activation resource -->
+    <script src="scripts/services/activation.js"></script>
+    <script src="scripts/controllers/activations/create.js"></script>
+    <script src="scripts/controllers/activations/index.js"></script>
+    <script src="scripts/controllers/activations/main.js"></script>
+    <script src="scripts/controllers/activations/show.js"></script>
+    <script src="scripts/states/activation.js"></script>
+    <!-- end activation resources -->
+    <!-- start bill resources -->
+    <script src="scripts/services/bill.js"></script>
+    <script src="scripts/controllers/bills/create.js"></script>
+    <script src="scripts/controllers/bills/edit.js"></script>
+    <script src="scripts/controllers/bills/index.js"></script>
+    <script src="scripts/controllers/bills/main.js"></script>
+    <script src="scripts/controllers/bills/show.js"></script>
+    <script src="scripts/controllers/bills/invoice.js"></script>
+    <script src="scripts/states/bill.js"></script>
+    <!-- end bill resources -->
+    <!-- start settings -->
+    <script src="scripts/services/setting.js"></script>
+    <script src="scripts/controllers/settings/index.js"></script>
+    <script src="scripts/states/setting.js"></script>
+    <!-- end settings -->
+    <!-- endbuild -->
+</body>
+
+</html>

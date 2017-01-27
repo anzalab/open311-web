@@ -1,0 +1,232 @@
+<!-- start header -->
+<div class="header">
+    <!-- start top navbar -->
+    <div class="navbar b-b">
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" title="Create or Add New Issue">
+                    <span class="btn btn-sm btn-icon">
+                        <i class="icon ti-plus"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" title="Filter By Status">
+                    <span class="btn btn-sm btn-icon">
+                        <i class="icon ti-more-alt"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+            <li class="nav-item">
+                <a class="nav-link" title="Previous">
+                    <span class="btn btn-sm btn-icon">
+                        <i class="icon ti-angle-left"></i>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" title="Next">
+                    <span class="btn btn-sm btn-icon">
+                        <i class="icon ti-angle-right"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end top navbar -->
+    <!-- start search form -->
+    <form class="search-form">
+        <div class="input-search input-search-dark">
+            <i class="input-search-icon ti-search" aria-hidden="true"></i>
+            <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control" name="" placeholder="Search Reported Issues...">
+        </div>
+    </form>
+    <!-- end seach form -->
+</div>
+<!-- end header -->
+<!-- start list -->
+<div class="list">
+    <div class="list-item active">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item waiting">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item inactive">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item active">
+        <div class="list-left">
+            <span class="avatar">
+                 <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item waiting">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item active">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item waiting">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item inactive">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item active">
+        <div class="list-left">
+            <span class="avatar">
+                 <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+    <div class="list-item waiting">
+        <div class="list-left">
+            <span class="avatar">
+                <letter-avatar title="{{party.name}}" data="{{party.name}}" 
+                    height="60" width="60" shape="round">
+                </letter-avatar>
+            </span>
+        </div>
+        <div class="list-body">
+            <span class="pull-right text-xs text-muted font-size-10">09.04</span>
+            <div class="item-title font-600">
+                <a href="#" class="font-600">Jeremy Scott</a>
+            </div>
+            <small class="block text-muted text-ellipsis font-size-12">
+                Submit a support ticket
+            </small>
+        </div>
+    </div>
+</div>
+<!-- end list -->

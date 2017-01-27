@@ -1,0 +1,31 @@
+<!-- start signing -->
+<div class="page-login-v3 layout-full">
+    <div class="page animsition vertical-align text-center">
+        <div class="page-content vertical-align-middle">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="brand margin-top-80 margin-bottom-60">
+                        <h2 class="brand-text text-blue-600 font-size-20 brand-color">{{ENV.title}}<strong class="text-blue-600 font-size-10 brand-color">{{ENV.version}}</strong></h2>
+                    </div>
+                    <form ng-submit="signin()" name="signinForm" role="form" autocomplete="off">
+                        <div class="form-group form-material floating">
+                            <input type="email" class="form-control" name="email" ng-model="user.email" ng-required/>
+                            <label class="floating-label">Email</label>
+                        </div>
+                        <div class="form-group form-material floating">
+                            <input type="password" class="form-control" name="password" ng-model="user.password" ng-required/>
+                            <label class="floating-label">Password</label>
+                        </div>
+                        <div class="form-group clearfix">
+                            <a class="pull-right text-blue-600" ui-sref="forgot" title="Click to request reset password">
+                                Forgot Password?
+                            </a>
+                        </div>
+                        <button ng-disabled="signinForm.$invalid || !user.email || !user.password" type="submit" class="btn btn-primary btn-block btn-lg margin-top-40">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end container -->

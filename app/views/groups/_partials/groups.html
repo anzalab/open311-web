@@ -1,0 +1,23 @@
+<!-- start groups list -->
+<tbody>
+    <tr ng-repeat="group in groups" ui-sref="app.groups.show({id:group._id})" title="{{group.name}}" ng-class="{'active':!group.deletedAt, 'inactive':group.deletedAt}">
+        <td>
+            <div class="content">
+                <div class="title font-weight-600" title="Name">
+                    {{group.name}}
+                </div>
+                <div class="abstract font-size-12">
+                    <h6 ng-show="group.description" title="Code">{{group.description}}
+                    </h6>
+                </div>
+            </div>
+        </td>
+        <td class="cell-30 responsive-hide"></td>
+        <td class="cell-180">
+            <div class="time" title="Code">
+                Code: {{group.code}}
+            </div>
+        </td>
+    </tr>
+</tbody>
+<!-- end groups list -->

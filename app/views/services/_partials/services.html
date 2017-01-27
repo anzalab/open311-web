@@ -1,0 +1,23 @@
+<!-- start services list -->
+<tbody>
+    <tr ng-repeat="service in services" ui-sref="app.services.show({id:service._id})" title="{{service.name}}" ng-class="{'active':!service.deletedAt, 'inactive':service.deletedAt}">
+        <td>
+            <div class="content">
+                <div class="title font-weight-600" title="Name">
+                    {{service.name}}
+                </div>
+                <div class="abstract font-size-12">
+                    <h6 ng-show="service.description" title="Code">{{service.description}}
+                    </h6>
+                </div>
+            </div>
+        </td>
+        <td class="cell-30 responsive-hide"></td>
+        <td class="cell-180">
+            <div class="time" title="Code">
+                Code: {{service.code}}
+            </div>
+        </td>
+    </tr>
+</tbody>
+<!-- end services list -->

@@ -1,0 +1,16 @@
+<!-- start change password -->
+<div class="container">
+    <div class="card card-signin">
+        <img class="profile-img" src="images/icon-96.png" alt="Logo">
+        <p class="text-center mgn-t20">Type your new password</p>
+        <form ng-submit="recover()" class="mgn-t30" role="form" autocomplete="off">
+            <div class="form-group">
+                <input ng-model="user.password" type="password" id="password" class="form-control input-lg" placeholder="Password" required>
+            </div>
+            <button class="btn btn-lg btn-misc btn-block" type="submit">Submit</button>
+            <br/>
+            <a ui-sref="signin" class="display-block text-center m-t-md fs-sm">Signin to your account</a>
+        </form>
+    </div>
+</div>
+<!-- end change password -->

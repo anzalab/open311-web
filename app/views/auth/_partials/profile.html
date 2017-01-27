@@ -1,0 +1,36 @@
+<!-- start profile avatar -->
+<div class="col-md-12">
+    <!-- <h6 class="font-size-12">Profile Avatar</h6> -->
+    <letter-avatar title="{{party.name}}" data="{{party.name}}" height="60" width="60" shape="round">
+    </letter-avatar>
+</div>
+<!-- end profile avatar -->
+<!-- start profile details -->
+<div class="col-md-4 margin-top-40">
+    <form name="profileForm" role="form" autocomplete="off">
+        <div class="form-group form-material floating">
+            <input type="text" class="form-control" name="name" ng-model="party.name" ng-disabled="!edit" ng-required/>
+            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Name</label>
+        </div>
+        <div class="form-group form-material floating margin-top-40">
+            <input type="text" class="form-control" name="phone" ng-model="party.phone" ng-disabled="!edit" ng-required/>
+            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Phone Number</label>
+        </div>
+        <div class="form-group form-material floating margin-top-40">
+            <input type="email" class="form-control" name="email" ng-model="party.email" ng-disabled="!edit" ng-required/>
+            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Email</label>
+        </div>
+        <div class="form-group form-material floating margin-top-40">
+            <input type="password" ng-change="onPasswordChange()" class="form-control" name="password" ng-model="party.password" ng-disabled="!edit" ng-required/>
+            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Password</label>
+            <span ng-show="party.password && party.password.length < 8" class="help-block red-700 font-weight-400">Password length must be atleast 8 characters</span>
+            <span ng-show="!edit" class="help-block help-block-password font-size-20">****************</span>
+        </div>
+        <div ng-show="party.password && party.password.length >= 8" class="form-group form-material floating margin-top-40">
+            <input type="password" ng-change="onConfirmPassword()" class="form-control" name="confirm" ng-model="party.confirm" ng-disabled="!edit" />
+            <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Password Confirm</label>
+            <span ng-show="passwordDontMatch" class="help-block red-700 font-weight-400">Password does not match</span>
+        </div>
+    </form>
+</div>
+<!-- end profile details -->

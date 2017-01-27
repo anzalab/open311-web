@@ -1,0 +1,50 @@
+<!-- start profile avatar -->
+<div class="col-md-12">
+    <!-- <h6 class="font-size-12">Profile Avatar</h6> -->
+    <letter-avatar data="{{settings.name}}" height="60" width="60" shape="round">
+    </letter-avatar>
+</div>
+<!-- end profile avatar -->
+<!-- start profile details -->
+<div>
+    <form name="profileForm" role="form" autocomplete="off">
+        <div class="col-md-4 margin-top-40">
+            <div class="form-group form-material floating">
+                <input type="text" class="form-control" name="name" ng-model="settings.name" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Name</label>
+            </div>
+            <!--start contacts-->
+            <div class="form-group form-material floating margin-top-40">
+                <input type="text" class="form-control" name="phoneNumber" ng-model="settings.phone" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Phone Number</label>
+            </div>
+            <div class="form-group form-material floating margin-top-40">
+                <input type="email" class="form-control" name="email" ng-model="settings.email" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Email</label>
+            </div>
+            <!--end contacts-->
+        </div>
+        <!--end business-->
+        <!--start application-->
+        <div class="col-md-4 margin-top-40">
+            <div class="form-group form-material floating">
+                <input type="text" class="form-control" name="currency" ng-model="settings.currency" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Currency</label>
+            </div>
+            <div class="form-group form-material floating margin-top-40">
+                <input type="text" class="form-control" name="dateFormat" ng-model="settings.dateFormat" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Date Format</label>
+            </div>
+            <div class="form-group form-material floating margin-top-40">
+                <input type="text" class="form-control" name="timeFormat" ng-model="settings.timeFormat" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Time Format</label>
+            </div>
+            <div class="form-group form-material floating margin-top-40">
+                <input type="text" class="form-control" name="defaultPassword" ng-model="settings.defaultPassword" ng-disabled="!edit" ng-required/>
+                <label ng-class="{'font-size-14':!edit,'blue-700':!edit, 'font-weight-400':!edit}" class="floating-label">Default Password</label>
+            </div>
+        </div>
+        <!--end application-->
+    </form>
+</div>
+<!-- end profile details -->
