@@ -167,3 +167,33 @@ body {
 .navbar-nav .text-muted i {
     /*opacity: .1;*/
 }
+
+.list > .list-item:hover:not(.active) {
+    background-color: #f9f9f9;
+    cursor: pointer;
+    -webkit-transition: background-color 0.2s ease-in;
+    transition: background-color 0.2s ease-in;
+}
+
+.nav > .nav-item:hover:not(.active) {
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-transition: font-weight 0.2s ease-in;
+    transition: font-weight 0.2s ease-in;
+}
+
+.list > .list-item.active,
+.list > .list-item:active,
+.list > .list-item:focus {
+    background-color: #f9f9f9;
+}
+
+.nav > .nav-item.active,
+.nav > .nav-item:active,
+.nav > .nav-item:focus {
+    font-weight: bold;
+}
+
+#internal-comment-box {
+    background-color: #f9f9f9;
+}
