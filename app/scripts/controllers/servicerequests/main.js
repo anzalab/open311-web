@@ -46,11 +46,13 @@ angular
      * set current service request
      */
     $scope.select = function (servicerequest) {
-      $scope.servicerequest = servicerequest;
       //sort comments in desc order
-      if ($scope.servicerequest) {
+      if (servicerequest && servicerequest._id) {
+        $scope.servicerequest = servicerequest;
+
         _.reverse($scope.servicerequest.comments =
           _.sortBy($scope.servicerequest.comments, 'createdAt'));
+
         $scope.mailTo = ServiceRequest.toEmail($scope.servicerequest);
       }
       $scope.create = false;
