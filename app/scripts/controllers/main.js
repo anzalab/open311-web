@@ -16,6 +16,10 @@ angular
       $rootScope.$broadcast('servicerequest:create');
     };
 
+    $scope.onAllIssues = function () {
+      $rootScope.$broadcast('servicerequest:list');
+    };
+
     //replace browser scroll with richer scroller
     // angular.element('html').niceScroll({
     //   cursorcolor: '#A3AFB7',

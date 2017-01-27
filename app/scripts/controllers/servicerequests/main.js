@@ -41,6 +41,11 @@ angular
       $scope.create = true;
     });
 
+    $rootScope.$on('servicerequest:list', function () {
+      $scope.find();
+      $scope.create = false;
+    });
+
 
     /**
      * set current service request
