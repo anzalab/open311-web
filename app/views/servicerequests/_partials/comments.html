@@ -2,6 +2,18 @@
 <div class="padding b-t">
     <h6 class="m-b" title="Internal Notes & Comments">Internal Notes</h6>
     <div class="p-a">
+        <div class="p-a p-y-sm b-t b-b m-b">
+            <form>
+                <div class="input-group b-a b-transparent">
+                    <input ng-model="note.content" type="text" class="form-control no-border font-size-12" placeholder="Write your note">
+                    <span class="input-group-btn" ng-keypress="comment()" ng-keyup="comment()">
+                        <button ng-click="comment()" class="btn no-bg no-shadow" type="button">
+                            <i class="fa fa-send text-success"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
         <div class="streamline streamline-theme m-b">
             <div class="sl-item" ng-repeat="comment in servicerequest.comments">
                 <div class="sl-content">
@@ -9,18 +21,6 @@
                     <p>{{comment.content}}</p>
                 </div>
             </div>
-        </div>
-        <div class="p-a p-y-sm b-t">
-            <form>
-                <div class="input-group b-a b-transparent">
-                    <input ng-model="note.content" type="text" class="form-control no-border font-size-12" placeholder="Write your note">
-                    <span class="input-group-btn" ng-keypress="comment()" ng-keyup="comment()">
-	                    <button ng-click="comment()" class="btn no-bg no-shadow" type="button">
-	                    	<i class="fa fa-send text-success"></i>
-	                    </button>
-                    </span>
-                </div>
-            </form>
         </div>
     </div>
 </div>

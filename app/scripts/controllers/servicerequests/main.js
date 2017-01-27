@@ -46,6 +46,11 @@ angular
      */
     $scope.select = function (servicerequest) {
       $scope.servicerequest = servicerequest;
+      //sort comments in desc order
+      if ($scope.servicerequest) {
+        _.reverse($scope.servicerequest.comments =
+          _.sortBy($scope.servicerequest.comments, 'createdAt'));
+      }
       $scope.create = false;
     };
 
@@ -81,7 +86,7 @@ angular
 
           response = response || {};
 
-          $scope.servicerequest = response;
+          $scope.servicerequest = $scope.select(response);
 
           response.message =
             response.message || 'Service Request Saved Successfully';
@@ -113,6 +118,11 @@ angular
 
         $scope.servicerequest.$update().then(function (response) {
           $scope.servicerequest = response;
+          //sort comment in desc order
+          if ($scope.servicerequest) {
+            _.reverse($scope.servicerequest.comments =
+              _.sortBy($scope.servicerequest.comments, 'createdAt'));
+          }
           $scope.note = {};
           $scope.updated = true;
           $rootScope.$broadcast('app:servicerequests:reload');
