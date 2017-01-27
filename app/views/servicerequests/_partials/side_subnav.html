@@ -47,22 +47,9 @@
                     <div class="m-b text-muted text-xs">Status</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li class="nav-item m-b-xs">
-                                <a ng-click="load({'status.name':'Open'})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label danger rounded">23</span>Open</a>
-                            </li>
-                            <li class="nav-item m-b-xs">
-                                <a ng-click="load({'status.name':'In Progress'})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label primary rounded">2</span> In Progress</a>
-                            </li>
-                            <li class="nav-item m-b-xs">
-                                <a ng-click="load({'status.name':'Pending'})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label warning rounded">4</span> Pending
-                                </a>
-                            </li>
-                            <li class="nav-item m-b-xs">
-                                <a ng-click="load({'status.name':'Closed'})" class="nav-link text-muted block"><span class="pull-right text-sm label success rounded">1</span>Closed
-                                </a>
+                            <li class="nav-item m-b-xs" ng-repeat="status in _statuses">
+                                <a ng-click="load({'status.name':status.name})" class="nav-link text-muted block">
+                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{status.color}}">23</span>{{status.name}}</a>
                             </li>
                         </ul>
                     </div>

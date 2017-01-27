@@ -309,4 +309,6 @@ angular
       }
     };
 
+    $scope._statuses = _.values($scope.statuses);
+
   });
