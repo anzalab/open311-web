@@ -10,8 +10,8 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
-    $rootScope, $scope, $state, ServiceRequest,
-    jurisdictions, groups, services, party, assignee
+    $rootScope, $scope, $state, ServiceRequest, Summary,
+    jurisdictions, groups, services, party, assignee, summaries
   ) {
 
     //servicerequests in the scope
@@ -33,6 +33,7 @@ angular
     $scope.services = services.services;
     $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.assignees = assignee.parties;
+    $scope.summaries = summaries;
 
     //listen for create event
     $rootScope.$on('servicerequest:create', function () {
@@ -254,6 +255,13 @@ angular
     //listen for events
     $rootScope.$on('app:servicerequests:reload', function () {
       $scope.find();
+    });
+
+    //reload summaries
+    $rootScope.$on('app:servicerequests:reload', function () {
+      Summary.issues().then(function (summaries) {
+        $scope.summaries = summaries;
+      });
     });
 
     //priorities

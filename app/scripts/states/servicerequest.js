@@ -56,6 +56,9 @@ angular
                 'relation.type': 'Worker'
               }
             });
+          },
+          summaries: function (Summary) {
+            return Summary.issues();
           }
         }
       })
