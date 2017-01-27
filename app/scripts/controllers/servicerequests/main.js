@@ -68,9 +68,11 @@ angular
     $scope.assign = function (assignee) {
       if (assignee) {
         $scope.servicerequest.assignee = assignee._id;
-        $scope.servicerequest.$update();
-        $scope.updated = true;
-        $rootScope.$broadcast('app:servicerequests:reload');
+        $scope.servicerequest.$update().then(function (response) {
+          $scope.servicerequest = response;
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+        });
       }
     };
 
@@ -136,9 +138,11 @@ angular
       if (priority) {
         $scope.servicerequest.priority = priority;
       }
-      $scope.servicerequest.$update();
-      $scope.updated = true;
-      $rootScope.$broadcast('app:servicerequests:reload');
+      $scope.servicerequest.$update().then(function (response) {
+        $scope.servicerequest = response;
+        $scope.updated = true;
+        $rootScope.$broadcast('app:servicerequests:reload');
+      });
     };
 
     $scope.changeStatus = function (status) {
@@ -146,9 +150,11 @@ angular
       if (status) {
         $scope.servicerequest.status = status;
       }
-      $scope.servicerequest.$update();
-      $scope.updated = true;
-      $rootScope.$broadcast('app:servicerequests:reload');
+      $scope.servicerequest.$update().then(function (response) {
+        $scope.servicerequest = response;
+        $scope.updated = true;
+        $rootScope.$broadcast('app:servicerequests:reload');
+      });
     };
 
     /**
