@@ -1,10 +1,29 @@
-# Scaffolds
-- yo mvp:angular bill billedAt:Date code:String customer:String entitlement:String items:String duedAt:Date
-- yo mvp:angular customer name:String email:String phoneNumber:String code:String type:String
-- yo mvp:angular entitlement customer:String key:String licence:String device:String products:String features:String
-- yo mvp:angular feature code:String name:String description:String price:Number
-- yo mvp:angular order code:String customer:String entitlement:String bill:String products:String features:String filledAt:Date
-- yo mvp:angular party name:String email:String phoneNumber:String roles:String
-- yo mvp:angular product code:String name:String description:String price:Number features:String
-- yo mvp:angular receipt receivedAt:Date amount:Number bill:String reference:String
-- yo mvp:angular role name:String description:String permissions:String
+# Updates
+autoprefixer-core           ^5.2.1  →   ^6.0.1 
+ grunt                       ^0.4.5  →   ^1.0.1 
+ grunt-angular-templates     ^0.5.7  →   ^1.1.0 
+ grunt-concurrent            ^1.0.0  →   ^2.3.1 
+ grunt-contrib-clean         ^0.6.0  →   ^1.0.0 
+ grunt-contrib-concat        ^0.5.0  →   ^1.0.1 
+ grunt-contrib-connect       ^0.9.0  →   ^1.0.2 
+ grunt-contrib-copy          ^0.7.0  →   ^1.0.0 
+ grunt-contrib-cssmin       ^0.12.0  →   ^1.0.2 
+ grunt-contrib-htmlmin       ^0.4.0  →   ^2.2.0 
+ grunt-contrib-jshint       ^0.11.0  →   ^1.1.0 
+ grunt-contrib-uglify        ^0.7.0  →   ^2.1.0 
+ grunt-contrib-watch         ^0.6.1  →   ^1.0.0 
+ grunt-jscs                  ^1.8.0  →   ^3.0.1 
+ grunt-karma                ^0.12.1  →   ^2.0.0 
+ grunt-ng-annotate           ^0.9.2  →   ^3.0.0 
+ grunt-ng-constant           ^1.1.0  →   ^2.0.1 
+ grunt-postcss               ^0.5.5  →   ^0.8.0 
+ grunt-svgmin                ^2.0.0  →   ^4.0.0 
+ grunt-wiredep               ^2.0.0  →   ^3.0.1 
+ jit-grunt                   ^0.9.1  →  ^0.10.0 
+ jshint-stylish              ^1.0.0  →   ^2.2.1 
+ karma                     ^0.13.16  →   ^1.4.1 
+ karma-mocha                 ^0.2.1  →   ^1.3.0 
+ karma-mocha-reporter        ^1.1.3  →   ^2.2.2 
+ karma-phantomjs-launcher    ^0.2.2  →   ^1.0.2 
+ mocha                       ^2.3.4  →   ^3.2.0 
+ phantomjs                  ^1.9.19  →   ^2.1.7 

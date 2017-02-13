@@ -25,7 +25,6 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             // bower:js
-            'bower_components/jquery/dist/jquery.js',
             'bower_components/angular/angular.js',
             'bower_components/angular-bootstrap/ui-bootstrap.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
@@ -36,6 +35,7 @@ module.exports = function(config) {
             'bower_components/ng-notify/src/scripts/ng-notify.js',
             'bower_components/themify-icons/ie7/ie7.js',
             'bower_components/angucomplete-alt/angucomplete-alt.js',
+            'bower_components/jquery/dist/jquery.js',
             'bower_components/tether/dist/js/tether.js',
             'bower_components/angularPrint/angularPrint.js',
             'bower_components/jquery.nicescroll/jquery.nicescroll.js',
