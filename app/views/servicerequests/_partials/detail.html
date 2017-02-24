@@ -67,37 +67,16 @@
                         <span uib-dropdown class="label primary m-l" title="Status" style="background-color:{{servicerequest.status.color}}">
                            <span uib-dropdown-toggle class="font-size-12 text-white">Status: {{servicerequest.status.name}} </span>
                         <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
-                            <a ng-click="changeStatus('open')" class="dropdown-item" href="#" title="Status - Open">
-                                <span>Open</span>
-                            </a>
-                            <a ng-click="changeStatus('progress')" class="dropdown-item" href="#" title="Status - In Progress">
-                                <span>In Progress</span>
-                            </a>
-                            <a ng-click="changeStatus('pending')" class="dropdown-item" href="#" title="Status - Pending">
-                                <span>Pending</span>
-                            </a>
-                            <a ng-click="changeStatus('closed')" class="dropdown-item" href="#" title="Status - Closed">
-                                <span>Closed</span>
+                            <a ng-repeat="status in statuses" ng-click="changeStatus(status)" class="dropdown-item" href="#" title="Status - {{status.name}}">
+                                <span>{{status.name}}</span>
                             </a>
                         </div>
                         </span>
                         <span uib-dropdown class="label danger m-l" title="Priority" style="background-color:{{servicerequest.priority.color}}">
                             <span uib-dropdown-toggle class="font-size-12 text-white">Priority: {{servicerequest.priority.name}}</span>
                         <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
-                            <a ng-click="changePriority('low')" class="dropdown-item" href="#" title="Priority Low">
-                                <span>Low</span>
-                            </a>
-                            <a ng-click="changePriority('normal')" class="dropdown-item" href="#" title="Priority Normal">
-                                <span>Normal</span>
-                            </a>
-                            <a ng-click="changePriority('medium')" class="dropdown-item" href="#" title="Priority Medium">
-                                <span>Medium</span>
-                            </a>
-                            <a ng-click="changePriority('high')" class="dropdown-item" href="#" title="Priority High">
-                                <span>High</span>
-                            </a>
-                            <a ng-click="changePriority('critical')" class="dropdown-item" href="#" title="Priority Critical">
-                                <span>Critical</span>
+                            <a ng-repeat="priority in priorities" ng-click="changePriority(priority)" class="dropdown-item" href="#" title="Priority {{priority.name}}">
+                                <span>{{priority.name}}</span>
                             </a>
                         </div>
                         </span>

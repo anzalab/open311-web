@@ -149,7 +149,6 @@ angular
     };
 
     $scope.changePriority = function (priority) {
-      priority = $scope.priorities[priority];
       if (priority) {
         $scope.servicerequest.priority = priority;
       }
@@ -162,7 +161,6 @@ angular
     };
 
     $scope.changeStatus = function (status) {
-      status = $scope.statuses[status];
       if (status) {
         $scope.servicerequest.status = status;
       }
