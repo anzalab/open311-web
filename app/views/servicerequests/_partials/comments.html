@@ -15,9 +15,12 @@
             </form>
         </div>
         <div class="streamline streamline-theme m-b">
-            <div class="sl-item" ng-repeat="comment in servicerequest.comments">
+            <div class="sl-item" ng-repeat="comment in comments">
                 <div class="sl-content">
-                    <div class="sl-date text-muted">{{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</div>
+                    <div class="sl-date text-muted">
+                        <span class="text-info">
+                        {{comment.commentator.name}}
+                        </span> on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</div>
                     <p>{{comment.content}}</p>
                 </div>
             </div>

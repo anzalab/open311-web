@@ -115,7 +115,7 @@ angular
       //prepare e-mail send option
       var recipient = '';
       var options = {
-        subject: issue.service.name,
+        subject: [issue.service.name, issue.code].join(' - #'),
         body: body
       };
       /*jshint camelcase:true*/

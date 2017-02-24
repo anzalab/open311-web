@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
-    $rootScope, $scope, $state, ServiceRequest, Summary,
+    $rootScope, $scope, $state, ServiceRequest, Comment, Summary,
     jurisdictions, groups, services, statuses, priorities,
     party, assignee, summaries
   ) {
@@ -18,6 +18,7 @@ angular
     //servicerequests in the scope
     $scope.spin = false;
     $scope.servicerequests = [];
+    $scope.comments = [];
     $scope.servicerequest = new ServiceRequest({});
     $scope.page = 1;
     $scope.limit = 10;
@@ -54,16 +55,21 @@ angular
      * set current service request
      */
     $scope.select = function (servicerequest) {
+
       //sort comments in desc order
       if (servicerequest && servicerequest._id) {
+        //update scope service request ref
         $scope.servicerequest = servicerequest;
 
-        _.reverse($scope.servicerequest.comments =
-          _.sortBy($scope.servicerequest.comments, 'createdAt'));
+        $scope.mailTo = ServiceRequest.toEmail(servicerequest);
 
-        $scope.mailTo = ServiceRequest.toEmail($scope.servicerequest);
+        //load service request comments
+        $scope.loadComment(servicerequest);
+
       }
+
       $scope.create = false;
+
     };
 
     /**
@@ -126,20 +132,14 @@ angular
 
       //TODO notify about the comment saved
       if ($scope.note && $scope.note.content) {
-        $scope.servicerequest.comments.push({
-          createdAt: new Date(),
+        var comment = new Comment({
+          request: $scope.servicerequest._id,
           commentator: party._id,
           content: $scope.note.content
         });
 
-        $scope.servicerequest.$update().then(function (response) {
-          $scope.select(response);
-          // $scope.servicerequest = response;
-          //sort comment in desc order
-          if ($scope.servicerequest) {
-            _.reverse($scope.servicerequest.comments =
-              _.sortBy($scope.servicerequest.comments, 'createdAt'));
-          }
+        comment.$save().then(function (response) {
+          $scope.select($scope.servicerequest);
           $scope.note = {};
           $scope.updated = true;
           $rootScope.$broadcast('app:servicerequests:reload');
@@ -219,6 +219,21 @@ angular
 
     $scope.load = function (query) {
       $scope.find(query);
+    };
+
+    $scope.loadComment = function (servicerequest) {
+      if (servicerequest && servicerequest._id) {
+        Comment.find({
+          sort: {
+            createdAt: -1
+          },
+          query: {
+            request: servicerequest._id
+          }
+        }).then(function (response) {
+          $scope.comments = response.comments;
+        });
+      }
     };
 
 
