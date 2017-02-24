@@ -49,10 +49,10 @@
                     <div class="m-b text-muted text-xs">Status</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li class="nav-item m-b-xs" ng-repeat="status in _statuses">
-                                <a ng-click="load({'status.name':status.name})" class="nav-link text-muted block">
+                            <li class="nav-item m-b-xs" ng-repeat="status in statuses">
+                                <a ng-click="load({'status':status._id})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{status.color}}">
-                                        {{summaries.statuses[status.name]}}
+                                        {{summaries.statuses[status._id]}}
                                     </span>{{status.name}}</a>
                             </li>
                         </ul>

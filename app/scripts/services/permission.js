@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .factory('Permission', function ($http, $resource, Utils) {
 
-    //create role resource
+    //create permission resource
     var Permission = $resource(Utils.asLink(['permissions', ':id']), {
       id: '@_id'
     }, {
@@ -31,11 +31,12 @@ angular
         })
         .then(function (response) {
 
-          //map plain role object to resource instances
-          var permissions = response.data.permissions.map(function (role) {
-            //create role as a resource instance
-            return new Permission(role);
-          });
+          //map plain permission object to resource instances
+          var permissions =
+            response.data.permissions.map(function (permission) {
+              //create permission as a resource instance
+              return new Permission(permission);
+            });
 
           //return paginated response
           return {

@@ -95,6 +95,34 @@
         scope.thumbWrapperWidth = 0;
         scope.thumbsWidth = 0;
 
+        var calculateThumbsWidth = function () {
+          var width = 0,
+            visibleWidth = 0;
+          angular.forEach($thumbnails.find('img'), function (thumb) {
+            width += thumb.clientWidth;
+            width += 10; // margin-right
+            visibleWidth = thumb.clientWidth + 10;
+          });
+          return {
+            width: width,
+            visibleWidth: visibleWidth * scope.thumbsNum
+          };
+        };
+
+        var smartScroll = function (index) {
+          $timeout(function () {
+            var len = scope.images.length,
+              width = scope.thumbsWidth,
+              itemScroll = parseInt(width / len, 10),
+              i = index + 1,
+              s = Math.ceil(len / i);
+
+            $thumbwrapper[0].scrollLeft = 0;
+            $thumbwrapper[0].scrollLeft = i * itemScroll - (s *
+              itemScroll);
+          }, 100);
+        };
+
         var loadImage = function (i) {
           var deferred = $q.defer();
           var image = new Image();
@@ -212,34 +240,6 @@
 
           scope.$apply();
         });
-
-        var calculateThumbsWidth = function () {
-          var width = 0,
-            visibleWidth = 0;
-          angular.forEach($thumbnails.find('img'), function (thumb) {
-            width += thumb.clientWidth;
-            width += 10; // margin-right
-            visibleWidth = thumb.clientWidth + 10;
-          });
-          return {
-            width: width,
-            visibleWidth: visibleWidth * scope.thumbsNum
-          };
-        };
-
-        var smartScroll = function (index) {
-          $timeout(function () {
-            var len = scope.images.length,
-              width = scope.thumbsWidth,
-              itemScroll = parseInt(width / len, 10),
-              i = index + 1,
-              s = Math.ceil(len / i);
-
-            $thumbwrapper[0].scrollLeft = 0;
-            $thumbwrapper[0].scrollLeft = i * itemScroll - (s *
-              itemScroll);
-          }, 100);
-        };
 
       }
     };

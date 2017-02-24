@@ -44,6 +44,24 @@ angular
               }
             });
           },
+          statuses: function (Status) {
+            return Status.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          },
+          priorities: function (Priority) {
+            return Priority.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          },
           assignee: function (Party) {
             // TODO fetch partis of specific area who are internal
             // workers

@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .factory('Service', function ($http, $resource, Utils) {
 
-    //create issue resource
+    //create service resource
     var Service = $resource(Utils.asLink(['services', ':id']), {
       id: '@_id'
     }, {
@@ -22,7 +22,7 @@ angular
 
 
     /**
-     * @description find issue with pagination
+     * @description find service with pagination
      * @param  {[type]} params [description]
      * @return {[type]}        [description]
      */
@@ -32,10 +32,10 @@ angular
         })
         .then(function (response) {
 
-          //map plain issue object to resource instances
-          var services = response.data.services.map(function (issue) {
-            //create issue as a resource instance
-            return new Service(issue);
+          //map plain service object to resource instances
+          var services = response.data.services.map(function (service) {
+            //create service as a resource instance
+            return new Service(service);
           });
 
           //return paginated response

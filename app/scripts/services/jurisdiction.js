@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .factory('Jurisdiction', function ($http, $resource, Utils) {
 
-    //create issue resource
+    //create jurisdiction resource
     var Jurisdiction = $resource(Utils.asLink(['jurisdictions', ':id']), {
       id: '@_id'
     }, {
@@ -22,7 +22,7 @@ angular
 
 
     /**
-     * @description find issue with pagination
+     * @description find jurisdiction with pagination
      * @param  {[type]} params [description]
      * @return {[type]}        [description]
      */
@@ -32,12 +32,12 @@ angular
         })
         .then(function (response) {
 
-          //map plain issue object to resource instances
-          var jurisdictions = response.data.jurisdictions.map(function (
-            issue) {
-            //create issue as a resource instance
-            return new Jurisdiction(issue);
-          });
+          //map plain jurisdiction object to resource instances
+          var jurisdictions =
+            response.data.jurisdictions.map(function (jurisdiction) {
+              //create jurisdiction as a resource instance
+              return new Jurisdiction(jurisdiction);
+            });
 
           //return paginated response
           return {

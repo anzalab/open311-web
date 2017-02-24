@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .factory('ServiceGroup', function ($http, $resource, Utils) {
 
-    //create issue resource
+    //create servicegroup resource
     var ServiceGroup = $resource(Utils.asLink(['servicegroups', ':id']), {
       id: '@_id'
     }, {
@@ -22,7 +22,7 @@ angular
 
 
     /**
-     * @description find issue with pagination
+     * @description find servicegroup with pagination
      * @param  {[type]} params [description]
      * @return {[type]}        [description]
      */
@@ -32,11 +32,12 @@ angular
         })
         .then(function (response) {
 
-          //map plain issue object to resource instances
-          var groups = response.data.servicegroups.map(function (issue) {
-            //create issue as a resource instance
-            return new ServiceGroup(issue);
-          });
+          //map plain servicegroup object to resource instances
+          var groups =
+            response.data.servicegroups.map(function (servicegroup) {
+              //create servicegroup as a resource instance
+              return new ServiceGroup(servicegroup);
+            });
 
           //return paginated response
           return {

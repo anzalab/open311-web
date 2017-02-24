@@ -11,7 +11,8 @@ angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
     $rootScope, $scope, $state, ServiceRequest, Summary,
-    jurisdictions, groups, services, party, assignee, summaries
+    jurisdictions, groups, services, statuses, priorities,
+    party, assignee, summaries
   ) {
 
     //servicerequests in the scope
@@ -30,6 +31,8 @@ angular
     $scope.create = false;
 
     //bind states
+    $scope.priorities = priorities.priorities;
+    $scope.statuses = statuses.statuses;
     $scope.services = services.services;
     $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.assignees = assignee.parties;
@@ -277,60 +280,5 @@ angular
         $scope.summaries = summaries;
       });
     });
-
-    //priorities
-    $scope.priorities = {
-      low: {
-        name: 'Low',
-        weight: 5,
-        color: '#1B5E20'
-      },
-      normal: {
-        name: 'Normal',
-        weight: 0,
-        color: '#4CAF50'
-      },
-      medium: {
-        name: 'Medium',
-        weight: -5,
-        color: '#FFC107'
-      },
-      high: {
-        name: 'High',
-        weight: -10,
-        color: '#FF9800'
-      },
-      critical: {
-        name: 'Critical',
-        weight: -15,
-        color: '#F44336'
-      }
-    };
-
-    //statuses
-    $scope.statuses = {
-      open: {
-        name: 'Open',
-        weight: -5,
-        color: '#0D47A1'
-      },
-      progress: {
-        name: 'In Progress',
-        weight: 0,
-        color: '#F9A825'
-      },
-      pending: {
-        name: 'Pending',
-        weight: 5,
-        color: '#9C27B0'
-      },
-      closed: {
-        name: 'Closed',
-        weight: 10,
-        color: '#1B5E20'
-      }
-    };
-
-    $scope._statuses = _.values($scope.statuses);
 
   });
