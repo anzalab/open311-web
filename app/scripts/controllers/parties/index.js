@@ -10,13 +10,14 @@
 angular
   .module('ng311')
   .controller('PartyIndexCtrl', function (
-    $rootScope, $scope, $state, Party) {
+    $rootScope, $scope, $state, Party
+  ) {
 
     //parties in the scope
     $scope.spin = false;
     $scope.parties = [];
     $scope.page = 1;
-    $scope.limit = 3;
+    $scope.limit = 10;
     $scope.total = 0;
 
     $scope.search = {};
@@ -33,6 +34,23 @@ angular
 
 
     /**
+     * set current service request
+     */
+    $scope.select = function (party) {
+
+      //sort comments in desc order
+      if (party && party._id) {
+        //update scope service request ref
+        $scope.party = party;
+        $rootScope.$broadcast('party:selected', party);
+      }
+
+      $scope.create = false;
+
+    };
+
+
+    /**
      * @description load parties
      */
     $scope.find = function () {
@@ -45,13 +63,16 @@ angular
         sort: {
           name: 1
         },
-        query: {
-          'relation.name': 'Internal'
-        },
+        query: {},
         q: $scope.q
       }).then(function (response) {
         //update scope with parties when done loading
         $scope.parties = response.parties;
+        if ($scope.updated) {
+          $scope.updated = false;
+        } else {
+          $scope.select(_.first($scope.parties));
+        }
         $scope.total = response.total;
         $scope.spin = false;
       }).catch(function (error) {

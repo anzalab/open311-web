@@ -19,9 +19,10 @@ angular
       $scope.edit = true;
     };
 
-    //load jurisdiction
-    $scope.jurisdiction = Jurisdiction.get({
-      id: $stateParams.id
+    //TODO show empty state if no jurisdiction selected
+    //listen for selected juridiction
+    $rootScope.$on('jurisdiction:selected', function (event, jurisdiction) {
+      $scope.jurisdiction = jurisdiction;
     });
 
 

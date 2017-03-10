@@ -114,6 +114,14 @@ body {
 }
 
 
+/*settings style*/
+
+.search-settings {
+    padding: 0.9rem;
+    font-family: Lato;
+}
+
+
 /*issue styles*/
 
 .nav-servicerequests .nav-text {

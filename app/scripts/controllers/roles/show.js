@@ -25,12 +25,19 @@ angular
     };
 
     //load role
-    $scope.role = Role.get({
-      id: $stateParams.id,
-      populate: [{
-        path: 'permissions'
-      }]
+    // $scope.role = Role.get({
+    //   id: $stateParams.id,
+    //   populate: [{
+    //     path: 'permissions'
+    //   }]
+    // });
+
+    //TODO show empty state if no role selected
+    //listen for selected juridiction
+    $rootScope.$on('role:selected', function (event, role) {
+      $scope.role = role;
     });
+
 
 
     /**

@@ -1,0 +1,54 @@
+<!-- start role details -->
+<div class="row-col">
+    <div class="white b-b bg">
+        <!-- start role detail action bar -->
+        <div ng-include="'views/roles/_partials/action_bar.html'" class="navbar"></div>
+        <!-- end role details action bar -->
+    </div>
+    <!-- start role body -->
+    <div class="row-row">
+        <div class="row-body">
+            <div class="row-inner">
+                <div class="padding">
+                    <!-- start role service -->
+                    <h4 class="_600">
+                        {{role.name}}
+                        <span class="pull-right font-size-14" title="Service Group Jurisdiction">
+                        <span class="text-muted font-size-10">Area</span>
+                        {{role.jurisdiction.name}}
+                    </span>
+                    </h4>
+                    <!-- end role service -->
+                    <div class="p-y">
+                        <div title="Code">
+                            <span class="text-muted font-size-12">Code: </span>
+                            <span>{{role.code}}</span>
+                        </div>
+                        <div title="Color">
+                            <span class="text-muted font-size-12">Color: </span>
+                            <span>{{role.color}}</span>
+                        </div>
+                    </div>
+                    <div class="p-y b-t">
+                        <span title="Operator Responsible">
+                            <span class="text-muted font-size-12">Jurisdiction: </span>
+                        <a href="mailto:{{role.operator.email}}">
+                            {{role.jurisdiction.name}}
+                        </a>
+                        </span>
+                    </div>
+                </div>
+                <!-- start issue description -->
+                <div class="padding b-t">
+                    <h6 class="m-b" title="Service Group Description">Description</h6>
+                    <p class="text-lt">
+                        {{role.description}}
+                    </p>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end role body -->
+</div>
+<!-- end role details -->

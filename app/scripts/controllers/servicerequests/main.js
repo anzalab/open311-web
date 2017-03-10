@@ -19,7 +19,11 @@ angular
     $scope.spin = false;
     $scope.servicerequests = [];
     $scope.comments = [];
-    $scope.servicerequest = new ServiceRequest({});
+    $scope.servicerequest = new ServiceRequest({
+      call: {
+        startedAt: new Date()
+      }
+    });
     $scope.page = 1;
     $scope.limit = 10;
     $scope.total = 0;
@@ -103,6 +107,11 @@ angular
 
       $scope.create = false;
       $scope.updated = true;
+
+      //set call end time
+      if (!$scope.servicerequest._id) {
+        $scope.servicerequest.call.endedAt = new Date();
+      }
 
       $scope.servicerequest.$save().then(function (response) {
 
@@ -260,7 +269,6 @@ angular
         if ($scope.updated) {
           $scope.updated = false;
         } else {
-          // $scope.servicerequest = _.first($scope.servicerequests);
           $scope.select(_.first($scope.servicerequests));
         }
         $scope.total = response.total;

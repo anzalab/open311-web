@@ -20,11 +20,17 @@ angular
     };
 
     //load party
-    Party.get({
-      id: $stateParams.id
-    }).$promise.then(function (party) {
-      party._roles = _.map(party.roles, 'name').join(', ');
-      party._assigned = _.map(party.roles, '_id');
+    // Party.get({
+    //   id: $stateParams.id
+    // }).$promise.then(function (party) {
+    //   party._roles = _.map(party.roles, 'name').join(', ');
+    //   party._assigned = _.map(party.roles, '_id');
+    //   $scope.party = party;
+    // });
+
+    //TODO show empty state if no party selected
+    //listen for selected juridiction
+    $rootScope.$on('party:selected', function (event, party) {
       $scope.party = party;
     });
 

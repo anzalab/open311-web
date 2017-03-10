@@ -73,13 +73,9 @@ angular
           }
         }
       })
-      .state('app.notifications', {
-        url: '/notifications',
-        templateUrl: 'views/dashboard/notifications.html',
-        controller: function () {},
-        data: {
-          authenticated: true
-        }
+      .state('app.manage', {
+        abstract: true,
+        templateUrl: 'views/manage/main.html'
       });
 
   })

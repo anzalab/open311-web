@@ -10,44 +10,20 @@ angular
   .module('ng311')
   .config(function ($stateProvider) {
 
-    //jurisdictions(user) management states
+    //jurisdictions management states
     $stateProvider
-      .state('app.jurisdictions', {
-        abstract: true,
-        templateUrl: 'views/jurisdictions/main.html',
-        controller: 'JurisdictionMainCtrl',
-        resolve: {
-          roles: function (Jurisdiction) {
-            return Jurisdiction.find({
-              query: {
-                jurisdiction: {
-                  $eq: null //TODO load undeleted(or)
-                }
-              }
-            });
-          }
-        }
-      })
-      .state('app.jurisdictions.list', {
+      .state('app.manage.jurisdictions', {
         url: '/jurisdictions',
-        templateUrl: 'views/jurisdictions/index.html',
-        controller: 'JurisdictionIndexCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.jurisdictions.show', {
-        url: '/jurisdictions/show/:id',
-        templateUrl: 'views/jurisdictions/create.html',
-        controller: 'JurisdictionShowCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.jurisdictions.create', {
-        url: '/jurisdictions/create',
-        templateUrl: 'views/jurisdictions/create.html',
-        controller: 'JurisdictionCreateCtrl',
+        views: {
+          list: {
+            templateUrl: 'views/jurisdictions/_partials/list.html',
+            controller: 'JurisdictionIndexCtrl'
+          },
+          detail: {
+            templateUrl: 'views/jurisdictions/_partials/detail.html',
+            controller: 'JurisdictionShowCtrl'
+          }
+        },
         data: {
           authenticated: true
         }

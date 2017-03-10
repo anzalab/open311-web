@@ -12,7 +12,7 @@ angular
 
     //setting management states
     $stateProvider
-      .state('app.settings', {
+      .state('app.manage.settings', {
         url: '/settings',
         templateUrl: 'views/settings/index.html',
         controller: 'SettingIndexCtrl',

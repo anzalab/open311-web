@@ -17,7 +17,7 @@ angular
     $scope.spin = false;
     $scope.services = [];
     $scope.page = 1;
-    $scope.limit = 3;
+    $scope.limit = 10;
     $scope.total = 0;
 
     $scope.search = {};
@@ -30,6 +30,23 @@ angular
         $scope.q = undefined;
         $scope.find();
       }
+    };
+
+
+    /**
+     * set current service request
+     */
+    $scope.select = function (service) {
+
+      //sort comments in desc order
+      if (service && service._id) {
+        //update scope service request ref
+        $scope.service = service;
+        $rootScope.$broadcast('service:selected', service);
+      }
+
+      $scope.create = false;
+
     };
 
 
@@ -51,6 +68,11 @@ angular
       }).then(function (response) {
         //update scope with services when done loading
         $scope.services = response.services;
+        if ($scope.updated) {
+          $scope.updated = false;
+        } else {
+          $scope.select(_.first($scope.services));
+        }
         $scope.total = response.total;
         $scope.spin = false;
       }).catch(function (error) {

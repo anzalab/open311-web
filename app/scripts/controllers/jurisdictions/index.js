@@ -17,7 +17,7 @@ angular
     $scope.spin = false;
     $scope.jurisdictions = [];
     $scope.page = 1;
-    $scope.limit = 3;
+    $scope.limit = 10;
     $scope.total = 0;
 
     $scope.search = {};
@@ -30,6 +30,23 @@ angular
         $scope.q = undefined;
         $scope.find();
       }
+    };
+
+
+    /**
+     * set current service request
+     */
+    $scope.select = function (jurisdiction) {
+
+      //sort comments in desc order
+      if (jurisdiction && jurisdiction._id) {
+        //update scope service request ref
+        $scope.jurisdiction = jurisdiction;
+        $rootScope.$broadcast('jurisdiction:selected', jurisdiction);
+      }
+
+      $scope.create = false;
+
     };
 
 
@@ -51,6 +68,11 @@ angular
       }).then(function (response) {
         //update scope with jurisdictions when done loading
         $scope.jurisdictions = response.jurisdictions;
+        if ($scope.updated) {
+          $scope.updated = false;
+        } else {
+          $scope.select(_.first($scope.jurisdictions));
+        }
         $scope.total = response.total;
         $scope.spin = false;
       }).catch(function (error) {

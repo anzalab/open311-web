@@ -12,42 +12,18 @@ angular
 
     //services management states
     $stateProvider
-      .state('app.services', {
-        abstract: true,
-        templateUrl: 'views/services/main.html',
-        controller: 'ServiceMainCtrl',
-        resolve: {
-          roles: function (Service) {
-            return Service.find({
-              query: {
-                jurisdiction: {
-                  $eq: null //TODO load undeleted(or)
-                }
-              }
-            });
-          }
-        }
-      })
-      .state('app.services.list', {
+      .state('app.manage.services', {
         url: '/services',
-        templateUrl: 'views/services/index.html',
-        controller: 'ServiceIndexCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.services.show', {
-        url: '/services/show/:id',
-        templateUrl: 'views/services/create.html',
-        controller: 'ServiceShowCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.services.create', {
-        url: '/services/create',
-        templateUrl: 'views/services/create.html',
-        controller: 'ServiceCreateCtrl',
+        views: {
+          list: {
+            templateUrl: 'views/services/_partials/list.html',
+            controller: 'ServiceIndexCtrl'
+          },
+          detail: {
+            templateUrl: 'views/services/_partials/detail.html',
+            controller: 'ServiceShowCtrl'
+          }
+        },
         data: {
           authenticated: true
         }

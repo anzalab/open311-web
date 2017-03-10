@@ -1,0 +1,61 @@
+<!-- start servicegroups list -->
+<div class="row-col lt">
+    <!-- start servicegroups list search -->
+    <div class="p-a b-b search-settings">
+        <form>
+            <div class="input-group">
+                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Service Groups ...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm no-shadow" type="button">
+                        <i class="ti-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <!-- end servicegroup list search -->
+    <!-- start servicegroup listing -->
+    <div class="row-row">
+        <div class="row-body scrollable hover">
+            <div class="row-inner">
+                <div class="list" data-ui-list="info">
+                    <div ng-click="select(servicegroup)" class="list-item list-item-padded" ng-repeat="servicegroup in servicegroups" title="{{servicegroup.description}}">
+                        <div class="list-left">
+                            <span class="w-40 avatar circle">
+                                <letter-avatar title="Status & Area" 
+                                data="{{servicegroup.name}}" 
+                                    height="60" width="60" color="{{servicegroup.color}}" shape="round">
+                                </letter-avatar>
+                            </span>
+                        </div>
+                        <div class="list-body">
+                            <span class="pull-right text-xs text-muted">
+                                {{servicegroup.code}}
+                            </span>
+                            <div class="item-title">
+                                <span class="_500">{{servicegroup.name}}</span>
+                            </div>
+                            <p class="block text-muted text-ellipsis">
+                                {{servicegroup.description}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end servicegroup listing -->
+    <!-- TODO use infinite scroll insteady of pagination -->
+    <div class="p-x-md p-y">
+        <div class="btn-group pull-right">
+            <a href="#" class="btn btn-default btn-xs">
+                <i class="fa fa-fw fa-angle-left"></i>
+            </a>
+            <a href="#" class="btn btn-default btn-xs">
+                <i class="fa fa-fw fa-angle-right"></i>
+            </a>
+        </div>
+        <span class="text-sm text-muted">Total: {{total}}</span>
+    </div>
+</div>
+<!-- end servicegroups list -->

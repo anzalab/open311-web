@@ -12,10 +12,21 @@ angular
 
     //parties(user) management states
     $stateProvider
-      .state('app.parties', {
-        abstract: true,
-        templateUrl: 'views/parties/main.html',
-        controller: 'PartyMainCtrl',
+      .state('app.manage.parties', {
+        url: '/parties',
+        views: {
+          list: {
+            templateUrl: 'views/parties/_partials/list.html',
+            controller: 'PartyIndexCtrl'
+          },
+          detail: {
+            templateUrl: 'views/parties/_partials/detail.html',
+            controller: 'PartyShowCtrl'
+          }
+        },
+        data: {
+          authenticated: true
+        },
         resolve: {
           roles: function (Role) {
             return Role.find({
@@ -26,30 +37,6 @@ angular
               }
             });
           }
-        }
-      })
-      .state('app.parties.list', {
-        url: '/parties',
-        templateUrl: 'views/parties/index.html',
-        controller: 'PartyIndexCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.parties.show', {
-        url: '/parties/show/:id',
-        templateUrl: 'views/parties/create.html',
-        controller: 'PartyShowCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.parties.create', {
-        url: '/parties/create',
-        templateUrl: 'views/parties/create.html',
-        controller: 'PartyCreateCtrl',
-        data: {
-          authenticated: true
         }
       });
   });

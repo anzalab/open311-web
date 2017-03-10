@@ -1,0 +1,60 @@
+<!-- start service details -->
+<div class="row-col">
+    <div class="white b-b bg">
+        <!-- start service detail action bar -->
+        <div ng-include="'views/services/_partials/action_bar.html'" class="navbar"></div>
+        <!-- end service details action bar -->
+    </div>
+    <!-- start service body -->
+    <div class="row-row">
+        <div class="row-body">
+            <div class="row-inner">
+                <div class="padding">
+                    <!-- start service service -->
+                    <h4 class="_600">
+                        {{service.name}}
+                        <span class="pull-right font-size-14" title="Service Jurisdiction">
+                        <span class="text-muted font-size-10">Area</span>
+                        {{service.jurisdiction.name}}
+                    </span>
+                    </h4>
+                    <!-- end service service -->
+                    <div class="p-y">
+                        <div title="Code">
+                            <span class="text-muted font-size-12">Code: </span>
+                            <span>{{service.code}}</span>
+                        </div>
+                        <div title="Color">
+                            <span class="text-muted font-size-12">Color: </span>
+                            <span>{{service.color}}</span>
+                        </div>
+                    </div>
+                    <div class="p-y b-t">
+                        <span title="Jurisdiction">
+                            <span class="text-muted font-size-12">Jurisdiction: </span>
+                        <a href="mailto:{{service.operator.email}}">
+                            {{service.jurisdiction.name}}
+                        </a>
+                        </span>
+                        <span title="Service Group" class="m-l">
+                            <span class="text-muted font-size-12">Service Group: </span>
+                        <a href="mailto:{{service.operator.email}}">
+                            {{service.group.name}}
+                        </a>
+                        </span>
+                    </div>
+                </div>
+                <!-- start issue description -->
+                <div class="padding b-t">
+                    <h6 class="m-b" title="Service Description">Description</h6>
+                    <p class="text-lt">
+                        {{service.description}}
+                    </p>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end service body -->
+</div>
+<!-- end service details -->

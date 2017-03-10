@@ -12,38 +12,25 @@ angular
 
     //role management states
     $stateProvider
-      .state('app.roles', {
-        abstract: true,
-        templateUrl: 'views/roles/main.html',
-        controller: 'RoleMainCtrl',
+      .state('app.manage.roles', {
+        url: '/roles',
+        views: {
+          list: {
+            templateUrl: 'views/roles/_partials/list.html',
+            controller: 'RoleIndexCtrl'
+          },
+          detail: {
+            templateUrl: 'views/roles/_partials/detail.html',
+            controller: 'RoleShowCtrl'
+          }
+        },
+        data: {
+          authenticated: true
+        },
         resolve: {
           permissions: function (Permission) {
             return Permission.find();
           }
-        }
-      })
-      .state('app.roles.list', {
-        url: '/roles',
-        templateUrl: 'views/roles/index.html',
-        controller: 'RoleIndexCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.roles.show', {
-        url: '/roles/show/:id',
-        templateUrl: 'views/roles/create.html',
-        controller: 'RoleShowCtrl',
-        data: {
-          authenticated: true
-        }
-      })
-      .state('app.roles.create', {
-        url: '/roles/create',
-        templateUrl: 'views/roles/create.html',
-        controller: 'RoleCreateCtrl',
-        data: {
-          authenticated: true
         }
       });
   });

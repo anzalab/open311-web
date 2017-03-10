@@ -19,9 +19,10 @@ angular
       $scope.edit = true;
     };
 
-    //load service
-    $scope.service = Service.get({
-      id: $stateParams.id
+    //TODO show empty state if no service selected
+    //listen for selected juridiction
+    $rootScope.$on('service:selected', function (event, service) {
+      $scope.service = service;
     });
 
 
@@ -56,7 +57,7 @@ angular
           response = response || {};
 
           response.message =
-            response.message || 'User updated successfully';
+            response.message || 'Service updated successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 

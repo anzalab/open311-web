@@ -12,7 +12,7 @@
                 <div class="padding">
                     <!-- start servicerequest service -->
                     <h4 class="_600">
-                        {{servicerequest.service.name}} #{{servicerequest.code}}
+                        <span title="Issue Nature">{{servicerequest.service.name}}</span> - <span title="Issue Number">#{{servicerequest.code}}</span>
                         <span class="pull-right font-size-14" title="Area Responsible">
                         <span class="text-muted font-size-10">Area</span>
                         {{servicerequest.jurisdiction.name}}
@@ -37,6 +37,20 @@
                             <a>{{servicerequest.address}}</a>
                         </div>
                     </div>
+                    <!-- start call details -->
+                    <div class="p-y b-t" ng-show="servicerequest.call.startedAt && servicerequest.call.endedAt">
+                        <span title="Call Start Time">
+                            <span class="text-muted font-size-12">
+                            Call Start:
+                            </span>
+                        <span class="font-size-12">{{servicerequest.call.startedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
+                        </span>
+                        <span title="Call End Time" class="p-l">
+                            <span class="text-muted font-size-12">Call End: </span>
+                        <span class="font-size-12">{{servicerequest.call.endedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
+                        </span>
+                    </div>
+                    <!-- end call details -->
                     <div class="p-y b-t">
                         <!-- start representative -->
                         <span title="Operator Responsible">

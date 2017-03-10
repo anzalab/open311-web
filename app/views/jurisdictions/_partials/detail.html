@@ -1,0 +1,62 @@
+<!-- start jurisdiction details -->
+<div class="row-col">
+    <div class="white b-b bg">
+        <!-- start jurisdiction detail action bar -->
+        <div ng-include="'views/jurisdictions/_partials/action_bar.html'" class="navbar"></div>
+        <!-- end jurisdiction details action bar -->
+    </div>
+    <!-- start jurisdiction body -->
+    <div class="row-row">
+        <div class="row-body">
+            <div class="row-inner">
+                <div class="padding">
+                    <!-- start jurisdiction service -->
+                    <h4 class="_600">
+                        {{jurisdiction.name}}
+                        <span class="pull-right font-size-14" title="Top Jurisdiction">
+                        <span class="text-muted font-size-10">Area</span>
+                        {{jurisdiction.jurisdiction.name}}
+                    </span>
+                    </h4>
+                    <!-- end jurisdiction service -->
+                    <div class="p-y">
+                        <div title="Email">
+                            <span class="text-muted font-size-12">Email: </span>
+                            <span>{{jurisdiction.email}}</span>
+                        </div>
+                        <div title="Phone Number">
+                            <span class="text-muted font-size-12">Phone #: </span>
+                            <span>{{jurisdiction.phone}}</span>
+                        </div>
+                        <div title="Physical Address">
+                            <span class="text-muted font-size-12">Address: </span>
+                            <span>{{jurisdiction.address}}</span>
+                        </div>
+                        <div title="Code">
+                            <span class="text-muted font-size-12">Code: </span>
+                            <span>{{jurisdiction.code}}</span>
+                        </div>
+                    </div>
+                    <div class="p-y b-t">
+                        <span title="Operator Responsible">
+                            <span class="text-muted font-size-12">Operator: </span>
+                        <a href="mailto:{{jurisdiction.operator.email}}">
+                            {{jurisdiction.operator.name}}
+                        </a>
+                        </span>
+                    </div>
+                </div>
+                <!-- start issue description -->
+                <div class="padding b-t">
+                    <h6 class="m-b" title="Jurisdiction Description">About</h6>
+                    <p class="text-lt">
+                        {{jurisdiction.about}}
+                    </p>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end jurisdiction body -->
+</div>
+<!-- end jurisdiction details -->

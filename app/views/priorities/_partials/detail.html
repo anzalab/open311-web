@@ -1,0 +1,50 @@
+<!-- start priority details -->
+<div class="row-col">
+    <div class="white b-b bg">
+        <!-- start priority detail action bar -->
+        <div ng-include="'views/priorities/_partials/action_bar.html'" class="navbar"></div>
+        <!-- end priority details action bar -->
+    </div>
+    <!-- start priority body -->
+    <div class="row-row">
+        <div class="row-body">
+            <div class="row-inner">
+                <div class="padding">
+                    <!-- start priority service -->
+                    <h4 class="_600">
+                        {{priority.name}}
+                        <span class="pull-right font-size-14" title="Top Jurisdiction">
+                        <span class="text-muted font-size-10">Area</span>
+                        {{priority.priority.name}}
+                    </span>
+                    </h4>
+                    <!-- end priority service -->
+                    <div class="p-y">
+                        <div title="Email">
+                            <span class="text-muted font-size-12">Weight: </span>
+                            <span>{{priority.weight}}</span>
+                        </div>
+                    </div>
+                    <div class="p-y b-t">
+                        <span title="Operator Responsible">
+                            <span class="text-muted font-size-12">Operator: </span>
+                        <a href="mailto:{{priority.operator.email}}">
+                            {{priority.operator.name}}
+                        </a>
+                        </span>
+                    </div>
+                </div>
+                <!-- start issue description -->
+                <div class="padding b-t">
+                    <h6 class="m-b" title="Jurisdiction Description">About</h6>
+                    <p class="text-lt">
+                        {{priority.name}}
+                    </p>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end priority body -->
+</div>
+<!-- end priority details -->

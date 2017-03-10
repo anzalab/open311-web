@@ -1,0 +1,61 @@
+<!-- start jurisdictions list -->
+<div class="row-col lt">
+    <!-- start jurisdictions list search -->
+    <div class="p-a b-b search-settings">
+        <form>
+            <div class="input-group">
+                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Jurisdictions ...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-sm no-shadow" type="button">
+                        <i class="ti-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <!-- end jurisdiction list search -->
+    <!-- start jurisdiction listing -->
+    <div class="row-row">
+        <div class="row-body scrollable hover">
+            <div class="row-inner">
+                <div class="list" data-ui-list="info">
+                    <div ng-click="select(jurisdiction)" class="list-item list-item-padded" ng-repeat="jurisdiction in jurisdictions" title="{{jurisdiction.about}}">
+                        <div class="list-left">
+                            <span class="w-40 avatar circle">
+                                <letter-avatar title="Status & Area" 
+                                data="{{jurisdiction.name}}" 
+                                    height="60" width="60" shape="round">
+                                </letter-avatar>
+                            </span>
+                        </div>
+                        <div class="list-body">
+                            <span class="pull-right text-xs text-muted">
+                                {{jurisdiction.code}}
+                            </span>
+                            <div class="item-title">
+                                <span class="_500">{{jurisdiction.name}}</span>
+                            </div>
+                            <p class="block text-muted text-ellipsis">
+                                {{jurisdiction.about}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end jurisdiction listing -->
+    <!-- TODO use infinite scroll insteady of pagination -->
+    <div class="p-x-md p-y">
+        <div class="btn-group pull-right">
+            <a href="#" class="btn btn-default btn-xs">
+                <i class="fa fa-fw fa-angle-left"></i>
+            </a>
+            <a href="#" class="btn btn-default btn-xs">
+                <i class="fa fa-fw fa-angle-right"></i>
+            </a>
+        </div>
+        <span class="text-sm text-muted">Total: {{total}}</span>
+    </div>
+</div>
+<!-- end jurisdictions list -->
