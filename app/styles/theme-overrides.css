@@ -205,3 +205,14 @@ body {
 #internal-comment-box {
     background-color: #f9f9f9;
 }
+
+/*.navbar::after {
+    content: "";
+    display: table;
+    clear: both;
+    box-sizing: inherit;
+}
+
+.navbar-nav .nav-item {
+    float: left;
+}*/
