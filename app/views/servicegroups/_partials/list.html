@@ -22,17 +22,17 @@
                     <div ng-click="select(servicegroup)" class="list-item list-item-padded" ng-repeat="servicegroup in servicegroups" title="{{servicegroup.description}}">
                         <div class="list-left">
                             <span class="w-40 avatar circle">
-                                <letter-avatar title="Status & Area" 
-                                data="{{servicegroup.name}}" 
+                                <letter-avatar title="Service Group Code" 
+                                data="{{servicegroup.code}}" 
                                     height="60" width="60" color="{{servicegroup.color}}" shape="round">
                                 </letter-avatar>
                             </span>
                         </div>
                         <div class="list-body">
-                            <span class="pull-right text-xs text-muted">
+                            <span title="Service Group Code" class="pull-right text-xs text-muted">
                                 {{servicegroup.code}}
                             </span>
-                            <div class="item-title">
+                            <div title="Service Group Name" class="item-title">
                                 <span class="_500">{{servicegroup.name}}</span>
                             </div>
                             <p class="block text-muted text-ellipsis">

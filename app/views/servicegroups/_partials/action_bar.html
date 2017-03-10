@@ -1,47 +1,30 @@
-<!-- start servicerequest detail action bar -->
+<!-- start service group detail action bar -->
 <ul class="nav navbar-nav">
-    <li class="nav-item">
-        <a ng-if="mailTo" href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
+    <li ng-if="edit" class="nav-item">
+        <a ng-click="onCancel()" class="nav-link text-muted" title="Click to Cancel Service Group Edit">
             <span class="nav-text">
-                <i class="icon-action-undo"></i>
+                <i class="icon ti-close" aria-hidden="true"></i>
             </span>
         </a>
     </li>
-    <!-- <li class="nav-item b-l p-l p-r">
-        <a class="nav-link text-muted no-border" title="People on Issue">
+    <li ng-if="!edit" class="nav-item">
+        <a ng-click="onNew()" class="nav-link text-muted" title="Click to Add New Service Group">
             <span class="nav-text">
-                <i class="icon-people"></i>
+                <i class="icon ti-plus" aria-hidden="true"></i>
             </span>
         </a>
     </li>
-    <li class="nav-item b-l p-l p-r">
-        <a class="nav-link text-muted no-border" title="Comments">
+    <li ng-if="!edit" class="nav-item">
+        <a ng-click="onEdit()" class="nav-link text-muted" title="Click to edit service group">
             <span class="nav-text">
-                <i class="fa fa-comments-o"></i>
+                <i class="icon-pencil" aria-hidden="true"></i>
             </span>
         </a>
     </li>
-    <li class="nav-item hidden-sm-down b-l p-l p-r">
-        <a class="nav-link text-muted no-border" title="Work Logs">
-            <span class="nav-text">
-                <i class="fa fa-hourglass-o"></i>
-            </span>
+    <li ng-if="edit" class="nav-item">
+        <a ng-click="save()" class="nav-link text-muted" title="Click to save service group">
+            Save
         </a>
     </li>
-    <li class="nav-item hidden-sm-down b-l p-l p-r">
-        <a class="nav-link text-muted no-border" title="Notifications">
-            <span class="nav-text">
-                <i class="fa fa-bell-o"></i>
-                <b class="label rounded danger up">3</b>
-            </span>
-        </a>
-    </li>
-    <li title="Delete Issue" class="nav-item b-l p-l">
-        <a ng-click="delete(servicerequest)" class="nav-link text-muted no-border">
-            <span class="nav-text">
-                <i class="fa fa-trash-o"></i>
-            </span>
-        </a>
-    </li> -->
 </ul>
-<!-- end servicerequest detail action bar -->
+<!-- end service group detail action bar -->

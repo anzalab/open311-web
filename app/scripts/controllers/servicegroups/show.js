@@ -19,51 +19,44 @@ angular
       $scope.edit = true;
     };
 
+    $scope.onCancel = function () {
+      $scope.edit = false;
+    };
+
+    $scope.onNew = function () {
+      $scope.servicegroup = new ServiceGroup({});
+      $scope.edit = true;
+    };
+
     //TODO show empty state if no servicegroup selected
-    //listen for selected juridiction
+    //listen for selected servicegroup
     $rootScope.$on('servicegroup:selected', function (event, servicegroup) {
       $scope.servicegroup = servicegroup;
     });
 
-
     /**
-     * @description block created group
-     */
-    $scope.block = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
-
-
-    /**
-     * @description unblock created group
-     */
-    $scope.unblock = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
-
-    /**
-     * @description save created group
+     * @description save created servicegroup
      */
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-
-      $scope.servicegroup.$update().then(function (response) {
+      var updateOrSave = $scope.servicegroup.$update();
+      if (!$scope.servicegroup._id) {
+        updateOrSave = $scope.servicegroup.$save();
+      }
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
           response.message =
-            response.message || 'User updated successfully';
+            response.message || 'Service Group Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('servicegroup:update:success');
+          $rootScope.$broadcast('app:servicegroups:reload');
 
-          $state.go('app.servicegroups.list');
+          $scope.edit = false;
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);
