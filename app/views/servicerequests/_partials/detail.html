@@ -22,19 +22,19 @@
                     <div class="p-y">
                         <div title="Reporter Name">
                             <span class="text-muted font-size-12">From: </span>
-                            <a href="mailto:{{servicerequest.reporter.email}}">{{servicerequest.reporter.name}}</a>
+                            <span>{{servicerequest.reporter.name}}</span>
                         </div>
                         <div title="Reporter Account Number">
                             <span class="text-muted font-size-12">Account #: </span>
-                            <a>{{servicerequest.reporter.account}}</a>
+                            <span>{{servicerequest.reporter.account}}</span>
                         </div>
                         <div title="Reporter Phone Number">
                             <span class="text-muted font-size-12">Phone #: </span>
-                            <a>{{servicerequest.reporter.phone}}</a>
+                            <span>{{servicerequest.reporter.phone}}</span>
                         </div>
                         <div title="Reporter Address">
                             <span class="text-muted font-size-12">Address: </span>
-                            <a>{{servicerequest.address}}</a>
+                            <span>{{servicerequest.address}}</span>
                         </div>
                     </div>
                     <!-- start call details -->
@@ -55,13 +55,13 @@
                         <!-- start representative -->
                         <span title="Operator Responsible">
                             <span class="text-muted font-size-12">Operator: </span>
-                        <a href="mailto:{{servicerequest.operator.email}}">{{servicerequest.operator.name}}</a>
+                        <span>{{servicerequest.operator.name}}</span>
                         </span>
                         <!-- end representative -->
                         <!-- start assignee -->
                         <span uib-dropdown class="m-l">
                             <span uib-dropdown-toggle class="text-muted font-size-12">Assignee: </span>
-                        <a href="mailto:{{servicerequest.assignee.email}}">{{servicerequest.assignee.name}}</a>
+                        <span>{{servicerequest.assignee.name || 'N/A'}}</span>
                         <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <ul class="list no-border p-b">
                                 <li class="list-item" ng-repeat="assignee in assignees" ng-click="assign(assignee)">

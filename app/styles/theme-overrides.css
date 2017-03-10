@@ -146,7 +146,7 @@ body {
 }
 
 .servicerequest .dropdown-toggle::after {
-    content: none;
+    /*content: none;*/
 }
 
 

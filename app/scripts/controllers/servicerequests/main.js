@@ -121,7 +121,7 @@ angular
 
           response = response || {};
 
-          $scope.servicerequest = $scope.select(response);
+          $scope.select(response);
 
           response.message =
             response.message || 'Service Request Saved Successfully';
@@ -131,6 +131,7 @@ angular
           $rootScope.$broadcast('servicerequest:create:success', response);
 
           $rootScope.$broadcast('app:servicerequests:reload');
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);
