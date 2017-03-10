@@ -19,31 +19,20 @@ angular
       $scope.edit = true;
     };
 
+    $scope.onCancel = function () {
+      $scope.edit = false;
+    };
+
+    $scope.onNew = function () {
+      $scope.jurisdiction = new Jurisdiction({});
+      $scope.edit = true;
+    };
+
     //TODO show empty state if no jurisdiction selected
-    //listen for selected juridiction
+    //listen for selected jurisdiction
     $rootScope.$on('jurisdiction:selected', function (event, jurisdiction) {
       $scope.jurisdiction = jurisdiction;
     });
-
-
-    /**
-     * @description block created jurisdiction
-     */
-    $scope.block = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
-
-
-    /**
-     * @description unblock created jurisdiction
-     */
-    $scope.unblock = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
 
     /**
      * @description save created jurisdiction
@@ -51,19 +40,23 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-
-      $scope.jurisdiction.$update().then(function (response) {
+      var updateOrSave = $scope.jurisdiction.$update();
+      if (!$scope.jurisdiction._id) {
+        updateOrSave = $scope.jurisdiction.$save();
+      }
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
           response.message =
-            response.message || 'Jurisdiction updated successfully';
+            response.message || 'Jurisdiction Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('jurisdiction:update:success');
+          $rootScope.$broadcast('app:jurisdictions:reload');
 
-          $state.go('app.jurisdictions.list');
+          $scope.edit = false;
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);

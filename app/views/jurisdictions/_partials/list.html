@@ -22,20 +22,20 @@
                     <div ng-click="select(jurisdiction)" class="list-item list-item-padded" ng-repeat="jurisdiction in jurisdictions" title="{{jurisdiction.about}}">
                         <div class="list-left">
                             <span class="w-40 avatar circle">
-                                <letter-avatar title="Status & Area" 
-                                data="{{jurisdiction.name}}" 
+                                <letter-avatar title="Jurisdiction Code" 
+                                data="{{jurisdiction.code}}" 
                                     height="60" width="60" shape="round">
                                 </letter-avatar>
                             </span>
                         </div>
                         <div class="list-body">
-                            <span class="pull-right text-xs text-muted">
+                            <span title="Jurisdiction Code" class="pull-right text-xs text-muted">
                                 {{jurisdiction.code}}
                             </span>
                             <div class="item-title">
-                                <span class="_500">{{jurisdiction.name}}</span>
+                                <span title="Jurisdiction Name" class="_500">{{jurisdiction.name}}</span>
                             </div>
-                            <p class="block text-muted text-ellipsis">
+                            <p title="Jurisdiction Description" class="block text-muted text-ellipsis">
                                 {{jurisdiction.about}}
                             </p>
                         </div>

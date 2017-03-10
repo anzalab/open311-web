@@ -10,49 +10,37 @@
         <div class="row-body">
             <div class="row-inner">
                 <div class="padding">
-                    <!-- start jurisdiction service -->
-                    <h4 class="_600">
-                        {{jurisdiction.name}}
-                        <span class="pull-right font-size-14" title="Top Jurisdiction">
-                        <span class="text-muted font-size-10">Area</span>
-                        {{jurisdiction.jurisdiction.name}}
-                    </span>
-                    </h4>
-                    <!-- end jurisdiction service -->
-                    <div class="p-y">
-                        <div title="Email">
-                            <span class="text-muted font-size-12">Email: </span>
-                            <span>{{jurisdiction.email}}</span>
+                    <form ng-submit="save()" name="jurisdictionForm" role="form" autocomplete="off" novalidate>
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="m-b" title="Jurisdiction Name">
+                                    <div class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="jurisdiction.code" ng-required ng-minlength="1" type="text" name="code" class="form-control" />
+                                        <label title="Jurisdiction Code" class="floating-label">Code</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Jurisdiction Name">
+                                    <div class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="jurisdiction.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                                        <label title="Jurisdiction Name" class="floating-label">Name</label>
+                                    </div>
+                                </div>
+                                 <div class="m-t-lg" title="Jurisdiction Domain">
+                                    <div class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="jurisdiction.domain" ng-required ng-minlength="2" type="text" name="domain" class="form-control" />
+                                        <label title="Domain Name" class="floating-label">Domain</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Jurisdiction Weight">
+                                    <div class="form-group form-material floating">
+                                        <textarea ng-disabled="!edit" ng-model="jurisdiction.about" msd-elastic name="about" class="form-control" rows="3">
+                                        </textarea>
+                                        <label class="floating-label">About</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div title="Phone Number">
-                            <span class="text-muted font-size-12">Phone #: </span>
-                            <span>{{jurisdiction.phone}}</span>
-                        </div>
-                        <div title="Physical Address">
-                            <span class="text-muted font-size-12">Address: </span>
-                            <span>{{jurisdiction.address}}</span>
-                        </div>
-                        <div title="Code">
-                            <span class="text-muted font-size-12">Code: </span>
-                            <span>{{jurisdiction.code}}</span>
-                        </div>
-                    </div>
-                    <div class="p-y b-t">
-                        <span title="Operator Responsible">
-                            <span class="text-muted font-size-12">Operator: </span>
-                        <a href="mailto:{{jurisdiction.operator.email}}">
-                            {{jurisdiction.operator.name}}
-                        </a>
-                        </span>
-                    </div>
-                </div>
-                <!-- start issue description -->
-                <div class="padding b-t">
-                    <h6 class="m-b" title="Jurisdiction Description">About</h6>
-                    <p class="text-lt">
-                        {{jurisdiction.about}}
-                    </p>
-                    <p>&nbsp;</p>
+                    </form>
                 </div>
             </div>
         </div>
