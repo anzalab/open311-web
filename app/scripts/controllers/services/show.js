@@ -19,31 +19,20 @@ angular
       $scope.edit = true;
     };
 
+    $scope.onCancel = function () {
+      $scope.edit = false;
+    };
+
+    $scope.onNew = function () {
+      $scope.service = new Service({});
+      $scope.edit = true;
+    };
+
     //TODO show empty state if no service selected
-    //listen for selected juridiction
+    //listen for selected service
     $rootScope.$on('service:selected', function (event, service) {
       $scope.service = service;
     });
-
-
-    /**
-     * @description block created service
-     */
-    $scope.block = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
-
-
-    /**
-     * @description unblock created service
-     */
-    $scope.unblock = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
 
     /**
      * @description save created service
@@ -51,19 +40,23 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-
-      $scope.service.$update().then(function (response) {
+      var updateOrSave = $scope.service.$update();
+      if (!$scope.service._id) {
+        updateOrSave = $scope.service.$save();
+      }
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
           response.message =
-            response.message || 'Service updated successfully';
+            response.message || 'Service Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('service:update:success');
+          $rootScope.$broadcast('app:services:reload');
 
-          $state.go('app.services.list');
+          $scope.edit = false;
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);

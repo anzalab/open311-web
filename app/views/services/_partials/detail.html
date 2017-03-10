@@ -10,47 +10,35 @@
         <div class="row-body">
             <div class="row-inner">
                 <div class="padding">
-                    <!-- start service service -->
-                    <h4 class="_600">
-                        {{service.name}}
-                        <span class="pull-right font-size-14" title="Service Jurisdiction">
-                        <span class="text-muted font-size-10">Area</span>
-                        {{service.jurisdiction.name}}
-                    </span>
-                    </h4>
-                    <!-- end service service -->
-                    <div class="p-y">
-                        <div title="Code">
-                            <span class="text-muted font-size-12">Code: </span>
-                            <span>{{service.code}}</span>
+                    <form ng-submit="save()" name="serviceForm" role="form" autocomplete="off" novalidate>
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="m-b" title="Service Code">
+                                    <div class="form-group form-material floating">
+                                        <input title="Service Code" ng-disabled="!edit" ng-model="service.code" ng-required ng-minlength="1" type="text" name="code" class="form-control" />
+                                        <label title="Service Code" class="floating-label">Code</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Service Name">
+                                    <div class="form-group form-material floating">
+                                        <input title="Service Name" ng-disabled="!edit" ng-model="service.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                                        <label title="Service Name" class="floating-label">Name</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Service Color">
+                                    <color-picker ng-model="service.color">
+                                    </color-picker>
+                                </div>
+                                <div class="m-t-lg" title="Service Description">
+                                    <div class="form-group form-material floating">
+                                        <textarea title="Service Description" ng-disabled="!edit" ng-model="service.description" msd-elastic name="about" class="form-control" rows="3">
+                                        </textarea>
+                                        <label class="floating-label">Description</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div title="Color">
-                            <span class="text-muted font-size-12">Color: </span>
-                            <span>{{service.color}}</span>
-                        </div>
-                    </div>
-                    <div class="p-y b-t">
-                        <span title="Jurisdiction">
-                            <span class="text-muted font-size-12">Jurisdiction: </span>
-                        <a href="mailto:{{service.operator.email}}">
-                            {{service.jurisdiction.name}}
-                        </a>
-                        </span>
-                        <span title="Service Group" class="m-l">
-                            <span class="text-muted font-size-12">Service Group: </span>
-                        <a href="mailto:{{service.operator.email}}">
-                            {{service.group.name}}
-                        </a>
-                        </span>
-                    </div>
-                </div>
-                <!-- start issue description -->
-                <div class="padding b-t">
-                    <h6 class="m-b" title="Service Description">Description</h6>
-                    <p class="text-lt">
-                        {{service.description}}
-                    </p>
-                    <p>&nbsp;</p>
+                    </form>
                 </div>
             </div>
         </div>
