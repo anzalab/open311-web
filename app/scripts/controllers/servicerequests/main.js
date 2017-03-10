@@ -291,6 +291,31 @@ angular
       return willPaginate;
     };
 
+    //export current filtered issues
+    //TODO if no filter export all
+    $scope.export = function () {
+      var _exports =
+        _.map($scope.servicerequests, function (servicerequest) {
+          return {
+            code: servicerequest.code,
+            callStart: (servicerequest.call || {}).startedAt,
+            callEnd: (servicerequest.call || {}).endedAt,
+            reporterName: servicerequest.reporter.name,
+            reporterPhone: servicerequest.reporter.phone,
+            reporterAccount: servicerequest.reporter.account,
+            operator: servicerequest.operator.name,
+            area: servicerequest.jurisdiction.name,
+            nature: servicerequest.service.name,
+            assignee: (servicerequest.assignee || {}).name,
+            description: servicerequest.description,
+            address: servicerequest.address,
+            status: servicerequest.status.name,
+            priority: servicerequest.priority.name
+          };
+        });
+      return _exports;
+    };
+
 
     //pre load servicerequests on state activation
     $scope.find();

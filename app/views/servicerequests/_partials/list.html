@@ -50,11 +50,8 @@
     <!-- TODO use infinite scroll insteady of pagination -->
     <div class="p-x-md p-y">
         <div class="btn-group pull-right">
-            <a href="#" class="btn btn-default btn-xs">
-                <i class="fa fa-fw fa-angle-left"></i>
-            </a>
-            <a href="#" class="btn btn-default btn-xs">
-                <i class="fa fa-fw fa-angle-right"></i>
+            <a title="Click To Export Issues" class="btn btn-default btn-xs" ng-csv="export" csv-header="['#','Call Start Time', 'Call End Time', 'Reporter Name', 'Reporter Phone', 'Reporter Account', 'Operator', 'Area', 'Nature', 'Assignee', 'Description', 'Address', 'Status', 'Priority']" filename="issues.csv">
+                <i class="icon-cloud-download"></i>
             </a>
         </div>
         <span class="text-sm text-muted">Total: {{total}}</span>
