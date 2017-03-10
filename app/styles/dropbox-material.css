@@ -458,3 +458,8 @@ fieldset[disabled] .form-material .form-control~.floating-label {
     height: 100%;
     z-index: 100
 }
+
+.form-material .form-control:disabled,
+.form-material .form-control[disabled] {
+    border-bottom: none;
+}

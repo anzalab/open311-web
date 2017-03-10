@@ -19,31 +19,20 @@ angular
       $scope.edit = true;
     };
 
+    $scope.onCancel = function () {
+      $scope.edit = false;
+    };
+
+    $scope.onNew = function () {
+      $scope.status = new Status({ weight: 0, color: '#FF9800' });
+      $scope.edit = true;
+    };
+
     //TODO show empty state if no status selected
     //listen for selected juridiction
     $rootScope.$on('status:selected', function (event, status) {
       $scope.status = status;
     });
-
-
-    /**
-     * @description block created status
-     */
-    $scope.block = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
-
-
-    /**
-     * @description unblock created status
-     */
-    $scope.unblock = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
 
     /**
      * @description save created status
@@ -51,19 +40,23 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-
-      $scope.status.$update().then(function (response) {
+      var updateOrSave = $scope.status.$update();
+      if (!$scope.status._id) {
+        updateOrSave = $scope.status.$save();
+      }
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
           response.message =
-            response.message || 'Status updated successfully';
+            response.message || 'Status Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('status:update:success');
+          $rootScope.$broadcast('app:statuses:reload');
 
-          $state.go('app.statuses.list');
+          $scope.edit = false;
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);

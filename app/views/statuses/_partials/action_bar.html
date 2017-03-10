@@ -1,33 +1,30 @@
-<!-- start servicerequest detail action bar -->
+<!-- start status detail action bar -->
 <ul class="nav navbar-nav">
-    <li class="nav-item">
-        <a href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
+    <li ng-if="edit" class="nav-item">
+        <a ng-click="onCancel()" class="nav-link text-muted" title="Click to Cancel Status Edit">
             <span class="nav-text">
-                <i class="icon-action-undo"></i>
+                <i class="icon ti-close" aria-hidden="true"></i>
             </span>
         </a>
     </li>
-    <li class="nav-item">
-        <a ng-click="onEdit()" class="nav-link text-muted" title="Click to edit jurisdiction">
+    <li ng-if="!edit" class="nav-item">
+        <a ng-click="onNew()" class="nav-link text-muted" title="Click to Add New Status">
+            <span class="nav-text">
+                <i class="icon ti-plus" aria-hidden="true"></i>
+            </span>
+        </a>
+    </li>
+    <li ng-if="!edit" class="nav-item">
+        <a ng-click="onEdit()" class="nav-link text-muted" title="Click to edit status">
             <span class="nav-text">
                 <i class="icon-pencil" aria-hidden="true"></i>
             </span>
         </a>
     </li>
-    <li>
-        <button ng-disabled="jurisdictionForm.$invalid || !jurisdiction.name || !jurisdiction.domain || !jurisdiction.code" ng-click="save()" ng-show="edit" type="button" class="btn btn-primary btn-md empty-btn" title="Click to save jurisdiction">
+    <li ng-if="edit" class="nav-item">
+        <a ng-click="save()" class="nav-link text-muted" title="Click to save status">
             Save
-        </button>
-    </li>
-    <li>
-        <button ng-click="delete(jurisdiction)" ng-show="edit && jurisdiction._id" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Delete jurisdiction permanently">
-            <i class="icon icon-trash" aria-hidden="true"></i>
-        </button>
-    </li>
-    <li class="nav-item">
-        <button ui-sref="app.jurisdictions.list" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Cancel jurisdiction edits">
-            <i class="icon ti-close" aria-hidden="true"></i>
-        </button>
+        </a>
     </li>
 </ul>
-<!-- end servicerequest detail action bar -->
+<!-- end status detail action bar -->

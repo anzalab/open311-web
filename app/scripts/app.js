@@ -32,7 +32,8 @@ angular
     'angular-theme-spinner',
     'monospaced.elastic',
     'oi.select',
-    'uz.mailto'
+    'uz.mailto',
+    'mp.colorPicker'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,

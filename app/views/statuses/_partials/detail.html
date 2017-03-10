@@ -10,37 +10,28 @@
         <div class="row-body">
             <div class="row-inner">
                 <div class="padding">
-                    <!-- start status service -->
-                    <h4 class="_600">
-                        {{status.name}}
-                        <span class="pull-right font-size-14" title="Top Jurisdiction">
-                        <span class="text-muted font-size-10">Area</span>
-                        {{status.status.name}}
-                    </span>
-                    </h4>
-                    <!-- end status service -->
-                    <div class="p-y">
-                        <div title="Email">
-                            <span class="text-muted font-size-12">Weight: </span>
-                            <span>{{status.weight}}</span>
+                    <form ng-submit="save()" name="servicerequestForm" role="form" autocomplete="off" novalidate>
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="m-b" title="Status Name">
+                                    <div class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="status.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                                        <label title="Status Name" class="floating-label">Name</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Status Weight">
+                                    <div class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="status.weight" ng-required type="number" name="name" class="form-control" />
+                                        <label title="Status Weight" class="floating-label">Weight</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Status Color">
+                                    <color-picker ng-model="status.color">
+                                    </color-picker>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-y b-t">
-                        <span title="Operator Responsible">
-                            <span class="text-muted font-size-12">Operator: </span>
-                        <a href="mailto:{{status.operator.email}}">
-                            {{status.operator.name}}
-                        </a>
-                        </span>
-                    </div>
-                </div>
-                <!-- start issue description -->
-                <div class="padding b-t">
-                    <h6 class="m-b" title="Jurisdiction Description">About</h6>
-                    <p class="text-lt">
-                        {{status.name}}
-                    </p>
-                    <p>&nbsp;</p>
+                    </form>
                 </div>
             </div>
         </div>

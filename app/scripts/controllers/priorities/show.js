@@ -19,31 +19,20 @@ angular
       $scope.edit = true;
     };
 
+    $scope.onCancel = function () {
+      $scope.edit = false;
+    };
+
+    $scope.onNew = function () {
+      $scope.priority = new Priority({ weight: 0, color: '#FF9800' });
+      $scope.edit = true;
+    };
+
     //TODO show empty state if no priority selected
     //listen for selected juridiction
     $rootScope.$on('priority:selected', function (event, priority) {
       $scope.priority = priority;
     });
-
-
-    /**
-     * @description block created priority
-     */
-    $scope.block = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
-
-
-    /**
-     * @description unblock created priority
-     */
-    $scope.unblock = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.save();
-    };
 
     /**
      * @description save created priority
@@ -51,19 +40,23 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-
-      $scope.priority.$update().then(function (response) {
+      var updateOrSave = $scope.priority.$update();
+      if (!$scope.priority._id) {
+        updateOrSave = $scope.priority.$save();
+      }
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
           response.message =
-            response.message || 'Priority updated successfully';
+            response.message || 'Priority Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('priority:update:success');
+          $rootScope.$broadcast('app:priorities:reload');
 
-          $state.go('app.priorities.list');
+          $scope.edit = false;
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);
