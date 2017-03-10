@@ -29,7 +29,7 @@ angular
         }, function (isState) {
 
           if (isState) {
-            element.css('display', 'initial');
+            element.css('display', 'inherit');
           } else {
             element.css('display', 'none');
           }
@@ -71,7 +71,7 @@ angular
           if (isState) {
             element.css('display', 'none');
           } else {
-            element.css('display', 'initial');
+            element.css('display', 'inherit');
           }
 
         });
