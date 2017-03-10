@@ -45,7 +45,11 @@ angular
 
     //listen for create event
     $rootScope.$on('servicerequest:create', function () {
-      $scope.servicerequest = new ServiceRequest({});
+      $scope.servicerequest = new ServiceRequest({
+        call: {
+          startedAt: new Date()
+        }
+      });
       $scope.create = true;
     });
 
