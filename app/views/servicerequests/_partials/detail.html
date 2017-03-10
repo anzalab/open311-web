@@ -59,11 +59,14 @@
                         </span>
                         <!-- end representative -->
                         <!-- start assignee -->
-                        <span uib-dropdown class="m-l">
+                        <span uib-dropdown auto-close="outsideClick" class="m-l">
                             <span uib-dropdown-toggle class="text-muted font-size-12">Assignee: </span>
                         <span>{{servicerequest.assignee.name || 'N/A'}}</span>
                         <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <ul class="list no-border p-b">
+                                <li class="list-item" title="Type To Search Assignee">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search Assignee ...">
+                                </li>
                                 <li class="list-item" ng-repeat="assignee in assignees" ng-click="assign(assignee)">
                                     <div class="list-body">
                                         <div>
