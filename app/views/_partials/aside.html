@@ -16,7 +16,7 @@
                     <span class="text-xs">Main</span>
                 </li>
                 <li>
-                    <a ng-click="onAllIssues()" class="b-default" title="Issues & Service Request">
+                    <a ui-sref="app.servicerequests" class="b-default" title="Issues & Service Request">
                         <span class="nav-icon">
                             <i class="ion-chatbubble-working"></i>
                         </span>
@@ -32,7 +32,7 @@
                     </a>
                 </li> -->
                 <li>
-                    <a ng-click="onCreateIssue()" class="b-default" title="Report New Issue or Service Request">
+                    <a show-if-state="app.servicerequests" ng-click="onCreateIssue()" class="b-default" title="Report New Issue or Service Request">
                         <span class="nav-icon">
                             <i class="ion-plus-circled"></i>
                         </span>
