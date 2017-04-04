@@ -22,7 +22,7 @@
                     <span class="text-xs">Main</span>
                 </li>
                 <li>
-                    <a ui-sref="app.servicerequests.list" class="b-default" title="Issues & Service Request">
+                    <a ui-sref="app.servicerequests.list" title="Issues & Service Request">
                         <span class="nav-icon">
                             <i class="ion-chatbubble-working"></i>
                         </span>
@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a show-if-state="app.servicerequests.list" ng-click="onCreateIssue()" class="b-default" title="Report New Issue or Service Request">
+                    <a show-if-state="app.servicerequests.list" ng-click="onCreateIssue()" title="Report New Issue or Service Request">
                         <span class="nav-icon">
                             <i class="ion-plus-circled"></i>
                         </span>
@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="b-default" title="Summary Reports">
+                    <a href="#" title="Issue Summary Reports">
                         <span class="nav-icon">
                             <i class="ion-pie-graph"></i>
                         </span>
@@ -46,7 +46,15 @@
                     </a>
                 </li>
                 <li>
-                    <a ui-sref="app.manage.jurisdictions" class="b-default" title="Manage System">
+                    <a href="#" title="Issue Visualization">
+                        <span class="nav-icon">
+                            <i class="ion-location"></i>
+                        </span>
+                        <span class="nav-text">Visualize</span>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="app.manage.jurisdictions" title="Manage System">
                         <span class="nav-icon">
                             <i class="ion-gear-a"></i>
                         </span>
