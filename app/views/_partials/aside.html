@@ -2,13 +2,19 @@
 <div class="navside" data-layout="column">
     <!-- start brand details -->
     <div class="navbar no-radius">
-        <a href="index.html" class="navbar-brand">
+        <a ui-sref="app.servicerequests.list" class="navbar-brand">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                <circle cx="24" cy="24" r="24" style="fill: rgba(120,130,140,0.7);"></circle>
+                <circle cx="24" cy="0" r="2" fill="#ffffff" class="brand-animate"></circle>
+                <text dy="10" x="50%" y="50%" text-anchor="middle" style="fill: #ffffff; stroke: none; font-size: 40px;">a</text>
+            </svg>
             <img src="images/logo.png" alt="." class="hide">
             <span class="hidden-folded inline">aside</span>
         </a>
     </div>
     <!-- end brand details -->
     <!-- start menu actions -->
+    <br/>
     <div data-flex class="hide-scroll">
         <nav class="scroll nav-stacked nav-stacked-rounded nav-color">
             <ul class="nav" data-ui-nav>
@@ -23,20 +29,28 @@
                         <span class="nav-text">Issues</span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="#" class="b-default" title="Summary Reports">
-                        <span class="nav-icon">
-                            <i class="ion-pie-graph"></i>
-                        </span>
-                        <span class="nav-text">Reports</span>
-                    </a>
-                </li> -->
                 <li>
                     <a show-if-state="app.servicerequests.list" ng-click="onCreateIssue()" class="b-default" title="Report New Issue or Service Request">
                         <span class="nav-icon">
                             <i class="ion-plus-circled"></i>
                         </span>
                         <span class="nav-text">New Issue</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="b-default" title="Summary Reports">
+                        <span class="nav-icon">
+                            <i class="ion-pie-graph"></i>
+                        </span>
+                        <span class="nav-text">Summaries</span>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="app.manage.jurisdictions" class="b-default" title="Manage System">
+                        <span class="nav-icon">
+                            <i class="ion-gear-a"></i>
+                        </span>
+                        <span class="nav-text">Manage</span>
                     </a>
                 </li>
             </ul>
@@ -53,21 +67,14 @@
                         </letter-avatar>
                     </div>
                 </div>
-                <div class="clear hidden-folded p-x">
-                    <span class="block _500 text-muted">Jean Reyes</span>
-                    <div class="progress-xxs m-y-sm lt progress">
-                        <div class="progress-bar info" style="width: 15%">
-                        </div>
-                    </div>
-                </div>
             </a>
             <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                 <a class="dropdown-item" href="#" title="My Profile">
                     <span>Profile</span>
                 </a>
-                <a class="dropdown-item" ui-sref="app.manage.jurisdictions" title="System Settings">
+                <!-- <a class="dropdown-item" ui-sref="app.manage.jurisdictions" title="System Settings">
                     <span>Settings</span>
-                </a>
+                </a> -->
                 <a ng-show="isAuthenticated" ng-show="isAuthenticated" data-signout title="Signout" class="dropdown-item" title="Signout">
                     Sign out
                 </a>

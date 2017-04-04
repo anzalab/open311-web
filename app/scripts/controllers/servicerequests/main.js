@@ -10,9 +10,9 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
-    $rootScope, $scope, $state, ServiceRequest, Comment, Summary,
+    $rootScope, $scope, $state, Party, ServiceRequest, Comment, Summary,
     jurisdictions, groups, services, statuses, priorities,
-    party, assignee, summaries
+    party, summaries
   ) {
 
     //servicerequests in the scope
@@ -40,7 +40,7 @@ angular
     $scope.statuses = statuses.statuses;
     $scope.services = services.services;
     $scope.jurisdictions = jurisdictions.jurisdictions;
-    $scope.assignees = assignee.parties;
+    // $scope.assignees = assignee.parties;
     $scope.summaries = summaries;
 
     //listen for create event
@@ -227,6 +227,29 @@ angular
       } else {
         $scope.q = undefined;
         $scope.find();
+      }
+    };
+
+    /**
+     * search assignes
+     * @return {[type]} [description]
+     */
+    $scope.onSearchAssignees = function () {
+      if ($scope.search.party && $scope.search.party.length >= 2) {
+        Party.find({
+          query: {
+            deletedAt: {
+              $eq: null
+            },
+            'relation.name': 'Internal',
+            'relation.type': 'Worker'
+          },
+          q: $scope.search.party
+        }).then(function (response) {
+          $scope.assignees = response.parties;
+        }).catch(function ( /*error*/ ) {
+          $scope.assignees = [];
+        });
       }
     };
 

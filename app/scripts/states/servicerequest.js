@@ -62,19 +62,6 @@ angular
               }
             });
           },
-          assignee: function (Party) {
-            // TODO fetch partis of specific area who are internal
-            // workers
-            return Party.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                },
-                'relation.name': 'Internal',
-                'relation.type': 'Worker'
-              }
-            });
-          },
           summaries: function (Summary) {
             return Summary.issues();
           }

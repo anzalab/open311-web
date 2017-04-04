@@ -65,7 +65,7 @@
                         <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <ul class="list no-border p-b">
                                 <li class="list-item" title="Type To Search Assignee">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search Assignee ...">
+                                    <input ng-change="onSearchAssignees()" ng-model="search.party" type="text" class="form-control form-control-sm" placeholder="Search Assignee ...">
                                 </li>
                                 <li class="list-item" ng-repeat="assignee in assignees" ng-click="assign(assignee)">
                                     <div class="list-body">

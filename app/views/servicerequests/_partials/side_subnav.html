@@ -15,7 +15,7 @@
     <!-- end title -->
     <!-- start body -->
     <div class="row-row">
-        <div class="row-body scrollable hover">
+        <div ng-nicescroll nice-option=" {cursorcolor: '#A3AFB7', cursorwidth: '6px'}" class="row-body scrollable hover">
             <div class="row-inner">
                 <!-- start view all -->
                 <div class="p-a-md nav-active-white" style="padding-bottom: 0rem;padding-left: 1.2rem">
@@ -59,6 +59,21 @@
                     </div>
                 </div>
                 <!-- end statuses menu -->
+                <!-- start priorities menu -->
+                <div class="p-a-md">
+                    <div class="m-b text-muted text-xs">Priorities</div>
+                    <div class="nav-active-white">
+                        <ul class="nav">
+                            <li class="nav-item m-b-xs" ng-repeat="priority in priorities">
+                                <a ng-click="load({'priority':priority._id})" class="nav-link text-muted block">
+                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{priority.color}}">
+                                        {{summaries.priorities[priority._id]}}
+                                    </span>{{priority.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end priorities menu -->
             </div>
         </div>
     </div>
