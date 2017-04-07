@@ -16,7 +16,7 @@ module.exports = function (grunt) {
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
-    template: 'grunt-template',
+    'string-replace': 'grunt-string-replace',
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     ngconstant: 'grunt-ng-constant',
@@ -423,26 +423,22 @@ module.exports = function (grunt) {
     },
 
     //replace template placeholder with actual content
-    //see https://github.com/mathiasbynens/grunt-template
-    template: {
-      development: {
-        options: {
-          data: '<%= ngconstant.development.constants.ENV %>'
-        },
+    //see https://github.com/eruizdechavez/grunt-string-replace
+    'string-replace': {
+      dist: {
         files: {
-          '<%= yeoman.app %>/index.html': [
-            '<%= yeoman.app %>/index.html'
+          '<%= yeoman.dist %>/index.html': [
+            '<%= yeoman.dist %>/index.html'
           ]
-        }
-      },
-      production: {
-        options: {
-          data: '<%= ngconstant.production.constants.ENV %>'
         },
-        files: {
-          '<%= yeoman.app %>/index.html': [
-            '<%= yeoman.app %>/index.html'
-          ]
+        options: {
+          replacements: [{
+            pattern: '{{ENV.title}}',
+            replacement: '<%= ngconstant.production.constants.ENV.title %>'
+          },{
+            pattern: '{{ENV.description}}',
+            replacement: '<%= ngconstant.production.constants.ENV.description %>'
+          }]
         }
       }
     },
@@ -569,7 +565,6 @@ module.exports = function (grunt) {
 
       grunt.task.run([
         'clean:server',
-        'template:development',
         'ngconstant:development',
         'wiredep',
         'concurrent:server',
@@ -590,7 +585,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'template:development',
     'ngconstant:development',
     'wiredep',
     'concurrent:test',
@@ -601,7 +595,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'template:development',
     'ngconstant:production',
     'wiredep',
     'useminPrepare',
@@ -616,7 +609,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'string-replace:dist',
   ]);
 
   grunt.registerTask('default', [
