@@ -27,3 +27,6 @@ Service Request Creation
 - On save record last time
 - Assign a person from a specific area who are internal worker
 - Create party with Civilian type
+
+Continuing
+- Add infinity scroll on issue
