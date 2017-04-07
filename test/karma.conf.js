@@ -63,6 +63,9 @@ module.exports = function(config) {
             'bower_components/oi.select/dist/select-tpls.min.js',
             'bower_components/angular-mailto/angular-mailto.js',
             'bower_components/angular-color-picker/angular-color-picker.js',
+            'bower_components/jquery-mousewheel/jquery.mousewheel.js',
+            'bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
+            'bower_components/ng-scrollbars/dist/scrollbars.min.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",
