@@ -83,12 +83,41 @@ angular
           authenticated: true
         }
       })
-      .state('app.servicerequests.create', {
+      .state('app.create_servicerequests', {
         url: '/servicerequests/create',
         templateUrl: 'views/servicerequests/create.html',
         controller: 'ServiceRequestCreateCtrl',
         data: {
           authenticated: true
+        },
+        resolve: {
+          jurisdictions: function (Jurisdiction) {
+            return Jurisdiction.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          },
+          groups: function (ServiceGroup) {
+            return ServiceGroup.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          },
+          services: function (Service) {
+            return Service.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          }
         }
       });
   });

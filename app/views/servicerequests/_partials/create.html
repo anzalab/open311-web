@@ -53,7 +53,6 @@
                                     <div class="col-sm-6">
                                         <div class="form-group form-material floating">
                                             <oi-select oi-options="item.name for item in services track by item.id" ng-model="servicerequest.service" placeholder="Select Service" class="form-control"></oi-select>
-                                            <!-- <label class="floating-label">Service</label> -->
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -63,20 +62,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--  <div class="row m-b">
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-material floating">
-                                            <input ng-model="servicerequest.priority" ng-required ng-minlength="2" type="text" name="priority" class="form-control" />
-                                            <label class="floating-label">Priority</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-material floating">
-                                            <input ng-model="servicerequest.address" ng-required ng-minlength="2" type="text" name="address" class="form-control" />
-                                            <label class="floating-label">Address</label>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="form-group form-material floating">
                                     <textarea ng-model="servicerequest.addess" msd-elastic name="address" class="form-control" rows="2">
                                     </textarea>
@@ -89,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="p-a text-right">
-                                <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+                                <button ui-sref="app.servicerequests.list" type="button" ng-click="cancel()" class="btn">Cancel</button>
                                 <button type="submit" class="btn info">Submit</button>
                             </div>
                         </div>
