@@ -95,12 +95,14 @@ angular
     $scope.assign = function (assignee) {
       if (assignee) {
         $scope.servicerequest.assignee = assignee._id;
-        $scope.servicerequest.$update().then(function (response) {
-          // $scope.servicerequest = response;
-          $scope.select(response);
-          $scope.updated = true;
-          $rootScope.$broadcast('app:servicerequests:reload');
-        });
+        if (!$scope.servicerequest.resolvedAt) {
+          $scope.servicerequest.$update().then(function (response) {
+            // $scope.servicerequest = response;
+            $scope.select(response);
+            $scope.updated = true;
+            $rootScope.$broadcast('app:servicerequests:reload');
+          });
+        }
       }
     };
 
@@ -166,24 +168,50 @@ angular
       if (priority) {
         $scope.servicerequest.priority = priority;
       }
-      $scope.servicerequest.$update().then(function (response) {
-        // $scope.servicerequest = response;
-        $scope.select(response);
-        $scope.updated = true;
-        $rootScope.$broadcast('app:servicerequests:reload');
-      });
+
+      if (!$scope.servicerequest.resolvedAt) {
+        $scope.servicerequest.$update().then(function (response) {
+          // $scope.servicerequest = response;
+          $scope.select(response);
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+        });
+      }
     };
 
     $scope.changeStatus = function (status) {
       if (status) {
         $scope.servicerequest.status = status;
       }
-      $scope.servicerequest.$update().then(function (response) {
-        // $scope.servicerequest = response;
-        $scope.select(response);
-        $scope.updated = true;
-        $rootScope.$broadcast('app:servicerequests:reload');
-      });
+
+      if (!$scope.servicerequest.resolvedAt) {
+        $scope.servicerequest.$update().then(function (response) {
+          // $scope.servicerequest = response;
+          $scope.select(response);
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+        });
+      }
+    };
+
+    $scope.onClose = function () {
+      if (!$scope.servicerequest.resolvedAt) {
+        $scope.servicerequest.resolvedAt = new Date();
+        $scope.servicerequest.$update().then(function (response) {
+          // $scope.servicerequest = response;
+          $scope.select(response);
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+
+          response = response || {};
+
+          response.message =
+            response.message || 'Issue Marked As Resolved';
+
+          $rootScope.$broadcast('appSuccess', response);
+
+        });
+      }
     };
 
     /**

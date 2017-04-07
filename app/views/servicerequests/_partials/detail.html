@@ -62,7 +62,7 @@
                         <span uib-dropdown auto-close="outsideClick" class="m-l">
                             <span uib-dropdown-toggle class="text-muted font-size-12">Assignee: </span>
                         <span>{{servicerequest.assignee.name || 'N/A'}}</span>
-                        <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
+                        <div ng-if="!servicerequest.resolvedAt" uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <ul class="list no-border p-b">
                                 <li class="list-item" title="Type To Search Assignee">
                                     <input ng-change="onSearchAssignees()" ng-model="search.party" type="text" class="form-control form-control-sm" placeholder="Search Assignee ...">
@@ -83,7 +83,7 @@
                         <!-- end assignee -->
                         <span uib-dropdown class="label primary m-l" title="Status" style="background-color:{{servicerequest.status.color}}">
                            <span uib-dropdown-toggle class="font-size-12 text-white">Status: {{servicerequest.status.name}} </span>
-                        <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
+                        <div ng-if="!servicerequest.resolvedAt" uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <a ng-repeat="status in statuses" ng-click="changeStatus(status)" class="dropdown-item" href="#" title="Status - {{status.name}}">
                                 <span>{{status.name}}</span>
                             </a>
@@ -91,7 +91,7 @@
                         </span>
                         <span uib-dropdown class="label danger m-l" title="Priority" style="background-color:{{servicerequest.priority.color}}">
                             <span uib-dropdown-toggle class="font-size-12 text-white">Priority: {{servicerequest.priority.name}}</span>
-                        <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
+                        <div ng-if="!servicerequest.resolvedAt" uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <a ng-repeat="priority in priorities" ng-click="changePriority(priority)" class="dropdown-item" href="#" title="Priority {{priority.name}}">
                                 <span>{{priority.name}}</span>
                             </a>

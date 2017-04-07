@@ -3,18 +3,18 @@
     <li class="nav-item">
         <a ng-if="mailTo" href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
             <span class="nav-text">
-                <i class="icon-action-undo"></i>
+                <i class="icon-action-redo"></i>
+            </span>
+        </a>
+    </li>
+    <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l p-r">
+        <a ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Signal Feedback Provided To Reporter">
+            <span class="nav-text">
+                <i class="icon-call-out"></i>
             </span>
         </a>
     </li>
     <!-- <li class="nav-item b-l p-l p-r">
-        <a class="nav-link text-muted no-border" title="People on Issue">
-            <span class="nav-text">
-                <i class="icon-people"></i>
-            </span>
-        </a>
-    </li>
-    <li class="nav-item b-l p-l p-r">
         <a class="nav-link text-muted no-border" title="Comments">
             <span class="nav-text">
                 <i class="fa fa-comments-o"></i>
