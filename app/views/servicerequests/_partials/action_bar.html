@@ -14,14 +14,14 @@
             </span>
         </a>
     </li>
-    <!-- <li class="nav-item b-l p-l p-r">
-        <a class="nav-link text-muted no-border" title="Comments">
+    <li ng-if="servicerequest.resolvedAt" class="nav-item b-l p-l p-r">
+        <a ng-click="onReOpen()" class="nav-link text-muted no-border" title="Click To Re-Open The Issue">
             <span class="nav-text">
-                <i class="fa fa-comments-o"></i>
+                <i class="icon-call-in"></i>
             </span>
         </a>
     </li>
-    <li class="nav-item hidden-sm-down b-l p-l p-r">
+    <!-- <li class="nav-item hidden-sm-down b-l p-l p-r">
         <a class="nav-link text-muted no-border" title="Work Logs">
             <span class="nav-text">
                 <i class="fa fa-hourglass-o"></i>

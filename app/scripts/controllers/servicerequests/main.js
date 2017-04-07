@@ -214,6 +214,26 @@ angular
       }
     };
 
+    $scope.onReOpen = function () {
+      if ($scope.servicerequest.resolvedAt) {
+        $scope.servicerequest.resolvedAt = null;
+        $scope.servicerequest.$update().then(function (response) {
+          // $scope.servicerequest = response;
+          $scope.select(response);
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+
+          response = response || {};
+
+          response.message =
+            response.message || 'Issue Re-Open Successfully';
+
+          $rootScope.$broadcast('appSuccess', response);
+
+        });
+      }
+    };
+
     /**
      * @description delete servicerequest
      */

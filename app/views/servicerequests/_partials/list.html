@@ -56,6 +56,9 @@
     <!-- TODO use infinite scroll insteady of pagination -->
     <div class="p-x-md p-y">
         <div class="btn-group pull-right">
+            <a title="Click To Refresh Issues" ng-click="load()" class="btn btn-default btn-xs">
+                <i class="icon-reload"></i>
+            </a>
             <a title="Click To Export Issues" class="btn btn-default btn-xs" ng-csv="export" csv-header="['Issue Number','Call Start Time', 'Call End Time', 'Reporter Name', 'Reporter Phone', 'Reporter Account', 'Operator', 'Area', 'Nature', 'Assignee', 'Description', 'Address', 'Status', 'Priority']" filename="issues.csv">
                 <i class="icon-cloud-download"></i>
             </a>
