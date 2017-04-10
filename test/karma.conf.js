@@ -63,6 +63,9 @@ module.exports = function(config) {
             'bower_components/oi.select/dist/select-tpls.min.js',
             'bower_components/angular-mailto/angular-mailto.js',
             'bower_components/angular-color-picker/angular-color-picker.js',
+            'bower_components/moment/moment.js',
+            'bower_components/bootstrap-daterangepicker/daterangepicker.js',
+            'bower_components/angular-daterangepicker/js/angular-daterangepicker.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",
