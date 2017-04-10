@@ -10,9 +10,9 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
-    $rootScope, $scope, $state, Party, ServiceRequest, Comment, Summary,
-    jurisdictions, groups, services, statuses, priorities,
-    party, summaries
+    $rootScope, $scope, $state, prompt, Party, ServiceRequest,
+    Comment, Summary, jurisdictions, groups, services, statuses,
+    priorities, party, summaries
   ) {
 
     //servicerequests in the scope
@@ -200,44 +200,74 @@ angular
       }
     };
 
+    /**
+     * close and resolve issue
+     */
     $scope.onClose = function () {
-      if (!$scope.servicerequest.resolvedAt) {
-        $scope.servicerequest.resolvedAt = new Date();
-        $scope.servicerequest.$update().then(function (response) {
-          // $scope.servicerequest = response;
-          $scope.select(response);
-          $scope.updated = true;
-          $rootScope.$broadcast('app:servicerequests:reload');
+      prompt({
+        title: 'Resolve Issue',
+        message: 'Are you sure you want to mark this issue as resolved?',
+        buttons: [{
+          label: 'Yes',
+          primary: true,
+        }, {
+          label: 'No',
+          cancel: true
+        }]
+      }).then(function () {
+        if (!$scope.servicerequest.resolvedAt) {
+          $scope.servicerequest.resolvedAt = new Date();
+          $scope.servicerequest.$update().then(function (response) {
+            // $scope.servicerequest = response;
+            $scope.select(response);
+            $scope.updated = true;
+            $rootScope.$broadcast('app:servicerequests:reload');
 
-          response = response || {};
+            response = response || {};
 
-          response.message =
-            response.message || 'Issue Marked As Resolved';
+            response.message =
+              response.message || 'Issue Marked As Resolved';
 
-          $rootScope.$broadcast('appSuccess', response);
+            $rootScope.$broadcast('appSuccess', response);
 
-        });
-      }
+          });
+        }
+      }).catch(function () {});
     };
 
+    /**
+     * re-open close issue
+     */
     $scope.onReOpen = function () {
-      if ($scope.servicerequest.resolvedAt) {
-        $scope.servicerequest.resolvedAt = null;
-        $scope.servicerequest.$update().then(function (response) {
-          // $scope.servicerequest = response;
-          $scope.select(response);
-          $scope.updated = true;
-          $rootScope.$broadcast('app:servicerequests:reload');
+      prompt({
+        title: 'Re-Open Issue',
+        message: 'Are you sure you want to re-open this issue?',
+        buttons: [{
+          label: 'Yes',
+          primary: true,
+        }, {
+          label: 'No',
+          cancel: true
+        }]
+      }).then(function () {
+        if ($scope.servicerequest.resolvedAt) {
+          $scope.servicerequest.resolvedAt = null;
+          $scope.servicerequest.$update().then(function (response) {
+            // $scope.servicerequest = response;
+            $scope.select(response);
+            $scope.updated = true;
+            $rootScope.$broadcast('app:servicerequests:reload');
 
-          response = response || {};
+            response = response || {};
 
-          response.message =
-            response.message || 'Issue Re-Open Successfully';
+            response.message =
+              response.message || 'Issue Re-Open Successfully';
 
-          $rootScope.$broadcast('appSuccess', response);
+            $rootScope.$broadcast('appSuccess', response);
 
-        });
-      }
+          });
+        }
+      }).catch(function () {});
     };
 
     /**
