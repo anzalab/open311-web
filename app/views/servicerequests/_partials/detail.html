@@ -49,6 +49,10 @@
                             <span class="text-muted font-size-12">Call End: </span>
                         <span class="font-size-12">{{servicerequest.call.endedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
                         </span>
+                        <span ng-if="servicerequest.resolvedAt" title="Date Issue Resolved" class="p-l">
+                            <span class="text-muted font-size-12">Resolve Date: </span>
+                        <span class="font-size-12">{{servicerequest.resolvedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
+                        </span>
                     </div>
                     <!-- end call details -->
                     <div class="p-y b-t">
@@ -81,21 +85,24 @@
                         </div>
                         </span>
                         <!-- end assignee -->
-                        <span uib-dropdown class="label primary m-l" title="Status" style="background-color:{{servicerequest.status.color}}">
+                        <span ng-if="!servicerequest.resolvedAt" uib-dropdown class="label primary m-l" title="Status" style="background-color:{{servicerequest.status.color}}">
                            <span uib-dropdown-toggle class="font-size-12 text-white">Status: {{servicerequest.status.name}} </span>
-                        <div ng-if="!servicerequest.resolvedAt" uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
+                        <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <a ng-repeat="status in statuses" ng-click="changeStatus(status)" class="dropdown-item" href="#" title="Status - {{status.name}}">
                                 <span>{{status.name}}</span>
                             </a>
                         </div>
                         </span>
-                        <span uib-dropdown class="label danger m-l" title="Priority" style="background-color:{{servicerequest.priority.color}}">
+                        <span ng-if="!servicerequest.resolvedAt" uib-dropdown class="label danger m-l" title="Priority" style="background-color:{{servicerequest.priority.color}}">
                             <span uib-dropdown-toggle class="font-size-12 text-white">Priority: {{servicerequest.priority.name}}</span>
-                        <div ng-if="!servicerequest.resolvedAt" uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
+                        <div uib-dropdown-menu class="dropdown-menu w dropdown-menu-scale">
                             <a ng-repeat="priority in priorities" ng-click="changePriority(priority)" class="dropdown-item" href="#" title="Priority {{priority.name}}">
                                 <span>{{priority.name}}</span>
                             </a>
                         </div>
+                        </span>
+                        <span ng-if="servicerequest.resolvedAt" class="label danger m-l" style="background-color: #4CAF50;">
+                            <span class="font-size-12 text-white">Resolved</span>
                         </span>
                     </div>
                 </div>

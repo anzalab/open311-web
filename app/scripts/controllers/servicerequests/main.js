@@ -154,11 +154,17 @@ angular
           content: $scope.note.content
         });
 
+        //clear note
+        $scope.note = {};
+
         comment.$save().then(function (response) {
           $scope.select($scope.servicerequest);
           $scope.note = {};
           $scope.updated = true;
           $rootScope.$broadcast('app:servicerequests:reload');
+        }).catch(function ( /*error*/ ) {
+          //TODO signal error
+          $scope.note = {};
         });
 
       }
