@@ -17,53 +17,14 @@ angular
         templateUrl: 'views/servicerequests/main.html',
         controller: 'ServiceRequestMainCtrl',
         resolve: {
-          jurisdictions: function (Jurisdiction) {
-            return Jurisdiction.find({
+          endpoints: function (Summary) {
+            return Summary.endpoints({
               query: {
                 deletedAt: {
                   $eq: null
                 }
               }
             });
-          },
-          groups: function (ServiceGroup) {
-            return ServiceGroup.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          },
-          services: function (Service) {
-            return Service.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          },
-          statuses: function (Status) {
-            return Status.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          },
-          priorities: function (Priority) {
-            return Priority.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          },
-          summaries: function (Summary) {
-            return Summary.issues();
           }
         }
       })

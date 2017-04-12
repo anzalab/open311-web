@@ -7,14 +7,14 @@
             </span>
         </a>
     </li>
-    <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l p-r">
+    <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
         <a ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Signal Feedback Provided To Reporter">
             <span class="nav-text">
                 <i class="icon-call-out"></i>
             </span>
         </a>
     </li>
-    <li ng-if="servicerequest.resolvedAt" class="nav-item b-l p-l p-r">
+    <li ng-if="servicerequest.resolvedAt" class="nav-item b-l p-l">
         <a ng-click="onReOpen()" class="nav-link text-muted no-border" title="Click To Re-Open The Issue">
             <span class="nav-text">
                 <i class="icon-call-in"></i>
@@ -24,7 +24,7 @@
     <li class="nav-item b-l p-l p-r">
         <a ng-click="onCopy()" class="nav-link text-muted no-border" title="Click To Copy Reporter Information & Create New Issue">
             <span class="nav-text">
-                <i class="icon-magic-wand"></i>
+                <i class="ti-cut"></i>
             </span>
         </a>
     </li>

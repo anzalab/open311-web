@@ -2,15 +2,30 @@
   "name": "open311-web",
   "private": true,
   "version": "0.1.0",
+  "homepage": "https://github.com/CodeTanzania/open311-web/",
+  "bugs": {
+    "url": "https://github.com/CodeTanzania/open311-web/issues",
+    "email": "lallyelias87@gmail.com"
+  },
+  "license": "MIT",
   "author": {
-    "name": "byteskode Team",
-    "url": "http://www.byteskode.com/"
+    "name": "lally elias",
+    "email": "lallyelias87@gmail.com"
+  },
+  "contributors": [{
+    "name": "lallyelias",
+    "email": "lallyelias87@gmail.com"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeTanzania/open311-web/"
   },
   "licence": "MIT",
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
+    "grunt-angular-localization": "^1.0.1",
     "grunt-angular-templates": "^1.1.0",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-clean": "^1.0.0",
@@ -53,13 +68,5 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://lallyelias@bitbucket.org/DRMo/open311-web.git"
-  },
-  "bugs": {
-    "url": "https://lallyelias@bitbucket.org/DRMo/open311-web/issues"
-  },
-  "homepage": "https://lallyelias@bitbucket.org/DRMo/open311-web",
   "dependencies": {}
 }

@@ -11,8 +11,7 @@ angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
     $rootScope, $scope, $state, prompt, Party, ServiceRequest,
-    Comment, Summary, jurisdictions, groups, services, statuses,
-    priorities, party, summaries
+    Comment, Summary, endpoints
   ) {
 
     //servicerequests in the scope
@@ -36,12 +35,12 @@ angular
     $scope.create = false;
 
     //bind states
-    $scope.priorities = priorities.priorities;
-    $scope.statuses = statuses.statuses;
-    $scope.services = services.services;
-    $scope.jurisdictions = jurisdictions.jurisdictions;
+    $scope.priorities = endpoints.priorities.priorities;
+    $scope.statuses = endpoints.statuses.statuses;
+    $scope.services = endpoints.services.services;
+    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     // $scope.assignees = assignee.parties;
-    $scope.summaries = summaries;
+    $scope.summaries = endpoints.summaries;
 
     //listen for create event
     $rootScope.$on('servicerequest:create', function () {
