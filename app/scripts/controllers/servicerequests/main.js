@@ -161,7 +161,7 @@ angular
           $scope.select($scope.servicerequest);
           $scope.note = {};
           $scope.updated = true;
-          $rootScope.$broadcast('app:servicerequests:reload');
+          $rootScope.$broadcast('app:comments:reload');
         }).catch(function ( /*error*/ ) {
           //TODO signal error
           $scope.note = {};
