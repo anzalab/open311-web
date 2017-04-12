@@ -4,9 +4,9 @@
     <div class="p-a b-b search-servicerequests">
         <form>
             <div class="input-group">
-                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Issues ...">
+                <input type="text" ng-enter="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Issues ...">
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm no-shadow" type="button">
+                    <button ng-click="onSearch()" class="btn btn-default btn-sm no-shadow" type="button">
                         <i class="ti-search"></i>
                     </button>
                 </span>
