@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('ServiceRequestCreateCtrl', function (
-    $rootScope, $scope, $state,
+    $rootScope, $scope, $state, $stateParams,
     ServiceRequest, jurisdictions, groups, services) {
 
     //action performed by this controller
@@ -26,7 +26,8 @@ angular
     $scope.servicerequest = new ServiceRequest({
       call: {
         startedAt: new Date()
-      }
+      },
+      reporter: ($stateParams || {}).reporter || {}
     });
 
 

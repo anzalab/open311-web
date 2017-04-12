@@ -270,6 +270,16 @@ angular
       }).catch(function () {});
     };
 
+
+    /**
+     * Initialize new issue creation with reporter details
+     */
+    $scope.onCopy = function () {
+      $state.go('app.create_servicerequests', {
+        reporter: $scope.servicerequest.reporter
+      });
+    };
+
     /**
      * @description delete servicerequest
      */

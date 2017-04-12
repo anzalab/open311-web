@@ -85,6 +85,7 @@ angular
       })
       .state('app.create_servicerequests', {
         url: '/servicerequests/create',
+        params: { reporter: {} }, //hack to allow state go with reporter $state param
         templateUrl: 'views/servicerequests/create.html',
         controller: 'ServiceRequestCreateCtrl',
         data: {
