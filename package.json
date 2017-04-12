@@ -28,6 +28,7 @@
     "grunt-google-cdn": "^0.4.3",
     "grunt-jscs": "^3.0.1",
     "grunt-karma": "^2.0.0",
+    "grunt-locales": "^7.1.0",
     "grunt-newer": "^1.2.0",
     "grunt-ng-annotate": "^3.0.0",
     "grunt-ng-constant": "^2.0.1",

@@ -25,5 +25,21 @@ angular
         });
     };
 
+
+    /**
+     * @description load all api endpoint in singe request to improve
+     *              ui responsiveness
+     * @param  {Object} params additional params
+     * @return {Object}        
+     */
+    Summary.endpoints = function (params) {
+      return $http.get(Utils.asLink('endpoints'), {
+          params: params
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
     return Summary;
   });

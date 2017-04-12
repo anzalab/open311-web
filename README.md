@@ -3,6 +3,10 @@
 Web UI for open311-api
 
 
+## References
+- [internationalization-of-angularjs-applications](https://scotch.io/tutorials/internationalization-of-angularjs-applications)
+
+
 ## Contribute
 
 Fork this repo and push in your ideas. 

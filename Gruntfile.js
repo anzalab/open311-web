@@ -435,7 +435,7 @@ module.exports = function (grunt) {
           replacements: [{
             pattern: '{{ENV.title}}',
             replacement: '<%= ngconstant.production.constants.ENV.title %>'
-          },{
+          }, {
             pattern: '{{ENV.description}}',
             replacement: '<%= ngconstant.production.constants.ENV.description %>'
           }]
@@ -494,11 +494,6 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>'
         }, {
           expand: true,
-          cwd: 'bower_components/open-iconic/font',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
           cwd: 'bower_components/simple-line-icons',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
@@ -510,11 +505,6 @@ module.exports = function (grunt) {
         }, {
           expand: true,
           cwd: 'bower_components/Ionicons',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
-        }, {
-          expand: true,
-          cwd: 'bower_components/web-icons',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }, {
