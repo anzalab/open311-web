@@ -324,6 +324,16 @@ angular
     };
 
     /**
+     * filter issue by provided reporter details
+     * @param  {[type]} query [description]
+     * @return {[type]}       [description]
+     */
+    $scope.filterByReporter = function (q, query) {
+      $scope.search.q = q;
+      $scope.load(query, true);
+    };
+
+    /**
      * search assignes
      * @return {[type]} [description]
      */
@@ -347,7 +357,10 @@ angular
     };
 
 
-    $scope.load = function (query) {
+    $scope.load = function (query, skipClearSearch) {
+      if (!skipClearSearch) {
+        $scope.search = {};
+      }
       $scope.find(query);
     };
 
