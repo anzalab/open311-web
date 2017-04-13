@@ -53,26 +53,8 @@ angular
           authenticated: true
         },
         resolve: {
-          jurisdictions: function (Jurisdiction) {
-            return Jurisdiction.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          },
-          groups: function (ServiceGroup) {
-            return ServiceGroup.find({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          },
-          services: function (Service) {
-            return Service.find({
+          endpoints: function (Summary) {
+            return Summary.endpoints({
               query: {
                 deletedAt: {
                   $eq: null

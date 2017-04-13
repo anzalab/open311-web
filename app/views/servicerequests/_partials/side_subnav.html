@@ -33,7 +33,7 @@
                     <div class="m-b text-muted text-xs">Services</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li class="nav-item m-b-xs" ng-repeat="service in services">
+                            <li ng-class="{active:query.service == service._id}" class="nav-item m-b-xs" ng-repeat="service in services">
                                 <a ng-click="load({service:service._id})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{service.color}}">
                                     {{summaries.services[service._id]}}
@@ -49,7 +49,7 @@
                     <div class="m-b text-muted text-xs">Status</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li class="nav-item m-b-xs" ng-repeat="status in statuses">
+                            <li ng-class="{active:query.status == status._id}" class="nav-item m-b-xs" ng-repeat="status in statuses">
                                 <a ng-click="load({'status':status._id})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{status.color}}">
                                         {{summaries.statuses[status._id]}}
@@ -64,7 +64,7 @@
                     <div class="m-b text-muted text-xs">Priorities</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li class="nav-item m-b-xs" ng-repeat="priority in priorities">
+                            <li ng-class="{active:query.priority == priority._id}" class="nav-item m-b-xs" ng-repeat="priority in priorities">
                                 <a ng-click="load({'priority':priority._id})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{priority.color}}">
                                         {{summaries.priorities[priority._id]}}

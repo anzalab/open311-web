@@ -11,16 +11,16 @@ angular
   .module('ng311')
   .controller('ServiceRequestCreateCtrl', function (
     $rootScope, $scope, $state, $stateParams,
-    ServiceRequest, jurisdictions, groups, services) {
+    ServiceRequest, endpoints) {
 
     //action performed by this controller
     $scope.action = 'Create';
 
     $scope.edit = true;
 
-    $scope.groups = groups.groups;
-    $scope.jurisdictions = jurisdictions.jurisdictions;
-    $scope.services = services.services;
+    $scope.groups = endpoints.servicegroups.servicegroups;
+    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.services = endpoints.services.services;
 
     //instantiate new servicerequest
     $scope.servicerequest = new ServiceRequest({

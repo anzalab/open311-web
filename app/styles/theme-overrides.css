@@ -234,3 +234,24 @@ body {
         max-width: 400px;
     }
 }
+
+
+/*aside subnav*/
+
+
+/*a.text-muted:active,
+{
+    color: #687077 !important;
+    font-weight: 800 !important;
+}*/
+
+
+/*a.text-muted:active {
+    opacity: 1;
+}*/
+
+.nav > .nav-item.active .text-muted,
+.nav > .nav-item:active .text-muted,
+.nav > .nav-item:focus .text-muted {
+    opacity: 1;
+}

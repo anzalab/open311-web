@@ -387,6 +387,9 @@ angular
       //start sho spinner
       $scope.spin = true;
 
+      //track active ui based on query
+      $scope.query = query;
+
       query = _.merge({}, query);
 
       ServiceRequest.find({
