@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
     $rootScope, $scope, $state, prompt, Party, ServiceRequest,
-    Comment, Summary, endpoints
+    Comment, Summary, endpoints, party
   ) {
 
     //servicerequests in the scope
