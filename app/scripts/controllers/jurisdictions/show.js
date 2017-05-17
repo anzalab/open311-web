@@ -24,7 +24,11 @@ angular
     };
 
     $scope.onNew = function () {
-      $scope.jurisdiction = new Jurisdiction({});
+      $scope.jurisdiction = new Jurisdiction({
+        location: {
+          coordinates: [0, 0]
+        }
+      });
       $scope.edit = true;
     };
 
@@ -40,6 +44,13 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
+
+      //update location(longitude & latitude) coordinates
+      $scope.jurisdiction.location.coordinates[0] =
+        $scope.jurisdiction.longitude;
+      $scope.jurisdiction.location.coordinates[1] =
+        $scope.jurisdiction.latitude;
+
       var updateOrSave = $scope.jurisdiction.$update();
       if (!$scope.jurisdiction._id) {
         updateOrSave = $scope.jurisdiction.$save();
