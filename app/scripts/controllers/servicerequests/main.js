@@ -430,6 +430,7 @@ angular
         _.map($scope.servicerequests, function (servicerequest) {
           return {
             code: servicerequest.code,
+            reportedAt: servicerequest.createdAt,
             callStart: (servicerequest.call || {}).startedAt,
             callEnd: (servicerequest.call || {}).endedAt,
             callDuration: (servicerequest.call || {}).duration,
@@ -443,7 +444,11 @@ angular
             description: servicerequest.description,
             address: servicerequest.address,
             status: (servicerequest.status || {}).name,
-            priority: (servicerequest.priority || {}).name
+            priority: (servicerequest.priority || {}).name,
+            resolvedAt: servicerequest.resolvedAt,
+            ttrHours: servicerequest.ttrHours,
+            ttrMinutes: servicerequest.ttrMinutes,
+            ttrSeconds: servicerequest.ttrSeconds
           };
         });
       return _exports;
