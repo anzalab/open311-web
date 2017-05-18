@@ -390,7 +390,7 @@ angular
       //track active ui based on query
       $scope.query = query;
 
-      query = _.merge({}, query);
+      query = _.merge({}, { resolvedAt: null }, query);
 
       ServiceRequest.find({
         page: $scope.page,
