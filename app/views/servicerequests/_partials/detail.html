@@ -49,6 +49,10 @@
                             <span class="text-muted font-size-12">Call End: </span>
                         <span class="font-size-12">{{servicerequest.call.endedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
                         </span>
+                        <span title="Call Duration" class="p-l">
+                            <span class="text-muted font-size-12">Call Duration: </span>
+                        <span class="font-size-12">{{servicerequest.call.duration}} seconds</span>
+                        </span>
                         <span ng-if="servicerequest.resolvedAt" title="Date Issue Resolved" class="p-l">
                             <span class="text-muted font-size-12">Resolve Date: </span>
                         <span class="font-size-12">{{servicerequest.resolvedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>

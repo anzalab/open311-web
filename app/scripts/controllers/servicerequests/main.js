@@ -432,17 +432,18 @@ angular
             code: servicerequest.code,
             callStart: (servicerequest.call || {}).startedAt,
             callEnd: (servicerequest.call || {}).endedAt,
-            reporterName: servicerequest.reporter.name,
-            reporterPhone: servicerequest.reporter.phone,
-            reporterAccount: servicerequest.reporter.account,
-            operator: servicerequest.operator.name,
-            area: servicerequest.jurisdiction.name,
-            nature: servicerequest.service.name,
+            callDuration: (servicerequest.call || {}).duration,
+            reporterName: (servicerequest.reporter || {}).name,
+            reporterPhone: (servicerequest.reporter || {}).phone,
+            reporterAccount: (servicerequest.reporter || {}).account,
+            operator: (servicerequest.operator || {}).name,
+            area: (servicerequest.jurisdiction || {}).name,
+            nature: (servicerequest.service || {}).name,
             assignee: (servicerequest.assignee || {}).name,
             description: servicerequest.description,
             address: servicerequest.address,
-            status: servicerequest.status.name,
-            priority: servicerequest.priority.name
+            status: (servicerequest.status || {}).name,
+            priority: (servicerequest.priority || {}).name
           };
         });
       return _exports;
