@@ -29,7 +29,8 @@ angular
     'monospaced.elastic',
     'oi.select',
     'uz.mailto',
-    'mp.colorPicker'
+    'mp.colorPicker',
+    'AngularPrint'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,
