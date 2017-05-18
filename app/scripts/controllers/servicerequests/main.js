@@ -450,12 +450,12 @@ angular
     };
 
 
-    //pre load servicerequests on state activation
-    $scope.find();
+    //pre load un resolved servicerequests on state activation
+    $scope.find({ resolvedAt: null, operator: { $ne: null } });
 
     //listen for events
     $rootScope.$on('app:servicerequests:reload', function () {
-      $scope.find();
+      $scope.find({ resolvedAt: null, operator: { $ne: null } });
     });
 
     //reload summaries

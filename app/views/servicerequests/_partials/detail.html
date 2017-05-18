@@ -53,12 +53,34 @@
                             <span class="text-muted font-size-12">Call Duration: </span>
                         <span class="font-size-12">{{servicerequest.call.duration}} seconds</span>
                         </span>
-                        <span ng-if="servicerequest.resolvedAt" title="Date Issue Resolved" class="p-l">
-                            <span class="text-muted font-size-12">Resolve Date: </span>
-                        <span class="font-size-12">{{servicerequest.resolvedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
-                        </span>
                     </div>
                     <!-- end call details -->
+                    <!-- start resolve details -->
+                    <div class="p-b">
+                        <span title="Date Issue Reported">
+                            <span class="text-muted font-size-12">Reported: </span>
+                        <span class="font-size-12">{{servicerequest.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
+                        </span>
+                        <span ng-if="servicerequest.resolvedAt" title="Date Issue Resolved" class="p-l">
+                            <span class="text-muted font-size-12">Resolved: </span>
+                        <span class="font-size-12">{{servicerequest.resolvedAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
+                        </span>
+                        <span ng-if="servicerequest.resolvedAt" title="Time Taken To Resolve" class="p-l">
+                            <span class="text-muted font-size-12">TTR: </span>
+                            <span class="font-size-12">: 
+                                <span title="{{servicerequest.ttrHours}} Hours Taken to Resolve Issue">
+                                    {{servicerequest.ttrHours}} hrs : 
+                                </span>
+                                <span title="{{servicerequest.ttrMinutes}} Minutes Taken to Resolve Issue">
+                                    {{servicerequest.ttrMinutes}} mins : 
+                                </span>
+                                <span title="{{servicerequest.ttrSeconds}} Seconds Taken to Resolve Issue">
+                                    {{servicerequest.ttrSeconds}} secs
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                    <!-- end resolve details -->
                     <div class="p-y b-t">
                         <!-- start representative -->
                         <span title="Operator Responsible">

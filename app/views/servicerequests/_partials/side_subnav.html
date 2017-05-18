@@ -17,17 +17,30 @@
     <div class="row-row">
         <div class="row-body scrollable hover">
             <div class="row-inner">
-                <!-- start view all -->
-                <div class="p-a-md nav-active-white" style="padding-bottom: 0rem;padding-left: 1.2rem">
-                    <ul class="nav">
-                        <li class="nav-item m-b-xs">
-                            <a ng-click="load()" class="nav-link text-muted block" title="View All Issues">
-                            All
-                            </a>
-                        </li>
-                    </ul>
+                <!-- start misc menu -->
+                <div class="p-a-md">
+                    <div class="m-b text-muted text-xs">Miscellaneous</div>
+                    <div class="nav-active-white">
+                        <ul class="nav">
+                            <li ng-class="{active:query.operator == null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                                <a ng-click="load({operator:null, resolvedAt:null})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
+                                Un-Attended
+                                </a>
+                            </li>
+                            <li ng-class="{active:query.operator != null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
+                                Un-Resolved
+                                </a>
+                            </li>
+                            <li ng-class="{active:query.resolvedAt != null}" class="nav-item m-b-xs">
+                                <a ng-click="load({resolvedAt:{$ne:null}})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
+                                Resolved
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- end view all -->
+                <!-- end misc menu -->
                 <!-- start services menu -->
                 <div class="p-a-md">
                     <div class="m-b text-muted text-xs">Services</div>
