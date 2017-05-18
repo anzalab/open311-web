@@ -74,6 +74,21 @@
                     </div>
                 </div>
                 <!-- end priorities menu -->
+                <!-- start jurisdictions menu -->
+                <div class="p-a-md">
+                    <div class="m-b text-muted text-xs">Areas</div>
+                    <div class="nav-active-white">
+                        <ul class="nav">
+                            <li ng-class="{active:query.jurisdiction == jurisdiction._id}" class="nav-item m-b-xs" ng-repeat="jurisdiction in jurisdictions">
+                                <a ng-click="load({'jurisdiction':jurisdiction._id})" class="nav-link text-muted block">
+                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{jurisdiction.color}}">
+                                        {{summaries.jurisdictions[jurisdiction._id]}}
+                                    </span>{{jurisdiction.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end jurisdictions menu -->
             </div>
         </div>
     </div>
