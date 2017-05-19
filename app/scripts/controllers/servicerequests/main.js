@@ -39,6 +39,7 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.party = party;
     // $scope.assignees = assignee.parties;
     $scope.summaries = endpoints.summaries;
 

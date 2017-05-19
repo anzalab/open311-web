@@ -22,7 +22,12 @@
                     <div class="m-b text-muted text-xs">Miscellaneous</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:query.operator == null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                            <li ng-class="{active:query.$or != null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                                <a ng-click="load({$or:[{operator: party._id},{assignee:party._id}], resolvedAt:null})" class="nav-link text-muted block" title="Issue Received or Assigned To You">
+                                Inbox
+                                </a>
+                            </li>
+                            <li ng-class="{active:query.operator == null && query.$or == null && query.resolvedAt == null}" class="nav-item m-b-xs">
                                 <a ng-click="load({operator:null, resolvedAt:null})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
