@@ -25,6 +25,12 @@
                                         <label title="Service Name" class="floating-label">Name</label>
                                     </div>
                                 </div>
+                                <div class="m-t-lg" title="Service Level Agreement">
+                                    <div class="form-group form-material floating">
+                                        <input title="Service Level Agreement" ng-disabled="!edit" ng-model="service.sla.ttr" min="0" ng-step="1" type="number" name="ttr" class="form-control" />
+                                        <label title="Service Level Agreement" class="floating-label">Service Level Agreement</label>
+                                    </div>
+                                </div>
                                 <div class="m-t-lg" title="Service Color">
                                     <color-picker ng-model="service.color">
                                     </color-picker>

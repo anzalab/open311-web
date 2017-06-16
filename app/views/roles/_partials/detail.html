@@ -10,41 +10,25 @@
         <div class="row-body">
             <div class="row-inner">
                 <div class="padding">
-                    <!-- start role service -->
-                    <h4 class="_600">
-                        {{role.name}}
-                        <span class="pull-right font-size-14" title="Service Group Jurisdiction">
-                        <span class="text-muted font-size-10">Area</span>
-                        {{role.jurisdiction.name}}
-                    </span>
-                    </h4>
-                    <!-- end role service -->
-                    <div class="p-y">
-                        <div title="Code">
-                            <span class="text-muted font-size-12">Code: </span>
-                            <span>{{role.code}}</span>
+                    <form ng-submit="save()" name="roleForm" role="form" autocomplete="off" novalidate>
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="m-b" title="Role Name">
+                                    <div class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="role.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                                        <label title="Role Name" class="floating-label">Name</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Role Description">
+                                    <div class="form-group form-material floating">
+                                        <textarea ng-disabled="!edit" ng-model="role.description" msd-elastic name="description" class="form-control" rows="2">
+                                        </textarea>
+                                        <label class="floating-label">Description</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div title="Color">
-                            <span class="text-muted font-size-12">Color: </span>
-                            <span>{{role.color}}</span>
-                        </div>
-                    </div>
-                    <div class="p-y b-t">
-                        <span title="Operator Responsible">
-                            <span class="text-muted font-size-12">Jurisdiction: </span>
-                        <a href="mailto:{{role.operator.email}}">
-                            {{role.jurisdiction.name}}
-                        </a>
-                        </span>
-                    </div>
-                </div>
-                <!-- start issue description -->
-                <div class="padding b-t">
-                    <h6 class="m-b" title="Service Group Description">Description</h6>
-                    <p class="text-lt">
-                        {{role.description}}
-                    </p>
-                    <p>&nbsp;</p>
+                    </form>
                 </div>
             </div>
         </div>

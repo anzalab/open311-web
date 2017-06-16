@@ -95,7 +95,7 @@ angular
         address || 'N/A',
         '\n',
         'Area: ',
-        (issue.assingee || {}).name || 'N/A',
+        (issue.jurisdiction || {}).name || 'N/A',
         '\n',
         'Customer Name: ',
         issue.reporter.name || 'N/A',
@@ -113,7 +113,7 @@ angular
       ].join('');
 
       //prepare e-mail send option
-      var recipient = '';
+      var recipient = _.get(issue, 'jurisdiction.email', '');
       var options = {
         subject: [issue.service.name, issue.code].join(' - #'),
         body: body

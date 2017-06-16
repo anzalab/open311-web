@@ -41,5 +41,20 @@ angular
         });
     };
 
+    /**
+     * @description load current overview/pipeline
+     * @param  {Object} params additional params
+     * @return {Object}        
+     */
+    Summary.overviews = function (params) {
+      return $http.get(Utils.asLink('overviews'), {
+          params: params
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
     return Summary;
+
   });

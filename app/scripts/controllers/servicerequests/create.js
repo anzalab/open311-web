@@ -27,7 +27,8 @@ angular
       call: {
         startedAt: new Date()
       },
-      reporter: ($stateParams || {}).reporter || {}
+      reporter: ($stateParams || {}).reporter || {},
+      jurisdiction: ($stateParams || {}).jurisdiction
     });
 
 

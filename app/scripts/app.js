@@ -30,7 +30,8 @@ angular
     'oi.select',
     'uz.mailto',
     'mp.colorPicker',
-    'AngularPrint'
+    'AngularPrint',
+    'angular-echarts'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,
@@ -74,6 +75,19 @@ angular
       .state('app.manage', {
         abstract: true,
         templateUrl: 'views/manage/main.html'
+      })
+      .state('app.overviews', {
+        url: '/overviews',
+        templateUrl: 'views/dashboards/overviews.html',
+        controller: 'DashboardOverviewCtrl',
+        data: {
+          authenticated: true
+        },
+        resolve: {
+          overviews: function (Summary) {
+            return Summary.overviews();
+          }
+        }
       });
 
   })

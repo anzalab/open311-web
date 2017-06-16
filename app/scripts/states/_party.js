@@ -10,7 +10,7 @@ angular
   .module('ng311')
   .config(function ($stateProvider) {
 
-    //parties management states
+    //parties(user) management states
     $stateProvider
       .state('app.manage.parties', {
         url: '/parties',
@@ -21,22 +21,22 @@ angular
           },
           detail: {
             templateUrl: 'views/parties/_partials/detail.html',
-            controller: 'PartyShowCtrl',
-            resolve: {
-              jurisdictions: function (Jurisdiction) {
-                return Jurisdiction.find({
-                  query: {
-                    deletedAt: {
-                      $eq: null
-                    }
-                  }
-                });
-              }
-            }
+            controller: 'PartyShowCtrl'
           }
         },
         data: {
           authenticated: true
+        },
+        resolve: {
+          roles: function (Role) {
+            return Role.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          }
         }
       });
   });

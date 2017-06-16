@@ -22,17 +22,17 @@
                     <div ng-click="select(role)" class="list-item list-item-padded" ng-repeat="role in roles" title="{{role.description}}">
                         <div class="list-left">
                             <span class="w-40 avatar circle">
-                                <letter-avatar title="Role Visual Color" 
+                                <letter-avatar title="Status & Area" 
                                 data="{{role.name}}" 
                                     height="60" width="60" color="{{role.color}}" shape="round">
                                 </letter-avatar>
                             </span>
                         </div>
                         <div class="list-body">
-                            <div class="item-title" title="Role Name">
+                            <div class="item-title">
                                 <span class="_500">{{role.name}}</span>
                             </div>
-                            <p title="Role Description" class="block text-muted text-ellipsis">
+                            <p class="block text-muted text-ellipsis">
                                 {{role.description}}
                             </p>
                         </div>

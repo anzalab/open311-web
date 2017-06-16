@@ -276,7 +276,8 @@ angular
      */
     $scope.onCopy = function () {
       $state.go('app.create_servicerequests', {
-        reporter: $scope.servicerequest.reporter
+        reporter: $scope.servicerequest.reporter,
+        jurisdiction: $scope.servicerequest.jurisdiction
       });
     };
 
@@ -440,7 +441,8 @@ angular
             reporterAccount: (servicerequest.reporter || {}).account,
             operator: (servicerequest.operator || {}).name,
             area: (servicerequest.jurisdiction || {}).name,
-            nature: (servicerequest.service || {}).name,
+            group: (servicerequest.group || {}).name,
+            service: (servicerequest.service || {}).name,
             assignee: (servicerequest.assignee || {}).name,
             description: servicerequest.description,
             address: servicerequest.address,

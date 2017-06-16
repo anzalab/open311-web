@@ -12,11 +12,23 @@
                 <div class="padding">
                     <!-- start servicerequest service -->
                     <h4 class="_600">
-                        <span title="Issue Nature">{{servicerequest.service.name}}</span> - <span title="Issue Number">#{{servicerequest.code}}</span>
-                        <span class="pull-right font-size-14" title="Area Responsible">
-                        <span class="text-muted font-size-10">Area</span>
-                        {{servicerequest.jurisdiction.name}}
-                    </span>
+                        <span title="Issue Nature">
+                            {{servicerequest.service.name}}
+                        </span> - 
+                        <span title="Issue Number">
+                            #{{servicerequest.code}}
+                        </span>
+                        <span class="pull-right font-size-14">
+                            <span title="Issue Group/Category">
+                                <span class="text-muted font-size-10">Group</span>
+                                {{servicerequest.group.name}}
+                            </span>
+                            <br/>
+                            <span  title="Area Responsible">
+                                <span class="text-muted font-size-10">Area</span>
+                                {{servicerequest.jurisdiction.name}}
+                            </span>
+                        </span>
                     </h4>
                     <!-- end servicerequest service -->
                     <div class="p-y">
@@ -67,17 +79,17 @@
                         </span>
                         <span ng-if="servicerequest.resolvedAt" title="Time Taken To Resolve" class="p-l">
                             <span class="text-muted font-size-12">TTR: </span>
-                            <span class="font-size-12">: 
+                        <span class="font-size-12">: 
                                 <span title="{{servicerequest.ttrHours}} Hours Taken to Resolve Issue">
                                     {{servicerequest.ttrHours}} hrs : 
                                 </span>
-                                <span title="{{servicerequest.ttrMinutes}} Minutes Taken to Resolve Issue">
+                        <span title="{{servicerequest.ttrMinutes}} Minutes Taken to Resolve Issue">
                                     {{servicerequest.ttrMinutes}} mins : 
                                 </span>
-                                <span title="{{servicerequest.ttrSeconds}} Seconds Taken to Resolve Issue">
+                        <span title="{{servicerequest.ttrSeconds}} Seconds Taken to Resolve Issue">
                                     {{servicerequest.ttrSeconds}} secs
                                 </span>
-                            </span>
+                        </span>
                         </span>
                     </div>
                     <!-- end resolve details -->

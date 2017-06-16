@@ -392,8 +392,10 @@ module.exports = function (grunt) {
             version: 'v0.1.0',
             description: 'Citizen Feedback System',
             apiEndPoint: {
-              mobile: 'https://dawasco.herokuapp.com',
-              web: 'https://dawasco.herokuapp.com'
+              mobile: '',
+              // mobile: 'https://dawasco.herokuapp.com',
+              // web: 'https://dawasco.herokuapp.com'
+              web: ''
             },
             settings: {
               name: 'open311',

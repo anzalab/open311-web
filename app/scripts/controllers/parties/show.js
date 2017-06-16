@@ -9,24 +9,26 @@
  */
 angular
   .module('ng311')
-  .controller('PartyShowCtrl', function ($rootScope, $scope, $state,
-    $stateParams, Party, roles, $timeout) {
+  .controller('PartyShowCtrl', function (
+    $rootScope, $scope, $state, $stateParams, Party,
+    jurisdictions
+  ) {
 
     $scope.edit = false;
-    $scope.roles = roles.roles;
+    $scope.jurisdictions = jurisdictions.jurisdictions;
 
     $scope.onEdit = function () {
       $scope.edit = true;
     };
 
-    //load party
-    // Party.get({
-    //   id: $stateParams.id
-    // }).$promise.then(function (party) {
-    //   party._roles = _.map(party.roles, 'name').join(', ');
-    //   party._assigned = _.map(party.roles, '_id');
-    //   $scope.party = party;
-    // });
+    $scope.onCancel = function () {
+      $scope.edit = false;
+    };
+
+    $scope.onNew = function () {
+      $scope.party = new Party({});
+      $scope.edit = true;
+    };
 
     //TODO show empty state if no party selected
     //listen for selected juridiction
@@ -34,48 +36,29 @@ angular
       $scope.party = party;
     });
 
-
-    /**
-     * @description block created party
-     */
-    $scope.block = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.party.deletedAt = new Date();
-      $scope.save();
-    };
-
-
-    /**
-     * @description unblock created party
-     */
-    $scope.unblock = function () {
-      //TODO show input prompt
-      //TODO show loading mask
-      $scope.party.deletedAt = null;
-      $scope.save();
-    };
-
     /**
      * @description save created party
      */
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-      $scope.party.roles = $scope.party._assigned;
-
-      $scope.party.$update().then(function (response) {
+      var updateOrSave = $scope.party.$update();
+      if (!$scope.party._id) {
+        updateOrSave = $scope.party.$save();
+      }
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
           response.message =
-            response.message || 'User updated successfully';
+            response.message || 'Party Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('party:update:success');
+          $rootScope.$broadcast('app:parties:reload');
 
-          $state.go('app.parties.list');
+          $scope.edit = false;
+
         })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);
