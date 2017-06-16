@@ -27,7 +27,7 @@
                                 Inbox
                                 </a>
                             </li>
-                            <li ng-class="{active:query.operator == null && query.$or == null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                            <li ng-class="{active:query.operator == null && query.$or == null && query.resolvedAt == null && !query.service && !query.status && !query.priority && !query.jurisdiction}" class="nav-item m-b-xs">
                                 <a ng-click="load({operator:null, resolvedAt:null})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
