@@ -28,6 +28,11 @@
                                 <span class="text-muted font-size-10">Area</span>
                                 {{servicerequest.jurisdiction.name}}
                             </span>
+                            <br/>
+                            <span ng-if="servicerequest.jurisdiction.phone && servicerequest.jurisdiction.phone != 'N/A'" title="Area Phone Number">
+                                <span class="text-muted font-size-10">Phone</span> 
+                                {{servicerequest.jurisdiction.phone}}
+                            </span>
                         </span>
                     </h4>
                     <!-- end servicerequest service -->
