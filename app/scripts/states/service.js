@@ -21,7 +21,27 @@ angular
           },
           detail: {
             templateUrl: 'views/services/_partials/detail.html',
-            controller: 'ServiceShowCtrl'
+            controller: 'ServiceShowCtrl',
+            resolve: {
+              jurisdictions: function (Jurisdiction) {
+                return Jurisdiction.find({
+                  query: {
+                    deletedAt: {
+                      $eq: null
+                    }
+                  }
+                });
+              },
+              servicegroups: function (ServiceGroup) {
+                return ServiceGroup.find({
+                  query: {
+                    deletedAt: {
+                      $eq: null
+                    }
+                  }
+                });
+              }
+            }
           }
         },
         data: {

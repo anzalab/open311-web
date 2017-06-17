@@ -10,10 +10,13 @@
 angular
   .module('ng311')
   .controller('ServiceShowCtrl', function (
-    $rootScope, $scope, $state, $stateParams, Service
+    $rootScope, $scope, $state, $stateParams, Service,
+    jurisdictions, servicegroups
   ) {
 
     $scope.edit = false;
+    $scope.jurisdictions = jurisdictions.jurisdictions;
+    $scope.servicegroups = servicegroups.servicegroups;
 
     $scope.onEdit = function () {
       $scope.edit = true;

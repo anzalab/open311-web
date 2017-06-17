@@ -13,7 +13,17 @@
                     <form ng-submit="save()" name="serviceForm" role="form" autocomplete="off" novalidate>
                         <div class="box">
                             <div class="box-body">
-                                <div class="m-b" title="Service Code">
+                                <div class="m-b" title="Service Group">
+                                    <div ng-show="!edit" class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="service.group.name" ng-required ng-minlength="2" type="text" name="group" class="form-control" />
+                                        <label title="Group" class="floating-label">Group</label>
+                                    </div>
+                                    <div ng-show="edit" class="form-group form-material floating">
+                                        <oi-select oi-options="item.name for item in servicegroups track by item.id" ng-model="service.group" placeholder="Select Group" class="form-control"></oi-select>
+                                        <label title="Group" class="floating-label">Group</label>
+                                    </div>
+                                </div>
+                                <div class="m-t-lg" title="Service Code">
                                     <div class="form-group form-material floating">
                                         <input title="Service Code" ng-disabled="!edit" ng-model="service.code" ng-required ng-minlength="1" type="text" name="code" class="form-control" />
                                         <label title="Service Code" class="floating-label">Code</label>
