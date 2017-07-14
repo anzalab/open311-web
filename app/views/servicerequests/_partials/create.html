@@ -19,14 +19,14 @@
                                 <div class="row m-b">
                                     <div class="col-sm-6">
                                         <div class="form-group form-material floating">
-                                            <input ng-model="servicerequest.reporter.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                            <label class="floating-label">Name</label>
+                                            <input ng-model="servicerequest.reporter.phone" ng-required ng-minlength="2" focus-if="!servicerequest.reporter.phone" type="text" name="phone" class="form-control" />
+                                            <label class="floating-label">Phone</label>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group form-material floating">
-                                            <input ng-model="servicerequest.reporter.phone" ng-required ng-minlength="2" focus-if="!servicerequest.reporter.phone" type="text" name="phone" class="form-control" />
-                                            <label class="floating-label">Phone</label>
+                                            <input ng-model="servicerequest.reporter.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                                            <label class="floating-label">Name</label>
                                         </div>
                                     </div>
                                 </div>
