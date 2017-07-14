@@ -13,6 +13,16 @@
                     <form ng-submit="save()" name="partyForm" role="form" autocomplete="off" novalidate>
                         <div class="box">
                             <div class="box-body">
+                                <div class="m-b" title="Area">
+                                    <div ng-show="!edit" class="form-group form-material floating">
+                                        <input ng-disabled="!edit" ng-model="party.jurisdiction.name" ng-required ng-minlength="2" type="text" name="area" class="form-control" />
+                                        <label title="Area" class="floating-label">Area</label>
+                                    </div>
+                                    <div ng-show="edit" class="form-group form-material floating">
+                                        <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="party.jurisdiction" placeholder="Select Area" class="form-control"></oi-select>
+                                        <label title="Area" class="floating-label">Area</label>
+                                    </div>
+                                </div>
                                 <div class="row m-t-lg">
                                     <div class="col-sm-6" title="Party Name">
                                         <div class="form-group form-material floating">
@@ -34,14 +44,10 @@
                                             <label title="Email Address" class="floating-label">Email</label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6" title="Party Area">
-                                        <div ng-show="!edit" class="form-group form-material floating">
-                                            <input ng-disabled="!edit" ng-model="party.jurisdiction.name" ng-required ng-minlength="2" type="text" name="area" class="form-control" />
-                                            <label title="Area" class="floating-label">Area</label>
-                                        </div>
-                                        <div ng-show="edit" class="form-group form-material floating">
-                                            <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="party.jurisdiction" placeholder="Select Area" class="form-control"></oi-select>
-                                            <label title="Area" class="floating-label">Area</label>
+                                    <div class="col-sm-6" title="SIP Number">
+                                        <div class="form-group form-material floating">
+                                            <input ng-disabled="!edit" ng-model="party.sipNumber" ng-required ng-minlength="2" type="text" name="sipNumber" class="form-control" />
+                                            <label title="SIP Phone Number" class="floating-label">SIP Number</label>
                                         </div>
                                     </div>
                                 </div>

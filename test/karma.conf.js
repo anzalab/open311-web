@@ -67,6 +67,8 @@ module.exports = function(config) {
             'bower_components/angular-echarts/dist/angular-echarts.js',
             'bower_components/Chart.js/dist/Chart.js',
             'bower_components/ng-chartjs/dist/angular-chartjs.min.js',
+            'bower_components/angular-socket-io/socket.js',
+            'bower_components/socket.io-client/dist/socket.io.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",

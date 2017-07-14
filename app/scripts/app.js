@@ -31,7 +31,8 @@ angular
     'uz.mailto',
     'mp.colorPicker',
     'AngularPrint',
-    'angular-echarts'
+    'angular-echarts',
+    'btford.socket-io'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,

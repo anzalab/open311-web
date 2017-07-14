@@ -58,6 +58,22 @@ angular
       $scope.create = false;
     });
 
+    /**
+     * listen for received call picked events and filter
+     * issue list based on reporter details(i.e phone number)
+     */
+    var callPickedDeregister = $rootScope.$on('call picked', function (event,
+      data) {
+
+      if (data && data.phone) {
+        $scope.filterByReporter(data.phone, {
+          'reporter.phone': data.phone
+        });
+      }
+
+    });
+    $scope.$on('$destroy', callPickedDeregister);
+
 
     /**
      * set current service request

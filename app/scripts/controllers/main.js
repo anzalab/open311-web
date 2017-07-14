@@ -9,7 +9,8 @@
  */
 angular
   .module('ng311')
-  .controller('MainCtrl', function ($rootScope, $scope, ngNotify) {
+  .controller('MainCtrl', function ($rootScope, $scope, ngNotify,
+    ngToast, socket) {
     //TODO show signin progress
 
     $scope.onCreateIssue = function () {
@@ -90,5 +91,65 @@ angular
         pageAside.addClass('open');
       }
     };
+
+    /**
+     * listen to signin success event
+     */
+    $rootScope.$on('signinSuccess', function (event, response) {
+      //obtain signin party(user)
+      var party = _.get(response, 'data.party');
+
+      //if party is operator and has sipNumber
+      //subscribe to web socket for call picked events
+      if (socket && party && party.sipNumber) {
+
+        //ensure socket connection
+        // socket.connect();
+
+        //prepare sip socket event name
+        $rootScope.sipEvent = [
+          'socket:',
+          party.sipNumber,
+          '-call-picked'
+        ].join('');
+
+        socket.on($rootScope.sipEvent, function (data) {
+
+          //notify new call
+          ngToast.create({
+            className: 'info',
+            content: 'New Call Received',
+            dismissButton: true
+          });
+
+          //broadcast call picked
+          $rootScope.$broadcast('call picked', data);
+
+          //TODO save latest call data on local storage for new
+          //call creation
+
+        });
+
+      }
+
+    });
+
+    /**
+     * listen to signout success event
+     */
+    $rootScope.$on('signoutSuccess', function () {
+      //disconnect from call picked socket event
+      if (socket && socket.disconnect) {
+
+        if ($rootScope.sipEvent) {
+          socket.removeListener($rootScope.sipEvent);
+        }
+
+        // socket.removeAllListeners();
+
+        // socket.disconnect();
+
+      }
+    });
 
   });
