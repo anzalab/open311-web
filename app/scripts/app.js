@@ -32,7 +32,8 @@ angular
     'mp.colorPicker',
     'AngularPrint',
     'angular-echarts',
-    'btford.socket-io'
+    'btford.socket-io',
+    'focus-if'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,
