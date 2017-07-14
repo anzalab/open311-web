@@ -451,7 +451,10 @@ angular
             reportedAt: servicerequest.createdAt,
             callStart: (servicerequest.call || {}).startedAt,
             callEnd: (servicerequest.call || {}).endedAt,
-            callDuration: (servicerequest.call || {}).duration,
+            callDurationMinutes: ((servicerequest.call || {}).duration || {})
+              .minutes,
+            callDurationSeconds: ((servicerequest.call || {}).duration || {})
+              .seconds,
             reporterName: (servicerequest.reporter || {}).name,
             reporterPhone: (servicerequest.reporter || {}).phone,
             reporterAccount: (servicerequest.reporter || {}).account,
@@ -465,9 +468,10 @@ angular
             status: (servicerequest.status || {}).name,
             priority: (servicerequest.priority || {}).name,
             resolvedAt: servicerequest.resolvedAt,
-            ttrHours: servicerequest.ttrHours,
-            ttrMinutes: servicerequest.ttrMinutes,
-            ttrSeconds: servicerequest.ttrSeconds
+            ttrDays: (servicerequest.ttr || {}).days,
+            ttrHours: (servicerequest.ttr || {}).hours,
+            ttrMinutes: (servicerequest.ttr || {}).minutes,
+            ttrSeconds: (servicerequest.ttr || {}).seconds
           };
         });
       return _exports;
