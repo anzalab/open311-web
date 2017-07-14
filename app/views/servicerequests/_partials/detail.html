@@ -68,7 +68,7 @@
                         </span>
                         <span title="Call Duration" class="p-l">
                             <span class="text-muted font-size-12">Call Duration: </span>
-                        <span class="font-size-12">{{servicerequest.call.duration}} seconds</span>
+                        <span class="font-size-12">{{servicerequest.call.duration.human}}</span>
                         </span>
                     </div>
                     <!-- end call details -->
@@ -84,17 +84,9 @@
                         </span>
                         <span ng-if="servicerequest.resolvedAt" title="Time Taken To Resolve" class="p-l">
                             <span class="text-muted font-size-12">TTR: </span>
-                        <span class="font-size-12">: 
-                                <span title="{{servicerequest.ttrHours}} Hours Taken to Resolve Issue">
-                                    {{servicerequest.ttrHours}} hrs : 
-                                </span>
-                        <span title="{{servicerequest.ttrMinutes}} Minutes Taken to Resolve Issue">
-                                    {{servicerequest.ttrMinutes}} mins : 
-                                </span>
-                        <span title="{{servicerequest.ttrSeconds}} Seconds Taken to Resolve Issue">
-                                    {{servicerequest.ttrSeconds}} secs
-                                </span>
-                        </span>
+                        <span class="font-size-12"> 
+                                {{servicerequest.ttr.human}}
+                            </span>
                         </span>
                     </div>
                     <!-- end resolve details -->
