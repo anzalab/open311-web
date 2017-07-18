@@ -95,45 +95,43 @@ angular
     /**
      * listen to signin success event
      */
-    $rootScope.$on('signinSuccess', function ( /*event, response*/ ) {
-      //TODO re-enable socket connection
-      //TODO use socket ENV options to enable of disable
+    $rootScope.$on('signinSuccess', function (event, response) {
 
       //obtain signin party(user)
-      // var party = _.get(response, 'data.party');
+      var party = _.get(response, 'data.party');
 
-      // //if party is operator and has sipNumber
-      // //subscribe to web socket for call picked events
-      // if (socket && party && party.sipNumber) {
+      //if party is operator and has sipNumber
+      //subscribe to web socket for call picked events
+      if (socket && party && socket.on && party.sipNumber) {
 
-      //   //ensure socket connection
-      //   // socket.connect();
+        //ensure socket connection
+        // socket.connect();
 
-      //   //prepare sip socket event name
-      //   $rootScope.sipEvent = [
-      //     'socket:',
-      //     party.sipNumber,
-      //     '-call-picked'
-      //   ].join('');
+        //prepare sip socket event name
+        $rootScope.sipEvent = [
+          'socket:',
+          party.sipNumber,
+          '-call-picked'
+        ].join('');
 
-      //   socket.on($rootScope.sipEvent, function (data) {
+        socket.on($rootScope.sipEvent, function (data) {
 
-      //     //notify new call
-      //     ngToast.create({
-      //       className: 'info',
-      //       content: 'New Call Received',
-      //       dismissButton: true
-      //     });
+          //notify new call
+          ngToast.create({
+            className: 'info',
+            content: 'New Call Received',
+            dismissButton: true
+          });
 
-      //     //broadcast call picked
-      //     $rootScope.$broadcast('call picked', data);
+          //broadcast call picked
+          $rootScope.$broadcast('call picked', data);
 
-      //     //TODO save latest call data on local storage for new
-      //     //call creation
+          //TODO save latest call data on local storage for new
+          //call creation
 
-      //   });
+        });
 
-      // }
+      }
 
     });
 

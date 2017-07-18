@@ -8,15 +8,20 @@
  * Factory in the ng311.
  */
 angular.module('ng311')
-  .factory('socket', function ( /*ENV,*/ socketFactory) {
+  .factory('socket', function (ENV, Utils, socketFactory) {
 
-    //TODO check for socket.io integration
-    //from configuration
+    //no op socket
+    var socket = {};
 
-    //initialize socket.io
-    var socket = socketFactory({
-      ioSocket: io('http://localhost:9090')
-    });
+    if (ENV && ENV.socketEnable) {
+      //socket endpoint
+      var socketEndPoint = (ENV.socketEndPoint || {}.web) || Utils.asLink('');
+
+      //initialize socket.io
+      socket = socketFactory({
+        ioSocket: io(socketEndPoint)
+      });
+    }
 
     return socket;
 
