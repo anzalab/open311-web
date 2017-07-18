@@ -451,9 +451,11 @@ angular
             reportedAt: servicerequest.createdAt,
             callStart: (servicerequest.call || {}).startedAt,
             callEnd: (servicerequest.call || {}).endedAt,
-            callDurationMinutes: ((servicerequest.call || {}).duration || {})
+            callDurationMinutes: ((servicerequest.call || {}).duration ||
+                {})
               .minutes,
-            callDurationSeconds: ((servicerequest.call || {}).duration || {})
+            callDurationSeconds: ((servicerequest.call || {}).duration ||
+                {})
               .seconds,
             reporterName: (servicerequest.reporter || {}).name,
             reporterPhone: (servicerequest.reporter || {}).phone,
