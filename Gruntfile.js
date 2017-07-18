@@ -371,6 +371,10 @@ module.exports = function (grunt) {
               web: 'http://127.0.0.1:3000',
               mobile: 'http://127.0.0.1:3000'
             },
+            socketEndPoint: {
+              web: 'http://127.0.0.1:3000',
+              mobile: 'http://127.0.0.1:3000'
+            },
             settings: {
               name: 'open311',
               email: 'example@example.com',
@@ -392,6 +396,12 @@ module.exports = function (grunt) {
             version: 'v0.1.0',
             description: 'Citizen Feedback System',
             apiEndPoint: {
+              mobile: '',
+              // mobile: 'https://dawasco.herokuapp.com',
+              // web: 'https://dawasco.herokuapp.com'
+              web: ''
+            },
+            socketEndPoint: {
               mobile: '',
               // mobile: 'https://dawasco.herokuapp.com',
               // web: 'https://dawasco.herokuapp.com'

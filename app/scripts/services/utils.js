@@ -8,7 +8,7 @@
  * Factory in the ng311.
  */
 angular.module('ng311')
-  .factory('Utils', function (ENV) {
+  .factory('Utils', function ($window, ENV) {
     var utils = {};
 
     /**
@@ -20,9 +20,10 @@ angular.module('ng311')
       if (!angular.isArray(path)) {
         path = [path];
       }
-      var asLink = [ENV.apiEndPoint.web];
+      var asLink = [ENV.apiEndPoint.web || $window.location.origin];
       asLink = asLink.concat(path);
-      return asLink.join('/');
+      asLink = asLink.join('/');
+      return asLink;
     };
 
     return utils;
