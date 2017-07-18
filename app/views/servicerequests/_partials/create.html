@@ -75,7 +75,7 @@
                             </div>
                             <div class="p-a text-right">
                                 <button ui-sref="app.servicerequests.list" type="button" ng-click="cancel()" class="btn">Cancel</button>
-                                <button type="submit" class="btn info">Submit</button>
+                                <button ng-disabled="servicerequest.$invalid || !servicerequest.reporter.phone" type="submit" class="btn info">Submit</button>
                             </div>
                         </div>
                     </form>
