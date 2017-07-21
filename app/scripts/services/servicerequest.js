@@ -60,8 +60,8 @@ angular
 
       //prepare complaint address
       var address = '';
-      if (issue.account) {
-        address = address + issue.account;
+      if (issue.reporter.account) {
+        address = address + issue.reporter.account;
       }
       if (issue.address) {
         if (address) {

@@ -410,11 +410,11 @@ angular
       $scope.busy = true;
 
       //reset pagination
-      if (query.resetPage) {
+      if (query && query.resetPage) {
         $scope.page = 1;
         $scope.paginating = true;
+        delete query.resetPage;
       }
-      delete query.resetPage;
 
       //track active ui based on query
       $scope.query = query;
