@@ -46,22 +46,6 @@
                     </div>
                 </div>
                 <!-- end misc menu -->
-                <!-- start services menu -->
-                <div class="p-a-md">
-                    <div class="m-b text-muted text-xs">Services</div>
-                    <div class="nav-active-white">
-                        <ul class="nav">
-                            <li ng-class="{active:query.service == service._id}" class="nav-item m-b-xs" ng-repeat="service in services">
-                                <a ng-click="load({service:service._id})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{service.color}}">
-                                    {{summaries.services[service._id]}}
-                                    </span> {{service.name}}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end services menu -->
                 <!-- start statuses menu -->
                 <div class="p-a-md">
                     <div class="m-b text-muted text-xs">Status</div>
@@ -92,6 +76,22 @@
                     </div>
                 </div>
                 <!-- end priorities menu -->
+                <!-- start services menu -->
+                <div class="p-a-md">
+                    <div class="m-b text-muted text-xs">Services</div>
+                    <div class="nav-active-white">
+                        <ul class="nav">
+                            <li ng-class="{active:query.service == service._id}" class="nav-item m-b-xs" ng-repeat="service in services">
+                                <a ng-click="load({service:service._id})" class="nav-link text-muted block">
+                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{service.color}}">
+                                    {{summaries.services[service._id]}}
+                                    </span> {{service.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end services menu -->
                 <!-- start jurisdictions menu -->
                 <div class="p-a-md">
                     <div class="m-b text-muted text-xs">Areas</div>

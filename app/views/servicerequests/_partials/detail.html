@@ -39,15 +39,15 @@
                     <div class="p-y">
                         <div title="Reporter Name">
                             <span class="text-muted font-size-12">From: </span>
-                            <span ng-click="filterByReporter(servicerequest.reporter.name, {'reporter.name':servicerequest.reporter.name})">{{servicerequest.reporter.name}}</span>
+                            <span ng-click="filterByReporter(servicerequest.reporter.name, {'reporter.name':servicerequest.reporter.name, resolvedAt:null, operator:servicerequest.operator})">{{servicerequest.reporter.name}}</span>
                         </div>
                         <div title="Reporter Account Number">
                             <span class="text-muted font-size-12">Account #: </span>
-                            <span ng-click="filterByReporter(servicerequest.reporter.account, {'reporter.account':servicerequest.reporter.account})">{{servicerequest.reporter.account}}</span>
+                            <span ng-click="filterByReporter(servicerequest.reporter.account, {'reporter.account':servicerequest.reporter.account, resolvedAt:null, operator:servicerequest.operator})">{{servicerequest.reporter.account}}</span>
                         </div>
                         <div title="Reporter Phone Number">
                             <span class="text-muted font-size-12">Phone #: </span>
-                            <span ng-click="filterByReporter(servicerequest.reporter.phone, {'reporter.phone':servicerequest.reporter.phone})">{{servicerequest.reporter.phone}}</span>
+                            <span ng-click="filterByReporter(servicerequest.reporter.phone, {'reporter.phone':servicerequest.reporter.phone, resolvedAt:null, operator:servicerequest.operator})">{{servicerequest.reporter.phone}}</span>
                         </div>
                         <div title="Reporter Address">
                             <span class="text-muted font-size-12">Address: </span>
