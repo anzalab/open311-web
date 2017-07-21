@@ -9,13 +9,9 @@
  */
 angular
   .module('ng311')
-  .controller('MainCtrl', function ($rootScope, $scope, ngNotify,
+  .controller('MainCtrl', function ($rootScope, $scope, $state, ngNotify,
     ngToast, socket) {
     //TODO show signin progress
-
-    $scope.onCreateIssue = function () {
-      $rootScope.$broadcast('servicerequest:create');
-    };
 
     $scope.onAllIssues = function () {
       $rootScope.$broadcast('servicerequest:list');

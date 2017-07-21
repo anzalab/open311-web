@@ -47,7 +47,7 @@ angular
       .state('app.create_servicerequests', {
         url: '/servicerequests/create',
         params: { //hack to allow state go with reporter $state param
-          reporter: {},
+          reporter: undefined,
           jurisdiction: undefined,
           servicerequest: undefined
         },
