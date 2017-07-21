@@ -33,7 +33,8 @@ angular
     'AngularPrint',
     'angular-echarts',
     'btford.socket-io',
-    'focus-if'
+    'focus-if',
+    'infinite-scroll'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,

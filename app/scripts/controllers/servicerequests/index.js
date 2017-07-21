@@ -14,9 +14,10 @@ angular
 
     //servicerequests in the scope
     $scope.spin = false;
+    $scope.busy = false;
     $scope.servicerequests = [];
     $scope.page = 1;
-    $scope.limit = 3;
+    $scope.limit = 10;
     $scope.total = 0;
 
     $scope.search = {};
@@ -36,8 +37,9 @@ angular
      * @description load servicerequests
      */
     $scope.find = function () {
-      //start sho spinner
+      //start show spinner
       $scope.spin = true;
+      $scope.busy = true;
 
       ServiceRequest.find({
         page: $scope.page,
@@ -53,9 +55,12 @@ angular
         //update scope with servicerequests when done loading
         $scope.servicerequests = response.servicerequests;
         $scope.total = response.total;
+        $scope.page = response.page;
         $scope.spin = false;
+        $scope.busy = false;
       }).catch(function (error) {
         $scope.spin = false;
+        $scope.busy = false;
       });
     };
 

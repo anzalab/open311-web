@@ -16,6 +16,8 @@ angular
 
     //servicerequests in the scope
     $scope.spin = false;
+    $scope.busy = false;
+    $scope.paginating = true;
     $scope.servicerequests = [];
     $scope.comments = [];
     $scope.servicerequest = new ServiceRequest({
@@ -24,6 +26,7 @@ angular
       }
     });
     $scope.page = 1;
+    $scope.pages = 1;
     $scope.limit = 10;
     $scope.total = 0;
     $scope.note = {};
@@ -404,11 +407,19 @@ angular
     $scope.find = function (query) {
       //start sho spinner
       $scope.spin = true;
+      $scope.busy = true;
+
+      //reset pagination
+      if (query.resetPage) {
+        $scope.page = 1;
+      }
+      delete query.resetPage;
 
       //track active ui based on query
       $scope.query = query;
+      var defaultQuery = { resolvedAt: null };
 
-      query = _.merge({}, { resolvedAt: null }, query);
+      query = _.merge({}, defaultQuery, query);
 
       ServiceRequest.find({
         page: $scope.page,
@@ -420,25 +431,44 @@ angular
         q: $scope.q
       }).then(function (response) {
         //update scope with servicerequests when done loading
-        $scope.servicerequests = response.servicerequests;
+        if (!$scope.paginating) {
+          $scope.servicerequests =
+            $scope.servicerequests.concat(response.servicerequests);
+        } else {
+          $scope.servicerequests = response.servicerequests;
+        }
         if ($scope.updated) {
           $scope.updated = false;
         } else {
           $scope.select(_.first($scope.servicerequests));
         }
         $scope.total = response.total;
+        $scope.pages = response.pages;
         $scope.spin = false;
+        $scope.busy = false;
+        $scope.paginating = !$scope.willPaginate();
       }).catch(function (error) {
         $scope.spin = false;
+        $scope.busy = false;
       });
     };
 
 
     //check whether servicerequests will paginate
     $scope.willPaginate = function () {
-      var willPaginate =
-        ($scope.servicerequests && $scope.total && $scope.total > $scope.limit);
+      var willPaginate = $scope.pages > $scope.page;
       return willPaginate;
+    };
+
+    $scope.paginate = function () {
+
+      if (!$scope.paginating && $scope.willPaginate()) {
+        //increment page
+        $scope.page = $scope.page + 1;
+        //load next page
+        $scope.find(($scope.query || {}));
+      }
+
     };
 
     //export current filtered issues

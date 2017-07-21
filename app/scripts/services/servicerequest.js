@@ -44,7 +44,8 @@ angular
           //return paginated response
           return {
             servicerequests: servicerequests,
-            total: response.data.count
+            total: response.data.count,
+            pages: response.data.pages
           };
         });
     };
