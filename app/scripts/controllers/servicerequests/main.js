@@ -300,6 +300,7 @@ angular
      * @return {[type]} [description]
      */
     $scope.onSearch = function () {
+      console.log($scope.search.q);
       if ($scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -346,6 +347,7 @@ angular
     $scope.load = function (query, skipClearSearch) {
       if (!skipClearSearch) {
         $scope.search = {};
+        $scope.q = undefined;
       }
       $scope.find(query);
     };
