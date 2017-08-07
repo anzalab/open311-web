@@ -15,6 +15,7 @@
     "angular": false,
     "inject": false,
     "_": false,
-    "io": false
+    "io": false,
+    "moment": false
   }
 }
