@@ -87,10 +87,10 @@
                     </div>
                 </div>
                 <!-- end issues summary -->
-                <!-- start jurisdiction & service count summary -->
+                <!-- start jurisdiction count summary -->
                 <div class="padding">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="box">
                                 <div class="box-header">
                                     <h3>Issue per Area</h3>
@@ -99,11 +99,36 @@
                                 </small>
                                 </div>
                                 <div class="box-body">
-                                    <pie-chart config="jurisdictionConfig" data="jurisdictionData"></pie-chart>
+                                    <echart config="jurisdictionConfig" options="jurisdictionOptions"></echart>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                    </div>
+                </div>
+                <!-- end jurisdiction count summary -->
+                <!-- start service group count summary -->
+                <div class="padding">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Issue per Service Group</h3>
+                                    <small class="block text-muted">
+                                 Count of Reported Issues by Their Service Group
+                                </small>
+                                </div>
+                                <div class="box-body">
+                                    <pie-chart config="groupConfig" data="groupData" font-style="Lato"></pie-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end service group count summary -->
+                <!-- start service count summary -->
+                <div class="padding">
+                    <div class="row">
+                        <div class="col-sm-12">
                             <div class="box">
                                 <div class="box-header">
                                     <h3>Issue per Service</h3>
@@ -112,13 +137,13 @@
                                 </small>
                                 </div>
                                 <div class="box-body">
-                                    <pie-chart config="serviceConfig" data="serviceData"></pie-chart>
+                                    <echart config="serviceConfig" options="serviceOptions"></echart>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end jurisdiction & service count summary -->
+                <!-- end service count summary -->
                 <!-- start priority & status count summary -->
                 <div class="padding">
                     <div class="row">

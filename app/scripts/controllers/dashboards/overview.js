@@ -15,6 +15,28 @@ angular
 
     console.log(overviews);
 
+    /**
+     * prepare multi series data
+     * @param {[Object]} data series value to prepare
+     * @return {[[Object]]} valid multi series data 
+     */
+    $scope.prepareMultiSeries = function (values) {
+
+      values = _.map(values, function (value) {
+        return {
+          name: value.name,
+          type: 'bar',
+          datapoints: [{
+            x: value.name,
+            y: value.value
+          }]
+        };
+      });
+
+      return values;
+
+    };
+
     //initialize overview
     $scope.overviews = overviews;
 
@@ -22,11 +44,13 @@ angular
       //obtain issues summary
       $scope.issues = overviews.issues;
 
-      //TODO prepare issue based on service category
+      //TODO add date filter default to today
 
       $scope.prepareIssueByJurisdiction();
 
       $scope.prepareIssueByService();
+
+      $scope.prepareIssueByServiceGroup();
 
       $scope.prepareIssueByStatus();
 
@@ -40,6 +64,9 @@ angular
       var statuses = _.map($scope.overviews.statuses, 'status');
 
       $scope.statusConfig = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
         radius: '55%',
         center: ['50%', '60%'],
         height: 300,
@@ -53,7 +80,17 @@ angular
           x: 'left',
           data: statuses
         },
-        calculable: true
+        calculable: true,
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Status-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        }
       };
 
       $scope.statusData = [{
@@ -70,6 +107,9 @@ angular
       var priorities = _.map($scope.overviews.priorities, 'priority');
 
       $scope.priorityConfig = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
         radius: '55%',
         center: ['50%', '60%'],
         height: 300,
@@ -83,7 +123,17 @@ angular
           x: 'left',
           data: priorities
         },
-        calculable: true
+        calculable: true,
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Priority-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        }
       };
 
       $scope.priorityData = [{
@@ -98,29 +148,124 @@ angular
 
     $scope.prepareIssueByService = function () {
 
-      var services = _.map($scope.overviews.services, 'service');
+      //prepare values for bar chart
+      var services = _.map(
+        $scope.overviews.services,
+        function (service) {
+          return {
+            name: service.service,
+            value: service.count,
+            itemStyle: {
+              normal: {
+                color: service.color
+              }
+            }
+          };
+        });
 
       $scope.serviceConfig = {
-        radius: '55%',
-        center: ['50%', '60%'],
-        height: 300,
-        width: 500,
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          orient: 'vertical',
-          x: 'left',
-          data: services
-        },
-        calculable: true
+        height: 1000,
+        width: 960
       };
 
-      $scope.serviceData = [{
-        datapoints: _.map($scope.overviews.services, function (
-          service) {
-          return { x: service.service, y: service.count };
+      $scope.serviceOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c}'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Service-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        grid: {
+          left: '3%',
+          containLabel: true
+        },
+        yAxis: [{
+          type: 'category',
+          data: _.map(services, 'name'),
+          axisTick: {
+            alignWithLabel: true
+          }
+        }],
+        xAxis: [{
+          type: 'value'
+        }],
+        series: [{
+          type: 'bar',
+          barWidth: '60%',
+          label: {
+            normal: {
+              show: true
+            }
+          },
+          markPoint: { // show area with maximum and minimum
+            data: [
+              { name: 'Maximum', type: 'max' },
+              { name: 'Minimum', type: 'min' }
+            ]
+          },
+          markLine: { //add average line
+            precision: 0,
+            data: [
+              { type: 'average', name: 'Average' }
+            ]
+          },
+          data: services
+        }]
+      };
+
+    };
+
+
+    $scope.prepareIssueByServiceGroup = function () {
+
+      var groups = _.map($scope.overviews.groups, 'group');
+
+      $scope.groupConfig = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        radius: '70%',
+        center: ['50%', '50%'],
+        height: 300,
+        width: 960,
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c} ({d}%)'
+        },
+        legend: {
+          orient: 'horizontal',
+          x: 'center',
+          y: 'top',
+          data: groups
+        },
+        calculable: true,
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Service Group-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        }
+      };
+
+      $scope.groupData = [{
+        datapoints: _.map($scope.overviews.groups, function (
+          group) {
+          return { x: group.group, y: group.count };
         })
       }];
 
@@ -129,35 +274,79 @@ angular
 
     $scope.prepareIssueByJurisdiction = function () {
 
-      var jurisdictions = _.map($scope.overviews.jurisdictions,
-        'jurisdiction');
+      //prepare values for bar chart
+      var jurisdictions = _.map(
+        $scope.overviews.jurisdictions,
+        function (jurisdiction) {
+          return {
+            name: jurisdiction.jurisdiction,
+            value: jurisdiction.count,
+            itemStyle: {
+              normal: {
+                color: jurisdiction.color
+              }
+            }
+          };
+        });
 
       $scope.jurisdictionConfig = {
-        radius: '55%',
-        center: ['50%', '60%'],
-        height: 300,
-        width: 500,
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          orient: 'vertical',
-          x: 'left',
-          data: jurisdictions
-        },
-        calculable: true
+        height: 360,
+        width: 960
       };
 
-      $scope.jurisdictionData = [{
-        datapoints: _.map($scope.overviews.jurisdictions, function (
-          jurisdiction) {
-          return { x: jurisdiction.jurisdiction, y: jurisdiction.count };
-        })
-      }];
+      $scope.jurisdictionOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c}'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Area-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        xAxis: [{
+          type: 'category',
+          data: _.map(jurisdictions, 'name'),
+          axisTick: {
+            alignWithLabel: true
+          }
+        }],
+        yAxis: [{
+          type: 'value'
+        }],
+        series: [{
+          type: 'bar',
+          barWidth: '70%',
+          label: {
+            normal: {
+              show: true
+            }
+          },
+          markPoint: { // show area with maximum and minimum
+            data: [
+              { name: 'Maximum', type: 'max' },
+              { name: 'Minimum', type: 'min' }
+            ]
+          },
+          markLine: { //add average line
+            precision: 0,
+            data: [
+              { type: 'average', name: 'Average' }
+            ]
+          },
+          data: jurisdictions
+        }]
+      };
 
     };
-
 
 
     //listen for events and reload overview accordingly
@@ -168,7 +357,10 @@ angular
       });
     });
 
+
+    //on load
     //prepare overview details
     $scope.prepare();
+
 
   });

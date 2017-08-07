@@ -107,6 +107,7 @@ body {
 
 
 
+
 /*support angular bootstrap*/
 
 .nav,
@@ -120,12 +121,14 @@ body {
 
 
 
+
 /*settings style*/
 
 .search-settings {
   padding: 0.9rem;
   font-family: Lato;
 }
+
 
 
 
@@ -162,6 +165,7 @@ body {
 
 
 
+
 /*status navigation*/
 
 .nav-active-white .nav-link {
@@ -173,12 +177,14 @@ body {
 
 
 
+
 /*list*/
 
 .list-item-padded {
   padding-top: 16px;
   padding-bottom: 16px;
 }
+
 
 
 
@@ -228,6 +234,7 @@ body {
 
 
 
+
 /*ng-prompt*/
 
 .modal-header {
@@ -260,6 +267,7 @@ body {
 
 
 
+
 /*aside subnav*/
 
 
@@ -287,9 +295,17 @@ body {
 
 
 
+
 /*search-servicerequests*/
 
 .search-servicerequests .form-control-sm {
   padding-top: 0.28rem;
   padding-bottom: 0.28rem;
+}
+
+
+/*ensure all sv charts text use lato font*/
+
+svg text {
+  font-family: Lato !important;
 }
