@@ -1,7 +1,7 @@
 <!-- start roles list -->
 <div class="row-col lt">
     <!-- start roles list search -->
-    <div class="p-a b-b search-settings">
+    <div class="p-a b-b list-search">
         <form>
             <div class="input-group">
                 <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Roles ...">
@@ -44,13 +44,7 @@
     <!-- end role listing -->
     <!-- TODO use infinite scroll insteady of pagination -->
     <div class="p-x-md p-y">
-        <div class="btn-group pull-right">
-            <a href="#" class="btn btn-default btn-xs">
-                <i class="fa fa-fw fa-angle-left"></i>
-            </a>
-            <a href="#" class="btn btn-default btn-xs">
-                <i class="fa fa-fw fa-angle-right"></i>
-            </a>
+        <div class="btn-group pull-right" list-pager" uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" template-url="views/_partials/list_pager.html">
         </div>
         <span class="text-sm text-muted">Total: {{total}}</span>
     </div>

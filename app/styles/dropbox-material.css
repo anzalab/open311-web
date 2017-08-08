@@ -102,7 +102,7 @@ fieldset[disabled] .form-material .form-control {
 }
 
 .form-material .form-control:disabled~.floating-label,
-.form-group-material-disabled .floating-label,
+.form-inputs-material .form-group-disabled .floating-label,
 .form-material .form-control[disabled]~.floating-label,
 fieldset[disabled] .form-material .form-control~.floating-label {
   /*color: #ccd5db*/
@@ -143,7 +143,8 @@ fieldset[disabled] .form-material .form-control~.floating-label {
 
 .form-material .form-control.focus~.floating-label,
 .form-material .form-control:focus~.floating-label,
-.form-material .form-control:not(.empty)~.floating-label {
+.form-material .form-control:not(.empty)~.floating-label,
+.form-inputs-material .form-group:not(.empty)~.floating-label {
   top: -20.4px;
   font-size: 11.2px;
   padding-bottom: 4px;
@@ -191,7 +192,8 @@ fieldset[disabled] .form-material .form-control~.floating-label {
 
 .form-material .form-control.focus~.floating-label,
 .form-material .form-control:focus~.floating-label,
-.form-material .form-control:not(.empty)~.floating-label {
+.form-material .form-control:not(.empty)~.floating-label,
+.form-inputs-material .form-group:not(.empty)~.floating-label {
   font-weight: 500
 }
 
