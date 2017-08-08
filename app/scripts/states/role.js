@@ -21,16 +21,16 @@ angular
           },
           detail: {
             templateUrl: 'views/roles/_partials/detail.html',
-            controller: 'RoleShowCtrl'
+            controller: 'RoleShowCtrl',
+            resolve: {
+              permissions: function (Permission) {
+                return Permission.find();
+              }
+            }
           }
         },
         data: {
           authenticated: true
-        },
-        resolve: {
-          permissions: function (Permission) {
-            return Permission.find();
-          }
         }
       });
   });

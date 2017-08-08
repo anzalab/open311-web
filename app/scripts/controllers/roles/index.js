@@ -42,12 +42,6 @@ angular
       if (role && role._id) {
         //update scope service request ref
         $scope.role = role;
-        console.log(role);
-
-        //prepare displayable roles
-        // party._roles = party.roles && !_.isEmpty(party.roles) ?
-        //   _.join(_.map(party.roles, 'name'), ', ') :
-        //   'N/A';
 
         //deduce assigned roles
         role._assigned = _.map(role.permissions, '_id');

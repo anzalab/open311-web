@@ -15,7 +15,7 @@ angular
 
     $scope.permissions = permissions.permissions;
 
-
+    //prepare grouped permissions
     $scope.grouped = _.groupBy($scope.permissions, 'resource');
     $scope.grouped = _.map($scope.grouped, function (values, key) {
       return { resource: key, permits: values };
@@ -29,6 +29,7 @@ angular
 
     $scope.onCancel = function () {
       $scope.edit = false;
+      $rootScope.$broadcast('app:roles:reload');
     };
 
     $scope.onNew = function () {
@@ -75,10 +76,10 @@ angular
       //update assigned permissions
       $scope.role.permissions = $scope.role._assigned;
 
-      var updateOrSave = $scope.role.$update();
-      if (!$scope.role._id) {
-        updateOrSave = $scope.role.$save();
-      }
+      //try update or save role
+      var updateOrSave =
+        (!$scope.role._id ? $scope.role.$save() : $scope.role.$update());
+
       updateOrSave.then(function (response) {
 
           response = response || {};
@@ -88,7 +89,7 @@ angular
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('app:parties:reload');
+          $rootScope.$broadcast('app:roles:reload');
 
           $scope.edit = false;
 

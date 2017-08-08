@@ -21,6 +21,7 @@ angular
 
     $scope.onCancel = function () {
       $scope.edit = false;
+      $rootScope.$broadcast('app:priorities:reload');
     };
 
     $scope.onNew = function () {
@@ -40,10 +41,12 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-      var updateOrSave = $scope.priority.$update();
-      if (!$scope.priority._id) {
-        updateOrSave = $scope.priority.$save();
-      }
+
+      //try update or save priority
+      var updateOrSave =
+        (!$scope.priority._id ?
+          $scope.priority.$save() : $scope.priority.$update());
+
       updateOrSave.then(function (response) {
 
           response = response || {};

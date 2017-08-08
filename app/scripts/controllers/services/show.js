@@ -24,6 +24,7 @@ angular
 
     $scope.onCancel = function () {
       $scope.edit = false;
+      $rootScope.$broadcast('app:services:reload');
     };
 
     $scope.onNew = function () {
@@ -43,10 +44,12 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-      var updateOrSave = $scope.service.$update();
-      if (!$scope.service._id) {
-        updateOrSave = $scope.service.$save();
-      }
+
+      //try update or save service
+      var updateOrSave =
+        (!$scope.service._id ?
+          $scope.service.$save() : $scope.service.$update());
+
       updateOrSave.then(function (response) {
 
           response = response || {};

@@ -21,6 +21,7 @@ angular
 
     $scope.onCancel = function () {
       $scope.edit = false;
+      $rootScope.$broadcast('app:jurisdictions:reload');
     };
 
     $scope.onNew = function () {
@@ -51,10 +52,11 @@ angular
       $scope.jurisdiction.location.coordinates[1] =
         $scope.jurisdiction.latitude;
 
-      var updateOrSave = $scope.jurisdiction.$update();
-      if (!$scope.jurisdiction._id) {
-        updateOrSave = $scope.jurisdiction.$save();
-      }
+      //try update or save jurisdiction
+      var updateOrSave =
+        (!$scope.jurisdiction._id ?
+          $scope.jurisdiction.$save() : $scope.jurisdiction.$update());
+
       updateOrSave.then(function (response) {
 
           response = response || {};

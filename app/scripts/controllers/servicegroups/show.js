@@ -21,6 +21,7 @@ angular
 
     $scope.onCancel = function () {
       $scope.edit = false;
+      $rootScope.$broadcast('app:servicegroups:reload');
     };
 
     $scope.onNew = function () {
@@ -40,10 +41,12 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
-      var updateOrSave = $scope.servicegroup.$update();
-      if (!$scope.servicegroup._id) {
-        updateOrSave = $scope.servicegroup.$save();
-      }
+
+      //try update or save servicegroup
+      var updateOrSave =
+        (!$scope.servicegroup._id ?
+          $scope.servicegroup.$save() : $scope.servicegroup.$update());
+
       updateOrSave.then(function (response) {
 
           response = response || {};

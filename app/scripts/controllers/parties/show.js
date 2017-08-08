@@ -24,6 +24,7 @@ angular
 
     $scope.onCancel = function () {
       $scope.edit = false;
+      $rootScope.$broadcast('app:parties:reload');
     };
 
     $scope.onNew = function () {
@@ -71,10 +72,10 @@ angular
       //update party assigned roles
       $scope.party.roles = $scope.party._assigned;
 
-      var updateOrSave = $scope.party.$update();
-      if (!$scope.party._id) {
-        updateOrSave = $scope.party.$save();
-      }
+      //try update or save party
+      var updateOrSave =
+        (!$scope.party._id ? $scope.party.$save() : $scope.party.$update());
+
       updateOrSave.then(function (response) {
 
           response = response || {};
