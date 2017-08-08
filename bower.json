@@ -1,7 +1,8 @@
 {
   "name": "open311-web",
   "version": "0.1.0",
-  "dependencies": {
+  "dependencies":
+  {
     "angular": "^1.6.5",
     "angular-bootstrap": "^2.4.0",
     "angular-loading-bar": "~0.8.0",
@@ -16,7 +17,6 @@
     "angucomplete-alt": "~2.1.0",
     "bootstrap": "v4.0.0-alpha.4",
     "jquery.nicescroll": "https://github.com/inuyaksa/jquery.nicescroll.git#master",
-    "angular-morris-chart": "https://github.com/stewones/angular-morris-chart.git#~1.2.0",
     "checklist-model": "^0.11.0",
     "angular-prompt": "^1.2.0",
     "awesome-bootstrap-checkbox": "~0.3.7",
@@ -36,7 +36,6 @@
     "angular-daterangepicker": "^0.2.2",
     "angularPrint": "angular-print#^0.3.8",
     "angular-echarts": "https://github.com/lykmapipo/angular-echarts.git#^1.1.1",
-    "ng-chartjs": "^0.0.5",
     "echarts": "^3.6.2",
     "angular-socket-io": "^0.7.0",
     "socket.io-client": "^2.0.3",
@@ -45,86 +44,79 @@
     "moment": "^2.18.1",
     "web-icons": "*"
   },
-  "devDependencies": {
+  "devDependencies":
+  {
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
   "moduleName": "open311-web",
-  "overrides": {
-    "bootstrap": {
+  "overrides":
+  {
+    "bootstrap":
+    {
       "main": [
         "dist/css/bootstrap.css"
       ]
     },
-    "angular-bootstrap": {
+    "angular-bootstrap":
+    {
       "main": [
         "ui-bootstrap.js",
         "ui-bootstrap-tpls.js"
       ]
     },
-    "open-iconic": {
+    "open-iconic":
+    {
       "main": [
         "font/css/open-iconic-bootstrap.css"
       ]
     },
-    "font-awesome": {
+    "font-awesome":
+    {
       "main": [
         "css/font-awesome.css"
       ]
     },
-    "angular-morris-chart": {
-      "main": [
-        "src/angular-morris-chart.js"
-      ]
-    },
-    "morris.js": {
-      "main": [
-        "morris.js",
-        "morris.css"
-      ],
-      "dependencies": {
-        "jquery": ">= 2.1.0",
-        "raphael": ">= 2.0"
-      }
-    },
-    "angular-theme-spinner": {
+    "angular-theme-spinner":
+    {
       "main": [
         "dist/angular-theme-spinner.js",
         "dist/angular-theme-spinner.min.css"
       ]
     },
-    "ng-csv": {
+    "ng-csv":
+    {
       "main": [
         "build/ng-csv.js"
       ]
     },
-    "ui-listView": {
+    "ui-listView":
+    {
       "main": [
         "dist/ui-listView.js",
         "dist/ui-listView.css"
       ]
     },
-    "jquery.nicescroll": {
+    "jquery.nicescroll":
+    {
       "main": [
         "jquery.nicescroll.js"
       ]
     },
-    "ng-scrollbars": {
+    "ng-scrollbars":
+    {
       "main": [
         "src/scrollbars.js"
       ]
     },
-    "angular-echarts": {
+    "angular-echarts":
+    {
       "main": [
         "dist/angular-echarts.js"
       ]
     },
-    "echarts": {
-      "main": [
-        "dist/echarts.js"
-      ]
-    },
-    "socket.io-client": {
+    "socket.io-client":
+    {
       "main": [
         "dist/socket.io.js"
       ]

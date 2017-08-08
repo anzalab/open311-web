@@ -21,7 +21,6 @@ angular
     'ngNotify',
     'ngToast',
     'angucomplete-alt',
-    'angular.morris-chart',
     'cgPrompt',
     'checklist-model',
     'ui-listView',
