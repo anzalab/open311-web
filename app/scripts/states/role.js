@@ -26,6 +26,11 @@ angular
         },
         data: {
           authenticated: true
+        },
+        resolve: {
+          permissions: function (Permission) {
+            return Permission.find();
+          }
         }
       });
   });

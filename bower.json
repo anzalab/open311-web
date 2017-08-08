@@ -17,7 +17,7 @@
     "bootstrap": "v4.0.0-alpha.4",
     "jquery.nicescroll": "https://github.com/inuyaksa/jquery.nicescroll.git#master",
     "angular-morris-chart": "https://github.com/stewones/angular-morris-chart.git#~1.2.0",
-    "checklist-model": "~0.9.0",
+    "checklist-model": "^0.11.0",
     "angular-prompt": "^1.2.0",
     "awesome-bootstrap-checkbox": "~0.3.7",
     "lodash": "~4.13.1",
@@ -42,7 +42,8 @@
     "socket.io-client": "^2.0.3",
     "ng-focus-if": "^1.0.7",
     "ngInfiniteScroll": "^1.3.4",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "web-icons": "*"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

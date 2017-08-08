@@ -1,62 +1,81 @@
 <!-- start party details -->
 <div class="row-col">
-    <div class="white b-b bg">
-        <!-- start party detail action bar -->
-        <div ng-include="'views/parties/_partials/action_bar.html'" class="navbar"></div>
-        <!-- end party details action bar -->
-    </div>
-    <!-- start party body -->
-    <div class="row-row">
-        <div class="row-body">
-            <div class="row-inner">
-                <div class="padding">
-                    <form ng-submit="save()" name="partyForm" role="form" autocomplete="off" novalidate>
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="m-b" title="Area">
-                                    <div ng-show="!edit" class="form-group form-material floating">
-                                        <input ng-disabled="!edit" ng-model="party.jurisdiction.name" ng-required ng-minlength="2" type="text" name="area" class="form-control" />
-                                        <label title="Area" class="floating-label">Area</label>
-                                    </div>
-                                    <div ng-show="edit" class="form-group form-material floating">
-                                        <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="party.jurisdiction" placeholder="Select Area" class="form-control"></oi-select>
-                                        <label title="Area" class="floating-label">Area</label>
-                                    </div>
-                                </div>
-                                <div class="row m-t-lg">
-                                    <div class="col-sm-6" title="Party Name">
-                                        <div class="form-group form-material floating">
-                                            <input ng-disabled="!edit" ng-model="party.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                            <label title="Party Name" class="floating-label">Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6" title="Party Phone">
-                                        <div class="form-group form-material floating">
-                                            <input ng-disabled="!edit" ng-model="party.phone" ng-required ng-minlength="2" type="text" name="phone" class="form-control" />
-                                            <label title="Mobile Phone Number" class="floating-label">Phone</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-lg">
-                                    <div class="col-sm-6" title="Party Email">
-                                        <div class="form-group form-material floating">
-                                            <input ng-disabled="!edit" ng-model="party.email" ng-required ng-minlength="2" type="text" name="email" class="form-control" />
-                                            <label title="Email Address" class="floating-label">Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6" title="SIP Number">
-                                        <div class="form-group form-material floating">
-                                            <input ng-disabled="!edit" ng-model="party.sipNumber" ng-required ng-minlength="2" type="text" name="sipNumber" class="form-control" />
-                                            <label title="SIP Phone Number" class="floating-label">SIP Number</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </form>
-                    </div>
+  <div class="white b-b bg">
+    <!-- start party detail action bar -->
+    <div ng-include="'views/parties/_partials/action_bar.html'" class="navbar"></div>
+    <!-- end party details action bar -->
+  </div>
+  <!-- start party body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form ng-submit="save()" name="partyForm" role="form" autocomplete="off" novalidate>
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Area">
+                  <div ng-show="!edit" class="form-group form-material floating">
+                    <input ng-disabled="!edit" ng-model="party.jurisdiction.name" ng-required ng-minlength="2" type="text" name="area" class="form-control" />
+                    <label title="Area" class="floating-label">Area</label>
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="party.jurisdiction" placeholder="Select Area" class="form-control"></oi-select>
+                    <label title="Area" class="floating-label">Area</label>
+                  </div>
                 </div>
-            </div>
+                <div class="row m-t-lg">
+                  <div class="col-sm-6" title="Party Name">
+                    <div class="form-group form-material floating">
+                      <input ng-disabled="!edit" ng-model="party.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                      <label title="Party Name" class="floating-label">Name</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6" title="Party Phone">
+                    <div class="form-group form-material floating">
+                      <input ng-disabled="!edit" ng-model="party.phone" ng-required ng-minlength="2" type="text" name="phone" class="form-control" />
+                      <label title="Mobile Phone Number" class="floating-label">Phone</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row m-t-lg">
+                  <div class="col-sm-6" title="Party Email">
+                    <div class="form-group form-material floating">
+                      <input ng-disabled="!edit" ng-model="party.email" ng-required ng-minlength="2" type="text" name="email" class="form-control" />
+                      <label title="Email Address" class="floating-label">Email</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-6" title="SIP Number">
+                    <div class="form-group form-material floating">
+                      <input ng-disabled="!edit" ng-model="party.sipNumber" ng-required ng-minlength="2" type="text" name="sipNumber" class="form-control" />
+                      <label title="SIP Phone Number" class="floating-label">SIP Number</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- start party roles -->
+                <div class="row m-t-lg">
+                  <div class="col-sm-12">
+                    <div ng-show="!edit" class="form-group form-material floating">
+                      <input ng-disabled="!edit" ng-model="party._roles" ng-required ng-minlength="2" type="text" name="_roles" class="form-control" />
+                      <label title="Roles" class="floating-label">Roles</label>
+                    </div>
+                    <div ng-show="edit" class="form-inputs">
+                      <div class="form-group">
+                        <label class="floating-label">Roles</label>
+                        <div class="checkbox-custom checkbox-primary" ng-repeat="role in roles">
+                          <input type="checkbox" checklist-model="party._assigned" checklist-value="role._id">
+                          <label>{{role.name}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end party roles -->
+              </div>
+          </form>
+          </div>
         </div>
-        <!-- end party body -->
+      </div>
     </div>
-    <!-- end party details -->
+    <!-- end party body -->
+  </div>
+  <!-- end party details -->

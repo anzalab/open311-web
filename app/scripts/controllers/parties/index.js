@@ -40,10 +40,20 @@ angular
 
       //sort comments in desc order
       if (party && party._id) {
+
+        //prepare displayable roles
+        party._roles = party.roles && !_.isEmpty(party.roles) ?
+          _.join(_.map(party.roles, 'name'), ', ') :
+          'N/A';
+
+        //deduce assigned roles
+        party._assigned = _.map(party.roles, '_id');
+
         //update scope service request ref
         $scope.party = party;
         $rootScope.$broadcast('party:selected', party);
       }
+
 
       $scope.create = false;
 

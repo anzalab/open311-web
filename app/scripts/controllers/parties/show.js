@@ -11,11 +11,12 @@ angular
   .module('ng311')
   .controller('PartyShowCtrl', function (
     $rootScope, $scope, $state, $stateParams, Party,
-    jurisdictions
+    jurisdictions, roles
   ) {
 
     $scope.edit = false;
     $scope.jurisdictions = jurisdictions.jurisdictions;
+    $scope.roles = roles.roles;
 
     $scope.onEdit = function () {
       $scope.edit = true;
@@ -26,8 +27,32 @@ angular
     };
 
     $scope.onNew = function () {
-      $scope.party = new Party({});
+      $scope.party = new Party({
+        roles: [],
+        _assigned: []
+      });
       $scope.edit = true;
+    };
+
+    /**
+     * @description block created party
+     */
+    $scope.block = function () {
+      //TODO show input prompt
+      //TODO show loading mask
+      $scope.party.deletedAt = new Date();
+      $scope.save();
+    };
+
+
+    /**
+     * @description unblock created party
+     */
+    $scope.unblock = function () {
+      //TODO show input prompt
+      //TODO show loading mask
+      $scope.party.deletedAt = null;
+      $scope.save();
     };
 
     //TODO show empty state if no party selected
@@ -42,6 +67,10 @@ angular
     $scope.save = function () {
       //TODO show input prompt
       //TODO show loading mask
+
+      //update party assigned roles
+      $scope.party.roles = $scope.party._assigned;
+
       var updateOrSave = $scope.party.$update();
       if (!$scope.party._id) {
         updateOrSave = $scope.party.$save();

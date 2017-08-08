@@ -13,8 +13,6 @@ angular
     $rootScope, $scope, $state, Summary, overviews
   ) {
 
-    console.log(overviews);
-
     /**
      * prepare multi series data
      * @param {[Object]} data series value to prepare

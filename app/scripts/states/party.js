@@ -37,6 +37,17 @@ angular
         },
         data: {
           authenticated: true
+        },
+        resolve: {
+          roles: function (Role) {
+            return Role.find({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          }
         }
       });
   });
