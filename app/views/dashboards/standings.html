@@ -37,7 +37,7 @@
             <div class="col-sm-12">
               <div class="box">
                 <div class="box-header">
-                  <h3>Issue per Area per Service Group - Affected Business Units</h3>
+                  <h3>Issue per Area per Service Group - Affected Business Units(Divisions)</h3>
                   <small class="block text-muted">
                                  Count of Reported Issues by Their Area and Service Group
                                 </small>
@@ -50,6 +50,25 @@
           </div>
         </div>
         <!-- end per jurisdiction per service group count standing -->
+        <!-- start per jurisdiction per service count standing -->
+        <div class="padding">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3>Issue per Area per Service - Impacted Business Services</h3>
+                  <small class="block text-muted">
+                                 Count of Reported Issues by Their Area and Service
+                                </small>
+                </div>
+                <div class="box-body">
+                  <echart ng-repeat="options in perJurisdictionPerServiceOptions" config="perJurisdictionPerServiceConfig" options="options"></echart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end per jurisdiction per service count standing -->
         <!-- start per jurisdiction per priority count standing -->
         <div class="padding">
           <div class="row">

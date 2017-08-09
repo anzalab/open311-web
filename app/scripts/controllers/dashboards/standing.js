@@ -23,6 +23,7 @@ angular
       //build reports
       $scope.prepareIssuePerJurisdiction();
       $scope.prepareIssuePerJurisdictionPerServiceGroup();
+      $scope.prepareIssuePerJurisdictionPerService();
       $scope.prepareIssuePerJurisdictionPerPriority();
       $scope.prepareIssuePerJurisdictionPerStatus();
 
@@ -249,6 +250,134 @@ angular
 
 
     /**
+     * prepare per jurisdiction per service bar chart
+     * @return {object} echart bar chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareIssuePerJurisdictionPerService = function () {
+
+      //prepare unique jurisdictions for bar chart categories
+      var categories = _.chain($scope.standings)
+        .map('jurisdiction.name')
+        .uniq()
+        .value();
+
+      //prepare unique service for bar chart series
+      var services = _.chain($scope.standings)
+        .map('service')
+        .uniqBy('name')
+        .value();
+
+      //prepare chart config
+      $scope.perJurisdictionPerServiceConfig = {
+        height: 400,
+        width: 1200
+      };
+      //prepare chart options
+      $scope.perJurisdictionPerServiceOptions = [];
+
+      //chunk services for better charting display
+      var chunks = _.chunk(services, 6);
+      var chunksSize = _.size(chunks);
+      _.forEach(chunks, function (_services, index) {
+
+        //prepare unique service color for bar chart and legends color
+        var colors = _.map(_services, 'color');
+
+        //prepare unique service name for bar chart legends label
+        var legends = _.map(_services, 'name');
+
+        //prepare bar chart series
+        var series = {};
+        _.forEach(categories, function (category) {
+          _.forEach(_services, function (service) {
+            var serie = series[service.name] || {
+              name: service.name,
+              type: 'bar',
+              label: {
+                normal: {
+                  show: true,
+                }
+              },
+              data: []
+            };
+
+            //obtain all standings of specified jurisdiction(category)
+            //and service
+            var value =
+              _.filter($scope.standings, function (standing) {
+                return (standing.jurisdiction.name ===
+                  category &&
+                  standing.service.name === service.name);
+              });
+            value = value ? _.sumBy(value, 'count') : 0;
+            serie.data.push({
+              value: value,
+              itemStyle: {
+                normal: {
+                  color: service.color
+                }
+              }
+            });
+            series[service.name] = serie;
+          });
+        });
+        series = _.values(series);
+
+        //ensure bottom margin for top charts
+        var chart = (index === (chunksSize - 1)) ? {} : {
+          grid: {
+            bottom: '30%'
+          }
+        };
+
+        //prepare chart options
+        $scope.perJurisdictionPerServiceOptions.push(_.merge(chart, {
+          color: colors,
+          textStyle: {
+            fontFamily: 'Lato'
+          },
+          tooltip: {
+            trigger: 'item',
+            // formatter: '{b} : {c}'
+          },
+          legend: {
+            orient: 'horizontal',
+            x: 'center',
+            y: 'top',
+            data: legends
+          },
+          toolbox: {
+            show: true,
+            feature: {
+              saveAsImage: {
+                name: 'Issue per Area Per Service-' + new Date().getTime(),
+                title: 'Save',
+                show: true
+              }
+            }
+          },
+          calculable: true,
+          stack: true,
+          xAxis: [{
+            type: 'category',
+            data: categories
+          }],
+          yAxis: [{
+            type: 'value'
+          }],
+          series: series
+        }));
+
+      });
+
+    };
+
+
+
+    /**
      * prepare per jurisdiction per status bar chart
      * @return {object} echart bar chart configurations
      * @version 0.1.0
@@ -295,7 +424,8 @@ angular
           //and status
           var value =
             _.filter($scope.standings, function (standing) {
-              return (standing.jurisdiction.name === category &&
+              return (standing.jurisdiction.name ===
+                category &&
                 standing.status.name === status.name);
             });
           value = value ? _.sumBy(value, 'count') : 0;
@@ -405,7 +535,8 @@ angular
           //and priority
           var value =
             _.filter($scope.standings, function (standing) {
-              return (standing.jurisdiction.name === category &&
+              return (standing.jurisdiction.name ===
+                category &&
                 standing.priority.name === priority.name);
             });
           value = value ? _.sumBy(value, 'count') : 0;
