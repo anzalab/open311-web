@@ -20,7 +20,118 @@ angular
 
       //TODO add date filter default to today
 
+      //build reports
+      $scope.prepareIssuePerJurisdiction();
       $scope.prepareIssuePerJurisdictionPerStatus();
+
+    };
+
+
+    /**
+     * prepare per jurisdiction
+     * @return {object} echart bar chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareIssuePerJurisdiction = function () {
+
+      //prepare unique jurisdictions for bar chart categories
+      var categories = _.chain($scope.standings)
+        .map('jurisdiction')
+        .uniqBy('name')
+        .value();
+
+      //prepare unique jurisdiction color for bar chart and legends color
+      var colors = _.map(categories, 'color');
+
+      //prepare unique jurisdiction name for bar chart legends label
+      var legends = _.map(categories, 'name');
+
+      //prepare bar chart series data
+      var data =
+        _.map(categories, function (category) {
+
+          //obtain all standings of specified jurisdiction(category)
+          var value =
+            _.filter($scope.standings, function (standing) {
+              return standing.jurisdiction.name === category.name;
+            });
+          value = value ? _.sumBy(value, 'count') : 0;
+          var serie = {
+            name: category.name,
+            value: value,
+            itemStyle: {
+              normal: {
+                color: category.color
+              }
+            }
+          };
+
+          return serie;
+
+        });
+
+      //prepare chart config
+      $scope.perJurisdictionConfig = {
+        height: 400,
+        width: 1200
+      };
+
+      //prepare chart options
+      $scope.perJurisdictionOptions = {
+        color: colors,
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c}'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Area-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        calculable: true,
+        xAxis: [{
+          type: 'category',
+          data: _.map(categories, 'name'),
+          axisTick: {
+            alignWithLabel: true
+          }
+        }],
+        yAxis: [{
+          type: 'value'
+        }],
+        series: [{
+          type: 'bar',
+          barWidth: '70%',
+          label: {
+            normal: {
+              show: true
+            }
+          },
+          markPoint: { // show area with maximum and minimum
+            data: [
+              { name: 'Maximum', type: 'max' },
+              { name: 'Minimum', type: 'min' }
+            ]
+          },
+          markLine: { //add average line
+            precision: 0,
+            data: [
+              { type: 'average', name: 'Average' }
+            ]
+          },
+          data: data
+        }]
+      };
 
     };
 
@@ -67,6 +178,9 @@ angular
             },
             data: []
           };
+
+          //obtaion all standings of specified jurisdiction(category)
+          //and status
           var value =
             _.filter($scope.standings, function (standing) {
               return (standing.jurisdiction.name === category &&
@@ -86,11 +200,13 @@ angular
       });
       series = _.values(series);
 
+      //prepare chart config
       $scope.perJurisdictionPerStatusConfig = {
         height: 400,
         width: 1200
       };
 
+      //prepare chart options
       $scope.perJurisdictionPerStatusOptions = {
         color: colors,
         textStyle: {
