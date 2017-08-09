@@ -62,7 +62,7 @@ angular
      * @return {Object}        
      */
     Summary.standings = function (params) {
-      return $http.get(Utils.asLink('standings'), {
+      return $http.get(Utils.asLink(['reports', 'standings']), {
           params: params
         })
         .then(function (response) {
