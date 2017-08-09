@@ -12,13 +12,13 @@
   <div class="app-body-inner">
     <div class="row-col">
       <div class="col-lg b-r">
-        <!-- start per jurisdiction count summary -->
+        <!-- start per jurisdiction count standing -->
         <div class="padding">
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
                 <div class="box-header">
-                  <h3>Issue per Area - Issue Load</h3>
+                  <h3>Issue per Area - Work Load</h3>
                   <small class="block text-muted">
                                  Count of Reported Issues by Their Area
                                 </small>
@@ -30,14 +30,33 @@
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction count summary -->
-        <!-- start per jurisdiction per status count summary -->
+        <!-- end per jurisdiction count standing -->
+        <!-- start per jurisdiction per priority count standing -->
         <div class="padding">
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
                 <div class="box-header">
-                  <h3>Issue per Area per Status - Work Load</h3>
+                  <h3>Issue per Area per Priority - Work Severity</h3>
+                  <small class="block text-muted">
+                                 Count of Reported Issues by Their Area and Priority
+                                </small>
+                </div>
+                <div class="box-body">
+                  <echart config="perJurisdictionPerPriorityConfig" options="perJurisdictionPerPriorityOptions"></echart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end per jurisdiction per priority count standing -->
+        <!-- start per jurisdiction per status count standing -->
+        <div class="padding">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3>Issue per Area per Status - Work Progress</h3>
                   <small class="block text-muted">
                                  Count of Reported Issues by Their Area and Status
                                 </small>
@@ -49,7 +68,7 @@
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction per status count summary -->
+        <!-- end per jurisdiction per status count standing -->
       </div>
     </div>
   </div>

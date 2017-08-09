@@ -22,6 +22,7 @@ angular
 
       //build reports
       $scope.prepareIssuePerJurisdiction();
+      $scope.prepareIssuePerJurisdictionPerPriority();
       $scope.prepareIssuePerJurisdictionPerStatus();
 
     };
@@ -179,7 +180,7 @@ angular
             data: []
           };
 
-          //obtaion all standings of specified jurisdiction(category)
+          //obtain all standings of specified jurisdiction(category)
           //and status
           var value =
             _.filter($scope.standings, function (standing) {
@@ -227,6 +228,116 @@ angular
           feature: {
             saveAsImage: {
               name: 'Issue per Area Per Status-' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        calculable: true,
+        xAxis: [{
+          type: 'category',
+          data: categories
+        }],
+        yAxis: [{
+          type: 'value'
+        }],
+        series: series
+      };
+
+    };
+
+
+    /**
+     * prepare per jurisdiction per priority bar chart
+     * @return {object} echart bar chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareIssuePerJurisdictionPerPriority = function () {
+
+      //prepare unique jurisdictions for bar chart categories
+      var categories = _.chain($scope.standings)
+        .map('jurisdiction.name')
+        .uniq()
+        .value();
+
+      //prepare unique priority for bar chart series
+      var prioroties = _.chain($scope.standings)
+        .map('priority')
+        .uniqBy('name')
+        .value();
+
+      //prepare unique priority color for bar chart and legends color
+      var colors = _.map(prioroties, 'color');
+
+      //prepare unique priority name for bar chart legends label
+      var legends = _.map(prioroties, 'name');
+
+      //prepare bar chart series
+      var series = {};
+      _.forEach(categories, function (category) {
+        _.forEach(prioroties, function (priority) {
+          var serie = series[priority.name] || {
+            name: priority.name,
+            type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            data: []
+          };
+
+          //obtain all standings of specified jurisdiction(category)
+          //and priority
+          var value =
+            _.filter($scope.standings, function (standing) {
+              return (standing.jurisdiction.name === category &&
+                standing.priority.name === priority.name);
+            });
+          value = value ? _.sumBy(value, 'count') : 0;
+          serie.data.push({
+            value: value,
+            itemStyle: {
+              normal: {
+                color: priority.color
+              }
+            }
+          });
+          series[priority.name] = serie;
+        });
+      });
+      series = _.values(series);
+
+      //prepare chart config
+      $scope.perJurisdictionPerPriorityConfig = {
+        height: 400,
+        width: 1200
+      };
+
+      //prepare chart options
+      $scope.perJurisdictionPerPriorityOptions = {
+        color: colors,
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        tooltip: {
+          trigger: 'item',
+          // formatter: '{b} : {c}'
+        },
+        legend: {
+          orient: 'horizontal',
+          x: 'center',
+          y: 'top',
+          data: legends
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Area Per Priority-' + new Date().getTime(),
               title: 'Save',
               show: true
             }
