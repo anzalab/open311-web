@@ -120,6 +120,12 @@
       "main": [
         "dist/socket.io.js"
       ]
+    },
+    "echarts":
+    {
+      "main": [
+        "dist/echarts.js"
+      ]
     }
   }
 }

@@ -59,6 +59,7 @@ module.exports = function(config) {
             'bower_components/bootstrap-daterangepicker/daterangepicker.js',
             'bower_components/angular-daterangepicker/js/angular-daterangepicker.js',
             'bower_components/angularPrint/angularPrint.js',
+            'bower_components/echarts/dist/echarts.js',
             'bower_components/angular-echarts/dist/angular-echarts.js',
             'bower_components/angular-socket-io/socket.js',
             'bower_components/socket.io-client/dist/socket.io.js',
