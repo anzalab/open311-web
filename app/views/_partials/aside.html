@@ -4,7 +4,7 @@
   <div class="navbar no-radius">
     <a title="{{ENV.title}} | {{ENV.description}}" ui-sref="app.servicerequests.list" class="navbar-brand">
             <img src="images/logo_sm.png" alt="." width="48" class="m-t-sm">
-            <span class="hidden-folded inline">aside</span>
+            <span class="hidden-folded inline">open311</span>
         </a>
   </div>
   <!-- end brand details -->
@@ -18,43 +18,43 @@
         </li>
         <li ui-sref-active="active">
           <a ui-sref="app.servicerequests.list" title="Issues & Service Request">
-                        <span class="nav-icon">
-                            <i class="ion-chatbubble-working"></i>
-                        </span>
-                        <span class="nav-text">Issues</span>
-                    </a>
+              <span class="nav-icon">
+                  <i class="ion-chatbubble-working"></i>
+              </span>
+              <span class="nav-text">Issues</span>
+          </a>
         </li>
         <li ui-sref-active="active">
           <a ui-sref="app.create_servicerequests" ui-sref-opts="{reload: true}" title="Report New Issue or Service Request">
-                        <span class="nav-icon">
-                            <i class="ion-plus-circled"></i>
-                        </span>
-                        <span class="nav-text">New Issue</span>
-                    </a>
+              <span class="nav-icon">
+                  <i class="ion-plus-circled"></i>
+              </span>
+              <span class="nav-text">New Issue</span>
+          </a>
         </li>
         <li ui-sref-active="active">
           <a ui-sref="app.overviews" title="Overviews">
-                        <span class="nav-icon">
-                            <i class="ion-pie-graph"></i>
-                        </span>
-                        <span class="nav-text">Overviews</span>
-                    </a>
+              <span class="nav-icon">
+                  <i class="ion-pie-graph"></i>
+              </span>
+              <span class="nav-text">Overviews</span>
+          </a>
         </li>
-        <!-- <li>
-                    <a href="#" title="Visualization Issues">
-                        <span class="nav-icon">
-                            <i class="ion-location"></i>
-                        </span>
-                        <span class="nav-text">Visualize</span>
-                    </a>
-                </li> -->
+        <li ui-sref-active="active">
+          <a ui-sref="app.standings" title="Standings">
+              <span class="nav-icon">
+                  <i class="ion-arrow-graph-up-right"></i>
+              </span>
+              <span class="nav-text">Standings</span>
+          </a>
+        </li>
         <li ui-sref-active="active">
           <a ui-sref="app.manage.jurisdictions" title="Manage System">
-                        <span class="nav-icon">
-                            <i class="ion-gear-a"></i>
-                        </span>
-                        <span class="nav-text">Manage</span>
-                    </a>
+              <span class="nav-icon">
+                  <i class="ion-gear-a"></i>
+              </span>
+              <span class="nav-text">Manage</span>
+          </a>
         </li>
       </ul>
     </nav>

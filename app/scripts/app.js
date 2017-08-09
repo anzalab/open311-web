@@ -90,6 +90,18 @@ angular
             return Summary.overviews();
           }
         }
+      }).state('app.standings', {
+        url: '/standings',
+        templateUrl: 'views/dashboards/standings.html',
+        controller: 'DashboardStandingCtrl',
+        data: {
+          authenticated: true
+        },
+        resolve: {
+          standings: function (Summary) {
+            return Summary.standings();
+          }
+        }
       });
 
   })

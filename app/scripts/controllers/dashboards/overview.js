@@ -5,7 +5,7 @@
  * @name ng311.controller:DashboardOverviewCtrl
  * @description
  * # DashboardOverviewCtrl
- * Service Request controller of ng311
+ * dashboard overview controller of ng311
  */
 angular
   .module('ng311')

@@ -1,8 +1,7 @@
 {
   "name": "open311-web",
   "version": "0.1.0",
-  "dependencies":
-  {
+  "dependencies": {
     "angular": "^1.6.5",
     "angular-bootstrap": "^2.4.0",
     "angular-loading-bar": "~0.8.0",
@@ -20,7 +19,7 @@
     "checklist-model": "^0.11.0",
     "angular-prompt": "^1.2.0",
     "awesome-bootstrap-checkbox": "~0.3.7",
-    "lodash": "~4.13.1",
+    "lodash": "^4.17.4",
     "ui-listView": "~0.0.8",
     "ng-aa": "~0.3.0",
     "ng-csv": "~0.3.6",
@@ -42,87 +41,74 @@
     "ng-focus-if": "^1.0.7",
     "ngInfiniteScroll": "^1.3.4",
     "moment": "^2.18.1",
-    "web-icons": "*"
+    "web-icons": "*",
+    "ng-material-floating-button": "ng-mfb#^0.6.2"
   },
-  "devDependencies":
-  {
+  "devDependencies": {
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
   "moduleName": "open311-web",
-  "overrides":
-  {
-    "bootstrap":
-    {
+  "overrides": {
+    "bootstrap": {
       "main": [
         "dist/css/bootstrap.css"
       ]
     },
-    "angular-bootstrap":
-    {
+    "angular-bootstrap": {
       "main": [
         "ui-bootstrap.js",
         "ui-bootstrap-tpls.js"
       ]
     },
-    "open-iconic":
-    {
+    "open-iconic": {
       "main": [
         "font/css/open-iconic-bootstrap.css"
       ]
     },
-    "font-awesome":
-    {
+    "font-awesome": {
       "main": [
         "css/font-awesome.css"
       ]
     },
-    "angular-theme-spinner":
-    {
+    "angular-theme-spinner": {
       "main": [
         "dist/angular-theme-spinner.js",
         "dist/angular-theme-spinner.min.css"
       ]
     },
-    "ng-csv":
-    {
+    "ng-csv": {
       "main": [
         "build/ng-csv.js"
       ]
     },
-    "ui-listView":
-    {
+    "ui-listView": {
       "main": [
         "dist/ui-listView.js",
         "dist/ui-listView.css"
       ]
     },
-    "jquery.nicescroll":
-    {
+    "jquery.nicescroll": {
       "main": [
         "jquery.nicescroll.js"
       ]
     },
-    "ng-scrollbars":
-    {
+    "ng-scrollbars": {
       "main": [
         "src/scrollbars.js"
       ]
     },
-    "angular-echarts":
-    {
+    "angular-echarts": {
       "main": [
         "dist/angular-echarts.js"
       ]
     },
-    "socket.io-client":
-    {
+    "socket.io-client": {
       "main": [
         "dist/socket.io.js"
       ]
     },
-    "echarts":
-    {
+    "echarts": {
       "main": [
         "dist/echarts.js"
       ]

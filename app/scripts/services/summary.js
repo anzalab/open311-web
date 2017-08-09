@@ -6,6 +6,7 @@
  * @description
  * # Summary
  * Factory in ng311
+ * //TODO rename to reports
  */
 angular
   .module('ng311')
@@ -48,6 +49,20 @@ angular
      */
     Summary.overviews = function (params) {
       return $http.get(Utils.asLink('overviews'), {
+          params: params
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
+    /**
+     * @description load current standings
+     * @param  {Object} params additional params
+     * @return {Object}        
+     */
+    Summary.standings = function (params) {
+      return $http.get(Utils.asLink('standings'), {
           params: params
         })
         .then(function (response) {
