@@ -279,7 +279,7 @@ angular
       $scope.perJurisdictionPerServiceOptions = [];
 
       //chunk services for better charting display
-      var chunks = _.chunk(services, 6);
+      var chunks = _.chunk(services, 4);
       var chunksSize = _.size(chunks);
       _.forEach(chunks, function (_services, index) {
 
