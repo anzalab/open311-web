@@ -10,11 +10,8 @@
 angular
   .module('ng311', [
     'ngSanitize',
-    // 'ngAnimate',
     'ngResource',
     'ui.router',
-    // 'pascalprecht.translate',
-    // 'tmh.dynamicLocale',
     'ngAA',
     'angular-loading-bar',
     'ui.bootstrap',
