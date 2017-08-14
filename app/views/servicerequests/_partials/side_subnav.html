@@ -23,22 +23,22 @@
                     <div class="nav-active-white">
                         <ul class="nav">
                             <li ng-class="{active:query.$or != null && query.resolvedAt == null}" class="nav-item m-b-xs">
-                                <a ng-click="load({$or:[{operator: party._id},{assignee:party._id}], resolvedAt:null , resetPage:true})" class="nav-link text-muted block" title="Issue Received or Assigned To You">
+                                <a ng-click="load({$or:[{operator: party._id},{assignee:party._id}], resolvedAt:null , resetPage:true,reset:true})" class="nav-link text-muted block" title="Issue Received or Assigned To You">
                                 Inbox
                                 </a>
                             </li>
-                            <li ng-class="{active:query.operator == null && query.$or == null && query.resolvedAt == null && !query.service && !query.status && !query.priority && !query.jurisdiction}" class="nav-item m-b-xs">
-                                <a ng-click="load({operator:null, resolvedAt:null, resetPage:true})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
+                            <li ng-class="{active:query.operator == null && query.$or == null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                                <a ng-click="load({operator:null, resolvedAt:null, resetPage:true,reset:true})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
                             </li>
                             <li ng-class="{active:query.operator != null && query.resolvedAt == null}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
+                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
                                 Un-Resolved
                                 </a>
                             </li>
                             <li ng-class="{active:query.resolvedAt != null}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:{$ne:null}, resetPage:true})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
+                                <a ng-click="load({resolvedAt:{$ne:null}, resetPage:true,reset:true})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
                                 Resolved
                                 </a>
                             </li>

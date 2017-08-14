@@ -16,6 +16,8 @@ angular
 
     //servicerequests in the scope
     $scope.spin = false;
+    $scope.busy = false;
+    $scope.paginating = true;
     $scope.servicerequests = [];
     $scope.comments = [];
     $scope.servicerequest = new ServiceRequest({
@@ -24,6 +26,7 @@ angular
       }
     });
     $scope.page = 1;
+    $scope.pages = 1;
     $scope.limit = 10;
     $scope.total = 0;
     $scope.note = {};
@@ -297,6 +300,7 @@ angular
      * @return {[type]} [description]
      */
     $scope.onSearch = function () {
+      console.log($scope.search.q);
       if ($scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -368,25 +372,22 @@ angular
      * @description load servicerequests
      */
     $scope.find = function (query) {
-      //ensure query
-      query = _.merge({ resolvedAt: null }, query);
-
       //start sho spinner
       $scope.spin = true;
+      $scope.busy = true;
 
       //reset pagination
       if (query && query.resetPage) {
         $scope.page = 1;
+        $scope.paginating = true;
         delete query.resetPage;
       }
 
       //track active ui based on query
-      if (query.reset) {
-        delete query.reset;
-        $scope.query = query;
-      } else {
-        $scope.query = _.merge({}, $scope.query, query);
-      }
+      $scope.query = query;
+      var defaultQuery = { resolvedAt: null };
+
+      query = _.merge({}, defaultQuery, query);
 
       ServiceRequest.find({
         page: $scope.page,
@@ -394,29 +395,48 @@ angular
         sort: {
           createdAt: -1
         },
-        query: $scope.query,
+        query: query,
         q: $scope.q
       }).then(function (response) {
         //update scope with servicerequests when done loading
-        $scope.servicerequests = response.servicerequests;
+        if (!$scope.paginating) {
+          $scope.servicerequests =
+            $scope.servicerequests.concat(response.servicerequests);
+        } else {
+          $scope.servicerequests = response.servicerequests;
+        }
         if ($scope.updated) {
           $scope.updated = false;
         } else {
           $scope.select(_.first($scope.servicerequests));
         }
         $scope.total = response.total;
+        $scope.pages = response.pages;
         $scope.spin = false;
+        $scope.busy = false;
+        $scope.paginating = !$scope.willPaginate();
       }).catch(function (error) {
         $scope.spin = false;
+        $scope.busy = false;
       });
     };
 
 
     //check whether servicerequests will paginate
     $scope.willPaginate = function () {
-      var willPaginate =
-        ($scope.servicerequests && $scope.total && $scope.total > $scope.limit);
+      var willPaginate = $scope.pages > $scope.page;
       return willPaginate;
+    };
+
+    $scope.paginate = function () {
+
+      if (!$scope.paginating && $scope.willPaginate()) {
+        //increment page
+        $scope.page = $scope.page + 1;
+        //load next page
+        $scope.find(($scope.query || {}));
+      }
+
     };
 
     //export current filtered issues
