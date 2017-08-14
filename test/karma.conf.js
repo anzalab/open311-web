@@ -47,8 +47,6 @@ module.exports = function(config) {
             'bower_components/ng-aa/dist/ng-aa.js',
             'bower_components/ng-csv/build/ng-csv.js',
             'bower_components/angular-elastic/elastic.js',
-            'bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js',
-            'bower_components/angular-translate/angular-translate.js',
             'bower_components/ngToast/dist/ngToast.js',
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-mocks/angular-mocks.js',
@@ -65,7 +63,6 @@ module.exports = function(config) {
             'bower_components/socket.io-client/dist/socket.io.js',
             'bower_components/ng-focus-if/focusIf.js',
             'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
-            'bower_components/ng-material-floating-button/src/mfb-directive.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",
