@@ -3,7 +3,11 @@
     <i class="fa fa-fw fa-angle-left"></i>
 </a>
 </span>
-
+<span>
+	<a href ng-click="$parent.all()" class="btn btn-default btn-xs">
+		<i class="fa fa-fw fa-sort-amount-desc"></i>
+	</a>
+</span>
 <span ng-class="{disabled: noNext()||ngDisabled, next: align}">
   <a href ng-click="selectPage(page + 1, $event)" ng-disabled="noNext()||ngDisabled" uib-tabindex-toggle class="btn btn-default btn-xs">
 	<i class="fa fa-fw fa-angle-right"></i>

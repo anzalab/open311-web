@@ -53,9 +53,9 @@
         </div>
     </div>
     <!-- end servicerequest listing -->
-    <!-- TODO use infinite scroll insteady of pagination -->
+    <!-- start list bottom toolbox -->
     <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit" ng-change="find()" template-url="views/_partials/list_pager.html" style="padding-left: 12px;">
+        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit" ng-change="find()" template-url="views/_partials/list_pager.html" style="padding-left: 12px;" role="group">
         </div>
         <div class="btn-group pull-right">
             <a title="Click To Refresh Issues" ng-click="load({ resolvedAt: null, operator: { $ne: null }, resetPage:true, reset:true}, false)" class="btn btn-default btn-xs">
@@ -67,5 +67,6 @@
         </div>
         <span class="text-sm text-muted">Total: {{total}}</span>
     </div>
+    <!-- end list bottom toolbox -->
 </div>
 <!-- end servicerequests list -->

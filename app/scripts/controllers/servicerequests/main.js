@@ -363,6 +363,15 @@ angular
       }
     };
 
+    /**
+     * Load all service request based on current filters
+     * @return {[type]} [description]
+     */
+    $scope.all = function () {
+      $scope.page = 1;
+      $scope.limit = $scope.total;
+      $scope.find();
+    };
 
     /**
      * @description load servicerequests
@@ -420,7 +429,6 @@ angular
     };
 
     //export current filtered issues
-    //TODO if no filter export all
     $scope.export = function () {
       var _exports =
         _.map($scope.servicerequests, function (servicerequest) {
