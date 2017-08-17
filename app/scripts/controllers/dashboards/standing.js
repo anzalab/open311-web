@@ -23,8 +23,8 @@ angular
     $scope.params = {
       query: {
         createdAt: {
-          $gte: $scope.startedAt,
-          $lte: $scope.endedAt
+          $gte: $scope.startedAt || moment().utc().startOf('month').toDate(),
+          $lte: $scope.endedAt || moment().utc().endOf('month').toDate()
         }
       }
     };
@@ -36,7 +36,9 @@ angular
       //update start date filter and reload
       if (startedAt) {
         $scope.params.query.createdAt.$gte =
-          moment(startedAt).utc().startOf('date').toDate();
+          moment(new Date(startedAt)).utc().startOf('date').toDate();
+        $scope.params.query.createdAt.$lte =
+          moment(new Date(startedAt)).utc().endOf('date').toDate();
         $scope.reload();
       }
     };
@@ -45,11 +47,15 @@ angular
      * Handle ended date changed
      */
     $scope.onEndedAtChange = function (endedAt) {
-
       //update end date filter and reload
+      if (!$scope.startedAt) {
+        $scope.params.query.createdAt.$gte =
+          moment(new Date(endedAt)).utc().startOf('date').toDate();
+      }
+
       if (endedAt) {
         $scope.params.query.createdAt.$lte =
-          moment(endedAt).utc().endOf('date').toDate();
+          moment(new Date(endedAt)).utc().endOf('date').toDate();
         $scope.reload();
       }
 
