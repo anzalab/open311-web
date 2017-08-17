@@ -124,7 +124,7 @@
               Start Date
             </h6>
           </div>
-          <div pickadate ng-model="startedAt" class="p-a"></div>
+          <div pickadate ng-model="startedAt" max-date="maxDate" on-change="onStartedAtChange(startedAt)" class="p-a"></div>
           <!-- end start date filter -->
 
           <!-- start end date filter -->
@@ -133,7 +133,7 @@
               End Date
             </h6>
           </div>
-          <div pickadate ng-model="endedAt" class="p-a"></div>
+          <div pickadate ng-model="endedAt" max-date="maxDate" on-change="onEndedAtChange(endedAt)" class="p-a"></div>
           <!-- end end date filter -->
         </div>
       </div>

@@ -95,7 +95,14 @@ angular
         },
         resolve: {
           standings: function (Summary) {
-            return Summary.standings();
+            return Summary.standings({
+              query: {
+                createdAt: {
+                  $gte: moment().utc().startOf('date').toDate(), //start of today
+                  $lte: moment().utc().endOf('date').toDate() //end of today
+                }
+              }
+            });
           }
         }
       });

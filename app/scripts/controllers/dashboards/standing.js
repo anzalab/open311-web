@@ -16,8 +16,45 @@ angular
     //initialize standings
     $scope.standings = standings;
 
-    $scope.startedAt = new Date();
-    $scope.endedAt = new Date();
+    //initialize scope attributes
+    $scope.startedAt;
+    $scope.endedAt;
+    $scope.maxDate = new Date();
+    $scope.params = {
+      query: {
+        createdAt: {
+          $gte: $scope.startedAt,
+          $lte: $scope.endedAt
+        }
+      }
+    };
+
+    /**
+     * Handle start date changed
+     */
+    $scope.onStartedAtChange = function (startedAt) {
+      //update start date filter and reload
+      if (startedAt) {
+        $scope.params.query.createdAt.$gte =
+          moment(startedAt).utc().startOf('date').toDate();
+        $scope.reload();
+      }
+    };
+
+    /**
+     * Handle ended date changed
+     */
+    $scope.onEndedAtChange = function (endedAt) {
+
+      //update end date filter and reload
+      if (endedAt) {
+        $scope.params.query.createdAt.$lte =
+          moment(endedAt).utc().endOf('date').toDate();
+        $scope.reload();
+      }
+
+    };
+
 
     $scope.prepare = function () {
 
@@ -601,13 +638,20 @@ angular
 
     };
 
+    /**
+     * Reload standing reports
+     */
+    $scope.reload = function () {
+      var shouldLoad =
+        Summary.standings($scope.params).then(function (standings) {
+          $scope.standings = standings;
+          $scope.prepare();
+        });
+    };
 
     //listen for events and reload overview accordingly
     $rootScope.$on('app:servicerequests:reload', function () {
-      Summary.standings().then(function (standings) {
-        $scope.standings = standings;
-        $scope.prepare();
-      });
+      $scope.reload();
     });
 
 
