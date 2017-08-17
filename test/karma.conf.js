@@ -62,7 +62,6 @@ module.exports = function(config) {
             'bower_components/angular-socket-io/socket.js',
             'bower_components/socket.io-client/dist/socket.io.js',
             'bower_components/ng-focus-if/focusIf.js',
-            'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",
