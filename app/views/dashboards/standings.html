@@ -7,21 +7,16 @@
     </div>
     <!-- end report title -->
     <!-- start report actions -->
-    <ul class="nav navbar-nav pull-right">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="dropdown" aria-expanded="false" title="Click to Filter Report">
-          <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
-        </a>
-      </li>
-    </ul>
+    <!-- TODO implement downloads -->
     <!-- end report actions -->
   </div>
 </div>
 <!-- end dashboard header -->
-<!-- start overview body -->
+<!-- start standing body -->
 <div class="app-body">
   <div class="app-body-inner">
     <div class="row-col">
+      <!-- start reports -->
       <div class="col-lg b-r">
         <!-- start per jurisdiction count standing -->
         <div class="padding">
@@ -119,7 +114,31 @@
         </div>
         <!-- end per jurisdiction per status count standing -->
       </div>
+      <!-- end reports -->
+      <!-- start report filters -->
+      <div class="col-lg w-lg w-auto-md bg">
+        <div>
+          <!-- start start date filter -->
+          <div class="p-a b-b">
+            <h6 class="text-muted m-a-0">
+              Start Date
+            </h6>
+          </div>
+          <div pickadate ng-model="startedAt" class="p-a"></div>
+          <!-- end start date filter -->
+
+          <!-- start end date filter -->
+          <div class="p-a b-t b-b m-t-md">
+            <h6 class="text-muted m-a-0">
+              End Date
+            </h6>
+          </div>
+          <div pickadate ng-model="endedAt" class="p-a"></div>
+          <!-- end end date filter -->
+        </div>
+      </div>
+      <!-- end report filters -->
     </div>
   </div>
 </div>
-<!-- end overview body -->
+<!-- end standing body -->

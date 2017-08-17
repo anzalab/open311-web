@@ -16,6 +16,9 @@ angular
     //initialize standings
     $scope.standings = standings;
 
+    $scope.startedAt = new Date();
+    $scope.endedAt = new Date();
+
     $scope.prepare = function () {
 
       //TODO add date filter default to today
@@ -78,7 +81,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionConfig = {
         height: 400,
-        width: 1200
+        width: 900
       };
 
       //prepare chart options
@@ -205,7 +208,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceGroupConfig = {
         height: 400,
-        width: 1200
+        width: 900
       };
 
       //prepare chart options
@@ -273,7 +276,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceConfig = {
         height: 400,
-        width: 1200
+        width: 900
       };
       //prepare chart options
       $scope.perJurisdictionPerServiceOptions = [];
@@ -445,7 +448,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerStatusConfig = {
         height: 400,
-        width: 1200
+        width: 900
       };
 
       //prepare chart options
@@ -556,7 +559,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerPriorityConfig = {
         height: 400,
-        width: 1200
+        width: 900
       };
 
       //prepare chart options

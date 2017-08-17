@@ -58,6 +58,7 @@ module.exports = function(config) {
             'bower_components/socket.io-client/dist/socket.io.js',
             'bower_components/ng-focus-if/focusIf.js',
             'bower_components/moment/moment.js',
+            'bower_components/angular-pickadate/dist/angular-pickadate.js',
             // endbower
             "app/scripts/**/*.js",
             "test/mock/**/*.js",
