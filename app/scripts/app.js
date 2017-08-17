@@ -19,7 +19,7 @@ angular
     'ngToast',
     'cgPrompt',
     'checklist-model',
-    'ui-listView',
+    // 'ui-listView',
     'ngCsv',
     'monospaced.elastic',
     'oi.select',
