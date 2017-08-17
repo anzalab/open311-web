@@ -9,19 +9,14 @@
  */
 angular
   .module('ng311')
-  .controller('MainCtrl', function ($rootScope, $scope, $state, ngNotify,
-    ngToast, socket) {
+  .controller('MainCtrl', function ($rootScope, $scope, $state,
+    ngNotify, ngToast, socket) {
+
     //TODO show signin progress
 
     $scope.onAllIssues = function () {
       $rootScope.$broadcast('servicerequest:list');
     };
-
-    //replace browser scroll with richer scroller
-    // angular.element('html').niceScroll({
-    //   cursorcolor: '#A3AFB7',
-    //   cursorwidth: '6px'
-    // });
 
     //show app aside
     $rootScope.showAside = true;

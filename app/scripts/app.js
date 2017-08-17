@@ -17,7 +17,6 @@ angular
     'ui.bootstrap',
     'ngNotify',
     'ngToast',
-    'angucomplete-alt',
     'cgPrompt',
     'checklist-model',
     'ui-listView',
