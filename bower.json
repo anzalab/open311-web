@@ -1,7 +1,8 @@
 {
   "name": "open311-web",
   "version": "0.1.0",
-  "dependencies": {
+  "dependencies":
+  {
     "angular": "^1.6.5",
     "angular-bootstrap": "^2.4.0",
     "angular-loading-bar": "~0.8.0",
@@ -30,7 +31,6 @@
     "oi.select": "^0.2.21",
     "angular-mailto": "^0.1.0",
     "angular-color-picker": "^1.0.10",
-    "angular-daterangepicker": "^0.2.2",
     "angularPrint": "angular-print#^0.3.8",
     "angular-echarts": "https://github.com/lykmapipo/angular-echarts.git#^1.1.1",
     "echarts": "^3.6.2",
@@ -40,66 +40,79 @@
     "moment": "^2.18.1",
     "web-icons": "*"
   },
-  "devDependencies": {
+  "devDependencies":
+  {
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
   "moduleName": "open311-web",
-  "overrides": {
-    "bootstrap": {
+  "overrides":
+  {
+    "bootstrap":
+    {
       "main": [
         "dist/css/bootstrap.css"
       ]
     },
-    "angular-bootstrap": {
+    "angular-bootstrap":
+    {
       "main": [
         "ui-bootstrap.js",
         "ui-bootstrap-tpls.js"
       ]
     },
-    "open-iconic": {
+    "open-iconic":
+    {
       "main": [
         "font/css/open-iconic-bootstrap.css"
       ]
     },
-    "font-awesome": {
+    "font-awesome":
+    {
       "main": [
         "css/font-awesome.css"
       ]
     },
-    "ng-csv": {
+    "ng-csv":
+    {
       "main": [
         "build/ng-csv.js"
       ]
     },
-    "ui-listView": {
+    "ui-listView":
+    {
       "main": [
         "dist/ui-listView.js",
         "dist/ui-listView.css"
       ]
     },
-    "jquery.nicescroll": {
+    "jquery.nicescroll":
+    {
       "main": [
         "jquery.nicescroll.js"
       ]
     },
-    "socket.io-client": {
+    "socket.io-client":
+    {
       "main": [
         "dist/socket.io.js"
       ]
     },
-    "echarts": {
+    "echarts":
+    {
       "main": [
         "dist/echarts.js"
       ]
     },
-    "angular-echarts": {
+    "angular-echarts":
+    {
       "main": [
         "dist/angular-echarts.js"
       ]
     }
   },
-  "resolutions": {
+  "resolutions":
+  {
     "angular": "^1.6.5"
   }
 }
