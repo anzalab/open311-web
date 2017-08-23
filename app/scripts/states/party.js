@@ -25,6 +25,7 @@ angular
             resolve: {
               jurisdictions: function (Jurisdiction) {
                 return Jurisdiction.find({
+                  limit: 1000,
                   query: {
                     deletedAt: {
                       $eq: null
