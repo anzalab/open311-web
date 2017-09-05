@@ -386,6 +386,7 @@ angular
       //reset pagination
       if (query && query.resetPage) {
         $scope.page = 1;
+        $scope.limit = 10;
         delete query.resetPage;
       }
 
