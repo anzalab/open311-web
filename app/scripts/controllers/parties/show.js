@@ -15,6 +15,7 @@ angular
   ) {
 
     $scope.edit = false;
+    $scope.passwordDontMatch = false;
     $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.roles = roles.roles;
 
@@ -42,6 +43,7 @@ angular
       //TODO show input prompt
       //TODO show loading mask
       $scope.party.deletedAt = new Date();
+      $scope.party.lockedAt = new Date();
       $scope.save();
     };
 
@@ -52,7 +54,21 @@ angular
     $scope.unblock = function () {
       //TODO show input prompt
       //TODO show loading mask
+      //clear soft delete data
       $scope.party.deletedAt = null;
+
+      //clear locking data
+      $scope.party.failedAttempts = 0;
+      $scope.party.lockedAt = null;
+      $scope.party.unlockedAt = null;
+      $scope.party.unlockToken = null;
+      $scope.party.unlockSentAt = null;
+      $scope.party.unlockTokenExpiryAt = null;
+
+      //set password to guest
+      //TODO allow password change
+      $scope.party.password = 'guest';
+
       $scope.save();
     };
 

@@ -124,7 +124,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionConfig = {
         height: 400,
-        width: 900
+        width: 990
       };
 
       //prepare chart options
@@ -251,7 +251,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceGroupConfig = {
         height: 400,
-        width: 900
+        width: 990
       };
 
       //prepare chart options
@@ -319,7 +319,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceConfig = {
         height: 400,
-        width: 900
+        width: 990
       };
       //prepare chart options
       $scope.perJurisdictionPerServiceOptions = [];
@@ -491,7 +491,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerStatusConfig = {
         height: 400,
-        width: 900
+        width: 990
       };
 
       //prepare chart options
@@ -602,7 +602,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerPriorityConfig = {
         height: 400,
-        width: 900
+        width: 990
       };
 
       //prepare chart options

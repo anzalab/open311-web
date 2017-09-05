@@ -1,39 +1,39 @@
 <!-- start servicerequest detail action bar -->
 <ul class="nav navbar-nav">
-    <li class="nav-item">
-        <a ng-if="mailTo" href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
+  <li class="nav-item">
+    <a ng-if="mailTo" href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
             <span class="nav-text">
                 <i class="icon-action-redo"></i>
             </span>
         </a>
-    </li>
-    <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
-        <a ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Signal Feedback Provided To Reporter">
+  </li>
+  <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
+    <a ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Signal Feedback Provided To Reporter">
             <span class="nav-text">
                 <i class="icon-call-out"></i>
             </span>
         </a>
-    </li>
-    <li ng-if="servicerequest.resolvedAt" class="nav-item b-l p-l">
-        <a ng-click="onReOpen()" class="nav-link text-muted no-border" title="Click To Re-Open The Issue">
+  </li>
+  <li ng-if="servicerequest.resolvedAt" class="nav-item b-l p-l">
+    <a ng-click="onReOpen()" class="nav-link text-muted no-border" title="Click To Re-Open The Issue">
             <span class="nav-text">
                 <i class="icon-call-in"></i>
             </span>
         </a>
-    </li>
-    <li class="nav-item b-l p-l">
-        <a ng-click="onCopy()" class="nav-link text-muted no-border" title="Click To Copy Reporter Information & Create New Issue">
+  </li>
+  <li class="nav-item b-l p-l">
+    <a ng-click="onCopy()" class="nav-link text-muted no-border" title="Click To Copy Reporter Information & Create New Issue">
             <span class="nav-text">
                 <i class="ti-cut"></i>
             </span>
         </a>
-    </li>
-    <li class="nav-item b-l p-l p-r">
-        <a print-btn class="nav-link text-muted no-border" title="Click To Print Issue">
+  </li>
+  <li class="nav-item b-l p-l p-r">
+    <a print-btn class="nav-link text-muted no-border" title="Click To Print Issue">
             <span class="nav-text">
                 <i class="icon-printer"></i>
             </span>
         </a>
-    </li>
+  </li>
 </ul>
 <!-- end servicerequest detail action bar -->

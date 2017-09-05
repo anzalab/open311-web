@@ -19,7 +19,7 @@
       <!-- start reports -->
       <div class="col-lg b-r">
         <!-- start per jurisdiction count standing -->
-        <div class="padding">
+        <div>
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
@@ -29,7 +29,7 @@
                                  Count of Reported Issues by Their Area
                                 </small>
                 </div>
-                <div class="box-body">
+                <div class="box-body p-l-none p-r-none">
                   <echart config="perJurisdictionConfig" options="perJurisdictionOptions"></echart>
                 </div>
               </div>
@@ -38,7 +38,7 @@
         </div>
         <!-- end per jurisdiction count standing -->
         <!-- start per jurisdiction per service group count standing -->
-        <div class="padding">
+        <div>
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
@@ -48,7 +48,7 @@
                                  Count of Reported Issues by Their Area and Service Group
                                 </small>
                 </div>
-                <div class="box-body">
+                <div class="box-body p-l-none p-r-none">
                   <echart config="perJurisdictionPerServiceGroupConfig" options="perJurisdictionPerServiceGroupOptions"></echart>
                 </div>
               </div>
@@ -57,7 +57,7 @@
         </div>
         <!-- end per jurisdiction per service group count standing -->
         <!-- start per jurisdiction per service count standing -->
-        <div class="padding">
+        <div>
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
@@ -67,7 +67,7 @@
                                  Count of Reported Issues by Their Area and Service
                                 </small>
                 </div>
-                <div class="box-body">
+                <div class="box-body p-l-none p-r-none">
                   <echart ng-repeat="options in perJurisdictionPerServiceOptions" config="perJurisdictionPerServiceConfig" options="options"></echart>
                 </div>
               </div>
@@ -76,7 +76,7 @@
         </div>
         <!-- end per jurisdiction per service count standing -->
         <!-- start per jurisdiction per priority count standing -->
-        <div class="padding">
+        <div>
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
@@ -86,7 +86,7 @@
                                  Count of Reported Issues by Their Area and Priority
                                 </small>
                 </div>
-                <div class="box-body">
+                <div class="box-body p-l-none p-r-none">
                   <echart config="perJurisdictionPerPriorityConfig" options="perJurisdictionPerPriorityOptions"></echart>
                 </div>
               </div>
@@ -95,7 +95,7 @@
         </div>
         <!-- end per jurisdiction per priority count standing -->
         <!-- start per jurisdiction per status count standing -->
-        <div class="padding">
+        <div>
           <div class="row">
             <div class="col-sm-12">
               <div class="box">
@@ -105,7 +105,7 @@
                                  Count of Reported Issues by Their Area and Status
                                 </small>
                 </div>
-                <div class="box-body">
+                <div class="box-body p-l-none p-r-none">
                   <echart config="perJurisdictionPerStatusConfig" options="perJurisdictionPerStatusOptions"></echart>
                 </div>
               </div>
