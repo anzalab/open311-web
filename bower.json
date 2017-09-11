@@ -20,7 +20,7 @@
     "lodash": "^4.17.4",
     "ui-listView": "~0.0.8",
     "ng-aa": "^0.3.0",
-    "ng-csv": "~0.3.6",
+    "ng-csv": "https://github.com/lykmapipo/ng-csv.git#^0.3.6",
     "angular-elastic": "~2.5.1",
     "ngToast": "ngtoast#^2.0.0",
     "angular-animate": "^1.6.1",

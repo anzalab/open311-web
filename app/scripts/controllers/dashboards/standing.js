@@ -38,10 +38,36 @@ angular
     //initialize standings
     $scope.standings = standings;
 
+
     //initialize scope attributes
     $scope.startedAt;
     $scope.endedAt;
     $scope.maxDate = new Date();
+    $scope.exports = {
+      filename: 'standing_reports_' + Date.now() + '.csv',
+      headers: [
+        'Area', 'Service Group', 'Service',
+        'Status', 'Priority', 'Count'
+      ]
+    };
+
+    /**
+     * Exports current standing data
+     */
+    $scope.export = function () {
+      var _exports =
+        _.map($scope.standings, function (standing) {
+          return {
+            jurisdiction: standing.jurisdiction.name,
+            servicegroup: standing.group.name,
+            service: standing.service.name,
+            status: standing.status.name,
+            priority: standing.priority.name,
+            count: standing.count
+          };
+        });
+      return _exports;
+    };
 
 
     /**
@@ -106,6 +132,9 @@ angular
     };
 
 
+    /**
+     * Prepare standing reports for display
+     */
     $scope.prepare = function () {
 
       //notify no data loaded
@@ -114,6 +143,9 @@ angular
           message: 'No Data Found. Please Update Your Filters.'
         });
       }
+
+      //update export filename
+      $scope.exports.filename = 'standing_reports_' + Date.now() + '.csv';
 
       //build reports
       $scope.prepareIssuePerJurisdiction();

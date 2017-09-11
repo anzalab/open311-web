@@ -8,12 +8,20 @@
     <!-- end report title -->
     <!-- start report actions -->
     <ul class="nav navbar-nav pull-right">
-      <!-- TODO implement downloads -->
+      <!-- start filter -->
       <li class="nav-item">
         <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">      
             <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
         </a>
       </li>
+      <!-- end filter -->
+      <!-- start download -->
+      <li class="nav-item" ng-if="standings && standings.length > 0">
+        <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="exports.filename">
+                <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
+            </a>
+      </li>
+      <!-- end download -->
     </ul>
     <!-- end report actions -->
   </div>
