@@ -14,8 +14,6 @@ angular
   ) {
 
     //initialize scope attributes
-    $scope.startedAt;
-    $scope.endedAt;
     $scope.maxDate = new Date();
 
     //bind states
@@ -23,6 +21,13 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+
+    //bind filters
+    $scope.filters = {
+      startedAt: undefined,
+      endedAt: undefined,
+      status: [],
+    };
 
     /**
      * prepare multi series data

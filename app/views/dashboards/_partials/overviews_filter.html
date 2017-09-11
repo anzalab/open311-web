@@ -8,6 +8,7 @@
   <!-- start filter body -->
   <div class="modal-body">
     <div class="container-fluid">
+      <!-- start date filters -->
       <div class="row">
         <!-- start start date filter -->
         <div class="col-md-6">
@@ -16,7 +17,7 @@
               Start Date
             </h6>
           </div>
-          <div pickadate ng-model="startedAt" max-date="maxDate" class="p-a"></div>
+          <div pickadate ng-model="filters.startedAt" max-date="maxDate" class="p-a"></div>
         </div>
         <!-- end start date filter -->
         <!-- start end date filter -->
@@ -26,10 +27,29 @@
               End Date
             </h6>
           </div>
-          <div pickadate ng-model="endedAt" max-date="maxDate" class="p-a"></div>
+          <div pickadate ng-model="filters.endedAt" max-date="maxDate" class="p-a"></div>
         </div>
         <!-- end end date filter -->
       </div>
+      <!-- end date filters -->
+      <!-- start status filters -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="p-a b-b">
+            <h6 class="text-muted m-a-0">
+              Status
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-2" ng-repeat="status in statuses">
+          <div class="checkbox-custom checkbox-primary p-a">
+            <input type="checkbox" checklist-model="filters.status" checklist-value="status._id">
+            <label title="{{status.name}}">{{status.name}}</label>
+          </div>
+          <br/>
+        </div>
+      </div>
+      <!-- end status filters -->
     </div>
   </div>
   <!-- end filter body -->
