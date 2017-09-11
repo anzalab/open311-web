@@ -10,8 +10,28 @@
 angular
   .module('ng311')
   .controller('DashboardStandingCtrl', function (
-    $rootScope, $scope, $state, Summary, standings
+    $rootScope, $scope, $state, $uibModal, Summary, endpoints, standings
   ) {
+
+    //initialize scope attributes
+    $scope.maxDate = new Date();
+
+    //bind states
+    $scope.priorities = endpoints.priorities.priorities;
+    $scope.statuses = endpoints.statuses.statuses;
+    $scope.services = endpoints.services.services;
+    $scope.servicegroups = endpoints.servicegroups.servicegroups;
+    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+
+    //bind filters
+    $scope.filters = {
+      startedAt: undefined,
+      endedAt: undefined,
+      statuses: [],
+      priorities: [],
+      servicegroups: [],
+      jurisdictions: [],
+    };
 
     //initialize standings
     $scope.standings = standings;
@@ -20,45 +40,73 @@ angular
     $scope.startedAt;
     $scope.endedAt;
     $scope.maxDate = new Date();
-    $scope.params = {
-      query: {
-        createdAt: {
-          $gte: $scope.startedAt || moment().utc().startOf('month').toDate(),
-          $lte: $scope.endedAt || moment().utc().endOf('month').toDate()
-        }
-      }
-    };
+
 
     /**
-     * Handle start date changed
+     * Open overview reports filter
      */
-    $scope.onStartedAtChange = function (startedAt) {
-      //update start date filter and reload
-      if (startedAt) {
-        $scope.params.query.createdAt.$gte =
-          moment(new Date(startedAt)).utc().startOf('date').toDate();
-        $scope.params.query.createdAt.$lte =
-          moment(new Date(startedAt)).utc().endOf('date').toDate();
-        $scope.reload();
-      }
+    $scope.showFilter = function () {
+
+      //open overview reports filter modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/dashboards/_partials/overviews_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(function onClose( /*selectedItem*/ ) {},
+        function onDismissed() {});
+
     };
 
+
     /**
-     * Handle ended date changed
+     * Filter overview reports based on on current selected filters
+     * @param {Boolean} [reset] whether to clear and reset filter
      */
-    $scope.onEndedAtChange = function (endedAt) {
-      //update end date filter and reload
-      if (!$scope.startedAt) {
-        $scope.params.query.createdAt.$gte =
-          moment(new Date(endedAt)).utc().startOf('date').toDate();
+    $scope.filter = function (reset) {
+      if (reset) {
+        $scope.filters = {
+          startedAt: undefined,
+          endedAt: undefined,
+          statuses: [],
+          priorities: [],
+          servicegroups: [],
+          jurisdictions: [],
+        };
       }
+      //prepare query
+      $scope.params = Summary.prepareQuery($scope.filters);
 
-      if (endedAt) {
-        $scope.params.query.createdAt.$lte =
-          moment(new Date(endedAt)).utc().endOf('date').toDate();
-        $scope.reload();
+      //load reports
+      $scope.reload();
+
+      //close current modal
+      $scope.modal.close();
+    };
+
+
+    /**
+     * Filter service based on selected service group
+     */
+    $scope.filterServices = function () {
+      var filterHasServiceGroups =
+        ($scope.filters.servicegroups && $scope.filters.servicegroups.length >
+          0);
+      //pick only service of selected group
+      if (filterHasServiceGroups) {
+        //filter services based on service group(s)
+        $scope.services =
+          _.filter(endpoints.services.services, function (service) {
+            return _.includes($scope.filters.servicegroups, service.group
+              ._id);
+          });
       }
-
+      //use all services
+      else {
+        $scope.services = endpoints.services.services;
+      }
     };
 
 
@@ -649,7 +697,9 @@ angular
      */
     $scope.reload = function () {
       var shouldLoad =
-        Summary.standings($scope.params).then(function (standings) {
+        Summary
+        .standings({ query: $scope.params })
+        .then(function (standings) {
           $scope.standings = standings;
           $scope.prepare();
         });

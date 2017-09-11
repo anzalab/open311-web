@@ -50,7 +50,7 @@
       </div>
       <!-- end jurisdiction filters -->
       <!-- start servicegroup filters -->
-      <div class="row m-t-sm">
+      <div class="row m-t-md">
         <div class="col-md-12">
           <div class="p-a p-l-none">
             <h6 class="m-a-0">
@@ -60,7 +60,7 @@
         </div>
         <div class="col-md-3" ng-repeat="servicegroup in servicegroups">
           <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id">
+            <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id" checklist-change="filterServices()">
             <label class="text-muted" title="{{servicegroup.name}}">{{servicegroup.name}}</label>
           </div>
         </div>

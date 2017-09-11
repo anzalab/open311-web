@@ -103,6 +103,15 @@ angular
           authenticated: true
         },
         resolve: {
+          endpoints: function (Summary) {
+            return Summary.endpoints({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          },
           standings: function (Summary) {
             return Summary.standings({
               query: {
