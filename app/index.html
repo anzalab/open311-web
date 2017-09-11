@@ -78,7 +78,6 @@
     <script src="bower_components/angular-color-picker/angular-color-picker.js"></script>
     <script src="bower_components/angularPrint/angularPrint.js"></script>
     <script src="bower_components/echarts/dist/echarts.js"></script>
-    <script src="bower_components/angular-echarts/dist/angular-echarts.js"></script>
     <script src="bower_components/angular-socket-io/socket.js"></script>
     <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
     <script src="bower_components/ng-focus-if/focusIf.js"></script>
@@ -87,8 +86,13 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- start custom modules -->
+    <script src="scripts/modules/echart.js"></script>
+    <!-- end custom modules -->
+    <!-- start app & config -->
     <script src="scripts/app.js"></script>
     <script src="scripts/config.js"></script>
+    <!-- end app & config -->
     <!-- states -->
     <script src="scripts/states/auth.js"></script>
     <!-- end states -->

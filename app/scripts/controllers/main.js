@@ -58,12 +58,34 @@ angular
 
     }
 
+    //handle fired warning events
+    function onWarning(event, warning) {
+
+      var message = 'Operation Not Completed';
+
+      try {
+        message = warning.message;
+      } catch (e) {}
+
+      ngNotify.set(message, {
+        position: 'top',
+        type: 'warn',
+        button: true,
+        sticky: true,
+        dismissButton: true
+      });
+
+    }
+
     //listen errors and notify
     $rootScope.$on('appError', onError);
     $rootScope.$on('signinError', onError);
 
     //listen success and notify
     $rootScope.$on('appSuccess', onSuccess);
+
+    //listen warning and notify
+    $rootScope.$on('appWarning', onWarning);
 
     //TODO fire welcome message
     // $rootScope.$on('signinSuccess', onSuccess);

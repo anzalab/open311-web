@@ -22,129 +22,105 @@
 <!-- start standing body -->
 <div class="app-body">
   <div class="app-body-inner">
-    <div class="row-col">
-      <!-- start reports -->
-      <div class="col-lg b-r">
-        <!-- start per jurisdiction count standing -->
-        <div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3>Issue per Area - Work Load</h3>
-                  <small class="block text-muted">
+    <!-- start reports -->
+    <div class="padding">
+      <!-- start per jurisdiction count standing -->
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box">
+              <div class="box-header">
+                <h3>Issue per Area - Work Load</h3>
+                <small class="block text-muted">
                                  Count of Reported Issues by Their Area
                                 </small>
-                </div>
-                <div class="box-body p-l-none p-r-none">
-                  <echart config="perJurisdictionConfig" options="perJurisdictionOptions"></echart>
-                </div>
+              </div>
+              <div class="box-body p-l-none p-r-none">
+                <echart config="perJurisdictionConfig" options="perJurisdictionOptions"></echart>
               </div>
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction count standing -->
-        <!-- start per jurisdiction per service group count standing -->
-        <div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3>Issue per Area per Service Group - Affected Business Units(Divisions)</h3>
-                  <small class="block text-muted">
+      </div>
+      <!-- end per jurisdiction count standing -->
+      <!-- start per jurisdiction per service group count standing -->
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box">
+              <div class="box-header">
+                <h3>Issue per Area per Service Group - Affected Business Units(Divisions)</h3>
+                <small class="block text-muted">
                                  Count of Reported Issues by Their Area and Service Group
                                 </small>
-                </div>
-                <div class="box-body p-l-none p-r-none">
-                  <echart config="perJurisdictionPerServiceGroupConfig" options="perJurisdictionPerServiceGroupOptions"></echart>
-                </div>
+              </div>
+              <div class="box-body p-l-none p-r-none">
+                <echart config="perJurisdictionPerServiceGroupConfig" options="perJurisdictionPerServiceGroupOptions"></echart>
               </div>
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction per service group count standing -->
-        <!-- start per jurisdiction per service count standing -->
-        <div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3>Issue per Area per Service - Impacted Business Services</h3>
-                  <small class="block text-muted">
+      </div>
+      <!-- end per jurisdiction per service group count standing -->
+      <!-- start per jurisdiction per service count standing -->
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box">
+              <div class="box-header">
+                <h3>Issue per Area per Service - Impacted Business Services</h3>
+                <small class="block text-muted">
                                  Count of Reported Issues by Their Area and Service
                                 </small>
-                </div>
-                <div class="box-body p-l-none p-r-none">
-                  <echart ng-repeat="options in perJurisdictionPerServiceOptions" config="perJurisdictionPerServiceConfig" options="options"></echart>
-                </div>
+              </div>
+              <div class="box-body p-l-none p-r-none">
+                <echart ng-repeat="options in perJurisdictionPerServiceOptions" config="perJurisdictionPerServiceConfig" options="options"></echart>
               </div>
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction per service count standing -->
-        <!-- start per jurisdiction per priority count standing -->
-        <div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3>Issue per Area per Priority - Work Severity</h3>
-                  <small class="block text-muted">
+      </div>
+      <!-- end per jurisdiction per service count standing -->
+      <!-- start per jurisdiction per priority count standing -->
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box">
+              <div class="box-header">
+                <h3>Issue per Area per Priority - Work Severity</h3>
+                <small class="block text-muted">
                                  Count of Reported Issues by Their Area and Priority
                                 </small>
-                </div>
-                <div class="box-body p-l-none p-r-none">
-                  <echart config="perJurisdictionPerPriorityConfig" options="perJurisdictionPerPriorityOptions"></echart>
-                </div>
+              </div>
+              <div class="box-body p-l-none p-r-none">
+                <echart config="perJurisdictionPerPriorityConfig" options="perJurisdictionPerPriorityOptions"></echart>
               </div>
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction per priority count standing -->
-        <!-- start per jurisdiction per status count standing -->
-        <div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3>Issue per Area per Status - Work Progress</h3>
-                  <small class="block text-muted">
+      </div>
+      <!-- end per jurisdiction per priority count standing -->
+      <!-- start per jurisdiction per status count standing -->
+      <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="box">
+              <div class="box-header">
+                <h3>Issue per Area per Status - Work Progress</h3>
+                <small class="block text-muted">
                                  Count of Reported Issues by Their Area and Status
                                 </small>
-                </div>
-                <div class="box-body p-l-none p-r-none">
-                  <echart config="perJurisdictionPerStatusConfig" options="perJurisdictionPerStatusOptions"></echart>
-                </div>
+              </div>
+              <div class="box-body p-l-none p-r-none">
+                <echart config="perJurisdictionPerStatusConfig" options="perJurisdictionPerStatusOptions"></echart>
               </div>
             </div>
           </div>
         </div>
-        <!-- end per jurisdiction per status count standing -->
       </div>
-      <!-- end reports -->
-      <!-- start report filters -->
-      <div class="col-lg w-lg w-auto-md bg">
-        <div>
-          <!-- start start date filter -->
-          <div class="p-a b-b">
-            <h6 class="text-muted m-a-0">
-              Start Date
-            </h6>
-          </div>
-          <div pickadate ng-model="startedAt" max-date="maxDate" on-change="onStartedAtChange(startedAt)" class="p-a"></div>
-          <!-- end start date filter -->
-          <!-- start end date filter -->
-          <div class="p-a b-t b-b m-t-md">
-            <h6 class="text-muted m-a-0">
-              End Date
-            </h6>
-          </div>
-          <div pickadate ng-model="endedAt" max-date="maxDate" on-change="onEndedAtChange(endedAt)" class="p-a"></div>
-          <!-- end end date filter -->
-        </div>
-      </div>
-      <!-- end report filters -->
+      <!-- end per jurisdiction per status count standing -->
     </div>
+    <!-- end reports -->
   </div>
 </div>
 <!-- end standing body -->

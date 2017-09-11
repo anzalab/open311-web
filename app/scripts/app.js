@@ -95,7 +95,8 @@ angular
             return Summary.overviews();
           }
         }
-      }).state('app.standings', {
+      })
+      .state('app.standings', {
         url: '/standings',
         templateUrl: 'views/dashboards/standings.html',
         controller: 'DashboardStandingCtrl',

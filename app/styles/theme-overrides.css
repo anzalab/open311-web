@@ -122,7 +122,6 @@ body {
 }
 
 
-
 /*issue styles*/
 
 .nav-servicerequests .nav-text {
@@ -151,7 +150,6 @@ body {
 }
 
 
-
 /*status navigation*/
 
 .nav-active-white .nav-link {
@@ -160,15 +158,12 @@ body {
 }
 
 
-
 /*list*/
 
 .list-item-padded {
   padding-top: 16px;
   padding-bottom: 16px;
 }
-
-
 
 
 /*navbar ovverides*/
@@ -212,7 +207,6 @@ body {
 }
 
 
-
 /*ng-prompt*/
 
 .modal-header {
@@ -253,7 +247,6 @@ body {
 }
 
 
-
 /*aside subnav*/
 
 .nav>.nav-item.active .text-muted,
@@ -267,7 +260,6 @@ body {
 }
 
 
-
 /*search-servicerequests*/
 
 .list-search .form-control-sm {
@@ -276,13 +268,11 @@ body {
 }
 
 
-
 /*ensure all sv charts text use lato font*/
 
 svg text {
   font-family: Lato !important;
 }
-
 
 
 /*pager*/
@@ -300,7 +290,6 @@ svg text {
   color: #777;
   cursor: not-allowed;
 }
-
 
 
 /*box body*/
@@ -325,4 +314,14 @@ svg text {
 .checkbox-primary input[type="checkbox"]:checked + label::before,
 .checkbox-primary input[type="radio"]:checked + label::before {
   background-color: #008CCD !important;
+}
+
+/*ng-notify ovverides*/
+.ngn-dismiss {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
 }

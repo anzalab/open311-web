@@ -29,7 +29,6 @@
     "angular-mailto": "^0.1.0",
     "angular-color-picker": "^1.0.10",
     "angularPrint": "angular-print#^0.3.8",
-    "angular-echarts": "https://github.com/lykmapipo/angular-echarts.git#^1.1.1",
     "echarts": "^3.6.2",
     "angular-socket-io": "^0.7.0",
     "socket.io-client": "^2.0.3",
@@ -89,11 +88,6 @@
     "echarts": {
       "main": [
         "dist/echarts.js"
-      ]
-    },
-    "angular-echarts": {
-      "main": [
-        "dist/angular-echarts.js"
       ]
     }
   },

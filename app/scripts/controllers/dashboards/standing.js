@@ -108,6 +108,13 @@ angular
 
     $scope.prepare = function () {
 
+      //notify no data loaded
+      if (!$scope.standings || $scope.standings.length <= 0) {
+        $rootScope.$broadcast('appWarning', {
+          message: 'No Data Found. Please Update Your Filters.'
+        });
+      }
+
       //build reports
       $scope.prepareIssuePerJurisdiction();
       $scope.prepareIssuePerJurisdictionPerServiceGroup();
@@ -166,7 +173,6 @@ angular
       //prepare chart config
       $scope.perJurisdictionConfig = {
         height: 400,
-        width: 990,
         forceClear: true
       };
 
@@ -265,6 +271,7 @@ angular
             label: {
               normal: {
                 show: true,
+                position: 'top'
               }
             },
             data: []
@@ -294,7 +301,6 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceGroupConfig = {
         height: 400,
-        width: 990,
         forceClear: true
       };
 
@@ -325,7 +331,6 @@ angular
           }
         },
         calculable: true,
-        stack: true,
         xAxis: [{
           type: 'category',
           data: categories
@@ -363,7 +368,6 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceConfig = {
         height: 400,
-        width: 990,
         forceClear: true
       };
       //prepare chart options
@@ -390,6 +394,7 @@ angular
               label: {
                 normal: {
                   show: true,
+                  position: 'top'
                 }
               },
               data: []
@@ -451,7 +456,6 @@ angular
             }
           },
           calculable: true,
-          stack: true,
           xAxis: [{
             type: 'category',
             data: categories
