@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('DashboardOverviewCtrl', function (
-    $rootScope, $scope, $state, Summary, overviews
+    $rootScope, $scope, $state, $uibModal, Summary, overviews
   ) {
 
     /**
@@ -37,6 +37,36 @@ angular
 
     //initialize overview
     $scope.overviews = overviews;
+
+
+    /**
+     * Open overview reports filter
+     */
+    $scope.showFilter = function () {
+
+      //open overview reports filter modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/dashboards/_partials/overviews_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(function onClose( /*selectedItem*/ ) {},
+        function onDismissed() {});
+
+    };
+
+
+    /**
+     * Filter overview reports based on on current selected filters
+     */
+    $scope.filter = function () {
+      //TODO load reports
+      //close current modal
+      $scope.modal.close();
+    };
+
 
     $scope.prepare = function () {
       //obtain issues summary
