@@ -24,14 +24,16 @@ angular
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
 
     //bind filters
-    $scope.filters = {
-      startedAt: undefined,
-      endedAt: undefined,
+    var defaultFilters = {
+      startedAt: moment().utc().startOf('date').toDate(),
+      endedAt: moment().utc().endOf('date').toDate(),
       statuses: [],
       priorities: [],
       servicegroups: [],
       jurisdictions: [],
     };
+
+    $scope.filters = defaultFilters;
 
     //initialize standings
     $scope.standings = standings;
@@ -67,15 +69,9 @@ angular
      */
     $scope.filter = function (reset) {
       if (reset) {
-        $scope.filters = {
-          startedAt: undefined,
-          endedAt: undefined,
-          statuses: [],
-          priorities: [],
-          servicegroups: [],
-          jurisdictions: [],
-        };
+        $scope.filters = defaultFilters;
       }
+
       //prepare query
       $scope.params = Summary.prepareQuery($scope.filters);
 
@@ -111,8 +107,6 @@ angular
 
 
     $scope.prepare = function () {
-
-      //TODO add date filter default to today
 
       //build reports
       $scope.prepareIssuePerJurisdiction();
@@ -172,7 +166,8 @@ angular
       //prepare chart config
       $scope.perJurisdictionConfig = {
         height: 400,
-        width: 990
+        width: 990,
+        forceClear: true
       };
 
       //prepare chart options
@@ -299,7 +294,8 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceGroupConfig = {
         height: 400,
-        width: 990
+        width: 990,
+        forceClear: true
       };
 
       //prepare chart options
@@ -367,7 +363,8 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceConfig = {
         height: 400,
-        width: 990
+        width: 990,
+        forceClear: true
       };
       //prepare chart options
       $scope.perJurisdictionPerServiceOptions = [];
@@ -539,7 +536,8 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerStatusConfig = {
         height: 400,
-        width: 990
+        width: 990,
+        forceClear: true
       };
 
       //prepare chart options
@@ -650,7 +648,8 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerPriorityConfig = {
         height: 400,
-        width: 990
+        width: 990,
+        forceClear: true
       };
 
       //prepare chart options

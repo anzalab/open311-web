@@ -116,8 +116,8 @@ angular
             return Summary.standings({
               query: {
                 createdAt: {
-                  $gte: moment().utc().startOf('month').toDate(), //start of today
-                  $lte: moment().utc().endOf('month').toDate() //end of today
+                  $gte: moment().utc().startOf('date').toDate(), //start of today
+                  $lte: moment().utc().endOf('date').toDate() //end of today
                 }
               }
             });
