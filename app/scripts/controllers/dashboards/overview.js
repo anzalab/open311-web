@@ -10,8 +10,19 @@
 angular
   .module('ng311')
   .controller('DashboardOverviewCtrl', function (
-    $rootScope, $scope, $state, $uibModal, Summary, overviews
+    $rootScope, $scope, $state, $uibModal, Summary, endpoints, overviews
   ) {
+
+    //initialize scope attributes
+    $scope.startedAt;
+    $scope.endedAt;
+    $scope.maxDate = new Date();
+
+    //bind states
+    $scope.priorities = endpoints.priorities.priorities;
+    $scope.statuses = endpoints.statuses.statuses;
+    $scope.services = endpoints.services.services;
+    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
 
     /**
      * prepare multi series data
@@ -60,8 +71,10 @@ angular
 
     /**
      * Filter overview reports based on on current selected filters
+     * @param {Boolean} [reset] whether to clear and reset filter
      */
-    $scope.filter = function () {
+    $scope.filter = function (reset) {
+      console.log(reset);
       //TODO load reports
       //close current modal
       $scope.modal.close();

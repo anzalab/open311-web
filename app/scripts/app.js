@@ -82,6 +82,15 @@ angular
           authenticated: true
         },
         resolve: {
+          endpoints: function (Summary) {
+            return Summary.endpoints({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          },
           overviews: function (Summary) {
             return Summary.overviews();
           }

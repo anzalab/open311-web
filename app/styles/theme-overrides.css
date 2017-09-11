@@ -104,19 +104,7 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*support angular bootstrap*/
+/**support angular bootstrap*/
 
 .nav,
 .pagination,
@@ -126,19 +114,12 @@ body {
 }
 
 
-
-
-
-
 /*settings style*/
 
 .search-settings {
   padding: 0.9rem;
   font-family: Lato;
 }
-
-
-
 
 
 
@@ -171,17 +152,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /*status navigation*/
 
 .nav-active-white .nav-link {
@@ -191,33 +161,12 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /*list*/
 
 .list-item-padded {
   padding-top: 16px;
   padding-bottom: 16px;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -264,17 +213,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /*ng-prompt*/
 
 .modal-header {
@@ -297,6 +235,10 @@ body {
   margin-left: 12px !important;
 }
 
+.modal-footer button:nth-child(even) {
+  margin-left: 12px !important;
+}
+
 @media (min-width: 544px) {
   .modal-dialog {
     max-width: 400px;
@@ -312,30 +254,7 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 /*aside subnav*/
-
-
-/*a.text-muted:active,
-{
-    color: #687077 !important;
-    font-weight: 800 !important;
-}*/
-
-
-/*a.text-muted:active {
-    opacity: 1;
-}*/
 
 .nav>.nav-item.active .text-muted,
 .nav>.nav-item:active .text-muted,
@@ -349,16 +268,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /*search-servicerequests*/
 
 .list-search .form-control-sm {
@@ -368,24 +277,11 @@ body {
 
 
 
-
-
-
-
-
-
-
 /*ensure all sv charts text use lato font*/
 
 svg text {
   font-family: Lato !important;
 }
-
-
-
-
-
-
 
 
 
@@ -404,10 +300,6 @@ svg text {
   color: #777;
   cursor: not-allowed;
 }
-
-
-
-
 
 
 

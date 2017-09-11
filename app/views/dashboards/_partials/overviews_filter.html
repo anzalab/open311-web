@@ -7,11 +7,36 @@
   <!-- end filter header -->
   <!-- start filter body -->
   <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- start start date filter -->
+        <div class="col-md-6">
+          <div class="p-a b-b">
+            <h6 class="text-muted m-a-0">
+              Start Date
+            </h6>
+          </div>
+          <div pickadate ng-model="startedAt" max-date="maxDate" class="p-a"></div>
+        </div>
+        <!-- end start date filter -->
+        <!-- start end date filter -->
+        <div class="col-md-6">
+          <div class="p-a b-b">
+            <h6 class="text-muted m-a-0">
+              End Date
+            </h6>
+          </div>
+          <div pickadate ng-model="endedAt" max-date="maxDate" class="p-a"></div>
+        </div>
+        <!-- end end date filter -->
+      </div>
+    </div>
   </div>
   <!-- end filter body -->
   <!-- start filter footer -->
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="filter()">Load</button>
+    <button class="btn btn-primary" ng-click="filter()">&nbsp;Load&nbsp;</button>
+    <button class="btn btn-default" ng-click="filter(true)">Clear&nbsp;</button>
     <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
   </div>
   <!-- end footer filter -->
