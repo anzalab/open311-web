@@ -312,3 +312,17 @@ svg text {
 .p-r-none {
   padding-right: 0 !important;
 }
+
+.p-b-none {
+  padding-bottom: 0 !important;
+}
+
+.p-t-none {
+  padding-bottom: 0 !important;
+}
+
+/*custom checkbox overrides*/
+.checkbox-primary input[type="checkbox"]:checked + label::before,
+.checkbox-primary input[type="radio"]:checked + label::before {
+  background-color: #008CCD !important;
+}

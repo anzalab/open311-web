@@ -20,13 +20,18 @@ angular
     $scope.priorities = endpoints.priorities.priorities;
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
+    $scope.servicegroups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+
 
     //bind filters
     $scope.filters = {
       startedAt: undefined,
       endedAt: undefined,
-      status: [],
+      statuses: [],
+      priorities: [],
+      servicegroups: [],
+      jurisdictions: [],
     };
 
     /**
@@ -79,7 +84,19 @@ angular
      * @param {Boolean} [reset] whether to clear and reset filter
      */
     $scope.filter = function (reset) {
-      console.log(reset);
+      if (reset) {
+        $scope.filters = {
+          startedAt: undefined,
+          endedAt: undefined,
+          statuses: [],
+          priorities: [],
+          servicegroups: [],
+          jurisdictions: [],
+        };
+      }
+      //prepare query
+      var query = Summary.prepareQuery($scope.filters);
+      
       //TODO load reports
       //close current modal
       $scope.modal.close();
