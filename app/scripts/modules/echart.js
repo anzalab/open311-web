@@ -12,7 +12,7 @@
  */
 angular
   .module('angular-echarts', [])
-  .directive('echart', function () {
+  .directive('echart', function ($window, $timeout) {
     return {
       restrict: 'EA',
       template: '<div config="config" options="options" style="width: 100%; min-height: 400px"></div>',
@@ -27,7 +27,7 @@ angular
         var chartDOM = element.find('div')[0];
         var parent = element.parent()[0];
         var parentHeight = parent.clientHeight;
-        var height = parseInt(attrs.height) || parentHeight || 240;
+        var height = parseInt(attrs.height) || parentHeight || 400;
 
         //ensure config
         var config = scope.config || {};
@@ -136,6 +136,14 @@ angular
           }
 
         });
+
+        //listen to window resize and resize charts accordingly
+        var _window = angular.element($window);
+        if (_window) {
+          _window.bind('resize', function () {
+            refreshChart();
+          });
+        }
 
       }
     };

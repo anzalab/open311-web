@@ -10,7 +10,8 @@
 angular
   .module('ng311')
   .controller('DashboardOverviewCtrl', function (
-    $rootScope, $scope, $state, $uibModal, Summary, endpoints, overviews
+    $rootScope, $scope, $state, $uibModal,
+    Summary, endpoints
   ) {
 
     //initialize scope attributes
@@ -45,7 +46,7 @@ angular
     };
 
     //initialize overviews
-    $scope.overviews = overviews;
+    $scope.overviews = [];
 
 
     /**
@@ -128,8 +129,6 @@ angular
 
 
     $scope.prepare = function () {
-
-      console.log($scope.overviews);
 
       //notify no data loaded
       if (!$scope.overviews || $scope.overviews.length <= 0) {
@@ -595,10 +594,9 @@ angular
     });
 
 
-    //on load
+    //pre-load reports
     //prepare overview details
-    $scope.prepare();
-
-
+    $scope.params = Summary.prepareQuery($scope.filters);
+    $scope.reload();
 
   });

@@ -90,16 +90,6 @@ angular
                 }
               }
             });
-          },
-          overviews: function (Summary) {
-            return Summary.overviews({
-              query: {
-                createdAt: {
-                  $gte: moment().add(-21, 'd').utc().startOf('date').toDate(), //start of today
-                  $lte: moment().utc().endOf('date').toDate() //end of today
-                }
-              }
-            });
           }
         }
       })
@@ -116,16 +106,6 @@ angular
               query: {
                 deletedAt: {
                   $eq: null
-                }
-              }
-            });
-          },
-          standings: function (Summary) {
-            return Summary.standings({
-              query: {
-                createdAt: {
-                  $gte: moment().utc().startOf('date').toDate(), //start of today
-                  $lte: moment().utc().endOf('date').toDate() //end of today
                 }
               }
             });

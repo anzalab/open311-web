@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('DashboardStandingCtrl', function (
-    $rootScope, $scope, $state, $uibModal, Summary, endpoints, standings
+    $rootScope, $scope, $state, $uibModal, Summary, endpoints
   ) {
 
     //initialize scope attributes
@@ -47,7 +47,7 @@ angular
     };
 
     //initialize standings
-    $scope.standings = standings;
+    $scope.standings = [];
 
     /**
      * Exports current standing data
@@ -570,7 +570,6 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerStatusConfig = {
         height: 400,
-        width: 990,
         forceClear: true
       };
 
@@ -682,7 +681,6 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerPriorityConfig = {
         height: 400,
-        width: 990,
         forceClear: true
       };
 
@@ -743,9 +741,10 @@ angular
     });
 
 
-    //on load
+    //pre-load reports
     //prepare overview details
-    $scope.prepare();
+    $scope.params = Summary.prepareQuery($scope.filters);
+    $scope.reload();
 
 
   });
