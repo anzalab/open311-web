@@ -35,13 +35,8 @@ angular
 
     $scope.filters = defaultFilters;
 
-    //initialize standings
-    $scope.standings = standings;
 
-
-    //initialize scope attributes
-    $scope.startedAt;
-    $scope.endedAt;
+    //bind exports
     $scope.maxDate = new Date();
     $scope.exports = {
       filename: 'standing_reports_' + Date.now() + '.csv',
@@ -50,6 +45,9 @@ angular
         'Status', 'Priority', 'Count'
       ]
     };
+
+    //initialize standings
+    $scope.standings = standings;
 
     /**
      * Exports current standing data
@@ -77,7 +75,7 @@ angular
 
       //open overview reports filter modal
       $scope.modal = $uibModal.open({
-        templateUrl: 'views/dashboards/_partials/overviews_filter.html',
+        templateUrl: 'views/dashboards/_partials/standings_filter.html',
         scope: $scope,
         size: 'lg',
       });
@@ -731,8 +729,7 @@ angular
      * Reload standing reports
      */
     $scope.reload = function () {
-      var shouldLoad =
-        Summary
+      Summary
         .standings({ query: $scope.params })
         .then(function (standings) {
           $scope.standings = standings;

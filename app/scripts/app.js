@@ -92,7 +92,14 @@ angular
             });
           },
           overviews: function (Summary) {
-            return Summary.overviews();
+            return Summary.overviews({
+              query: {
+                createdAt: {
+                  $gte: moment().add(-21, 'd').utc().startOf('date').toDate(), //start of today
+                  $lte: moment().utc().endOf('date').toDate() //end of today
+                }
+              }
+            });
           }
         }
       })

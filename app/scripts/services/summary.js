@@ -48,7 +48,7 @@ angular
      * @return {Object}        
      */
     Summary.overviews = function (params) {
-      return $http.get(Utils.asLink('overviews'), {
+      return $http.get(Utils.asLink(['reports', 'overviews']), {
           params: params
         })
         .then(function (response) {
