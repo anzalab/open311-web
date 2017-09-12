@@ -12,7 +12,7 @@
  */
 angular
   .module('angular-echarts', [])
-  .directive('echart', function ($window, $timeout) {
+  .directive('echart', function ($window) {
     return {
       restrict: 'EA',
       template: '<div config="config" options="options" style="width: 100%; min-height: 400px"></div>',
