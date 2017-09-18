@@ -6,24 +6,6 @@
       Bulk - Exports
     </div>
     <!-- end report title -->
-    <!-- start report actions -->
-    <ul class="nav navbar-nav pull-right">
-      <!-- start filter -->
-      <li class="nav-item">
-        <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">      
-            <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
-        </a>
-      </li>
-      <!-- end filter -->
-      <!-- start download -->
-      <li class="nav-item" ng-if="overviews && overviews.length > 0">
-        <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="exports.filename">
-                <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
-            </a>
-      </li>
-      <!-- end download -->
-    </ul>
-    <!-- end report actions -->
   </div>
 </div>
 <!-- end dashboard header -->
@@ -142,11 +124,11 @@
       </div>
       <!-- end priority filters -->
       <!-- start export actions -->
-      <div class="row m-t-md">
+      <div class="row m-t-md m-b-lg">
         <div class="col-md-12">
           <div class="pull-right">
-            <button class="btn btn-primary" ng-click="filter()">Export</button>
-            <button class="btn btn-default" ng-click="filter(true)">Clear&nbsp;</button>
+            <button class="btn btn-primary" ng-click="export()">Export</button>
+            <button class="btn btn-default m-l-sm" ng-click="export(true)">Clear&nbsp;</button>
           </div>
         </div>
       </div>

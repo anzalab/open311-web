@@ -27,4 +27,5 @@ angular.module('ng311')
     };
 
     return utils;
+
   });

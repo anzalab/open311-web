@@ -66,6 +66,9 @@ angular
         resolve: {
           party: function ($auth) {
             return $auth.getProfile();
+          },
+          token: function ($q, ngAAToken) {
+            return $q.resolve(ngAAToken.getToken());
           }
         }
       })
