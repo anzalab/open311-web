@@ -110,6 +110,24 @@ angular
             });
           }
         }
+      }).state('app.exports', {
+        url: '/exports',
+        templateUrl: 'views/dashboards/exports.html',
+        controller: 'DashboardExportCtrl',
+        data: {
+          authenticated: true
+        },
+        resolve: {
+          endpoints: function (Summary) {
+            return Summary.endpoints({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          }
+        }
       });
 
   })

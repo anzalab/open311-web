@@ -1,0 +1,158 @@
+<!-- start dashboard header -->
+<div class="app-header bg b-b bg-white">
+  <div class="navbar">
+    <!-- start report title -->
+    <div class="navbar-item pull-left h5 text-md">
+      Bulk - Exports
+    </div>
+    <!-- end report title -->
+    <!-- start report actions -->
+    <ul class="nav navbar-nav pull-right">
+      <!-- start filter -->
+      <li class="nav-item">
+        <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">      
+            <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
+        </a>
+      </li>
+      <!-- end filter -->
+      <!-- start download -->
+      <li class="nav-item" ng-if="overviews && overviews.length > 0">
+        <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="exports.filename">
+                <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
+            </a>
+      </li>
+      <!-- end download -->
+    </ul>
+    <!-- end report actions -->
+  </div>
+</div>
+<!-- end dashboard header -->
+<!-- start overview body -->
+<div class="app-body">
+  <div class="app-body-inner">
+    <div class="padding">
+      <!-- start filters -->
+      <!-- start date filters -->
+      <div class="row">
+        <!-- start start date filter -->
+        <div class="col-md-6">
+          <div class="p-a p-l-none p-b-none">
+            <h6 class="m-a-0">
+              From
+            </h6>
+          </div>
+          <div pickadate ng-model="filters.startedAt" max-date="maxDate" class="p-a p-l-none"></div>
+        </div>
+        <!-- end start date filter -->
+        <!-- start end date filter -->
+        <div class="col-md-6">
+          <div class="p-a p-l-none p-b-none">
+            <h6 class="m-a-0">
+              To
+            </h6>
+          </div>
+          <div pickadate ng-model="filters.endedAt" max-date="maxDate" class="p-a p-l-none"></div>
+        </div>
+        <!-- end end date filter -->
+      </div>
+      <!-- end date filters -->
+      <!-- start jurisdiction filters -->
+      <div class="row m-t-sm">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Jurisdiction
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions">
+          <div class="checkbox-custom checkbox-primary p-a p-b-none">
+            <input type="checkbox" checklist-model="filters.jurisdictions" checklist-value="jurisdiction._id">
+            <label class="text-muted" title="{{jurisdiction.name}}">{{jurisdiction.name}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- end jurisdiction filters -->
+      <!-- start servicegroup filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Service Group
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-3" ng-repeat="servicegroup in servicegroups">
+          <div class="checkbox-custom checkbox-primary p-a p-b-none">
+            <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id" checklist-change="filterServices()">
+            <label class="text-muted" title="{{servicegroup.name}}">{{servicegroup.name}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- end servicegroup filters -->
+      <!-- start service filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Service
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-3" ng-repeat="service in services">
+          <div class="checkbox-custom checkbox-primary p-a p-b-none">
+            <input type="checkbox" checklist-model="filters.services" checklist-value="service._id">
+            <label class="text-muted" title="{{service.name}}">{{service.name}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- end service filters -->
+      <!-- start status filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Status
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-2" ng-repeat="status in statuses">
+          <div class="checkbox-custom checkbox-primary p-a">
+            <input type="checkbox" checklist-model="filters.statuses" checklist-value="status._id">
+            <label class="text-muted" title="{{status.name}}">{{status.name}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- end status filters -->
+      <!-- start priority filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Priority
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-2" ng-repeat="priority in priorities">
+          <div class="checkbox-custom checkbox-primary p-a">
+            <input type="checkbox" checklist-model="filters.priorities" checklist-value="priority._id">
+            <label class="text-muted" title="{{priority.name}}">{{priority.name}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- end priority filters -->
+      <!-- start export actions -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="pull-right">
+            <button class="btn btn-primary" ng-click="filter()">Export</button>
+            <button class="btn btn-default" ng-click="filter(true)">Clear&nbsp;</button>
+          </div>
+        </div>
+      </div>
+      <!-- end export actions -->
+      <!-- end filters -->
+    </div>
+  </div>
+</div>
+<!-- end overview body -->

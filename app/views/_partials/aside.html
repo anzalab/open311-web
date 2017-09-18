@@ -48,6 +48,14 @@
               <span class="nav-text">Standings</span>
           </a>
         </li>
+        <li ui-sref-active="active" show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view">
+          <a ui-sref="app.exports" title="Exports">
+              <span class="nav-icon">
+                  <i class="ion-social-buffer"></i>
+              </span>
+              <span class="nav-text">Exports</span>
+          </a>
+        </li>
         <li show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view" ui-sref-active="active">
           <a ui-sref="app.manage.jurisdictions" title="Manage System">
               <span class="nav-icon">
