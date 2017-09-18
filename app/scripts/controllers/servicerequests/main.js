@@ -326,9 +326,7 @@ angular
           query: {
             deletedAt: {
               $eq: null
-            },
-            'relation.name': 'Internal',
-            'relation.type': 'Worker'
+            }
           },
           q: $scope.search.party
         }).then(function (response) {

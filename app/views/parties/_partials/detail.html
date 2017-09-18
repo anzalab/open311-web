@@ -51,6 +51,25 @@
                     </div>
                   </div>
                 </div>
+                <!-- start passwords -->
+                <div class="row m-t-lg">
+                  <div class="col-sm-6" title="Party Password">
+                    <div class="form-group form-material floating">
+                      <input ng-change="onPasswordChange()" ng-disabled="!edit" ng-model="party.password" ng-required ng-minlength="2" type="password" name="password" class="form-control" />
+                      <label title="Password" class="floating-label">Password</label>
+                      <span ng-show="party.password && party.password.length < 8" class="help-block text-red-700 font-weight-400">Password length must be atleast 8 characters</span>
+                      <span ng-show="!edit" class="help-block help-block-password font-size-20">****************</span>
+                    </div>
+                  </div>
+                  <div ng-show="party.password && party.password.length >= 8" class="col-sm-6" title="Password Confirmation">
+                    <div class="form-group form-material floating">
+                      <input ng-change="onConfirmPassword()" ng-disabled="!edit" ng-model="party.confirm" ng-required ng-minlength="2" type="password" name="confirm" class="form-control" />
+                      <label title="SIP Phone Number" class="floating-label">Password Confirm</label>
+                      <span ng-show="passwordDontMatch" class="help-block text-red-700 font-weight-400">Password does not match</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- end passwords -->
                 <!-- start party roles -->
                 <div class="row m-t-lg">
                   <div class="col-sm-12">

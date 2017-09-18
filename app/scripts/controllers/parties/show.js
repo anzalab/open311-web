@@ -15,6 +15,7 @@ angular
   ) {
 
     $scope.edit = false;
+    $scope.canSave = true;
     $scope.passwordDontMatch = false;
     $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.roles = roles.roles;
@@ -79,6 +80,34 @@ angular
     });
 
     /**
+     * Listen for password confirmation input changes
+     */
+    $scope.onConfirmPassword = function () {
+      if (!$scope.party.confirm || !$scope.party.password) {
+        $scope.passwordDontMatch = false;
+      } else {
+        $scope.passwordDontMatch = !($scope.party.password === $scope.party
+          .confirm);
+        $scope.canSave =
+          ($scope.party.password.length >= 8) &&
+          ($scope.party.password === $scope.party.confirm);
+      }
+    };
+
+    /**
+     * Listen for password input changes
+     */
+    $scope.onPasswordChange = function () {
+      if (!$scope.party.password) {
+        $scope.canSave = true;
+      } else {
+        $scope.canSave =
+          ($scope.party.password.length >= 8) &&
+          ($scope.party.password === $scope.party.confirm);
+      }
+    };
+
+    /**
      * @description save created party
      */
     $scope.save = function () {
@@ -102,6 +131,9 @@ angular
           $rootScope.$broadcast('appSuccess', response);
 
           $rootScope.$broadcast('app:parties:reload');
+
+          //re-select saved party
+          // $rootScope.$broadcast('party:selected', $scope.party);
 
           $scope.edit = false;
 

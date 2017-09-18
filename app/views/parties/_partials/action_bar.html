@@ -21,7 +21,7 @@
             </span>
         </a>
   </li>
-  <li ng-if="edit" class="nav-item">
+  <li ng-if="edit && canSave" class="nav-item">
     <a ng-click="save()" class="nav-link text-muted" title="Click to save party">
             Save
         </a>
