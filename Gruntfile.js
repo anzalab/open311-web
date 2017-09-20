@@ -251,7 +251,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              // js: ['concat', 'uglifyjs'], TO FIX
+              //js: ['concat', 'uglifyjs'], TO FIX
               js: ['concat'],
               css: ['cssmin']
             },
@@ -399,15 +399,15 @@ module.exports = function (grunt) {
             description: 'Citizen Feedback System',
             apiEndPoint: {
               mobile: '',
-              // mobile: 'https://dawasco.herokuapp.com',
-              // web: 'https://dawasco.herokuapp.com'
               web: ''
+              // web: 'http://127.0.0.1:3000',
+              // mobile: 'http://127.0.0.1:3000'
             },
             socketEndPoint: {
               mobile: '',
-              // mobile: 'https://dawasco.herokuapp.com',
-              // web: 'https://dawasco.herokuapp.com'
               web: ''
+              // web: 'http://127.0.0.1:3000',
+              // mobile: 'http://127.0.0.1:3000'
             },
             socketEnable: false,
             settings: {
@@ -616,11 +616,11 @@ module.exports = function (grunt) {
     'copy:dist',
     // 'cdnify',
     'cssmin',
-    // 'uglify', TO FIX
+    //'uglify', //TO FIX 
     'filerev',
     'usemin',
-    // 'htmlmin', TO FIX
-    'string-replace:dist',
+    'htmlmin',
+    'string-replace:dist'
   ]);
 
   grunt.registerTask('default', [
