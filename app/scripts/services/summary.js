@@ -178,6 +178,22 @@ angular
         }
       }
 
+      //ensure workspaces
+      //7. ensure workspaces
+      //7.0 normalize & compact workspaces
+      params.workspaces = _.uniq(_.compact([].concat(params.workspaces)));
+      //7.1 build priority criteria
+      if (params.workspaces.length >= 1) {
+        query.method = {};
+        if (params.workspaces.length > 1) {
+          //use $in criteria
+          query.method.workspace = { $in: params.workspaces };
+        } else {
+          //use $eq criteria
+          query.method.workspace = _.first(params.workspaces);
+        }
+      }
+
       return query;
 
     };

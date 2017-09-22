@@ -43,7 +43,7 @@
         <div class="col-md-12">
           <div class="p-a p-l-none">
             <h6 class="m-a-0">
-              Jurisdiction
+              Area
             </h6>
           </div>
         </div>
@@ -123,6 +123,23 @@
         </div>
       </div>
       <!-- end priority filters -->
+      <!-- start workspace filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Workspace
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-2" ng-repeat="workspace in workspaces">
+          <div class="checkbox-custom checkbox-primary p-a">
+            <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace">
+            <label class="text-muted" title="{{workspace}}">{{workspace}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- end workspace filters -->
       <!-- start export actions -->
       <div class="row m-t-md m-b-lg">
         <div class="col-md-12">
