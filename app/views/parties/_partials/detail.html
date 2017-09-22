@@ -70,6 +70,25 @@
                   </div>
                 </div>
                 <!-- end passwords -->
+                <!-- start party workspace -->
+                <div class="row m-t-lg">
+                  <div class="col-sm-12">
+                    <div ng-show="!edit" class="form-group form-material floating">
+                      <input ng-disabled="!edit" ng-model="party.relation.workspace" ng-required ng-minlength="2" type="text" name="workspace" class="form-control" />
+                      <label title="Workspace" class="floating-label">Workspace</label>
+                    </div>
+                    <div ng-show="edit" class="form-inputs">
+                      <div class="form-group">
+                        <label class="floating-label">Workspace</label>
+                        <div class="radio-custom radio-primary" ng-repeat="workspace in workspaces">
+                          <input type="radio" ng-model="party.relation.workspace" ng-value="workspace">
+                          <label>{{workspace}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end party workspace -->
                 <!-- start party roles -->
                 <div class="row m-t-lg">
                   <div class="col-sm-12">

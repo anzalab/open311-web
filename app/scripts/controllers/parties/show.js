@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .controller('PartyShowCtrl', function (
     $rootScope, $scope, $state, $stateParams, Party,
-    jurisdictions, roles
+    jurisdictions, roles, party
   ) {
 
     $scope.edit = false;
@@ -19,6 +19,8 @@ angular
     $scope.passwordDontMatch = false;
     $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.roles = roles.roles;
+
+    $scope.workspaces = party.settings.party.relation.workspaces;
 
     $scope.onEdit = function () {
       $scope.edit = true;
