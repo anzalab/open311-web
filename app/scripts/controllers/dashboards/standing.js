@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('DashboardStandingCtrl', function (
-    $rootScope, $scope, $state, $uibModal, Summary, endpoints
+    $rootScope, $scope, $state, $uibModal, Summary, endpoints, party
   ) {
 
     //initialize scope attributes
@@ -22,6 +22,8 @@ angular
     $scope.services = endpoints.services.services;
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.workspaces = party.settings.party.relation.workspaces;
+
 
     //bind filters
     var defaultFilters = {
@@ -31,6 +33,7 @@ angular
       priorities: [],
       servicegroups: [],
       jurisdictions: [],
+      workspaces: []
     };
 
     $scope.filters = defaultFilters;
