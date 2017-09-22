@@ -136,11 +136,11 @@ angular
     $scope.prepare = function () {
 
       //notify no data loaded
-      if (!$scope.standings || $scope.standings.length <= 0) {
-        $rootScope.$broadcast('appWarning', {
-          message: 'No Data Found. Please Update Your Filters.'
-        });
-      }
+      // if (!$scope.standings || $scope.standings.length <= 0) {
+      //   $rootScope.$broadcast('appWarning', {
+      //     message: 'No Data Found. Please Update Your Filters.'
+      //   });
+      // }
 
       //update export filename
       $scope.exports.filename = 'standing_reports_' + Date.now() + '.csv';

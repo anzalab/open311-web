@@ -131,11 +131,11 @@ angular
     $scope.prepare = function () {
 
       //notify no data loaded
-      if (!$scope.overviews || $scope.overviews.length <= 0) {
-        $rootScope.$broadcast('appWarning', {
-          message: 'No Data Found. Please Update Your Filters.'
-        });
-      }
+      // if (!$scope.overviews || $scope.overviews.length <= 0) {
+      //   $rootScope.$broadcast('appWarning', {
+      //     message: 'No Data Found. Please Update Your Filters.'
+      //   });
+      // }
 
       //update export filename
       $scope.exports.filename = 'overview_reports_' + Date.now() + '.csv';

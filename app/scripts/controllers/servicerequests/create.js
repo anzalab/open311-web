@@ -11,7 +11,7 @@ angular
   .module('ng311')
   .controller('ServiceRequestCreateCtrl', function (
     $rootScope, $scope, $state, $stateParams,
-    ServiceRequest, endpoints) {
+    ServiceRequest, endpoints, party) {
 
     //action performed by this controller
     $scope.action = 'Create';
@@ -21,12 +21,14 @@ angular
     $scope.groups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.services = endpoints.services.services;
+    $scope.methods = party.settings.servicerequest.methods;
 
     //instantiate new servicerequest
     $scope.servicerequest = new ServiceRequest({
       call: {
         startedAt: new Date()
       },
+      method: { name: undefined },
       reporter: ($stateParams || {}).reporter || {},
       jurisdiction: ($stateParams || {}).jurisdiction
     });
