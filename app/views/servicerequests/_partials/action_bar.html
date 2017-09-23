@@ -8,7 +8,7 @@
         </a>
   </li>
   <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
-    <a ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Signal Feedback Provided To Reporter">
+    <a show-if-has-permit="servicerequest:resolve" ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Resolve and Signal Feedback Provided To Reporter">
             <span class="nav-text">
                 <i class="icon-call-out"></i>
             </span>
