@@ -184,13 +184,13 @@ angular
       params.workspaces = _.uniq(_.compact([].concat(params.workspaces)));
       //7.1 build priority criteria
       if (params.workspaces.length >= 1) {
-        query.method = {};
+        // query.method = {};
         if (params.workspaces.length > 1) {
           //use $in criteria
-          query.method.workspace = { $in: params.workspaces };
+          query['method.workspace'] = { $in: params.workspaces };
         } else {
           //use $eq criteria
-          query.method.workspace = _.first(params.workspaces);
+          query['method.workspace'] = _.first(params.workspaces);
         }
       }
 
