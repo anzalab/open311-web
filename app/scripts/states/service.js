@@ -23,17 +23,8 @@ angular
             templateUrl: 'views/services/_partials/detail.html',
             controller: 'ServiceShowCtrl',
             resolve: {
-              jurisdictions: function (Jurisdiction) {
-                return Jurisdiction.find({
-                  query: {
-                    deletedAt: {
-                      $eq: null
-                    }
-                  }
-                });
-              },
-              servicegroups: function (ServiceGroup) {
-                return ServiceGroup.find({
+              endpoints: function (Summary) {
+                return Summary.endpoints({
                   query: {
                     deletedAt: {
                       $eq: null

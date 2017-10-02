@@ -52,7 +52,7 @@ angular
           service: undefined,
           description: undefined,
           address: undefined,
-          method: undefined,
+          method: {},
           _id: undefined,
           servicerequest: undefined
         },
