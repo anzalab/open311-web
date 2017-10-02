@@ -49,6 +49,11 @@ angular
         params: { //hack to allow state go with reporter $state param
           reporter: undefined,
           jurisdiction: undefined,
+          service: undefined,
+          description: undefined,
+          address: undefined,
+          method: undefined,
+          _id: undefined,
           servicerequest: undefined
         },
         templateUrl: 'views/servicerequests/create.html',

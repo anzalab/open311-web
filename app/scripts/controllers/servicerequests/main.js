@@ -263,6 +263,13 @@ angular
     };
 
     /**
+     * Initialize new issue attending with operator details
+     */
+    $scope.onAttend = function () {
+      $state.go('app.create_servicerequests', $scope.servicerequest);
+    };
+
+    /**
      * @description delete servicerequest
      */
     $scope.delete = function (servicerequest) {

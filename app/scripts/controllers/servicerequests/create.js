@@ -24,14 +24,20 @@ angular
     $scope.methods = party.settings.servicerequest.methods;
 
     //instantiate new servicerequest
-    $scope.servicerequest = new ServiceRequest({
+    var servicerequest = _.merge({}, {
+      _id: ($stateParams || {})._id,
       call: {
         startedAt: new Date()
       },
       method: { name: undefined },
       reporter: ($stateParams || {}).reporter || {},
-      jurisdiction: ($stateParams || {}).jurisdiction
+      jurisdiction: ($stateParams || {}).jurisdiction,
+      service: ($stateParams || {}).service,
+      description: ($stateParams || {}).description,
+      address: ($stateParams || {}).address,
+      method: ($stateParams || {}).method
     });
+    $scope.servicerequest = new ServiceRequest(servicerequest);
 
 
     /**
@@ -47,7 +53,17 @@ angular
         $scope.servicerequest.call.endedAt = new Date();
       }
 
-      $scope.servicerequest.$save().then(function (response) {
+      //ensure operator on attending
+      if (!$scope.servicerequest.operator) {
+        $scope.servicerequest.operator = party ? party._id : undefined;
+      }
+
+      //try update or save servicerequest
+      var updateOrSave =
+        (!$scope.servicerequest._id ?
+          $scope.servicerequest.$save() : $scope.servicerequest.$update());
+
+      updateOrSave.then(function (response) {
 
           response = response || {};
 
