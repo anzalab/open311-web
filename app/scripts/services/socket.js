@@ -7,7 +7,8 @@
  * # socket
  * Factory in the ng311.
  */
-angular.module('ng311')
+angular
+  .module('ng311')
   .factory('socket', function (ENV, Utils, socketFactory) {
 
     //no op socket

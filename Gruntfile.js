@@ -251,8 +251,8 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              //js: ['concat', 'uglifyjs'], TO FIX
-              js: ['concat'],
+              js: ['concat', 'uglifyjs'], //TO FIX
+              // js: ['concat'],
               css: ['cssmin']
             },
             post: {}
@@ -400,14 +400,10 @@ module.exports = function (grunt) {
             apiEndPoint: {
               mobile: '',
               web: ''
-              // web: 'http://127.0.0.1:3000',
-              // mobile: 'http://127.0.0.1:3000'
             },
             socketEndPoint: {
               mobile: '',
               web: ''
-              // web: 'http://127.0.0.1:3000',
-              // mobile: 'http://127.0.0.1:3000'
             },
             socketEnable: false,
             settings: {
@@ -616,7 +612,7 @@ module.exports = function (grunt) {
     'copy:dist',
     // 'cdnify',
     'cssmin',
-    //'uglify', //TO FIX 
+    'uglify', //TO FIX 
     'filerev',
     'usemin',
     'htmlmin',
