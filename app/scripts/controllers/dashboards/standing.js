@@ -170,6 +170,7 @@ angular
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
         .map('jurisdiction')
+        .sortBy('name')
         .uniqBy('name')
         .value();
 
@@ -278,7 +279,9 @@ angular
 
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
-        .map('jurisdiction.name')
+        .map('jurisdiction')
+        .sortBy('name')
+        .map('name')
         .uniq()
         .value();
 
@@ -388,7 +391,9 @@ angular
 
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
-        .map('jurisdiction.name')
+        .map('jurisdiction')
+        .sortBy('name')
+        .map('name')
         .uniq()
         .value();
 
@@ -516,13 +521,16 @@ angular
 
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
-        .map('jurisdiction.name')
+        .map('jurisdiction')
+        .sortBy('name')
+        .map('name')
         .uniq()
         .value();
 
       //prepare unique status for bar chart series
       var statuses = _.chain($scope.standings)
         .map('status')
+        .sortBy('weight')
         .uniqBy('name')
         .value();
 
@@ -627,13 +635,16 @@ angular
 
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
-        .map('jurisdiction.name')
+        .map('jurisdiction')
+        .sortBy('name')
+        .map('name')
         .uniq()
         .value();
 
       //prepare unique priority for bar chart series
       var prioroties = _.chain($scope.standings)
         .map('priority')
+        .sortBy('weight')
         .uniqBy('name')
         .value();
 

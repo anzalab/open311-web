@@ -189,6 +189,9 @@ angular
 
         });
 
+      //sort data by their value
+      data = _.orderBy(data, 'value', 'desc');
+
       //prepare chart config
       $scope.perGroupConfig = {
         height: 400,
@@ -264,6 +267,7 @@ angular
       //prepare unique status for bar chart categories
       var categories = _.chain($scope.overviews)
         .map('status')
+        .sortBy('weight')
         .uniqBy('name')
         .value();
 
@@ -367,6 +371,7 @@ angular
       //prepare unique priority for bar chart categories
       var categories = _.chain($scope.overviews)
         .map('priority')
+        .sortBy('weight')
         .uniqBy('name')
         .value();
 
