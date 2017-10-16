@@ -28,7 +28,8 @@ angular
     'angular-echarts',
     'btford.socket-io',
     'focus-if',
-    'pickadate'
+    'pickadate',
+    'ui-leaflet'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,
