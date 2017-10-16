@@ -55,6 +55,9 @@ module.exports = function(config) {
             'bower_components/ng-focus-if/focusIf.js',
             'bower_components/moment/moment.js',
             'bower_components/angular-pickadate/dist/angular-pickadate.js',
+            'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
+            'bower_components/leaflet/dist/leaflet-src.js',
+            'bower_components/ui-leaflet/dist/ui-leaflet.js',
             'bower_components/angular-mocks/angular-mocks.js',
             // endbower
             "app/scripts/**/*.js",
