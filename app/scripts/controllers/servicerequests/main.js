@@ -94,8 +94,8 @@ angular
 
           //prepare bounds
           var bounds = leafletBoundsHelpers.createBoundsFromArray([
-            [servicerequest.latitude, servicerequest.longitude],
-            [servicerequest.latitude, servicerequest.longitude]
+            [servicerequest.latitude + 0.029, servicerequest.longitude],
+            [servicerequest.latitude - 0.029, servicerequest.longitude]
           ]);
 
 
