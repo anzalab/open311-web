@@ -251,8 +251,8 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'], //TO FIX
-              // js: ['concat'],
+              //js: ['concat', 'uglifyjs'], //TO FIX
+              js: ['concat'],
               css: ['cssmin']
             },
             post: {}
@@ -528,6 +528,11 @@ module.exports = function (grunt) {
           cwd: 'bower_components/web-icons',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: 'bower_components/leaflet/dist',
+          src: 'images/*',
+          dest: '<%= yeoman.dist %>'
         }]
       },
       styles: {
@@ -612,7 +617,7 @@ module.exports = function (grunt) {
     'copy:dist',
     // 'cdnify',
     'cssmin',
-    'uglify', //TO FIX 
+    //'uglify', //TO FIX 
     'filerev',
     'usemin',
     'htmlmin',

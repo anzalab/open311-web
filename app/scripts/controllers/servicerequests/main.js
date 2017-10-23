@@ -10,8 +10,8 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
-    $rootScope, $scope, $state, prompt, Party, ServiceRequest,
-    Comment, Summary, endpoints, party
+    $rootScope, $scope, $state, prompt, leafletBoundsHelpers, Party,
+    ServiceRequest, Comment, Summary, endpoints, party
   ) {
 
     //servicerequests in the scope
@@ -30,6 +30,7 @@ angular
     $scope.updated = false;
 
     $scope.search = {};
+    $scope.map = {};
 
     //signal create mode
     $scope.create = false;
@@ -42,6 +43,7 @@ angular
     $scope.party = party;
     // $scope.assignees = assignee.parties;
     $scope.summaries = endpoints.summaries;
+
 
     //listen for create event
     $rootScope.$on('servicerequest:create', function () {
@@ -86,6 +88,37 @@ angular
         $scope.servicerequest = servicerequest;
 
         $scope.mailTo = ServiceRequest.toEmail(servicerequest);
+
+        //update markers & map center
+        if (servicerequest.longitude && servicerequest.latitude) {
+
+          //prepare bounds
+          var bounds = leafletBoundsHelpers.createBoundsFromArray([
+            [servicerequest.latitude + 0.029, servicerequest.longitude],
+            [servicerequest.latitude - 0.029, servicerequest.longitude]
+          ]);
+
+
+          //set marker point
+          $scope.map = {
+            bounds: bounds,
+            markers: {
+              servicerequest: {
+                lat: servicerequest.latitude,
+                lng: servicerequest.longitude,
+                focus: true,
+                draggable: false
+              }
+            },
+            center: {
+              lat: servicerequest.latitude,
+              lng: servicerequest.longitude,
+              zoom: 1
+            }
+          };
+
+
+        }
 
         //load service request comments
         $scope.loadComment(servicerequest);
@@ -284,7 +317,8 @@ angular
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('servicerequest:delete:success', response);
+          $rootScope.$broadcast('servicerequest:delete:success',
+            response);
 
           $rootScope.$broadcast('app:servicerequests:reload');
 
@@ -292,7 +326,8 @@ angular
         .catch(function (error) {
           if (error) {
             $rootScope.$broadcast('appError', error);
-            $rootScope.$broadcast('servicerequest:delete:error', error);
+            $rootScope.$broadcast('servicerequest:delete:error',
+              error);
 
           }
         });
@@ -430,7 +465,8 @@ angular
     //check whether servicerequests will paginate
     $scope.willPaginate = function () {
       var willPaginate =
-        ($scope.servicerequests && $scope.total && $scope.total > $scope.limit);
+        ($scope.servicerequests && $scope.total && $scope.total >
+          $scope.limit);
       return willPaginate;
     };
 

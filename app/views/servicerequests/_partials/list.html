@@ -19,31 +19,31 @@
         <div class="row-body scrollable hover">
             <div class="row-inner" id="scrollable-servicerequest-list">
                 <div class="list" data-ui-list="info">
-                    <div ng-click="select(servicerequest)" class="list-item list-item-padded" ng-repeat="servicerequest in servicerequests" title="{{servicerequest.description}}" style="border-left: 2px solid {{servicerequest.priority.color || '#f3c111'}}">
+                    <div ng-click="select(_servicerequest)" class="list-item list-item-padded" ng-class="{'active': _servicerequest._id === servicerequest._id}" ng-repeat="_servicerequest in servicerequests" title="{{_servicerequest.description}}" style="border-left: 2px solid {{_servicerequest.priority.color || '#f3c111'}}">
                         <div class="list-left">
                             <span class="w-40 avatar circle">
                                 <letter-avatar title="Status & Area" 
-                                data="{{servicerequest.jurisdiction.name}}" 
+                                data="{{_servicerequest.jurisdiction.name}}" 
                                     height="60" width="60" shape="round"
-                                    color="{{servicerequest.status.color}}">
+                                    color="{{_servicerequest.status.color}}">
                                 </letter-avatar>
                             </span>
                         </div>
                         <div class="list-body">
                             <span title="Issue Report Date" class="pull-right text-xs text-muted">
-                                {{servicerequest.createdAt  | date:'dd MMM yyyy HH:mm'}}
+                                {{_servicerequest.createdAt  | date:'dd MMM yyyy HH:mm'}}
                             </span>
                             <div class="item-title">
-                                <a href="#" class="_500">{{servicerequest.service.name}} 
+                                <a href="#" class="_500">{{_servicerequest.service.name}} 
                                 <br/><span title="Issue Number" class="font-size-12">
-                                #{{servicerequest.code}}</span></a>
+                                #{{_servicerequest.code}}</span></a>
                             </div>
                             <small class="block text-xs text-muted text-ellipsis">
                                 <span title="Reporter Name">
-                                <i class="icon-user"></i>&nbsp;&nbsp;{{(servicerequest.reporter.name) || 'NA'}}
+                                <i class="icon-user"></i>&nbsp;&nbsp;{{(_servicerequest.reporter.name) || 'NA'}}
                                 </span>
                                 <span class="pull-right" title="Reporter Phone Number">
-                                <i class="icon-phone"></i>&nbsp;&nbsp;{{(servicerequest.reporter.phone) ||'NA'}}
+                                <i class="icon-phone"></i>&nbsp;&nbsp;{{(_servicerequest.reporter.phone) ||'NA'}}
                                 </span>
                             </small>
                         </div>
