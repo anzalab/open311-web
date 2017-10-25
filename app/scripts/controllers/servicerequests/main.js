@@ -162,23 +162,24 @@ angular
 
       //TODO notify about the comment saved
       if ($scope.note && $scope.note.content) {
-        var comment = new Comment({
-          request: $scope.servicerequest._id,
-          commentator: party._id,
-          content: $scope.note.content
-        });
 
-        //clear note
-        $scope.note = {};
+        var changelog = { //TODO flag internal or public
+          changer: party._id,
+          comment: $scope.note.content
+        };
 
-        comment.$save().then(function (response) {
-          $scope.select($scope.servicerequest);
-          $scope.note = {};
+        //update changelogs
+        $scope.servicerequest.changelogs =
+          ([].concat($scope.servicerequest.changelogs).concat(changelog));
+
+        //update changelog
+        $scope.servicerequest.$update().then(function (response) {
+          //TODO notify success
+          $scope.select(response);
           $scope.updated = true;
-          $rootScope.$broadcast('app:comments:reload');
-        }).catch(function ( /*error*/ ) {
-          //TODO signal error
-          $scope.note = {};
+        }).catch(function (error) {
+          //TODO notify error
+          console.log(error);
         });
 
       }
@@ -389,18 +390,8 @@ angular
     };
 
     $scope.loadComment = function (servicerequest) {
-      if (servicerequest && servicerequest._id) {
-        Comment.find({
-          sort: {
-            createdAt: -1
-          },
-          query: {
-            request: servicerequest._id
-          }
-        }).then(function (response) {
-          $scope.comments = response.comments;
-        });
-      }
+      $scope.comments =
+        _.orderBy($scope.servicerequest.changelogs, 'createdAt', 'desc');
     };
 
     /**

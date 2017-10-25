@@ -14,14 +14,18 @@
                 </div>
             </form>
         </div>
-        <div class="streamline streamline-theme m-b">
-            <div class="sl-item" ng-repeat="comment in comments">
+        <div class="streamline m-b">
+            <div class="sl-item" ng-style="comment.status ? {'border-color': comment.status.color} : {}" ng-repeat="comment in comments">
                 <div class="sl-content">
                     <div class="sl-date text-muted">
                         <span class="text-info">
-                        {{comment.commentator.name}}
+                        {{comment.changer.name}}
                         </span> on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</div>
-                    <p>{{comment.content}}</p>
+                    <p ng-if="comment.comment">{{comment.comment}}</p>
+                    <p ng-if="comment.status && comment.status.name">{{comment.status.name}}</p>
+                    <p ng-if="comment.assignee && comment.assignee.name">
+                     Assigned to {{comment.assignee.name}}
+                    </p>
                 </div>
             </div>
         </div>
