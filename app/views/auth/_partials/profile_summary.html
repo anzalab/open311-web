@@ -1,0 +1,59 @@
+<!-- start profile summary -->
+<div class="item">
+    <div class="p-a-lg">
+        <div class="row m-t">
+            <div class="col-sm-12">
+                <!-- start party avatar -->
+                <a href="#" class="pull-left m-r-md">
+                  <span>
+                  <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
+                  <letter-avatar title="{{party.name}}" data="{{party.name}}" height="96" width="96" shape="round">
+                  </letter-avatar>
+                  <i class="on b-white"></i>
+                  </span>
+                </a>
+                <!-- end party avatar -->
+                <!-- start party details -->
+                <div class="clear m-b">
+                    <!-- start party name -->
+                    <h4 class="m-a-0 m-b-sm" title="Name">{{party.name}}</h4>
+                    <!-- end party name -->
+                    <!-- start party relations -->
+                    <p class="text-muted m-t-sm">
+                        <span class="m-r" title="Relation &amp; Workspace">
+                            {{party.relation.name ? party.relation.name :'N/A'}}
+                             / {{party.relation.workspace ? party.relation.workspace : 'N/A' }}
+                        </span>
+                        <small title="Working Area">
+                           <i class="fa fa-map-marker m-r-xs"></i>
+                           {{party.jurisdiction ? party.jurisdiction.name : 'N/A'}}
+                        </small>
+                    </p>
+                    <!-- end party relations -->
+                    <div class="block clearfix m-b">
+                        <span>
+                              <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                            <i class="icon-phone"></i>
+                            <i class="icon-phone indigo"></i>
+                          </a>
+                              <span title="Phone Number"  class="text-muted">
+                                {{party.phone ? party.phone : 'N/A'}}
+                              </span>
+                        </span>
+                        <span class="m-l-md">
+                              <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                            <i class="icon-envelope"></i>
+                            <i class="icon-envelope light-blue"></i>
+                          </a>
+                              <span title="Email Address" class="text-muted">
+                                {{party.email ? party.email : 'N/A'}}
+                              </span>
+                        </span>
+                    </div>
+                </div>
+                <!-- end party details -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end profile summary -->
