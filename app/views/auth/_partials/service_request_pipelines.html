@@ -8,6 +8,7 @@
       </small>
     </div>
     <!-- end header -->
+    <!-- start displaying pipeline -->
     <div class="row m-t-lg">
         <div ng-repeat="pipeline in performances.pipelines" class="col-xs-6 col-sm-2" title="{{pipeline.label.name}} Service Requests">
             <div class="padding">
@@ -25,5 +26,11 @@
             </div>
         </div>
     </div>
+    <!-- TODO resolved pipeline -->
+    <!-- TODO late pipeline -->
+    <!-- TODO reopened pipeline -->
+    <!-- TODO filter by duration (today, this weeek, this month) -->
+    <!-- end displaying pipeline -->
+
 </div>
 <!-- end service request pipeline -->
