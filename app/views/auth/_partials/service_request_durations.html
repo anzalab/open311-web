@@ -14,7 +14,7 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>Today</h2>
-                    <small>{{filters.durations.day.startedAt | date: settings.dateFormat}}</small>
+                    <small>{{durationFilters.durations.day.startedAt | date: settings.dateFormat}}</small>
                     <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
@@ -43,8 +43,8 @@
                 <div class="box-header">
                     <h2>This Week</h2>
                     <small>
-                      {{filters.durations.week.startedAt | date: settings.dateFormat}}  -
-                      {{filters.durations.week.endedAt | date: settings.dateFormat}}
+                      {{durationFilters.durations.week.startedAt | date: settings.dateFormat}}  -
+                      {{durationFilters.durations.week.endedAt | date: settings.dateFormat}}
                     </small>
                     <div class="box-tool">
                         <ul class="nav">
@@ -76,8 +76,8 @@
                 <div class="box-header">
                     <h2>This Month</h2>
                     <small>
-                        {{filters.durations.month.startedAt | date: settings.dateFormat}}  -
-                        {{filters.durations.month.endedAt | date: settings.dateFormat}}
+                        {{durationFilters.durations.month.startedAt | date: settings.dateFormat}}  -
+                        {{durationFilters.durations.month.endedAt | date: settings.dateFormat}}
                     </small>
                     <div class="box-tool">
                         <ul class="nav">

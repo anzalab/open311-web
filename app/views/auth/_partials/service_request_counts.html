@@ -14,7 +14,7 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>Today</h2>
-                    <small>Number of Service Requests Received</small>
+                    <small>{{workFilters.durations.day.startedAt | date: settings.dateFormat}}</small>
                     <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
@@ -41,7 +41,9 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>This Week</h2>
-                    <small>Number of Service Requests Received</small>
+                    <small>{{workFilters.durations.week.startedAt | date: settings.dateFormat}} -
+                       {{workFilters.durations.week.endedAt | date: settings.dateFormat}}
+                    </small>
                     <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
@@ -68,7 +70,10 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>This Month</h2>
-                    <small>Number of Service Requests Received</small>
+                    <small>
+                        {{workFilters.durations.month.startedAt | date: settings.dateFormat}}  -
+                        {{workFilters.durations.month.endedAt | date: settings.dateFormat}}
+                    </small>
                     <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
