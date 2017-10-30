@@ -378,13 +378,20 @@ module.exports = function (grunt) {
             },
             socketEnable: false,
             settings: {
+              locale: 'sw',
               name: 'open311',
               email: 'example@example.com',
               phone: '(000) 000 000 000',
               currency: 'USD',
               dateFormat: 'dd/MM/yyyy',
               timeFormat: 'hh:mm:ss',
-              defaultPassword: 'guest'
+              defaultPassword: 'guest',
+              abbreviations: {
+                thousand: 'K',
+                million: 'M',
+                billion: 'B',
+                trillion: 'T'
+              }
             }
           }
         }
@@ -407,13 +414,20 @@ module.exports = function (grunt) {
             },
             socketEnable: false,
             settings: {
+              locale: 'sw',
               name: 'open311',
               email: 'example@example.com',
               phone: '(000) 000 000 000',
               currency: 'USD',
               dateFormat: 'dd/MM/yyyy',
               timeFormat: 'hh:mm:ss',
-              defaultPassword: 'guest'
+              defaultPassword: 'guest',
+              abbreviations: {
+                thousand: 'K',
+                million: 'M',
+                billion: 'B',
+                trillion: 'T'
+              }
             }
           }
         }
@@ -617,7 +631,7 @@ module.exports = function (grunt) {
     'copy:dist',
     // 'cdnify',
     'cssmin',
-    //'uglify', //TO FIX 
+    //'uglify', //TO FIX
     'filerev',
     'usemin',
     'htmlmin',

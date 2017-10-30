@@ -9,69 +9,18 @@
     </div>
     <!-- end header -->
     <div class="row m-t-lg">
-        <div class="col-xs-6 col-sm-2">
+        <div ng-repeat="pipeline in performances.pipelines" class="col-xs-6 col-sm-2" title="{{pipeline.label.name}} Service Requests">
             <div class="padding">
                 <div class="p-t-md">
-                    <span class="pull-right"><i class="fa fa-circle text-primary m-y-xs"></i></span>
+                    <span class="pull-right">
+                      <i class="fa fa-circle text-primary m-y-xs" style="color: {{pipeline.displayColor}}"></i>
+                    </span>
                 </div>
                 <div class="text-center">
-                    <h2 class="text-center _600">45</h2>
-                    <p class="text-muted m-b-md">Total</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="padding">
-                <div class="p-t-md">
-                    <span class="pull-right"><i class="fa fa-circle text-primary m-y-xs"></i></span>
-                </div>
-                <div class="text-center">
-                    <h2 class="text-center _600">45</h2>
-                    <p class="text-muted m-b-md">Open</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="padding">
-                <div class="p-t-md">
-                    <span class="pull-right"><i class="fa fa-circle text-primary m-y-xs"></i></span>
-                </div>
-                <div class="text-center">
-                    <h2 class="text-center _600">219</h2>
-                    <p class="text-muted m-b-md">Escallated</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="padding">
-                <div class="p-t-md">
-                    <span class="pull-right"><i class="fa fa-circle text-danger m-y-xs"></i></span>
-                </div>
-                <div class="text-center">
-                    <h2 class="text-center _600">8</h2>
-                    <p class="text-muted m-b-md">In Progress</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="padding">
-                <div class="p-t-md">
-                    <span class="pull-right"><i class="fa fa-circle text-primary m-y-xs"></i></span>
-                </div>
-                <div class="text-center">
-                    <h2 class="text-center _600">36</h2>
-                    <p class="text-muted m-b-md">Closed</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-2">
-            <div class="padding">
-                <div class="p-t-md">
-                    <span class="pull-right"><i class="fa fa-circle text-primary m-y-xs"></i></span>
-                </div>
-                <div class="text-center">
-                    <h2 class="text-center _600">45</h2>
-                    <p class="text-muted m-b-md">Late</p>
+                    <h2 class="text-center text-3x" title="{{pipeline.count | number:0}}">
+                        {{pipeline.count | numeraljs:'0a'}}
+                    </h2>
+                    <p class="text-muted m-b-md">{{pipeline.label.name}}</p>
                 </div>
             </div>
         </div>

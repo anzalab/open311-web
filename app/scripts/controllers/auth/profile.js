@@ -132,4 +132,28 @@ angular
         });
     };
 
+
+    $scope.performance = function () {
+      var params = {
+        _id: $scope.party._id
+      };
+
+      Party.performances(params).then(function (response) {
+        //TODO comment
+        response.pipelines =
+          _.chain(response.pipelines)
+          .orderBy('label.weight', 'asc')
+          .map(function (pipeline) {
+            return _.merge({}, {
+              displayColor: _.get(pipeline, 'label.color',
+                '#4BC0C0') + '!important'
+            }, pipeline);
+          }).value();
+
+        $scope.performances = response;
+      });
+    };
+
+    $scope.performance();
+
   });
