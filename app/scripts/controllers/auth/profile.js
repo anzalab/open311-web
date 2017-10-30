@@ -23,6 +23,24 @@ angular
     //use only editable properties
     $scope.party = new Party($rootScope.party);
 
+    //bind filters
+    $scope.filters = {
+      durations: {
+        day: {
+          startedAt: moment().utc().startOf('date').toDate(),
+          endedAt: moment().utc().endOf('date').toDate()
+        },
+        week: {
+          startedAt: moment().utc().startOf('week').toDate(),
+          endedAt: moment().utc().endOf('week').toDate()
+        },
+        month: {
+          startedAt: moment().utc().startOf('month').toDate(),
+          endedAt: moment().utc().endOf('month').toDate()
+        }
+      }
+    };
+
 
     $scope.onEdit = function () {
       $scope.edit = true;
