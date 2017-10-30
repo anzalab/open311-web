@@ -21,12 +21,7 @@ angular
     $scope.passwordDontMatch = false;
 
     //use only editable properties
-    $scope.party = new Party({
-      _id: $rootScope.party._id,
-      name: $rootScope.party.name,
-      email: $rootScope.party.email,
-      phone: $rootScope.party.phone
-    });
+    $scope.party = new Party($rootScope.party);
 
 
     $scope.onEdit = function () {
