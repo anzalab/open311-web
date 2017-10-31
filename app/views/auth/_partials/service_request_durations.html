@@ -10,7 +10,7 @@
     </div>
     <!-- end header -->
     <div class="row m-t-lg">
-        <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="box p-a">
                 <div class="box-header">
                     <h2>Today</h2>
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 offset-lg-1">
+        <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="box p-a">
                 <div class="box-header">
                     <h2>This Week</h2>
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 offset-lg-1">
+        <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="box p-a">
                 <div class="box-header">
                     <h2>This Month</h2>
@@ -102,6 +102,40 @@
                         <span>
                           {{(performances.durations.month.duration.days * 24) + performances.durations.month.duration.hours }}
                            <span class="text-sm text-muted">Hours</span> {{performances.durations.month.duration.minutes}}
+                        <span class="text-sm text-muted">Minutes</span>
+                        </span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3">
+            <div class="box p-a">
+                <div class="box-header">
+                    <h2>Average Call Duration</h2>
+                    <small>
+                      {{party.createdAt | date: settings.dateFormat}}  -
+                      Present
+                  </small>
+                    <!-- <div class="box-tool">
+                      <ul class="nav">
+                          <li class="nav-item inline">
+                              <a class="nav-link">
+                                <i  class="icon-reload"></i>
+                              </a>
+                          </li>
+                          <li class="nav-item inline">
+                              <a class="nav-link p-l-xs">
+                                <i class="icon-frame"></i>
+                              </a>
+                          </li>
+                      </ul>
+                  </div> -->
+                </div>
+                <div class="box-body">
+                    <h4 class="m-a-0 text-3x">
+                        <span>
+                        {{(performances.durations.month.duration.days * 24) + performances.durations.month.duration.hours }}
+                         <span class="text-sm text-muted">Hours</span> {{performances.durations.month.duration.minutes}}
                         <span class="text-sm text-muted">Minutes</span>
                         </span>
                     </h4>
