@@ -14,8 +14,8 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>Today</h2>
-                    <small>{{workFilters.durations.day.startedAt | date: settings.dateFormat}}</small>
-                    <div class="box-tool">
+                    <small>{{performances.works.day.startedAt | date: settings.dateFormat}}</small>
+                    <!-- <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
                                 <a class="nav-link">
@@ -28,11 +28,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="box-body">
                     <h4 class="m-a-0 text-3x">
-                        <a href="#">75</a>
+                        <a href="#">{{performances.works.day.count}}</a>
                     </h4>
                 </div>
             </div>
@@ -41,10 +41,10 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>This Week</h2>
-                    <small>{{workFilters.durations.week.startedAt | date: settings.dateFormat}} -
-                       {{workFilters.durations.week.endedAt | date: settings.dateFormat}}
+                    <small>{{performances.works.week.startedAt | date: settings.dateFormat}} -
+                       {{performances.works.week.endedAt | date: settings.dateFormat}}
                     </small>
-                    <div class="box-tool">
+                    <!-- <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
                                 <a class="nav-link">
@@ -57,11 +57,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="box-body">
                     <h4 class="m-a-0 text-3x">
-                        <a href="#">40</a>
+                        <a href="#">{{performances.works.week.count}}</a>
                     </h4>
                 </div>
             </div>
@@ -71,10 +71,10 @@
                 <div class="box-header">
                     <h2>This Month</h2>
                     <small>
-                        {{workFilters.durations.month.startedAt | date: settings.dateFormat}}  -
-                        {{workFilters.durations.month.endedAt | date: settings.dateFormat}}
+                        {{performances.works.month.startedAt | date: settings.dateFormat}}  -
+                        {{performances.works.month.endedAt | date: settings.dateFormat}}
                     </small>
-                    <div class="box-tool">
+                    <!-- <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
                                 <a class="nav-link">
@@ -87,11 +87,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="clear">
+                <div class="box-body">
                     <h4 class="m-a-0 text-3x">
-                        <a href="#">6,000</a>
+                        <a href="#">{{performances.works.month.count}}</a>
                     </h4>
                 </div>
             </div>

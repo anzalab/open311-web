@@ -14,8 +14,8 @@
             <div class="box p-a">
                 <div class="box-header">
                     <h2>Today</h2>
-                    <small>{{durationFilters.durations.day.startedAt | date: settings.dateFormat}}</small>
-                    <div class="box-tool">
+                    <small>{{performances.durations.day.startedAt | date: settings.dateFormat}}</small>
+                    <!-- <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
                                 <a class="nav-link">
@@ -28,12 +28,14 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="box-body">
-                    <h4 class="m-a-0 text-3x"><a href="#">
-                      00 <span class="text-sm text-muted">Hours</span>
-                      35 <span class="text-sm text-muted">Minutes</span></a>
+                    <h4 class="m-a-0 text-3x"><span>
+                      {{(performances.durations.day.duration.days * 24) + performances.durations.day.duration.hours }}
+                      <span class="text-sm text-muted">Hours</span> {{performances.durations.day.duration.minutes}}
+                        <span class="text-sm text-muted">Minutes</span>
+                        </span>
                     </h4>
                 </div>
             </div>
@@ -43,10 +45,10 @@
                 <div class="box-header">
                     <h2>This Week</h2>
                     <small>
-                      {{durationFilters.durations.week.startedAt | date: settings.dateFormat}}  -
-                      {{durationFilters.durations.week.endedAt | date: settings.dateFormat}}
+                      {{performances.durations.week.startedAt | date: settings.dateFormat}}  -
+                      {{performances.durations.week.endedAt | date: settings.dateFormat}}
                     </small>
-                    <div class="box-tool">
+                    <!-- <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
                                 <a class="nav-link">
@@ -59,14 +61,15 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="box-body">
                     <h4 class="m-a-0 text-3x">
-                        <a href="#">
-                          16 <span class="text-sm text-muted">Hours</span>
-                          24 <span class="text-sm text-muted">Minutes</span>
-                        </a>
+                        <span>
+                          {{(performances.durations.week.duration.days * 24) + performances.durations.week.duration.hours }}
+                          <span class="text-sm text-muted">Hours</span> {{performances.durations.week.duration.minutes}}
+                        <span class="text-sm text-muted">Minutes</span>
+                        </span>
                     </h4>
                 </div>
             </div>
@@ -76,10 +79,10 @@
                 <div class="box-header">
                     <h2>This Month</h2>
                     <small>
-                        {{durationFilters.durations.month.startedAt | date: settings.dateFormat}}  -
-                        {{durationFilters.durations.month.endedAt | date: settings.dateFormat}}
+                        {{performances.durations.month.startedAt | date: settings.dateFormat}}  -
+                        {{performances.durations.month.endedAt | date: settings.dateFormat}}
                     </small>
-                    <div class="box-tool">
+                    <!-- <div class="box-tool">
                         <ul class="nav">
                             <li class="nav-item inline">
                                 <a class="nav-link">
@@ -92,12 +95,15 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="box-body">
-                    <h4 class="m-a-0 text-3x"><a href="#">
-                        100 <span class="text-sm text-muted">Hours</span>
-                        15 <span class="text-sm text-muted">Minutes</span></a>
+                    <h4 class="m-a-0 text-3x">
+                        <span>
+                          {{(performances.durations.month.duration.days * 24) + performances.durations.month.duration.hours }}
+                           <span class="text-sm text-muted">Hours</span> {{performances.durations.month.duration.minutes}}
+                        <span class="text-sm text-muted">Minutes</span>
+                        </span>
                     </h4>
                 </div>
             </div>

@@ -150,6 +150,9 @@ angular
             }, pipeline);
           }).value();
 
+        response.leaderboard =
+          _.orderBy(response.leaderboard, 'count', 'desc');
+        console.log(response);
         $scope.performances = response;
       });
     };
