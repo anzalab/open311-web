@@ -15,16 +15,16 @@
     <ng-include src="'views/auth/_partials/profile_summary.html'"></ng-include>
     <!-- end profile summary -->
     <!-- start service request pipelines -->
-    <ng-include src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
+    <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
     <!-- end service request pipelines -->
     <!-- start service request counts -->
-    <ng-include src="'views/auth/_partials/service_request_counts.html'"></ng-include>
+    <ng-include ng-if="performances.works" src="'views/auth/_partials/service_request_counts.html'"></ng-include>
     <!-- end service request counts -->
     <!-- start service request durations -->
-    <ng-include src="'views/auth/_partials/service_request_durations.html'"></ng-include>
+    <ng-include ng-if="performances.durations" src="'views/auth/_partials/service_request_durations.html'"></ng-include>
     <!-- end service request durations -->
     <!-- start service request leaderboard -->
-    <ng-include src="'views/auth/_partials/service_request_leaderboard.html'"></ng-include>
+    <ng-include ng-if="performances.leaderboard" src="'views/auth/_partials/service_request_leaderboard.html'"></ng-include>
     <!-- end service request leaderboard -->
 </div>
 <!-- end app body -->
