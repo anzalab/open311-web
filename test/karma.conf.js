@@ -33,8 +33,6 @@ module.exports = function(config) {
             'bower_components/angular-sanitize/angular-sanitize.js',
             'bower_components/angular-ui-router/release/angular-ui-router.js',
             'bower_components/ng-notify/src/scripts/ng-notify.js',
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/tether/dist/js/tether.js',
             'bower_components/checklist-model/checklist-model.js',
             'bower_components/angular-prompt/dist/angular-prompt.js',
             'bower_components/lodash/lodash.js',
