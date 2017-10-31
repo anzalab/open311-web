@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "appPath": "app",
   "moduleName": "open311-web",
-  "dependencies":
-  {
+  "dependencies": {
     "angular": "^1.6.5",
     "angular-bootstrap": "^2.4.0",
     "angular-loading-bar": "~0.8.0",
@@ -40,79 +39,66 @@
     "angular-pickadate": "https://github.com/lykmapipo/angular-pickadate.git#^2.1.2",
     "ui-leaflet": "^2.0.0"
   },
-  "devDependencies":
-  {
+  "devDependencies": {
     "angular-mocks": "^1.4.0"
   },
-  "overrides":
-  {
-    "bootstrap":
-    {
+  "overrides": {
+    "bootstrap": {
       "main": [
         "dist/css/bootstrap.css"
-      ],
-      "dependencies": []
+      ]
     },
-    "angular-bootstrap":
-    {
+    "angular-bootstrap": {
       "main": [
         "ui-bootstrap.js",
         "ui-bootstrap-tpls.js"
       ]
     },
-    "open-iconic":
-    {
+    "open-iconic": {
       "main": [
         "font/css/open-iconic-bootstrap.css"
       ]
     },
-    "font-awesome":
-    {
+    "font-awesome": {
       "main": [
         "css/font-awesome.css"
       ]
     },
-    "themify-icons":
-    {
+    "themify-icons": {
       "main": [
         "css/themify-icons.css",
         "fonts"
       ]
     },
-    "ng-csv":
-    {
+    "ng-csv": {
       "main": [
         "build/ng-csv.js"
       ]
     },
-    "socket.io-client":
-    {
+    "socket.io-client": {
       "main": [
         "dist/socket.io.js"
       ]
     },
-    "echarts":
-    {
+    "echarts": {
       "main": [
         "dist/echarts.js"
       ]
     },
-    "oi.select":
-    {
+    "oi.select": {
       "main": [
         "dist/select-tpls.js",
         "dist/select.css"
       ],
-      "dependencies":
-      {
+      "dependencies": {
         "angular": ">=1.2",
         "angular-sanitize": ">=1.2"
       }
     }
   },
-  "resolutions":
-  {
+  "resolutions": {
     "angular": "^1.6.5",
-    "angular-ui-router": "^0.4.0"
+    "angular-ui-router": "^0.4.0",
+    "angular-bootstrap": "^2.4.0"
   }
 }
