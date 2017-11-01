@@ -15,6 +15,12 @@
     <ng-include src="'views/auth/_partials/profile_summary.html'"></ng-include>
     <!-- end profile summary -->
     <!-- start service request pipelines -->
+    <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.1.html'"></ng-include>
+
+    <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.2.html'"></ng-include>
+
+    <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.3.html'"></ng-include>
+
     <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
     <!-- end service request pipelines -->
     <!-- start service request counts -->
