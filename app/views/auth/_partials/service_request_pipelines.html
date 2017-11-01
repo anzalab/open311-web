@@ -10,7 +10,7 @@
     <!-- end header -->
     <!-- start displaying pipeline -->
     <div class="row m-t-lg">
-        <div ng-repeat="pipeline in performances.pipelines" class="col-xs-6 col-sm-2" title="{{pipeline.label.name}} Service Requests">
+        <div ng-repeat="pipeline in performances.pipelines" ng-class="{'b-l':$first}" class="col-xs-6 col-sm-2 b-t b-r b-b" title="{{pipeline.label.name}} Service Requests">
             <div class="padding">
                 <div class="p-t-md">
                     <span class="pull-right">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-2" title="Late Service Requests">
+        <div class="col-xs-6 col-sm-2 b-a b-l-0" title="Late Service Requests">
             <div class="padding">
                 <div class="p-t-md">
                     <span class="pull-right">
