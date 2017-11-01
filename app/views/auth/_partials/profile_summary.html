@@ -2,7 +2,7 @@
 <div class="item">
     <div class="p-a-lg">
         <div class="row m-t">
-            <div class="col-sm-12">
+            <div class="col-sm-12 col-md-4 col-lg-6">
                 <!-- start party avatar -->
                 <a href="#" class="pull-left m-r-md">
                   <span>
@@ -55,6 +55,11 @@
                 </div>
                 <!-- end party details -->
             </div>
+            <!-- start of pipeline -->
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
+            </div>
+            <!-- end of pipeline -->
         </div>
     </div>
 </div>
