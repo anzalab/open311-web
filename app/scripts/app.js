@@ -85,6 +85,14 @@ angular
           }
         }
       })
+      .state('app.performances', {
+        url: '/performances',
+        templateUrl: 'views/dashboards/performances.html',
+        controller: 'DashboardPerformanceCtrl',
+        data: {
+          authenticated: true
+        }
+      })
       .state('app.manage', {
         abstract: true,
         templateUrl: 'views/manage/main.html'
