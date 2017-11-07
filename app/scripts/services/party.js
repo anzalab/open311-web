@@ -27,6 +27,12 @@ angular
      * @return {[type]}        [description]
      */
     Party.find = function (params) {
+
+      //ensure roles is populated
+      params = _.merge({}, params, {
+        populate: [{ path: 'roles' }]
+      });
+
       return $http.get(Utils.asLink('parties'), {
           params: params
         })

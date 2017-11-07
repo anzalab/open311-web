@@ -27,6 +27,12 @@ angular
      * @return {[type]}        [description]
      */
     Service.find = function (params) {
+
+      //ensure service group is populated
+      params = _.merge({}, params, {
+        populate: [{ path: 'group', select: 'name' }]
+      });
+
       return $http.get(Utils.asLink('services'), {
           params: params
         })

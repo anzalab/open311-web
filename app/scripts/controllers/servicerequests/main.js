@@ -82,6 +82,9 @@ angular
      */
     $scope.select = function (servicerequest) {
 
+      //clear note
+      $scope.note = {};
+
       //sort comments in desc order
       if (servicerequest && servicerequest._id) {
         //update scope service request ref
@@ -145,7 +148,15 @@ angular
       if (assignee) {
         $scope.servicerequest.assignee = assignee._id;
         if (!$scope.servicerequest.resolvedAt) {
-          $scope.servicerequest.$update().then(function (response) {
+
+          var changelog = { //TODO flag internal or public
+            changer: party._id,
+            assignee: $scope.servicerequest.assignee
+          };
+
+          //update changelog
+          var _id = $scope.servicerequest._id;
+          ServiceRequest.changelog(_id, changelog).then(function (response) {
             // $scope.servicerequest = response;
             $scope.select(response);
             $scope.updated = true;
@@ -168,13 +179,11 @@ angular
           comment: $scope.note.content
         };
 
-        //update changelogs
-        $scope.servicerequest.changelogs =
-          ([].concat($scope.servicerequest.changelogs).concat(changelog));
-
         //update changelog
-        $scope.servicerequest.$update().then(function (response) {
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog).then(function (response) {
           //TODO notify success
+          $scope.note = {};
           $scope.select(response);
           $scope.updated = true;
         }).catch(function (error) {
@@ -191,13 +200,21 @@ angular
       }
 
       if (!$scope.servicerequest.resolvedAt) {
-        $scope.servicerequest.$update().then(function (response) {
+
+        var changelog = { //TODO flag internal or public
+          changer: party._id,
+          priority: $scope.servicerequest.priority
+        };
+        var _id = $scope.servicerequest._id;
+
+        ServiceRequest.changelog(_id, changelog).then(function (response) {
           // $scope.servicerequest = response;
           $scope.select(response);
           $scope.updated = true;
           $rootScope.$broadcast('app:servicerequests:reload');
         });
       }
+
     };
 
     $scope.changeStatus = function (status) {
@@ -206,7 +223,13 @@ angular
       }
 
       if (!$scope.servicerequest.resolvedAt) {
-        $scope.servicerequest.$update().then(function (response) {
+        var changelog = { //TODO flag internal or public
+          changer: party._id,
+          status: $scope.servicerequest.status
+        };
+        var _id = $scope.servicerequest._id;
+
+        ServiceRequest.changelog(_id, changelog).then(function (response) {
           // $scope.servicerequest = response;
           $scope.select(response);
           $scope.updated = true;

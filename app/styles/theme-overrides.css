@@ -310,6 +310,11 @@ svg text {
   padding-bottom: 0 !important;
 }
 
+.streamline .label {
+    padding: .4em .5em;
+    color: #FFFFFF;
+}
+
 /*custom checkbox overrides*/
 .checkbox-primary input[type="checkbox"]:checked + label::before,
 .checkbox-primary input[type="radio"]:checked + label::before {
