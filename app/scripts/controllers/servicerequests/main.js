@@ -195,9 +195,15 @@ angular
     };
 
     $scope.changePriority = function (priority) {
+
+      if (priority._id === $scope.servicerequest.priority._id) {
+        return;
+      }
+
       if (priority) {
         $scope.servicerequest.priority = priority;
       }
+
 
       if (!$scope.servicerequest.resolvedAt) {
 
@@ -218,6 +224,11 @@ angular
     };
 
     $scope.changeStatus = function (status) {
+
+      if (status._id === $scope.servicerequest.status._id) {
+        return;
+      }
+
       if (status) {
         $scope.servicerequest.status = status;
       }
@@ -254,8 +265,16 @@ angular
         }]
       }).then(function () {
         if (!$scope.servicerequest.resolvedAt) {
-          $scope.servicerequest.resolvedAt = new Date();
-          $scope.servicerequest.$update().then(function (response) {
+
+          var changelog = { //TODO flag internal or public
+            changer: party._id,
+            resolvedAt: new Date()
+          };
+
+          //update changelog
+          var _id = $scope.servicerequest._id;
+          ServiceRequest.changelog(_id, changelog).then(function (
+            response) {
             // $scope.servicerequest = response;
             $scope.select(response);
             $scope.updated = true;
@@ -289,8 +308,16 @@ angular
         }]
       }).then(function () {
         if ($scope.servicerequest.resolvedAt) {
-          $scope.servicerequest.resolvedAt = null;
-          $scope.servicerequest.$update().then(function (response) {
+
+          var changelog = { //TODO flag internal or public
+            changer: party._id,
+            resolvedAt: null
+          };
+
+          //update changelog
+          var _id = $scope.servicerequest._id;
+          ServiceRequest.changelog(_id, changelog).then(function (
+            response) {
             // $scope.servicerequest = response;
             $scope.select(response);
             $scope.updated = true;
