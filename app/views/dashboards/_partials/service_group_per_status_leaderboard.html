@@ -34,25 +34,17 @@
                     <thead>
                         <tr>
                             <th>Service Group</th>
-                            <th>Open</th>
-                            <th>Escallated</th>
-                            <th>In Progress</th>
-                            <th>Closed</th>
-                            <th>Resolved</th>
-                            <th>Late</th>
+                            <th ng-repeat="status in statuses">{{status.name}}</th>
                             <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="servicegroup in serviceGroupPerStatus">
-                            <td>{{servicegroup.name}}</td>
-                            <td>{{servicegroup.open}}</td>
-                            <td>{{servicegroup.escallated}}</td>
-                            <td>{{servicegroup.inprogress}}</td>
-                            <td>{{servicegroup.closed}}</td>
-                            <td>{{servicegroup.resolved}}</td>
-                            <td>{{servicegroup.late}}</td>
-                            <td>{{servicegroup.total}}</td>
+                        <tr ng-repeat="serviceGroup in serviceGroupPerStatus">
+                            <td>{{serviceGroup.name}}</td>
+                            <td ng-repeat="status in serviceGroup.statuses">
+                                {{status.count}}
+                            </td>
+                            <td>{{serviceGroup.total}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -20,16 +20,31 @@ angular
           $scope.standings = standings;
 
           $scope.prepare();
-          console.log(standings);
         });
     };
 
     // prepare standing report data in a preferable format
     $scope.prepare = function () {
+
+      $scope.statuses = _.chain($scope.standings)
+        .map('status')
+        .uniqBy('name')
+        .sortBy('weight')
+        .value();
+
+      // service groups
+      $scope.groups = _.chain($scope.standings)
+        .map('group')
+        .uniqBy('name')
+        .sortBy('name')
+        .value();
+
+
       $scope.prepareAreaPerStatus();
       $scope.prepareAreaPerServiceGroup();
       $scope.prepareAreaPerService();
       $scope.prepareServicePerStatus();
+      $scope.prepareServiceGroupPerStatus();
     };
 
 
@@ -42,11 +57,7 @@ angular
         .sortBy('name')
         .value();
 
-      $scope.statuses = _.chain($scope.standings)
-        .map('status')
-        .uniqBy('name')
-        .sortBy('weight')
-        .value();
+
 
       // data which will be displayed
       var data = [];
@@ -149,12 +160,7 @@ angular
         .sortBy('name')
         .value();
 
-      // service groups
-      $scope.groups = _.chain($scope.standings)
-        .map('group')
-        .uniqBy('name')
-        .sortBy('name')
-        .value();
+
 
       var data = [];
 
@@ -295,13 +301,6 @@ angular
         .sortBy('name')
         .value();
 
-
-      $scope.statuses = _.chain($scope.standings)
-        .map('status')
-        .uniqBy('name')
-        .sortBy('weight')
-        .value();
-
       var data = [];
       _.forEach(services, function (service) {
         var serviceObject = {};
@@ -360,6 +359,73 @@ angular
     };
 
 
+    $scope.prepareServiceGroupPerStatus = function () {
+
+      // service groups
+      var groups = _.chain($scope.standings)
+        .map('group')
+        .uniqBy('name')
+        .sortBy('name')
+        .value();
+
+      var data = [];
+
+      _.forEach(groups, function (group) {
+        var groupObject = {};
+        groupObject.name = group.name;
+        groupObject.statuses = [];
+        groupObject.total = 0;
+        _.forEach($scope.statuses, function (status) {
+
+          var value = _.filter($scope.standings, function (standing) {
+            return standing.group.name === group.name &&
+              standing.status.name === status.name;
+          });
+
+          value = value ? _.sumBy(value, 'count') : 0;
+
+          status = _.merge({}, status, {
+            count: value
+          });
+
+          groupObject.statuses.push(status);
+
+          groupObject.total += value;
+
+        });
+        data.push(groupObject);
+      });
+
+      // prepare the last Row
+      var lastRow = {};
+      lastRow.total = 0;
+      lastRow.name = 'Total';
+      lastRow.statuses = [];
+
+      _.forEach($scope.statuses, function (status) {
+
+        var value = _.filter($scope.standings, function (standing) {
+          return standing.status.name === status.name;
+        });
+
+        value = value ? _.sumBy(value, 'count') : 0;
+
+        status = _.merge({}, status, {
+          count: value
+        });
+
+        lastRow.statuses.push(status);
+
+        lastRow.total += value;
+
+      });
+
+      data.push(lastRow);
+
+      $scope.serviceGroupPerStatus = data;
+    };
+
+
 
     // dummy data
     $scope.pipelines = [{
@@ -392,48 +458,6 @@ angular
         name: 'Closed'
       },
       displayColor: '#1B5E20'
-    }];
-
-
-
-
-
-    $scope.serviceGroupPerStatus = [{
-      name: 'Commercial',
-      open: 2,
-      inprogress: 4,
-      escallated: 5,
-      closed: 40,
-      resolved: 4,
-      late: 45,
-      total: 120
-    }, {
-      name: 'Non Commercial',
-      open: 2,
-      inprogress: 4,
-      escallated: 5,
-      closed: 40,
-      resolved: 4,
-      late: 45,
-      total: 120
-    }, {
-      name: 'Illegal',
-      open: 2,
-      inprogress: 4,
-      escallated: 5,
-      closed: 40,
-      resolved: 4,
-      late: 45,
-      total: 120
-    }, {
-      name: 'Other',
-      open: 2,
-      inprogress: 4,
-      escallated: 5,
-      closed: 40,
-      resolved: 4,
-      late: 45,
-      total: 120
     }];
 
 
