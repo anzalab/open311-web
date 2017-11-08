@@ -29,6 +29,7 @@ angular
       $scope.prepareAreaPerStatus();
       $scope.prepareAreaPerServiceGroup();
       $scope.prepareAreaPerService();
+      $scope.prepareServicePerStatus();
     };
 
 
@@ -285,6 +286,80 @@ angular
       $scope.areaPerService = data;
     };
 
+    // TODO document this function
+    $scope.prepareServicePerStatus = function () {
+
+      var services = _.chain($scope.standings)
+        .map('service')
+        .uniqBy('name')
+        .sortBy('name')
+        .value();
+
+
+      $scope.statuses = _.chain($scope.standings)
+        .map('status')
+        .uniqBy('name')
+        .sortBy('weight')
+        .value();
+
+      var data = [];
+      _.forEach(services, function (service) {
+        var serviceObject = {};
+        serviceObject.name = service.name;
+        serviceObject.total = 0;
+        serviceObject.statuses = [];
+
+        _.forEach($scope.statuses, function (status) {
+
+          var value = _.filter($scope.standings, function (standing) {
+            return standing.service.name === service.name &&
+              standing.status.name === status.name;
+          });
+
+          value = value ? _.sumBy(value, 'count') : 0;
+
+          status = _.merge({}, status, {
+            count: value
+          });
+
+          serviceObject.statuses.push(status);
+
+          serviceObject.total += value;
+        });
+
+        data.push(serviceObject);
+
+      });
+
+
+      var lastRow = {};
+      lastRow.name = 'Total';
+      lastRow.total = 0;
+      lastRow.statuses = [];
+
+      _.forEach($scope.statuses, function (status) {
+
+        var value = _.filter($scope.standings, function (standing) {
+          return standing.status.name === status.name;
+        });
+
+        value = value ? _.sumBy(value, 'count') : 0;
+
+        status = _.merge({}, status, {
+          count: value
+        });
+
+        lastRow.statuses.push(status);
+
+        lastRow.total += value;
+      });
+
+      data.push(lastRow);
+
+      $scope.servicePerStatus = data;
+    };
+
+
 
     // dummy data
     $scope.pipelines = [{
@@ -320,67 +395,7 @@ angular
     }];
 
 
-    $scope.servicesPerStatus = [{
-        name: 'Billing',
-        open: 2,
-        inprogress: 4,
-        escallated: 5,
-        closed: 40,
-        resolved: 4,
-        late: 45,
-        total: 120
-      },
-      {
-        name: 'Lack of Water',
-        open: 2,
-        inprogress: 4,
-        escallated: 5,
-        closed: 40,
-        resolved: 4,
-        late: 45,
-        total: 120
-      },
-      {
-        name: 'Meter Problem',
-        open: 2,
-        inprogress: 4,
-        escallated: 5,
-        closed: 40,
-        resolved: 4,
-        late: 45,
-        total: 120
-      },
-      {
-        name: 'Others',
-        open: 2,
-        inprogress: 4,
-        escallated: 5,
-        closed: 40,
-        resolved: 4,
-        late: 45,
-        total: 120
-      },
-      {
-        name: 'Billing',
-        open: 2,
-        inprogress: 4,
-        escallated: 5,
-        closed: 40,
-        resolved: 4,
-        late: 45,
-        total: 120
-      },
-      {
-        name: 'Billing',
-        open: 2,
-        inprogress: 4,
-        escallated: 5,
-        closed: 40,
-        resolved: 4,
-        late: 45,
-        total: 120
-      }
-    ];
+
 
 
     $scope.serviceGroupPerStatus = [{

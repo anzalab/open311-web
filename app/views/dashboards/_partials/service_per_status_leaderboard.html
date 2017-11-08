@@ -34,25 +34,15 @@
                     <thead>
                         <tr>
                             <th>Service</th>
-                            <th>Open</th>
-                            <th>Escallated</th>
-                            <th>In Progress</th>
-                            <th>Closed</th>
-                            <th>Resolved</th>
-                            <th>Late</th>
+                            <th ng-repeat="status in statuses">{{status.name}}</th>
                             <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="service in servicesPerStatus">
+                        <tr ng-repeat="service in servicePerStatus">
                             <!-- <td><label class="ui-check m-a-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td> -->
                             <td>{{service.name}}</td>
-                            <td>{{service.open}}</td>
-                            <td>{{service.escallated}}</td>
-                            <td>{{service.inprogress}}</td>
-                            <td>{{service.closed}}</td>
-                            <td>{{service.resolved}}</td>
-                            <td>{{service.late}}</td>
+                            <td ng-repeat="status in service.statuses">{{status.count}}</td>
                             <td>{{service.total}}</td>
                         </tr>
                     </tbody>
