@@ -1,0 +1,27 @@
+<!-- start service request summary -->
+<div>
+    <!-- start displaying summary -->
+    <div class="row">
+        <div ng-repeat="summary in performances.summaries" class="col-xs-6 col-sm-2" style="background-color:{{summary.color}};color:#fff;" title="{{summary.name}} Service Requests">
+            <div class="">
+                <div class="p-t-md">
+                    <span class="pull-right">
+                    </span>
+                </div>
+                <div class="text-center">
+                    <h2 class="text-center text-md" title="{{summary.count | number:0}}">
+                        {{summary.count | numeraljs:'0a'}}
+                    </h2>
+                    <p class="m-b-md text-sm">{{summary.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TODO resolved summary -->
+    <!-- TODO late summary -->
+    <!-- TODO reopened summary -->
+    <!-- TODO filter by duration (today, this weeek, this month) -->
+    <!-- end displaying summary -->
+
+</div>
+<!-- end service request summary -->

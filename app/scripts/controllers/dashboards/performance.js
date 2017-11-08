@@ -45,7 +45,6 @@ angular
     //initialize performances
     $scope.performances = [];
 
-
     /**
      * Open overview reports filter
      */
@@ -116,7 +115,32 @@ angular
         .performances({ query: $scope.params })
         .then(function (performances) {
           $scope.performances = performances;
+
+          //prepare summary
+          $scope.performances.summaries = [{
+            name: 'Total',
+            count: $scope.performances.total,
+            color: '#607D8B'
+          }, {
+            name: 'Resolved',
+            count: $scope.performances.resolved,
+            color: '#8BC34A'
+          }, {
+            name: 'Pending',
+            count: $scope.performances.pending,
+            color: '#00BCD4'
+          }, {
+            name: 'Late',
+            count: $scope.performances.late,
+            color: '#009688'
+          }, {
+            name: 'Un-Attended',
+            count: $scope.performances.unattended,
+            color: '#9E9D24'
+          }];
+
           console.log($scope.performances);
+
         });
     };
 
