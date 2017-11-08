@@ -31,13 +31,14 @@
                     <thead>
                         <tr>
                             <th>Service</th>
-                            <th ng-repeat="area in areaPerService.areas">{{area}}</th>
+                            <th ng-repeat="area in areas">{{area.name}}</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="service in areaPerService.services">
+                        <tr ng-repeat="service in areaPerService">
                             <td>{{service.name}}</td>
-                            <td ng-repeat="count in service.counts track by $index">{{count}}</td>
+                            <td ng-repeat="area in service.areas">{{area.count}}</td>
                             <td>{{service.total}}</td>
                         </tr>
                     </tbody>

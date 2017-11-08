@@ -28,9 +28,11 @@ angular
     $scope.prepare = function () {
       $scope.prepareAreaPerStatus();
       $scope.prepareAreaPerServiceGroup();
+      $scope.prepareAreaPerService();
     };
 
 
+    // TODO document this function
     $scope.prepareAreaPerStatus = function () {
 
       var areas = _.chain($scope.standings)
@@ -110,6 +112,7 @@ angular
       $scope.areaPerStatus = data;
     };
 
+    // TODO document this function
     $scope.preparePipeline = function () {
       var data = [];
       var total = 0;
@@ -136,6 +139,7 @@ angular
 
     };
 
+    //TODO document this function
     $scope.prepareAreaPerServiceGroup = function () {
 
       var areas = _.chain($scope.standings)
@@ -207,8 +211,78 @@ angular
 
       data.push(lastRow);
 
-      console.log(data);
       $scope.areaPerServiceGroup = data;
+    };
+
+    // TODO document this function
+    $scope.prepareAreaPerService = function () {
+
+      $scope.areas = _.chain($scope.standings)
+        .map('jurisdiction')
+        .uniqBy('name')
+        .sortBy('name')
+        .value();
+
+      var services = _.chain($scope.standings)
+        .map('service')
+        .uniqBy('name')
+        .sortBy('name')
+        .value();
+
+      var data = [];
+
+      _.forEach(services, function (service) {
+        var serviceObject = {};
+        serviceObject.name = service.name;
+        serviceObject.areas = [];
+        serviceObject.total = 0;
+        _.forEach($scope.areas, function (area) {
+
+          var value = _.filter($scope.standings, function (standing) {
+            return standing.service.name === service.name &&
+              standing.jurisdiction.name === area.name;
+          });
+
+          value = value ? _.sumBy(value, 'count') : 0;
+
+          serviceObject.total += value;
+
+          area = _.merge({}, area, {
+            count: value
+          });
+
+          serviceObject.areas.push(area);
+        });
+
+        data.push(serviceObject);
+      });
+
+
+      var lastRow = {};
+      lastRow.name = 'Total';
+      lastRow.areas = [];
+      lastRow.total = 0;
+      // prepare the last row which is the summation of each column
+      _.forEach($scope.areas, function (area) {
+
+        var value = _.filter($scope.standings, function (standing) {
+          return standing.jurisdiction.name === area.name;
+        });
+
+        value = value ? _.sumBy(value, 'count') : 0;
+
+        lastRow.total += value;
+
+        area = _.merge({}, area, {
+          count: value
+        });
+
+        lastRow.areas.push(area);
+      });
+
+      data.push(lastRow);
+
+      $scope.areaPerService = data;
     };
 
 
@@ -245,56 +319,6 @@ angular
       displayColor: '#1B5E20'
     }];
 
-
-    $scope.areaPerServiceGroup = [{
-        name: 'Ilala',
-        commercial: 2,
-        noncommercial: 4,
-        illegal: 5,
-        other: 40,
-        total: 120
-      },
-      {
-        name: 'Temeke',
-        commercial: 2,
-        noncommercial: 4,
-        illegal: 5,
-        other: 40,
-        total: 120
-      },
-      {
-        name: 'Kibaha',
-        commercial: 2,
-        noncommercial: 4,
-        illegal: 5,
-        other: 40,
-        total: 120
-      },
-      {
-        name: 'Kimara',
-        commercial: 2,
-        noncommercial: 4,
-        illegal: 5,
-        other: 40,
-        total: 120
-      },
-      {
-        name: 'Mbezi',
-        commercial: 2,
-        noncommercial: 4,
-        illegal: 5,
-        other: 40,
-        total: 120
-      },
-      {
-        name: 'Tegeta',
-        commercial: 2,
-        noncommercial: 4,
-        illegal: 5,
-        other: 40,
-        total: 120
-      }
-    ];
 
     $scope.servicesPerStatus = [{
         name: 'Billing',
@@ -357,25 +381,6 @@ angular
         total: 120
       }
     ];
-
-    $scope.areaPerService = {
-      areas: ['Boko', 'Temeke', 'Kinondoni', 'Kibaha', 'Kimara', 'Mbezi',
-        'Total'
-      ],
-      services: [{
-        name: 'Billing',
-        counts: [12, 43, 23, 21, 43, 12],
-        total: 200
-      }, {
-        name: 'Lack of Water',
-        counts: [12, 34, 634, 34, 23, 12],
-        total: 304
-      }, {
-        name: 'Meter Problems',
-        counts: [12, 34, 634, 34, 23, 12],
-        total: 400
-      }]
-    };
 
 
     $scope.serviceGroupPerStatus = [{
