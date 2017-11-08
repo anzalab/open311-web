@@ -15,17 +15,33 @@
             </form>
         </div>
         <div class="streamline m-b">
-            <div class="sl-item" ng-style="comment.status ? {'border-color': comment.status.color} : {}" ng-repeat="comment in comments">
+            <div class="sl-item" ng-style="comment.status || comment.priority ? {'border-color': comment.status.color || comment.priority.color} : {}" ng-repeat="comment in comments">
                 <div class="sl-content">
                     <div class="sl-date text-muted">
                         <span class="text-info">
                         {{comment.changer.name}}
                         </span> on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</div>
                     <p ng-if="comment.comment">{{comment.comment}}</p>
-                    <p ng-if="comment.status && comment.status.name">{{comment.status.name}}</p>
-                    <p ng-if="comment.assignee && comment.assignee.name">
-                     Assigned to {{comment.assignee.name}}
+                    <p ng-if="comment.status && comment.status.name">
+                     Change status to 
+                        <span class="label success pos-rlt m-l-xs b-a-xs" ng-style="comment.status ? {'background-color': comment.status.color} : {}">
+                            <b class="arrow left b-success pull-in" ng-style="comment.status ? {'border-color': comment.status.color} : {}"></b>
+                            {{comment.status.name}}
+                        </span>
                     </p>
+                    <p ng-if="comment.priority && comment.priority.name">
+                     Change priority to   
+                        <span class="label success pos-rlt m-l-xs b-a-xs" ng-style="comment.priority ? {'background-color': comment.priority.color} : {}">
+                            <b class="arrow left b-success pull-in" ng-style="comment.priority ? {'border-color': comment.priority.color} : {}"></b>
+                            {{comment.priority.name}}
+                        </span>
+                    </p>
+                    <p ng-if="comment.assignee && comment.assignee.name">
+                     Assignee to {{comment.assignee.name}}
+                    </p>
+                    <!-- TODO show resolved changelog -->
+                    <!-- TODO show re-open changelog -->
+                    <!-- TODO show attachment changelog -->
                 </div>
             </div>
         </div>

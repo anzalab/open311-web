@@ -314,6 +314,10 @@ svg text {
     border-left: 0 !important;
 }
 
+.streamline .label {
+    padding: .4em .5em;
+    color: #FFFFFF;
+}
 
 /*custom checkbox overrides*/
 
