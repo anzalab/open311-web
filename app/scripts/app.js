@@ -85,6 +85,14 @@ angular
           }
         }
       })
+      .state('app.comparison', {
+        url: '/comparison',
+        templateUrl: 'views/dashboards/comparison.html',
+        controller: 'DashboardComparisonCtrl',
+        data: {
+          authenticated: true
+        }
+      })
       .state('app.performances', {
         url: '/performances',
         templateUrl: 'views/dashboards/performances.html',

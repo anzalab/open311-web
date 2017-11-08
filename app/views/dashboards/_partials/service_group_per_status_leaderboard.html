@@ -1,0 +1,65 @@
+<!-- start of service group per status report -->
+<hr>
+<div class="p-a-lg">
+    <!-- start header -->
+    <div>
+        <h4 title="Work Performed">Issue per Service Groups per Status</h4>
+        <small class="block text-muted" title="Count of Reported Issues by Service Group and Status">
+          Count of Reported Issues by Service Group and Status
+      </small>
+    </div>
+    <!-- end header -->
+    <!-- start of standing comparison reports -->
+    <div class="row m-t-md">
+        <div class="box">
+            <!-- start actions -->
+            <div class="row p-a">
+                <div class="col-sm-11">
+                </div>
+                <div class="col-sm-1">
+                    <div class="dt-buttons btn-group">
+                        <a class="btn btn-secondary buttons-copy buttons-html5" title="Visualize" tabindex="0" href="#">
+                              <i class="icon-eye"></i>
+                            </a>
+                        <a class="btn btn-secondary buttons-excel buttons-html5" title="Export as CSV" tabindex="0" href="#">
+                              <i class="icon-cloud-download"></i>
+                            </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end actions -->
+            <!-- start table -->
+            <div class="table-responsive">
+                <table class="table table-striped b-t">
+                    <thead>
+                        <tr>
+                            <th>Service Group</th>
+                            <th>Open</th>
+                            <th>Escallated</th>
+                            <th>In Progress</th>
+                            <th>Closed</th>
+                            <th>Resolved</th>
+                            <th>Late</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="servicegroup in serviceGroupPerStatus">
+                            <td>{{servicegroup.name}}</td>
+                            <td>{{servicegroup.open}}</td>
+                            <td>{{servicegroup.escallated}}</td>
+                            <td>{{servicegroup.inprogress}}</td>
+                            <td>{{servicegroup.closed}}</td>
+                            <td>{{servicegroup.resolved}}</td>
+                            <td>{{servicegroup.late}}</td>
+                            <td>{{servicegroup.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- end table -->
+        </div>
+    </div>
+    <!-- end of standing comparison reports -->
+</div>
+<!-- end of service group per status report -->
