@@ -2,7 +2,7 @@
 <div>
     <!-- start displaying pipeline -->
     <div class="row">
-        <div ng-repeat="pipeline in pipelines" class="col-xs-6 col-sm-2" style="background-color:{{pipeline.displayColor}};color:#fff;" title="{{pipeline.label.name}} Service Requests">
+        <div ng-repeat="pipeline in performances.statuses" class="col-xs-6 col-sm-2" style="background-color:{{pipeline.color}};color:#fff;" title="{{pipeline.name}} Service Requests">
             <div class="">
                 <div class="p-t-md">
                     <span class="pull-right">
@@ -12,7 +12,7 @@
                     <h2 class="text-center text-md" title="{{pipeline.count | number:0}}">
                         {{pipeline.count | numeraljs:'0a'}}
                     </h2>
-                    <p class="m-b-md text-sm">{{pipeline.label.name}}</p>
+                    <p class="m-b-md text-sm">{{pipeline.name}}</p>
                 </div>
             </div>
         </div>

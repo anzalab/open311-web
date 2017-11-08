@@ -12,201 +12,123 @@
 
 angular
   .module('ng311')
-  .controller('DashboardPerformanceCtrl', function ($scope) {
+  .controller('DashboardPerformanceCtrl', function (
+    $rootScope, $scope, $state, $uibModal,
+    Summary, endpoints, party
+  ) {
 
-    // dummy data
-    $scope.pipelines = [{
-      count: 17,
-      label: {
-        name: 'Total'
-      },
-      displayColor: '#4BC0C0'
-    }, {
-      count: 7,
-      label: {
-        name: 'Open'
-      },
-      displayColor: '#0D47A1'
-    }, {
-      count: 5,
-      label: {
-        name: 'Escallated'
-      },
-      displayColor: '#EF6C00'
-    }, {
-      count: 5,
-      label: {
-        name: 'Closed'
-      },
-      displayColor: '#1B5E20'
-    }];
+    //initialize scope attributes
+    $scope.maxDate = new Date();
 
-    $scope.groups = [{
-      count: 17,
-      label: {
-        name: 'Commercial'
-      },
-      displayColor: '#06C947'
-    }, {
-      count: 7,
-      label: {
-        name: 'Non Commercial'
-      },
-      displayColor: '#960F1E'
-    }, {
-      count: 5,
-      label: {
-        name: 'Illegal'
-      },
-      displayColor: '#263238'
-    }, {
-      count: 5,
-      label: {
-        name: 'Other'
-      },
-      displayColor: '#C8B1EF'
-    }];
+    //bind states
+    $scope.priorities = endpoints.priorities.priorities;
+    $scope.statuses = endpoints.statuses.statuses;
+    $scope.services = endpoints.services.services;
+    $scope.servicegroups = endpoints.servicegroups.servicegroups;
+    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.workspaces = party.settings.party.relation.workspaces;
 
-    $scope.performances = {
-      works: {
-        day: {
-          count: 7,
-          startedAt: new Date().toISOString(),
-          endedAt: new Date().toISOString()
-        },
-        week: {
-          count: 10,
-          startedAt: new Date().toISOString(),
-          endedAt: new Date().toISOString()
-        },
-        month: {
-          count: 21,
-          startedAt: new Date().toISOString(),
-          endedAt: new Date().toISOString()
-        }
-      },
-      durations: {
-        day: {
-          duration: {
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            milliseconds: 0,
-            seconds: 0
-          },
-          startedAt: new Date().toISOString(),
-          endedAt: new Date().toISOString()
-        },
-        week: {
-          duration: {
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            milliseconds: 0,
-            seconds: 0
-          },
-          startedAt: new Date().toISOString(),
-          endedAt: new Date().toISOString()
-        },
-        month: {
-          duration: {
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            milliseconds: 0,
-            seconds: 0
-          },
-          startedAt: new Date().toISOString(),
-          endedAt: new Date().toISOString()
-        }
+    //bind filters
+    var defaultFilters = {
+      // startedAt: moment().utc().startOf('date').toDate(),
+      startedAt: moment().utc().startOf('year').toDate(),
+      endedAt: moment().utc().endOf('date').toDate(),
+      statuses: [],
+      priorities: [],
+      servicegroups: [],
+      jurisdictions: [],
+      workspaces: []
+    };
+
+    $scope.filters = defaultFilters;
+
+    //initialize performances
+    $scope.performances = [];
+
+
+    /**
+     * Open overview reports filter
+     */
+    $scope.showFilter = function () {
+
+      //open overview reports filter modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/dashboards/_partials/performances_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(function onClose( /*selectedItem*/ ) {},
+        function onDismissed() {});
+
+    };
+
+
+    /**
+     * Filter overview reports based on on current selected filters
+     * @param {Boolean} [reset] whether to clear and reset filter
+     */
+    $scope.filter = function (reset) {
+      if (reset) {
+        $scope.filters = defaultFilters;
+      }
+
+      //prepare query
+      $scope.params = Summary.prepareQuery($scope.filters);
+
+      //load reports
+      $scope.reload();
+
+      //close current modal
+      $scope.modal.close();
+    };
+
+
+    /**
+     * Filter service based on selected service group
+     */
+    $scope.filterServices = function () {
+      var filterHasServiceGroups =
+        ($scope.filters.servicegroups && $scope.filters.servicegroups.length >
+          0);
+      //pick only service of selected group
+      if (filterHasServiceGroups) {
+        //filter services based on service group(s)
+        $scope.services =
+          _.filter(endpoints.services.services, function (service) {
+            return _.includes($scope.filters.servicegroups, service.group
+              ._id);
+          });
+      }
+      //use all services
+      else {
+        $scope.services = endpoints.services.services;
       }
     };
 
-    $scope.performances.leaderboard = [{
-        count: 400,
-        party: {
-          name: 'John Doe'
-        }
-      }, {
-        count: 399,
-        party: {
-          name: 'John Doe'
-        }
-      },
-      {
-        count: 398,
-        party: {
-          name: 'John Doe'
-        }
-      }, {
-        count: 397,
-        party: {
-          name: 'John Doe'
-        }
-      }, {
-        count: 396,
-        party: {
-          name: 'John Doe'
-        }
-      }, {
-        count: 395,
-        party: {
-          name: 'John Doe'
-        }
-      }, {
-        count: 394,
-        party: {
-          name: 'John Doe'
-        }
-      }, {
-        count: 393,
-        party: {
-          name: 'John Doe'
-        }
-      }
-    ];
 
-    $scope.performances.areaStandings = [{
-        count: 400,
-        party: {
-          name: 'Ilala'
-        }
-      }, {
-        count: 399,
-        party: {
-          name: 'Kinondoni'
-        }
-      },
-      {
-        count: 398,
-        party: {
-          name: 'Kibaha'
-        }
-      }, {
-        count: 397,
-        party: {
-          name: 'Kimara'
-        }
-      }, {
-        count: 396,
-        party: {
-          name: 'Magomeni'
-        }
-      }, {
-        count: 395,
-        party: {
-          name: 'Tegeta'
-        }
-      }, {
-        count: 394,
-        party: {
-          name: 'Temeke'
-        }
-      }, {
-        count: 393,
-        party: {
-          name: 'Mbagala'
-        }
-      }
-    ];
+    /**
+     * Reload overview reports
+     */
+    $scope.reload = function () {
+      Summary
+        .performances({ query: $scope.params })
+        .then(function (performances) {
+          $scope.performances = performances;
+          console.log($scope.performances);
+        });
+    };
+
+    //listen for events and reload overview accordingly
+    $rootScope.$on('app:servicerequests:reload', function () {
+      $scope.reload();
+    });
+
+
+    //pre-load reports
+    //prepare overview details
+    $scope.params = Summary.prepareQuery($scope.filters);
+    $scope.reload();
+
   });

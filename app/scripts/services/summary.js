@@ -71,6 +71,20 @@ angular
     };
 
     /**
+     * @description load current performances
+     * @param  {Object} params additional params
+     * @return {Object}        
+     */
+    Summary.performances = function (params) {
+      return $http.get(Utils.asLink(['reports', 'performances']), {
+          params: params
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
+    /**
      * Build params as per API filtering, sorting and paging
      * @param  {Object} [params] reports filters
      * @return {Object}

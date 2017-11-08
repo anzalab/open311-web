@@ -1,50 +1,55 @@
 <!-- start performance header -->
 <div class="app-header bg b-b bg-white">
-    <div class="navbar">
-        <!-- start report title -->
-        <div class="navbar-item pull-left h5 text-md">
-            Performance
-        </div>
-        <!-- end report title -->
+  <div class="navbar">
+    <!-- start report title -->
+    <div class="navbar-item pull-left h5 text-md">
+      Performance
     </div>
+    <!-- end report title -->
+  </div>
 </div>
 <!-- end performance header -->
 <!-- start app body -->
+<!-- start overview body -->
 <div class="app-body">
-    <div class="row m-b-md">
-        <div class="padding m-l-md">
+  <div class="app-body-inner">
+    <div class="padding">
+
+        <!-- start service group & pipeline -->
+        <div class="row m-b-lg m-t-lg">
+            <!-- start count by service group -->
             <div class="col-sm-12 col-md-6 col-lg-6">
                 <ng-include src="'views/dashboards/_partials/service_request_groups.html'"></ng-include>
             </div>
+            <!-- end count by service group -->
+
             <!-- start of service pipeline -->
-            <div class="col-sm-12  col-md-6 col-lg-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
                 <ng-include src="'views/dashboards/_partials/service_request_pipelines.html'"></ng-include>
             </div>
             <!-- end of service pipeline -->
         </div>
-    </div>
-    <!-- start service request counts -->
-    <ng-include ng-if="performances.works" src="'views/dashboards/_partials/service_request_counts.html'"></ng-include>
-    <!-- end service request counts -->
-    <!-- start service request durations -->
-    <ng-include ng-if="performances.durations" src="'views/dashboards/_partials/service_request_durations.html'"></ng-include>
-    <!-- end service request durations -->
-    <!-- start of leader's board section -->
-    <hr>
-    <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <!-- start of staff leaderboard -->
-            <ng-include ng-if="performances.leaderboard" src="'views/dashboards/_partials/service_request_leaderboard.html'"></ng-include>
+        <!-- end service group & pipeline -->
 
-            <!-- end of staff leaderboard -->
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <!-- start of area leaderboard -->
-            <ng-include ng-if="performances.areaStandings" src="'views/dashboards/_partials/service_request_area_leaderboard.html'"></ng-include>
 
-            <!-- end of area leaderboard -->
+        <!-- start of leader's board section -->
+        <hr>
+        <div class="row m-t-lg">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <!-- start of staff leaderboard -->
+                <ng-include ng-if="performances.operators" src="'views/dashboards/_partials/service_request_leaderboard.html'"/>
+
+                <!-- end of staff leaderboard -->
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <!-- start of area leaderboard -->
+                <ng-include ng-if="performances.jurisdictions" src="'views/dashboards/_partials/service_request_area_leaderboard.html'"/>
+                <!-- end of area leaderboard -->
+            </div>
         </div>
+        <!-- end of leader's board section -->
+
     </div>
-    <!-- end of leader's board section -->
+  </div>
 </div>
 <!-- end app body -->
