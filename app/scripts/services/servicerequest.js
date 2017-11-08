@@ -50,6 +50,23 @@ angular
         });
     };
 
+
+    /**
+     * @description patch service request with specific changes
+     * @param  {[type]} params [description]
+     * @return {[type]}        [description]
+     */
+    ServiceRequest.changelog = function (id, changelog) {
+
+      var url = Utils.asLink(['servicerequests', id, 'changelogs']);
+
+      return $http.patch(url, changelog).then(function (response) {
+        return new ServiceRequest(response.data);
+      });
+
+    };
+
+
     /**
      * @description convert a report to email
      * @param  {Object} report current report in the scope
@@ -79,6 +96,7 @@ angular
       } catch (error) {}
 
       //prepare e-mail body
+      //TODO add internal notes & use template if possible
       var body = [
         'Hello,',
         '\n\n',
