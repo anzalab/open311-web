@@ -337,3 +337,24 @@ svg text {
     text-shadow: none !important;
     opacity: 1 !important;
 }
+
+
+/*tables*/
+.table-tabular tr:last-child td {
+    font-weight: bold;
+    background-color: rgba(120, 130, 140, .045);
+}
+
+.table-tabular td:last-child {
+    font-weight: bold;
+    background-color: rgba(120, 130, 140, .045);
+}
+
+.table-tabular th:last-child {
+    font-weight: bold;
+    background-color: rgba(120, 130, 140, .045);
+}
+
+.table-tabular td, th{
+    font-size: .76rem;
+}
