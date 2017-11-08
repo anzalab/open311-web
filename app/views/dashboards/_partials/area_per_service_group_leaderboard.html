@@ -31,21 +31,16 @@
                     <thead>
                         <tr>
                             <th>Area</th>
-                            <th>Commercial</th>
-                            <th>Non Commercial</th>
-                            <th>Illegal</th>
-                            <th>Other</th>
+                            <th ng-repeat="group in groups">{{group.name}}</th>
                             <th>Total</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="service in areaPerServiceGroup">
-                            <td>{{service.name}}</td>
-                            <td>{{service.commercial}}</td>
-                            <td>{{service.noncommercial}}</td>
-                            <td>{{service.illegal}}</td>
-                            <td>{{service.other}}</td>
-                            <td>{{service.total}}</td>
+                        <tr ng-repeat="area in areaPerServiceGroup">
+                            <td>{{area.name}}</td>
+                            <td ng-repeat="group in area.groups">{{group.count}}</td>
+                            <td>{{area.total}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -29,26 +29,24 @@
                 <table class="table table-striped b-t">
                     <thead>
                         <tr>
-                            <th>Service</th>
-                            <th>Open</th>
-                            <th>Escallated</th>
-                            <th>In Progress</th>
-                            <th>Closed</th>
-                            <th>Resolved</th>
-                            <th>Late</th>
+                            <th>Area</th>
+                            <th ng-repeat="status in statuses">
+                                {{status.name}}
+                            </th>
+                            <!-- <th>Resolved</th>
+                            <th>Late</th> -->
                             <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="service in areaPerStatus">
-                            <td>{{service.name}}</td>
-                            <td>{{service.open}}</td>
-                            <td>{{service.escallated}}</td>
-                            <td>{{service.inprogress}}</td>
-                            <td>{{service.closed}}</td>
-                            <td>{{service.resolved}}</td>
-                            <td>{{service.late}}</td>
-                            <td>{{service.total}}</td>
+                        <tr ng-repeat="area in areaPerStatus">
+                            <td>{{area.name}}</td>
+                            <td ng-repeat="status in area.statuses">
+                                {{status.count}}
+                            </td>
+                            <!-- <td>{{area.resolved}}</td>
+                            <td>{{area.late}}</td> -->
+                            <td>{{area.total}}</td>
                         </tr>
                     </tbody>
                 </table>

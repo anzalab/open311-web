@@ -33,10 +33,10 @@
         </div>
     </div>
     <!-- start area per status leaderboard -->
-    <ng-include src="'views/dashboards/_partials/area_per_status_leaderboard.html'"></ng-include>
+    <ng-include ng-if="areaPerStatus" src="'views/dashboards/_partials/area_per_status_leaderboard.html'"></ng-include>
     <!-- end area per status leaderboard -->
     <!-- start of service per area per service group leaderboard -->
-    <ng-include src="'views/dashboards/_partials/area_per_service_group_leaderboard.html'"></ng-include>
+    <ng-include ng-if="areaPerServiceGroup" src="'views/dashboards/_partials/area_per_service_group_leaderboard.html'"></ng-include>
     <!-- end of service per area per service group leaderboard -->
     <!-- start service per status leaderboard -->
     <ng-include src="'views/dashboards/_partials/service_per_status_leaderboard.html'"></ng-include>
