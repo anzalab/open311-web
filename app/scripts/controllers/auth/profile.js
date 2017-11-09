@@ -23,6 +23,41 @@ angular
     //use only editable properties
     $scope.party = new Party($rootScope.party);
 
+    //bind filters
+    $scope.durationFilters = {
+      durations: {
+        day: {
+          startedAt: moment().utc().startOf('date').toDate(),
+          endedAt: moment().utc().endOf('date').toDate()
+        },
+        week: {
+          startedAt: moment().utc().startOf('week').toDate(),
+          endedAt: moment().utc().endOf('week').toDate()
+        },
+        month: {
+          startedAt: moment().utc().startOf('month').toDate(),
+          endedAt: moment().utc().endOf('month').toDate()
+        }
+      }
+    };
+
+    $scope.workFilters = {
+      durations: {
+        day: {
+          startedAt: moment().utc().startOf('date').toDate(),
+          endedAt: moment().utc().endOf('date').toDate()
+        },
+        week: {
+          startedAt: moment().utc().startOf('week').toDate(),
+          endedAt: moment().utc().endOf('week').toDate()
+        },
+        month: {
+          startedAt: moment().utc().startOf('month').toDate(),
+          endedAt: moment().utc().endOf('month').toDate()
+        }
+      }
+    };
+
 
     $scope.onEdit = function () {
       $scope.edit = true;
@@ -96,5 +131,32 @@ angular
           $state.go('app.profile');
         });
     };
+
+
+    $scope.performance = function () {
+      var params = {
+        _id: $scope.party._id
+      };
+
+      Party.performances(params).then(function (response) {
+        //TODO comment
+        response.pipelines =
+          _.chain(response.pipelines)
+          .orderBy('label.weight', 'asc')
+          .map(function (pipeline) {
+            return _.merge({}, {
+              displayColor: _.get(pipeline, 'label.color',
+                '#4BC0C0') + '!important'
+            }, pipeline);
+          }).value();
+
+        response.leaderboard =
+          _.orderBy(response.leaderboard, 'count', 'desc');
+        console.log(response);
+        $scope.performances = response;
+      });
+    };
+
+    $scope.performance();
 
   });

@@ -1,0 +1,56 @@
+<!-- start for area per status leaderboard -->
+<hr>
+<div class="p-a-lg">
+    <!-- start header -->
+    <div>
+        <h4 title="Work Performed">Issue per Status</h4>
+        <small class="block text-muted" title="Count of Reported Issues by Their Status">
+          Count of Reported Issues by Their Status
+      </small>
+    </div>
+    <!-- end header -->
+    <!-- start of standing comparison reports -->
+    <div class="row m-t-md">
+        <div class="box">
+            <!-- start actions -->
+            <div class="row p-a">
+                <div class="col-sm-10">
+                </div>
+                <div class="col-sm-2">
+                    <div class="dt-buttons btn-group">
+                        <a class="btn btn-secondary buttons-copy buttons-html5" title="Visualize" tabindex="0" href="#">
+                          <i class="icon-eye"></i>
+                        </a>
+                        <a class="btn btn-secondary buttons-excel buttons-html5" title="Export as CSV" tabindex="0" href="#">
+                          <i class="icon-cloud-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end actions -->
+            <!-- start table -->
+            <div class="table-responsive">
+                <table class="table table-bordered b-t table-tabular">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th ng-repeat="status in statuses">{{status.name}}</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="service in servicePerStatus">
+                            <!-- <td><label class="ui-check m-a-0"><input type="checkbox" name="post[]"><i class="dark-white"></i></label></td> -->
+                            <td>{{service.name}}</td>
+                            <td ng-repeat="status in service.statuses">{{status.count}}</td>
+                            <td>{{service.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- end table -->
+        </div>
+    </div>
+    <!-- end of standing comparison reports -->
+</div>
+<!-- end for area per status leaderboard -->

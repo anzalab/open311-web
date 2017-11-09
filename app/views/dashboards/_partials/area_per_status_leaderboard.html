@@ -1,0 +1,58 @@
+<!-- start for area per status leaderboard -->
+<div class="p-a-lg">
+    <!-- start header -->
+    <div>
+        <h4 title="Work Performed">Issue per Area per Status - Work Progress</h4>
+        <small class="block text-muted" title="Count of Reported Issues by Their Area and Status">
+          Count of Reported Issues by Their Area and Status
+      </small>
+    </div>
+    <!-- end header -->
+    <!-- start of standing comparison reports -->
+    <div class="row m-t-md">
+        <div class="box">
+            <div class="row p-a">
+                <div class="col-sm-10">
+                </div>
+                <div class="col-sm-2">
+                    <div class="dt-buttons btn-group">
+                        <a class="btn btn-secondary buttons-copy buttons-html5" title="Visualize" tabindex="0" href="#">
+                          <i class="icon-eye"></i>
+                        </a>
+                        <a class="btn btn-secondary buttons-excel buttons-html5" title="Export as CSV" tabindex="0" href="#">
+                          <i class="icon-cloud-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered b-t table-tabular">
+                    <thead>
+                        <tr>
+                            <th>Area</th>
+                            <th ng-repeat="status in statuses">
+                                {{status.name}}
+                            </th>
+                            <!-- <th>Resolved</th>
+                            <th>Late</th> -->
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="area in areaPerStatus">
+                            <td>{{area.name}}</td>
+                            <td ng-repeat="status in area.statuses">
+                                {{status.count}}
+                            </td>
+                            <!-- <td>{{area.resolved}}</td>
+                            <td>{{area.late}}</td> -->
+                            <td>{{area.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- end of standing comparison reports -->
+</div>
+<!-- end for area per status leaderboard -->

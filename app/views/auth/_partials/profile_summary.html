@@ -2,7 +2,7 @@
 <div class="item">
     <div class="p-a-lg">
         <div class="row m-t">
-            <div class="col-sm-12">
+            <div class="col-sm-12 col-md-4 col-lg-6">
                 <!-- start party avatar -->
                 <a href="#" class="pull-left m-r-md">
                   <span>
@@ -36,6 +36,7 @@
                             <i class="icon-phone"></i>
                             <i class="icon-phone indigo"></i>
                           </a>
+                          <!-- TODO should initiate call -->
                               <span title="Phone Number"  class="text-muted">
                                 {{party.phone ? party.phone : 'N/A'}}
                               </span>
@@ -45,6 +46,7 @@
                             <i class="icon-envelope"></i>
                             <i class="icon-envelope light-blue"></i>
                           </a>
+                          <!-- TODO should initiate email -->
                               <span title="Email Address" class="text-muted">
                                 {{party.email ? party.email : 'N/A'}}
                               </span>
@@ -53,6 +55,11 @@
                 </div>
                 <!-- end party details -->
             </div>
+            <!-- start of pipeline -->
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
+            </div>
+            <!-- end of pipeline -->
         </div>
     </div>
 </div>

@@ -1,0 +1,35 @@
+<!-- start service request pipeline -->
+<div>
+    <!-- start header -->
+    <!-- <div>
+        <h4 title="Response Pipeline">Response Pipeline</h4>
+        <small class="block text-muted" title="Overall Number of Service Requests Per Status">
+          Overall Number of Service Requests Per Status
+      </small>
+    </div> -->
+    <!-- end header -->
+    <!-- start displaying pipeline -->
+    <div class="row">
+        <div ng-repeat="pipeline in performances.pipelines" class="col-xs-6 col-sm-2" style="background-color:{{pipeline.displayColor}};color:#fff;" title="{{pipeline.label.name}} Service Requests">
+            <div class="">
+                <div class="p-t-md">
+                    <span class="pull-right">
+                    </span>
+                </div>
+                <div class="text-center">
+                    <h2 class="text-center text-2x" title="{{pipeline.count | number:0}}">
+                        {{pipeline.count | numeraljs:'0a'}}
+                    </h2>
+                    <p class="m-b-md text-sm">{{pipeline.label.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TODO resolved pipeline -->
+    <!-- TODO late pipeline -->
+    <!-- TODO reopened pipeline -->
+    <!-- TODO filter by duration (today, this weeek, this month) -->
+    <!-- end displaying pipeline -->
+
+</div>
+<!-- end service request pipeline -->

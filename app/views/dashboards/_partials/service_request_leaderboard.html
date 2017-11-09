@@ -1,0 +1,32 @@
+<!-- start leader board -->
+<!-- start header -->
+<div>
+  <h4 title="Leaderboard">Leaderboard</h4>
+  <small class="block text-muted" title="Operator Ranking Based on Attending Service Requests">
+          Operator Ranking Based on Attending Service Requests
+      </small>
+</div>
+<!-- end header -->
+<div class="m-t-lg">
+  <ul class="list inset m-a-0">
+    <li ng-if="leader" ng-repeat="leader in performances.operators" class="list-item">
+      <a href class="list-left">
+        <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
+        <letter-avatar title="{{leader.name}}" data="{{leader.name}}" height="40" width="40" shape="round" fontSize="15">
+        </letter-avatar>
+      </a>
+      <div class="list-body">
+        <div>
+          <a href>{{leader.name}}</a>
+          <span class="pull-right text-muted">{{leader.count | number:0}}</span>
+        </div>
+        <small class="text-muted text-ellipsis">
+                        {{leader.relation.name ? leader.relation.name :'N/A'}}
+                        / {{leader.relation.workspace ? leader.relation.workspace : 'N/A' }}
+                        <span class="pull-right label info" title="#{{$index+1}}">&nbsp;&nbsp;{{$index + 1}}&nbsp;&nbsp;</span>
+                    </small>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- end leader board -->

@@ -1,0 +1,22 @@
+<!-- start service request group -->
+<div>
+    <!-- start displaying group -->
+    <div class="row">
+        <div ng-repeat="group in performances.groups" class="col-xs-6 col-sm-2" style="background-color:{{group.color}};color:#fff;" title="{{group.label.name}} Service Requests">
+            <div class="">
+                <div class="p-t-md">
+                    <span class="pull-right">
+                    </span>
+                </div>
+                <div class="text-center">
+                    <h2 class="text-center text-md" title="{{group.count | number:0}}">
+                        {{group.count | numeraljs:'0a'}}
+                    </h2>
+                    <p class="m-b-md text-sm">{{group.name}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end displaying service group -->
+</div>
+<!-- end service request group -->

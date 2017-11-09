@@ -29,11 +29,13 @@ angular
     'btford.socket-io',
     'focus-if',
     'pickadate',
-    'ui-leaflet'
+    'ui-leaflet',
+    'ngNumeraljs'
   ])
   .config(function (
     $stateProvider, $urlRouterProvider,
-    $authProvider, cfpLoadingBarProvider, ENV
+    $authProvider, cfpLoadingBarProvider,
+    $numeraljsConfigProvider, ENV
   ) {
 
     //configure ngAA
@@ -55,6 +57,16 @@ angular
     //configure loading bar
     cfpLoadingBarProvider.includeSpinner = false;
 
+    //configure numeraljs formating
+    $numeraljsConfigProvider.register('locale', ENV.settings.locale, {
+      abbreviations: ENV.settings.abbreviations
+    });
+
+    //switch locale to sw
+    $numeraljsConfigProvider.locale(ENV.settings.locale);
+
+
+
     //unmatched route handler
     $urlRouterProvider.otherwise('/servicerequests');
 
@@ -70,6 +82,33 @@ angular
           },
           token: function ($q, ngAAToken) {
             return $q.resolve(ngAAToken.getToken());
+          }
+        }
+      })
+      .state('app.comparison', {
+        url: '/comparison',
+        templateUrl: 'views/dashboards/comparison.html',
+        controller: 'DashboardComparisonCtrl',
+        data: {
+          authenticated: true
+        }
+      })
+      .state('app.performances', {
+        url: '/performances',
+        templateUrl: 'views/dashboards/performances.html',
+        controller: 'DashboardPerformanceCtrl',
+        data: {
+          authenticated: true
+        },
+        resolve: {
+          endpoints: function (Summary) {
+            return Summary.endpoints({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
           }
         }
       })

@@ -117,5 +117,23 @@ angular
         });
     };
 
+
+    /**
+     * @description Obtain given party performances reports
+     * @param  {[type]} params [description]
+     * @return {[type]}        [description]
+     */
+    Party.performances = function (params) {
+      var _id = params._id;
+      params = _.omit(params, '_id');
+
+      return $http.get(Utils.asLink(['parties', _id, 'performances']), {
+          params: params
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
     return Party;
   });
