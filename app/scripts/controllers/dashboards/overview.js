@@ -391,28 +391,19 @@ angular
 
 
       //prepare bar chart series data
-      var data =
-        _.map(categories, function (category) {
-
-          //obtain all overviews of specified priority(category)
-          var value =
-            _.filter($scope.overviews, function (overview) {
-              return overview.priority.name === category.name;
-            });
-          value = value ? _.sumBy(value, 'count') : 0;
-          var serie = {
-            name: category.name,
-            value: value,
-            itemStyle: {
-              normal: {
-                color: category.color
-              }
-            }
-          };
-
-          return serie;
-
-        });
+      var data = [{
+        value: 3661,
+        name: 'Commercial',
+      }, {
+        value: 5713,
+        name: 'Non-Commercial'
+      }, {
+        value: 9938,
+        name: 'Illegal'
+      }, {
+        value: 17623,
+        name: 'Other'
+      }];
 
       //prepare chart config
       $scope.perPriorityConfig = {
@@ -422,60 +413,46 @@ angular
 
       //prepare chart options
       $scope.perPriorityOptions = {
-        color: _.map(data, 'itemStyle.normal.color'),
         textStyle: {
           fontFamily: 'Lato'
         },
+        title: {
+          text: 'Pending',
+          subtext: '2017',
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16
+          }
+        },
         tooltip: {
+          show: false,
           trigger: 'item',
-          formatter: '{b} : {c}'
+          formatter: "{b}: {c} ({d}%)"
         },
         toolbox: {
           show: true,
           feature: {
             saveAsImage: {
-              name: 'Issue per Priority-' + new Date().getTime(),
+              name: 'Service Groups Overview - ' + new Date().getTime(),
               title: 'Save',
               show: true
             }
           }
         },
-        calculable: true,
-        xAxis: [{
-          type: 'category',
-          data: _.map(data, 'name'),
-          axisTick: {
-            alignWithLabel: true
-          }
-        }],
-        yAxis: [{
-          type: 'value'
-        }],
         series: [{
-          type: 'bar',
-          barWidth: '70%',
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['55%', '75%'],
+          color: ['#86D560', '#AF89D6', '#59ADF3', '#FF999A',
+            '#FFCC67'
+          ],
+
           label: {
             normal: {
-              show: true
+              formatter: '{b}\n{d}%',
             }
-          },
-          markPoint: { // show area with maximum and minimum
-            data: [{
-                name: 'Maximum',
-                type: 'max'
-              },
-              {
-                name: 'Minimum',
-                type: 'min'
-              }
-            ]
-          },
-          markLine: { //add average line
-            precision: 0,
-            data: [{
-              type: 'average',
-              name: 'Average'
-            }]
           },
           data: data
         }]
