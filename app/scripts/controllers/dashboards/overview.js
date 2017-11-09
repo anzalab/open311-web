@@ -27,7 +27,7 @@ angular
 
     //bind filters
     var defaultFilters = {
-      startedAt: moment().utc().startOf('date').toDate(),
+      startedAt: moment().utc().startOf('year').toDate(),
       endedAt: moment().utc().endOf('date').toDate(),
       statuses: [],
       priorities: [],
@@ -219,35 +219,43 @@ angular
           }
         },
         calculable: true,
-        xAxis: [{
+        yAxis: [{
           type: 'category',
           data: _.map(data, 'name'),
+          boundaryGap: true,
           axisTick: {
             alignWithLabel: true
+          },
+          axisLabel: {
+            rotate: 60,
+            padding: [0, 0, 14, 0]
+          },
+          axisLine: {
+            show: true
           }
         }],
-        yAxis: [{
-          type: 'value'
+        xAxis: [{
+          type: 'value',
+          scale: true,
+          position: 'top',
+          axisTick: {
+            show: false,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          splitLine: {
+            show: false
+          }
         }],
         series: [{
           type: 'bar',
-          barWidth: '70%',
+          barWidth: '45%',
           label: {
             normal: {
-              show: true
+              show: true,
+              position: 'right'
             }
-          },
-          markPoint: { // show area with maximum and minimum
-            data: [
-              { name: 'Maximum', type: 'max' },
-              { name: 'Minimum', type: 'min' }
-            ]
-          },
-          markLine: { //add average line
-            precision: 0,
-            data: [
-              { type: 'average', name: 'Average' }
-            ]
           },
           data: data
         }]
@@ -341,16 +349,22 @@ angular
             }
           },
           markPoint: { // show area with maximum and minimum
-            data: [
-              { name: 'Maximum', type: 'max' },
-              { name: 'Minimum', type: 'min' }
+            data: [{
+                name: 'Maximum',
+                type: 'max'
+              },
+              {
+                name: 'Minimum',
+                type: 'min'
+              }
             ]
           },
           markLine: { //add average line
             precision: 0,
-            data: [
-              { type: 'average', name: 'Average' }
-            ]
+            data: [{
+              type: 'average',
+              name: 'Average'
+            }]
           },
           data: data
         }]
@@ -446,16 +460,22 @@ angular
             }
           },
           markPoint: { // show area with maximum and minimum
-            data: [
-              { name: 'Maximum', type: 'max' },
-              { name: 'Minimum', type: 'min' }
+            data: [{
+                name: 'Maximum',
+                type: 'max'
+              },
+              {
+                name: 'Minimum',
+                type: 'min'
+              }
             ]
           },
           markLine: { //add average line
             precision: 0,
-            data: [
-              { type: 'average', name: 'Average' }
-            ]
+            data: [{
+              type: 'average',
+              name: 'Average'
+            }]
           },
           data: data
         }]
@@ -563,16 +583,22 @@ angular
               }
             },
             markPoint: { // show area with maximum and minimum
-              data: [
-                { name: 'Maximum', type: 'max' },
-                { name: 'Minimum', type: 'min' }
+              data: [{
+                  name: 'Maximum',
+                  type: 'max'
+                },
+                {
+                  name: 'Minimum',
+                  type: 'min'
+                }
               ]
             },
             markLine: { //add average line
               precision: 0,
-              data: [
-                { type: 'average', name: 'Average' }
-              ]
+              data: [{
+                type: 'average',
+                name: 'Average'
+              }]
             },
             data: data
           }]
@@ -588,7 +614,9 @@ angular
      */
     $scope.reload = function () {
       Summary
-        .overviews({ query: $scope.params })
+        .overviews({
+          query: $scope.params
+        })
         .then(function (overviews) {
           $scope.overviews = overviews;
           $scope.prepare();
