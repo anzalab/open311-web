@@ -40,29 +40,60 @@ angular
 
     //bind exports
     $scope.exports = {
-      filename: 'overview_reports_' + Date.now() + '.csv',
-      headers: [
-        'Service Group', 'Service',
-        'Status', 'Priority', 'Count'
-      ]
+      jurisdictions: {
+        filename: 'areas_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Area', 'Total', 'Pending', 'Resolved',
+          'Late', 'Average Attend Time (Call Duration)',
+          'Average Resolve Time'
+        ]
+      },
+      groups: {
+        filename: 'service_groups_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service Group', 'Total', 'Pending', 'Resolved',
+          'Late', 'Average Attend Time (Call Duration)',
+          'Average Resolve Time'
+        ]
+      },
+      services: {
+        filename: 'services_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service', 'Total', 'Pending', 'Resolved',
+          'Late', 'Average Attend Time (Call Duration)',
+          'Average Resolve Time'
+        ]
+      }
     };
 
     //initialize overviews
-    $scope.overviews = [];
+    $scope.overviews = {};
 
 
     /**
      * Exports current overview data
      */
-    $scope.export = function () {
+    $scope.export = function (type) {
       var _exports =
-        _.map($scope.overviews, function (overview) {
+        _.map($scope.overviews[type], function (overview) {
           return {
-            servicegroup: overview.group.name,
-            service: overview.service.name,
-            status: overview.status.name,
-            priority: overview.priority.name,
-            count: overview.count
+            name: overview.name,
+            total: overview.count,
+            pending: overview.pending,
+            resolved: overview.resolved,
+            late: overview.late,
+            averageAttendTime: [
+              overview.averageAttendTime.days, ' days, ',
+              overview.averageAttendTime.hours, ' hrs, ',
+              overview.averageAttendTime.minutes, ' mins, ',
+              overview.averageAttendTime.seconds, ' secs'
+            ].join(''),
+            averageResolveTime: [
+              overview.averageResolveTime.days, 'days, ',
+              overview.averageResolveTime.hours, 'hrs, ',
+              overview.averageResolveTime.minutes, 'mins, ',
+              overview.averageResolveTime.seconds, 'secs, '
+            ].join(''),
           };
         });
       return _exports;
@@ -143,10 +174,10 @@ angular
       $scope.exports.filename = 'overview_reports_' + Date.now() + '.csv';
 
       //prepare charts
-      $scope.prepareIssuePerServiceGroup();
-      $scope.prepareIssuePerService();
-      $scope.prepareIssuePerStatus();
-      $scope.prepareIssuePerPriority();
+      // $scope.prepareIssuePerServiceGroup();
+      // $scope.prepareIssuePerService();
+      // $scope.prepareIssuePerStatus();
+      // $scope.prepareIssuePerPriority();
 
     };
 

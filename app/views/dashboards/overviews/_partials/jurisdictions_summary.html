@@ -5,21 +5,21 @@
     <div class="box b-a p-l-0">
 
         <!-- start header -->
-        <div class="box-header b-b" title="Areas Summary">
+        <div class="box-header b-b p-t-md" title="Areas Summary">
             <h3>Areas Summary</h3>
             <small>Sub title goes here with small font</small>
         </div>
         <!-- end header -->
 
         <!-- start toolbox -->
-        <div class="box-tool">
+        <div class="box-tool p-t-sm">
 
             <!-- start time filters -->
             <ul class="nav">
 
                 <!-- start export -->
                 <li class="nav-item inline">
-                    <a uib-dropdown-toggle class="btn btn-xs rounded white" aria-expanded="false">
+                    <a title="Click To Export" class="btn btn-xs rounded white" aria-expanded="false" ng-csv="export('jurisdictions')" csv-header="exports.jurisdictions.headers" filename="areas_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
                       Export
                     </a>
                 </li>
@@ -67,28 +67,47 @@
                                 <th title="Total Count of Pending Service Requests">Pending</th>
                                 <th title="Total Count of Resolved Service Requests">Resolved</th>
                                 <th title="Total Count of Service Requests Past SLA Resolve Time">Late</th>
-                                <th title="Average Time Taken to Attend a Customer(Call) Service Request">Average Attend Time (ATT)</th>
-                                <th title="Average Time Taken to a Resolve Service Request">Average Resolve Time (ART)</th>
+                                <th title="Average Time Taken to Attend a Customer(Call) Service Request">Average Attend Time</th>
+                                <th title="Average Time Taken to a Resolve Service Request">Average Resolve Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Kimara</td>
-                                <td>1495</td>
-                                <td>495</td>
-                                <td>200</td>
-                                <td>100</td>
-                                <td>70</td>
-                                <td>70</td>
-                            </tr>
-                            <tr>
-                                <td>Ilala</td>
-                                <td>1495</td>
-                                <td>495</td>
-                                <td>200</td>
-                                <td>100</td>
-                                <td>70</td>
-                                <td>70</td>
+                            <tr ng-repeat="jurisdiction in overviews.jurisdictions">
+                                <td title="{{jurisdiction.name}}">
+                                    {{jurisdiction.name}}
+                                </td>
+                                <td title="{{jurisdiction.count | number:0}}">
+                                    {{jurisdiction.count | number:0}}
+                                </td>
+                                <td title=" {{jurisdiction.pending | number:0}}">
+                                     {{jurisdiction.pending | number:0}}
+                                </td>
+                                <td title=" {{jurisdiction.resolved | number:0}}">
+                                     {{jurisdiction.resolved | number:0}}
+                                </td>
+                                <td title=" {{jurisdiction.late | number:0}}">
+                                     {{jurisdiction.late | number:0}}
+                                </td>
+                                <td>
+                                    <span>
+                                      {{jurisdiction.averageAttendTime.minutes}} 
+                                      <span class="text-muted text-xs">mins</span>
+                                    </span>
+                                    <span>
+                                        {{jurisdiction.averageAttendTime.seconds}}
+                                        <span class="text-muted text-xs">secs</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                      {{jurisdiction.averageResolveTime.hours + (jurisdiction.averageResolveTime.days * 24)}} 
+                                      <span class="text-muted text-xs">hrs</span>
+                                    </span>
+                                    <span>
+                                        {{jurisdiction.averageAttendTime.minutes}}
+                                        <span class="text-muted text-xs">mins</span>
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

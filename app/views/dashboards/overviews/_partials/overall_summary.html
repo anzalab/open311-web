@@ -5,7 +5,9 @@
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Total Service Requests">
         <div class="padding">
             <div class="text-center">
-                <h2 class="text-center _600 m-t-md">45</h2>
+                <h2 class="text-center _600 m-t-md">
+                    {{overviews.overall.count | number:0}}
+                </h2>
                 <p class="text-muted m-b-md">Total</p>
             </div>
         </div>
@@ -16,7 +18,9 @@
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
         <div class="padding">
             <div class="text-center">
-                <h2 class="text-center _600 m-t-md">219</h2>
+                <h2 class="text-center _600 m-t-md">
+                    {{overviews.overall.pending | number:0}}
+                </h2>
                 <p class="text-muted m-b-md">Pending</p>
             </div>
         </div>
@@ -27,7 +31,9 @@
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Resolved Service Requests">
         <div class="padding">
             <div class="text-center">
-                <h2 class="text-center _600 m-t-md">8</h2>
+                <h2 class="text-center _600 m-t-md">
+                    {{overviews.overall.resolved | number:0}}
+                </h2>
                 <p class="text-muted m-b-md">Resolved</p>
             </div>
         </div>
@@ -38,7 +44,9 @@
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Late(Past SLA Time) Service Requests">
         <div class="padding">
             <div class="text-center">
-                <h2 class="text-center _600 m-t-md">36</h2>
+                <h2 class="text-center _600 m-t-md">
+                    {{overviews.overall.late | number:0}}
+                </h2>
                 <p class="text-muted m-b-md">Late</p>
             </div>
         </div>
@@ -51,10 +59,12 @@
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     <span title="Average Attend Time(Call Duration) - Minutes Spent">
-                      45 <span class="text-muted text-xs">mins</span>
+                      {{overviews.overall.averageAttendTime.minutes}} 
+                      <span class="text-muted text-xs">mins</span>
                     </span>
                     <span title="Average Attend Time(Call Duration) - Seconds Spent">
-                      00 <span class="text-muted text-xs">secs</span>
+                        {{overviews.overall.averageAttendTime.seconds}}
+                    <span class="text-muted text-xs">secs</span>
                     </span>
                 </h2>
                 <p class="text-muted m-b-md">Avarage Attend Time</p>
@@ -69,13 +79,12 @@
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     <span title="Average resolve Time - Hourss Spent">
-                        01 <span class="text-muted text-xs">hrs</span>
+                        {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}} 
+                    <span class="text-muted text-xs">hrs</span>
                     </span>
                     <span title="Average resolve Time - Minutes Spent">
-                      45 <span class="text-muted text-xs">mins</span>
-                    </span>
-                    <span title="Average resolve Time - Seconds Spent">
-                      00 <span class="text-muted text-xs">secs</span>
+                      {{overviews.overall.averageResolveTime.minutes}}
+                    <span class="text-muted text-xs">mins</span>
                     </span>
                 </h2>
                 <p class="text-muted m-b-md">Avarage Resolve Time</p>

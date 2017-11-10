@@ -19,9 +19,9 @@
 
                 <!-- start export -->
                 <li class="nav-item inline">
-                    <a uib-dropdown-toggle class="btn btn-xs rounded white" aria-expanded="false">
-                          Export
-                        </a>
+                    <a title="Click To Export" class="btn btn-xs rounded white" aria-expanded="false" ng-csv="export('services')" csv-header="exports.services.headers" filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
+                      Export
+                    </a>
                 </li>
                 <!-- end export -->
 
@@ -67,28 +67,47 @@
                                 <th title="Total Count of Pending Service Requests">Pending</th>
                                 <th title="Total Count of Resolved Service Requests">Resolved</th>
                                 <th title="Total Count of Service Requests Past SLA Resolve Time">Late</th>
-                                <th title="Average Time Taken to Attend a Customer(Call) Service Request">Average Attend Time (ATT)</th>
-                                <th title="Average Time Taken to a Resolve Service Request">Average Resolve Time (ART)</th>
+                                <th title="Average Time Taken to Attend a Customer(Call) Service Request">Average Attend Time</th>
+                                <th title="Average Time Taken to a Resolve Service Request">Average Resolve Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Billing</td>
-                                <td>1495</td>
-                                <td>495</td>
-                                <td>200</td>
-                                <td>100</td>
-                                <td>70</td>
-                                <td>70</td>
-                            </tr>
-                            <tr>
-                                <td>Leakage</td>
-                                <td>1495</td>
-                                <td>495</td>
-                                <td>200</td>
-                                <td>100</td>
-                                <td>70</td>
-                                <td>70</td>
+                            <tr ng-repeat="service in overviews.services">
+                                <td title="{{service.name}}">
+                                    {{service.name}}
+                                </td>
+                                <td title="{{service.count | number:0}}">
+                                    {{service.count | number:0}}
+                                </td>
+                                <td title=" {{service.pending | number:0}}">
+                                     {{service.pending | number:0}}
+                                </td>
+                                <td title=" {{service.resolved | number:0}}">
+                                     {{service.resolved | number:0}}
+                                </td>
+                                <td title=" {{service.late | number:0}}">
+                                     {{service.late | number:0}}
+                                </td>
+                                <td>
+                                    <span>
+                                      {{service.averageAttendTime.minutes}} 
+                                      <span class="text-muted text-xs">mins</span>
+                                    </span>
+                                    <span>
+                                        {{service.averageAttendTime.seconds}}
+                                        <span class="text-muted text-xs">secs</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                      {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}} 
+                                      <span class="text-muted text-xs">hrs</span>
+                                    </span>
+                                    <span>
+                                        {{service.averageAttendTime.minutes}}
+                                        <span class="text-muted text-xs">mins</span>
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
