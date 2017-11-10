@@ -52,7 +52,7 @@
                 <!-- start visual stats -->
                 <div class="col-sm-5 b-r lt">
                     <div class="p-a-md">
-                        <echart config="perGroupConfig" options="perGroupOptions"></echart>
+                        <echart config="perServiceConfig" options="perServiceOptions"></echart>
                     </div>
                 </div>
                 <!-- end visual starts -->
@@ -62,11 +62,11 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th title="Area">Service</th>
-                                <th title="Total Count of Service Requests">Total</th>
-                                <th title="Total Count of Pending Service Requests">Pending</th>
-                                <th title="Total Count of Resolved Service Requests">Resolved</th>
-                                <th title="Total Count of Service Requests Past SLA Resolve Time">Late</th>
+                                <th ng-click="prepareServiceVisualization('count')" title="Area">Service</th>
+                                <th ng-click="prepareServiceVisualization('count')" title="Total Count of Service Requests">Total</th>
+                                <th ng-click="prepareServiceVisualization('pending')" title="Total Count of Pending Service Requests">Pending</th>
+                                <th ng-click="prepareServiceVisualization('resolved')" title="Total Count of Resolved Service Requests">Resolved</th>
+                                <th ng-click="prepareServiceVisualization('late')" title="Total Count of Service Requests Past SLA Resolve Time">Late</th>
                                 <th title="Average Time Taken to Attend a Customer(Call) Service Request">Average Attend Time</th>
                                 <th title="Average Time Taken to a Resolve Service Request">Average Resolve Time</th>
                             </tr>
