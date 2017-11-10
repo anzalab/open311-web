@@ -47,17 +47,17 @@
         <!-- end overall summary -->
 
         <!-- start jurisdictions summary -->
-        <ng-include ng-if="overviews.jurisdictions" src="'views/dashboards/overviews/_partials/jurisdictions_summary.html'"></ng-include>
+        <ng-include ng-if="overviews.jurisdictions && overviews.jurisdictions.length > 0" src="'views/dashboards/overviews/_partials/jurisdictions_summary.html'"></ng-include>
         <!-- end jurisdictions summary -->
 
         <!-- start service groups summary -->
         <!-- see http://gallery.echartsjs.com/editor.html?c=xrJZ60TVIg -->
-        <ng-include ng-if="overviews.groups" src="'views/dashboards/overviews/_partials/service_groups_summary.html'"></ng-include>
+        <ng-include ng-if="overviews.groups && overviews.groups.length > 0" src="'views/dashboards/overviews/_partials/service_groups_summary.html'"></ng-include>
         <!-- end service groups summary -->
 
         <!-- start services summary -->
         <!-- see http://gallery.echartsjs.com/editor.html?c=xrJZ60TVIg -->
-        <ng-include ng-if="overviews.services" src="'views/dashboards/overviews/_partials/services_summary.html'"></ng-include>
+        <ng-include ng-if="overviews.services  && overviews.services.length > 0" src="'views/dashboards/overviews/_partials/services_summary.html'"></ng-include>
         <!-- end services summary -->
 
     </div>

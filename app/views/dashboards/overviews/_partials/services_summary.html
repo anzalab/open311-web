@@ -5,9 +5,9 @@
     <div class="box b-a p-l-0">
 
         <!-- start header -->
-        <div class="box-header b-b" title="Areas Summary">
+        <div class="box-header b-b p-t-md p-b-md" title="Areas Summary">
             <h3>Services Summary</h3>
-            <small>Sub title goes here with small font</small>
+            <!-- <small>Sub title goes here with small font</small> -->
         </div>
         <!-- end header -->
 
@@ -26,7 +26,7 @@
                 <!-- end export -->
 
                 <!-- start date filters -->
-                <li uib-dropdown class="nav-item inline dropdown">
+                <li uib-dropdown class="nav-item inline dropdown" style="display:none">
                     <a uib-dropdown-toggle class="btn btn-xs rounded white dropdown-toggle" aria-expanded="false">Today</a>
                     <div uib-dropdown-menu class="dropdown-menu dropdown-menu-scale pull-right">
                         <a class="dropdown-item" href="">Last 24 hours</a>
@@ -50,7 +50,7 @@
             <div class="row-col">
 
                 <!-- start visual stats -->
-                <div class="col-sm-5 b-r lt">
+                <div class="col-sm-6 b-r lt">
                     <div class="p-a-md">
                         <echart config="perServiceConfig" options="perServiceOptions"></echart>
                     </div>
@@ -58,8 +58,8 @@
                 <!-- end visual starts -->
 
                 <!-- start tabular stats -->
-                <div class="col-sm-7">
-                    <table class="table table-bordered">
+                <div class="col-sm-6">
+                    <table class="table table-bordered table-stats">
                         <thead>
                             <tr>
                                 <th ng-click="prepareServiceVisualization('count')" title="Area">Service</th>
@@ -80,17 +80,17 @@
                                     {{service.count | number:0}}
                                 </td>
                                 <td title=" {{service.pending | number:0}}">
-                                     {{service.pending | number:0}}
+                                    {{service.pending | number:0}}
                                 </td>
                                 <td title=" {{service.resolved | number:0}}">
-                                     {{service.resolved | number:0}}
+                                    {{service.resolved | number:0}}
                                 </td>
                                 <td title=" {{service.late | number:0}}">
-                                     {{service.late | number:0}}
+                                    {{service.late | number:0}}
                                 </td>
                                 <td>
                                     <span>
-                                      {{service.averageAttendTime.minutes}} 
+                                      {{service.averageAttendTime.minutes}}
                                       <span class="text-muted text-xs">mins</span>
                                     </span>
                                     <span>
@@ -100,7 +100,7 @@
                                 </td>
                                 <td>
                                     <span>
-                                      {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}} 
+                                      {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}}
                                       <span class="text-muted text-xs">hrs</span>
                                     </span>
                                     <span>

@@ -27,7 +27,7 @@ angular
 
     //bind filters
     var defaultFilters = {
-      startedAt: moment().utc().startOf('year').toDate(),
+      startedAt: moment().utc().startOf('date').toDate(),
       endedAt: moment().utc().endOf('date').toDate(),
       statuses: [],
       priorities: [],
@@ -214,7 +214,7 @@ angular
 
       //prepare chart config
       $scope.perServiceConfig = {
-        height: '800',
+        height: '1100',
         forceClear: true
       };
 
@@ -248,7 +248,6 @@ angular
           },
           axisLabel: {
             rotate: 60,
-            padding: [0, 0, 14, 0]
           },
           axisLine: {
             show: true
@@ -258,6 +257,7 @@ angular
           type: 'value',
           scale: true,
           position: 'top',
+          boundaryGap: true,
           axisTick: {
             show: false,
             lineStyle: {
@@ -270,7 +270,7 @@ angular
         }],
         series: [{
           type: 'bar',
-          barWidth: '80%',
+          barWidth: '55%',
           label: {
             normal: {
               show: true,
@@ -302,7 +302,7 @@ angular
         return {
           name: group.name,
           value: group[column]
-        }
+        };
       });
 
       //prepare chart config
@@ -377,7 +377,7 @@ angular
         return {
           name: group.name,
           value: group[column]
-        }
+        };
       });
 
       //prepare chart config

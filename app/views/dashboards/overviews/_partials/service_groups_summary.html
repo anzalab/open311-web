@@ -5,9 +5,9 @@
     <div class="box b-a p-l-0">
 
         <!-- start header -->
-        <div class="box-header b-b p-t-md" title="Areas Summary">
+        <div class="box-header b-b p-t-md  p-b-md" title="Areas Summary">
             <h3>Service Groups Summary</h3>
-            <small>Sub title goes here with small font</small>
+            <!-- <small>Sub title goes here with small font</small> -->
         </div>
         <!-- end header -->
 
@@ -26,7 +26,7 @@
                 <!-- end export -->
 
                 <!-- start date filters -->
-                <li uib-dropdown class="nav-item inline dropdown">
+                <li uib-dropdown class="nav-item inline dropdown" style="display:none">
                     <a uib-dropdown-toggle class="btn btn-xs rounded white dropdown-toggle" aria-expanded="false">Today</a>
                     <div uib-dropdown-menu class="dropdown-menu dropdown-menu-scale pull-right">
                         <a class="dropdown-item" href="">Last 24 hours</a>
@@ -51,7 +51,7 @@
 
                 <!-- start tabular stats -->
                 <div class="col-sm-7">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-stats">
                         <thead>
                             <tr>
                                 <th ng-click="prepareServiceGroupVisualization('count')" title="Area">
@@ -60,7 +60,7 @@
                                 <th ng-click="prepareServiceGroupVisualization('count')" title="Total Count of Service Requests">
                                     Total
                                 </th>
-                                <th ng-click="prepareServiceGroupVisualization('pending')"  title="Total Count of Pending Service Requests">
+                                <th ng-click="prepareServiceGroupVisualization('pending')" title="Total Count of Pending Service Requests">
                                     Pending
                                 </th>
                                 <th ng-click="prepareServiceGroupVisualization('resolved')" title="Total Count of Resolved Service Requests">
@@ -72,7 +72,7 @@
                                 <th title="Average Time Taken to Attend a Customer(Call) Service Request">
                                     Average Attend Time
                                 </th>
-                                <th title="Average Time Taken to a Resolve Service Request">   Average Resolve Time
+                                <th title="Average Time Taken to a Resolve Service Request"> Average Resolve Time
                                 </th>
                             </tr>
                         </thead>
@@ -85,17 +85,17 @@
                                     {{group.count | number:0}}
                                 </td>
                                 <td title=" {{group.pending | number:0}}">
-                                     {{group.pending | number:0}}
+                                    {{group.pending | number:0}}
                                 </td>
                                 <td title=" {{group.resolved | number:0}}">
-                                     {{group.resolved | number:0}}
+                                    {{group.resolved | number:0}}
                                 </td>
                                 <td title=" {{group.late | number:0}}">
-                                     {{group.late | number:0}}
+                                    {{group.late | number:0}}
                                 </td>
                                 <td>
                                     <span>
-                                      {{group.averageAttendTime.minutes}} 
+                                      {{group.averageAttendTime.minutes}}
                                       <span class="text-muted text-xs">mins</span>
                                     </span>
                                     <span>
@@ -105,7 +105,7 @@
                                 </td>
                                 <td>
                                     <span>
-                                      {{group.averageResolveTime.hours + (group.averageResolveTime.days * 24)}} 
+                                      {{group.averageResolveTime.hours + (group.averageResolveTime.days * 24)}}
                                       <span class="text-muted text-xs">hrs</span>
                                     </span>
                                     <span>
