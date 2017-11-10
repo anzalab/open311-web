@@ -22,11 +22,11 @@
             <!-- end filter -->
 
             <!-- start download -->
-            <li class="nav-item" ng-if="overviews && overviews.length > 0">
+            <!-- <li class="nav-item" ng-if="overviews && overviews.length > 0">
                 <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="overviews.csv">
                   <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
                 </a>
-            </li>
+            </li> -->
             <!-- end download -->
 
         </ul>
@@ -47,7 +47,7 @@
         <!-- end overall summary -->
 
         <!-- start jurisdictions summary -->
-        <ng-include ng-if="overviews.jurisdictions && overviews.jurisdictions.length > 0" src="'views/dashboards/overviews/_partials/jurisdictions_summary.html'"></ng-include>
+        <ng-include ng-if="overviews.jurisdictions && overviews.jurisdictions.length > 1" src="'views/dashboards/overviews/_partials/jurisdictions_summary.html'"></ng-include>
         <!-- end jurisdictions summary -->
 
         <!-- start service groups summary -->

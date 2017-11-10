@@ -139,8 +139,6 @@ angular
             color: '#9E9D24'
           }];
 
-          console.log($scope.performances);
-
         });
     };
 
