@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('DashboardOverviewCtrl', function (
-    $rootScope, $scope, $state, $uibModal,
+    $rootScope, $scope, $filter, $state, $uibModal,
     Summary, endpoints, party
   ) {
 
@@ -177,7 +177,7 @@ angular
       // $scope.prepareIssuePerServiceGroup();
       // $scope.prepareIssuePerService();
       // $scope.prepareIssuePerStatus();
-      // $scope.prepareIssuePerPriority();
+      $scope.prepareServiceGroupVisualization();
 
     };
 
@@ -411,45 +411,34 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareIssuePerPriority = function () {
+    $scope.prepareServiceGroupVisualization = function (column) {
 
-      //prepare unique priority for bar chart categories
-      var categories = _.chain($scope.overviews)
-        .map('priority')
-        .sortBy('weight')
-        .uniqBy('name')
-        .value();
+      //ensure column
+      column = column || 'count';
 
 
       //prepare bar chart series data
-      var data = [{
-        value: 3661,
-        name: 'Commercial',
-      }, {
-        value: 5713,
-        name: 'Non-Commercial'
-      }, {
-        value: 9938,
-        name: 'Illegal'
-      }, {
-        value: 17623,
-        name: 'Other'
-      }];
+      var data = _.map($scope.overviews.groups, function (group) {
+        return {
+          name: group.name,
+          value: group[column]
+        }
+      });
 
       //prepare chart config
-      $scope.perPriorityConfig = {
+      $scope.perServiceGroupConfig = {
         height: 400,
         forceClear: true
       };
 
       //prepare chart options
-      $scope.perPriorityOptions = {
+      $scope.perServiceGroupOptions = {
         textStyle: {
           fontFamily: 'Lato'
         },
         title: {
-          text: 'Pending',
-          subtext: '2017',
+          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
           x: 'center',
           y: 'center',
           textStyle: {
@@ -458,9 +447,9 @@ angular
           }
         },
         tooltip: {
-          show: false,
+          show: true,
           trigger: 'item',
-          formatter: "{b}: {c} ({d}%)"
+          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
         },
         toolbox: {
           show: true,
@@ -475,10 +464,8 @@ angular
         series: [{
           type: 'pie',
           selectedMode: 'single',
-          radius: ['55%', '75%'],
-          color: ['#86D560', '#AF89D6', '#59ADF3', '#FF999A',
-            '#FFCC67'
-          ],
+          radius: ['45%', '55%'],
+          color: _.map($scope.overviews.groups, 'color'),
 
           label: {
             normal: {
