@@ -27,6 +27,7 @@ angular
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
+    $scope.party = party;
 
     //bind filters
     var defaultFilters = {
@@ -112,7 +113,9 @@ angular
      */
     $scope.reload = function () {
       Summary
-        .performances({ query: $scope.params })
+        .performances({
+          query: $scope.params
+        })
         .then(function (performances) {
           $scope.performances = performances;
 

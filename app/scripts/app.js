@@ -95,7 +95,7 @@ angular
       })
       .state('app.performances', {
         url: '/performances',
-        templateUrl: 'views/dashboards/performances.html',
+        templateUrl: 'views/dashboards/performance/index.html',
         controller: 'DashboardPerformanceCtrl',
         data: {
           authenticated: true
