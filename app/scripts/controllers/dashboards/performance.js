@@ -145,6 +145,76 @@ angular
         });
     };
 
+    $scope.dummyVisualization = function () {
+      // chart config
+      $scope.visualizationConfig = {
+        height: 400,
+        forceClear: true
+      };
+
+      var column = 'count';
+
+      var data = [{
+        name: 'Total',
+        value: 100
+      }, {
+        name: 'Pending',
+        value: 20
+      }, {
+        name: 'Resolved',
+        value: 80
+      }];
+
+      //prepare chart options
+      $scope.overviewOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        title: {
+          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          // subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16
+          }
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Service Groups Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['45%', '55%'],
+          color: ['#00acee',
+            '#52cdd5',
+            '#79d9f1',
+            '#a7e7ff',
+            '#c8efff'
+          ],
+          label: {
+            normal: {
+              formatter: '{b}\n{d}%',
+            }
+          },
+          data: data
+        }]
+      };
+    };
+
     //listen for events and reload overview accordingly
     $rootScope.$on('app:servicerequests:reload', function () {
       $scope.reload();
@@ -155,5 +225,6 @@ angular
     //prepare overview details
     $scope.params = Summary.prepareQuery($scope.filters);
     $scope.reload();
+    $scope.dummyVisualization();
 
   });

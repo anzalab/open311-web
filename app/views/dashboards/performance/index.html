@@ -15,6 +15,40 @@
         <!-- start profile summary and service request pipelines -->
         <ng-include src="'views/dashboards/performance/_partials/profile_summary.html'"></ng-include>
         <!-- end profile summary and service request pipelines -->
+
+        <!-- start overal and pipeline summary -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <!-- start of area overall summary -->
+                <ng-include src="'views/dashboards/performance/_partials/overall_summary.html'"></ng-include>
+                <!-- end of area overall summary -->
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <!-- start area service pipeline -->
+                <ng-include src="'views/dashboards/performance/_partials/pipeline_summary.html'"></ng-include>
+                <!-- end area service pipeline -->
+            </div>
+        </div>
+        <!-- start overal and pipeline summary -->
+
+        <hr>
+        <div class="padding">
+            <!-- start of leader's board section -->
+            <div class="row m-t-lg">
+                <div class="col-sm-12 col-md-5 col-lg-5">
+                    <!-- start of staff leaderboard -->
+                    <ng-include ng-if="performances.operators" src="'views/dashboards/_partials/service_request_leaderboard.html'" />
+                    <!-- end of staff leaderboard -->
+                </div>
+                <div class="col-sm-12 col-md-5 col-lg-5 offset-md-1">
+                    <!-- start of area leaderboard -->
+                    <ng-include ng-if="performances.jurisdictions" src="'views/dashboards/_partials/service_request_area_leaderboard.html'" />
+                    <!-- end of area leaderboard -->
+                </div>
+            </div>
+            <!-- end of leader's board section -->
+        </div>
+
     </div>
 </div>
 <!-- end app body -->
