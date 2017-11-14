@@ -458,8 +458,11 @@ angular
      * @description load servicerequests
      */
     $scope.find = function (query) {
+
       //ensure query
-      query = _.merge({ resolvedAt: null }, query);
+      var isSearchable = ($scope.search.q && $scope.search.q.length >= 2);
+      var extras = isSearchable ? $scope.query : {};
+      query = _.merge({ resolvedAt: null }, extras, query);
 
       //start sho spinner
       $scope.spin = true;

@@ -27,7 +27,7 @@
                                 Inbox
                                 </a>
                             </li>
-                            <li ng-class="{active:query.operator == null && query.$or == null && query.resolvedAt == null}" class="nav-item m-b-xs">
+                            <li ng-class="{active:query.operator == null && query.resolvedAt == null}" class="nav-item m-b-xs">
                                 <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resolvedAt:null, resetPage:true, reset:true})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
@@ -38,7 +38,7 @@
                                 </a>
                             </li>
                             <li ng-class="{active:query.resolvedAt != null}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:{$ne:null}, resetPage:true,reset:true})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
+                                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
                                 Resolved
                                 </a>
                             </li>
