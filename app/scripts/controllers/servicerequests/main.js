@@ -462,7 +462,7 @@ angular
       //ensure query
       var isSearchable = ($scope.search.q && $scope.search.q.length >= 2);
       var extras = isSearchable ? $scope.query : {};
-      query = _.merge({ resolvedAt: null }, extras, query);
+      query = _.merge({}, extras, query);
 
       //start sho spinner
       $scope.spin = true;
@@ -476,8 +476,11 @@ angular
 
       //track active ui based on query
       if (query.reset) {
+
         delete query.reset;
+
         $scope.query = query;
+
       } else {
         $scope.query = _.merge({}, $scope.query, query);
       }
@@ -549,6 +552,11 @@ angular
           };
         });
       return _exports;
+    };
+
+
+    $scope.isEmpty = function (value) {
+      return _.isEmpty(value);
     };
 
 
