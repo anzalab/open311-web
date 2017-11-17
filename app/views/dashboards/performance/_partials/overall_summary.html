@@ -5,8 +5,8 @@
     <div class="box b-a p-l-0">
 
         <!-- start header -->
-        <div class="box-header b-b p-t-md p-b-md" title="Areas Summary">
-            <h3>Area Overview Summary</h3>
+        <div class="box-header b-b p-t-md p-b-md" title="Overview Summary">
+            <h3>Overview Summary</h3>
             <!-- <small>Sub title goes here with small font</small> -->
         </div>
         <!-- end header -->
@@ -49,16 +49,16 @@
         <div>
 
             <!-- start overall stats -->
-            <!-- start overview summary -->
+
+            <!-- start jurisdiction performance summary -->
             <div class="row no-gutter">
 
                 <!-- start total -->
-                <div class="col-xs-6 col-sm-2 b-r b-b" title="Total Service Requests">
+                <div class="col-xs-6 col-sm-3 b-r b-b" title="Total Service Requests">
                     <div class="padding">
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.count | number:0}} -->
-                                0
+                                {{performances.overall.count | number:0}}
                             </h2>
                             <p class="text-muted m-b-md">Total</p>
                         </div>
@@ -67,12 +67,11 @@
                 <!-- end total -->
 
                 <!-- start pending -->
-                <div class="col-xs-6 col-sm-3 b-r b-b" title="Pending Service Requests">
+                <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
                     <div class="padding">
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.pending | number:0}} -->
-                                0
+                                {{performances.overall.pending | number:0}}
                             </h2>
                             <p class="text-muted m-b-md">Pending</p>
                         </div>
@@ -81,12 +80,11 @@
                 <!-- end pending -->
 
                 <!-- start resolved -->
-                <div class="col-xs-6 col-sm-3 b-r b-b" title="Resolved Service Requests">
+                <div class="col-xs-6 col-sm-2 b-r b-b" title="Resolved Service Requests">
                     <div class="padding">
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.resolved | number:0}} -->
-                                0
+                                {{performances.overall.resolved | number:0}}
                             </h2>
                             <p class="text-muted m-b-md">Resolved</p>
                         </div>
@@ -99,8 +97,7 @@
                     <div class="padding">
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.late | number:0}} -->
-                                0
+                                {{performances.overall.late | number:0}}
                             </h2>
                             <p class="text-muted m-b-md">Late</p>
                         </div>
@@ -108,22 +105,21 @@
                 </div>
                 <!-- end late  -->
 
-                <!-- start Escallated -->
-                <div class="col-xs-6 col-sm-2 b-b" title="Late(Past SLA Time) Service Requests">
+                <!-- start escallated -->
+                <div class="col-xs-6 col-sm-3 b-b" title="Late(Past SLA Time) Service Requests">
                     <div class="padding">
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.late | number:0}} -->
-                                0
+                                {{performances.overall.late | number:0}}
                             </h2>
                             <p class="text-muted m-b-md">Escallated</p>
                         </div>
                     </div>
                 </div>
-                <!-- end Escallated  -->
+                <!-- end escallated  -->
 
             </div>
-            <!-- end overview summary -->
+            <!-- end jurisdiction performance summary -->
 
             <!-- start visualization chart -->
             <div class="p-a-md">

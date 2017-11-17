@@ -27,17 +27,16 @@ angular
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
-    $scope.party = party;
+
+    //set default jurisdiction
+    $scope.jurisdiction = _.first($scope.jurisdictions);
 
     //bind filters
     var defaultFilters = {
       // startedAt: moment().utc().startOf('date').toDate(),
       startedAt: moment().utc().startOf('year').toDate(),
       endedAt: moment().utc().endOf('date').toDate(),
-      statuses: [],
-      priorities: [],
-      servicegroups: [],
-      jurisdictions: [],
+      jurisdictions: [].concat($scope.jurisdiction._id),
       workspaces: []
     };
 
@@ -77,34 +76,15 @@ angular
       //prepare query
       $scope.params = Summary.prepareQuery($scope.filters);
 
+      //reset area
+      var _id = _.first($scope.filters.jurisdictions);
+      $scope.jurisdiction = _.find($scope.jurisdictions, { '_id': _id });
+
       //load reports
       $scope.reload();
 
       //close current modal
       $scope.modal.close();
-    };
-
-
-    /**
-     * Filter service based on selected service group
-     */
-    $scope.filterServices = function () {
-      var filterHasServiceGroups =
-        ($scope.filters.servicegroups && $scope.filters.servicegroups.length >
-          0);
-      //pick only service of selected group
-      if (filterHasServiceGroups) {
-        //filter services based on service group(s)
-        $scope.services =
-          _.filter(endpoints.services.services, function (service) {
-            return _.includes($scope.filters.servicegroups, service.group
-              ._id);
-          });
-      }
-      //use all services
-      else {
-        $scope.services = endpoints.services.services;
-      }
     };
 
 
@@ -117,7 +97,12 @@ angular
           query: $scope.params
         })
         .then(function (performances) {
+
           $scope.performances = performances;
+
+          //ensure status are sorted by weight
+          $scope.performances.statuses =
+            _.orderBy(performances.statuses, 'weight', 'asc');
 
           //prepare summary
           $scope.performances.summaries = [{

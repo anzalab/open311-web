@@ -5,8 +5,8 @@
     <div class="box b-a p-l-0">
 
         <!-- start header -->
-        <div class="box-header b-b p-t-md p-b-md" title="Areas Summary">
-            <h3>Area Service Pipeline</h3>
+        <div class="box-header b-b p-t-md p-b-md" title="Work Pipeline">
+            <h3>Work Pipeline</h3>
             <!-- <small>Sub title goes here with small font</small> -->
         </div>
         <!-- end header -->
@@ -48,67 +48,28 @@
         <!-- start body -->
         <div>
 
-            <!-- start service pipeline -->
-            <!-- start overview summary -->
+            <!-- start pipeline -->
+
+            <!-- start pipeline counts -->
             <div class="row no-gutter">
 
                 <!-- start open -->
-                <div class="col-xs-6 col-sm-3 b-r b-b" title="Total Service Requests">
+                <div ng-repeat="status in performances.statuses" class="col-xs-6 col-sm-3 b-r b-b" title="{{status.name}} Service Requests">
                     <div class="padding">
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.count | number:0}} -->
-                                0
+                                {{status.count}}
                             </h2>
-                            <p class="text-muted m-b-md">Open</p>
+                            <p class="text-muted m-b-md">
+                                {{status.name}}
+                            </p>
                         </div>
                     </div>
                 </div>
                 <!-- end open -->
 
-                <!-- start escallated -->
-                <div class="col-xs-6 col-sm-3 b-r b-b" title="Pending Service Requests">
-                    <div class="padding">
-                        <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.pending | number:0}} -->
-                                0
-                            </h2>
-                            <p class="text-muted m-b-md">Escallated</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- end escallated -->
-
-                <!-- start in progress -->
-                <div class="col-xs-6 col-sm-3 b-r b-b" title="Resolved Service Requests">
-                    <div class="padding">
-                        <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.resolved | number:0}} -->
-                                0
-                            </h2>
-                            <p class="text-muted m-b-md">In Progress</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- end in progress -->
-
-                <!-- start closed -->
-                <div class="col-xs-6 col-sm-3 b-r b-b" title="Late(Past SLA Time) Service Requests">
-                    <div class="padding">
-                        <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
-                                <!-- {{overviews.overall.late | number:0}} -->
-                                0
-                            </h2>
-                            <p class="text-muted m-b-md">Closed</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- end closed  -->
             </div>
-            <!-- end overview summary -->
+            <!-- end pipeline counts -->
 
             <!-- start of visualization chart -->
             <div class="p-a-md">
@@ -116,7 +77,7 @@
             </div>
             <!-- end of visualization chart -->
 
-            <!-- end service pipeline -->
+            <!-- end pipeline -->
         </div>
         <!-- end body -->
 

@@ -3,17 +3,15 @@
 
     <!-- start average attend time -->
     <div class="col-xs-6 col-sm-6 b-a" title="Average Attend Time(Call Duration)">
-        <div class="padding">
+        <div> <!--class="padding"-->
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     <span title="Average Attend Time(Call Duration) - Minutes Spent">
-                        <!-- {{overviews.overall.averageAttendTime.minutes}} -->
-                        0
+                        {{performances.overall.averageAttendTime.minutes}}
                         <span class="text-muted text-xs">mins</span>
                     </span>
                     <span title="Average Attend Time(Call Duration) - Seconds Spent">
-                      0
-                          <!-- {{overviews.overall.averageAttendTime.seconds}} -->
+                        {{performances.overall.averageAttendTime.seconds}}
                       <span class="text-muted text-xs">secs</span>
                     </span>
                 </h2>
@@ -25,17 +23,19 @@
 
     <!-- start average resolve time -->
     <div class="col-xs-6 col-sm-6 b-b b-t b-r" title="Average resolve Time">
-        <div class="padding">
+        <div> <!--class="padding"-->
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
-                    <span title="Average resolve Time - Hourss Spent">
-                      0
-                      <!-- {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}} -->
+                    <span title="Average resolve Time - Days Spent">
+                      {{performances.overall.averageResolveTime.days}}
+                      <span class="text-muted text-xs">days</span>
+                    </span>
+                    <span title="Average resolve Time - Hours Spent">
+                      {{performances.overall.averageResolveTime.hours}}
                       <span class="text-muted text-xs">hrs</span>
                     </span>
                     <span title="Average resolve Time - Minutes Spent">
-                      0
-                      <!-- {{overviews.overall.averageResolveTime.minutes}} -->
+                      {{performances.overall.averageResolveTime.minutes}}
                       <span class="text-muted text-xs">mins</span>
                     </span>
                 </h2>

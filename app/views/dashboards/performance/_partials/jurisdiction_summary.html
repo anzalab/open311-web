@@ -1,36 +1,25 @@
-<!-- start profile summary -->
+<!-- start jurisdiction summary -->
 <div class="item">
     <div class="p-a-lg">
         <div class="row m-t">
-            <div class="col-sm-12 col-md-4 col-lg-6">
-                <!-- start party avatar -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <!-- start jurisdction avatar -->
                 <a href="#" class="pull-left m-r-md">
                 <span>
                 <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
-                <letter-avatar title="{{party.name}}" data="{{party.name}}" height="96" width="96" shape="round">
+                <letter-avatar title="{{jurisdiction.name}}" data="{{jurisdiction.name}}" height="96" width="96" shape="round">
                 </letter-avatar>
                 <i class="on b-white"></i>
                 </span>
               </a>
-                <!-- end party avatar -->
-                <!-- start party details -->
+                <!-- end jurisdction avatar -->
+
+                <!-- start jurisdiction details -->
                 <div class="clear m-b">
-                    <!-- start party name -->
-                    <h4 class="m-a-0 m-b-sm" title="Name">{{party.name}}</h4>
-                    <!-- end party name -->
-                    <!-- start party relations -->
-                    <p class="text-muted m-t-sm">
-                        <span class="m-r" title="Relation &amp; Workspace">
-                          {{party.relation.name ? party.relation.name :'N/A'}}
-                           / {{party.relation.workspace ? party.relation.workspace : 'N/A' }}
-                      </span>
-                        <small title="Working Area">
-                         <i class="fa fa-map-marker m-r-xs"></i>
-                         {{party.jurisdiction ? party.jurisdiction.name : 'N/A'}}
-                      </small>
-                    </p>
-                    <!-- end party relations -->
-                    <div class="block clearfix m-b">
+                    <!-- start jurisdiction name -->
+                    <h4 class="m-a-0 m-b-sm" title="Name">{{jurisdiction.name}}</h4>
+                    <!-- end jurisdiction name -->
+                    <div class="block clearfix m-t-md m-b">
                         <span>
                             <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
                           <i class="icon-phone"></i>
@@ -38,7 +27,7 @@
                         </a>
                         <!-- TODO should initiate call -->
                             <span title="Phone Number"  class="text-muted">
-                              {{party.phone ? party.phone : 'N/A'}}
+                              {{jurisdiction.phone ? jurisdiction.phone : 'N/A'}}
                             </span>
                         </span>
                         <span class="m-l-md">
@@ -48,19 +37,21 @@
                         </a>
                         <!-- TODO should initiate email -->
                             <span title="Email Address" class="text-muted">
-                              {{party.email ? party.email : 'N/A'}}
+                              {{jurisdiction.email ? jurisdiction.email : 'N/A'}}
                             </span>
                         </span>
                     </div>
                 </div>
-                <!-- end party details -->
+                <!-- end jurisdiction details -->
             </div>
+
             <!-- start of average time indicator -->
-            <div class="col-sm-12 col-md-4 col-lg-4 pull-right">
+            <div class="col-sm-12 col-md-6 col-lg-6 pull-right">
                 <ng-include src="'views/dashboards/performance/_partials/average_time_summary.html'"></ng-include>
             </div>
             <!-- end of average time indicator -->
+
         </div>
     </div>
 </div>
-<!-- end profile summary -->
+<!-- end jurisdiction summary -->
