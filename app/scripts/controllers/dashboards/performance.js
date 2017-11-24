@@ -32,6 +32,7 @@ angular
     $scope.jurisdiction =
       ($stateParams.jurisdiction || _.first($scope.jurisdictions));
 
+    console.log($stateParams);
     //bind filters
     var defaultFilters = {
       // startedAt: moment().utc().startOf('date').toDate(),
@@ -79,7 +80,9 @@ angular
 
       //reset area
       var _id = _.first($scope.filters.jurisdictions);
-      $scope.jurisdiction = _.find($scope.jurisdictions, { '_id': _id });
+      $scope.jurisdiction = _.find($scope.jurisdictions, {
+        '_id': _id
+      });
 
       //load reports
       $scope.reload();
