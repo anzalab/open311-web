@@ -97,6 +97,11 @@ angular
         url: '/performances',
         templateUrl: 'views/dashboards/performance/index.html',
         controller: 'DashboardPerformanceCtrl',
+        params: {
+          jurisdiction: null,
+          startedAt: null,
+          endedAt: null
+        },
         data: {
           authenticated: true
         },

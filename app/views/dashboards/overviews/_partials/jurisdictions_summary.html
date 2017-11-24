@@ -72,7 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="jurisdiction in overviews.jurisdictions">
+                            <tr ng-repeat="jurisdiction in overviews.jurisdictions" ui-sref="app.performances({jurisdiction:jurisdiction,startedAt:filters.startedAt,endedAt:filters.endedAt})">
                                 <td title="{{jurisdiction.name}}">
                                     {{jurisdiction.name}}
                                 </td>
