@@ -32,7 +32,6 @@ angular
     $scope.jurisdiction =
       ($stateParams.jurisdiction || _.first($scope.jurisdictions));
 
-    console.log($stateParams);
     //bind filters
     var defaultFilters = {
       // startedAt: moment().utc().startOf('date').toDate(),
