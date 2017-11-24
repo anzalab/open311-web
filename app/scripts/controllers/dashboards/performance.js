@@ -13,7 +13,7 @@
 angular
   .module('ng311')
   .controller('DashboardPerformanceCtrl', function (
-    $rootScope, $scope, $state, $stateParams, $uibModal,
+    $rootScope, $scope, $state, $filter, $stateParams, $uibModal,
     Summary, endpoints, party
   ) {
 
@@ -35,8 +35,8 @@ angular
     //bind filters
     var defaultFilters = {
       // startedAt: moment().utc().startOf('date').toDate(),
-      startedAt: moment().utc().startOf('year').toDate(),
-      endedAt: moment().utc().endOf('date').toDate(),
+      startedAt: ($stateParams.startedAt || moment().utc().startOf('year').toDate()),
+      endedAt: ($stateParams.endedAt || moment().utc().endOf('date').toDate()),
       jurisdictions: [].concat($scope.jurisdiction._id),
       workspaces: []
     };
@@ -47,11 +47,11 @@ angular
     $scope.performances = [];
 
     /**
-     * Open overview reports filter
+     * Open performance reports filter
      */
     $scope.showFilter = function () {
 
-      //open overview reports filter modal
+      //open performance reports filter modal
       $scope.modal = $uibModal.open({
         templateUrl: 'views/dashboards/_partials/performances_filter.html',
         scope: $scope,
@@ -66,7 +66,7 @@ angular
 
 
     /**
-     * Filter overview reports based on on current selected filters
+     * Filter performance reports based on on current selected filters
      * @param {Boolean} [reset] whether to clear and reset filter
      */
     $scope.filter = function (reset) {
@@ -88,9 +88,44 @@ angular
       $scope.modal.close();
     };
 
+    //prepare summaries
+    //TODO make api to return data
+    $scope.prepareSummaries = function () {
+      //prepare summary
+      $scope.performances.summaries = [{
+        name: 'Resolved',
+        count: $scope.performances.overall.resolved,
+        color: '#8BC34A'
+      }, {
+        name: 'Pending',
+        count: $scope.performances.overall.pending,
+        color: '#00BCD4'
+      }, {
+        name: 'Late',
+        count: $scope.performances.overall.late,
+        color: '#009688'
+      }, {
+        name: 'Un-Attended',
+        count: $scope.performances.overall.unattended,
+        color: '#9E9D24'
+      }];
+    };
+
+    $scope.prepare = function () {
+
+      //shaping data
+      $scope.prepareSummaries();
+
+      //prepare visualization
+      $scope.prepareSummaryVisualization();
+      $scope.prepareStatusesVisualization();
+      $scope.prepareServiceGroupVisualization();
+
+    };
+
 
     /**
-     * Reload overview reports
+     * Reload performance reports
      */
     $scope.reload = function () {
       Summary
@@ -105,60 +140,184 @@ angular
           $scope.performances.statuses =
             _.orderBy(performances.statuses, 'weight', 'asc');
 
-          //prepare summary
-          $scope.performances.summaries = [{
-            name: 'Total',
-            count: $scope.performances.total,
-            color: '#607D8B'
-          }, {
-            name: 'Resolved',
-            count: $scope.performances.resolved,
-            color: '#8BC34A'
-          }, {
-            name: 'Pending',
-            count: $scope.performances.pending,
-            color: '#00BCD4'
-          }, {
-            name: 'Late',
-            count: $scope.performances.late,
-            color: '#009688'
-          }, {
-            name: 'Un-Attended',
-            count: $scope.performances.unattended,
-            color: '#9E9D24'
-          }];
+          $scope.prepare();
 
         });
     };
 
-    $scope.dummyVisualization = function () {
-      // chart config
-      $scope.visualizationConfig = {
+    /**
+     * prepare summary visualization
+     * @return {object} echart donut chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareSummaryVisualization = function () {
+
+      //prepare chart series data
+      var data = _.map($scope.performances.summaries, function (summary) {
+        return {
+          name: summary.name,
+          value: summary.count
+        };
+      });
+
+      //prepare chart config
+      $scope.perSummaryConfig = {
         height: 400,
         forceClear: true
       };
 
-      var column = 'count';
+      //prepare chart options
+      $scope.perSummaryOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        title: {
+          text: 'Total',
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16
+          }
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Area Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['45%', '55%'],
+          color: _.map($scope.performances.summaries, 'color'),
+          label: {
+            normal: {
+              formatter: '{b}\n{d}%',
+            }
+          },
+          data: data
+        }]
+      };
 
-      var data = [{
-        name: 'Total',
-        value: 100
-      }, {
-        name: 'Pending',
-        value: 20
-      }, {
-        name: 'Resolved',
-        value: 80
-      }];
+    };
+
+    /**
+     * prepare statuses visualization
+     * @return {object} echart donut chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareStatusesVisualization = function () {
+
+      //prepare chart series data
+      var data = _.map($scope.performances.statuses, function (status) {
+        return {
+          name: status.name,
+          value: status.count
+        };
+      });
+
+      //prepare chart config
+      $scope.perStatusesConfig = {
+        height: 400,
+        forceClear: true
+      };
 
       //prepare chart options
-      $scope.overviewOptions = {
+      $scope.perStatusesOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        title: {
+          text: 'Total',
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16
+          }
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Area Status Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['45%', '55%'],
+          color: _.map($scope.performances.statuses, 'color'),
+          label: {
+            normal: {
+              formatter: '{b}\n{d}%',
+            }
+          },
+          data: data
+        }]
+      };
+
+    };
+
+    /**
+     * prepare service group performance visualization
+     * @return {object} echart bar chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareServiceGroupVisualization = function (column) {
+
+      //ensure column
+      column = column || 'count';
+
+
+      //prepare chart series data
+      var data = _.map($scope.performances.groups, function (group) {
+        return {
+          name: group.name,
+          value: group[column]
+        };
+      });
+
+      //prepare chart config
+      $scope.perServiceGroupConfig = {
+        height: 400,
+        forceClear: true
+      };
+
+      //prepare chart options
+      $scope.perServiceGroupOptions = {
         textStyle: {
           fontFamily: 'Lato'
         },
         title: {
           text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
-          // subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
           x: 'center',
           y: 'center',
           textStyle: {
@@ -185,12 +344,8 @@ angular
           type: 'pie',
           selectedMode: 'single',
           radius: ['45%', '55%'],
-          color: ['#00acee',
-            '#52cdd5',
-            '#79d9f1',
-            '#a7e7ff',
-            '#c8efff'
-          ],
+          color: _.map($scope.performances.groups, 'color'),
+
           label: {
             normal: {
               formatter: '{b}\n{d}%',
@@ -199,18 +354,17 @@ angular
           data: data
         }]
       };
+
     };
 
-    //listen for events and reload overview accordingly
+    //listen for events and reload performance accordingly
     $rootScope.$on('app:servicerequests:reload', function () {
       $scope.reload();
     });
 
-
     //pre-load reports
-    //prepare overview details
+    //prepare performance details
     $scope.params = Summary.prepareQuery($scope.filters);
     $scope.reload();
-    $scope.dummyVisualization();
 
   });
