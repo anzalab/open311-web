@@ -120,7 +120,7 @@ angular
         });
 
       return _exports;
-      
+
     };
 
 
@@ -195,6 +195,7 @@ angular
       $scope.prepareJurisdictionVisualization();
       $scope.prepareServiceGroupVisualization();
       $scope.prepareMethodVisualization();
+      $scope.prepareWorkspaceVisualization();
 
     };
 
@@ -520,7 +521,7 @@ angular
           type: 'pie',
           selectedMode: 'single',
           radius: ['45%', '55%'],
-          color: _.map($scope.overviews.jurisdictions, 'color'),
+          color: _.map($scope.overviews.services, 'color'),
           label: {
             normal: {
               formatter: '{b}\n{d}%',
@@ -554,13 +555,13 @@ angular
       });
 
       //prepare chart config
-      $scope.perWoerkspaceConfig = {
+      $scope.perWorkspaceConfig = {
         height: 400,
         forceClear: true
       };
 
       //prepare chart options
-      $scope.perWoerkspaceOptions = {
+      $scope.perWorkspaceOptions = {
         textStyle: {
           fontFamily: 'Lato'
         },
@@ -593,7 +594,8 @@ angular
           type: 'pie',
           selectedMode: 'single',
           radius: ['45%', '55%'],
-          color: _.map($scope.overviews.jurisdictions, 'color'),
+          color: _.reverse(_.map($scope.overviews.services,
+            'color')),
           label: {
             normal: {
               formatter: '{b}\n{d}%',
