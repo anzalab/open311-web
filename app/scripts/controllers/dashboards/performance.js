@@ -13,7 +13,7 @@
 angular
   .module('ng311')
   .controller('DashboardPerformanceCtrl', function (
-    $rootScope, $scope, $state, $uibModal,
+    $rootScope, $scope, $state, $stateParams, $uibModal,
     Summary, endpoints, party
   ) {
 
@@ -29,7 +29,8 @@ angular
     $scope.workspaces = party.settings.party.relation.workspaces;
 
     //set default jurisdiction
-    $scope.jurisdiction = _.first($scope.jurisdictions);
+    $scope.jurisdiction =
+      ($stateParams.jurisdiction || _.first($scope.jurisdictions));
 
     //bind filters
     var defaultFilters = {
