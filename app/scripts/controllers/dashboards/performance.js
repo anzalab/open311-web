@@ -42,6 +42,7 @@ angular
       workspaces: []
     };
 
+    //TODO persist filter to local storage
     $scope.filters = defaultFilters;
 
     //initialize performances
@@ -107,10 +108,6 @@ angular
         name: 'Late',
         count: $scope.performances.overall.late,
         color: '#009688'
-      }, {
-        name: 'Un-Attended',
-        count: $scope.performances.overall.unattended,
-        color: '#9E9D24'
       }];
     };
 
@@ -123,6 +120,7 @@ angular
       $scope.prepareSummaryVisualization();
       $scope.prepareStatusesVisualization();
       $scope.prepareServiceGroupVisualization();
+      $scope.prepareServiceVisualization();
 
     };
 
@@ -352,6 +350,116 @@ angular
           label: {
             normal: {
               formatter: '{b}\n{d}%',
+            }
+          },
+          data: data
+        }]
+      };
+
+    };
+
+    /**
+     * prepare per service bar chart
+     * @return {object} echart bar chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareServiceVisualization = function (column) {
+
+      //ensure column
+      column = column || 'count';
+
+      //prepare unique services for bar chart categories
+      var categories = _.chain($scope.performances)
+        .map('services')
+        .uniqBy('name')
+        .value();
+
+      //prepare bar chart series data
+      var data =
+        _.map($scope.performances.services, function (service) {
+
+          var serie = {
+            name: service.name,
+            value: service[column],
+            itemStyle: {
+              normal: {
+                color: service.color
+              }
+            }
+          };
+
+          return serie;
+
+        });
+
+      //sort data by their value
+      data = _.orderBy(data, 'value', 'asc');
+
+      //prepare chart config
+      $scope.perServiceConfig = {
+        height: '1100',
+        forceClear: true
+      };
+
+      //prepare chart options
+      $scope.perServiceOptions = {
+        color: _.map(data, 'itemStyle.normal.color'),
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b} : {c}'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Area Services Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        calculable: true,
+        yAxis: [{
+          type: 'category',
+          data: _.map(data, 'name'),
+          boundaryGap: true,
+          axisTick: {
+            alignWithLabel: true
+          },
+          axisLabel: {
+            rotate: 60,
+          },
+          axisLine: {
+            show: true
+          }
+        }],
+        xAxis: [{
+          type: 'value',
+          scale: true,
+          position: 'top',
+          boundaryGap: true,
+          axisTick: {
+            show: false,
+            lineStyle: {
+              color: '#ddd'
+            }
+          },
+          splitLine: {
+            show: false
+          }
+        }],
+        series: [{
+          type: 'bar',
+          barWidth: '55%',
+          label: {
+            normal: {
+              show: true,
+              position: 'right'
             }
           },
           data: data

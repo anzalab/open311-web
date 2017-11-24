@@ -36,6 +36,7 @@ angular
       workspaces: []
     };
 
+    //TODO persist filter to local storage
     $scope.filters = defaultFilters;
 
     //bind exports
@@ -211,7 +212,7 @@ angular
       //ensure column
       column = column || 'count';
 
-      //prepare unique service groups for bar chart categories
+      //prepare unique services for bar chart categories
       var categories = _.chain($scope.overviews)
         .map('services')
         .uniqBy('name')

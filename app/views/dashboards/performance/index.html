@@ -45,9 +45,13 @@
         </div>
         <!-- start overal and pipeline summary -->
 
-         <!-- start service groups summary -->
+        <!-- start service groups summary -->
         <ng-include ng-if="performances.groups && performances.groups.length > 0" src="'views/dashboards/performance/_partials/service_groups_summary.html'"></ng-include>
         <!-- end service groups summary -->
+
+        <!-- start services summary -->
+        <ng-include ng-if="performances.services  && performances.services.length > 0" src="'views/dashboards/performance/_partials/services_summary.html'"></ng-include>
+        <!-- end services summary -->
 
         <hr>
         <div class="padding" style="display: none">
