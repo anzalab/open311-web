@@ -65,7 +65,7 @@
         <!-- start workspaces summary -->
         <ng-include ng-if="overviews.workspaces  && overviews.workspaces.length > 0" src="'views/dashboards/overviews/_partials/workspaces_summary.html'"></ng-include>
         <!-- end workspaces summary -->
-
+        <!-- start no data description -->
         <div ng-if="!overviews.overall" class="row-col h-v">
             <div class="row-cell v-m">
                 <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- end no data description -->
     </div>
 </div>
 <!-- end overview body -->
