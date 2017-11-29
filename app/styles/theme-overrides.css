@@ -369,3 +369,27 @@ th {
 .table-stats tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.065);
 }
+
+
+/* displays */
+
+.display-5 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+
+/* buttons */
+
+.b-grey {
+    border-color: #7a7a7a;
+}
+
+.text-gray {
+    color: #7a7a7a;
+}
+
+.btn.b-grey:hover {
+    background-color: #dfdede;
+    color: #000;
+}
