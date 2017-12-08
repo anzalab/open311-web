@@ -36,6 +36,7 @@ angular
       workspaces: []
     };
 
+    //TODO persist filter to local storage
     $scope.filters = defaultFilters;
 
     //bind exports
@@ -63,6 +64,19 @@ angular
           'Late', 'Average Attend Time (Call Duration)',
           'Average Resolve Time'
         ]
+      },
+      methods: {
+        filename: 'reporting_methods_overview_reports_' + Date.now() +
+          '.csv',
+        headers: [
+          'Name', 'Total'
+        ]
+      },
+      workspaces: {
+        filename: 'workspaces_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Name', 'Total'
+        ]
       }
     };
 
@@ -76,27 +90,38 @@ angular
     $scope.export = function (type) {
       var _exports =
         _.map($scope.overviews[type], function (overview) {
-          return {
+
+          overview = {
             name: overview.name,
             total: overview.count,
             pending: overview.pending,
             resolved: overview.resolved,
             late: overview.late,
-            averageAttendTime: [
+            averageAttendTime: overview.averageAttendTime ? [
               overview.averageAttendTime.days, ' days, ',
               overview.averageAttendTime.hours, ' hrs, ',
               overview.averageAttendTime.minutes, ' mins, ',
               overview.averageAttendTime.seconds, ' secs'
-            ].join(''),
-            averageResolveTime: [
+            ].join('') : undefined,
+            averageResolveTime: overview.averageResolveTime ? [
               overview.averageResolveTime.days, 'days, ',
               overview.averageResolveTime.hours, 'hrs, ',
               overview.averageResolveTime.minutes, 'mins, ',
               overview.averageResolveTime.seconds, 'secs, '
-            ].join(''),
+            ].join('') : undefined,
           };
+
+          //reshape for workspace and method
+          if (type === 'methods' || type === 'workspaces') {
+            overview = _.pick(overview, ['name', 'total']);
+          }
+
+          return overview;
+
         });
+
       return _exports;
+
     };
 
 
@@ -170,6 +195,8 @@ angular
       $scope.prepareServiceVisualization();
       $scope.prepareJurisdictionVisualization();
       $scope.prepareServiceGroupVisualization();
+      $scope.prepareMethodVisualization();
+      $scope.prepareWorkspaceVisualization();
 
     };
 
@@ -185,7 +212,7 @@ angular
       //ensure column
       column = column || 'count';
 
-      //prepare unique service groups for bar chart categories
+      //prepare unique services for bar chart categories
       var categories = _.chain($scope.overviews)
         .map('services')
         .uniqBy('name')
@@ -298,10 +325,11 @@ angular
 
 
       //prepare chart series data
-      var data = _.map($scope.overviews.jurisdictions, function (group) {
+      var data = _.map($scope.overviews.jurisdictions, function (
+        jurisdiction) {
         return {
-          name: group.name,
-          value: group[column]
+          name: jurisdiction.name,
+          value: jurisdiction[column]
         };
       });
 
@@ -346,7 +374,6 @@ angular
           selectedMode: 'single',
           radius: ['45%', '55%'],
           color: _.map($scope.overviews.jurisdictions, 'color'),
-
           label: {
             normal: {
               formatter: '{b}\n{d}%',
@@ -422,6 +449,154 @@ angular
           radius: ['45%', '55%'],
           color: _.map($scope.overviews.groups, 'color'),
 
+          label: {
+            normal: {
+              formatter: '{b}\n{d}%',
+            }
+          },
+          data: data
+        }]
+      };
+
+    };
+
+
+    /**
+     * prepare method overview visualization
+     * @return {object} echart pie chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareMethodVisualization = function (column) {
+
+      //ensure column
+      column = column || 'count';
+
+
+      //prepare chart series data
+      var data = _.map($scope.overviews.methods, function (method) {
+        return {
+          name: method.name,
+          value: method[column]
+        };
+      });
+
+      //prepare chart config
+      $scope.perMethodConfig = {
+        height: 400,
+        forceClear: true
+      };
+
+      //prepare chart options
+      $scope.perMethodOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        title: {
+          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16
+          }
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Reporting Methods Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['45%', '55%'],
+          color: _.map($scope.overviews.services, 'color'),
+          label: {
+            normal: {
+              formatter: '{b}\n{d}%',
+            }
+          },
+          data: data
+        }]
+      };
+
+    };
+
+    /**
+     * prepare workspace overview visualization
+     * @return {object} echart pie chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareWorkspaceVisualization = function (column) {
+
+      //ensure column
+      column = column || 'count';
+
+
+      //prepare chart series data
+      var data = _.map($scope.overviews.workspaces, function (workspace) {
+        return {
+          name: workspace.name,
+          value: workspace[column]
+        };
+      });
+
+      //prepare chart config
+      $scope.perWorkspaceConfig = {
+        height: 400,
+        forceClear: true
+      };
+
+      //prepare chart options
+      $scope.perWorkspaceOptions = {
+        textStyle: {
+          fontFamily: 'Lato'
+        },
+        title: {
+          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16
+          }
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Workspaces Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true
+            }
+          }
+        },
+        series: [{
+          type: 'pie',
+          selectedMode: 'single',
+          radius: ['45%', '55%'],
+          color: _.reverse(_.map($scope.overviews.services,
+            'color')),
           label: {
             normal: {
               formatter: '{b}\n{d}%',

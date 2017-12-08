@@ -5,7 +5,7 @@
     <div class="box b-a p-l-0">
 
         <!-- start header -->
-        <div class="box-header b-b p-t-md p-b-md" title="Areas Summary">
+        <div class="box-header b-b p-t-md p-b-md" title="Services Summary">
             <h3>Services Summary</h3>
             <!-- <small>Sub title goes here with small font</small> -->
         </div>
@@ -19,7 +19,7 @@
 
                 <!-- start export -->
                 <li class="nav-item inline">
-                    <a title="Click To Export" class="btn btn-xs rounded white" aria-expanded="false" ng-csv="export('services')" csv-header="exports.services.headers" filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
+                    <a title="Click To Export" class="btn btn-xs rounded white" aria-expanded="false" ng-csv="export('services')" csv-header="exports.services.headers" filename="services_performance_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
                         Export
                       </a>
                 </li>
@@ -72,7 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="service in overviews.services">
+                            <tr ng-repeat="service in performances.services">
                                 <td title="{{service.name}}">
                                     {{service.name}}
                                 </td>
@@ -100,7 +100,7 @@
                                 </td>
                                 <td>
                                     <span>
-                                        {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}}
+                                        {{performances.overall.averageResolveTime.hours + (performances.overall.averageResolveTime.days * 24)}}
                                         <span class="text-muted text-xs">hrs</span>
                                     </span>
                                     <span>

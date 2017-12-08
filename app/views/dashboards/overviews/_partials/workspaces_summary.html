@@ -1,0 +1,91 @@
+<!-- start workspaces summary -->
+<div class="padding m-t-md">
+
+    <!-- start report box -->
+    <div class="box b-a p-l-0">
+
+        <!-- start header -->
+        <div class="box-header b-b p-t-md p-b-md" title="Reporting Workspaces Summary">
+            <h3>Workspaces Summary</h3>
+            <!-- <small>Sub title goes here with small font</small> -->
+        </div>
+        <!-- end header -->
+
+        <!-- start toolbox -->
+        <div class="box-tool p-t-sm">
+
+            <!-- start time filters -->
+            <ul class="nav">
+
+                <!-- start export -->
+                <li class="nav-item inline">
+                    <a title="Click To Export" class="btn btn-xs rounded white" aria-expanded="false" ng-csv="export('workspaces')" csv-header="exports.workspaces.headers" filename="workspaces_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
+                      Export
+                    </a>
+                </li>
+                <!-- end export -->
+
+                <!-- start date filters -->
+                <li uib-dropdown class="nav-item inline dropdown" style="display:none">
+                    <a uib-dropdown-toggle class="btn btn-xs rounded white dropdown-toggle" aria-expanded="false">Today</a>
+                    <div uib-dropdown-menu class="dropdown-menu dropdown-menu-scale pull-right">
+                        <a class="dropdown-item" href="">Last 24 hours</a>
+                        <a class="dropdown-item" href="">Last 7 days</a>
+                        <a class="dropdown-item" href="">Last month</a>
+                        <a class="dropdown-item" href="">Last Year</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Today</a>
+                    </div>
+                </li>
+                <!-- end date filters -->
+
+            </ul>
+            <!-- end time filters -->
+
+        </div>
+        <!-- end toolbox -->
+
+        <!-- start body -->
+        <div>
+            <div class="row-col">
+
+                <!-- start tabular stats -->
+                <div class="col-sm-7">
+                    <table class="table table-bordered table-stats">
+                        <thead>
+                            <tr>
+                                <th ng-click="prepareWorkspaceVisualization('count')" title="Workspace">Workspace</th>
+                                <th ng-click="prepareWorkspaceVisualization('count')" title="Total Count of Service Requests">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="workspace in overviews.workspaces">
+                                <td title="{{workspace.name}}">
+                                    {{workspace.name}}
+                                </td>
+                                <td title="{{workspace.count | number:0}}">
+                                    {{workspace.count | number:0}}
+                                </td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end tabular stats -->
+
+                <!-- start visual stats -->
+                <div class="col-sm-5 b-l lt">
+                    <div class="p-a-md">
+                        <echart config="perWorkspaceConfig" options="perWorkspaceOptions"></echart>
+                    </div>
+                </div>
+                <!-- end visual starts -->
+
+            </div>
+        </div>
+        <!-- end body -->
+
+    </div>
+    <!-- end report box -->
+
+</div>
+<!-- end workspaces summary -->

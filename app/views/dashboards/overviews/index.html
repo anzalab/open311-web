@@ -51,15 +51,30 @@
         <!-- end jurisdictions summary -->
 
         <!-- start service groups summary -->
-        <!-- see http://gallery.echartsjs.com/editor.html?c=xrJZ60TVIg -->
         <ng-include ng-if="overviews.groups && overviews.groups.length > 0" src="'views/dashboards/overviews/_partials/service_groups_summary.html'"></ng-include>
         <!-- end service groups summary -->
 
         <!-- start services summary -->
-        <!-- see http://gallery.echartsjs.com/editor.html?c=xrJZ60TVIg -->
         <ng-include ng-if="overviews.services  && overviews.services.length > 0" src="'views/dashboards/overviews/_partials/services_summary.html'"></ng-include>
         <!-- end services summary -->
 
+        <!-- start methods summary -->
+        <ng-include ng-if="overviews.methods  && overviews.methods.length > 0" src="'views/dashboards/overviews/_partials/methods_summary.html'"></ng-include>
+        <!-- end methods summary -->
+
+        <!-- start workspaces summary -->
+        <ng-include ng-if="overviews.workspaces  && overviews.workspaces.length > 0" src="'views/dashboards/overviews/_partials/workspaces_summary.html'"></ng-include>
+        <!-- end workspaces summary -->
+        <!-- start no data description -->
+        <div ng-if="!overviews.overall" class="row-col h-v">
+            <div class="row-cell v-m">
+                <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+                    <h1 class="display-5 text-muted m-y-lg">Sorry No Any Data Today! Please Update your Filters so See Previous Data.</h1>
+                    <button ng-click="showFilter()" class="btn btn-outline b-grey text-grey">Update Filters</button>
+                </div>
+            </div>
+        </div>
+        <!-- end no data description -->
     </div>
 </div>
 <!-- end overview body -->
