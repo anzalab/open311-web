@@ -123,6 +123,20 @@ angular
 
         }
 
+        //ensure attachements has correct data for displaying
+        var hasAttachments = (servicerequest && servicerequest.attachments &&
+          servicerequest.attachments.length > 0);
+        if (hasAttachments) {
+          servicerequest.attachments =
+            _.map(servicerequest.attachments, function (attachment) {
+              attachment.thumb = ['data:', attachment.mime, ';base64,',
+                attachment.content
+              ].join('');
+              attachment.description = attachment.caption;
+              return attachment;
+            });
+        }
+
         //load service request comments
         $scope.loadComment(servicerequest);
 

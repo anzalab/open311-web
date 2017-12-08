@@ -27,18 +27,13 @@
     $templateCache.put(templateUrl,
       '<div class="{{ baseClass }}">' +
       '  <div ng-repeat="i in images">' +
-      '    <img data-ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="openGallery($index)" alt="Image {{ $index + 1 }}" />' +
+      '    <img data-ng-src="{{ i.thumb }}" class="{{ thumbClass }}" ng-click="openGallery($index)" alt="{{i.name}}" title="{{i.caption}}" />' +
       '  </div>' +
-      '<div ng-show="allowUpload" class="file-upload btn btn-default">' +
-      '<span><i class="icon-cloud-upload"></i></span>' +
-      '<input on-after-validate="onUpload" ng-model="upload" name="upload" accept="image/*" base-sixty-four-input type="file" title="Upload screenshot" class="upload" />' +
-      '</div>' +
       '</div>' +
       '<div class="ng-overlay" ng-show="opened">' +
       '</div>' +
       '<div class="ng-gallery-content" unselectable="on" ng-show="opened" ng-swipe-left="nextImage()" ng-swipe-right="prevImage()">' +
       '  <div class="uil-ring-css" ng-show="loading"><div></div></div>' +
-      '<a ng-click="whenRemove()" class="download-image" title="Remove"><i class="icon-trash"></i></a>' +
       '  <a class="close-popup" ng-click="closeGallery()" title="Close"><i class="ti-close"></i></a>' +
       '  <a class="nav-left" ng-click="prevImage()" title="Previous"><i class="ti-angle-left"></i></a>' +
       '  <img ondragstart="return false;" draggable="false" data-ng-src="{{ img }}" ng-click="nextImage()" ng-show="!loading" class="effect" />' +
@@ -95,28 +90,6 @@
         scope.thumbWrapperWidth = 0;
         scope.thumbsWidth = 0;
 
-        var loadImage = function (i) {
-          var deferred = $q.defer();
-          var image = new Image();
-
-          image.onload = function () {
-            scope.loading = false;
-            if (typeof this.complete === false || this.naturalWidth ===
-              0) {
-              deferred.reject();
-            }
-            deferred.resolve(image);
-          };
-
-          image.onerror = function () {
-            deferred.reject();
-          };
-
-          image.src = scope.images[i].img;
-          scope.loading = true;
-
-          return deferred.promise;
-        };
 
         var calculateThumbsWidth = function () {
           var width = 0,
@@ -147,10 +120,11 @@
         };
 
         var showImage = function (i) {
-          loadImage(scope.index).then(function (resp) {
-            scope.img = resp.src;
+          var img = scope.images[i];
+          if (img) {
+            scope.img = scope.images[i].thumb;
             smartScroll(scope.index);
-          });
+          }
           scope.description = scope.images[i].description || '';
         };
 
