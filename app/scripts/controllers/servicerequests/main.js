@@ -350,7 +350,10 @@ angular
      * Initialize new issue attending with operator details
      */
     $scope.onAttend = function () {
-      $state.go('app.create_servicerequests', $scope.servicerequest);
+      //prevent attachements and changelogs on attending
+      var servicerequest =
+        _.omit($scope.servicerequest, ['attachments', 'changelogs']);
+      $state.go('app.create_servicerequests', servicerequest);
     };
 
     /**
