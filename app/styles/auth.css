@@ -1,47 +1,52 @@
+/**
+ * The MIT License (MIT)
+ * Copyright (c) 2016 lykmapipo, CodeTanzania & Contributors
+ */
+
 .page {
-    position: inherit;
+  position: inherit;
 }
 
 .vertical-align {
-    font-size: 0;
+  font-size: 0;
 }
 
 .vertical-align:before {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: "";
 }
 
 .page-content {
-    padding: 30px 30px;
+  padding: 30px 30px;
 }
 
 .vertical-align-middle {
-    vertical-align: middle;
-    display: inline-block;
-    max-width: 100%;
-    font-size: 14px;
+  vertical-align: middle;
+  display: inline-block;
+  max-width: 100%;
+  font-size: 14px;
 }
 
 .page-login-v3 .panel {
-    border: none;
-    box-shadow: none;
-    width: 300px;
+  border: none;
+  box-shadow: none;
+  width: 300px;
 }
 
 .margin-bottom-60 {
-    margin-bottom: 60px!important;
+  margin-bottom: 60px!important;
 }
 
 .margin-top-80 {
-    margin-top: 80px!important;
+  margin-top: 80px!important;
 }
 
 .font-size-24 {
-    font-size: 24px!important;
+  font-size: 24px!important;
 }
 
 .font-size-10 {
-    font-size: 10px!important;
+  font-size: 10px!important;
 }
