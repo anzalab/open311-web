@@ -49,74 +49,7 @@
         </div>
       </div>
       <!-- end jurisdiction filters -->
-      <!-- start servicegroup filters -->
-      <div class="row m-t-md">
-        <div class="col-md-12">
-          <div class="p-a p-l-none">
-            <h6 class="m-a-0">
-              Service Group
-            </h6>
-          </div>
-        </div>
-        <div class="col-md-3" ng-repeat="servicegroup in servicegroups">
-          <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id" checklist-change="filterServices()">
-            <label class="text-muted" title="{{servicegroup.name}}">{{servicegroup.name}}</label>
-          </div>
-        </div>
-      </div>
-      <!-- end servicegroup filters -->
-      <!-- start service filters -->
-      <div class="row m-t-md">
-        <div class="col-md-12">
-          <div class="p-a p-l-none">
-            <h6 class="m-a-0">
-              Service
-            </h6>
-          </div>
-        </div>
-        <div class="col-md-3" ng-repeat="service in services">
-          <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.services" checklist-value="service._id">
-            <label class="text-muted" title="{{service.name}}">{{service.name}}</label>
-          </div>
-        </div>
-      </div>
-      <!-- end service filters -->
-      <!-- start status filters -->
-      <div class="row m-t-md">
-        <div class="col-md-12">
-          <div class="p-a p-l-none">
-            <h6 class="m-a-0">
-              Status
-            </h6>
-          </div>
-        </div>
-        <div class="col-md-2" ng-repeat="status in statuses">
-          <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.statuses" checklist-value="status._id">
-            <label class="text-muted" title="{{status.name}}">{{status.name}}</label>
-          </div>
-        </div>
-      </div>
-      <!-- end status filters -->
-      <!-- start priority filters -->
-      <div class="row m-t-md">
-        <div class="col-md-12">
-          <div class="p-a p-l-none">
-            <h6 class="m-a-0">
-              Priority
-            </h6>
-          </div>
-        </div>
-        <div class="col-md-2" ng-repeat="priority in priorities">
-          <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.priorities" checklist-value="priority._id">
-            <label class="text-muted" title="{{priority.name}}">{{priority.name}}</label>
-          </div>
-        </div>
-      </div>
-      <!-- end priority filters -->
+    
       <!-- start workspace filters -->
       <div class="row m-t-md">
         <div class="col-md-12">

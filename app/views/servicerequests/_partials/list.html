@@ -55,7 +55,7 @@
     <!-- end servicerequest listing -->
     <!-- start list bottom toolbox -->
     <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit" ng-change="find()" template-url="views/_partials/list_pager.html" style="padding-left: 12px;" role="group">
+        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit" ng-change="find(query)" template-url="views/_partials/list_pager.html" style="padding-left: 12px;" role="group">
         </div>
         <div class="btn-group pull-right">
             <a title="Click To Refresh Issues" ng-click="load({ resolvedAt: null, operator: { $ne: null }, resetPage:true, reset:true}, false)" class="btn btn-default btn-xs">

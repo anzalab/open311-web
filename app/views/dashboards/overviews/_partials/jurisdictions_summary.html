@@ -1,0 +1,125 @@
+<!-- start jurisdictions summary -->
+<div class="padding m-t-md">
+
+    <!-- start report box -->
+    <div class="box b-a p-l-0">
+
+        <!-- start header -->
+        <div class="box-header b-b p-t-md p-b-md" title="Areas Summary">
+            <h3>Areas Summary</h3>
+            <!-- <small>Sub title goes here with small font</small> -->
+        </div>
+        <!-- end header -->
+
+        <!-- start toolbox -->
+        <div class="box-tool p-t-sm">
+
+            <!-- start time filters -->
+            <ul class="nav">
+
+                <!-- start export -->
+                <li class="nav-item inline">
+                    <a title="Click To Export" class="btn btn-xs rounded white" aria-expanded="false" ng-csv="export('jurisdictions')" csv-header="exports.jurisdictions.headers" filename="jurisdictions_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
+                      Export
+                    </a>
+                </li>
+                <!-- end export -->
+
+                <!-- start date filters -->
+                <li uib-dropdown class="nav-item inline dropdown" style="display:none">
+                    <a uib-dropdown-toggle class="btn btn-xs rounded white dropdown-toggle" aria-expanded="false">Today</a>
+                    <div uib-dropdown-menu class="dropdown-menu dropdown-menu-scale pull-right">
+                        <a class="dropdown-item" href="">Last 24 hours</a>
+                        <a class="dropdown-item" href="">Last 7 days</a>
+                        <a class="dropdown-item" href="">Last month</a>
+                        <a class="dropdown-item" href="">Last Year</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Today</a>
+                    </div>
+                </li>
+                <!-- end date filters -->
+
+            </ul>
+            <!-- end time filters -->
+
+        </div>
+        <!-- end toolbox -->
+
+        <!-- start body -->
+        <div>
+            <div class="row-col">
+
+                <!-- start visual stats -->
+                <div class="col-sm-5 b-r lt">
+                    <div class="p-a-md">
+                        <echart config="perJurisdictionConfig" options="perJurisdictionOptions"></echart>
+                    </div>
+                </div>
+                <!-- end visual starts -->
+
+                <!-- start tabular stats -->
+                <div class="col-sm-7">
+                    <table class="table table-bordered table-stats">
+                        <thead>
+                            <tr>
+                                <th ng-click="prepareJurisdictionVisualization('count')" title="Area">Area</th>
+                                <th ng-click="prepareJurisdictionVisualization('count')" title="Total Count of Service Requests">Total</th>
+                                <th ng-click="prepareJurisdictionVisualization('pending')" title="Total Count of Pending Service Requests">Pending</th>
+                                <th ng-click="prepareJurisdictionVisualization('resolved')" title="Total Count of Resolved Service Requests">Resolved</th>
+                                <th ng-click="prepareJurisdictionVisualization('late')" title="Total Count of Service Requests Past SLA Resolve Time">Late</th>
+                                <th title="Average Time Taken to Attend a Customer(Call) Service Request">Average Attend Time</th>
+                                <th title="Average Time Taken to a Resolve Service Request">Average Resolve Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="jurisdiction in overviews.jurisdictions" ui-sref="app.performances({jurisdiction:jurisdiction,startedAt:filters.startedAt,endedAt:filters.endedAt})">
+                                <td title="{{jurisdiction.name}}">
+                                    {{jurisdiction.name}}
+                                </td>
+                                <td title="{{jurisdiction.count | number:0}}">
+                                    {{jurisdiction.count | number:0}}
+                                </td>
+                                <td title=" {{jurisdiction.pending | number:0}}">
+                                    {{jurisdiction.pending | number:0}}
+                                </td>
+                                <td title=" {{jurisdiction.resolved | number:0}}">
+                                    {{jurisdiction.resolved | number:0}}
+                                </td>
+                                <td title=" {{jurisdiction.late | number:0}}">
+                                    {{jurisdiction.late | number:0}}
+                                </td>
+                                <td>
+                                    <span>
+                                      {{jurisdiction.averageAttendTime.minutes}}
+                                      <span class="text-muted text-xs">mins</span>
+                                    </span>
+                                    <span>
+                                        {{jurisdiction.averageAttendTime.seconds}}
+                                        <span class="text-muted text-xs">secs</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                      {{jurisdiction.averageResolveTime.hours + (jurisdiction.averageResolveTime.days * 24)}}
+                                      <span class="text-muted text-xs">hrs</span>
+                                    </span>
+                                    <span>
+                                        {{jurisdiction.averageAttendTime.minutes}}
+                                        <span class="text-muted text-xs">mins</span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end tabular stats -->
+
+            </div>
+        </div>
+        <!-- end body -->
+
+    </div>
+    <!-- end report box -->
+
+</div>
+<!-- end jurisdictions summary -->

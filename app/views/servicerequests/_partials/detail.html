@@ -14,7 +14,7 @@
           <h4 class="_600">
                         <span title="Issue Nature">
                             {{servicerequest.service.name}}
-                        </span> - 
+                        </span> -
                         <span title="Issue Number">
                             #{{servicerequest.code}}
                         </span>
@@ -30,7 +30,7 @@
                             </span>
                             <br/>
                             <span ng-if="servicerequest.jurisdiction.phone && servicerequest.jurisdiction.phone != 'N/A'" title="Area Phone Number">
-                                <span class="text-muted font-size-10">Phone</span> 
+                                <span class="text-muted font-size-10">Phone</span>
                                 {{servicerequest.jurisdiction.phone}}
                             </span>
                         </span>
@@ -84,7 +84,7 @@
             </span>
             <span ng-if="servicerequest.resolvedAt" title="Time Taken To Resolve" class="p-l">
                             <span class="text-muted font-size-12">TTR: </span>
-            <span class="font-size-12"> 
+            <span class="font-size-12">
                                 {{servicerequest.ttr.human}}
                             </span>
             </span>
@@ -157,6 +157,12 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue map -->
+        <!-- start issue attachments -->
+        <div class="padding b-t" ng-show="servicerequest.attachments && servicerequest.attachments.length > 0">
+          <h6 class="m-b" title="Issue Attachements">Attachments</h6>
+          <ng-gallery images="servicerequest.attachments"></ng-gallery>
+        </div>
+        <!-- end issue attachements -->
         <!-- start issue comment -->
         <div ng-include="'views/servicerequests/_partials/comments.html'"></div>
         <!-- end issue comments -->

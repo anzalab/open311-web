@@ -123,6 +123,24 @@ angular
 
         }
 
+        //ensure attachements has correct data for displaying
+        var hasAttachments = (servicerequest && servicerequest.attachments &&
+          servicerequest.attachments.length > 0);
+        if (hasAttachments) {
+          servicerequest.attachments =
+            _.map(servicerequest.attachments, function (attachment) {
+              if (!_.startsWith(attachment.content, 'data:')) {
+                attachment.thumb = ['data:', attachment.mime, ';base64,',
+                  attachment.content
+                ].join('');
+              } else {
+                attachment.thumb = attachment.content;
+              }
+              attachment.description = attachment.caption;
+              return attachment;
+            });
+        }
+
         //load service request comments
         $scope.loadComment(servicerequest);
 
@@ -350,7 +368,10 @@ angular
      * Initialize new issue attending with operator details
      */
     $scope.onAttend = function () {
-      $state.go('app.create_servicerequests', $scope.servicerequest);
+      //prevent attachements and changelogs on attending
+      var servicerequest =
+        _.omit($scope.servicerequest, ['attachments', 'changelogs']);
+      $state.go('app.create_servicerequests', servicerequest);
     };
 
     /**
@@ -458,8 +479,11 @@ angular
      * @description load servicerequests
      */
     $scope.find = function (query) {
+
       //ensure query
-      query = _.merge({ resolvedAt: null }, query);
+      var isSearchable = ($scope.search.q && $scope.search.q.length >= 2);
+      var extras = isSearchable ? $scope.query : {};
+      query = _.merge({}, extras, query);
 
       //start sho spinner
       $scope.spin = true;
@@ -473,8 +497,11 @@ angular
 
       //track active ui based on query
       if (query.reset) {
+
         delete query.reset;
+
         $scope.query = query;
+
       } else {
         $scope.query = _.merge({}, $scope.query, query);
       }
@@ -546,6 +573,11 @@ angular
           };
         });
       return _exports;
+    };
+
+
+    $scope.isEmpty = function (value) {
+      return _.isEmpty(value);
     };
 
 

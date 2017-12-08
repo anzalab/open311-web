@@ -1,3 +1,8 @@
+/**
+ * The MIT License (MIT)
+ * Copyright (c) 2016 lykmapipo, CodeTanzania & Contributors
+ */
+
 /*normalize font family, font size and font weight*/
 
 html,
@@ -319,6 +324,7 @@ svg text {
     color: #FFFFFF;
 }
 
+
 /*custom checkbox overrides*/
 
 .checkbox-primary input[type="checkbox"]:checked+label::before,
@@ -340,6 +346,7 @@ svg text {
 
 
 /*tables*/
+
 .table-tabular tr:last-child td {
     font-weight: bold;
     background-color: rgba(120, 130, 140, .045);
@@ -355,6 +362,39 @@ svg text {
     background-color: rgba(120, 130, 140, .045);
 }
 
-.table-tabular td, th{
+.table-tabular td,
+th {
     font-size: .76rem;
+}
+
+.table-stats th {
+    cursor: pointer;
+}
+
+.table-stats tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.065);
+}
+
+
+/* displays */
+
+.display-5 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+
+/* buttons */
+
+.b-grey {
+    border-color: #7a7a7a;
+}
+
+.text-gray {
+    color: #7a7a7a;
+}
+
+.btn.b-grey:hover {
+    background-color: #dfdede;
+    color: #000;
 }

@@ -85,7 +85,7 @@ angular
           }
         }
       })
-      .state('app.comparison', {
+      .state('app.comparison', { //TODO refactor to reports states
         url: '/comparison',
         templateUrl: 'views/dashboards/comparison.html',
         controller: 'DashboardComparisonCtrl',
@@ -95,8 +95,13 @@ angular
       })
       .state('app.performances', {
         url: '/performances',
-        templateUrl: 'views/dashboards/performances.html',
+        templateUrl: 'views/dashboards/performance/index.html',
         controller: 'DashboardPerformanceCtrl',
+        params: {
+          jurisdiction: null,
+          startedAt: null,
+          endedAt: null
+        },
         data: {
           authenticated: true
         },
@@ -118,7 +123,7 @@ angular
       })
       .state('app.overviews', {
         url: '/overviews',
-        templateUrl: 'views/dashboards/overviews.html',
+        templateUrl: 'views/dashboards/overviews/index.html',
         controller: 'DashboardOverviewCtrl',
         data: {
           authenticated: true
