@@ -129,9 +129,13 @@ angular
         if (hasAttachments) {
           servicerequest.attachments =
             _.map(servicerequest.attachments, function (attachment) {
-              attachment.thumb = ['data:', attachment.mime, ';base64,',
-                attachment.content
-              ].join('');
+              if (!_.startsWith(attachment.content, 'data:')) {
+                attachment.thumb = ['data:', attachment.mime, ';base64,',
+                  attachment.content
+                ].join('');
+              } else {
+                attachment.thumb = attachment.content;
+              }
               attachment.description = attachment.caption;
               return attachment;
             });
