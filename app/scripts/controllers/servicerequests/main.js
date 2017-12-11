@@ -130,6 +130,7 @@ angular
           servicerequest.attachments =
             _.map(servicerequest.attachments, function (attachment) {
 
+
               //obtain media thumb url from base64 encoded image
               if (!_.isEmpty(attachment.content)) {
                 if (!_.startsWith(attachment.content, 'data:')) {
@@ -143,7 +144,7 @@ angular
               }
 
               //obtain media thumb from url
-              if (!_.isEmpty(attachment.url) && _.startsWith(url, 'http')) {
+              if (!_.isEmpty(attachment.url) && _.startsWith(attachment.url, 'http')) {
                 attachment.thumb = attachment.url;
               }
 
