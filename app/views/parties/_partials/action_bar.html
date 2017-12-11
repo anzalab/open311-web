@@ -1,40 +1,40 @@
 <!-- start party detail action bar -->
 <ul class="nav navbar-nav">
-  <li ng-if="edit" class="nav-item">
-    <a ng-click="onCancel()" class="nav-link text-muted" title="Click to Cancel Jurisdiction Edit">
+    <li ng-if="edit" class="nav-item">
+        <a ng-click="onCancel()" class="nav-link text-muted" title="Click to Cancel Jurisdiction Edit">
             <span class="nav-text">
                 <i class="icon ti-close" aria-hidden="true"></i>
             </span>
         </a>
-  </li>
-  <li ng-if="!edit" class="nav-item">
-    <a ng-click="onNew()" class="nav-link text-muted" title="Click to Add New Jurisdiction">
+    </li>
+    <li ng-if="!edit" class="nav-item">
+        <a ng-click="onNew()" class="nav-link text-muted" title="Click to Add New Jurisdiction">
             <span class="nav-text">
                 <i class="icon ti-plus" aria-hidden="true"></i>
             </span>
         </a>
-  </li>
-  <li ng-if="!edit" class="nav-item">
-    <a ng-click="onEdit()" class="nav-link text-muted" title="Click to edit party">
+    </li>
+    <li ng-if="!edit" class="nav-item b-l p-l p-r">
+        <a ng-click="onEdit()" class="nav-link text-muted no-border" title="Click to edit party">
             <span class="nav-text">
                 <i class="icon-pencil" aria-hidden="true"></i>
             </span>
         </a>
-  </li>
-  <li ng-if="edit && canSave" class="nav-item">
-    <a ng-click="save()" class="nav-link text-muted" title="Click to save party">
+    </li>
+    <li ng-if="edit && canSave" class="nav-item b-l p-l p-r">
+        <a ng-click="save()" class="nav-link text-muted no-border" title="Click to save party">
             Save
         </a>
-  </li>
-  <li ng-show="edit && !(party.deletedAt || party.lockedAt) && party._id" class="nav-item">
-    <a ng-click="block()" class="nav-link text-muted" title="Click to block party">
+    </li>
+    <li ng-show="edit && !(party.deletedAt || party.lockedAt) && party._id" class="nav-item b-l p-l p-r">
+        <a ng-click="block()" class="nav-link text-muted no-border" title="Click to block party">
             Block
         </a>
-  </li>
-  <li ng-show="edit && (party.deletedAt || party.lockedAt) && party._id" class="nav-item">
-    <a ng-click="unblock()" class="nav-link text-muted" title="Click to unblock party">
+    </li>
+    <li ng-show="edit && (party.deletedAt || party.lockedAt) && party._id" class="nav-item b-l p-l p-r">
+        <a ng-click="unblock()" class="nav-link text-muted no-border" title="Click to unblock party">
             Unblock
         </a>
-  </li>
+    </li>
 </ul>
 <!-- end party detail action bar -->
