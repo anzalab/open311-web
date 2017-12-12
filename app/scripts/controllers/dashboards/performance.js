@@ -205,7 +205,7 @@ angular
           color: _.map($scope.performances.summaries, 'color'),
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
@@ -274,7 +274,7 @@ angular
           color: _.map($scope.performances.statuses, 'color'),
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
@@ -348,7 +348,7 @@ angular
 
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
