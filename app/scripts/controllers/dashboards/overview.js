@@ -376,7 +376,7 @@ angular
           color: _.map($scope.overviews.jurisdictions, 'color'),
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
@@ -451,7 +451,7 @@ angular
 
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
@@ -525,7 +525,7 @@ angular
           color: _.map($scope.overviews.services, 'color'),
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
@@ -599,7 +599,7 @@ angular
             'color')),
           label: {
             normal: {
-              formatter: '{b}\n{d}%',
+              formatter: '{b}\n{d}%\n( {c} )',
             }
           },
           data: data
