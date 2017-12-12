@@ -28,6 +28,12 @@
                                 <div class="m-t-lg" title="Status Color">
                                     <color-picker ng-model="status.color">
                                     </color-picker>
+                                    <div class="m-t-lg">
+                                        <div class="form-group form-material floating">
+                                            <input title="Status Color" ng-disabled="!edit" ng-model="status.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
+                                            <label title="Status Color" class="floating-label">Status Color(HEX)</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
