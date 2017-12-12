@@ -17,6 +17,9 @@
     <!-- start pending -->
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
         <div class="padding">
+            <div>
+                <span class="pull-right text-muted">{{(overviews.overall.pending/overviews.overall.count)*100 | number:2}}%</span>
+            </div>
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     {{overviews.overall.pending | number:0}}
@@ -30,6 +33,9 @@
     <!-- start resolved -->
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Resolved Service Requests">
         <div class="padding">
+            <div>
+                <span class="pull-right text-muted">{{(overviews.overall.resolved/overviews.overall.count)*100 | number:2}}%</span>
+            </div>
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     {{overviews.overall.resolved | number:0}}
@@ -43,6 +49,9 @@
     <!-- start late -->
     <div class="col-xs-6 col-sm-2 b-r b-b" title="Late(Past SLA Time) Service Requests">
         <div class="padding">
+            <div>
+                <span class="pull-right text-muted">{{(overviews.overall.late/overviews.overall.count)*100 | number:2}}%</span>
+            </div>
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     {{overviews.overall.late | number:0}}
@@ -59,7 +68,7 @@
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     <span title="Average Attend Time(Call Duration) - Minutes Spent">
-                      {{overviews.overall.averageAttendTime.minutes}} 
+                      {{overviews.overall.averageAttendTime.minutes}}
                       <span class="text-muted text-xs">mins</span>
                     </span>
                     <span title="Average Attend Time(Call Duration) - Seconds Spent">
@@ -79,7 +88,7 @@
             <div class="text-center">
                 <h2 class="text-center _600 m-t-md">
                     <span title="Average resolve Time - Hourss Spent">
-                        {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}} 
+                        {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}}
                     <span class="text-muted text-xs">hrs</span>
                     </span>
                     <span title="Average resolve Time - Minutes Spent">
