@@ -44,6 +44,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group form-material floating">
+                                    <textarea ng-model="servicerequest.address" ng-required msd-elastic name="address" class="form-control" rows="2">
+                                  </textarea>
+                                    <label class="floating-label">Address</label>
+                                </div>
                                 <div class="p-t p-b" style="margin-top: 2rem;">
                                     <h6 title="Method of Communication used by Reporter">
                                         Communication Method
@@ -51,10 +56,10 @@
                                 </div>
                                 <div class="row m-b">
                                     <div class="col-sm-1" ng-repeat="method in methods">
-                                      <div class="radio-custom radio-primary">
-                                        <input type="radio" ng-model="servicerequest.method.name" ng-value="method" name="method">
-                                        <label class="text-muted" title="Method of Communication used by Reporter">{{method}}</label>
-                                      </div>
+                                        <div class="radio-custom radio-primary">
+                                            <input type="radio" ng-model="servicerequest.method.name" ng-value="method" name="method">
+                                            <label class="text-muted" title="Method of Communication used by Reporter">{{method}}</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="p-t p-b m-t" style="margin-top: 4rem;">
@@ -74,11 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group form-material floating">
-                                    <textarea ng-model="servicerequest.address" ng-required msd-elastic name="address" class="form-control" rows="2">
-                                    </textarea>
-                                    <label class="floating-label">Address</label>
-                                </div>
+
                                 <div class="form-group form-material floating">
                                     <textarea ng-model="servicerequest.description" ng-required msd-elastic name="description" class="form-control" rows="3">
                                     </textarea>
