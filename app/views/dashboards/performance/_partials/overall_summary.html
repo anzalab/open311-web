@@ -56,7 +56,6 @@
                 <!-- start total -->
                 <div class="col-xs-6 col-sm-3 b-r b-b" title="Total Service Requests">
                     <div class="padding">
-                        <!--class="padding"-->
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
                                 {{performances.overall.count | number:0}}
@@ -89,7 +88,6 @@
                         <div>
                             <span class="pull-right text-xs" ng-class="performances.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'">{{performances.overall.percentageResolved | number:2}}%</span>
                         </div>
-                        <!--class="padding"-->
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
                                 {{performances.overall.resolved | number:0}}
@@ -106,7 +104,6 @@
                         <div>
                             <span class="pull-right text-xs" ng-class="performances.overall.percentageLate > 0 ? 'text-danger' : 'text-success'">{{performances.overall.percentageLate | number:2}}%</span>
                         </div>
-                        <!--class="padding"-->
                         <div class="text-center">
                             <h2 class="text-center _600 m-t-md">
                                 {{performances.overall.late | number:0}}
