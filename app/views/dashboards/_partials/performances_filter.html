@@ -61,9 +61,10 @@
                     </div>
                 </div>
                 <div class="col-md-3" ng-repeat="workspace in workspaces">
-                    <div class="checkbox-custom checkbox-primary p-a">
-                        <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace">
-                        <label class="text-muted" title="{{workspace}}">{{workspace}}</label>
+                    <div class="p-a p-b-none">
+                      <label class="md-check text-muted" title="{{workspace}}">
+                        <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace"> <i class="blue"></i>{{workspace}}
+                      </label>
                     </div>
                 </div>
             </div>
@@ -73,8 +74,8 @@
     <!-- end filter body -->
     <!-- start filter footer -->
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="filter()">Filter</button>
         <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button class="btn btn-primary" ng-click="filter()">Filter</button>
     </div>
     <!-- end footer filter -->
 </div>
