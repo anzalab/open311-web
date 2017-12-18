@@ -195,6 +195,9 @@ angular
       //update export filename
       $scope.exports.filename = 'overview_reports_' + Date.now() + '.csv';
 
+      // prepare percentages
+      $scope.prepareOverallPercentages();
+
       //prepare charts
       $scope.prepareServiceVisualization();
       $scope.prepareJurisdictionVisualization();
@@ -202,6 +205,36 @@ angular
       $scope.prepareMethodVisualization();
       $scope.prepareWorkspaceVisualization();
 
+    };
+
+
+    /**
+     * prepare percentages for pending,resolved and late service requests in respect to total
+     * service requests
+     * @version 0.1.0
+     * @since 0.1.0
+     * @author Benson Maruchu<benmaruchu@gmail.com>
+     */
+    $scope.prepareOverallPercentages = function () {
+
+      var overallExists = _.get($scope.overviews, 'overall', false);
+
+      // check if overall data exists
+      if (overallExists) {
+
+        var percentages = {
+          percentageResolved: ($scope.overviews.overall.resolved / $scope
+            .overviews.overall.count) * 100,
+          percentagePending: ($scope.overviews.overall.pending / $scope.overviews
+            .overall.count) * 100,
+          percentageLate: ($scope.overviews.overall.late / $scope.overviews
+            .overall.count) * 100,
+        };
+
+        _.merge($scope.overviews.overall, $scope.overviews.overall,
+          percentages);
+
+      }
     };
 
     /**
@@ -617,6 +650,7 @@ angular
      * Reload overview reports
      */
     $scope.reload = function () {
+
       Summary
         .overviews({
           query: $scope.params
