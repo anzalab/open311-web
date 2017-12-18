@@ -42,10 +42,11 @@
           </div>
         </div>
         <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
-          <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.jurisdictions" checklist-value="jurisdiction._id">
-            <label class="text-muted" title="{{jurisdiction.name}}">{{jurisdiction.name}}</label>
-          </div>
+            <div class="p-a p-b-none">
+              <label class="md-check text-muted" title="{{jurisdiction.name}}">
+                <input type="checkbox" checklist-model="filters.jurisdictions" checklist-value="jurisdiction._id"> <i class="blue"></i> {{jurisdiction.name}}
+              </label>
+            </div>
         </div>
       </div>
       <!-- end jurisdiction filters -->
@@ -59,9 +60,10 @@
           </div>
         </div>
         <div class="col-md-3" ng-repeat="servicegroup in servicegroups | orderBy:'name'">
-          <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id" checklist-change="filterServices()">
-            <label class="text-muted" title="{{servicegroup.name}}">{{servicegroup.name}}</label>
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{servicegroup.name}}">
+              <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id"> <i class="blue"></i>{{servicegroup.name}}
+            </label>
           </div>
         </div>
       </div>
@@ -76,9 +78,10 @@
           </div>
         </div>
         <div class="col-md-3" ng-repeat="service in services | orderBy:'name'">
-          <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.services" checklist-value="service._id">
-            <label class="text-muted" title="{{service.name}}">{{service.name}}</label>
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{service.name}}">
+              <input type="checkbox" checklist-model="filters.services" checklist-value="service._id"> <i class="blue"></i>{{service.name}}
+            </label>
           </div>
         </div>
       </div>
@@ -92,10 +95,11 @@
             </h6>
           </div>
         </div>
-        <div class="col-md-2" ng-repeat="status in statuses | orderBy:'weight'">
-          <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.statuses" checklist-value="status._id">
-            <label class="text-muted" title="{{status.name}}">{{status.name}}</label>
+        <div class="col-md-3" ng-repeat="status in statuses | orderBy:'weight'">
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{status.name}}">
+              <input type="checkbox" checklist-model="filters.statuses" checklist-value="status._id"> <i class="blue"></i>{{status.name}}
+            </label>
           </div>
         </div>
       </div>
@@ -109,10 +113,11 @@
             </h6>
           </div>
         </div>
-        <div class="col-md-2" ng-repeat="priority in priorities | orderBy:'weight'">
-          <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.priorities" checklist-value="priority._id">
-            <label class="text-muted" title="{{priority.name}}">{{priority.name}}</label>
+        <div class="col-md-3" ng-repeat="priority in priorities | orderBy:'weight'">
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{priority.name}}">
+              <input type="checkbox" checklist-model="filters.priorities" checklist-value="priority._id"> <i class="blue"></i>{{priority.name}}
+            </label>
           </div>
         </div>
       </div>
@@ -127,9 +132,10 @@
           </div>
         </div>
         <div class="col-md-3" ng-repeat="workspace in workspaces">
-          <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace">
-            <label class="text-muted" title="{{workspace}}">{{workspace}}</label>
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{workspace}}">
+              <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace"> <i class="blue"></i>{{workspace}}
+            </label>
           </div>
         </div>
       </div>
@@ -139,8 +145,8 @@
   <!-- end filter body -->
   <!-- start filter footer -->
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="filter()">Filter</button>
     <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+    <button class="btn btn-primary" ng-click="filter()">Filter</button>
   </div>
   <!-- end footer filter -->
 </div>
