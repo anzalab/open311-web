@@ -115,6 +115,9 @@ angular
       //shaping data
       $scope.prepareSummaries();
 
+      // prepare percentages for overall summary
+      $scope.prepareOverallPercentages();
+
       //prepare visualization
       $scope.prepareSummaryVisualization();
       $scope.prepareStatusesVisualization();
@@ -148,6 +151,38 @@ angular
 
         });
     };
+
+
+    /**
+     * prepare percentages for pending,resolved and late service requests in respect to total
+     * service requests
+     * @version 0.1.0
+     * @since 0.1.0
+     * @author Benson Maruchu<benmaruchu@gmail.com>
+     */
+    $scope.prepareOverallPercentages = function () {
+
+      var overallExists = _.get($scope.performances, 'overall', false);
+
+      // check if overall data exists
+      if (overallExists) {
+
+        var percentages = {
+          percentageResolved: ($scope.performances.overall.resolved /
+            $scope
+            .performances.overall.count) * 100,
+          percentagePending: ($scope.performances.overall.pending /
+            $scope.performances
+            .overall.count) * 100,
+          percentageLate: ($scope.performances.overall.late / $scope.performances
+            .overall.count) * 100,
+        };
+
+        _.merge($scope.performances.overall, $scope.performances.overall,
+          percentages);
+      }
+    };
+
 
     /**
      * prepare summary visualization
