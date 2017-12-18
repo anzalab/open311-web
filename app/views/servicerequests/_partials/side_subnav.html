@@ -23,7 +23,7 @@
                     <div class="nav-active-white">
                         <ul class="nav">
                             <li ng-class="{active:!isEmpty(query) && query.operator == party._id}" class="nav-item m-b-xs">
-                                <a ng-click="load({operator:party._id, resetPage:true, reset:true})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
+                                <a ng-click="load({operator:party._id, resolvedAt:null, resetPage:true, reset:true})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
                                 Inbox
                                 </a>
                             </li>
