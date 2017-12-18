@@ -55,11 +55,11 @@
 
                 <!-- start total -->
                 <div class="col-xs-6 col-sm-3 b-r b-b" title="Total Service Requests">
-                    <div class="padding">
+                    <div class="p-a-sm">
                         <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
+                            <h4 class="text-center _600 m-t-md">
                                 {{performances.overall.count | number:0}}
-                            </h2>
+                            </h4>
                             <p class="text-muted m-b-md">Total</p>
                         </div>
                     </div>
@@ -68,14 +68,14 @@
 
                 <!-- start pending -->
                 <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
-                    <div class="padding">
+                    <div class="p-a-sm">
                         <div>
                             <span class="pull-right text-xs" ng-class="performances.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'">{{performances.overall.percentagePending | number:2}}%</span>
                         </div>
                         <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
+                            <h4 class="text-center _600 m-t-md">
                                 {{performances.overall.pending | number:0}}
-                            </h2>
+                            </h4>
                             <p class="text-muted m-b-md">Pending</p>
                         </div>
                     </div>
@@ -84,14 +84,14 @@
 
                 <!-- start resolved -->
                 <div class="col-xs-6 col-sm-2 b-r b-b" title="Resolved Service Requests">
-                    <div class="padding">
+                    <div class="p-a-sm">
                         <div>
                             <span class="pull-right text-xs" ng-class="performances.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'">{{performances.overall.percentageResolved | number:2}}%</span>
                         </div>
                         <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
+                            <h4 class="text-center _600 m-t-md">
                                 {{performances.overall.resolved | number:0}}
-                            </h2>
+                            </h4>
                             <p class="text-muted m-b-md">Resolved</p>
                         </div>
                     </div>
@@ -100,14 +100,14 @@
 
                 <!-- start late -->
                 <div class="col-xs-6 col-sm-2 b-r b-b" title="Late(Past SLA Time) Service Requests">
-                    <div class="padding">
+                    <div class="p-a-sm">
                         <div>
                             <span class="pull-right text-xs" ng-class="performances.overall.percentageLate > 0 ? 'text-danger' : 'text-success'">{{performances.overall.percentageLate | number:2}}%</span>
                         </div>
                         <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
+                            <h4 class="text-center _600 m-t-md">
                                 {{performances.overall.late | number:0}}
-                            </h2>
+                            </h4>
                             <p class="text-muted m-b-md">Late</p>
                         </div>
                     </div>
@@ -116,12 +116,11 @@
 
                 <!-- start escallated -->
                 <div class="col-xs-6 col-sm-3 b-b" title="Late(Past SLA Time) Service Requests">
-                    <div class="padding">
-                        <!--class="padding"-->
+                    <div class="p-a-sm">
                         <div class="text-center">
-                            <h2 class="text-center _600 m-t-md">
+                            <h4 class="text-center _600 m-t-md">
                                 {{performances.overall.late | number:0}}
-                            </h2>
+                            </h4>
                             <p class="text-muted m-b-md">Escallated</p>
                         </div>
                     </div>
