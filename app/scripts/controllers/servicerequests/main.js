@@ -35,8 +35,8 @@ angular
     //signal create mode
     $scope.create = false;
 
-    //signal to activate all filter
-    $scope.isAll = false;
+    //track current misc fillter(all, inbox, unattended, unresolved, resolved)
+    $scope.misc = 'inbox';
 
     //bind states
     $scope.priorities = endpoints.priorities.priorities;
@@ -501,14 +501,14 @@ angular
       //ensure query
       var isSearchable = ($scope.search.q && $scope.search.q.length >= 2);
       var extras = isSearchable ? $scope.query : {};
-      query = _.merge({}, { isAll: $scope.isAll }, extras, query);
+      query = _.merge({}, { misc: $scope.misc }, extras, query);
 
       //start sho spinner
       $scope.spin = true;
 
       //activate all filter
-      $scope.isAll = query.isAll;
-      delete query.isAll;
+      $scope.misc = query.misc;
+      delete query.misc;
 
       //reset pagination
       if (query && query.resetPage) {
@@ -609,7 +609,7 @@ angular
       resolvedAt: null,
       resetPage: true,
       reset: true,
-      isAll: false
+      misc: $scope.misc
     });
 
     //listen for events
@@ -621,7 +621,7 @@ angular
         resolvedAt: null,
         resetPage: true,
         reset: true,
-        isAll: false
+        misc: $scope.misc
       });
 
     });
