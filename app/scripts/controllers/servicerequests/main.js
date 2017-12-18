@@ -35,6 +35,7 @@ angular
     //signal create mode
     $scope.create = false;
 
+
     //bind states
     $scope.priorities = endpoints.priorities.priorities;
     $scope.statuses = endpoints.statuses.statuses;
@@ -144,7 +145,8 @@ angular
               }
 
               //obtain media thumb from url
-              if (!_.isEmpty(attachment.url) && _.startsWith(attachment.url, 'http')) {
+              if (!_.isEmpty(attachment.url) && _.startsWith(attachment.url,
+                  'http')) {
                 attachment.thumb = attachment.url;
               }
 
