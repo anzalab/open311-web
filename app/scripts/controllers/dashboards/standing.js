@@ -114,16 +114,19 @@ angular
      * Filter service based on selected service group
      */
     $scope.filterServices = function () {
+      //check for service group filter activation
       var filterHasServiceGroups =
-        ($scope.filters.servicegroups && $scope.filters.servicegroups.length >
-          0);
+        ($scope.filters.servicegroups &&
+          $scope.filters.servicegroups.length > 0);
+
       //pick only service of selected group
       if (filterHasServiceGroups) {
         //filter services based on service group(s)
         $scope.services =
           _.filter(endpoints.services.services, function (service) {
-            return _.includes($scope.filters.servicegroups, service.group
-              ._id);
+            var group =
+              _.get(service, 'group._id', _.get(service, 'group'));
+            return _.includes($scope.filters.servicegroups, group);
           });
       }
       //use all services

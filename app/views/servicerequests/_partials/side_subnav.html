@@ -22,28 +22,28 @@
                     <div class="m-b text-muted text-xs">Miscellaneous</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:isAll}" class="nav-item m-b-xs">
-                                <a ng-click="load({resetPage:true, reset:true, isAll:true})" class="nav-link text-muted block" title="All Reported Issues">
+                            <li ng-class="{active:misc == 'all'}" class="nav-item m-b-xs">
+                                <a ng-click="load({resetPage:true, reset:true, misc:'all'})" class="nav-link text-muted block" title="All Reported Issues">
                                 All
                                 </a>
                             </li>
-                            <li ng-class="{active:!isEmpty(query) && !isAll && query.operator == party._id}" class="nav-item m-b-xs">
-                                <a ng-click="load({operator:party._id, resolvedAt:null, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
+                            <li ng-class="{active:misc == 'inbox'}" class="nav-item m-b-xs">
+                                <a ng-click="load({operator:party._id, resolvedAt:null, resetPage:true, reset:true, misc: 'inbox'})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
                                 Inbox
                                 </a>
                             </li>
-                            <li ng-class="{active:!isEmpty(query) && !isAll && query.operator == null}" class="nav-item m-b-xs">
-                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
+                            <li ng-class="{active:misc == 'unattended'}" class="nav-item m-b-xs">
+                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resetPage:true, reset:true, misc:'unattended'})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
                             </li>
-                            <li ng-class="{active:!isEmpty(query) && !isAll && query.operator != null && query.operator != party._id && query.resolvedAt == null}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
+                            <li ng-class="{active:misc == 'unresolved'}" class="nav-item m-b-xs">
+                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true, misc: 'unresolved'})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
                                 Un-Resolved
                                 </a>
                             </li>
-                            <li ng-class="{active:!isEmpty(query) && !isAll && query.resolvedAt != null && query.operator != party._id}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
+                            <li ng-class="{active:misc == 'resolved'}" class="nav-item m-b-xs">
+                                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true, misc: 'resolved'})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
                                 Resolved
                                 </a>
                             </li>
