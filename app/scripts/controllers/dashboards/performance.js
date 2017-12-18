@@ -34,10 +34,9 @@ angular
 
     //bind filters
     var defaultFilters = {
-      // startedAt: moment().utc().startOf('date').toDate(),
       startedAt: ($stateParams.startedAt || moment().utc().startOf('year').toDate()),
       endedAt: ($stateParams.endedAt || moment().utc().endOf('date').toDate()),
-      jurisdictions: [].concat($scope.jurisdiction._id),
+      jurisdictions: $scope.jurisdiction._id,
       workspaces: []
     };
 
@@ -79,10 +78,11 @@ angular
       $scope.params = Summary.prepareQuery($scope.filters);
 
       //reset area
-      var _id = _.first($scope.filters.jurisdictions);
+      var _id = $scope.filters.jurisdictions;
       $scope.jurisdiction = _.find($scope.jurisdictions, {
         '_id': _id
       });
+
 
       //load reports
       $scope.reload();
@@ -128,6 +128,7 @@ angular
      * Reload performance reports
      */
     $scope.reload = function () {
+
       Summary
         .performances({
           query: $scope.params
@@ -476,5 +477,4 @@ angular
     //prepare performance details
     $scope.params = Summary.prepareQuery($scope.filters);
     $scope.reload();
-
   });

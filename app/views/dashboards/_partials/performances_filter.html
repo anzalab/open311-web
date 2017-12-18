@@ -1,79 +1,85 @@
 <div>
-  <!-- start filter header -->
-  <div class="modal-header">
-    <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">×</button>
-    <h4 class="modal-title">Performances Reports - Filters</h4>
-  </div>
-  <!-- end filter header -->
-  <!-- start filter body -->
-  <div class="modal-body">
-    <div class="container-fluid">
-      <!-- start date filters -->
-      <div class="row">
-        <!-- start start date filter -->
-        <div class="col-md-6">
-          <div class="p-a p-l-none p-b-none">
-            <h6 class="m-a-0">
-              From
-            </h6>
-          </div>
-          <div pickadate ng-model="filters.startedAt" max-date="maxDate" class="p-a p-l-none"></div>
-        </div>
-        <!-- end start date filter -->
-        <!-- start end date filter -->
-        <div class="col-md-6">
-          <div class="p-a p-l-none p-b-none">
-            <h6 class="m-a-0">
-              To
-            </h6>
-          </div>
-          <div pickadate ng-model="filters.endedAt" max-date="maxDate" class="p-a p-l-none"></div>
-        </div>
-        <!-- end end date filter -->
-      </div>
-      <!-- end date filters -->
-      <!-- start jurisdiction filters -->
-      <div class="row m-t-sm" ng-if="jurisdictions.length > 1">
-        <div class="col-md-12">
-          <div class="p-a p-l-none">
-            <h6 class="m-a-0">
-              Area
-            </h6>
-          </div>
-        </div>
-        <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions">
-          <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.jurisdictions" checklist-value="jurisdiction._id">
-            <label class="text-muted" title="{{jurisdiction.name}}">{{jurisdiction.name}}</label>
-          </div>
-        </div>
-      </div>
-      <!-- end jurisdiction filters -->
-    
-      <!-- start workspace filters -->
-      <div class="row m-t-md">
-        <div class="col-md-12">
-          <div class="p-a p-l-none">
-            <h6 class="m-a-0">
-              Workspace
-            </h6>
-          </div>
-        </div>
-        <div class="col-md-3" ng-repeat="workspace in workspaces">
-          <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace">
-            <label class="text-muted" title="{{workspace}}">{{workspace}}</label>
-          </div>
-        </div>
-      </div>
-      <!-- end workspace filters -->
+    <!-- start filter header -->
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">×</button>
+        <h4 class="modal-title">Performances Reports - Filters</h4>
     </div>
-  </div>
-  <!-- end filter body -->
-  <!-- start filter footer -->
-  <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="filter()">Filter</button>
-    <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-  </div>
-  <!-- end footer filter -->
+    <!-- end filter header -->
+    <!-- start filter body -->
+    <div class="modal-body">
+        <div class="container-fluid">
+            <!-- start date filters -->
+            <div class="row">
+                <!-- start start date filter -->
+                <div class="col-md-6">
+                    <div class="p-a p-l-none p-b-none">
+                        <h6 class="m-a-0">
+                            From
+                        </h6>
+                    </div>
+                    <div pickadate ng-model="filters.startedAt" max-date="maxDate" class="p-a p-l-none"></div>
+                </div>
+                <!-- end start date filter -->
+                <!-- start end date filter -->
+                <div class="col-md-6">
+                    <div class="p-a p-l-none p-b-none">
+                        <h6 class="m-a-0">
+                            To
+                        </h6>
+                    </div>
+                    <div pickadate ng-model="filters.endedAt" max-date="maxDate" class="p-a p-l-none"></div>
+                </div>
+                <!-- end end date filter -->
+            </div>
+            <!-- end date filters -->
+            <!-- start jurisdiction filters -->
+            <div class="row m-t-sm" ng-if="jurisdictions.length > 1">
+                <div class="col-md-12">
+                    <div class="p-a p-l-none">
+                        <h6 class="m-a-0">
+                            Area
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions">
+                    <label class="md-check text-muted p-a p-b-none" title="{{jurisdiction.name}}">
+                        <input type="radio" name="radio" checked="" class="has-value" ng-model="filters.jurisdictions" ng-value="jurisdiction._id">
+                        <i class="blue"></i>
+                        {{jurisdiction.name}}
+                      </label>
+                    <!-- <div class="checkbox-custom checkbox-primary p-a p-b-none">
+                        <input type="radio" name="radio" ng-model="filters.jurisdictions" ng-value="jurisdiction._id">
+                        <input type="checkbox" checklist-model="filters.jurisdictions" checklist-value="jurisdiction._id">
+                        <label class="text-muted" title="{{jurisdiction.name}}">{{jurisdiction.name}}</label>
+                    </div> -->
+                </div>
+            </div>
+            <!-- end jurisdiction filters -->
+
+            <!-- start workspace filters -->
+            <div class="row m-t-md">
+                <div class="col-md-12">
+                    <div class="p-a p-l-none">
+                        <h6 class="m-a-0">
+                            Workspace
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-md-3" ng-repeat="workspace in workspaces">
+                    <div class="checkbox-custom checkbox-primary p-a">
+                        <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace">
+                        <label class="text-muted" title="{{workspace}}">{{workspace}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- end workspace filters -->
+        </div>
+    </div>
+    <!-- end filter body -->
+    <!-- start filter footer -->
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="filter()">Filter</button>
+        <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+    </div>
+    <!-- end footer filter -->
 </div>
