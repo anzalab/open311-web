@@ -34,7 +34,7 @@ angular
 
     //bind filters
     var defaultFilters = {
-      startedAt: ($stateParams.startedAt || moment().utc().startOf('year').toDate()),
+      startedAt: ($stateParams.startedAt || moment().utc().startOf('date').toDate()),
       endedAt: ($stateParams.endedAt || moment().utc().endOf('date').toDate()),
       jurisdictions: $scope.jurisdiction._id,
       workspaces: []
@@ -44,7 +44,7 @@ angular
     $scope.filters = defaultFilters;
 
     //initialize performances
-    $scope.performances = [];
+    $scope.performances = {};
 
     /**
      * Open performance reports filter
@@ -97,15 +97,15 @@ angular
       //prepare summary
       $scope.performances.summaries = [{
         name: 'Resolved',
-        count: $scope.performances.overall.resolved,
+        count: _.get($scope.performances, 'overall.resolved', 0),
         color: '#8BC34A'
       }, {
         name: 'Pending',
-        count: $scope.performances.overall.pending,
+        count: _.get($scope.performances, 'overall.pending', 0),
         color: '#00BCD4'
       }, {
         name: 'Late',
-        count: $scope.performances.overall.late,
+        count: _.get($scope.performances, 'overall.late', 0),
         color: '#009688'
       }];
     };
@@ -137,11 +137,14 @@ angular
 
           $scope.performances = performances;
 
-          //ensure status are sorted by weight
-          $scope.performances.statuses =
-            _.orderBy(performances.statuses, 'weight', 'asc');
+          //ensure performances loaded
+          if ($scope.performances) {
+            //ensure status are sorted by weight
+            $scope.performances.statuses =
+              _.orderBy(performances.statuses, 'weight', 'asc');
 
-          $scope.prepare();
+            $scope.prepare();
+          }
 
         });
     };
