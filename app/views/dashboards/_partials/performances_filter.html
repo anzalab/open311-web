@@ -42,11 +42,11 @@
                     </div>
                 </div>
                 <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
-                    <label class="md-check text-muted p-a p-b-none" title="{{jurisdiction.name}}">
-                        <input type="radio" name="radio" checked="" class="has-value" ng-model="filters.jurisdictions" ng-value="jurisdiction._id">
-                        <i class="blue"></i>
-                        {{jurisdiction.name}}
-                      </label>
+                  <div class="p-a p-b-none">
+                    <label class="md-check text-muted" title="{{jurisdiction.name}}">
+                      <input type="radio" ng-model="filters.jurisdictions" ng-value="jurisdiction._id"> <i class="blue"></i> {{jurisdiction.name}}
+                    </label>
+                  </div>
                 </div>
             </div>
             <!-- end jurisdiction filters -->

@@ -53,6 +53,10 @@
               <span class="text-muted font-size-12">Address: </span>
               <span>{{servicerequest.address}}</span>
             </div>
+            <div title="Communication Method">
+              <span class="text-muted font-size-12">Method: </span>
+              <span>{{servicerequest.method.name}}</span>
+            </div>
           </div>
           <!-- start call details -->
           <div class="p-y b-t" ng-show="servicerequest.call.startedAt && servicerequest.call.endedAt">
@@ -73,7 +77,7 @@
           </div>
           <!-- end call details -->
           <!-- start resolve details -->
-          <div class="p-b">
+          <div class="p-b" ng-class="{'p-y b-t':!servicerequest.call}">
             <span title="Date Issue Reported">
                             <span class="text-muted font-size-12">Reported: </span>
             <span class="font-size-12">{{servicerequest.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</span>
