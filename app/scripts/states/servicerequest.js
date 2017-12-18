@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name ng311.states:ServiceRequest
  * @description
- * ServiceRequest states configuration of ng311 
+ * ServiceRequest states configuration of ng311
  */
 angular
   .module('ng311')

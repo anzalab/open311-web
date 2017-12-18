@@ -75,6 +75,16 @@
                                         <label class="floating-label">Physical Address</label>
                                     </div>
                                 </div>
+                                <div class="m-t-lg" title="Jurisdiction Color">
+                                    <color-picker ng-model="jurisdiction.color">
+                                    </color-picker>
+                                    <div class="m-t-lg">
+                                        <div class="form-group form-material floating">
+                                            <input title="Jurisdiction Color" ng-disabled="!edit" ng-model="jurisdiction.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
+                                            <label title="Jurisdiction Color" class="floating-label">Jurisdiction Color(HEX)</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

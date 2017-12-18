@@ -22,18 +22,28 @@
                     <div class="m-b text-muted text-xs">Miscellaneous</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:!isEmpty(query) && query.operator == null && query.resolvedAt == null && query.$or == null}" class="nav-item m-b-xs">
-                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resolvedAt:null, resetPage:true, reset:true})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
+                            <li ng-class="{active:isAll}" class="nav-item m-b-xs">
+                                <a ng-click="load({resetPage:true, reset:true, isAll:true})" class="nav-link text-muted block" title="All Reported Issues">
+                                All
+                                </a>
+                            </li>
+                            <li ng-class="{active:!isEmpty(query) && !isAll && query.operator == party._id}" class="nav-item m-b-xs">
+                                <a ng-click="load({operator:party._id, resolvedAt:null, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
+                                Inbox
+                                </a>
+                            </li>
+                            <li ng-class="{active:!isEmpty(query) && !isAll && query.operator == null}" class="nav-item m-b-xs">
+                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
                             </li>
-                            <li ng-class="{active:!isEmpty(query) && query.operator != null && query.resolvedAt == null}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
+                            <li ng-class="{active:!isEmpty(query) && !isAll && query.operator != null && query.operator != party._id && query.resolvedAt == null}" class="nav-item m-b-xs">
+                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
                                 Un-Resolved
                                 </a>
                             </li>
-                            <li ng-class="{active:!isEmpty(query) && query.resolvedAt != null}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
+                            <li ng-class="{active:!isEmpty(query) && !isAll && query.resolvedAt != null && query.operator != party._id}" class="nav-item m-b-xs">
+                                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true, isAll:false})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
                                 Resolved
                                 </a>
                             </li>
@@ -46,7 +56,7 @@
                     <div class="m-b text-muted text-xs">Status</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:query.status == status._id}" class="nav-item m-b-xs" ng-repeat="status in statuses">
+                            <li ng-class="{active:query.status == status._id}" class="nav-item m-b-xs" ng-repeat="status in statuses | orderBy:'weight'">
                                 <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{status.color}}">
                                         {{summaries.statuses[status._id]}}
@@ -61,7 +71,7 @@
                     <div class="m-b text-muted text-xs">Priorities</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:query.priority == priority._id}" class="nav-item m-b-xs" ng-repeat="priority in priorities">
+                            <li ng-class="{active:query.priority == priority._id}" class="nav-item m-b-xs" ng-repeat="priority in priorities | orderBy:'weight'">
                                 <a ng-click="load({'priority':priority._id, resetPage:true})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{priority.color}}">
                                         {{summaries.priorities[priority._id]}}
@@ -76,7 +86,7 @@
                     <div class="m-b text-muted text-xs">Services</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:query.service == service._id}" class="nav-item m-b-xs" ng-repeat="service in services">
+                            <li ng-class="{active:query.service == service._id}" class="nav-item m-b-xs" ng-repeat="service in services | orderBy:'name'">
                                 <a ng-click="load({service:service._id, resetPage:true})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{service.color}}">
                                     {{summaries.services[service._id]}}
@@ -92,7 +102,7 @@
                     <div class="m-b text-muted text-xs">Areas</div>
                     <div class="nav-active-white">
                         <ul class="nav">
-                            <li ng-class="{active:query.jurisdiction == jurisdiction._id}" class="nav-item m-b-xs" ng-repeat="jurisdiction in jurisdictions">
+                            <li ng-class="{active:query.jurisdiction == jurisdiction._id}" class="nav-item m-b-xs" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
                                 <a ng-click="load({'jurisdiction':jurisdiction._id, resetPage:true})" class="nav-link text-muted block">
                                     <span class="pull-right text-sm label danger rounded" style="background-color: {{jurisdiction.color}}">
                                         {{summaries.jurisdictions[jurisdiction._id]}}

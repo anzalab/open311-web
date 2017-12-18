@@ -10,8 +10,8 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function (
-    $rootScope, $scope, $state, prompt, leafletBoundsHelpers, Party,
-    ServiceRequest, Comment, Summary, endpoints, party
+    $rootScope, $scope, $state, $stateParams, prompt, leafletBoundsHelpers,
+    Party, ServiceRequest, Comment, Summary, endpoints, party
   ) {
 
     //servicerequests in the scope
@@ -34,6 +34,9 @@ angular
 
     //signal create mode
     $scope.create = false;
+
+    //signal to activate all filter
+    $scope.isAll = false;
 
     //bind states
     $scope.priorities = endpoints.priorities.priorities;
@@ -144,7 +147,8 @@ angular
               }
 
               //obtain media thumb from url
-              if (!_.isEmpty(attachment.url) && _.startsWith(attachment.url, 'http')) {
+              if (!_.isEmpty(attachment.url) && _.startsWith(attachment.url,
+                  'http')) {
                 attachment.thumb = attachment.url;
               }
 
@@ -497,10 +501,14 @@ angular
       //ensure query
       var isSearchable = ($scope.search.q && $scope.search.q.length >= 2);
       var extras = isSearchable ? $scope.query : {};
-      query = _.merge({}, extras, query);
+      query = _.merge({}, { isAll: $scope.isAll }, extras, query);
 
       //start sho spinner
       $scope.spin = true;
+
+      //activate all filter
+      $scope.isAll = query.isAll;
+      delete query.isAll;
 
       //reset pagination
       if (query && query.resetPage) {
@@ -596,15 +604,31 @@ angular
 
 
     //pre load un resolved servicerequests on state activation
-    $scope.find({ resolvedAt: null, operator: { $ne: null } });
+    $scope.find({
+      operator: party._id,
+      resolvedAt: null,
+      resetPage: true,
+      reset: true,
+      isAll: false
+    });
 
     //listen for events
     $rootScope.$on('app:servicerequests:reload', function () {
-      $scope.find({ resolvedAt: null, operator: { $ne: null } });
+
+      //re-load current operator service requests
+      $scope.find({
+        operator: party._id,
+        resolvedAt: null,
+        resetPage: true,
+        reset: true,
+        isAll: false
+      });
+
     });
 
     //reload summaries
     $rootScope.$on('app:servicerequests:reload', function () {
+      //TODO pass params based on fillter
       Summary.issues().then(function (summaries) {
         $scope.summaries = summaries;
       });
