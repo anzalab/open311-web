@@ -178,7 +178,7 @@ angular
             .overall.count) * 100,
         };
 
-        _.merge($scope.performances.overall, $scope.performances.overall,
+        $scope.performances.overall = _.merge({}, $scope.performances.overall,
           percentages);
       }
     };
