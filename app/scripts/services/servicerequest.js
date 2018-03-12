@@ -70,7 +70,7 @@ angular
     /**
      * @description convert a report to email
      * @param  {Object} report current report in the scope
-     * @return {String} valid mailto string to bind into href        
+     * @return {String} valid mailto string to bind into href
      */
     ServiceRequest.toEmail = function (issue) {
       /*jshint camelcase:false */
@@ -130,6 +130,9 @@ angular
         '\n\n',
         'Regards.'
       ].join('');
+
+      //TODO add internal notes
+      //TODO add a link to actual problem
 
       //prepare e-mail send option
       var recipient = _.get(issue, 'jurisdiction.email', '');
