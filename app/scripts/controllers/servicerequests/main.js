@@ -453,6 +453,7 @@ angular
      * @return {[type]} [description]
      */
     $scope.onSearchAssignees = function () {
+      //TODO allow party where jurisdiction = null
       if ($scope.search.party && $scope.search.party.length >= 2) {
         Party.find({
           query: {
