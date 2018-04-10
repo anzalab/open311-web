@@ -231,7 +231,7 @@ angular
             .overall.count) * 100,
         };
 
-        _.merge($scope.overviews.overall, $scope.overviews.overall,
+        $scope.overviews.overall = _.merge({}, $scope.overviews.overall,
           percentages);
 
       }
