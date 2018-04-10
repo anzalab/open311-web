@@ -120,6 +120,9 @@ angular
               lat: servicerequest.latitude,
               lng: servicerequest.longitude,
               zoom: 1
+            },
+            defaults: {
+              scrollWheelZoom: false
             }
           };
 

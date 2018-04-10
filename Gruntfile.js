@@ -400,8 +400,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            owner: 'DAWASCO',
-            title: 'SmartDawasco',
+            owner: 'MWAUWASA',
+            title: 'MWAUWASA',
             version: 'v0.1.0',
             description: 'Citizen Feedback System',
             apiEndPoint: {
