@@ -3,6 +3,15 @@
     <div class="b-b bg">
         <div class="box-header" style="padding:1.2rem;">
             <h2>Report New Issue</h2>
+
+            <!-- customer lookup button -->
+            <div class="box-tool">
+                <button ng-click="openLookupModal()" class="btn info" title="Lookup for customer details">
+                  <i class="icon-magnifier"></i> &nbsp;
+                  Customer Lookup
+                </button>
+            </div>
+            <!-- end customer lookup button -->
         </div>
     </div>
     <!-- start servicerequest body -->
@@ -52,7 +61,7 @@
                                 <div class="row m-b">
                                     <div class="col-sm-1" ng-repeat="method in methods">
                                         <div>
-                                          <label class="md-check text-muted" title="Method of Communication used by Reporter">
+                                            <label class="md-check text-muted" title="Method of Communication used by Reporter">
                                             <input type="radio" ng-model="servicerequest.method.name" ng-value="method" name="method"> <i class="blue"></i> {{method}}
                                           </label>
                                         </div>

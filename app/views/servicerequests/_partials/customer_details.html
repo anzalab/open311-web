@@ -1,0 +1,130 @@
+<!-- modal header -->
+<div class="modal-header">
+    <div class="b-b">
+        <h4 class="modal-title">Customer Details</h4>
+    </div>
+</div>
+<!-- end modal header -->
+<!-- modal body -->
+<div class="modal-body">
+    <div class="box">
+        <div class="box-body">
+            <div class="row m-t-lg">
+                <!-- account Number -->
+                <div class="col-sm-6" title="Account">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.number" ng-minlength="2" type="text" class="form-control" disabled="true">
+                        <label title="Account Number" class="floating-label">Account Number</label>
+                    </div>
+                </div>
+                <!-- end account number -->
+
+                <!-- account status -->
+                <div class="col-sm-6" title="Account Status">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.active" ng-minlength="2" type="text" class="form-control" disabled="true">
+                        <label title="Account Number" class="floating-label">Is Account Active</label>
+                    </div>
+                </div>
+                <!-- end account status -->
+            </div>
+
+            <div class="row m-t-lg">
+                <!-- customer Name -->
+                <div class="col-sm-6" title="Party Name">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.name" type="text" name="name" class="form-control" disabled="true">
+                        <label title="Customer Name" class="floating-label">Name</label>
+                    </div>
+                </div>
+                <!-- end customer Name -->
+
+                <!-- customer Phone Number -->
+                <div class="col-sm-6" title="Customer Phone Number">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.phone" type="text" name="phone" class="form-control" disabled="true">
+                        <label title="Customer Phone Number" class="floating-label">Phone</label>
+                    </div>
+                </div>
+                <!-- end customer phone number -->
+
+            </div>
+
+            <div class="row m-t-lg">
+                <!-- customer email -->
+                <div class="col-sm-6" title="Email Address">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.email" type="text" name="email" class="form-control" disabled="true">
+                        <label title="Email Address" class="floating-label">Email</label>
+                    </div>
+                </div>
+                <!-- end customer email -->
+
+                <!-- customer address -->
+                <div class="col-sm-6" title="Customer Address">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.address" type="text" name="address" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required ng-valid-minlength ng-empty" disabled="true">
+                        <label title="Customer Address" class="floating-label">Address</label>
+                    </div>
+                </div>
+                <!-- end customer address -->
+            </div>
+
+            <div class="row m-t-lg">
+                <!-- customer area -->
+                <div class="col-sm-6" title="Email Address">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.area" type="text" name="email" class="form-control" disabled="true">
+                        <label title="Email Address" class="floating-label">Email</label>
+                    </div>
+                </div>
+                <!-- end customer area-->
+
+                <!-- customer neighborhood -->
+                <div class="col-sm-6" title="Customer Address">
+                    <div class="form-group form-material floating">
+                        <input ng-model="customerDetails.neighborhood" type="text" name="address" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required ng-valid-minlength ng-empty" disabled="true">
+                        <label title="Customer Address" class="floating-label">Address</label>
+                    </div>
+                </div>
+                <!-- end customer neighborhood -->
+            </div>
+
+            <div class="row m-t-lg">
+                <div class="box">
+                    <div class="box-header">
+                        <h2>Previous 3 Months Customer Bills</h2>
+                    </div>
+                    <table class="table table-striped b-t">
+                        <thead>
+                            <!-- headers for bills -->
+                            <tr>
+                                <th title="Control Number for bill payments">Control Number</th>
+                                <th title="Bill Month">Bill Month</th>
+                                <th title="Current or previous month outstanding balance">Current/Outstand Balance</th>
+                                <th title="Open balance">Open Balance</th>
+                                <th title="Periodic charges">Charges</th>
+                                <th title="Loan or Debt">Loan/Debt</th>
+                            </tr>
+                            <!-- end header for bills -->
+                        </thead>
+                        <tbody>
+                            <!-- ng-repeat for bills -->
+                            <tr ng-repeat="bill in customerDetails.bills">
+                                <td>{{bill.number}}</td>
+                                <td>{{bill.period.name}}</td>
+                                <td>{{bill.balance.current || bill.balance.outstand}}</td>
+                                <td>{{bill.balance.open}}</td>
+                                <td>{{bill.balance.charges}}</td>
+                                <td>{{bill.balance.loan || bill.balance.debt}}</td>
+                            </tr>
+                            <!-- end ng-repeat for bills -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end modal body -->
