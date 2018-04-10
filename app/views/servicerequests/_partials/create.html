@@ -42,8 +42,15 @@
                                 <div class="row m-b">
                                     <div class="col-sm-6">
                                         <div class="form-group form-material floating">
-                                            <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" />
-                                            <label class="floating-label">Account</label>
+                                            <div class="input-group">
+                                                <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" />
+                                                <label class="floating-label">Account</label>
+                                                <span class="input-group-btn p-l-sm">
+                                                    <button class="btn btn-sm btn-secondary" type="button">
+                                                        <i class="icon-magnifier"></i>
+                                                    </button>
+                                                  </span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

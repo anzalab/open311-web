@@ -1,6 +1,7 @@
 <!-- modal header -->
 <div class="modal-header">
     <div class="b-b">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">×</button>
         <h4 class="modal-title">Customer Details</h4>
     </div>
 </div>
@@ -9,118 +10,158 @@
 <div class="modal-body">
     <div class="box">
         <div class="box-body">
-            <div class="row m-t-lg">
-                <!-- account Number -->
-                <div class="col-sm-6" title="Account">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.number" ng-minlength="2" type="text" class="form-control" disabled="true">
-                        <label title="Account Number" class="floating-label">Account Number</label>
-                    </div>
-                </div>
-                <!-- end account number -->
 
-                <!-- account status -->
-                <div class="col-sm-6" title="Account Status">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.active" ng-minlength="2" type="text" class="form-control" disabled="true">
-                        <label title="Account Number" class="floating-label">Is Account Active</label>
+            <!-- start customer summary details -->
+            <div class="item">
+                <div class="p-a-md">
+                    <div class="row m-t">
+                        <div class="col-md-10">
+                            <!-- start name avatar -->
+                            <a href="#" class="pull-left m-r-md">
+                             <span>
+                               <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
+                               <letter-avatar title="{{customerDetails.name}}" data="{{customerDetails.name}}" height="96" width="96" shape="round">
+                               </letter-avatar>
+                              <i class="on b-white"></i>
+                             </span>
+                            </a>
+                            <!-- end party avatar -->
+
+
+                            <!-- start party details -->
+                            <div class="clear m-b">
+                                <div class="row-col">
+                                    <h4 class="m-a-0 m-b-sm">
+                                        <!-- start customer name -->
+                                        <span title="Name">{{customerDetails.name}}</span>
+                                        <!-- end customer name -->
+                                        <!-- account number -->
+                                        <span class="m-l-sm" title="Account Number">#{{customerDetails.number}}</span>
+                                        <!-- account number -->
+                                    </h4>
+                                </div>
+                                <!-- start party relations -->
+                                <p class="text-muted m-t-sm">
+                                    <i class="fa fa-map-marker m-r-xs"></i>
+                                    <span title="Working Area">
+                                      {{customerDetails.fullAddress}}
+                                    </span>
+                                </p>
+                                <!-- end party relations -->
+                                <div class="block clearfix m-b">
+                                    <span>
+                              <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                            <i class="icon-phone"></i>
+                            <i class="icon-phone indigo"></i>
+                          </a>
+                          <!-- TODO should initiate call -->
+                              <span title="Phone Number"  class="text-muted">
+                                {{party.phone ? party.phone : 'N/A'}}
+                              </span>
+                                    </span>
+                                    <span class="m-l-md">
+                              <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                            <i class="icon-envelope"></i>
+                            <i class="icon-envelope light-blue"></i>
+                          </a>
+                          <!-- TODO should initiate email -->
+                              <span title="Email Address" class="text-muted">
+                                {{party.email ? party.email : 'N/A'}}
+                              </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- end party details -->
+                        </div>
+                        <!-- start of pipeline -->
+                        <div class="col-sm-12 col-md-8 col-lg-6">
+                            <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
+                        </div>
+                        <!-- end of pipeline -->
                     </div>
                 </div>
-                <!-- end account status -->
             </div>
+            <!-- end customer summary details -->
 
             <div class="row m-t-lg">
-                <!-- customer Name -->
-                <div class="col-sm-6" title="Party Name">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.name" type="text" name="name" class="form-control" disabled="true">
-                        <label title="Customer Name" class="floating-label">Name</label>
-                    </div>
-                </div>
-                <!-- end customer Name -->
-
-                <!-- customer Phone Number -->
-                <div class="col-sm-6" title="Customer Phone Number">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.phone" type="text" name="phone" class="form-control" disabled="true">
-                        <label title="Customer Phone Number" class="floating-label">Phone</label>
-                    </div>
-                </div>
-                <!-- end customer phone number -->
-
-            </div>
-
-            <div class="row m-t-lg">
-                <!-- customer email -->
-                <div class="col-sm-6" title="Email Address">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.email" type="text" name="email" class="form-control" disabled="true">
-                        <label title="Email Address" class="floating-label">Email</label>
-                    </div>
-                </div>
-                <!-- end customer email -->
-
-                <!-- customer address -->
-                <div class="col-sm-6" title="Customer Address">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.address" type="text" name="address" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required ng-valid-minlength ng-empty" disabled="true">
-                        <label title="Customer Address" class="floating-label">Address</label>
-                    </div>
-                </div>
-                <!-- end customer address -->
-            </div>
-
-            <div class="row m-t-lg">
-                <!-- customer area -->
-                <div class="col-sm-6" title="Email Address">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.area" type="text" name="email" class="form-control" disabled="true">
-                        <label title="Email Address" class="floating-label">Email</label>
-                    </div>
-                </div>
-                <!-- end customer area-->
-
-                <!-- customer neighborhood -->
-                <div class="col-sm-6" title="Customer Address">
-                    <div class="form-group form-material floating">
-                        <input ng-model="customerDetails.neighborhood" type="text" name="address" class="form-control ng-pristine ng-untouched ng-valid ng-valid-required ng-valid-minlength ng-empty" disabled="true">
-                        <label title="Customer Address" class="floating-label">Address</label>
-                    </div>
-                </div>
-                <!-- end customer neighborhood -->
-            </div>
-
-            <div class="row m-t-lg">
-                <div class="box">
+                <div class="box box-shadow-z2">
                     <div class="box-header">
-                        <h2>Previous 3 Months Customer Bills</h2>
+                        <h2>Mini Statement <span class="pull-right">Amount Due: Tsh 19,400</span></h2>
                     </div>
-                    <table class="table table-striped b-t">
-                        <thead>
-                            <!-- headers for bills -->
-                            <tr>
-                                <th title="Control Number for bill payments">Control Number</th>
-                                <th title="Bill Month">Bill Month</th>
-                                <th title="Current or previous month outstanding balance">Current/Outstand Balance</th>
-                                <th title="Open balance">Open Balance</th>
-                                <th title="Periodic charges">Charges</th>
-                                <th title="Loan or Debt">Loan/Debt</th>
-                            </tr>
-                            <!-- end header for bills -->
-                        </thead>
-                        <tbody>
-                            <!-- ng-repeat for bills -->
-                            <tr ng-repeat="bill in customerDetails.bills">
-                                <td>{{bill.number}}</td>
-                                <td>{{bill.period.name}}</td>
-                                <td>{{bill.balance.current || bill.balance.outstand}}</td>
-                                <td>{{bill.balance.open}}</td>
-                                <td>{{bill.balance.charges}}</td>
-                                <td>{{bill.balance.loan || bill.balance.debt}}</td>
-                            </tr>
-                            <!-- end ng-repeat for bills -->
-                        </tbody>
-                    </table>
+                </div>
+                <div class="list box box-shadow-z2">
+                    <div class="box-header b-b">
+                        <h2>March 2018 <small class="pull-right text-muted text-sm">Date of Reading: 2018/03/25</small></h2>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-body">
+                            <p class="_500">
+                                <div>
+                                    <span>Previous Reading</span>
+                                    <small class="text-muted pull-right">290</small>
+                                </div>
+                                <div>
+                                    <span>Current Reading</span>
+                                    <small class="text-muted pull-right">270</small>
+                                </div>
+                                <div>
+                                    <span>Consumptions</span>
+                                    <small class="text-muted pull-right">20 m3</small>
+                                </div>
+                            </p>
+                            <p class="_500">
+                                <div>
+                                    <span>Open Balance</span>
+                                    <small class="text-muted pull-right">Tsh.  13,000</small>
+                                </div>
+                                <div>
+                                    <span>Periodic Charges</span>
+                                    <small class="text-muted pull-right">Tsh.  12,000</small>
+                                </div>
+                                <div>
+                                    <span>Closing Balance</span>
+                                    <small class="text-muted pull-right">Tsh.  25,000</small>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list box box-shadow-z2">
+                    <div class="box-header b-b">
+                        <h2>February 2018 <small class="pull-right text-muted text-sm">Date of Reading: 2018/03/25</small></h2>
+                    </div>
+                    <div class="list-item">
+                        <div class="list-body">
+                            <p class="_500">
+                                <div>
+                                    <span>Previous Reading</span>
+                                    <small class="text-muted pull-right">290</small>
+                                </div>
+                                <div>
+                                    <span>Current Reading</span>
+                                    <small class="text-muted pull-right">270</small>
+                                </div>
+                                <div>
+                                    <span>Consumptions</span>
+                                    <small class="text-muted pull-right">20 m3</small>
+                                </div>
+                            </p>
+                            <p class="_500">
+                                <div>
+                                    <span>Open Balance</span>
+                                    <small class="text-muted pull-right">Tsh.  13,000</small>
+                                </div>
+                                <div>
+                                    <span>Periodic Charges</span>
+                                    <small class="text-muted pull-right">Tsh.  12,000</small>
+                                </div>
+                                <div>
+                                    <span>Closing Balance</span>
+                                    <small class="text-muted pull-right">Tsh.  25,000</small>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

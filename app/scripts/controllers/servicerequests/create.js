@@ -59,6 +59,7 @@ angular
         verified: true
       }],
       address: 'Ilala / Ubungo / Mabibo',
+      fullAddress: 'Ilala - Upanga - Mabibo',
       area: 'Ilala',
       neighborhood: 'Upanga',
       location: {
