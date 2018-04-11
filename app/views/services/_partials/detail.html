@@ -19,9 +19,9 @@
                                         <label title="Group" class="floating-label">Group</label>
                                         <input ng-disabled="!edit" ng-model="service.group.name" ng-required ng-minlength="2" type="text" name="group" class="form-control" />
                                     </div>
-                                    <div ng-show="edit" class="form-group">
-                                        <label title="Group" class="floating-label">Group</label>
+                                    <div ng-show="edit" class="form-group form-material floating">
                                         <oi-select oi-options="item.name for item in servicegroups track by item.id" ng-model="service.group" placeholder="Select Group" class="form-control"></oi-select>
+                                        <label title="Group" class="floating-label">Group</label>
                                     </div>
                                 </div>
                                 <!-- end service group -->
@@ -31,9 +31,9 @@
                                         <label title="Priority" class="floating-label">Priority</label>
                                         <input ng-disabled="!edit" ng-model="service.priority.name" ng-required ng-minlength="2" type="text" name="priority" class="form-control" />
                                     </div>
-                                    <div ng-show="edit" class="form-group">
-                                        <label title="Priority" class="floating-label">Priority</label>
+                                    <div ng-show="edit" class="form-group form-material floating">
                                         <oi-select oi-options="item.name for item in priorities track by item.id" ng-model="service.priority" placeholder="Select Priority" class="form-control"></oi-select>
+                                        <label title="Priority" class="floating-label">Priority</label>
                                     </div>
                                 </div>
                                 <!-- end service priority -->
