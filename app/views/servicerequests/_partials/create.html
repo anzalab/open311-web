@@ -3,15 +3,6 @@
     <div class="b-b bg">
         <div class="box-header" style="padding:1.2rem;">
             <h2>Report New Issue</h2>
-
-            <!-- customer lookup button -->
-            <div class="box-tool">
-                <button ng-click="openLookupModal()" class="btn info" title="Lookup for customer details">
-                  <i class="icon-magnifier"></i> &nbsp;
-                  Customer Lookup
-                </button>
-            </div>
-            <!-- end customer lookup button -->
         </div>
     </div>
     <!-- start servicerequest body -->
@@ -46,7 +37,7 @@
                                             <div class="input-group">
                                                 <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" />
                                                 <span class="input-group-btn">
-                                                    <button class="btn btn-secondary" type="button">
+                                                    <button class="btn btn-secondary" type="button"  title="Lookup for customer account details">
                                                         <i class="icon-magnifier"></i>
                                                     </button>
                                                   </span>
