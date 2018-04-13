@@ -48,92 +48,6 @@ angular
 
     $scope.servicerequest = new ServiceRequest(servicerequest);
 
-    $scope.customerDetails = {
-      number: '124352',
-      name: 'Lally Elias',
-      phone: '255714095',
-      email: 'lally@example.com',
-      contacts: [{
-        phone: '255714095',
-        email: 'l@eg.com',
-        verified: true
-      }],
-      address: 'Ilala / Ubungo / Mabibo',
-      fullAddress: 'Ilala - Upanga - Mabibo',
-      area: 'Ilala',
-      neighborhood: 'Upanga',
-      location: {
-        longitude: 39.276638,
-        latitude: -6.81633
-      },
-      bills: [{
-          number: '53652323',
-          period: {
-            name: 'January 2018',
-            endedAt: '2018-01-30',
-            duedAt: '2018-01-31'
-          },
-          balance: {
-            current: 9000,
-            open: 5000,
-            charges: 3000,
-            loan: 1000
-          },
-          items: [{
-              name: 'Previous Readings',
-              quantity: '71',
-              units: 'cbm'
-            },
-            {
-              name: 'Current Readings',
-              quantity: '74',
-              units: 'cbm'
-            },
-            {
-              name: 'Unit Consumed',
-              quantity: '3',
-              units: 'cbm'
-            }
-          ]
-        },
-        {
-          number: '53652323',
-          period: {
-            name: 'December 2017',
-            startedAt: '2017-12-01',
-            endedAt: '2017-12-30',
-            duedAt: '2017-12-31'
-          },
-          balance: {
-            outstand: 9000,
-            open: 5000,
-            charges: 3000,
-            close: 9000,
-            debt: 1000
-          },
-          items: [{
-              time: '2017-12-31',
-              name: 'Previous Readings',
-              quantity: '71',
-              units: 'cbm'
-            },
-            {
-              time: '2017-12-31',
-              name: 'Current Readings',
-              quantity: '74',
-              units: 'cbm'
-            },
-            {
-              time: '2017-12-31',
-              name: 'Unit Consumed',
-              quantity: '3',
-              units: 'cbm'
-            }
-          ]
-        }
-      ],
-      active: true
-    };
 
     /**
      * @description save created servicerequest
@@ -186,18 +100,27 @@ angular
      */
     $scope.openLookupModal = function () {
 
-      var modalInstance = $uibModal.open({
-        animation: true,
-        ariaLabelledBy: 'modal-title',
-        ariaDescribedBy: 'modal-body',
-        templateUrl: 'views/servicerequests/_partials/customer_details.html',
-        size: 'lg',
-        scope: $scope,
-        controller: function () {},
-        resolve: {
-          items: function () {}
-        }
-      });
+      var modalInstance = null;
+
+      ServiceRequest.lookupCustomer('71629896')
+        .then(function (data) {
+          $scope.customerAccount = data;
+
+          modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'views/servicerequests/_partials/customer_details.html',
+            size: 'lg',
+            scope: $scope,
+            controller: function () {},
+            resolve: {
+              items: function () {}
+            }
+          });
+        });
+
+
     };
 
   });

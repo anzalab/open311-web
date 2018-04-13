@@ -20,9 +20,9 @@
                             <a href="#" class="pull-left m-r-md">
                              <span>
                                <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
-                               <letter-avatar title="{{customerDetails.name}}" data="{{customerDetails.name}}" height="96" width="96" shape="round">
+                               <letter-avatar title="{{customerAccount.name}}" data="{{customerAccount.name}}" height="96" width="96" shape="round">
                                </letter-avatar>
-                              <i class="on b-white"></i>
+                               <i class="on b-white"></i>
                              </span>
                             </a>
                             <!-- end party avatar -->
@@ -33,10 +33,10 @@
                                 <div class="row-col">
                                     <h4 class="m-a-0 m-b-sm">
                                         <!-- start customer name -->
-                                        <span title="Name">{{customerDetails.name}}</span>
+                                        <span title="Name">{{customerAccount.name}}</span>
                                         <!-- end customer name -->
                                         <!-- account number -->
-                                        <span class="m-l-sm" title="Account Number">#{{customerDetails.number}}</span>
+                                        <span class="m-l-sm" title="Account Number">#{{customerAccount.number}}</span>
                                         <!-- account number -->
                                     </h4>
                                 </div>
@@ -44,7 +44,7 @@
                                 <p class="text-muted m-t-sm">
                                     <i class="fa fa-map-marker m-r-xs"></i>
                                     <span title="Working Area">
-                                      {{customerDetails.fullAddress}}
+                                      {{customerAccount.fullAddress}}
                                     </span>
                                 </p>
                                 <!-- end party relations -->
@@ -56,7 +56,7 @@
                           </a>
                           <!-- TODO should initiate call -->
                               <span title="Phone Number"  class="text-muted">
-                                {{party.phone ? party.phone : 'N/A'}}
+                                {{customerAccount.phone ? customerAccount.phone : 'N/A'}}
                               </span>
                                     </span>
                                     <span class="m-l-md">
@@ -66,67 +66,64 @@
                           </a>
                           <!-- TODO should initiate email -->
                               <span title="Email Address" class="text-muted">
-                                {{party.email ? party.email : 'N/A'}}
+                                {{customerAccount.email ? customerAccount.email : 'N/A'}}
                               </span>
                                     </span>
                                 </div>
                             </div>
                             <!-- end party details -->
                         </div>
-                        <!-- start of pipeline -->
-                        <div class="col-sm-12 col-md-8 col-lg-6">
-                            <ng-include ng-if="performances.pipelines" src="'views/auth/_partials/service_request_pipelines.html'"></ng-include>
-                        </div>
-                        <!-- end of pipeline -->
                     </div>
                 </div>
             </div>
             <!-- end customer summary details -->
 
+            <!-- customer bill -->
             <div class="row m-t-lg">
                 <div class="box box-shadow-z2">
                     <div class="box-header">
-                        <h2>Mini Statement <span class="pull-right">Amount Due: Tsh 19,400</span></h2>
+                        <h2>Mini Statement <span class="pull-right">Amount Due: {{customerAccount.outstandingBalance | currency:'Tsh '}}</span></h2>
                     </div>
                 </div>
-                <div class="list box box-shadow-z2">
+                <div class="list box box-shadow-z2" ng-repeat="bill in customerAccount.bills">
                     <div class="box-header b-b">
-                        <h2>March 2018 <small class="pull-right text-muted text-sm">Date of Reading: 2018/03/25</small></h2>
+                        <h2>{{bill.period.billedAt | date:'MMMM yyyy'}} <small class="pull-right text-muted text-sm">Date of Reading: {{bill.period.billedAt | date:'dd/MM/yyyy'}}</small></h2>
                     </div>
                     <div class="list-item">
                         <div class="list-body">
                             <p class="_500">
-                                <div>
-                                    <span>Previous Reading</span>
-                                    <small class="text-muted pull-right">290</small>
+                                <!--start bill item  -->
+                                <div ng-repeat="item in bill.items">
+                                    <span>{{item.name}}</span>
+                                    <small class="text-muted pull-right">{{item.quantity | number:0}} Units</small>
                                 </div>
-                                <div>
-                                    <span>Current Reading</span>
-                                    <small class="text-muted pull-right">270</small>
-                                </div>
-                                <div>
-                                    <span>Consumptions</span>
-                                    <small class="text-muted pull-right">20 m3</small>
-                                </div>
+                                <!-- end bill item -->
                             </p>
                             <p class="_500">
                                 <div>
                                     <span>Open Balance</span>
-                                    <small class="text-muted pull-right">Tsh.  13,000</small>
+                                    <small class="text-muted pull-right">{{bill.balance.open | currency:'Tsh '}}</small>
                                 </div>
                                 <div>
                                     <span>Periodic Charges</span>
-                                    <small class="text-muted pull-right">Tsh.  12,000</small>
+                                    <small class="text-muted pull-right">{{bill.balance.charges | currency:'Tsh '}}</small>
+                                </div>
+                                <div>
+                                    <span>Loan/Debt Balance</span>
+                                    <small class="text-muted pull-right">{{bill.balance.debt | currency:'Tsh '}}</small>
                                 </div>
                                 <div>
                                     <span>Closing Balance</span>
-                                    <small class="text-muted pull-right">Tsh.  25,000</small>
+                                    <small class="text-muted pull-right">{{bill.balance.close | currency:'Tsh '}}</small>
                                 </div>
+                            </p>
+                            <p class="_500 text-muted">
+                                Note:&nbsp;{{bill.notes}}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="list box box-shadow-z2">
+                <!-- <div class="list box box-shadow-z2">
                     <div class="box-header b-b">
                         <h2>February 2018 <small class="pull-right text-muted text-sm">Date of Reading: 2018/03/25</small></h2>
                     </div>
@@ -162,8 +159,9 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+            <!-- end customer bill -->
         </div>
 
     </div>
