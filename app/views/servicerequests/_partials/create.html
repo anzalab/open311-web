@@ -37,7 +37,7 @@
                                             <div class="input-group">
                                                 <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" />
                                                 <span class="input-group-btn">
-                                                    <button  ng-click="openLookupModal()" class="btn btn-secondary" type="button"  title="Lookup for customer account details">
+                                                    <button  ng-disabled="!servicerequest.reporter.account" ng-click="openLookupModal()" class="btn btn-secondary" type="button"  title="Lookup for customer account details">
                                                         <i class="icon-magnifier"></i>
                                                     </button>
                                                   </span>

@@ -151,10 +151,16 @@ angular
      * @return {Object} valid customer account profile | empty object
      */
     ServiceRequest.lookupCustomer = function (account) {
-      var url = 'http://localhost:5000/v1.0.0/accounts?filter[number]=' +
-        account;
+      console.log(account);
+      var url = 'http://localhost:5000/v1.0.0/accounts';
 
-      return $http.get(url).then(function (response) {
+      return $http.get(url, {
+        params: {
+          filter: {
+            number: account
+          }
+        }
+      }).then(function (response) {
         var customerAccount = _.first(response.data.data);
 
         // create full address field
@@ -165,7 +171,7 @@ angular
           .balance.outstand || 0;
 
         return customerAccount;
-      }).catch(function (error) {
+      }).catch(function ( /*error*/ ) {
         //TODO handle error
       });
     };
