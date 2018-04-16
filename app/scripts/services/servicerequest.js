@@ -151,7 +151,6 @@ angular
      * @return {Object} valid customer account profile | empty object
      */
     ServiceRequest.lookupCustomer = function (account) {
-      console.log(account);
       var url = 'http://localhost:5000/v1.0.0/accounts';
 
       return $http.get(url, {

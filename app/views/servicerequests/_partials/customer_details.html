@@ -12,7 +12,7 @@
         <div class="box-body">
 
             <!-- start customer summary details -->
-            <div class="item">
+            <div ng-if="customerAccount" class="item">
                 <div class="p-a-md">
                     <div class="row m-t">
                         <div class="col-md-10">
@@ -79,7 +79,7 @@
             <!-- end customer summary details -->
 
             <!-- customer bill -->
-            <div class="row m-t-lg">
+            <div ng-if="customerAccount" class="row m-t-lg">
                 <div class="box box-shadow-z2">
                     <div class="box-header">
                         <h2>Mini Statement <span class="pull-right">Amount Due: {{customerAccount.outstandingBalance | currency:'Tsh '}}</span></h2>
@@ -123,6 +123,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- end customer bill -->
+
                 <!-- <div class="list box box-shadow-z2">
                     <div class="box-header b-b">
                         <h2>February 2018 <small class="pull-right text-muted text-sm">Date of Reading: 2018/03/25</small></h2>
@@ -162,6 +164,16 @@
                 </div> -->
             </div>
             <!-- end customer bill -->
+
+            <!-- account not found details -->
+            <div class="row-col">
+                <div ng-if="!customerAccount" class="row-cell v-m">
+                    <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+                        <p class="text-muted m-y-lg">Account Not Found</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end account not found details -->
         </div>
     </div>
 </div>

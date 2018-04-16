@@ -106,7 +106,6 @@ angular
 
       ServiceRequest.lookupCustomer(accountNumber)
         .then(function (data) {
-          console.log(data);
           $scope.customerAccount = data;
 
           modalInstance = $uibModal.open({
