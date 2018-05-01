@@ -20,7 +20,7 @@
                             <a href="#" class="pull-left m-r-md">
                              <span>
                                <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
-                               <letter-avatar title="{{customerAccount.name}}" data="{{customerAccount.name}}" height="96" width="96" shape="round">
+                               <letter-avatar title="{{customerAccount.name}}" data="{{customerAccount.name}}" height="96" width="96" shape="round" color="{{customerAccount.active ? '#63D471':'#EE6352'}}">
                                </letter-avatar>
                                <i class="on b-white"></i>
                              </span>
@@ -123,45 +123,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- end customer bill -->
-
-                <!-- <div class="list box box-shadow-z2">
-                    <div class="box-header b-b">
-                        <h2>February 2018 <small class="pull-right text-muted text-sm">Date of Reading: 2018/03/25</small></h2>
-                    </div>
-                    <div class="list-item">
-                        <div class="list-body">
-                            <p class="_500">
-                                <div>
-                                    <span>Previous Reading</span>
-                                    <small class="text-muted pull-right">290</small>
-                                </div>
-                                <div>
-                                    <span>Current Reading</span>
-                                    <small class="text-muted pull-right">270</small>
-                                </div>
-                                <div>
-                                    <span>Consumptions</span>
-                                    <small class="text-muted pull-right">20 m3</small>
-                                </div>
-                            </p>
-                            <p class="_500">
-                                <div>
-                                    <span>Open Balance</span>
-                                    <small class="text-muted pull-right">Tsh.  13,000</small>
-                                </div>
-                                <div>
-                                    <span>Periodic Charges</span>
-                                    <small class="text-muted pull-right">Tsh.  12,000</small>
-                                </div>
-                                <div>
-                                    <span>Closing Balance</span>
-                                    <small class="text-muted pull-right">Tsh.  25,000</small>
-                                </div>
-                            </p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <!-- end customer bill -->
 
@@ -182,6 +143,6 @@
 <!-- start filter footer -->
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-    <button class="btn btn-primary" ng-click="">Ok</button>
+    <button class="btn btn-primary" ng-click="$dismiss()">OK</button>
 </div>
 <!-- end footer filter -->
