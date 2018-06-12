@@ -74,20 +74,20 @@ angular
 
       updateOrSave.then(function (response) {
 
-          response = response || {};
+        response = response || {};
 
-          response.message =
-            response.message || 'Service Request Saved Successfully';
+        response.message =
+          response.message || 'Service Request Saved Successfully';
 
-          $rootScope.$broadcast('appSuccess', response);
+        $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('servicerequest:create:success', response);
+        $rootScope.$broadcast('servicerequest:create:success', response);
 
-          $rootScope.$broadcast('app:servicerequests:reload');
+        $rootScope.$broadcast('app:servicerequests:reload');
 
-          $state.go('app.servicerequests.list');
+        $state.go('app.servicerequests.list');
 
-        })
+      })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);
           $rootScope.$broadcast('servicerequest:create:error', error);
@@ -100,26 +100,21 @@ angular
      */
     $scope.openLookupModal = function () {
 
-      var modalInstance = null;
-
       var accountNumber = $scope.servicerequest.reporter.account;
 
       ServiceRequest.lookupCustomer(accountNumber)
         .then(function (data) {
-          $scope.customerAccount = data;
 
-          modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'views/servicerequests/_partials/customer_details.html',
-            size: 'lg',
-            scope: $scope,
-            controller: function () {},
-            resolve: {
-              items: function () {}
+          // shape data
+          data.accessors = _.map(data.accessors, function (accessor) {
+            if (accessor.verifiedAt) {
+              return _.merge({}, accessor, { verified: true });
             }
+
+            return _.merge({}, accessor, { verified: false });
           });
+
+          $state.go('accountModal.details', { customerAccount: data });
         });
 
 

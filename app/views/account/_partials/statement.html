@@ -1,7 +1,7 @@
 <!-- modal header -->
 <div class="modal-header">
     <div class="b-b">
-        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">×</button>
+        <button type="button" class="close pull-right" ng-click="$close()" aria-hidden="true">×</button>
         <h4 class="modal-title">Customer Details</h4>
     </div>
 </div>
@@ -15,7 +15,7 @@
             <div ng-if="customerAccount" class="item">
                 <div class="p-a-md">
                     <div class="row m-t">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <!-- start name avatar -->
                             <a href="#" class="pull-left m-r-md">
                              <span>
@@ -26,7 +26,6 @@
                              </span>
                             </a>
                             <!-- end party avatar -->
-
 
                             <!-- start party details -->
                             <div class="clear m-b">
@@ -50,24 +49,34 @@
                                 <!-- end party relations -->
                                 <div class="block clearfix m-b">
                                     <span>
-                              <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
-                            <i class="icon-phone"></i>
-                            <i class="icon-phone indigo"></i>
-                          </a>
-                          <!-- TODO should initiate call -->
-                              <span title="Phone Number"  class="text-muted">
-                                {{customerAccount.phone ? customerAccount.phone : 'N/A'}}
-                              </span>
+                                      <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                                        <i class="icon-phone"></i>
+                                        <i class="icon-phone indigo"></i>
+                                      </a>
+                                      <!-- TODO should initiate call -->
+                                      <span title="Phone Number"  class="text-muted">
+                                        {{customerAccount.phone ? customerAccount.phone : 'N/A'}}
+                                      </span>
                                     </span>
                                     <span class="m-l-md">
-                              <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
-                            <i class="icon-envelope"></i>
-                            <i class="icon-envelope light-blue"></i>
-                          </a>
-                          <!-- TODO should initiate email -->
-                              <span title="Email Address" class="text-muted">
-                                {{customerAccount.email ? customerAccount.email : 'N/A'}}
-                              </span>
+                                      <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                                        <i class="icon-envelope"></i>
+                                        <i class="icon-envelope light-blue"></i>
+                                      </a>
+                                       <!-- TODO should initiate email -->
+                                      <span title="Email Address" class="text-muted">
+                                        {{customerAccount.email ? customerAccount.email : 'N/A'}}
+                                      </span>
+                                    </span>
+                                    <span class="m-l-md">
+                                        <a href="" class="btn btn-icon btn-social rounded b-a btn-sm">
+                                          <i class="icon-list"></i>
+                                          <i class="icon-list light-blue"></i>
+                                        </a>
+                                        <!-- TODO should initiate email -->
+                                        <a ui-sref="accountModal.accessors" title="Account Accessors" class="text-muted">
+                                            View Account Accessors
+                                        </a>
                                     </span>
                                 </div>
                             </div>
