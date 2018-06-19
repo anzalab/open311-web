@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                             <li ng-class="{active:misc == 'inbox'}" class="nav-item m-b-xs">
-                                <a ng-click="load({operator:party._id, resolvedAt:null, resetPage:true, reset:true, misc: 'inbox'})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
+                                <a ng-click="load({$or: [{ operator: party._id }, { assignee: party._id }], resolvedAt:null, resetPage:true, reset:true, misc: 'inbox'})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
                                 Inbox
                                 </a>
                             </li>

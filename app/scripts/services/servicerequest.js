@@ -131,6 +131,9 @@ angular
         'Regards.'
       ].join('');
 
+      //TODO add internal notes
+      //TODO add a link to actual problem
+
       //prepare e-mail send option
       var recipient = _.get(issue, 'jurisdiction.email', '');
       var options = {
