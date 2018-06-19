@@ -14,7 +14,7 @@ angular
      * @function
      */
     $scope.openAccessorList = function () {
-      $state.go('accountModal.accessors');
+      $state.go('account.accessors');
     };
 
 

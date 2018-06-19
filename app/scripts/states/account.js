@@ -10,7 +10,7 @@ angular
   .config(function ($stateProvider) {
 
     $stateProvider
-      .state('accountModal', {
+      .state('account', {
         abstract: true,
         parent: 'app.create_servicerequests',
         url: '',
@@ -26,7 +26,7 @@ angular
           });
         }],
       })
-      .state('accountModal.details', {
+      .state('account.details', {
         views: {
           "account@": {
             templateUrl: 'views/account/_partials/account_details.html',
@@ -34,7 +34,7 @@ angular
           }
         }
       })
-      .state('accountModal.accessors', {
+      .state('account.accessors', {
         views: {
           "account@": {
             templateUrl: 'views/account/_partials/accessors_list.html',
@@ -42,7 +42,7 @@ angular
           }
         }
       })
-      .state('accountModal.create', {
+      .state('account.create', {
         params: {
           accessor: null
         },

@@ -114,7 +114,7 @@ angular
           });
 
           $rootScope.account = account;
-          $state.go('accountModal.details');
+          $state.go('account.details');
         });
     };
 

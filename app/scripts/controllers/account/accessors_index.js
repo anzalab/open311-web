@@ -11,13 +11,13 @@ angular
     /**
      * Open Account details view
      */
-    $scope.openAccountDetails = function () { $state.go('accountModal.details'); };
+    $scope.openAccountDetails = function () { $state.go('account.details'); };
 
 
     /**
      * Open a form for creating account accessor
      */
-    $scope.addAccessor = function () { $state.go('accountModal.create'); };
+    $scope.addAccessor = function () { $state.go('account.create'); };
 
 
     /**
@@ -25,7 +25,7 @@ angular
      * @param {Object} accessor
      */
     $scope.editAccessor = function (accessor) {
-      $state.go('accountModal.create', { accessor: accessor });
+      $state.go('account.create', { accessor: accessor });
     };
 
 
