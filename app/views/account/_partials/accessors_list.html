@@ -14,7 +14,7 @@
         <div class="box-header">
             <div class="row">
                 <div class="col-md-9">
-                    <small>List of People who can access this account billing information</small>
+                    <small>List of people who can access this account billing information</small>
                 </div>
                 <div class="col-md-3">
                     <a class="btn white pull-right" ng-click="addAccessor()"> <i class="ti-plus"></i>&nbsp;Add new</a>
@@ -40,9 +40,9 @@
                     <!-- actions -->
                     <td>
                         <div class="row">
-                            <a class="btn" title="Verify"><i class="ti-check-box text-green-500"></i></a>
-                            <a class="btn" title="Edit"><i class="ti-pencil-alt text-blue-500"></i></a>
-                            <a class="btn" title="Remove"><i class="ti-trash text-red-500"></i></a>
+                            <a class="btn" title="Verify" ng-click="verifyAccessor(accessor.phone)"><i class="ti-check-box text-green-500"></i></a>
+                            <a class="btn" title="Edit" ng-click="editAccessor(accessor)"><i class="ti-pencil-alt text-blue-500"></i></a>
+                            <a class="btn" title="Remove" ng-click="removeAccessor(accessor.phone)"><i class="ti-trash text-red-500"></i></a>
                         </div>
                     </td>
                     <!-- end actions -->
@@ -55,7 +55,7 @@
 
 <!-- start filter footer -->
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-    <button class="btn btn-primary" ng-click="goBack()">Back</button>
+    <button class="btn btn-default" ng-click="$close()">Cancel</button>
+    <button class="btn btn-primary" ng-click="openAccountDetails()">Back</button>
 </div>
 <!-- end footer filter -->

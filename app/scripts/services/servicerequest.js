@@ -144,37 +144,6 @@ angular
       return href;
     };
 
-
-    /**
-     * @description Lookup for customer account details
-     * @param {String} account - Customer Account Number
-     * @return {Object} valid customer account profile | empty object
-     */
-    ServiceRequest.lookupCustomer = function (account) {
-      var url = 'http://localhost:5000/v1/accounts';
-
-      return $http.get(url, {
-        params: {
-          filter: {
-            number: account
-          }
-        }
-      }).then(function (response) {
-        var customerAccount = _.first(response.data.data);
-
-        // create full address field
-        customerAccount.fullAddress = customerAccount.neighborhood +
-          ' - ' + customerAccount.address;
-
-        customerAccount.outstandingBalance = _.first(customerAccount.bills)
-          .balance.outstand || 0;
-
-        return customerAccount;
-      }).catch(function ( /*error*/) {
-        //TODO handle error
-      });
-    };
-
     return ServiceRequest;
 
   });

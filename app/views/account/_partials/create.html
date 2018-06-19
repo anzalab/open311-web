@@ -2,7 +2,7 @@
 <div class="modal-header">
     <div class="b-b">
         <button type="button" class="close pull-right" ng-click="$close()" aria-hidden="true">×</button>
-        <h4 class="modal-title">Add New Account Accessor</h4>
+        <h4 class="modal-title">{{title}} Account Accessor</h4>
     </div>
 </div>
 <!-- end modal header -->
@@ -13,16 +13,16 @@
         <div class="m-l-lg m-r-lg">
             <form role="form">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Customer Name" required>
+                    <label for="name">Customer Name</label>
+                    <input type="text" ng-model="accessor.name" class="form-control" id="name" placeholder="Enter Customer Full Name" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone Number" required>
+                    <input type="text" ng-model="accessor.phone" class="form-control" id="phone" placeholder="Enter Phone Number" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter Email Address">
+                    <input type="email" ng-model="accessor.email" class="form-control" id="email" placeholder="Enter Email Address">
                 </div>
             </form>
         </div>
@@ -34,7 +34,7 @@
 
 <!-- start filter footer -->
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="goBack()">Back</button>
-    <button class="btn btn-primary" ng-click="">Save</button>
+    <button class="btn btn-default" ng-click="openAccessorList()">Back</button>
+    <button class="btn btn-primary" ng-click="addAccessor()">Save</button>
 </div>
 <!-- end footer filter -->

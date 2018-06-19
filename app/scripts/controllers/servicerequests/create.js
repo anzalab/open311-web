@@ -14,7 +14,7 @@ angular
     $scope,
     $state,
     $stateParams,
-    $uibModal,
+    Account,
     ServiceRequest,
     endpoints,
     party) {
@@ -102,11 +102,10 @@ angular
 
       var accountNumber = $scope.servicerequest.reporter.account;
 
-      ServiceRequest.lookupCustomer(accountNumber)
-        .then(function (data) {
-
+      Account.getDetails(accountNumber)
+        .then(function (account) {
           // shape data
-          data.accessors = _.map(data.accessors, function (accessor) {
+          account.accessors = _.map(account.accessors, function (accessor) {
             if (accessor.verifiedAt) {
               return _.merge({}, accessor, { verified: true });
             }
@@ -114,10 +113,9 @@ angular
             return _.merge({}, accessor, { verified: false });
           });
 
-          $state.go('accountModal.details', { customerAccount: data });
+          $rootScope.account = account;
+          $state.go('accountModal.details');
         });
-
-
     };
 
   });

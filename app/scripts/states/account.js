@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name ng311.states:Billing
+ * @name ng311.states:Account
  * @description billing workflows configurations
  */
 angular
@@ -14,9 +14,6 @@ angular
         abstract: true,
         parent: 'app.create_servicerequests',
         url: '',
-        params: {
-          customerAccount: null
-        },
         onEnter: ['$uibModal', '$state', function ($uibModal, $state) {
           $uibModal.open({
             animation: true,
@@ -33,9 +30,7 @@ angular
         views: {
           "account@": {
             templateUrl: 'views/account/_partials/statement.html',
-            controller: function ($scope, $stateParams) {
-              $scope.customerAccount = $stateParams.customerAccount;
-            }
+            controller: 'AccountIndexCtrl'
           }
         }
       })
@@ -43,23 +38,18 @@ angular
         views: {
           "account@": {
             templateUrl: 'views/account/_partials/accessors_list.html',
-            controller: function ($scope, $state, $stateParams) {
-              $scope.accessors = $stateParams.customerAccount.accessors;
-              $scope.goBack = function () { $state.go('accountModal.details'); };
-              $scope.addAccessor = function () { $state.go('accountModal.create'); };
-              $scope.editAccessor = function () { };
-              $scope.removeAccessor = function () { };
-            },
+            controller: 'AccountAccessorsIndexCtrl'
           }
         }
       })
       .state('accountModal.create', {
+        params: {
+          accessor: null
+        },
         views: {
           "account@": {
             templateUrl: 'views/account/_partials/create.html',
-            controller: function ($scope, $state) {
-              $scope.goBack = function () { $state.go('accountModal.accessors'); };
-            }
+            controller: 'AccountAccessorsCreateCtrl'
           }
         }
       });
