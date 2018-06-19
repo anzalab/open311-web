@@ -29,7 +29,7 @@ angular
       .state('accountModal.details', {
         views: {
           "account@": {
-            templateUrl: 'views/account/_partials/statement.html',
+            templateUrl: 'views/account/_partials/account_details.html',
             controller: 'AccountIndexCtrl'
           }
         }

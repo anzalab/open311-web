@@ -2,7 +2,7 @@
 
 angular
   .module('ng311')
-  .controller('AccountAccessorsIndexCtrl', function ($scope, $state, $rootScope, Account) {
+  .controller('AccountAccessorsIndexCtrl', function ($rootScope, $scope, $state, Account) {
 
     /* declaration */
     $scope.accessors = $rootScope.account.accessors;
