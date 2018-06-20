@@ -87,53 +87,84 @@
             </div>
             <!-- end customer summary details -->
 
-            <!-- customer bill -->
+            <!-- customer bill information -->
             <div ng-if="account" class="row m-t-lg">
                 <div class="box box-shadow-z2">
                     <div class="box-header">
                         <h2>Mini Statement <span class="pull-right">Amount Due: {{account.outstandingBalance | currency:'Tsh '}}</span></h2>
                     </div>
                 </div>
-                <div class="list box box-shadow-z2" ng-repeat="bill in account.bills">
-                    <div class="box-header b-b">
-                        <h2>{{bill.period.billedAt | date:'MMMM yyyy'}} <small class="pull-right text-muted text-sm">Date of Reading: {{bill.period.billedAt | date:'dd/MM/yyyy'}}</small></h2>
-                    </div>
-                    <div class="list-item">
-                        <div class="list-body">
-                            <p class="_500">
-                                <!--start bill item  -->
-                                <div ng-repeat="item in bill.items">
-                                    <span>{{item.name}}</span>
-                                    <small class="text-muted pull-right">{{item.quantity | number:0}} Units</small>
+
+                <!-- bill tabs -->
+                <uib-tabset active="active" class="m-t-lg">
+                    <uib-tab ng-repeat="(key,bill) in account.bills" index="key" heading="{{bill.period.billedAt | date:'MMMM yyyy'}}">
+                        <div class="list box box-shadow-z2">
+                            <div class="box-header b-b">
+                                <h2>Control Number : {{bill.number}} <small class="pull-right text-muted text-sm">Date of Reading: {{bill.period.billedAt | date:'dd/MM/yyyy'}}</small></h2>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-body">
+                                    <p class="_500">
+                                        <!-- bill item -->
+                                        <div class="list-item" ng-repeat="item in bill.items">
+                                            <span title="Item Price" class="pull-right text-sm">
+                                              {{item.price | currency:''}}
+                                            </span>
+                                            <div class="item-title">
+                                                <a href="#" class="font-size-14">{{item.name}}
+                                                  <span title="Quantity" class="font-size-13 text-muted">
+                                                    &nbsp;{{item.quantity ? '( ' + item.quantity +' '+ item.unit + ' )' :''}}
+                                                  </span>
+                                                </a>
+                                            </div>
+                                            <!--  bill item subitems -->
+                                            <div class="list text-muted">
+                                                <div class="list-item" ng-repeat="subitem in item.items">
+                                                    <span title="Item Name" class="pull-right text-xs">
+                                                          {{subitem.quantity}}&nbsp;{{subitem.unit}}
+                                                  </span>
+                                                    <div class="item-title">
+                                                        <a href="#" class="_500">{{subitem.name}}<br/>
+                                                       <span title="Date" class="text-sm text-muted">
+                                                          {{subitem.time | date:'dd/MM/yyyy'}}
+                                                       </span>
+                                                      </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end bill item subitems -->
+                                        </div>
+                                        <!-- end bill item -->
+                                    </p>
+                                    <p class="_500">
+                                        <div>
+                                            <span>Open Balance</span>
+                                            <small class="text-muted pull-right">{{bill.balance.open | currency:'Tsh '}}</small>
+                                        </div>
+                                        <div>
+                                            <span>Periodic Charges</span>
+                                            <small class="text-muted pull-right">{{bill.balance.charges | currency:'Tsh '}}</small>
+                                        </div>
+                                        <div>
+                                            <span>Loan/Debt Balance</span>
+                                            <small class="text-muted pull-right">{{bill.balance.debt | currency:'Tsh '}}</small>
+                                        </div>
+                                        <div>
+                                            <span>Closing Balance</span>
+                                            <small class="text-muted pull-right">{{bill.balance.close | currency:'Tsh '}}</small>
+                                        </div>
+                                    </p>
+                                    <p class="_500 text-muted">
+                                        Note:&nbsp;{{bill.notes}}
+                                    </p>
                                 </div>
-                                <!-- end bill item -->
-                            </p>
-                            <p class="_500">
-                                <div>
-                                    <span>Open Balance</span>
-                                    <small class="text-muted pull-right">{{bill.balance.open | currency:'Tsh '}}</small>
-                                </div>
-                                <div>
-                                    <span>Periodic Charges</span>
-                                    <small class="text-muted pull-right">{{bill.balance.charges | currency:'Tsh '}}</small>
-                                </div>
-                                <div>
-                                    <span>Loan/Debt Balance</span>
-                                    <small class="text-muted pull-right">{{bill.balance.debt | currency:'Tsh '}}</small>
-                                </div>
-                                <div>
-                                    <span>Closing Balance</span>
-                                    <small class="text-muted pull-right">{{bill.balance.close | currency:'Tsh '}}</small>
-                                </div>
-                            </p>
-                            <p class="_500 text-muted">
-                                Note:&nbsp;{{bill.notes}}
-                            </p>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </uib-tab>
+                </uib-tabset>
+                <!-- end bill tabs -->
             </div>
-            <!-- end customer bill -->
+            <!-- end customer bill information -->
 
             <!-- account not found details -->
             <div class="row-col">

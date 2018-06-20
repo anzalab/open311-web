@@ -43,7 +43,7 @@ angular
       service: ($stateParams || {}).service,
       description: ($stateParams || {}).description,
       address: ($stateParams || {}).address,
-      method: ($stateParams || {}).method
+      method: _.merge({}, { name: undefined }, ($stateParams || {}).method)
     });
 
     $scope.servicerequest = new ServiceRequest(servicerequest);
@@ -102,17 +102,10 @@ angular
 
       var accountNumber = $scope.servicerequest.reporter.account;
 
-      Account.getDetails(accountNumber)
+      Account
+        .getDetails(accountNumber)
         .then(function (account) {
-          // shape data
-          account.accessors = _.map(account.accessors, function (accessor) {
-            if (accessor.verifiedAt) {
-              return _.merge({}, accessor, { verified: true });
-            }
-
-            return _.merge({}, accessor, { verified: false });
-          });
-
+          console.log(account);
           $rootScope.account = account;
           $state.go('account.details');
         });

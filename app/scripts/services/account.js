@@ -25,13 +25,20 @@ angular
      * Shape accessor object by adding verified field
      * @param {Array} accessors
      */
-    function shapeAccessors(accessors) {
+    function normalizeAccessors(accessors) {
       return _.map(accessors, function (accessor) {
         if (accessor.verifiedAt) {
           return _.merge({}, accessor, { verified: true });
         }
 
         return _.merge({}, accessor, { verified: false });
+      });
+    }
+
+    function normalizeBillItems(items) {
+      return _.map(items, function (item) {
+        var defaultItem = { name: '', quantity: '', unit: '', price: 0 };
+        return _.merge({}, defaultItem, item);
       });
     }
 
@@ -49,6 +56,13 @@ angular
         }
       }).then(function (response) {
         var customerAccount = _.first(response.data.data);
+
+        customerAccount.accessors = normalizeAccessors(customerAccount.accessors);
+
+        customerAccount.bills = _.map(customerAccount.bills, function (bill) {
+          bill.items = normalizeBillItems(bill.items);
+          return bill;
+        });
 
         // create full address field
         customerAccount.fullAddress = customerAccount.neighborhood +
@@ -72,7 +86,7 @@ angular
     Account.addAccessor = function (id, accessor) {
       var url = 'http://0.0.0.0:5000/v1/accounts/' + id + '/accessors';
       return $http.post(url, accessor).then(function (response) {
-        response.data.accessors = shapeAccessors(response.data.accessors);
+        response.data.accessors = normalizeAccessors(response.data.accessors);
 
         return response.data;
       });
@@ -90,7 +104,7 @@ angular
       return $http.put(url, { verifiedAt: new Date() })
         .then(function (response) {
 
-          response.data.accessors = shapeAccessors(response.data.accessors);
+          response.data.accessors = normalizeAccessors(response.data.accessors);
 
           return response.data;
         });
@@ -108,7 +122,7 @@ angular
 
       return $http.put(url, updates)
         .then(function (response) {
-          response.data.accessors = shapeAccessors(response.data.accessors);
+          response.data.accessors = normalizeAccessors(response.data.accessors);
 
           return response.data;
         });
@@ -120,7 +134,7 @@ angular
 
       return $http.delete(url)
         .then(function (response) {
-          response.data.accessors = shapeAccessors(response.data.accessors);
+          response.data.accessors = normalizeAccessors(response.data.accessors);
 
           return response.data;
         });
