@@ -204,7 +204,6 @@ angular
       $scope.prepareServiceGroupVisualization();
       $scope.prepareMethodVisualization();
       $scope.prepareWorkspaceVisualization();
-
     };
 
 
@@ -434,7 +433,6 @@ angular
 
       //ensure column
       column = column || 'count';
-
 
       //prepare chart series data
       var data = _.map($scope.overviews.groups, function (group) {
