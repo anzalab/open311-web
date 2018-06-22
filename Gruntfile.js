@@ -9,6 +9,29 @@
 
 module.exports = function (grunt) {
 
+  //prepare configs
+  const lodash = require('lodash');
+
+  //obtain config
+  let prodConfig = {};
+  let devConfig = {};
+
+  //default
+  try {
+    const dev = require('./development.config.json');
+    const prod = require('./production.config.json');
+    devConfig = lodash.merge({}, devConfig, dev);
+    prodConfig = lodash.merge({}, prodConfig, prod);
+  } catch (error) {}
+
+  //app specific
+  try {
+    const dev = require('./resources/development.config.json');
+    const prod = require('./resources/production.config.json');
+    devConfig = lodash.merge({}, devConfig, dev);
+    prodConfig = lodash.merge({}, prodConfig, prod);
+  } catch (error) {}
+
   const serveStatic = require('serve-static');
 
   // Time how long tasks take. Can help when optimizing build times
@@ -24,9 +47,10 @@ module.exports = function (grunt) {
   });
 
   // Configurable paths for the application
-  var appConfig = {
+  const appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    resources: 'resources'
   };
 
   // Define the configuration for all the tasks
@@ -362,74 +386,12 @@ module.exports = function (grunt) {
       },
       development: {
         constants: {
-          ENV: {
-            name: 'development',
-            owner: 'DAWASCO',
-            title: 'SmartDawasco',
-            version: 'v0.1.0',
-            description: 'Citizen Feedback System',
-            apiEndPoint: {
-              web: 'http://127.0.0.1:3000',
-              mobile: 'http://127.0.0.1:3000'
-            },
-            socketEndPoint: {
-              web: 'http://127.0.0.1:3000',
-              mobile: 'http://127.0.0.1:3000'
-            },
-            socketEnable: false,
-            settings: {
-              locale: 'sw',
-              name: 'open311',
-              email: 'example@example.com',
-              phone: '(000) 000 000 000',
-              currency: 'USD',
-              dateFormat: 'dd/MM/yyyy',
-              timeFormat: 'hh:mm:ss',
-              defaultPassword: 'guest',
-              abbreviations: {
-                thousand: 'K',
-                million: 'M',
-                billion: 'B',
-                trillion: 'T'
-              }
-            }
-          }
+          ENV: devConfig
         }
       },
       production: {
         constants: {
-          ENV: {
-            name: 'production',
-            owner: 'MWAUWASA',
-            title: 'MWAUWASA',
-            version: 'v0.1.0',
-            description: 'Citizen Feedback System',
-            apiEndPoint: {
-              mobile: '',
-              web: ''
-            },
-            socketEndPoint: {
-              mobile: '',
-              web: ''
-            },
-            socketEnable: false,
-            settings: {
-              locale: 'sw',
-              name: 'open311',
-              email: 'example@example.com',
-              phone: '(000) 000 000 000',
-              currency: 'USD',
-              dateFormat: 'dd/MM/yyyy',
-              timeFormat: 'hh:mm:ss',
-              defaultPassword: 'guest',
-              abbreviations: {
-                thousand: 'K',
-                million: 'M',
-                billion: 'B',
-                trillion: 'T'
-              }
-            }
-          }
+          ENV: prodConfig
         }
       }
     },
@@ -458,11 +420,14 @@ module.exports = function (grunt) {
         },
         options: {
           replacements: [{
-            pattern: '{{ENV.title}}',
+            pattern: /{{ENV.title}}/ig,
             replacement: '<%= ngconstant.production.constants.ENV.title %>'
           }, {
-            pattern: '{{ENV.description}}',
+            pattern: /{{ENV.description}}/ig,
             replacement: '<%= ngconstant.production.constants.ENV.description %>'
+          }, {
+            pattern: /{{ENV.author}}/ig,
+            replacement: '<%= ngconstant.production.constants.ENV.author %>'
           }]
         }
       }
@@ -554,6 +519,14 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      resources: {
+        expand: true,
+        cwd: '<%= yeoman.resources %>',
+        dest: '<%= yeoman.dist %>',
+        src: [
+          'images/{,*/}*.*'
+        ]
       }
     },
 
@@ -629,6 +602,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'copy:resources',
     // 'cdnify',
     'cssmin',
     //'uglify', //TO FIX

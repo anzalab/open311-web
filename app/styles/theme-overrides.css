@@ -391,3 +391,14 @@ th {
 .pickadate-cell .pickadate-active {
   background-color: #2196f3;
 }
+
+/* md form & inputs */
+.md-input.focus,
+.md-input:focus {
+  border-color: #62A8EA;
+}
+
+.md-input.focus~label,
+.md-input:focus~label {
+  color: #62A8EA;
+}

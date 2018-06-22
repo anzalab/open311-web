@@ -231,6 +231,7 @@ angular
         });
 
       }
+
     };
 
     $scope.changePriority = function (priority) {

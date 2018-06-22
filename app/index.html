@@ -2,183 +2,189 @@
 <html ng-app="ng311">
 
 <head>
-    <meta charset="utf-8" />
-    <title>{{ENV.title}} | {{ENV.description}}</title>
-    <meta name="description" content="Citizen Feedback System" />
-    <meta name="author" content="DAWASCO" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
-    <link rel="stylesheet" href="bower_components/simple-line-icons/css/simple-line-icons.css" />
-    <link rel="stylesheet" href="bower_components/ng-notify/src/styles/ng-notify.css" />
-    <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
-    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
-    <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
-    <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/oi.select/dist/select.css" />
-    <link rel="stylesheet" href="bower_components/angular-color-picker/angular-color-picker.css" />
-    <link rel="stylesheet" href="bower_components/angularPrint/angularPrint.css" />
-    <link rel="stylesheet" href="bower_components/web-icons/css/web-icons.css" />
-    <link rel="stylesheet" href="bower_components/angular-pickadate/dist/angular-pickadate.css" />
-    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/theme.css">
-    <link rel="stylesheet" href="styles/dropbox-material.css">
-    <link rel="stylesheet" href="styles/ng-gallery.css">
-    <link rel="stylesheet" href="styles/file-upload.css">
-    <link rel="stylesheet" href="styles/ng-gallery.css">
-    <link rel="stylesheet" href="styles/dropbox-color.css">
-    <link rel="stylesheet" href="styles/dropbox-font-size.css">
-    <link rel="stylesheet" href="styles/dropbox-radio-checkbox.css">
-    <link rel="stylesheet" href="styles/auth.css">
-    <link rel="stylesheet" href="styles/theme-overrides.css">
-    <!-- endbuild -->
+  <meta charset="utf-8" />
+  <title>{{ENV.title}} | {{ENV.description}}</title>
+  <meta name="description" content="Citizen Feedback System" />
+  <meta name="author" content="{{ENV.author}}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
+  <link rel="apple-touch-icon" href="images/logo_lg.png">
+  <meta name="apple-mobile-web-app-title" content="{{ENV.title}}">
+  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" sizes="196x196" href="images/logo_lg.png">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+  <link rel="stylesheet" href="bower_components/simple-line-icons/css/simple-line-icons.css" />
+  <link rel="stylesheet" href="bower_components/ng-notify/src/styles/ng-notify.css" />
+  <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
+  <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+  <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/oi.select/dist/select.css" />
+  <link rel="stylesheet" href="bower_components/angular-color-picker/angular-color-picker.css" />
+  <link rel="stylesheet" href="bower_components/angularPrint/angularPrint.css" />
+  <link rel="stylesheet" href="bower_components/web-icons/css/web-icons.css" />
+  <link rel="stylesheet" href="bower_components/angular-pickadate/dist/angular-pickadate.css" />
+  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/theme.css">
+  <link rel="stylesheet" href="styles/dropbox-material.css">
+  <link rel="stylesheet" href="styles/ng-gallery.css">
+  <link rel="stylesheet" href="styles/file-upload.css">
+  <link rel="stylesheet" href="styles/ng-gallery.css">
+  <link rel="stylesheet" href="styles/dropbox-color.css">
+  <link rel="stylesheet" href="styles/dropbox-font-size.css">
+  <link rel="stylesheet" href="styles/dropbox-radio-checkbox.css">
+  <link rel="stylesheet" href="styles/theme-overrides.css">
+  <!-- endbuild -->
 </head>
 
 <body ng-controller="MainCtrl">
-    <!--[if lte IE 8]>
+  <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="app" ui-view></div>
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/ng-notify/src/scripts/ng-notify.js"></script>
-    <script src="bower_components/checklist-model/checklist-model.js"></script>
-    <script src="bower_components/angular-prompt/dist/angular-prompt.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
-    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
-    <script src="bower_components/ng-aa/dist/ng-aa.js"></script>
-    <script src="bower_components/ng-csv/build/ng-csv.js"></script>
-    <script src="bower_components/angular-elastic/elastic.js"></script>
-    <script src="bower_components/ngToast/dist/ngToast.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/oi.select/dist/select-tpls.js"></script>
-    <script src="bower_components/angular-mailto/angular-mailto.js"></script>
-    <script src="bower_components/angular-color-picker/angular-color-picker.js"></script>
-    <script src="bower_components/angularPrint/angularPrint.js"></script>
-    <script src="bower_components/echarts/dist/echarts.js"></script>
-    <script src="bower_components/angular-socket-io/socket.js"></script>
-    <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
-    <script src="bower_components/ng-focus-if/focusIf.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/angular-pickadate/dist/angular-pickadate.js"></script>
-    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
-    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-    <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
-    <script src="bower_components/numeral/numeral.js"></script>
-    <script src="bower_components/angular-numeraljs/dist/angular-numeraljs.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <!-- start custom modules -->
-    <script src="scripts/modules/echart.js"></script>
-    <!-- end custom modules -->
-    <!-- start app & config -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/config.js"></script>
-    <!-- end app & config -->
-    <!-- states -->
-    <script src="scripts/states/auth.js"></script>
-    <!-- end states -->
-    <!-- services -->
-    <script src="scripts/services/utils.js"></script>
-    <script src="scripts/services/socket.js"></script>
-    <script src="scripts/services/permission.js"></script>
-    <script src="scripts/services/comment.js"></script>
-    <!-- end services -->
-    <!-- common controllers -->
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/app.js"></script>
-    <script src="scripts/controllers/auth/change.js"></script>
-    <script src="scripts/controllers/auth/forgot.js"></script>
-    <script src="scripts/controllers/auth/recover.js"></script>
-    <script src="scripts/controllers/auth/profile.js"></script>
-    <!-- end common controllers -->
-    <!-- directives -->
-    <script src="scripts/directives/uistates.js"></script>
-    <script src="scripts/directives/ngenter.js"></script>
-    <script src="scripts/directives/letteravatar.js"></script>
-    <script src="scripts/directives/ng-gallery.js"></script>
-    <!-- end directives -->
-    <!-- start servicerequest resources -->
-    <script src="scripts/services/servicerequest.js"></script>
-    <script src="scripts/controllers/servicerequests/create.js"></script>
-    <script src="scripts/controllers/servicerequests/index.js"></script>
-    <script src="scripts/controllers/servicerequests/main.js"></script>
-    <script src="scripts/controllers/servicerequests/show.js"></script>
-    <script src="scripts/states/servicerequest.js"></script>
-    <!-- end servicerequest resources -->
-    <!-- start group resources -->
-    <script src="scripts/services/servicegroup.js"></script>
-    <script src="scripts/controllers/servicegroups/index.js"></script>
-    <script src="scripts/controllers/servicegroups/show.js"></script>
-    <script src="scripts/states/servicegroup.js"></script>
-    <!-- end group resources -->
-    <!-- start service resources -->
-    <script src="scripts/services/service.js"></script>
-    <script src="scripts/controllers/services/index.js"></script>
-    <script src="scripts/controllers/services/show.js"></script>
-    <script src="scripts/states/service.js"></script>
-    <!-- end service resources -->
-    <!-- start status resources -->
-    <script src="scripts/services/status.js"></script>
-    <script src="scripts/controllers/statuses/index.js"></script>
-    <script src="scripts/controllers/statuses/show.js"></script>
-    <script src="scripts/states/status.js"></script>
-    <!-- end status resources -->
-    <!-- start priority resources -->
-    <script src="scripts/services/priority.js"></script>
-    <script src="scripts/controllers/priorities/index.js"></script>
-    <script src="scripts/controllers/priorities/show.js"></script>
-    <script src="scripts/states/priority.js"></script>
-    <!-- end priority resources -->
-    <!-- start jurisdiction resources -->
-    <script src="scripts/services/jurisdiction.js"></script>
-    <script src="scripts/controllers/jurisdictions/index.js"></script>
-    <script src="scripts/controllers/jurisdictions/show.js"></script>
-    <script src="scripts/states/jurisdiction.js"></script>
-    <!-- end jurisdiction resources -->
-    <!-- start role resources -->
-    <script src="scripts/services/role.js"></script>
-    <script src="scripts/controllers/roles/index.js"></script>
-    <script src="scripts/controllers/roles/show.js"></script>
-    <script src="scripts/states/role.js"></script>
-    <!-- end role resources -->
-    <!-- start party resources -->
-    <script src="scripts/services/party.js"></script>
-    <script src="scripts/controllers/parties/index.js"></script>
-    <script src="scripts/controllers/parties/show.js"></script>
-    <script src="scripts/states/party.js"></script>
-    <!-- end party resources -->
-    <!-- start settings -->
-    <script src="scripts/services/summary.js"></script>
-    <script src="scripts/services/setting.js"></script>
-    <script src="scripts/controllers/settings/index.js"></script>
-    <script src="scripts/states/setting.js"></script>
-    <!-- end settings -->
-    <!-- start dashboard -->
-    <script src="scripts/controllers/dashboards/overview.js"></script>
-    <script src="scripts/controllers/dashboards/standing.js"></script>
-    <script src="scripts/controllers/dashboards/export.js"></script>
-    <script src="scripts/controllers/dashboards/performance.js"></script>
-    <script src="scripts/controllers/dashboards/comparison.js"></script>
-    <!-- end dashboard -->
-    <!-- endbuild -->
+  <div class="app" ui-view></div>
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/ng-notify/src/scripts/ng-notify.js"></script>
+  <script src="bower_components/checklist-model/checklist-model.js"></script>
+  <script src="bower_components/angular-prompt/dist/angular-prompt.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+  <script src="bower_components/ng-aa/dist/ng-aa.js"></script>
+  <script src="bower_components/ng-csv/build/ng-csv.js"></script>
+  <script src="bower_components/angular-elastic/elastic.js"></script>
+  <script src="bower_components/ngToast/dist/ngToast.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/oi.select/dist/select-tpls.js"></script>
+  <script src="bower_components/angular-mailto/angular-mailto.js"></script>
+  <script src="bower_components/angular-color-picker/angular-color-picker.js"></script>
+  <script src="bower_components/angularPrint/angularPrint.js"></script>
+  <script src="bower_components/echarts/dist/echarts.js"></script>
+  <script src="bower_components/angular-socket-io/socket.js"></script>
+  <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
+  <script src="bower_components/ng-focus-if/focusIf.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-pickadate/dist/angular-pickadate.js"></script>
+  <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+  <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+  <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
+  <script src="bower_components/numeral/numeral.js"></script>
+  <script src="bower_components/angular-numeraljs/dist/angular-numeraljs.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <!-- start custom modules -->
+  <script src="scripts/modules/echart.js"></script>
+  <!-- end custom modules -->
+  <!-- start app & config -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/config.js"></script>
+  <!-- end app & config -->
+  <!-- states -->
+  <script src="scripts/states/auth.js"></script>
+  <!-- end states -->
+  <!-- services -->
+  <script src="scripts/services/utils.js"></script>
+  <script src="scripts/services/socket.js"></script>
+  <script src="scripts/services/permission.js"></script>
+  <script src="scripts/services/comment.js"></script>
+  <!-- end services -->
+  <!-- common controllers -->
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/app.js"></script>
+  <script src="scripts/controllers/auth/profile.js"></script>
+  <!-- end common controllers -->
+  <!-- directives -->
+  <script src="scripts/directives/uistates.js"></script>
+  <script src="scripts/directives/ngenter.js"></script>
+  <script src="scripts/directives/letteravatar.js"></script>
+  <script src="scripts/directives/ng-gallery.js"></script>
+  <!-- end directives -->
+  <!-- start servicerequest resources -->
+  <script src="scripts/services/servicerequest.js"></script>
+  <script src="scripts/controllers/servicerequests/create.js"></script>
+  <script src="scripts/controllers/servicerequests/index.js"></script>
+  <script src="scripts/controllers/servicerequests/main.js"></script>
+  <script src="scripts/controllers/servicerequests/show.js"></script>
+  <script src="scripts/states/servicerequest.js"></script>
+  <!-- end servicerequest resources -->
+  <!-- start group resources -->
+  <script src="scripts/services/servicegroup.js"></script>
+  <script src="scripts/controllers/servicegroups/index.js"></script>
+  <script src="scripts/controllers/servicegroups/show.js"></script>
+  <script src="scripts/states/servicegroup.js"></script>
+  <!-- end group resources -->
+  <!-- start service resources -->
+  <script src="scripts/services/service.js"></script>
+  <script src="scripts/controllers/services/index.js"></script>
+  <script src="scripts/controllers/services/show.js"></script>
+  <script src="scripts/states/service.js"></script>
+  <!-- end service resources -->
+  <!-- start status resources -->
+  <script src="scripts/services/status.js"></script>
+  <script src="scripts/controllers/statuses/index.js"></script>
+  <script src="scripts/controllers/statuses/show.js"></script>
+  <script src="scripts/states/status.js"></script>
+  <!-- end status resources -->
+  <!-- start priority resources -->
+  <script src="scripts/services/priority.js"></script>
+  <script src="scripts/controllers/priorities/index.js"></script>
+  <script src="scripts/controllers/priorities/show.js"></script>
+  <script src="scripts/states/priority.js"></script>
+  <!-- end priority resources -->
+  <!-- start jurisdiction resources -->
+  <script src="scripts/services/jurisdiction.js"></script>
+  <script src="scripts/controllers/jurisdictions/index.js"></script>
+  <script src="scripts/controllers/jurisdictions/show.js"></script>
+  <script src="scripts/states/jurisdiction.js"></script>
+  <!-- end jurisdiction resources -->
+  <!-- start role resources -->
+  <script src="scripts/services/role.js"></script>
+  <script src="scripts/controllers/roles/index.js"></script>
+  <script src="scripts/controllers/roles/show.js"></script>
+  <script src="scripts/states/role.js"></script>
+  <!-- end role resources -->
+  <!-- start party resources -->
+  <script src="scripts/services/party.js"></script>
+  <script src="scripts/controllers/parties/index.js"></script>
+  <script src="scripts/controllers/parties/show.js"></script>
+  <script src="scripts/states/party.js"></script>
+  <!-- end party resources -->
+  <!-- start settings -->
+  <script src="scripts/services/summary.js"></script>
+  <script src="scripts/services/setting.js"></script>
+  <script src="scripts/controllers/settings/index.js"></script>
+  <script src="scripts/states/setting.js"></script>
+  <!-- end settings -->
+  <!-- start dashboard -->
+  <script src="scripts/controllers/dashboards/overview.js"></script>
+  <script src="scripts/controllers/dashboards/standing.js"></script>
+  <script src="scripts/controllers/dashboards/export.js"></script>
+  <script src="scripts/controllers/dashboards/performance.js"></script>
+  <script src="scripts/controllers/dashboards/comparison.js"></script>
+  <!-- end dashboard -->
+  <!-- endbuild -->
 </body>
 <toast></toast>
 
