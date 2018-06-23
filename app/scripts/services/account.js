@@ -22,7 +22,7 @@ angular
 
 
     /**
-     * Shape accessor object by adding verified field
+     * Normalize accessor object by adding verified field
      * @param {Array} accessors
      */
     function normalizeAccessors(accessors) {
@@ -35,6 +35,10 @@ angular
       });
     }
 
+    /**
+     * Normalize bill items structure
+     * @param {Object[]} items
+     */
     function normalizeBillItems(items) {
       return _.map(items, function (item) {
         var defaultItem = { name: '', quantity: '', unit: '', price: 0 };

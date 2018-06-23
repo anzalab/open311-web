@@ -35,9 +35,6 @@ angular
       call: {
         startedAt: new Date()
       },
-      method: {
-        name: undefined
-      },
       reporter: ($stateParams || {}).reporter || {},
       jurisdiction: ($stateParams || {}).jurisdiction,
       service: ($stateParams || {}).service,
