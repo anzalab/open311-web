@@ -15,7 +15,7 @@
             </form>
         </div>
         <div class="streamline m-b">
-            <div class="sl-item" ng-style="comment.status || comment.priority || comment.resolvedAt ? {'border-color': comment.status.color || comment.priority.color || '#4CAF50'} : {}" ng-repeat="comment in comments">
+            <div class="sl-item" ng-style="comment.color ? {'border-color': comment.color} : {}" ng-repeat="comment in comments">
                 <div class="sl-content">
                     <div class="sl-date text-muted">
                         <span class="text-info">
@@ -46,7 +46,13 @@
                             Resolved
                         </span>
                     </p>
-                    <!-- TODO show re-open changelog -->
+                    <p ng-if="comment.reopenedAt">
+                     Change status to
+                     <span class="label rounded success pos-rlt m-l-xs b-a-xs" style="background-color: #F44336;">
+                            <b class="arrow left b-success pull-in" style="border-color: #F44336;"></b>
+                            Reopened
+                        </span>
+                    </p>
                     <!-- TODO show attachment changelog -->
                 </div>
             </div>
