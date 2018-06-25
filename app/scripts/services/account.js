@@ -9,7 +9,7 @@ angular
   .factory('Account', function ($http, $resource) {
 
     // var ACCOUNT_END_POINT = 'http://majifix-account.herokuapp/v1/accounts';
-    var ACCOUNT_END_POINT = 'http://0.0.0.0:5000/v1/accounts/';
+    var ACCOUNT_END_POINT = 'http://majifix-account.herokuapp.com/v1/accounts/';
 
     // account accessors resource
     var Account = $resource(ACCOUNT_END_POINT, {
@@ -88,7 +88,7 @@ angular
      * @param {Object} accessor new accessor to be added
      */
     Account.addAccessor = function (id, accessor) {
-      var url = 'http://0.0.0.0:5000/v1/accounts/' + id + '/accessors';
+      var url = 'http://majifix-account.herokuapp.com/v1/accounts/' + id + '/accessors';
       return $http.post(url, accessor).then(function (response) {
         response.data.accessors = normalizeAccessors(response.data.accessors);
 
@@ -103,7 +103,7 @@ angular
      * @param {String} phoneNumber
      */
     Account.verifyAccessor = function (id, phoneNumber) {
-      var url = 'http://0.0.0.0:5000/v1/accounts/' + id + '/accessors/' + phoneNumber;
+      var url = 'http://majifix-account.herokuapp.com/v1/accounts/' + id + '/accessors/' + phoneNumber;
 
       return $http.put(url, { verifiedAt: new Date() })
         .then(function (response) {
@@ -122,7 +122,7 @@ angular
      * @param {Object} updates
      */
     Account.updateAccessor = function (id, phoneNumber, updates) {
-      var url = 'http://0.0.0.0:5000/v1/accounts/' + id + '/accessors/' + phoneNumber;
+      var url = 'http://majifix-account.herokuapp.com/v1/accounts/' + id + '/accessors/' + phoneNumber;
 
       return $http.put(url, updates)
         .then(function (response) {
@@ -134,7 +134,7 @@ angular
 
 
     Account.deleteAccessor = function (id, phoneNumber) {
-      var url = 'http://0.0.0.0:5000/v1/accounts/' + id + '/accessors/' + phoneNumber;
+      var url = 'http://majifix-account.herokuapp.com/v1/accounts/' + id + '/accessors/' + phoneNumber;
 
       return $http.delete(url)
         .then(function (response) {
