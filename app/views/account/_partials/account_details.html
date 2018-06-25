@@ -104,57 +104,53 @@
                             </div>
                             <div class="list-item">
                                 <div class="list-body">
-                                    <p class="_500">
-                                        <!-- bill item -->
-                                        <div class="list-item" ng-repeat="item in bill.items">
-                                            <span title="Item Price" class="pull-right text-sm">
+                                    <!-- bill item -->
+                                    <div class="list-item p-t-none p-b-none" ng-repeat="item in bill.items">
+                                        <span title="Item Price" class="pull-right text-sm">
                                               {{item.price | currency:''}}
                                             </span>
-                                            <div class="item-title">
-                                                <a href="#" class="font-size-14">{{item.name}}
+                                        <div class="item-title">
+                                            <a href="#" class="font-size-14">{{item.name}}
                                                   <span title="Quantity" class="font-size-13 text-muted">
                                                     &nbsp;{{item.quantity ? '( ' + item.quantity +' '+ item.unit + ' )' :''}}
                                                   </span>
                                                 </a>
-                                            </div>
-                                            <!--  bill item subitems -->
-                                            <div class="list text-muted">
-                                                <div class="list-item" ng-repeat="subitem in item.items">
-                                                    <span title="Item Name" class="pull-right text-xs">
+                                        </div>
+                                        <!--  bill item subitems -->
+                                        <div class="list text-muted">
+                                            <div class="list-item p-t-none p-b-none" ng-repeat="subitem in item.items">
+                                                <span title="Item Name" class="pull-right text-xs">
                                                           {{subitem.quantity}}&nbsp;{{subitem.unit}}
                                                   </span>
-                                                    <div class="item-title">
-                                                        <a href="#" class="_500">{{subitem.name}}<br/>
+                                                <div class="item-title">
+                                                    <a href="#" class="_500">{{subitem.name}}<br/>
                                                        <span title="Date" class="text-sm text-muted">
                                                           {{subitem.time | date:'dd/MM/yyyy'}}
                                                        </span>
                                                       </a>
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <!-- end bill item subitems -->
                                         </div>
-                                        <!-- end bill item -->
-                                    </p>
+                                        <!-- end bill item subitems -->
+                                    </div>
+                                    <!-- end bill item -->
                                     <!-- bill balance summary -->
-                                    <p class="_500">
-                                        <div>
-                                            <span>Open Balance</span>
-                                            <small class="text-muted pull-right">{{bill.balance.open | currency:'Tsh '}}</small>
-                                        </div>
-                                        <div>
-                                            <span>Periodic Charges</span>
-                                            <small class="text-muted pull-right">{{bill.balance.charges | currency:'Tsh '}}</small>
-                                        </div>
-                                        <div>
-                                            <span>Loan/Debt Balance</span>
-                                            <small class="text-muted pull-right">{{bill.balance.debt | currency:'Tsh '}}</small>
-                                        </div>
-                                        <div>
-                                            <span>Closing Balance</span>
-                                            <small class="text-muted pull-right">{{bill.balance.close | currency:'Tsh '}}</small>
-                                        </div>
-                                    </p>
+                                    <div class="m-t-md">
+                                        <span>Open Balance</span>
+                                        <small class="text-muted pull-right">{{bill.balance.open | currency:'Tsh '}}</small>
+                                    </div>
+                                    <div>
+                                        <span>Periodic Charges</span>
+                                        <small class="text-muted pull-right">{{bill.balance.charges | currency:'Tsh '}}</small>
+                                    </div>
+                                    <div>
+                                        <span>Loan/Debt Balance</span>
+                                        <small class="text-muted pull-right">{{bill.balance.debt | currency:'Tsh '}}</small>
+                                    </div>
+                                    <div class="m-b-md">
+                                        <span>Closing Balance</span>
+                                        <small class="text-muted pull-right">{{bill.balance.close | currency:'Tsh '}}</small>
+                                    </div>
                                     <!-- end bill balance summary -->
                                     <!-- bill notes -->
                                     <p class="_500 text-muted">
