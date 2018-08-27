@@ -12,6 +12,10 @@ angular
     /**
      * Navigate back to accessor list
      * @function
+     * @name openAccessorList
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.openAccessorList = function () {
       $state.go('account.accessors');
@@ -21,6 +25,10 @@ angular
     /**
      * Create a new accessor in account
      * @function
+     * @name addAccessor
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.addAccessor = function () {
       var account = $rootScope.account;
