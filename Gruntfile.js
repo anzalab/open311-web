@@ -369,8 +369,8 @@ module.exports = function (grunt) {
             version: 'v0.1.0',
             description: 'Citizen Feedback System',
             apiEndPoint: {
-              web: 'http://127.0.0.1:3000',
-              mobile: 'http://127.0.0.1:3000'
+              web: 'http://127.0.0.1:5000',
+              mobile: 'http://127.0.0.1:5000'
             },
             socketEndPoint: {
               web: 'http://127.0.0.1:3000',
