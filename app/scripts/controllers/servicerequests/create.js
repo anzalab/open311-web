@@ -102,8 +102,18 @@ angular
       Account
         .getDetails(accountNumber)
         .then(function (account) {
-          console.log(account);
+          account = account || {};
           $rootScope.account = account;
+          $scope.servicerequest.reporter = _.merge({}, {
+            name: account.name,
+            email: account.email
+          }, $scope.servicerequest.reporter);
+
+          $scope.servicerequest.jurisdiction =
+            $scope.servicerequest.jurisdiction || account.jurisdiction;
+          $scope.servicerequest.address =
+            $scope.servicerequest.address || account.address;
+          $scope.servicerequest.location = account.location;
           $state.go('account.details');
         });
     };
