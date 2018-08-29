@@ -1,0 +1,81 @@
+<!-- start alert list -->
+<div class="row-col lt">
+  <!-- start alert list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input type="text" ng-enter="onSearch()" ng-model="search.q" class="form-control form-control-sm"
+          placeholder="Search Issues ...">
+        <span class="input-group-btn">
+          <button ng-click="onSearch()" class="btn btn-default btn-sm no-shadow"
+            type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end alert list search -->
+  <!-- start alert listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner" id="scrollable-alert-list">
+        <div class="list" data-ui-list="info">
+          <div ng-click="select(alert)" class="list-item list-item-padded"
+            ng-repeat="alert in alerts" title="{{alert.title}}">
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar title="Priority & Alert Type" data="{{alert.type}}"
+                  height="60" width="60" shape="round">
+                </letter-avatar>
+              </span>
+            </div>
+            <div class="list-body">
+              <span title="Alert Issue Date" class="pull-right text-xs text-muted">
+                {{alert.sentAt | date:'dd MMM yyyy HH:mm'}}
+              </span>
+              <div class="item-title">
+                <a href="#" class="_500">{{alert.title}}
+                  <br />
+                  <span title="Total Notifications Sent" class="font-size-12">
+                    # {{alert.totalSent}}
+                  </span>
+                </a>
+              </div>
+              <small class="block text-xs text-muted text-ellipsis">
+                <span title="Alert Message">
+                  <i class="icon-bubble"></i>&nbsp;&nbsp;{{(alert.message) || 'NA'}}
+                </span>
+                <span class="pull-right" title="Alerted Area">
+                  <i class="icon-location-pin"></i>&nbsp;&nbsp;{{(alert.area) ||'NA'}}
+                </span>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end alert listing -->
+  <!-- start list bottom toolbox -->
+  <div class="p-x-md p-y">
+    <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()"
+      total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit"
+      ng-change="find(query)" template-url="views/_partials/list_pager.html"
+      style="padding-left: 12px;" role="group">
+    </div>
+    <div class="btn-group pull-right">
+      <a title="Click To Refresh Issues" ng-click="load({}, false)" class="btn btn-default btn-xs">
+        <i class="icon-reload"></i>
+      </a>
+      <a title="Click To Export Issues" class="btn btn-default btn-xs" ng-csv="export"
+        csv-header="['Issue Number','Reported Date','Call Start Time', 'Call End Time','Call Duration(Minutes)', 'Call Duration(Seconds)', 'Reporter Name', 'Reporter Phone', 'Reporter Account', 'Operator', 'Area', 'Service Group', 'Service', 'Assignee', 'Description', 'Address', 'Status', 'Priority', 'Resolved Date', 'Time Taken(days)', 'Time Taken(hrs)', 'Time Taken(mins)', 'Time Taken(secs)']"
+        filename="issues.csv">
+        <i class="icon-cloud-download"></i>
+      </a>
+    </div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end list bottom toolbox -->
+</div>
+<!-- end alerts list -->

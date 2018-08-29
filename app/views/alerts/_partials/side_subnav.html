@@ -1,0 +1,83 @@
+<!-- start alerts side subnav -->
+<div class="row-col bg b-r">
+  <!-- start title -->
+  <div class="b-b">
+    <div class="navbar">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <span class="navbar-item text-md">
+            Alerts
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end title -->
+
+  <!-- start body -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <!-- start statuses menu -->
+        <div class="p-a-md">
+          <div class="m-b-md">
+            <button class="btn btn-fw info" ng-click="compose()">Compose</button>
+          </div>
+          <div class="m-b text-muted text-xs">Status</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li ng-class="{active:misc == 'all'}" class="nav-item m-b-xs">
+                <a ng-click="load({resetPage:true, reset:true, misc:'all'})"
+                  class="nav-link text-muted block" title="All Reported Issues">
+                  All
+                </a>
+              </li>
+              <li class="nav-item m-b-xs" ng-repeat="status in statuses | orderBy:'weight'">
+                <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
+                    {{summaries.statuses[status._id]}}
+                  </span>{{status.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end statuses menu -->
+        <!-- start priorities menu -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">Priority</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-item m-b-xs" ng-repeat="priority in priorities | orderBy:'weight'">
+                <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
+                    {{summaries.statuses[status._id]}}
+                  </span>{{priority.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end priorities menu -->
+        <!-- start alert type menu -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">Type</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-item m-b-xs" ng-repeat="type in types | orderBy:'weight'">
+                <a class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded" style="background-color: yellowgreen">
+                    {{summaries.priorities[priority._id]}}
+                  </span>{{type.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end alert type menu -->
+      </div>
+    </div>
+  </div>
+  <!-- end body -->
+</div>
+<!-- end alerts side subnav -->

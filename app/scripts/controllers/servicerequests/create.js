@@ -94,6 +94,11 @@ angular
 
     /**
      * @description Launch a customer lookup details in a modal window
+     * @function
+     * @name openLookModal
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.openLookupModal = function () {
 
