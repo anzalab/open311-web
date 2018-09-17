@@ -34,9 +34,10 @@
               </li>
               <li class="nav-item m-b-xs" ng-repeat="status in statuses | orderBy:'weight'">
                 <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
-                  <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
+                  <!-- <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
                     {{summaries.statuses[status._id]}}
-                  </span>{{status.name}}
+                  </span> -->
+                  {{status.name}}
                 </a>
               </li>
             </ul>
@@ -50,9 +51,10 @@
             <ul class="nav">
               <li class="nav-item m-b-xs" ng-repeat="priority in priorities | orderBy:'weight'">
                 <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
-                  <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
+                  <!-- <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
                     {{summaries.statuses[status._id]}}
-                  </span>{{priority.name}}
+                  </span> -->
+                  {{priority.name}}
                 </a>
               </li>
             </ul>
@@ -60,20 +62,21 @@
         </div>
         <!-- end priorities menu -->
         <!-- start alert type menu -->
-        <div class="p-a-md">
+        <!-- <div class="p-a-md">
           <div class="m-b text-muted text-xs">Type</div>
           <div class="nav-active-white">
             <ul class="nav">
               <li class="nav-item m-b-xs" ng-repeat="type in types | orderBy:'weight'">
-                <a class="nav-link text-muted block">
-                  <span class="pull-right text-sm label danger rounded" style="background-color: yellowgreen">
+                <a class="nav-link text-muted block"> -->
+        <!-- <span class="pull-right text-sm label danger rounded" style="background-color: yellowgreen">
                     {{summaries.priorities[priority._id]}}
-                  </span>{{type.name}}
+                  </span> -->
+        <!-- {{type.name}}
                 </a>
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
         <!-- end alert type menu -->
       </div>
     </div>
