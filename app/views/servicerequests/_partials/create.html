@@ -1,106 +1,152 @@
 <!-- start servicerequest create -->
 <div class="row-col">
-    <div class="b-b bg">
-        <div class="box-header" style="padding:1.2rem;">
-            <h2>Report New Issue</h2>
-        </div>
+  <!-- start servicerequest form header -->
+  <div class="b-b bg">
+    <div class="box-header" style="padding:1.2rem;">
+      <h2>
+        Report New Issue
+      </h2>
     </div>
-    <!-- start servicerequest body -->
-    <div class="row-row">
-        <div class="row-body">
-            <div class="row-inner">
-                <div class="padding">
-                    <form ng-submit="save()" name="servicerequestForm" role="form" autocomplete="off">
-                        <div class="box">
-                            <div class="box-header">
-                                <h6>Reporter Details</h6>
-                            </div>
-                            <div class="box-body">
-                                <div class="row m-b">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="floating-label">Phone</label>
-                                            <input ng-model="servicerequest.reporter.phone" ng-required ng-minlength="2" focus-if="!servicerequest.reporter.phone" type="text" name="phone" class="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="floating-label">Name</label>
-                                            <input ng-model="servicerequest.reporter.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-b">
-                                    <div class="col-sm-6">
-                                        <label class="floating-label">Account</label>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" />
-                                                <span class="input-group-btn">
-                                                    <button  ng-disabled="!servicerequest.reporter.account" ng-click="openLookupModal()" class="btn btn-secondary" type="button"  title="Lookup for customer account details">
-                                                        <i class="icon-magnifier"></i>
-                                                    </button>
-                                                  </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="floating-label">Email</label>
-                                            <input ng-model="servicerequest.reporter.email" type="email" name="email" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-t p-b" style="margin-top: 2rem;">
-                                    <h6 title="Method of Communication used by Reporter">
-                                        Communication Method
-                                    </h6>
-                                </div>
-                                <div class="row m-b">
-                                    <div class="col-sm-1" ng-repeat="method in methods">
-                                        <div>
-                                            <label class="md-check text-muted" title="Method of Communication used by Reporter">
-                                            <input type="radio" ng-model="servicerequest.method.name" ng-value="method" name="method"> <i class="blue"></i> {{method}}
-                                          </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="p-t p-b m-t" style="margin-top: 4rem;">
-                                    <h6>
-                                        Issue Details
-                                    </h6>
-                                </div>
-                                <div class="row m-b">
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-material floating">
-                                            <oi-select oi-options="item.name for item in services track by item.id" ng-model="servicerequest.service" ng-required placeholder="Select Service" class="form-control"></oi-select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group form-material floating">
-                                            <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="servicerequest.jurisdiction" ng-required placeholder="Select Area" class="form-control"></oi-select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="floating-label">Address</label>
-                                    <textarea ng-model="servicerequest.address" ng-required msd-elastic name="address" class="form-control" rows="2">
-                                  </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="floating-label">Description</label>
-                                    <textarea ng-model="servicerequest.description" ng-required msd-elastic name="description" class="form-control" rows="3">
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="p-a text-right">
-                                <button ui-sref="app.servicerequests.list" type="button" ng-click="cancel()" class="btn">Cancel</button>
-                                <button ng-disabled="servicerequestForm.$invalid || !servicerequest.reporter.phone || !servicerequest.reporter.name || !servicerequest.service || !servicerequest.jurisdiction || !servicerequest.address || !servicerequest.description" type="submit" class="btn info">Submit</button>
-                            </div>
-                        </div>
-                    </form>
+  </div>
+  <!-- end servicerequest form header body -->
+  <!-- start servicerequest body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form ng-submit="save()" name="servicerequestForm" role="form" autocomplete="off">
+            <div class="box">
+              <div class="box-header">
+                <h6 title="Reporter or Customer Details">
+                  Reporter Details
+                </h6>
+              </div>
+              <div class="box-body">
+                <div class="row m-b">
+                  <!--start phone input-->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label title="Reporter or Customer Phone Number">
+                        Phone
+                      </label>
+                      <input ng-model="servicerequest.reporter.phone" ng-required ng-minlength="2" focus-if="!servicerequest.reporter.phone" type="text" name="phone" class="form-control" title="Reporter or Customer Phone Number" />
+                    </div>
+                  </div>
+                  <!--end phone input-->
+                  <!--start name input-->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label title="Reporter or Customer Name">
+                        Name
+                      </label>
+                      <input ng-model="servicerequest.reporter.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" title="Reporter or Customer Name" />
+                    </div>
+                  </div>
+                  <!--end name input-->
                 </div>
+                <div class="row m-b">
+                  <!--start account input-->
+                  <div class="col-sm-6">
+                    <label title="Reporter or Customer Account Number">
+                      Account
+                    </label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" title="Reporter or Customer Account Number" />
+                        <span class="input-group-btn">
+                          <button  ng-disabled="!servicerequest.reporter.account" ng-click="openLookupModal()" class="btn btn-secondary" type="button"  title="Click to Lookup for Customer Account Details">
+                            <i class="icon-magnifier"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end account input-->
+                  <!--start email input-->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label title="Reporter or Customer Email Address">
+                        Email
+                      </label>
+                      <input ng-model="servicerequest.reporter.email" type="email" name="email" class="form-control" title="Reporter or Customer Email Address" />
+                    </div>
+                  </div>
+                  <!--end email input input-->
+                </div>
+                <div class="p-t p-b" style="margin-top: 2rem;">
+                  <h6 title="Communication Method Used by Reporter To Report">
+                    Communication Method
+                  </h6>
+                </div>
+                <div class="row m-b">
+                  <!--start communication method input-->
+                  <div class="col-sm-1" ng-repeat="method in methods">
+                    <div>
+                      <label class="md-check text-muted" title="Method of Communication used by Reporter">
+                        <input type="radio" ng-model="servicerequest.method.name" ng-value="method" name="method"> <i class="blue"></i> {{method}}
+                      </label>
+                    </div>
+                  </div>
+                  <!--end communication method input-->
+                </div>
+                <div class="p-t p-b m-t" style="margin-top: 4rem;">
+                  <h6 title="Issue Details">
+                    Issue Details
+                  </h6>
+                </div>
+                <div class="row m-b">
+                  <!--start service input-->
+                  <div class="col-sm-6">
+                    <div class="form-group form-material floating" title="Select Service">
+                      <oi-select oi-options="item.name for item in services track by item.id" ng-model="servicerequest.service" ng-required placeholder="Select Service" class="form-control"></oi-select>
+                    </div>
+                  </div>
+                  <!--end service input-->
+                  <!--start jurisdiction input-->
+                  <div class="col-sm-6">
+                    <div class="form-group form-material floating" title="Select Area">
+                      <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="servicerequest.jurisdiction" ng-required placeholder="Select Area" class="form-control"></oi-select>
+                    </div>
+                  </div>
+                </div>
+                <!--end jurisdiction input-->
+                <!--start address input-->
+                <div class="row m-b">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label title="Reporter or Customer Address">
+                        Address
+                      </label>
+                      <textarea ng-model="servicerequest.address" ng-required msd-elastic name="address" class="form-control" rows="2" title="Reporter or Customer Address">
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+                <!--end address input-->
+                <!--start description input-->
+                <div class="row m-b">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <label title="Issue Details or Description">
+                        Description
+                      </label>
+                      <textarea ng-model="servicerequest.description" ng-required msd-elastic name="description" class="form-control" rows="2" title="Issue Details or Description">
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--end description input-->
+              <!--start form actions -->
+              <div class="p-a text-right">
+                <button ui-sref="app.servicerequests.list" type="button" ng-click="cancel()" class="btn" title="Click to Cancel">Cancel</button>
+                <button ng-disabled="servicerequestForm.$invalid || !servicerequest.reporter.phone || !servicerequest.reporter.name || !servicerequest.service || !servicerequest.jurisdiction || !servicerequest.address || !servicerequest.description" type="submit" class="btn info" title="Click to Submit">Submit</button>
+              </div>
+              <!--end form actions -->
             </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
