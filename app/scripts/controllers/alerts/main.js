@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc function
@@ -7,76 +7,159 @@
  * Alert Main Controller
  */
 angular
-  .module('ng311')
-  .controller('AlertMainCtrl', function ($scope, $uibModal) {
+  .module("ng311")
+  .controller("AlertMainCtrl", function ($scope, $uibModal, endpoints, Alert) {
+    $scope.page = 1;
+    $scope.limit = 10;
+    $scope.search = {};
+    $scope.channels = [];
+    $scope.alert = { jurisdictions: [], methods: [], receivers: [] };
 
-    $scope.alerts = [
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-      { title: 'Water Cut', type: 'SMS', status: 'Sent', priority: 'High', sentAt: new Date(), message: 'It sounds like you have multiple branches for different cycles of a change. I do not know what your cycles are, but lets assume they are yoy', totalSent: 1000, area: 'Ilala' },
-    ];
-
-    $scope.jurisdictions = [
-      { name: 'Ilala' },
-      { name: 'Tegeta' },
-      { name: 'Bagamoyo' },
-      { name: 'Tegeta' },
-      { name: 'Temeke' },
-    ];
-
+    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.methods = [
-      { name: 'SMS' },
-      { name: 'Email' },
-      { name: 'Push Notification' },
+      { name: "SMS" },
+      { name: "Email" },
+      { name: "Push Notification" }
     ];
 
     $scope.priorities = [
-      { name: 'High', count: 100 },
-      { name: 'Normal', count: 100 },
-      { name: 'Low', count: 100 },
+      { name: "High", count: 100 },
+      { name: "Normal", count: 100 },
+      { name: "Low", count: 100 }
     ];
 
     $scope.statuses = [
-      { name: 'Sent', count: 100 },
-      { name: 'Queued', count: 100 },
-      { name: 'Failed', count: 100 },
-      { name: 'Delivered', count: 100 },
+      { name: "Sent", count: 100 },
+      { name: "Failed", count: 100 },
+      { name: "Delivered", count: 100 }
     ];
 
-    $scope.types = [
-      { name: 'SMS', count: 100 },
-      { name: 'Email', count: 100 },
-      { name: 'Push', count: 100 },
+    $scope.methods = [
+      { name: "SMS", count: 100 },
+      { name: "Email", count: 100 },
+      { name: "Push Notification", count: 100 }
+    ];
+
+    $scope.receivers = [
+      { name: "Reporters" },
+      { name: "Customers" },
+      { name: "Subscribers" },
+      { name: "Employees" }
     ];
 
     /**
      * Open model to compose
+     *
      * @function
      * @name compose
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.compose = function () {
       //open performance reports filter modal
       $scope.modal = $uibModal.open({
-        templateUrl: 'views/alerts/_partials/compose.html',
+        templateUrl: "views/alerts/_partials/compose.html",
         scope: $scope,
-        size: 'lg',
+        size: "lg"
       });
 
       //handle modal close and dismissed
-      $scope.modal.result.then(function onClose( /*selectedItem*/) { },
-        function onDismissed() { });
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) { },
+        function onDismissed() { }
+      );
     };
+
+    /**
+     * Send composed message
+     *
+     * @function
+     * @name send
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.send = function () {
+      // TODO support Email and Push notification
+      // normalize input
+      // $scope.alert.methods = $scope.channels.map(function(method) {
+      //   return method.toUpperCase();
+      // });
+      $scope.alert.methods = ["SMS"]; // fix SMS as the type of alert that will be sent
+
+      var alert = new Alert($scope.alert);
+
+      console.log(alert);
+
+      // save an alert
+      // alert
+      //   .$save()
+      //   .then(function(response) {
+      //     $scope.modal.$dismiss();
+      //   })
+      //   .catch(function(error) {
+      //     // TODO handle errors
+      //   });
+    };
+
+    /**
+     * Load initial alerts on state activation
+     *
+     * @function
+     * @name index
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.find = function () {
+      Alert.find({
+        page: $scope.page,
+        q: $scope.q
+      }).then(function (results) {
+        $scope.alerts = results.alerts.map(function (alert) {
+          var areas = alert.jurisdictions.map(function (jurisdiction) {
+            return jurisdiction.name;
+          });
+
+          return _.merge({}, alert, { areas: areas.toString() });
+        });
+        $scope.total = results.total;
+      });
+    };
+
+    /**
+     * Search Alert
+     *
+     * @function
+     * @name onSearch
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.onSearch = function () {
+      if ($scope.alerts && $scope.search.q && $scope.search.q.length >= 2) {
+        $scope.q = $scope.search.q;
+        $scope.find();
+      } else {
+        $scope.q = undefined;
+        $scope.find();
+      }
+    };
+
+    /**
+     * Determine whether to show pagination button
+     *
+     * @function
+     * @name willPaginate
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.willPaginate = function () {
+      return $scope.total && $scope.total > $scope.limit;
+    };
+
+    // load alerts
+    $scope.find();
   });

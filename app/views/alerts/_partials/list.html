@@ -4,8 +4,8 @@
   <div class="p-a b-b list-search">
     <form>
       <div class="input-group">
-        <input type="text" ng-enter="onSearch()" ng-model="search.q" class="form-control form-control-sm"
-          placeholder="Search Issues ...">
+        <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm"
+          placeholder="Search Alerts ...">
         <span class="input-group-btn">
           <button ng-click="onSearch()" class="btn btn-default btn-sm no-shadow"
             type="button">
@@ -22,32 +22,47 @@
       <div class="row-inner" id="scrollable-alert-list">
         <div class="list" data-ui-list="info">
           <div ng-click="select(alert)" class="list-item list-item-padded"
-            ng-repeat="alert in alerts" title="{{alert.title}}">
+            ng-repeat="alert in alerts" title="{{alert.subject}}">
             <div class="list-left">
               <span class="w-40 avatar circle">
-                <letter-avatar title="Priority & Alert Type" data="{{alert.type}}"
+                <letter-avatar title="Priority & Alert Type" data="{{alert.subject}}"
                   height="60" width="60" shape="round">
                 </letter-avatar>
               </span>
             </div>
             <div class="list-body">
               <span title="Alert Issue Date" class="pull-right text-xs text-muted">
-                {{alert.sentAt | date:'dd MMM yyyy HH:mm'}}
+                {{alert.createdAt | date:'dd MMM yyyy HH:mm'}}
               </span>
               <div class="item-title">
-                <a href="#" class="_500">{{alert.title}}
+                <a href="#" class="_500">{{alert.subject}}
                   <br />
-                  <span title="Total Notifications Sent" class="font-size-12">
-                    # {{alert.totalSent}}
+                  <span class="font-size-12">
+                    <span class="text-muted" ng-repeat="method in alert.methods">
+                      {{method}} :
+                      <span title="Total Sent">
+                        <i class="icon-arrow-up-circle"></i>&nbsp;&nbsp;{{alert.statistics[method].sent}}
+                      </span>
+                      &nbsp;&nbsp;
+                      <span title="Total Delivered">
+                        <i class="icon-check"></i>
+                        {{alert.statistics[method].delivered}} &nbsp;&nbsp;
+                      </span>
+                      <span title="Total Failed">
+                        <i class="icon-close"></i>&nbsp;&nbsp;{{alert.statistics[method].failed}}
+                      </span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
                   </span>
                 </a>
               </div>
               <small class="block text-xs text-muted text-ellipsis">
                 <span title="Alert Message">
-                  <i class="icon-bubble"></i>&nbsp;&nbsp;{{(alert.message) || 'NA'}}
+                  <i class="icon-speech"></i>&nbsp;&nbsp;{{(alert.message) || 'NA'}}
                 </span>
-                <span class="pull-right" title="Alerted Area">
-                  <i class="icon-location-pin"></i>&nbsp;&nbsp;{{(alert.area) ||'NA'}}
+                <span class="pull-right" title="Alerted Areas">
+                  <i class="icon-location-pin"></i>&nbsp;&nbsp;
+                  {{alert.areas}}
                 </span>
               </small>
             </div>
@@ -63,16 +78,6 @@
       total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit"
       ng-change="find(query)" template-url="views/_partials/list_pager.html"
       style="padding-left: 12px;" role="group">
-    </div>
-    <div class="btn-group pull-right">
-      <a title="Click To Refresh Issues" ng-click="load({}, false)" class="btn btn-default btn-xs">
-        <i class="icon-reload"></i>
-      </a>
-      <a title="Click To Export Issues" class="btn btn-default btn-xs" ng-csv="export"
-        csv-header="['Issue Number','Reported Date','Call Start Time', 'Call End Time','Call Duration(Minutes)', 'Call Duration(Seconds)', 'Reporter Name', 'Reporter Phone', 'Reporter Account', 'Operator', 'Area', 'Service Group', 'Service', 'Assignee', 'Description', 'Address', 'Status', 'Priority', 'Resolved Date', 'Time Taken(days)', 'Time Taken(hrs)', 'Time Taken(mins)', 'Time Taken(secs)']"
-        filename="issues.csv">
-        <i class="icon-cloud-download"></i>
-      </a>
     </div>
     <span class="text-sm text-muted">Total: {{total}}</span>
   </div>

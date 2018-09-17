@@ -15,27 +15,6 @@
     <div class="m-l-lg m-r-lg">
       <form role="form">
 
-        <!-- start jurisdiction inputs -->
-        <div class="row" ng-if="jurisdictions.length > 1">
-          <div class="col-md-12">
-            <div class="p-a p-l-none">
-              <h6 class="m-a-0">
-                Area
-              </h6>
-            </div>
-          </div>
-          <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
-            <div class="p-a p-b-none p-l-none">
-              <label class="md-check text-muted" title="{{jurisdiction.name}}">
-                <input type="checkbox" checklist-model="filters.jurisdictions"
-                  checklist-value="jurisdiction._id"> <i class="blue"></i>
-                {{jurisdiction.name}}
-              </label>
-            </div>
-          </div>
-        </div>
-        <!-- end jurisdiction inputs -->
-
         <!-- start subject input -->
         <div class="row m-t-sm">
           <div class="col-md-12">
@@ -46,8 +25,8 @@
             </div>
           </div>
           <div class="col-md-12">
-            <input type="text" class="form-control" name="subject" placeholder="Subject"
-              required>
+            <input type="text" ng-model="alert.subject" class="form-control"
+              name="subject" placeholder="Subject" required>
           </div>
         </div>
         <!-- end subject input -->
@@ -62,20 +41,84 @@
             </div>
           </div>
           <div class="col-md-12">
-            <textarea rows="5" class="form-control" name="message" placeholder="Message ..."></textarea>
+            <textarea rows="5" ng-model="alert.message" class="form-control"
+              name="message" placeholder="Message ..." required></textarea>
           </div>
         </div>
         <!-- end message input -->
+
+        <!-- start jurisdiction inputs -->
+        <div class="row" ng-if="jurisdictions.length > 1">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Area
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
+            <div class="p-a p-b-none p-l-none">
+              <label class="md-check text-muted" title="{{jurisdiction.name}}">
+                <input type="checkbox" checklist-model="alert.jurisdictions"
+                  checklist-value="jurisdiction._id"> <i class="blue"></i>
+                {{jurisdiction.name}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- end jurisdiction inputs -->
+
+        <!-- start alert type inputs -->
+        <!-- <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Type
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-3" ng-repeat="method in methods | orderBy:'name'">
+            <div class="p-a p-b-none p-l-none">
+              <label class="md-check text-muted" title="{{method.name}}">
+                <input type="checkbox" checklist-value="method.name"
+                  checklist-model="channels"> <i class="blue"></i>
+                {{method.name}}
+              </label>
+            </div>
+          </div>
+        </div> -->
+        <!-- end alert type inputs -->
+
+        <!-- start alert audience type inputs -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Audience
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-3" ng-repeat="receiver in receivers | orderBy:'name'">
+            <div class="p-a p-b-none p-l-none">
+              <label class="md-check text-muted" title="{{receiver.name}}">
+                <input type="checkbox" checklist-value="receiver.name"
+                  checklist-model="alert.receivers"> <i class="blue"></i>
+                {{receiver.name}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- end alert audience type inputs -->
 
       </form>
     </div>
     <!-- end account accessor list -->
   </div>
-  <!-- end modal body -->
-
   <!-- start filter footer -->
   <div class="modal-footer">
     <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-    <button class="btn btn-primary" ng-click="$dismiss()">Send</button>
+    <button class="btn btn-primary" ng-click="send()">Send</button>
   </div>
   <!-- end footer filter -->
+</div>
+<!-- end modal body -->

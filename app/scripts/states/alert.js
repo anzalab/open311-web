@@ -14,6 +14,17 @@ angular
         url: '/alerts',
         'templateUrl': 'views/alerts/main.html',
         'controller': 'AlertMainCtrl',
+        resolve: {
+          endpoints: function (Summary) {
+            return Summary.endpoints({
+              query: {
+                deletedAt: {
+                  $eq: null
+                }
+              }
+            });
+          }
+        },
         data: {
           authenticated: true
         }
