@@ -5,19 +5,16 @@
   "title": "MajiFix",
   "version": "v0.1.0",
   "description": "Citizen Feedback System",
-  "apiEndPoint":
-  {
-    "web": "http://127.0.0.1:3000",
-    "mobile": "http://127.0.0.1:3000"
+  "apiEndPoint": {
+    "web": "http://127.0.0.1:5000",
+    "mobile": "http://127.0.0.1:5000"
   },
-  "socketEndPoint":
-  {
+  "socketEndPoint": {
     "web": "http://127.0.0.1:3000",
     "mobile": "http://127.0.0.1:3000"
   },
   "socketEnable": false,
-  "settings":
-  {
+  "settings": {
     "locale": "sw",
     "name": "MajiFix",
     "email": "lallyelias87@gmail.com",
@@ -26,8 +23,7 @@
     "dateFormat": "dd/MM/yyyy",
     "timeFormat": "hh:mm:ss",
     "defaultPassword": "guest",
-    "abbreviations":
-    {
+    "abbreviations": {
       "thousand": "K",
       "million": "M",
       "billion": "B",
