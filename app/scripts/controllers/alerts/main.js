@@ -8,7 +8,10 @@
  */
 angular
   .module("ng311")
-  .controller("AlertMainCtrl", function ($scope, $uibModal, endpoints, Alert) {
+  .controller("AlertMainCtrl", function(
+    $rootScope, $scope, $uibModal,
+    endpoints, Alert
+  ) {
     $scope.page = 1;
     $scope.limit = 10;
     $scope.search = {};
@@ -56,7 +59,7 @@ angular
      * @version 0.1.0
      * @since 0.1.0
      */
-    $scope.compose = function () {
+    $scope.compose = function() {
       //open performance reports filter modal
       $scope.modal = $uibModal.open({
         templateUrl: "views/alerts/_partials/compose.html",
@@ -66,8 +69,8 @@ angular
 
       //handle modal close and dismissed
       $scope.modal.result.then(
-        function onClose(/*selectedItem*/) { },
-        function onDismissed() { }
+        function onClose( /*selectedItem*/ ) {},
+        function onDismissed() {}
       );
     };
 
@@ -80,7 +83,7 @@ angular
      * @version 0.1.0
      * @since 0.1.0
      */
-    $scope.send = function () {
+    $scope.send = function() {
       // TODO support Email and Push notification
       // normalize input
       // $scope.alert.methods = $scope.channels.map(function(method) {
@@ -90,16 +93,28 @@ angular
 
       var alert = new Alert($scope.alert);
 
+      console.log($scope.alert);
+
       // save an alert
       alert
         .$save()
-        .then(function (response) {
-          console.log($scope.modal);
+        .then(function( /*response*/ ) {
+
           $scope.modal.dismiss();
+
+          //TODO avoid collision with alert.message
+          var response = {};
+
+          response.message =
+            response.message || 'Alert Saved Successfully';
+
+          $rootScope.$broadcast('appSuccess', response);
+
+          $rootScope.$broadcast('app:alerts:reload');
+
         })
-        .catch(function (error) {
-          console.log(error);
-          // TODO handle errors
+        .catch(function(error) {
+          $rootScope.$broadcast('appError', error);
         });
     };
 
@@ -112,13 +127,13 @@ angular
      * @version 0.1.0
      * @since 0.1.0
      */
-    $scope.find = function () {
+    $scope.find = function() {
       Alert.find({
         page: $scope.page,
         q: $scope.q
-      }).then(function (results) {
-        $scope.alerts = results.alerts.map(function (alert) {
-          var areas = alert.jurisdictions.map(function (jurisdiction) {
+      }).then(function(results) {
+        $scope.alerts = results.alerts.map(function(alert) {
+          var areas = alert.jurisdictions.map(function(jurisdiction) {
             return jurisdiction.name;
           });
 
@@ -137,7 +152,7 @@ angular
      * @version 0.1.0
      * @since 0.1.0
      */
-    $scope.onSearch = function () {
+    $scope.onSearch = function() {
       if ($scope.alerts && $scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -156,10 +171,16 @@ angular
      * @version 0.1.0
      * @since 0.1.0
      */
-    $scope.willPaginate = function () {
+    $scope.willPaginate = function() {
       return $scope.total && $scope.total > $scope.limit;
     };
 
     // load alerts
     $scope.find();
+
+    //listen for events
+    $rootScope.$on('app:alerts:reload', function() {
+      $scope.find();
+    });
+
   });
