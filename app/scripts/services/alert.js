@@ -6,11 +6,10 @@
  */
 angular
   .module('ng311')
-  .factory('Alert', function ($resource, $http) {
+  .factory('Alert', function ($resource, $http, Utils) {
     // account accessors resource
-    var URL = 'https://majifix-alert.herokuapp.com/v1/alerts';
 
-    var Alert = $resource(URL,
+    var Alert = $resource(Utils.asLink(['v1', 'alerts']),
       {
         id: '@_id',
       }, {
@@ -35,7 +34,7 @@ angular
      */
     Alert.find = function (params) {
       return $http
-        .get(URL, { params: params })
+        .get(Utils.asLink(['v1', 'alerts']), { params: params })
         .then(function (response) {
 
           var alerts = response.data.data.map(function (alert) {

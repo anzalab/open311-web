@@ -90,17 +90,17 @@ angular
 
       var alert = new Alert($scope.alert);
 
-      console.log(alert);
-
       // save an alert
-      // alert
-      //   .$save()
-      //   .then(function(response) {
-      //     $scope.modal.$dismiss();
-      //   })
-      //   .catch(function(error) {
-      //     // TODO handle errors
-      //   });
+      alert
+        .$save()
+        .then(function (response) {
+          console.log($scope.modal);
+          $scope.modal.dismiss();
+        })
+        .catch(function (error) {
+          console.log(error);
+          // TODO handle errors
+        });
     };
 
     /**
