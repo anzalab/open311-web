@@ -16,7 +16,8 @@ angular
     $scope.limit = 10;
     $scope.search = {};
     $scope.channels = [];
-    $scope.alert = { jurisdictions: [], methods: [], receivers: [] };
+    var alert = { jurisdictions: [], methods: [], receivers: [] };
+    $scope.alert = alert;
 
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.methods = [
@@ -93,13 +94,13 @@ angular
 
       var alert = new Alert($scope.alert);
 
-      console.log($scope.alert);
-
       // save an alert
       alert
         .$save()
         .then(function( /*response*/ ) {
 
+          //reset alert & dismiss modal
+          $scope.alert = alert;
           $scope.modal.dismiss();
 
           //TODO avoid collision with alert.message
