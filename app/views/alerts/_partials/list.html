@@ -4,8 +4,7 @@
   <div class="p-a b-b list-search">
     <form>
       <div class="input-group">
-        <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm"
-          placeholder="Search Alerts ...">
+        <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Alerts ...">
         <span class="input-group-btn">
           <button ng-click="onSearch()" class="btn btn-default btn-sm no-shadow"
             type="button">
@@ -21,8 +20,7 @@
     <div class="row-body scrollable hover">
       <div class="row-inner" id="scrollable-alert-list">
         <div class="list" data-ui-list="info">
-          <div ng-click="select(alert)" class="list-item list-item-padded"
-            ng-repeat="alert in alerts" title="{{alert.subject}}">
+          <div ng-click="select(alert)" class="list-item list-item-padded" ng-repeat="alert in alerts" title="{{alert.subject}}">
             <div class="list-left">
               <span class="w-40 avatar circle">
                 <letter-avatar title="Priority & Alert Type" data="{{alert.subject}}"
@@ -57,7 +55,7 @@
                 </a>
               </div>
               <small class="block text-xs text-muted text-ellipsis">
-                <span title="Alert Message">
+                <span title="Alert Message: {{alert.message}}">
                   <i class="icon-speech"></i>&nbsp;&nbsp;{{(alert.message) || 'NA'}}
                 </span>
                 <span class="pull-right" title="Alerted Areas">
@@ -74,10 +72,7 @@
   <!-- end alert listing -->
   <!-- start list bottom toolbox -->
   <div class="p-x-md p-y">
-    <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()"
-      total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit"
-      ng-change="find(query)" template-url="views/_partials/list_pager.html"
-      style="padding-left: 12px;" role="group">
+    <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit" ng-change="find(query)" template-url="views/_partials/list_pager.html" style="padding-left: 12px;" role="group">
     </div>
     <span class="text-sm text-muted">Total: {{total}}</span>
   </div>

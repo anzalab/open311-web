@@ -134,9 +134,10 @@ angular
         q: $scope.q
       }).then(function(results) {
         $scope.alerts = results.alerts.map(function(alert) {
-          var areas = alert.jurisdictions.map(function(jurisdiction) {
-            return jurisdiction.name;
-          });
+          var areas =
+            _.map([].concat(alert.jurisdictions), function(jurisdiction) {
+              return jurisdiction.name;
+            });
 
           return _.merge({}, alert, { areas: areas.toString() });
         });
