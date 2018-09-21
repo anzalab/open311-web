@@ -55,137 +55,148 @@
   <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-  <div class="app" ui-view></div>
-  <!-- build:js(.) scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/ng-notify/src/scripts/ng-notify.js"></script>
-  <script src="bower_components/checklist-model/checklist-model.js"></script>
-  <script src="bower_components/angular-prompt/dist/angular-prompt.js"></script>
-  <script src="bower_components/lodash/lodash.js"></script>
-  <script src="bower_components/ngstorage/ngStorage.js"></script>
-  <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
-  <script src="bower_components/ng-aa/dist/ng-aa.js"></script>
-  <script src="bower_components/ng-csv/build/ng-csv.js"></script>
-  <script src="bower_components/angular-elastic/elastic.js"></script>
-  <script src="bower_components/ngToast/dist/ngToast.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/oi.select/dist/select-tpls.js"></script>
-  <script src="bower_components/angular-mailto/angular-mailto.js"></script>
-  <script src="bower_components/angular-color-picker/angular-color-picker.js"></script>
-  <script src="bower_components/angularPrint/angularPrint.js"></script>
-  <script src="bower_components/echarts/dist/echarts.js"></script>
-  <script src="bower_components/angular-socket-io/socket.js"></script>
-  <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
-  <script src="bower_components/ng-focus-if/focusIf.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/angular-pickadate/dist/angular-pickadate.js"></script>
-  <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
-  <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-  <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
-  <script src="bower_components/numeral/numeral.js"></script>
-  <script src="bower_components/angular-numeraljs/dist/angular-numeraljs.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:js({.tmp,app}) scripts/scripts.js -->
-  <!-- start custom modules -->
-  <script src="scripts/modules/echart.js"></script>
-  <!-- end custom modules -->
-  <!-- start app & config -->
-  <script src="scripts/app.js"></script>
-  <script src="scripts/config.js"></script>
-  <!-- end app & config -->
-  <!-- states -->
-  <script src="scripts/states/auth.js"></script>
-  <!-- end states -->
-  <!-- services -->
-  <script src="scripts/services/utils.js"></script>
-  <script src="scripts/services/socket.js"></script>
-  <script src="scripts/services/permission.js"></script>
-  <script src="scripts/services/comment.js"></script>
-  <!-- end services -->
-  <!-- common controllers -->
-  <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/controllers/app.js"></script>
-  <script src="scripts/controllers/auth/profile.js"></script>
-  <!-- end common controllers -->
-  <!-- directives -->
-  <script src="scripts/directives/uistates.js"></script>
-  <script src="scripts/directives/ngenter.js"></script>
-  <script src="scripts/directives/letteravatar.js"></script>
-  <script src="scripts/directives/ng-gallery.js"></script>
-  <!-- end directives -->
-  <!-- start servicerequest resources -->
-  <script src="scripts/services/servicerequest.js"></script>
-  <script src="scripts/controllers/servicerequests/create.js"></script>
-  <script src="scripts/controllers/servicerequests/index.js"></script>
-  <script src="scripts/controllers/servicerequests/main.js"></script>
-  <script src="scripts/controllers/servicerequests/show.js"></script>
-  <script src="scripts/states/servicerequest.js"></script>
-  <!-- end servicerequest resources -->
-  <!-- start group resources -->
-  <script src="scripts/services/servicegroup.js"></script>
-  <script src="scripts/controllers/servicegroups/index.js"></script>
-  <script src="scripts/controllers/servicegroups/show.js"></script>
-  <script src="scripts/states/servicegroup.js"></script>
-  <!-- end group resources -->
-  <!-- start service resources -->
-  <script src="scripts/services/service.js"></script>
-  <script src="scripts/controllers/services/index.js"></script>
-  <script src="scripts/controllers/services/show.js"></script>
-  <script src="scripts/states/service.js"></script>
-  <!-- end service resources -->
-  <!-- start status resources -->
-  <script src="scripts/services/status.js"></script>
-  <script src="scripts/controllers/statuses/index.js"></script>
-  <script src="scripts/controllers/statuses/show.js"></script>
-  <script src="scripts/states/status.js"></script>
-  <!-- end status resources -->
-  <!-- start priority resources -->
-  <script src="scripts/services/priority.js"></script>
-  <script src="scripts/controllers/priorities/index.js"></script>
-  <script src="scripts/controllers/priorities/show.js"></script>
-  <script src="scripts/states/priority.js"></script>
-  <!-- end priority resources -->
-  <!-- start jurisdiction resources -->
-  <script src="scripts/services/jurisdiction.js"></script>
-  <script src="scripts/controllers/jurisdictions/index.js"></script>
-  <script src="scripts/controllers/jurisdictions/show.js"></script>
-  <script src="scripts/states/jurisdiction.js"></script>
-  <!-- end jurisdiction resources -->
-  <!-- start role resources -->
-  <script src="scripts/services/role.js"></script>
-  <script src="scripts/controllers/roles/index.js"></script>
-  <script src="scripts/controllers/roles/show.js"></script>
-  <script src="scripts/states/role.js"></script>
-  <!-- end role resources -->
-  <!-- start party resources -->
-  <script src="scripts/services/party.js"></script>
-  <script src="scripts/controllers/parties/index.js"></script>
-  <script src="scripts/controllers/parties/show.js"></script>
-  <script src="scripts/states/party.js"></script>
-  <!-- end party resources -->
-  <!-- start settings -->
-  <script src="scripts/services/summary.js"></script>
-  <script src="scripts/services/setting.js"></script>
-  <script src="scripts/controllers/settings/index.js"></script>
-  <script src="scripts/states/setting.js"></script>
-  <!-- end settings -->
-  <!-- start dashboard -->
-  <script src="scripts/controllers/dashboards/overview.js"></script>
-  <script src="scripts/controllers/dashboards/standing.js"></script>
-  <script src="scripts/controllers/dashboards/export.js"></script>
-  <script src="scripts/controllers/dashboards/performance.js"></script>
-  <script src="scripts/controllers/dashboards/comparison.js"></script>
-  <!-- end dashboard -->
-  <!-- endbuild -->
+    <div class="app" ui-view></div>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ng-notify/src/scripts/ng-notify.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/angular-prompt/dist/angular-prompt.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+    <script src="bower_components/ng-aa/dist/ng-aa.js"></script>
+    <script src="bower_components/ng-csv/build/ng-csv.js"></script>
+    <script src="bower_components/angular-elastic/elastic.js"></script>
+    <script src="bower_components/ngToast/dist/ngToast.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/oi.select/dist/select-tpls.js"></script>
+    <script src="bower_components/angular-mailto/angular-mailto.js"></script>
+    <script src="bower_components/angular-color-picker/angular-color-picker.js"></script>
+    <script src="bower_components/angularPrint/angularPrint.js"></script>
+    <script src="bower_components/echarts/dist/echarts.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
+    <script src="bower_components/ng-focus-if/focusIf.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-pickadate/dist/angular-pickadate.js"></script>
+    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
+    <script src="bower_components/numeral/numeral.js"></script>
+    <script src="bower_components/angular-numeraljs/dist/angular-numeraljs.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- start custom modules -->
+    <script src="scripts/modules/echart.js"></script>
+    <!-- end custom modules -->
+    <!-- start app & config -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <!-- end app & config -->
+    <!-- states -->
+    <script src="scripts/states/auth.js"></script>
+    <!-- end states -->
+    <!-- services -->
+    <script src="scripts/services/utils.js"></script>
+    <script src="scripts/services/socket.js"></script>
+    <script src="scripts/services/permission.js"></script>
+    <script src="scripts/services/comment.js"></script>
+    <!-- end services -->
+    <!-- common controllers -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/app.js"></script>
+    <script src="scripts/controllers/auth/profile.js"></script>
+    <!-- end common controllers -->
+    <!-- directives -->
+    <script src="scripts/directives/uistates.js"></script>
+    <script src="scripts/directives/ngenter.js"></script>
+    <script src="scripts/directives/letteravatar.js"></script>
+    <script src="scripts/directives/ng-gallery.js"></script>
+    <!-- end directives -->
+    <!-- start service request resources -->
+    <script src="scripts/services/servicerequest.js"></script>
+    <script src="scripts/controllers/servicerequests/create.js"></script>
+    <script src="scripts/controllers/servicerequests/index.js"></script>
+    <script src="scripts/controllers/servicerequests/main.js"></script>
+    <script src="scripts/controllers/servicerequests/show.js"></script>
+    <script src="scripts/states/servicerequest.js"></script>
+    <!-- end service request resources -->
+    <!-- start alerts -->
+    <script src="scripts/services/alert.js"></script>
+    <script src="scripts/controllers/alerts/main.js"></script>
+    <script src="scripts/states/alert.js"></script>
+    <!-- end alerts -->
+    <!-- start account -->
+    <script src="scripts/services/account.js"></script>
+    <script src="scripts/controllers/account/index.js"></script>
+    <script src="scripts/controllers/account/accessors_index.js"></script>
+    <script src="scripts/controllers/account/accessors_create.js"></script>
+    <script src="scripts/states/account.js"></script>
+    <!-- end account -->
+    <!-- start group resources -->
+    <script src="scripts/services/servicegroup.js"></script>
+    <script src="scripts/controllers/servicegroups/index.js"></script>
+    <script src="scripts/controllers/servicegroups/show.js"></script>
+    <script src="scripts/states/servicegroup.js"></script>
+    <!-- end group resources -->
+    <!-- start service resources -->
+    <script src="scripts/services/service.js"></script>
+    <script src="scripts/controllers/services/index.js"></script>
+    <script src="scripts/controllers/services/show.js"></script>
+    <script src="scripts/states/service.js"></script>
+    <!-- end service resources -->
+    <!-- start status resources -->
+    <script src="scripts/services/status.js"></script>
+    <script src="scripts/controllers/statuses/index.js"></script>
+    <script src="scripts/controllers/statuses/show.js"></script>
+    <script src="scripts/states/status.js"></script>
+    <!-- end status resources -->
+    <!-- start priority resources -->
+    <script src="scripts/services/priority.js"></script>
+    <script src="scripts/controllers/priorities/index.js"></script>
+    <script src="scripts/controllers/priorities/show.js"></script>
+    <script src="scripts/states/priority.js"></script>
+    <!-- end priority resources -->
+    <!-- start jurisdiction resources -->
+    <script src="scripts/services/jurisdiction.js"></script>
+    <script src="scripts/controllers/jurisdictions/index.js"></script>
+    <script src="scripts/controllers/jurisdictions/show.js"></script>
+    <script src="scripts/states/jurisdiction.js"></script>
+    <!-- end jurisdiction resources -->
+    <!-- start role resources -->
+    <script src="scripts/services/role.js"></script>
+    <script src="scripts/controllers/roles/index.js"></script>
+    <script src="scripts/controllers/roles/show.js"></script>
+    <script src="scripts/states/role.js"></script>
+    <!-- end role resources -->
+    <!-- start party resources -->
+    <script src="scripts/services/party.js"></script>
+    <script src="scripts/controllers/parties/index.js"></script>
+    <script src="scripts/controllers/parties/show.js"></script>
+    <script src="scripts/states/party.js"></script>
+    <!-- end party resources -->
+    <!-- start settings -->
+    <script src="scripts/services/summary.js"></script>
+    <script src="scripts/services/setting.js"></script>
+    <script src="scripts/controllers/settings/index.js"></script>
+    <script src="scripts/states/setting.js"></script>
+    <!-- end settings -->
+    <!-- start dashboard -->
+    <script src="scripts/controllers/dashboards/overview.js"></script>
+    <script src="scripts/controllers/dashboards/standing.js"></script>
+    <script src="scripts/controllers/dashboards/export.js"></script>
+    <script src="scripts/controllers/dashboards/performance.js"></script>
+    <script src="scripts/controllers/dashboards/comparison.js"></script>
+    <!-- end dashboard -->
+    <!-- endbuild -->
 </body>
 <toast></toast>
-
 </html>

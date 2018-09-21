@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @ngdoc service
+ * @ngdoc service request
  * @name ng311.ServiceRequest
  * @description
  * # ServiceRequest
@@ -17,10 +17,10 @@ angular
     var ServiceRequest = $resource(Utils.asLink(['servicerequests', ':id']), {
       id: '@_id'
     }, {
-      update: {
-        method: 'PUT'
-      },
-    });
+        update: {
+          method: 'PUT'
+        },
+      });
 
 
     /**
@@ -30,8 +30,8 @@ angular
      */
     ServiceRequest.find = function (params) {
       return $http.get(Utils.asLink('servicerequests'), {
-          params: params
-        })
+        params: params
+      })
         .then(function (response) {
 
           //map plain servicerequest object to resource instances
@@ -93,7 +93,7 @@ angular
       try {
         time = $filter('date')(issue.createdAt, 'hh:mm:ss a');
         date = $filter('date')(issue.createdAt, 'dd/MM/yyyy');
-      } catch (error) {}
+      } catch (error) { }
 
       //prepare e-mail body
       var body = [

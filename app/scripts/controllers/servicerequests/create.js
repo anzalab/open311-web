@@ -10,8 +10,14 @@
 angular
   .module('ng311')
   .controller('ServiceRequestCreateCtrl', function (
-    $rootScope, $scope, $state, $stateParams,
-    ServiceRequest, endpoints, party) {
+    $rootScope,
+    $scope,
+    $state,
+    $stateParams,
+    Account,
+    ServiceRequest,
+    endpoints,
+    party) {
 
     //action performed by this controller
     $scope.action = 'Create';
@@ -29,14 +35,14 @@ angular
       call: {
         startedAt: new Date()
       },
-      method: { name: undefined },
       reporter: ($stateParams || {}).reporter || {},
       jurisdiction: ($stateParams || {}).jurisdiction,
       service: ($stateParams || {}).service,
       description: ($stateParams || {}).description,
       address: ($stateParams || {}).address,
-      method: ($stateParams || {}).method
+      method: _.merge({}, { name: undefined }, ($stateParams || {}).method)
     });
+
     $scope.servicerequest = new ServiceRequest(servicerequest);
 
 
@@ -65,25 +71,56 @@ angular
 
       updateOrSave.then(function (response) {
 
-          response = response || {};
+        response = response || {};
 
-          response.message =
-            response.message || 'Service Request Saved Successfully';
+        response.message =
+          response.message || 'Service Request Saved Successfully';
 
-          $rootScope.$broadcast('appSuccess', response);
+        $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('servicerequest:create:success', response);
+        $rootScope.$broadcast('servicerequest:create:success', response);
 
-          $rootScope.$broadcast('app:servicerequests:reload');
+        $rootScope.$broadcast('app:servicerequests:reload');
 
-          $state.go('app.servicerequests.list');
+        $state.go('app.servicerequests.list');
 
-        })
+      })
         .catch(function (error) {
           $rootScope.$broadcast('appError', error);
           $rootScope.$broadcast('servicerequest:create:error', error);
         });
     };
 
+
+    /**
+     * @description Launch a customer lookup details in a modal window
+     * @function
+     * @name openLookModal
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.openLookupModal = function () {
+
+      var accountNumber = $scope.servicerequest.reporter.account;
+
+      Account
+        .getDetails(accountNumber)
+        .then(function (account) {
+          account = account || {};
+          $rootScope.account = account;
+          $scope.servicerequest.reporter = _.merge({}, {
+            name: account.name,
+            email: account.email
+          }, $scope.servicerequest.reporter);
+
+          $scope.servicerequest.jurisdiction =
+            $scope.servicerequest.jurisdiction || account.jurisdiction;
+          $scope.servicerequest.address =
+            $scope.servicerequest.address || account.address;
+          $scope.servicerequest.location = account.location;
+          $state.go('account.details');
+        });
+    };
 
   });

@@ -14,26 +14,26 @@
                         <div class="box">
                             <div class="box-body">
                                 <div class="m-b" title="Priority Name">
-                                    <div class="form-group form-material floating">
-                                        <input ng-disabled="!edit" ng-model="priority.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                                    <div class="form-group">
                                         <label title="Priority Name" class="floating-label">Name</label>
+                                        <input ng-disabled="!edit" ng-model="priority.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="m-t-lg" title="Priority Weight">
-                                    <div class="form-group form-material floating">
-                                        <input ng-disabled="!edit" ng-model="priority.weight" ng-required type="number" name="name" class="form-control" />
+                                    <div class="form-group">
                                         <label title="Priority Weight" class="floating-label">Weight</label>
+                                        <input ng-disabled="!edit" ng-model="priority.weight" ng-required type="number" name="name" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="m-t-lg" title="Priority Color">
                                     <color-picker ng-model="priority.color">
                                     </color-picker>
                                     <div class="m-t-lg">
-                                      <div class="form-group form-material floating">
-                                          <input title="Priority Color" ng-disabled="!edit" ng-model="priority.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
-                                          <label title="Priority Color" class="floating-label">Priority Color(HEX)</label>
-                                      </div>
-                                  </div>
+                                        <div class="form-group">
+                                            <label title="Priority Color" class="floating-label">Priority Color(HEX)</label>
+                                            <input title="Priority Color" ng-disabled="!edit" ng-model="priority.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

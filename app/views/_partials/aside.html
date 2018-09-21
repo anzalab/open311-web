@@ -15,6 +15,7 @@
                 <li class="nav-header hidden-folded">
                     <span class="text-xs">Main</span>
                 </li>
+
                 <li ui-sref-active="active" show-if-has-any-permit="servicerequest:create, servicerequest:view">
                     <a ui-sref="app.servicerequests.list" title="Issues & Service Request">
               <span class="nav-icon">
@@ -23,6 +24,7 @@
               <span class="nav-text">Issues</span>
           </a>
                 </li>
+
                 <li ui-sref-active="active" show-if-has-any-permit="servicerequest:create, servicerequest:edit">
                     <a ui-sref="app.create_servicerequests" ui-sref-opts="{reload: true}" title="Report New Issue or Service Request">
               <span class="nav-icon">
@@ -32,6 +34,14 @@
           </a>
                 </li>
 
+                <li ui-sref-active="active" show-if-has-any-permit="message:create, message:edit">
+                  <a ui-sref="app.alerts" ui-sref-opts="{reload: true}" title="Create and Manage Alerts">
+                    <span class="nav-icon">
+                        <i class="ion-android-notifications"></i>
+                    </span>
+                    <span class="nav-text">Alerts</span>
+                  </a>
+                </li>
 
                 <li ui-sref-active="active" show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view">
                     <a ui-sref="app.overviews" title="Overviews">
@@ -41,6 +51,7 @@
                 <span class="nav-text">Overviews</span>
               </a>
                 </li>
+
                 <li ui-sref-active="active" show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view">
                     <a ui-sref="app.standings" title="Standings">
               <span class="nav-icon">
@@ -49,6 +60,7 @@
               <span class="nav-text">Standings</span>
           </a>
                 </li>
+
                 <li ui-sref-active="active" show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view">
                     <a ui-sref="app.performances" title="Performances">
                     <span class="nav-icon">
@@ -57,6 +69,7 @@
                     <span class="nav-text">Performances</span>
                   </a>
                 </li>
+
                 <!-- <li ui-sref-active="active" show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view">
                     <a ui-sref="app.comparison" title="Comparison">
                   <span class="nav-icon">
@@ -65,6 +78,7 @@
                   <span class="nav-text">Comparison</span>
                 </a>
                 </li> -->
+
                 <li ui-sref-active="active" show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view">
                     <a ui-sref="app.exports" title="Exports">
               <span class="nav-icon">
@@ -73,6 +87,7 @@
               <span class="nav-text">Exports</span>
           </a>
                 </li>
+
                 <li show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view" ui-sref-active="active">
                     <a ui-sref="app.manage.jurisdictions" title="Manage System">
               <span class="nav-icon">
