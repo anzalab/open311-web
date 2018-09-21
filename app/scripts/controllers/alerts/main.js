@@ -16,8 +16,8 @@ angular
     $scope.limit = 10;
     $scope.search = {};
     $scope.channels = [];
-    var alert = { jurisdictions: [], methods: [], receivers: [] };
-    $scope.alert = alert;
+    $scope._alert = { jurisdictions: [], methods: [], receivers: [] };
+    $scope.alert = $scope._alert;
 
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.methods = [
@@ -100,7 +100,7 @@ angular
         .then(function( /*response*/ ) {
 
           //reset alert & dismiss modal
-          $scope.alert = alert;
+          $scope.alert = $scope._alert;
           $scope.modal.dismiss();
 
           //TODO avoid collision with alert.message
@@ -130,6 +130,9 @@ angular
      */
     $scope.find = function() {
       Alert.find({
+        sort: {
+          createdAt: -1
+        },
         page: $scope.page,
         q: $scope.q
       }).then(function(results) {
@@ -182,6 +185,7 @@ angular
 
     //listen for events
     $rootScope.$on('app:alerts:reload', function() {
+      $scope.alert = $scope._alert;
       $scope.find();
     });
 

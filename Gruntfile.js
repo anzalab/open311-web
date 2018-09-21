@@ -364,8 +364,8 @@ module.exports = function(grunt) {
         constants: {
           ENV: {
             name: 'development',
-            owner: 'DAWASCO',
-            title: 'SmartDawasco',
+            owner: 'MajiFix',
+            title: 'MajiFix',
             version: 'v0.1.0',
             description: 'Citizen Feedback System',
             apiEndPoint: {
@@ -400,8 +400,8 @@ module.exports = function(grunt) {
         constants: {
           ENV: {
             name: 'production',
-            owner: 'MWAUWASA',
-            title: 'MWAUWASA',
+            owner: 'MajiFix',
+            title: 'MajiFix',
             version: 'v0.1.0',
             description: 'Citizen Feedback System',
             apiEndPoint: {
