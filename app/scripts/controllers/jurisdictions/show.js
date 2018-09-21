@@ -47,10 +47,13 @@ angular
       //TODO show loading mask
 
       //update location(longitude & latitude) coordinates
-      $scope.jurisdiction.location.coordinates[0] =
-        $scope.jurisdiction.longitude;
-      $scope.jurisdiction.location.coordinates[1] =
-        $scope.jurisdiction.latitude;
+      $scope.jurisdiction.location = {
+        type: 'Point',
+        coordinates: [
+          $scope.jurisdiction.longitude || 0,
+          $scope.jurisdiction.latitude || 0
+        ]
+      };
 
       //try update or save jurisdiction
       var updateOrSave =

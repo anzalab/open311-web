@@ -231,6 +231,7 @@ angular
         });
 
       }
+
     };
 
     $scope.changePriority = function(priority) {
@@ -483,8 +484,19 @@ angular
     };
 
     $scope.loadComment = function(servicerequest) {
-      $scope.comments =
+      var comments =
         _.orderBy($scope.servicerequest.changelogs, 'createdAt', 'desc');
+      comments = _.map(comments, function(comment) {
+        comment.color = undefined;
+        comment.color =
+          (comment.status ? comment.status.color : comment.color);
+        comment.color =
+          (comment.priority ? comment.priority.color : comment.color);
+        comment.color = comment.reopenedAt ? '#F44336' : comment.color;
+        comment.color = comment.resolvedAt ? '#4CAF50' : comment.color;
+        return comment;
+      });
+      $scope.comments = comments;
     };
 
     /**

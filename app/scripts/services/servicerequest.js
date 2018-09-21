@@ -96,7 +96,6 @@ angular
       } catch (error) { }
 
       //prepare e-mail body
-      //TODO add internal notes & use template if possible
       var body = [
         'Hello,',
         '\n\n',
@@ -131,7 +130,100 @@ angular
         'Regards.'
       ].join('');
 
-      //TODO add internal notes
+      //add internal notes
+      var changelogs =
+        _.orderBy([].concat(issue.changelogs), 'createdAt', 'desc');
+      var notes = _.map(changelogs, function (changelog) {
+        var note = [];
+
+        //handle changelog
+        if (changelog.comment) {
+          note = note.concat([
+            changelog.changer.name,
+            ' on ',
+            $filter('date')(changelog.createdAt,
+              'dd MMM yyyy hh:mm:ss a'),
+            ': ',
+            'Write: ',
+            changelog.comment,
+          ].join(''));
+        }
+
+        //handle status
+        if (changelog.status) {
+          note = note.concat([
+            changelog.changer.name,
+            ' on ',
+            $filter('date')(changelog.createdAt,
+              'dd MMM yyyy hh:mm:ss a'),
+            ': ',
+            'Change status to ',
+            changelog.status.name,
+          ].join(''));
+        }
+
+        //handle priority
+        if (changelog.priority) {
+          note = note.concat([
+            changelog.changer.name,
+            ' on ',
+            $filter('date')(changelog.createdAt,
+              'dd MMM yyyy hh:mm:ss a'),
+            ': ',
+            'Change priority to ',
+            changelog.priority.name,
+          ].join(''));
+        }
+
+        //handle assignee
+        if (changelog.assignee) {
+          note = note.concat([
+            changelog.changer.name,
+            ' on ',
+            $filter('date')(changelog.createdAt,
+              'dd MMM yyyy hh:mm:ss a'),
+            ': ',
+            'Assignee to ',
+            changelog.assignee.name,
+          ].join(''));
+        }
+
+        //handle resolved
+        if (changelog.resolvedAt) {
+          note = note.concat([
+            changelog.changer.name,
+            ' on ',
+            $filter('date')(changelog.createdAt,
+              'dd MMM yyyy hh:mm:ss a'),
+            ': ',
+            'Change status to ',
+            'Resolved',
+          ].join(''));
+        }
+
+        //handle resolved
+        if (changelog.reopenedAt) {
+          note = note.concat([
+            changelog.changer.name,
+            ' on ',
+            $filter('date')(changelog.createdAt,
+              'dd MMM yyyy hh:mm:ss a'),
+            ': ',
+            'Change status to ',
+            'Reopened',
+          ].join(''));
+        }
+
+        note = _.filter(note, function (line) { return !_.isEmpty(line); });
+        note = note.length > 0 ? note.join(',\n') : undefined;
+        return note;
+
+      });
+
+      notes = _.compact(notes);
+
+      body = body + '\n\n' + 'Change Logs: ' + '\n\n' + notes.join(',\n');
+
       //TODO add a link to actual problem
 
       //prepare e-mail send option

@@ -1,0 +1,44 @@
+<div>
+    <!-- start filter header -->
+    <div class="modal-header">
+        <button type="button" class="close pull-right" ng-click="$dismiss()" aria-hidden="true">×</button>
+        <h4 class="modal-title">Profile Reports - Filters</h4>
+    </div>
+    <!-- end filter header -->
+    <!-- start filter body -->
+    <div class="modal-body">
+        <div class="container-fluid">
+            <!-- start date filters -->
+            <div class="row">
+                <!-- start start date filter -->
+                <div class="col-md-6">
+                    <div class="p-a p-l-none p-b-none">
+                        <h6 class="m-a-0">
+                            From
+                        </h6>
+                    </div>
+                    <div pickadate ng-model="filters.startedAt" max-date="maxDate" class="p-a p-l-none"></div>
+                </div>
+                <!-- end start date filter -->
+                <!-- start end date filter -->
+                <div class="col-md-6">
+                    <div class="p-a p-l-none p-b-none">
+                        <h6 class="m-a-0">
+                            To
+                        </h6>
+                    </div>
+                    <div pickadate ng-model="filters.endedAt" max-date="maxDate" class="p-a p-l-none"></div>
+                </div>
+                <!-- end end date filter -->
+            </div>
+            <!-- end date filters -->
+        </div>
+    </div>
+    <!-- end filter body -->
+    <!-- start filter footer -->
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+        <button class="btn btn-primary" ng-click="filter()">Filter</button>
+    </div>
+    <!-- end footer filter -->
+</div>

@@ -1,8 +1,8 @@
 {
   "name": "development",
-  "owner": "DAWASA",
-  "author": "DAWASA",
-  "title": "DAWASA",
+  "owner": "MajiFix",
+  "author": "MajiFix",
+  "title": "MajiFix",
   "version": "v0.1.0",
   "description": "Citizen Feedback System",
   "apiEndPoint":
@@ -12,17 +12,17 @@
   },
   "socketEndPoint":
   {
-    "web": "",
-    "mobile": ""
+    "web": "http://127.0.0.1:5000",
+    "mobile": "http://127.0.0.1:5000"
   },
   "socketEnable": false,
   "settings":
   {
     "locale": "sw",
-    "name": "DAWASA",
+    "name": "MajiFix",
     "email": "lallyelias87@gmail.com",
     "phone": "(000) 000 000 000",
-    "currency": "TZS",
+    "currency": "USD",
     "dateFormat": "dd/MM/yyyy",
     "timeFormat": "hh:mm:ss",
     "defaultPassword": "guest",

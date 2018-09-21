@@ -65,8 +65,6 @@ angular
     //switch locale to sw
     $numeraljsConfigProvider.locale(ENV.settings.locale);
 
-
-
     //unmatched route handler
     $urlRouterProvider.otherwise('/servicerequests');
 
