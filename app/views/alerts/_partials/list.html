@@ -1,0 +1,82 @@
+<!-- start alert list -->
+<div class="row-col lt">
+  <!-- start alert list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Alerts ...">
+        <span class="input-group-btn">
+          <button ng-click="onSearch()" class="btn btn-default btn-sm no-shadow"
+            type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end alert list search -->
+  <!-- start alert listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner" id="scrollable-alert-list">
+        <div class="list" data-ui-list="info">
+          <div ng-click="select(alert)" class="list-item list-item-padded" ng-repeat="alert in alerts" title="{{alert.subject}}">
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar title="Priority & Alert Type" data="{{alert.subject}}"
+                  height="60" width="60" shape="round">
+                </letter-avatar>
+              </span>
+            </div>
+            <div class="list-body">
+              <span title="Alert Issue Date" class="pull-right text-xs text-muted">
+                {{alert.createdAt | date:'dd MMM yyyy HH:mm'}}
+              </span>
+              <div class="item-title">
+                <a href="#" class="_500">
+                  {{alert.subject}} - {{alert.methods.join(', ')}}
+                  <br />
+                  <span class="font-size-12">
+                    <span class="text-muted" ng-repeat="method in alert.methods">
+                      {{method}} :
+                      <span title="Total Sent">
+                        <i class="icon-arrow-up-circle"></i>&nbsp;&nbsp;{{alert.statistics[method].sent}}
+                      </span>
+                      &nbsp;&nbsp;
+                      <span title="Total Delivered">
+                        <i class="icon-check"></i>
+                        {{alert.statistics[method].delivered}} &nbsp;&nbsp;
+                      </span>
+                      <span title="Total Failed">
+                        <i class="icon-close"></i>&nbsp;&nbsp;{{alert.statistics[method].failed}}
+                      </span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <small class="block text-xs text-muted text-ellipsis">
+                <span title="Alert Message: {{alert.message}}">
+                  <i class="icon-speech"></i>&nbsp;&nbsp;{{(alert.message) || 'NA'}}
+                </span>
+                <span class="pull-right" title="Alerted Areas">
+                  <i class="icon-location-pin"></i>&nbsp;&nbsp;
+                  {{alert.areas}}
+                </span>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end alert listing -->
+  <!-- start list bottom toolbox -->
+  <div class="p-x-md p-y">
+    <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="$parent.total" ng-model="$parent.page" items-per-page="$parent.limit" ng-change="find(query)" template-url="views/_partials/list_pager.html" style="padding-left: 12px;" role="group">
+    </div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end list bottom toolbox -->
+</div>
+<!-- end alerts list -->

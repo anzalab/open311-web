@@ -2,10 +2,28 @@
 
 Web UI for open311-api
 
+## Snippets
+
+```html
+<div class="form-group">
+    <label for="account">Account</label>
+    <div class="input-group">
+        <input ng-model="servicerequest.reporter.account" type="text" name="account" id="account" class="form-control" />
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">
+                <i class="icon-magnifier"></i>
+            </button>
+          </span>
+    </div>
+</div>
+```
+
+## References
+- [node-js-error-enospc](https://stackoverflow.com/questions/22475849/node-js-error-enospc/32600959#32600959)
 
 ## Contribute
 
-Fork this repo and push in your ideas. 
+Fork this repo and push in your ideas.
 Do not forget to add a bit of test(s) of what value you adding.
 
 ## License
