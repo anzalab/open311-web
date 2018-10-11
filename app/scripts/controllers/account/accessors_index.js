@@ -10,12 +10,18 @@ angular
 
     /**
      * Open Account details view
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.openAccountDetails = function () { $state.go('account.details'); };
 
 
     /**
      * Open a form for creating account accessor
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.addAccessor = function () { $state.go('account.create'); };
 
@@ -23,6 +29,9 @@ angular
     /**
      * Open a form for editing account accessor
      * @param {Object} accessor
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.editAccessor = function (accessor) {
       $state.go('account.create', { accessor: accessor });
@@ -32,6 +41,9 @@ angular
     /**
      * Verify account accessor
      * @param {String} phoneNumber
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.verifyAccessor = function (phoneNumber) {
 
@@ -47,6 +59,9 @@ angular
     /**
      * Remove account accessor
      * @param {String} phoneNumber
+     *
+     * @version 0.1.0
+     * @since 0.1.0
      */
     $scope.removeAccessor = function (phoneNumber) {
       Account.deleteAccessor(account._id, phoneNumber)
