@@ -168,7 +168,7 @@
         </div>
         <!-- end issue attachements -->
         <!-- start issue comment -->
-        <div ng-include="'views/servicerequests/_partials/comments.html'"></div>
+        <div ng-if="servicerequest.operator" ng-include="'views/servicerequests/_partials/comments.html'"></div>
         <!-- end issue comments -->
       </div>
     </div>
