@@ -88,6 +88,9 @@ angular
       //clear note
       $scope.note = {};
 
+      //clear comments
+      $scope.comments = [];
+
       //sort comments in desc order
       if (servicerequest && servicerequest._id) {
         //update scope service request ref
@@ -125,7 +128,6 @@ angular
               scrollWheelZoom: false
             }
           };
-
 
         }
 

@@ -9,7 +9,7 @@
  */
 angular
   .module('ng311')
-  .controller('ServiceRequestCreateCtrl', function (
+  .controller('ServiceRequestCreateCtrl', function(
     $rootScope,
     $scope,
     $state,
@@ -49,7 +49,7 @@ angular
     /**
      * @description save created servicerequest
      */
-    $scope.save = function () {
+    $scope.save = function() {
 
       $scope.create = false;
       $scope.updated = true;
@@ -69,23 +69,23 @@ angular
         (!$scope.servicerequest._id ?
           $scope.servicerequest.$save() : $scope.servicerequest.$update());
 
-      updateOrSave.then(function (response) {
+      updateOrSave.then(function(response) {
 
-        response = response || {};
+          response = response || {};
 
-        response.message =
-          response.message || 'Service Request Saved Successfully';
+          response.message =
+            response.message || 'Service Request Saved Successfully';
 
-        $rootScope.$broadcast('appSuccess', response);
+          $rootScope.$broadcast('appSuccess', response);
 
-        $rootScope.$broadcast('servicerequest:create:success', response);
+          $rootScope.$broadcast('servicerequest:create:success', response);
 
-        $rootScope.$broadcast('app:servicerequests:reload');
+          $rootScope.$broadcast('app:servicerequests:reload');
 
-        $state.go('app.servicerequests.list');
+          $state.go('app.servicerequests.list');
 
-      })
-        .catch(function (error) {
+        })
+        .catch(function(error) {
           $rootScope.$broadcast('appError', error);
           $rootScope.$broadcast('servicerequest:create:error', error);
         });
@@ -100,13 +100,13 @@ angular
      * @version 0.1.0
      * @since 0.1.0
      */
-    $scope.openLookupModal = function () {
+    $scope.openLookupModal = function() {
 
       var accountNumber = $scope.servicerequest.reporter.account;
 
       Account
         .getDetails(accountNumber)
-        .then(function (account) {
+        .then(function(account) {
 
           account = account || {};
 
