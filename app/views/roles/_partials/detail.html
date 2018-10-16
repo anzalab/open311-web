@@ -1,59 +1,59 @@
 <!-- start role details -->
 <div class="row-col">
-    <div class="white b-b bg">
-        <!-- start role detail action bar -->
-        <div ng-include="'views/roles/_partials/action_bar.html'" class="navbar"></div>
-        <!-- end role details action bar -->
-    </div>
-    <!-- start role body -->
-    <div class="row-row">
-        <div class="row-body">
-            <div class="row-inner">
-                <div class="padding">
-                    <form ng-submit="save()" name="roleForm" role="form" autocomplete="off" novalidate>
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="m-b" title="Role Name">
-                                    <div class="form-group">
-                                        <label title="Role Name" class="floating-label">Name</label>
-                                        <input ng-disabled="!edit" ng-model="role.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Role Description">
-                                    <div class="form-group">
-                                        <label class="floating-label">Description</label>
-                                        <textarea ng-disabled="!edit" ng-model="role.description" msd-elastic name="description" class="form-control" rows="2">
-                    </textarea>
-                                    </div>
-                                </div>
-                                <!-- start role permissions -->
-                                <div class="row m-t-lg">
-                                    <div class="col-sm-12">
-                                        <div class="form-inputs form-inputs-material">
-                                            <div class="form-group" ng-class="{'form-group-disabled':!edit}">
-                                                <label class="floating-label">Permissions</label>
-                                                <div class="row">
-                                                    <div class="col-md-4" ng-repeat="permission in grouped">
-                                                        <h6>{{permission.resource}}</h6>
-                                                        <div class="checkbox-custom checkbox-primary" ng-repeat="permit in permission.permits | orderBy : resource">
-                                                            <input ng-show="edit" type="checkbox" checklist-model="role._assigned" checklist-value="permit._id">
-                                                            <label title="{{permit.description}}">{{permit.resource}} {{permit.action}}</label>
-                                                        </div>
-                                                        <br/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end role permissions -->
-                            </div>
-                        </div>
-                    </form>
+  <div class="white b-b bg">
+    <!-- start role detail action bar -->
+    <div ng-include="'views/roles/_partials/action_bar.html'" class="navbar"></div>
+    <!-- end role details action bar -->
+  </div>
+  <!-- start role body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form ng-submit="save()" name="roleForm" role="form" autocomplete="off" novalidate>
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Role Name">
+                  <div class="form-group">
+                    <label title="Role Name" class="floating-label">Name</label>
+                    <input ng-disabled="!edit" ng-model="role.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
+                  </div>
                 </div>
+                <div class="m-t-lg" title="Role Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea ng-disabled="!edit" ng-model="role.description" msd-elastic name="description" class="form-control" rows="2">
+                    </textarea>
+                  </div>
+                </div>
+                <!-- start role permissions -->
+                <div class="row m-t-lg">
+                  <div class="col-sm-12">
+                    <div class="form-inputs form-inputs-material">
+                      <div class="form-group" ng-class="{'form-group-disabled':!edit}">
+                        <label class="floating-label">Permissions</label>
+                        <div class="row">
+                          <div class="col-md-4" ng-repeat="permission in grouped">
+                            <h6>{{permission.resource}}</h6>
+                            <div class="checkbox-custom checkbox-primary" ng-repeat="permit in permission.permits | orderBy : resource">
+                              <input ng-show="edit" type="checkbox" checklist-model="role._assigned" checklist-value="permit._id">
+                              <label title="{{permit.description}}">{{permit.resource}} {{permit.action}}</label>
+                            </div>
+                            <br />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end role permissions -->
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
-    <!-- end role body -->
+  </div>
+  <!-- end role body -->
 </div>
 <!-- end role details -->
