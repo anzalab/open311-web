@@ -107,7 +107,17 @@ angular
       Account
         .getDetails(accountNumber)
         .then(function (account) {
+
           account = account || {};
+
+          // ensure bill exists
+          var bills = _.get(account, 'bills', undefined);
+
+          if (bills) {
+            var _bills = _.orderBy(bills, 'period.billedAt', 'desc');
+            account = _.merge({}, account, { bills: _bills });
+          }
+
           $rootScope.account = account;
           $scope.servicerequest.reporter = _.merge({}, {
             name: account.name,
