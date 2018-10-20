@@ -9,7 +9,7 @@
  */
 angular
   .module('ng311')
-  .controller('PartyIndexCtrl', function (
+  .controller('PartyIndexCtrl', function(
     $rootScope, $scope, $state, Party
   ) {
 
@@ -22,7 +22,7 @@ angular
 
     $scope.search = {};
 
-    $scope.onSearch = function () {
+    $scope.onSearch = function() {
       if ($scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -36,7 +36,7 @@ angular
     /**
      * set current service request
      */
-    $scope.select = function (party) {
+    $scope.select = function(party) {
 
       //sort comments in desc order
       if (party && party._id) {
@@ -48,6 +48,9 @@ angular
 
         //deduce assigned roles
         party._assigned = _.map(party.roles, '_id');
+
+        //ensure relation
+        party.relation = party.relation || {};
 
         //update scope service request ref
         $scope.party = party;
@@ -63,7 +66,7 @@ angular
     /**
      * @description load parties
      */
-    $scope.find = function () {
+    $scope.find = function() {
       //start sho spinner
       $scope.spin = true;
 
@@ -75,7 +78,7 @@ angular
         },
         query: {},
         q: $scope.q
-      }).then(function (response) {
+      }).then(function(response) {
         //update scope with parties when done loading
         $scope.parties = response.parties;
         if ($scope.updated) {
@@ -85,14 +88,14 @@ angular
         }
         $scope.total = response.total;
         $scope.spin = false;
-      }).catch(function (error) {
+      }).catch(function(error) {
         $scope.spin = false;
       });
     };
 
 
     //check whether parties will paginate
-    $scope.willPaginate = function () {
+    $scope.willPaginate = function() {
       var willPaginate =
         ($scope.parties && $scope.total && $scope.total > $scope.limit);
       return willPaginate;
@@ -103,7 +106,7 @@ angular
     $scope.find();
 
     //listen for events
-    $rootScope.$on('app:parties:reload', function () {
+    $rootScope.$on('app:parties:reload', function() {
       $scope.find();
     });
 

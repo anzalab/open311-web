@@ -9,7 +9,7 @@
  */
 angular
   .module('ng311')
-  .controller('PartyShowCtrl', function (
+  .controller('PartyShowCtrl', function(
     $rootScope, $scope, $state, $stateParams, Party,
     jurisdictions, roles, party
   ) {
@@ -22,17 +22,18 @@ angular
 
     $scope.workspaces = party.settings.party.relation.workspaces;
 
-    $scope.onEdit = function () {
+    $scope.onEdit = function() {
       $scope.edit = true;
     };
 
-    $scope.onCancel = function () {
+    $scope.onCancel = function() {
       $scope.edit = false;
       $rootScope.$broadcast('app:parties:reload');
     };
 
-    $scope.onNew = function () {
+    $scope.onNew = function() {
       $scope.party = new Party({
+        relation: {},
         roles: [],
         _assigned: []
       });
@@ -42,7 +43,7 @@ angular
     /**
      * @description block created party
      */
-    $scope.block = function () {
+    $scope.block = function() {
       //TODO show input prompt
       //TODO show loading mask
       $scope.party.deletedAt = new Date();
@@ -54,7 +55,7 @@ angular
     /**
      * @description unblock created party
      */
-    $scope.unblock = function () {
+    $scope.unblock = function() {
       //TODO show input prompt
       //TODO show loading mask
       //clear soft delete data
@@ -77,14 +78,14 @@ angular
 
     //TODO show empty state if no party selected
     //listen for selected juridiction
-    $rootScope.$on('party:selected', function (event, party) {
+    $rootScope.$on('party:selected', function(event, party) {
       $scope.party = party;
     });
 
     /**
      * Listen for password confirmation input changes
      */
-    $scope.onConfirmPassword = function () {
+    $scope.onConfirmPassword = function() {
       if (!$scope.party.confirm || !$scope.party.password) {
         $scope.passwordDontMatch = false;
       } else {
@@ -99,7 +100,7 @@ angular
     /**
      * Listen for password input changes
      */
-    $scope.onPasswordChange = function () {
+    $scope.onPasswordChange = function() {
       if (!$scope.party.password) {
         $scope.canSave = true;
       } else {
@@ -112,7 +113,7 @@ angular
     /**
      * @description save created party
      */
-    $scope.save = function () {
+    $scope.save = function() {
       //TODO show input prompt
       //TODO show loading mask
 
@@ -123,7 +124,7 @@ angular
       var updateOrSave =
         (!$scope.party._id ? $scope.party.$save() : $scope.party.$update());
 
-      updateOrSave.then(function (response) {
+      updateOrSave.then(function(response) {
 
           response = response || {};
 
@@ -140,7 +141,7 @@ angular
           $scope.edit = false;
 
         })
-        .catch(function (error) {
+        .catch(function(error) {
           $rootScope.$broadcast('appError', error);
         });
     };
