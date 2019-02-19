@@ -80,7 +80,7 @@ angular
 
         $rootScope.$broadcast('servicerequest:create:success', response);
 
-        $rootScope.$broadcast('app:servicerequests:reload');
+        // $rootScope.$broadcast('app:servicerequests:reload');
 
         $state.go('app.servicerequests.list');
 
