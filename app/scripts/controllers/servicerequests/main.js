@@ -229,7 +229,7 @@ angular
           $scope.updated = true;
         }).catch(function(error) {
           //TODO notify error
-          console.log(error);
+          // console.log(error);
         });
 
       }
@@ -562,13 +562,13 @@ angular
       }).then(function(response) {
         //update scope with servicerequests when done loading
         $scope.servicerequests = response.servicerequests;
+        $scope.total = response.total;
+        $scope.spin = false;
         if ($scope.updated) {
           $scope.updated = false;
         } else {
           $scope.select(_.first($scope.servicerequests));
         }
-        $scope.total = response.total;
-        $scope.spin = false;
       }).catch(function(error) {
         $scope.spin = false;
       });
