@@ -10,7 +10,7 @@
 angular
   .module('ng311')
   .controller('AuthProfileCtrl', function (
-    $rootScope, $scope, $state, $auth, $uibModal, Party
+    $rootScope, $scope, $state, $stateParams, $auth, $uibModal, Party, Summary
   ) {
 
     //signal if its editing process
@@ -22,6 +22,14 @@ angular
 
     //use only editable properties
     $scope.party = new Party($rootScope.party);
+
+    // create initial default filters
+    var defaultFilters = {
+      startedAt: ($stateParams.startedAt || moment().utc().startOf('date').toDate()),
+      endedAt: ($stateParams.endedAt || moment().utc().endOf('date').toDate()),
+    };
+
+    $scope.filters = defaultFilters;
 
     //bind filters
     $scope.durationFilters = {
@@ -134,9 +142,9 @@ angular
 
 
     $scope.performance = function () {
-      var params = {
+      var params = _.merge({}, { query: $scope.params }, {
         _id: $scope.party._id
-      };
+      });
 
       Party.performances(params).then(function (response) {
         //TODO comment
@@ -152,8 +160,11 @@ angular
 
         response.leaderboard =
           _.orderBy(response.leaderboard, 'count', 'desc');
-        console.log(response);
         $scope.performances = response;
+        $scope.performances.overall = { count: 10, pending: 5, resolved: 5, late: 0, target: 0 };
+        $scope.performances.attendTime = { max: { days: 0, hours: 0, minutes: 0, seconds: 0 }, min: { days: 0, hours: 0, minutes: 0, seconds: 0 }, average: { days: 0, hours: 0, minutes: 0, seconds: 0 }, target: { days: 0, hours: 0, minutes: 0, seconds: 0 } };
+        $scope.performances.resolveTime = { max: { days: 0, hours: 0, minutes: 0, seconds: 0 }, min: { days: 0, hours: 0, minutes: 0, seconds: 0 }, average: { days: 0, hours: 0, minutes: 0, seconds: 0 }, target: { days: 0, hours: 0, minutes: 0, seconds: 0 } };
+
       });
     };
 
@@ -183,8 +194,17 @@ angular
     $scope.filter = function (reset) {
 
       if (reset) {
-        //TODO clear filters
+        $scope.filters = defaultFilters;
       }
+
+      $scope.params = Summary.prepareQuery($scope.filters);
+
+      //load reports
+      $scope.performance();
+
+      //close current modal
+      $scope.modal.close();
+
     };
 
     $scope.performance();
