@@ -68,6 +68,10 @@
   </div>
   <!-- start overall and pipeline summary -->
 
+  <ng-include ng-if="performances.breakdown"
+    src="'views/auth/_partials/service_requests_breakdown_summary.html'">
+  </ng-include>
+  
   <!-- start service request leader board -->
   <ng-include ng-if="performances.leaderboard"
     src="'views/auth/_partials/service_request_leaderboard.html'"></ng-include>

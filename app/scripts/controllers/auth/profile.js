@@ -164,7 +164,14 @@ angular
         $scope.performances.overall = { count: 10, pending: 5, resolved: 5, late: 0, target: 0 };
         $scope.performances.attendTime = { max: { days: 0, hours: 0, minutes: 0, seconds: 0 }, min: { days: 0, hours: 0, minutes: 0, seconds: 0 }, average: { days: 0, hours: 0, minutes: 0, seconds: 0 }, target: { days: 0, hours: 0, minutes: 0, seconds: 0 } };
         $scope.performances.resolveTime = { max: { days: 0, hours: 0, minutes: 0, seconds: 0 }, min: { days: 0, hours: 0, minutes: 0, seconds: 0 }, average: { days: 0, hours: 0, minutes: 0, seconds: 0 }, target: { days: 0, hours: 0, minutes: 0, seconds: 0 } };
-
+        $scope.performances.breakdown = [
+          { name: 'Billing', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Water Leakage', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Adjustment BTN', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Un registered Customer', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'New Connection', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 }
+        ];
       });
     };
 
