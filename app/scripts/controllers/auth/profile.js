@@ -170,7 +170,12 @@ angular
           { name: 'Adjustment BTN', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
           { name: 'Un registered Customer', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
           { name: 'New Connection', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
-          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 }
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
+          { name: 'Wrong Reading', total: 14, open: 2, inprogress: 5, close: 2, resolved: 5 },
         ];
       });
     };

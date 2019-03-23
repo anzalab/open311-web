@@ -1,4 +1,4 @@
-<!-- start overall area  summary -->
+<!-- start operator pipeline summary -->
 <div class="padding m-t-md">
 
   <!-- start report box -->
@@ -28,23 +28,6 @@
         </li>
         <!-- end export -->
 
-        <!-- start date filters -->
-        <li uib-dropdown class="nav-item inline dropdown" style="display:none">
-          <a uib-dropdown-toggle
-            class="btn btn-xs rounded white dropdown-toggle"
-            aria-expanded="false">Today</a>
-          <div uib-dropdown-menu
-            class="dropdown-menu dropdown-menu-scale pull-right">
-            <a class="dropdown-item" href="">Last 24 hours</a>
-            <a class="dropdown-item" href="">Last 7 days</a>
-            <a class="dropdown-item" href="">Last month</a>
-            <a class="dropdown-item" href="">Last Year</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item">Today</a>
-          </div>
-        </li>
-        <!-- end date filters -->
-
       </ul>
       <!-- end time filters -->
 
@@ -62,7 +45,7 @@
         <!-- start open -->
         <div ng-repeat="status in performances.pipelines"
           class="col-xs-6 col-sm-3 b-r b-b"
-          title="{{status.name}} Service Requests">
+          title="{{status.label.name}} Service Requests">
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
@@ -86,4 +69,4 @@
   <!-- end report box -->
 
 </div>
-<!-- end overall area summary -->
+<!-- end operator pipeline summary -->

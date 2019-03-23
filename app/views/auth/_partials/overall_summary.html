@@ -28,23 +28,6 @@
         </li>
         <!-- end export -->
 
-        <!-- start date filters -->
-        <li uib-dropdown class="nav-item inline dropdown" style="display:none">
-          <a uib-dropdown-toggle
-            class="btn btn-xs rounded white dropdown-toggle"
-            aria-expanded="false">Today</a>
-          <div uib-dropdown-menu
-            class="dropdown-menu dropdown-menu-scale pull-right">
-            <a class="dropdown-item" href="">Last 24 hours</a>
-            <a class="dropdown-item" href="">Last 7 days</a>
-            <a class="dropdown-item" href="">Last month</a>
-            <a class="dropdown-item" href="">Last Year</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item">Today</a>
-          </div>
-        </li>
-        <!-- end date filters -->
-
       </ul>
       <!-- end time filters -->
 
@@ -56,11 +39,12 @@
 
       <!-- start overall stats -->
 
-      <!-- start jurisdiction performance summary -->
+      <!-- start operator overall performance summary -->
       <div class="row no-gutter">
 
         <!-- start total -->
-        <div class="col-xs-6 col-sm-3 b-r b-b" title="Total Service Requests">
+        <div class="col-xs-6 col-sm-3 b-r b-b"
+          title="Total Service Requests Received">
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
@@ -126,8 +110,7 @@
         <!-- end late  -->
 
         <!-- start escalated -->
-        <div class="col-xs-6 col-sm-3 b-b"
-          title="Late(Past SLA Time) Service Requests">
+        <div class="col-xs-6 col-sm-3 b-b" title="Overall Target to be reached">
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
@@ -140,7 +123,7 @@
         <!-- end escalated  -->
 
       </div>
-      <!-- end jurisdiction performance summary -->
+      <!-- end operator overall performance summary -->
       <!-- end overall stats -->
     </div>
     <!-- end body -->
