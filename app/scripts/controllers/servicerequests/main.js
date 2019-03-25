@@ -673,6 +673,7 @@ angular
      * @description Open modal window for selecting operator for filtering workspace
      */
     $scope.showOperatorFilter = function () {
+      $scope.isOperatorFilter = true;
       $scope.modal = $uibModal.open({
         templateUrl: 'views/servicerequests/_partials/operator_filter.html',
         scope: $scope,
@@ -681,6 +682,23 @@ angular
 
       $scope.modal.result.then(function onClose() { }, function onDismissed() { });
     };
+
+    /**
+     * @function
+     * @name showAssigneeFilter
+     * @description Open modal window for selecting assignee for filtering workspace
+     */
+    $scope.showAssigneeFilter = function () {
+      $scope.isOperatorFilter = false;
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/operator_filter.html',
+        scope: $scope,
+        size: 'lg'
+      });
+
+      $scope.modal.result.then(function onClose() { }, function onDismissed() { });
+    };
+
 
     /**
      * @function
@@ -702,21 +720,6 @@ angular
       $scope.isOperatorFilter = true;
     };
 
-    /**
-     * @function
-     * @name showAssigneeFilter
-     * @description Open modal window for selecting assignee for filtering workspace
-     */
-    $scope.showAssigneeFilter = function () {
-      $scope.isOperatorFilter = false;
-      $scope.modal = $uibModal.open({
-        templateUrl: 'views/servicerequests/_partials/operator_filter.html',
-        scope: $scope,
-        size: 'lg'
-      });
-
-      $scope.modal.result.then(function onClose() { }, function onDismissed() { });
-    };
 
     //pre load un resolved servicerequests on state activation
     $scope.find({
