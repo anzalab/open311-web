@@ -1,120 +1,228 @@
-<!-- start servicerequests side subnav -->
+<!-- start service requests side subnav -->
 <div class="row-col bg b-r">
-    <!-- start title -->
-    <div class="b-b">
-        <div class="navbar">
-            <ul class="nav navbar-nav">
-                <li class="nav-item">
-                    <span class="navbar-item text-md">
-                        Issues
-                    </span>
-                </li>
+  <!-- start title -->
+  <div class="b-b">
+    <div class="navbar">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <span class="navbar-item text-md">
+            Issues
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- end title -->
+
+  <!-- start body -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <!-- start misc menu -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">Miscellaneous</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li ng-class="{active:misc == 'all'}" class="nav-item m-b-xs">
+                <a ng-click="load({resetPage:true, reset:true, misc:'all'})"
+                  class="nav-link text-muted block" title="All Reported Issues">
+                  All
+                </a>
+              </li>
+              <li ng-class="{active:misc == 'inbox'}" class="nav-item m-b-xs">
+                <a ng-click="load({$or: [{ operator: party._id }, { assignee: party._id }], resolvedAt:null, resetPage:true, reset:true, misc: 'inbox'})"
+                  class="nav-link text-muted block"
+                  title="My Pending Reported & Assigned Issues">
+                  Inbox
+                </a>
+              </li>
+              <li ng-class="{active:misc == 'unattended'}"
+                class="nav-item m-b-xs">
+                <a show-if-has-permit="servicerequest:attend"
+                  ng-click="load({operator:null, resetPage:true, reset:true, misc:'unattended'})"
+                  class="nav-link text-muted block"
+                  title="Reported Issues Using Other Method Than Call Center">
+                  Un-Attended
+                </a>
+              </li>
+              <li ng-class="{active:misc == 'unresolved'}"
+                class="nav-item m-b-xs">
+                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true, misc: 'unresolved'})"
+                  class="nav-link text-muted block"
+                  title="Reported Issues Currently Not Resolved">
+                  Un-Resolved
+                </a>
+              </li>
+              <li ng-class="{active:misc == 'resolved'}"
+                class="nav-item m-b-xs">
+                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true, misc: 'resolved'})"
+                  class="nav-link text-muted block"
+                  title="Reported Issues That Have Been Resolved">
+                  Resolved
+                </a>
+              </li>
             </ul>
+          </div>
         </div>
-    </div>
-    <!-- end title -->
-    <!-- start body -->
-    <div class="row-row">
-        <div class="row-body scrollable hover">
-            <div class="row-inner">
-                <!-- start misc menu -->
-                <div class="p-a-md">
-                    <div class="m-b text-muted text-xs">Miscellaneous</div>
-                    <div class="nav-active-white">
-                        <ul class="nav">
-                            <li ng-class="{active:misc == 'all'}" class="nav-item m-b-xs">
-                                <a ng-click="load({resetPage:true, reset:true, misc:'all'})" class="nav-link text-muted block" title="All Reported Issues">
-                                All
-                                </a>
-                            </li>
-                            <li ng-class="{active:misc == 'inbox'}" class="nav-item m-b-xs">
-                                <a ng-click="load({$or: [{ operator: party._id }, { assignee: party._id }], resolvedAt:null, resetPage:true, reset:true, misc: 'inbox'})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
-                                Inbox
-                                </a>
-                            </li>
-                            <li ng-class="{active:misc == 'unattended'}" class="nav-item m-b-xs">
-                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resetPage:true, reset:true, misc:'unattended'})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
-                                Un-Attended
-                                </a>
-                            </li>
-                            <li ng-class="{active:misc == 'unresolved'}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true, misc: 'unresolved'})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
-                                Un-Resolved
-                                </a>
-                            </li>
-                            <li ng-class="{active:misc == 'resolved'}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:{$ne:null}, operator:{$ne:null}, resetPage:true, reset:true, misc: 'resolved'})" class="nav-link text-muted block" title="Reported Issues That Have Been Resolved">
-                                Resolved
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end misc menu -->
-                <!-- start statuses menu -->
-                <div class="p-a-md">
-                    <div class="m-b text-muted text-xs">Status</div>
-                    <div class="nav-active-white">
-                        <ul class="nav">
-                            <li ng-class="{active:query.status == status._id}" class="nav-item m-b-xs" ng-repeat="status in statuses | orderBy:'weight'">
-                                <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{status.color}}">
-                                        {{summaries.statuses[status._id]}}
-                                    </span>{{status.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end statuses menu -->
-                <!-- start priorities menu -->
-                <div class="p-a-md">
-                    <div class="m-b text-muted text-xs">Priorities</div>
-                    <div class="nav-active-white">
-                        <ul class="nav">
-                            <li ng-class="{active:query.priority == priority._id}" class="nav-item m-b-xs" ng-repeat="priority in priorities | orderBy:'weight'">
-                                <a ng-click="load({'priority':priority._id, resetPage:true})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{priority.color}}">
-                                        {{summaries.priorities[priority._id]}}
-                                    </span>{{priority.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end priorities menu -->
-                <!-- start services menu -->
-                <div class="p-a-md">
-                    <div class="m-b text-muted text-xs">Services</div>
-                    <div class="nav-active-white">
-                        <ul class="nav">
-                            <li ng-class="{active:query.service == service._id}" class="nav-item m-b-xs" ng-repeat="service in services | orderBy:'name'">
-                                <a ng-click="load({service:service._id, resetPage:true})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{service.color}}">
-                                    {{summaries.services[service._id]}}
-                                    </span> {{service.name}}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end services menu -->
-                <!-- start jurisdictions menu -->
-                <div class="p-a-md" ng-if="jurisdictions.length > 1">
-                    <div class="m-b text-muted text-xs">Areas</div>
-                    <div class="nav-active-white">
-                        <ul class="nav">
-                            <li ng-class="{active:query.jurisdiction == jurisdiction._id}" class="nav-item m-b-xs" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
-                                <a ng-click="load({'jurisdiction':jurisdiction._id, resetPage:true})" class="nav-link text-muted block">
-                                    <span class="pull-right text-sm label danger rounded" style="background-color: {{jurisdiction.color}}">
-                                        {{summaries.jurisdictions[jurisdiction._id]}}
-                                    </span>{{jurisdiction.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end jurisdictions menu -->
-            </div>
+        <!-- end misc menu -->
+
+        <!-- start statuses menu -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">Status</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li ng-class="{active:query.status == status._id}"
+                class="nav-item m-b-xs"
+                ng-repeat="status in statuses | orderBy:'weight'">
+                <a ng-click="load({'status':status._id, resetPage:true})"
+                  class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded"
+                    style="background-color: {{status.color}}">
+                    {{summaries.statuses[status._id]}}
+                  </span>{{status.name}}</a>
+              </li>
+            </ul>
+          </div>
         </div>
+        <!-- end statuses menu -->
+
+        <!-- start priorities menu -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">Priorities</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li ng-class="{active:query.priority == priority._id}"
+                class="nav-item m-b-xs"
+                ng-repeat="priority in priorities | orderBy:'weight'">
+                <a ng-click="load({'priority':priority._id, resetPage:true})"
+                  class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded"
+                    style="background-color: {{priority.color}}">
+                    {{summaries.priorities[priority._id]}}
+                  </span>{{priority.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end priorities menu -->
+
+        <!-- start reportedAt date -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">
+            <a ng-click="showReportedAtFilter()">Reported Date
+              <i class="icon-calendar pull-right"></i>
+            </a>
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-link text-muted block">From :
+                <span class="pull-right text-sm">
+                  {{dateFilters.reportedAt.from | date : 'dd-MM-yyyy'}}
+                </span>
+              </li>
+              <li class="nav-link text-muted block">To :
+                <span class="pull-right text-sm">
+                  {{dateFilters.reportedAt.to | date : 'dd-MM-yyyy'}}</li>
+              </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end reportedAt date -->
+
+        <!-- start resolvedAt date inputs -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">
+            <a ng-click="showResolvedAtFilter()">Resolved Date
+              <i class="icon-calendar pull-right"></i>
+            </a>
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-link text-muted block">From :
+                <span class="pull-right text-sm">
+                  {{dateFilters.resolvedAt.from | date : 'dd-MM-yyyy'}}
+                </span>
+              </li>
+              <li class="nav-link text-muted block">To :
+                <span class="pull-right text-sm">
+                  {{dateFilters.resolvedAt.to | date : 'dd-MM-yyyy'}}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end resolvedAt date inputs -->
+
+        <!-- start Workers inputs -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">
+            <span ng-click="">Workers
+              <i class="icon-user pull-right"></i>
+            </span>
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-link text-muted block"
+                ng-click="showOperatorFilter()">Operator :
+                <span class="pull-right text-sm">
+                  {{operator ? operator.name : 'N/A'}}
+                </span>
+              </li>
+              <li class="nav-link text-muted block"
+                ng-click="showAssigneeFilter()">Assignee :
+                <span class="pull-right text-sm">
+                  {{assignee ? assignee.name : 'N/A'}}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end Workers inputs -->
+
+        <!-- start services menu -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">Services</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li ng-class="{active:query.service == service._id}"
+                class="nav-item m-b-xs"
+                ng-repeat="service in services | orderBy:'name'">
+                <a ng-click="load({service:service._id, resetPage:true})"
+                  class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded"
+                    style="background-color: {{service.color}}">
+                    {{summaries.services[service._id]}}
+                  </span> {{service.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end services menu -->
+
+        <!-- start jurisdictions menu -->
+        <div class="p-a-md" ng-if="jurisdictions.length > 1">
+          <div class="m-b text-muted text-xs">Areas</div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li ng-class="{active:query.jurisdiction == jurisdiction._id}"
+                class="nav-item m-b-xs"
+                ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
+                <a ng-click="load({'jurisdiction':jurisdiction._id, resetPage:true})"
+                  class="nav-link text-muted block">
+                  <span class="pull-right text-sm label danger rounded"
+                    style="background-color: {{jurisdiction.color}}">
+                    {{summaries.jurisdictions[jurisdiction._id]}}
+                  </span>{{jurisdiction.name}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end jurisdictions menu -->
+      </div>
     </div>
-    <!-- end body -->
+  </div>
+  <!-- end body -->
 </div>
-<!-- end servicerequests side subnav -->
+<!-- end service requests side subnav -->
