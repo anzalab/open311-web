@@ -210,6 +210,7 @@ angular
           //update changelog
           var _id = $scope.servicerequest._id;
           ServiceRequest.changelog(_id, changelog).then(function (response) {
+            $scope.modal.close();
             // $scope.servicerequest = response;
             $scope.select(response);
             $scope.updated = true;
@@ -699,6 +700,22 @@ angular
       $scope.modal.result.then(function onClose() { }, function onDismissed() { });
     };
 
+    /**
+     * @function
+     * @name showAssigneeFilter
+     * @description Open modal window for selecting assignee for filtering workspace
+     */
+    $scope.showAssigneeModal = function () {
+      if (!$scope.servicerequest.resolvedAt) {
+        $scope.modal = $uibModal.open({
+          templateUrl: 'views/servicerequests/_partials/assignee_modal.html',
+          scope: $scope,
+          size: 'lg'
+        });
+
+        $scope.modal.result.then(function onClose() { }, function onDismissed() { });
+      }
+    };
 
     /**
      * @function
