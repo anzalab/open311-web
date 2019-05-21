@@ -30,7 +30,7 @@
   "devDependencies": {
     "autoprefixer-core": "^6.0.1",
     "chai": "^4.2.0",
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
     "grunt-angular-localization": "^1.0.1",
     "grunt-angular-templates": "^1.1.0",
     "grunt-concurrent": "^2.3.1",
