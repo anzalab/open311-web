@@ -41,22 +41,22 @@
 
     <!-- start overall and pipeline summary -->
     <div class="row no-gutter">
+      <!-- start of area overall summary -->
       <div class="col-xs-12 col-sm-6 col-md-6">
-        <!-- start of area overall summary -->
         <ng-include
           ng-if="performances && performances.overall"
           src="'views/dashboards/performance/_partials/overall_summary.html'"
         ></ng-include>
-        <!-- end of area overall summary -->
       </div>
+      <!-- end of area overall summary -->
+      <!-- start area service pipeline -->
       <div class="col-xs-12 col-sm-6 col-md-6">
-        <!-- start area service pipeline -->
         <ng-include
           ng-if="performances.statuses && performances.statuses.length > 0"
           src="'views/dashboards/performance/_partials/pipeline_summary.html'"
         ></ng-include>
-        <!-- end area service pipeline -->
       </div>
+      <!-- end area service pipeline -->
     </div>
     <!-- end overall and pipeline summary -->
 
@@ -70,6 +70,13 @@
       src="'views/dashboards/performance/_partials/services_summary.html'"
     ></ng-include>
     <!-- end services summary -->
+
+    <!-- start zone summary -->
+    <ng-include
+      ng-if="performances.services  && performances.services.length > 0"
+      src="'views/dashboards/operation/_partials/jurisdiction_zone_summary.html'"
+    ></ng-include>
+    <!-- end zone summary -->
 
     <!-- start material used summary -->
     <ng-include
@@ -87,7 +94,7 @@
           <ng-include
             ng-if="performances.operators"
             src="'views/dashboards/_partials/service_request_leaderboard.html'"
-          />
+          ></ng-include>
           <!-- end of staff leaderboard -->
         </div>
         <div class="col-sm-12 col-md-5 col-lg-5 offset-md-1">
@@ -95,7 +102,7 @@
           <ng-include
             ng-if="performances.jurisdictions"
             src="'views/dashboards/_partials/service_request_area_leaderboard.html'"
-          />
+          ></ng-include>
           <!-- end of area leaderboard -->
         </div>
       </div>

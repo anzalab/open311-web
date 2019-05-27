@@ -51,6 +51,44 @@ angular
       { name: 'Air Valve 3"Double Acting (GS)', quantity: 1 },
       { name: 'Air Valve 3"Single Acting (GS)', quantity: 1 },
     ];
+    $scope.zones = [
+      {
+        name: 'Zone A',
+        total: 10,
+        inProgress: 4,
+        done: 2,
+        verified: 2,
+        closed: 2,
+        late: 0,
+      },
+      {
+        name: 'Zone B',
+        total: 10,
+        inProgress: 4,
+        done: 2,
+        verified: 2,
+        closed: 2,
+        late: 0,
+      },
+      {
+        name: 'Zone C',
+        total: 10,
+        inProgress: 4,
+        done: 2,
+        verified: 2,
+        closed: 2,
+        late: 0,
+      },
+      {
+        name: 'Zone D',
+        total: 10,
+        inProgress: 4,
+        done: 2,
+        verified: 2,
+        closed: 2,
+        late: 0,
+      },
+    ];
 
     //set default jurisdiction
     $scope.jurisdiction =
