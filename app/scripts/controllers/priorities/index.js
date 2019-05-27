@@ -9,10 +9,12 @@
  */
 angular
   .module('ng311')
-  .controller('PriorityIndexCtrl', function (
-    $rootScope, $scope, $state, Priority
+  .controller('PriorityIndexCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    Priority
   ) {
-
     //priorities in the scope
     $scope.spin = false;
     $scope.priorities = [];
@@ -22,7 +24,7 @@ angular
 
     $scope.search = {};
 
-    $scope.onSearch = function () {
+    $scope.onSearch = function() {
       if ($scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -32,12 +34,10 @@ angular
       }
     };
 
-
     /**
      * set current service request
      */
-    $scope.select = function (priority) {
-
+    $scope.select = function(priority) {
       //sort comments in desc order
       if (priority && priority._id) {
         //update scope service request ref
@@ -46,14 +46,12 @@ angular
       }
 
       $scope.create = false;
-
     };
-
 
     /**
      * @description load priorities
      */
-    $scope.find = function () {
+    $scope.find = function() {
       //start sho spinner
       $scope.spin = true;
 
@@ -61,40 +59,39 @@ angular
         page: $scope.page,
         limit: $scope.limit,
         sort: {
-          name: 1
+          name: 1,
         },
         query: {},
-        q: $scope.q
-      }).then(function (response) {
-        //update scope with priorities when done loading
-        $scope.priorities = response.priorities;
-        if ($scope.updated) {
-          $scope.updated = false;
-        } else {
-          $scope.select(_.first($scope.priorities));
-        }
-        $scope.total = response.total;
-        $scope.spin = false;
-      }).catch(function (error) {
-        $scope.spin = false;
-      });
+        q: $scope.q,
+      })
+        .then(function(response) {
+          //update scope with priorities when done loading
+          $scope.priorities = response.priorities;
+          if ($scope.updated) {
+            $scope.updated = false;
+          } else {
+            $scope.select(_.first($scope.priorities));
+          }
+          $scope.total = response.total;
+          $scope.spin = false;
+        })
+        .catch(function(error) {
+          $scope.spin = false;
+        });
     };
-
 
     //check whether priorities will paginate
-    $scope.willPaginate = function () {
+    $scope.willPaginate = function() {
       var willPaginate =
-        ($scope.priorities && $scope.total && $scope.total > $scope.limit);
+        $scope.priorities && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
-
 
     //pre load priorities on state activation
     $scope.find();
 
     //listen for events
-    $rootScope.$on('app:priorities:reload', function () {
+    $rootScope.$on('app:priorities:reload', function() {
       $scope.find();
     });
-
   });

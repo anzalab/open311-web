@@ -10,16 +10,33 @@
     <ul class="nav navbar-nav pull-right">
       <!-- start filter -->
       <li class="nav-item">
-        <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">      
-            <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
+        <a
+          ng-click="showFilter()"
+          class="nav-link"
+          aria-expanded="false"
+          title="Click to Filter Report"
+        >
+          <i
+            class="ion-android-funnel w-24"
+            title="Click To Filter Reports"
+          ></i>
         </a>
       </li>
       <!-- end filter -->
       <!-- start download -->
       <li class="nav-item" ng-if="standings && standings.length > 0">
-        <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="standings.csv">
-                <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
-            </a>
+        <a
+          title="Click To Export Reports"
+          class="nav-link"
+          ng-csv="export"
+          csv-header="exports.headers"
+          filename="standings.csv"
+        >
+          <i
+            class="icon-cloud-download w-24"
+            title="Click To Export Reports"
+          ></i>
+        </a>
       </li>
       <!-- end download -->
     </ul>
@@ -40,11 +57,14 @@
               <div class="box-header">
                 <h3>Issue per Area - Work Load</h3>
                 <small class="block text-muted">
-                                 Count of Reported Issues by Their Area
-                                </small>
+                  Count of Reported Issues by Their Area
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perJurisdictionConfig" options="perJurisdictionOptions"></echart>
+                <echart
+                  config="perJurisdictionConfig"
+                  options="perJurisdictionOptions"
+                ></echart>
               </div>
             </div>
           </div>
@@ -57,13 +77,19 @@
           <div class="col-sm-12">
             <div class="box">
               <div class="box-header">
-                <h3>Issue per Area per Service Group - Affected Business Units(Divisions)</h3>
+                <h3>
+                  Issue per Area per Service Group - Affected Business
+                  Units(Divisions)
+                </h3>
                 <small class="block text-muted">
-                                 Count of Reported Issues by Their Area and Service Group
-                                </small>
+                  Count of Reported Issues by Their Area and Service Group
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perJurisdictionPerServiceGroupConfig" options="perJurisdictionPerServiceGroupOptions"></echart>
+                <echart
+                  config="perJurisdictionPerServiceGroupConfig"
+                  options="perJurisdictionPerServiceGroupOptions"
+                ></echart>
               </div>
             </div>
           </div>
@@ -78,11 +104,15 @@
               <div class="box-header">
                 <h3>Issue per Area per Service - Impacted Business Services</h3>
                 <small class="block text-muted">
-                                 Count of Reported Issues by Their Area and Service
-                                </small>
+                  Count of Reported Issues by Their Area and Service
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart ng-repeat="options in perJurisdictionPerServiceOptions" config="perJurisdictionPerServiceConfig" options="options"></echart>
+                <echart
+                  ng-repeat="options in perJurisdictionPerServiceOptions"
+                  config="perJurisdictionPerServiceConfig"
+                  options="options"
+                ></echart>
               </div>
             </div>
           </div>
@@ -97,11 +127,14 @@
               <div class="box-header">
                 <h3>Issue per Area per Priority - Work Severity</h3>
                 <small class="block text-muted">
-                                 Count of Reported Issues by Their Area and Priority
-                                </small>
+                  Count of Reported Issues by Their Area and Priority
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perJurisdictionPerPriorityConfig" options="perJurisdictionPerPriorityOptions"></echart>
+                <echart
+                  config="perJurisdictionPerPriorityConfig"
+                  options="perJurisdictionPerPriorityOptions"
+                ></echart>
               </div>
             </div>
           </div>
@@ -116,11 +149,14 @@
               <div class="box-header">
                 <h3>Issue per Area per Status - Work Progress</h3>
                 <small class="block text-muted">
-                                 Count of Reported Issues by Their Area and Status
-                                </small>
+                  Count of Reported Issues by Their Area and Status
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perJurisdictionPerStatusConfig" options="perJurisdictionPerStatusOptions"></echart>
+                <echart
+                  config="perJurisdictionPerStatusConfig"
+                  options="perJurisdictionPerStatusOptions"
+                ></echart>
               </div>
             </div>
           </div>

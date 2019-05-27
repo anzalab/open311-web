@@ -8,24 +8,19 @@
  * dashboard daily comparison controller of ng311
  */
 
-
 angular
   .module('ng311')
-  .controller('DashboardComparisonCtrl', function ($scope, Summary) {
+  .controller('DashboardComparisonCtrl', function($scope, Summary) {
+    $scope.reload = function() {
+      Summary.standings().then(function(standings) {
+        $scope.standings = standings;
 
-    $scope.reload = function () {
-      Summary
-        .standings()
-        .then(function (standings) {
-          $scope.standings = standings;
-
-          $scope.prepare();
-        });
+        $scope.prepare();
+      });
     };
 
     // prepare standing report data in a preferable format
-    $scope.prepare = function () {
-
+    $scope.prepare = function() {
       $scope.statuses = _.chain($scope.standings)
         .map('status')
         .uniqBy('name')
@@ -39,7 +34,6 @@ angular
         .sortBy('name')
         .value();
 
-
       $scope.prepareAreaPerStatus();
       $scope.prepareAreaPerServiceGroup();
       $scope.prepareAreaPerService();
@@ -47,30 +41,27 @@ angular
       $scope.prepareServiceGroupPerStatus();
     };
 
-
     // TODO document this function
-    $scope.prepareAreaPerStatus = function () {
-
+    $scope.prepareAreaPerStatus = function() {
       var areas = _.chain($scope.standings)
         .map('jurisdiction')
         .uniqBy('name')
         .sortBy('name')
         .value();
 
-
-
       // data which will be displayed
       var data = [];
-      _.forEach(areas, function (area) {
+      _.forEach(areas, function(area) {
         var jurisdiction = {};
         jurisdiction.total = 0;
         jurisdiction.statuses = [];
-        _.forEach($scope.statuses, function (status) {
-
+        _.forEach($scope.statuses, function(status) {
           // filter all data from same jurisdiction and with the same status name
-          var value = _.filter($scope.standings, function (standing) {
-            return standing.jurisdiction.name === area.name &&
-              standing.status.name === status.name;
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.jurisdiction.name === area.name &&
+              standing.status.name === status.name
+            );
           });
 
           value = value ? _.sumBy(value, 'count') : 0;
@@ -82,17 +73,14 @@ angular
           jurisdiction.total += value;
           // add array of statuses into jurisdiction data object
           jurisdiction.statuses.push(status);
-
         });
 
-        jurisdiction.statuses = _.sortBy(jurisdiction.statuses,
-          'weight');
+        jurisdiction.statuses = _.sortBy(jurisdiction.statuses, 'weight');
 
         jurisdiction.name = area.name;
 
         data.push(jurisdiction);
       });
-
 
       // create last Row which is the summation of all areas based on statuses
       var lastRow = {};
@@ -100,10 +88,9 @@ angular
       lastRow.statuses = [];
       lastRow.total = 0;
 
-      _.forEach($scope.statuses, function (status) {
-
+      _.forEach($scope.statuses, function(status) {
         // filter all data from same jurisdiction and with the same status name
-        var value = _.filter($scope.standings, function (standing) {
+        var value = _.filter($scope.standings, function(standing) {
           return standing.status.name === status.name;
         });
 
@@ -116,7 +103,6 @@ angular
         });
 
         lastRow.statuses.push(status);
-
       });
 
       data.push(lastRow);
@@ -125,14 +111,13 @@ angular
     };
 
     // TODO document this function
-    $scope.preparePipeline = function () {
+    $scope.preparePipeline = function() {
       var data = [];
       var total = 0;
 
-      _.forEach($scope.statuses, function (status) {
-
+      _.forEach($scope.statuses, function(status) {
         // filter all data from same jurisdiction and with the same status name
-        var value = _.filter($scope.standings, function (standing) {
+        var value = _.filter($scope.standings, function(standing) {
           return standing.status.name === status.name;
         });
 
@@ -146,42 +131,35 @@ angular
 
         data.push(status);
       });
-
-
-
     };
 
     //TODO document this function
-    $scope.prepareAreaPerServiceGroup = function () {
-
+    $scope.prepareAreaPerServiceGroup = function() {
       var areas = _.chain($scope.standings)
         .map('jurisdiction')
         .uniqBy('name')
         .sortBy('name')
         .value();
 
-
-
       var data = [];
 
-      _.forEach(areas, function (area) {
+      _.forEach(areas, function(area) {
         var jurisdiction = {};
         jurisdiction.name = area.name;
         jurisdiction.groups = [];
         jurisdiction.total = 0;
-        _.forEach($scope.groups, function (group) {
-
-          var value = _.filter($scope.standings, function (standing) {
-            return standing.jurisdiction.name === area.name &&
-              standing.group.name === group.name;
+        _.forEach($scope.groups, function(group) {
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.jurisdiction.name === area.name &&
+              standing.group.name === group.name
+            );
           });
-
-
 
           value = value ? _.sumBy(value, 'count') : 0;
 
           group = _.merge({}, group, {
-            count: value
+            count: value,
           });
 
           jurisdiction.groups.push(group);
@@ -192,23 +170,21 @@ angular
         data.push(jurisdiction);
       });
 
-
       // prepare last Row
       var lastRow = {};
       lastRow.name = 'Total';
       lastRow.groups = [];
       lastRow.total = 0;
 
-      _.forEach($scope.groups, function (group) {
-
-        var value = _.filter($scope.standings, function (standing) {
+      _.forEach($scope.groups, function(group) {
+        var value = _.filter($scope.standings, function(standing) {
           return standing.group.name === group.name;
         });
 
         value = value ? _.sumBy(value, 'count') : 0;
 
         group = _.merge({}, group, {
-          count: value
+          count: value,
         });
 
         lastRow.groups.push(group);
@@ -222,8 +198,7 @@ angular
     };
 
     // TODO document this function
-    $scope.prepareAreaPerService = function () {
-
+    $scope.prepareAreaPerService = function() {
       $scope.areas = _.chain($scope.standings)
         .map('jurisdiction')
         .uniqBy('name')
@@ -238,16 +213,17 @@ angular
 
       var data = [];
 
-      _.forEach(services, function (service) {
+      _.forEach(services, function(service) {
         var serviceObject = {};
         serviceObject.name = service.name;
         serviceObject.areas = [];
         serviceObject.total = 0;
-        _.forEach($scope.areas, function (area) {
-
-          var value = _.filter($scope.standings, function (standing) {
-            return standing.service.name === service.name &&
-              standing.jurisdiction.name === area.name;
+        _.forEach($scope.areas, function(area) {
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.service.name === service.name &&
+              standing.jurisdiction.name === area.name
+            );
           });
 
           value = value ? _.sumBy(value, 'count') : 0;
@@ -255,7 +231,7 @@ angular
           serviceObject.total += value;
 
           area = _.merge({}, area, {
-            count: value
+            count: value,
           });
 
           serviceObject.areas.push(area);
@@ -264,15 +240,13 @@ angular
         data.push(serviceObject);
       });
 
-
       var lastRow = {};
       lastRow.name = 'Total';
       lastRow.areas = [];
       lastRow.total = 0;
       // prepare the last row which is the summation of each column
-      _.forEach($scope.areas, function (area) {
-
-        var value = _.filter($scope.standings, function (standing) {
+      _.forEach($scope.areas, function(area) {
+        var value = _.filter($scope.standings, function(standing) {
           return standing.jurisdiction.name === area.name;
         });
 
@@ -281,7 +255,7 @@ angular
         lastRow.total += value;
 
         area = _.merge({}, area, {
-          count: value
+          count: value,
         });
 
         lastRow.areas.push(area);
@@ -293,8 +267,7 @@ angular
     };
 
     // TODO document this function
-    $scope.prepareServicePerStatus = function () {
-
+    $scope.prepareServicePerStatus = function() {
       var services = _.chain($scope.standings)
         .map('service')
         .uniqBy('name')
@@ -302,23 +275,24 @@ angular
         .value();
 
       var data = [];
-      _.forEach(services, function (service) {
+      _.forEach(services, function(service) {
         var serviceObject = {};
         serviceObject.name = service.name;
         serviceObject.total = 0;
         serviceObject.statuses = [];
 
-        _.forEach($scope.statuses, function (status) {
-
-          var value = _.filter($scope.standings, function (standing) {
-            return standing.service.name === service.name &&
-              standing.status.name === status.name;
+        _.forEach($scope.statuses, function(status) {
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.service.name === service.name &&
+              standing.status.name === status.name
+            );
           });
 
           value = value ? _.sumBy(value, 'count') : 0;
 
           status = _.merge({}, status, {
-            count: value
+            count: value,
           });
 
           serviceObject.statuses.push(status);
@@ -327,25 +301,22 @@ angular
         });
 
         data.push(serviceObject);
-
       });
-
 
       var lastRow = {};
       lastRow.name = 'Total';
       lastRow.total = 0;
       lastRow.statuses = [];
 
-      _.forEach($scope.statuses, function (status) {
-
-        var value = _.filter($scope.standings, function (standing) {
+      _.forEach($scope.statuses, function(status) {
+        var value = _.filter($scope.standings, function(standing) {
           return standing.status.name === status.name;
         });
 
         value = value ? _.sumBy(value, 'count') : 0;
 
         status = _.merge({}, status, {
-          count: value
+          count: value,
         });
 
         lastRow.statuses.push(status);
@@ -358,9 +329,7 @@ angular
       $scope.servicePerStatus = data;
     };
 
-
-    $scope.prepareServiceGroupPerStatus = function () {
-
+    $scope.prepareServiceGroupPerStatus = function() {
       // service groups
       var groups = _.chain($scope.standings)
         .map('group')
@@ -370,28 +339,28 @@ angular
 
       var data = [];
 
-      _.forEach(groups, function (group) {
+      _.forEach(groups, function(group) {
         var groupObject = {};
         groupObject.name = group.name;
         groupObject.statuses = [];
         groupObject.total = 0;
-        _.forEach($scope.statuses, function (status) {
-
-          var value = _.filter($scope.standings, function (standing) {
-            return standing.group.name === group.name &&
-              standing.status.name === status.name;
+        _.forEach($scope.statuses, function(status) {
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.group.name === group.name &&
+              standing.status.name === status.name
+            );
           });
 
           value = value ? _.sumBy(value, 'count') : 0;
 
           status = _.merge({}, status, {
-            count: value
+            count: value,
           });
 
           groupObject.statuses.push(status);
 
           groupObject.total += value;
-
         });
         data.push(groupObject);
       });
@@ -402,22 +371,20 @@ angular
       lastRow.name = 'Total';
       lastRow.statuses = [];
 
-      _.forEach($scope.statuses, function (status) {
-
-        var value = _.filter($scope.standings, function (standing) {
+      _.forEach($scope.statuses, function(status) {
+        var value = _.filter($scope.standings, function(standing) {
           return standing.status.name === status.name;
         });
 
         value = value ? _.sumBy(value, 'count') : 0;
 
         status = _.merge({}, status, {
-          count: value
+          count: value,
         });
 
         lastRow.statuses.push(status);
 
         lastRow.total += value;
-
       });
 
       data.push(lastRow);
@@ -425,44 +392,45 @@ angular
       $scope.serviceGroupPerStatus = data;
     };
 
-
-
     // dummy data
-    $scope.pipelines = [{
-      count: 17,
-      label: {
-        name: 'Total'
+    $scope.pipelines = [
+      {
+        count: 17,
+        label: {
+          name: 'Total',
+        },
+        displayColor: '#4BC0C0',
       },
-      displayColor: '#4BC0C0'
-    }, {
-      count: 7,
-      label: {
-        name: 'Open'
+      {
+        count: 7,
+        label: {
+          name: 'Open',
+        },
+        displayColor: '#0D47A1',
       },
-      displayColor: '#0D47A1'
-    }, {
-      count: 5,
-      label: {
-        name: 'In Progress'
+      {
+        count: 5,
+        label: {
+          name: 'In Progress',
+        },
+        displayColor: '#1B5E20',
       },
-      displayColor: '#1B5E20'
-    }, {
-      count: 5,
-      label: {
-        name: 'Escallated'
+      {
+        count: 5,
+        label: {
+          name: 'Escallated',
+        },
+        displayColor: '#EF6C00',
       },
-      displayColor: '#EF6C00'
-    }, {
-      count: 5,
-      label: {
-        name: 'Closed'
+      {
+        count: 5,
+        label: {
+          name: 'Closed',
+        },
+        displayColor: '#1B5E20',
       },
-      displayColor: '#1B5E20'
-    }];
-
+    ];
 
     // reload standing data
     $scope.reload();
-
-
   });

@@ -1,8 +1,14 @@
 <div>
   <!-- start filter header -->
   <div class="modal-header">
-    <button type="button" class="close pull-right" ng-click="$dismiss()"
-      aria-hidden="true">×</button>
+    <button
+      type="button"
+      class="close pull-right"
+      ng-click="$dismiss()"
+      aria-hidden="true"
+    >
+      ×
+    </button>
     <h4 class="modal-title">Resolve Date - Filters</h4>
   </div>
   <!-- end filter header -->
@@ -18,8 +24,12 @@
               From
             </h6>
           </div>
-          <div pickadate ng-model="dateFilters.resolvedAt.from"
-            max-date="maxDate" class="p-a p-l-none"></div>
+          <div
+            pickadate
+            ng-model="dateFilters.resolvedAt.from"
+            max-date="maxDate"
+            class="p-a p-l-none"
+          ></div>
         </div>
         <!-- end start date filter -->
         <!-- start end date filter -->
@@ -29,8 +39,12 @@
               To
             </h6>
           </div>
-          <div pickadate ng-model="dateFilters.resolvedAt.to" max-date="maxDate"
-            class="p-a p-l-none"></div>
+          <div
+            pickadate
+            ng-model="dateFilters.resolvedAt.to"
+            max-date="maxDate"
+            class="p-a p-l-none"
+          ></div>
         </div>
         <!-- end end date filter -->
       </div>

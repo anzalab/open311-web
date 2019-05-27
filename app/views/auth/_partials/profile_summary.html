@@ -7,8 +7,13 @@
         <a href="#" class="pull-left m-r-md">
           <span>
             <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
-            <letter-avatar title="{{party.name}}" data="{{party.name}}"
-              height="96" width="96" shape="round">
+            <letter-avatar
+              title="{{party.name}}"
+              data="{{party.name}}"
+              height="96"
+              width="96"
+              shape="round"
+            >
             </letter-avatar>
             <i class="on b-white"></i>
           </span>
@@ -22,8 +27,8 @@
           <!-- start party relations -->
           <p class="text-muted m-t-sm">
             <span class="m-r" title="Relation &amp; Workspace">
-              {{party.relation.name ? party.relation.name :'N/A'}}
-              / {{party.relation.workspace ? party.relation.workspace : 'N/A' }}
+              {{party.relation.name ? party.relation.name :'N/A'}} /
+              {{party.relation.workspace ? party.relation.workspace : 'N/A' }}
             </span>
             <small title="Working Area">
               <i class="fa fa-map-marker m-r-xs"></i>

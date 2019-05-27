@@ -1,12 +1,12 @@
 <!-- start overall area  summary -->
 <div class="padding m-t-md">
-
   <!-- start report box -->
   <div class="box b-a p-l-0">
-
     <!-- start header -->
-    <div class="box-header b-b p-t-md p-b-md"
-      title="Time taken to attend service request">
+    <div
+      class="box-header b-b p-t-md p-b-md"
+      title="Time taken to attend service request"
+    >
       <h3>Attend Time Summary</h3>
       <!-- <small>Sub title goes here with small font</small> -->
     </div>
@@ -14,37 +14,38 @@
 
     <!-- start toolbox -->
     <div class="box-tool">
-
       <!-- start time filters -->
       <ul class="nav">
-
         <!-- start export -->
         <li class="nav-item inline">
-          <a title="Click To Export" class="btn btn-xs rounded white"
-            aria-expanded="false" ng-csv="export('services')"
+          <a
+            title="Click To Export"
+            class="btn btn-xs rounded white"
+            aria-expanded="false"
+            ng-csv="export('services')"
             csv-header="exports.services.headers"
-            filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv">
+            filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+          >
             Export
           </a>
         </li>
         <!-- end export -->
       </ul>
       <!-- end time filters -->
-
     </div>
     <!-- end toolbox -->
 
     <!-- start body -->
     <div>
-
       <!-- start overall stats -->
 
       <!-- start jurisdiction performance summary -->
       <div class="row no-gutter">
-
         <!-- start total -->
-        <div class="col-xs-6 col-sm-3 b-r b-b"
-          title="Maximum Time spent on attending a single Service Request">
+        <div
+          class="col-xs-6 col-sm-3 b-r b-b"
+          title="Maximum Time spent on attending a single Service Request"
+        >
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
@@ -68,8 +69,10 @@
         <!-- end total -->
 
         <!-- start pending -->
-        <div class="col-xs-6 col-sm-3 b-r b-b"
-          title="Minimum Time spent on attending a single Service Request">
+        <div
+          class="col-xs-6 col-sm-3 b-r b-b"
+          title="Minimum Time spent on attending a single Service Request"
+        >
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
@@ -93,8 +96,10 @@
         <!-- end pending -->
 
         <!-- start resolved -->
-        <div class="col-xs-6 col-sm-3 b-r b-b"
-          title="Resolved Service Requests">
+        <div
+          class="col-xs-6 col-sm-3 b-r b-b"
+          title="Resolved Service Requests"
+        >
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
@@ -118,39 +123,37 @@
         <!-- end resolved -->
 
         <!-- start late -->
-        <div class="col-xs-6 col-sm-3 b-r b-b"
-          title="Late(Past SLA Time) Service Requests">
+        <div
+          class="col-xs-6 col-sm-3 b-r b-b"
+          title="Late(Past SLA Time) Service Requests"
+        >
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
-                <h4 class="text-center _600 m-t-md">
-                  <span title="Average resolve Time - Days Spent">
-                    {{performances.attendTime.target.days}}
-                    <span class="text-muted text-xs">days</span>
-                  </span>
-                  <span title="Average resolve Time - Hours Spent">
-                    {{performances.attendTime.target.hours}}
-                    <span class="text-muted text-xs">hrs</span>
-                  </span>
-                  <span title="Average resolve Time - Minutes Spent">
-                    {{performances.attendTime.target.minutes}}
-                    <span class="text-muted text-xs">mins</span>
-                  </span>
-                </h4>
-                <p class="text-muted m-b-md">Target</p>
+                <span title="Average resolve Time - Days Spent">
+                  {{performances.attendTime.target.days}}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average resolve Time - Hours Spent">
+                  {{performances.attendTime.target.hours}}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average resolve Time - Minutes Spent">
+                  {{performances.attendTime.target.minutes}}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h4>
+              <p class="text-muted m-b-md">Target</p>
             </div>
           </div>
         </div>
         <!-- end late  -->
-
       </div>
       <!-- end jurisdiction performance summary -->
       <!-- end overall stats -->
     </div>
     <!-- end body -->
-
   </div>
   <!-- end report box -->
-
 </div>
 <!-- end overall area summary -->

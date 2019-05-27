@@ -15,30 +15,28 @@
  * @example
  * <button show-if-state="main" ui-sref="settings">Settings</button>
  */
-angular
-  .module('ng311')
-  .directive('showIfState', function ($state) {
-    return {
-      restrict: 'A',
-      scope: {
-        showIfState: '@'
-      },
-      link: function (scope, element) {
-        scope.$watch(function () {
+angular.module('ng311').directive('showIfState', function($state) {
+  return {
+    restrict: 'A',
+    scope: {
+      showIfState: '@',
+    },
+    link: function(scope, element) {
+      scope.$watch(
+        function() {
           return $state.is(scope.showIfState);
-        }, function (isState) {
-
+        },
+        function(isState) {
           if (isState) {
             element.css('display', 'inherit');
           } else {
             element.css('display', 'none');
           }
-
-        });
-      }
-    };
-  });
-
+        }
+      );
+    },
+  };
+});
 
 /**
  * @summary HideIfState directive
@@ -55,26 +53,25 @@ angular
  * @example
  * <button hide-if-state="settings" ui-sref="main">Go Back</button>
  */
-angular
-  .module('ng311')
-  .directive('hideIfState', function ($state) {
-    return {
-      restrict: 'A',
-      scope: {
-        hideIfState: '@'
-      },
-      link: function (scope, element) {
-        scope.$watch(function () {
+angular.module('ng311').directive('hideIfState', function($state) {
+  return {
+    restrict: 'A',
+    scope: {
+      hideIfState: '@',
+    },
+    link: function(scope, element) {
+      scope.$watch(
+        function() {
           return $state.is(scope.hideIfState);
-        }, function (isState) {
-
+        },
+        function(isState) {
           if (isState) {
             element.css('display', 'none');
           } else {
             element.css('display', 'inherit');
           }
-
-        });
-      }
-    };
-  });
+        }
+      );
+    },
+  };
+});

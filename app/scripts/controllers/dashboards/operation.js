@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @ngdoc function
@@ -9,8 +9,8 @@
  */
 
 angular
-  .module("ng311")
-  .controller("DashboardOperationCtrl", function(
+  .module('ng311')
+  .controller('DashboardOperationCtrl', function(
     $rootScope,
     $scope,
     $state,
@@ -32,24 +32,24 @@ angular
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
     $scope.materials = [
-      { name: "Adaptor Flange 10’’ PVC", quantity: 1 },
-      { name: "Adaptor Flange 10’’ GS", quantity: 1 },
-      { name: "Adaptor Flange 12’’ GS", quantity: 1 },
-      { name: "Adaptor Flange 12’’ PVC", quantity: 1 },
-      { name: "Adaptor Flange 3’’ GS", quantity: 1 },
-      { name: "Adaptor Flange 3’’ PVC", quantity: 1 },
-      { name: "Adaptor Flange 4’’ GS", quantity: 1 },
-      { name: "Adaptor Flange 4’’ PVC", quantity: 1 },
-      { name: "Adaptor Flange 6’’ GS", quantity: 1 },
-      { name: "Adaptor Flange 6’’ PVC", quantity: 1 },
-      { name: "Adaptor Flange 8’’ GS", quantity: 1 },
-      { name: "Adaptor Flange 8’’ PVC", quantity: 1 },
+      { name: 'Adaptor Flange 10’’ PVC', quantity: 1 },
+      { name: 'Adaptor Flange 10’’ GS', quantity: 1 },
+      { name: 'Adaptor Flange 12’’ GS', quantity: 1 },
+      { name: 'Adaptor Flange 12’’ PVC', quantity: 1 },
+      { name: 'Adaptor Flange 3’’ GS', quantity: 1 },
+      { name: 'Adaptor Flange 3’’ PVC', quantity: 1 },
+      { name: 'Adaptor Flange 4’’ GS', quantity: 1 },
+      { name: 'Adaptor Flange 4’’ PVC', quantity: 1 },
+      { name: 'Adaptor Flange 6’’ GS', quantity: 1 },
+      { name: 'Adaptor Flange 6’’ PVC', quantity: 1 },
+      { name: 'Adaptor Flange 8’’ GS', quantity: 1 },
+      { name: 'Adaptor Flange 8’’ PVC', quantity: 1 },
       { name: 'Air Valve 1" Double Acting (GS)', quantity: 1 },
       { name: 'Air Valve 1" Single Acting (GS)', quantity: 1 },
       { name: 'Air Valve 2"Double Acting (GS)', quantity: 1 },
       { name: 'Air Valve 2"Single Acting (GS)', quantity: 1 },
       { name: 'Air Valve 3"Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 3"Single Acting (GS)', quantity: 1 }
+      { name: 'Air Valve 3"Single Acting (GS)', quantity: 1 },
     ];
 
     //set default jurisdiction
@@ -62,16 +62,16 @@ angular
         $stateParams.startedAt ||
         moment()
           .utc()
-          .startOf("date")
+          .startOf('date')
           .toDate(),
       endedAt:
         $stateParams.endedAt ||
         moment()
           .utc()
-          .endOf("date")
+          .endOf('date')
           .toDate(),
       jurisdictions: $scope.jurisdiction._id,
-      workspaces: []
+      workspaces: [],
     };
 
     //TODO persist filter to local storage
@@ -86,9 +86,9 @@ angular
     $scope.showFilter = function() {
       //open performance reports filter modal
       $scope.modal = $uibModal.open({
-        templateUrl: "views/dashboards/_partials/performances_filter.html",
+        templateUrl: 'views/dashboards/_partials/performances_filter.html',
         scope: $scope,
-        size: "lg"
+        size: 'lg',
       });
 
       //handle modal close and dismissed
@@ -113,7 +113,7 @@ angular
       //reset area
       var _id = $scope.filters.jurisdictions;
       $scope.jurisdiction = _.find($scope.jurisdictions, {
-        _id: _id
+        _id: _id,
       });
 
       //load reports
@@ -129,20 +129,20 @@ angular
       //prepare summary
       $scope.performances.summaries = [
         {
-          name: "Resolved",
-          count: _.get($scope.performances, "overall.resolved", 0),
-          color: "#8BC34A"
+          name: 'Resolved',
+          count: _.get($scope.performances, 'overall.resolved', 0),
+          color: '#8BC34A',
         },
         {
-          name: "Pending",
-          count: _.get($scope.performances, "overall.pending", 0),
-          color: "#00BCD4"
+          name: 'Pending',
+          count: _.get($scope.performances, 'overall.pending', 0),
+          color: '#00BCD4',
         },
         {
-          name: "Late",
-          count: _.get($scope.performances, "overall.late", 0),
-          color: "#009688"
-        }
+          name: 'Late',
+          count: _.get($scope.performances, 'overall.late', 0),
+          color: '#009688',
+        },
       ];
     };
 
@@ -165,7 +165,7 @@ angular
      */
     $scope.reload = function() {
       Summary.performances({
-        query: $scope.params
+        query: $scope.params,
       }).then(function(performances) {
         $scope.performances = performances;
 
@@ -174,8 +174,8 @@ angular
           //ensure status are sorted by weight
           $scope.performances.statuses = _.orderBy(
             performances.statuses,
-            "weight",
-            "asc"
+            'weight',
+            'asc'
           );
 
           $scope.prepare();
@@ -191,7 +191,7 @@ angular
      * @author Benson Maruchu<benmaruchu@gmail.com>
      */
     $scope.prepareOverallPercentages = function() {
-      var overallExists = _.get($scope.performances, "overall", false);
+      var overallExists = _.get($scope.performances, 'overall', false);
 
       // check if overall data exists
       if (overallExists) {
@@ -207,7 +207,7 @@ angular
           percentageLate:
             ($scope.performances.overall.late /
               $scope.performances.overall.count) *
-            100
+            100,
         };
 
         $scope.performances.overall = _.merge(
@@ -230,60 +230,60 @@ angular
       var data = _.map($scope.performances.summaries, function(summary) {
         return {
           name: summary.name,
-          value: summary.count
+          value: summary.count,
         };
       });
 
       //prepare chart config
       $scope.perSummaryConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perSummaryOptions = {
         textStyle: {
-          fontFamily: "Lato"
+          fontFamily: 'Lato',
         },
         title: {
-          text: "Total",
-          subtext: $filter("number")(_.sumBy(data, "value"), 0),
-          x: "center",
-          y: "center",
+          text: 'Total',
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
           textStyle: {
-            fontWeight: "normal",
-            fontSize: 16
-          }
+            fontWeight: 'normal',
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
-          trigger: "item",
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          trigger: 'item',
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
           feature: {
             saveAsImage: {
-              name: "Area Overview - " + new Date().getTime(),
-              title: "Save",
-              show: true
-            }
-          }
+              name: 'Area Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
         },
         series: [
           {
-            type: "pie",
-            selectedMode: "single",
-            radius: ["45%", "55%"],
-            color: _.map($scope.performances.summaries, "color"),
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.performances.summaries, 'color'),
             label: {
               normal: {
-                formatter: "{b}\n{d}%\n( {c} )"
-              }
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
             },
-            data: data
-          }
-        ]
+            data: data,
+          },
+        ],
       };
     };
 
@@ -299,60 +299,60 @@ angular
       var data = _.map($scope.performances.statuses, function(status) {
         return {
           name: status.name,
-          value: status.count
+          value: status.count,
         };
       });
 
       //prepare chart config
       $scope.perStatusesConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perStatusesOptions = {
         textStyle: {
-          fontFamily: "Lato"
+          fontFamily: 'Lato',
         },
         title: {
-          text: "Total",
-          subtext: $filter("number")(_.sumBy(data, "value"), 0),
-          x: "center",
-          y: "center",
+          text: 'Total',
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
           textStyle: {
-            fontWeight: "normal",
-            fontSize: 16
-          }
+            fontWeight: 'normal',
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
-          trigger: "item",
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          trigger: 'item',
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
           feature: {
             saveAsImage: {
-              name: "Area Status Overview - " + new Date().getTime(),
-              title: "Save",
-              show: true
-            }
-          }
+              name: 'Area Status Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
         },
         series: [
           {
-            type: "pie",
-            selectedMode: "single",
-            radius: ["45%", "55%"],
-            color: _.map($scope.performances.statuses, "color"),
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.performances.statuses, 'color'),
             label: {
               normal: {
-                formatter: "{b}\n{d}%\n( {c} )"
-              }
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
             },
-            data: data
-          }
-        ]
+            data: data,
+          },
+        ],
       };
     };
 
@@ -365,68 +365,68 @@ angular
      */
     $scope.prepareServiceGroupVisualization = function(column) {
       //ensure column
-      column = column || "count";
+      column = column || 'count';
 
       //prepare chart series data
       var data = _.map($scope.performances.groups, function(group) {
         return {
           name: group.name,
-          value: group[column]
+          value: group[column],
         };
       });
 
       //prepare chart config
       $scope.perServiceGroupConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perServiceGroupOptions = {
         textStyle: {
-          fontFamily: "Lato"
+          fontFamily: 'Lato',
         },
         title: {
           text:
-            column === "count" ? "Total" : _.upperFirst(column.toLowerCase()),
-          subtext: $filter("number")(_.sumBy(data, "value"), 0),
-          x: "center",
-          y: "center",
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
           textStyle: {
-            fontWeight: "normal",
-            fontSize: 16
-          }
+            fontWeight: 'normal',
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
-          trigger: "item",
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          trigger: 'item',
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
           feature: {
             saveAsImage: {
-              name: "Service Groups Overview - " + new Date().getTime(),
-              title: "Save",
-              show: true
-            }
-          }
+              name: 'Service Groups Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
         },
         series: [
           {
-            type: "pie",
-            selectedMode: "single",
-            radius: ["45%", "55%"],
-            color: _.map($scope.performances.groups, "color"),
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.performances.groups, 'color'),
 
             label: {
               normal: {
-                formatter: "{b}\n{d}%\n( {c} )"
-              }
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
             },
-            data: data
-          }
-        ]
+            data: data,
+          },
+        ],
       };
     };
 
@@ -439,12 +439,12 @@ angular
      */
     $scope.prepareServiceVisualization = function(column) {
       //ensure column
-      column = column || "count";
+      column = column || 'count';
 
       //prepare unique services for bar chart categories
       var categories = _.chain($scope.performances)
-        .map("services")
-        .uniqBy("name")
+        .map('services')
+        .uniqBy('name')
         .value();
 
       //prepare bar chart series data
@@ -454,95 +454,95 @@ angular
           value: service[column],
           itemStyle: {
             normal: {
-              color: service.color
-            }
-          }
+              color: service.color,
+            },
+          },
         };
 
         return serie;
       });
 
       //sort data by their value
-      data = _.orderBy(data, "value", "asc");
+      data = _.orderBy(data, 'value', 'asc');
 
       //prepare chart config
       $scope.perServiceConfig = {
-        height: "1100",
-        forceClear: true
+        height: '1100',
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perServiceOptions = {
-        color: _.map(data, "itemStyle.normal.color"),
+        color: _.map(data, 'itemStyle.normal.color'),
         textStyle: {
-          fontFamily: "Lato"
+          fontFamily: 'Lato',
         },
         tooltip: {
-          trigger: "item",
-          formatter: "{b} : {c}"
+          trigger: 'item',
+          formatter: '{b} : {c}',
         },
         toolbox: {
           show: true,
           feature: {
             saveAsImage: {
-              name: "Area Services Overview - " + new Date().getTime(),
-              title: "Save",
-              show: true
-            }
-          }
+              name: 'Area Services Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
         },
         calculable: true,
         yAxis: [
           {
-            type: "category",
-            data: _.map(data, "name"),
+            type: 'category',
+            data: _.map(data, 'name'),
             boundaryGap: true,
             axisTick: {
-              alignWithLabel: true
+              alignWithLabel: true,
             },
             axisLabel: {
-              rotate: 60
+              rotate: 60,
             },
             axisLine: {
-              show: true
-            }
-          }
+              show: true,
+            },
+          },
         ],
         xAxis: [
           {
-            type: "value",
+            type: 'value',
             scale: true,
-            position: "top",
+            position: 'top',
             boundaryGap: true,
             axisTick: {
               show: false,
               lineStyle: {
-                color: "#ddd"
-              }
+                color: '#ddd',
+              },
             },
             splitLine: {
-              show: false
-            }
-          }
+              show: false,
+            },
+          },
         ],
         series: [
           {
-            type: "bar",
-            barWidth: "55%",
+            type: 'bar',
+            barWidth: '55%',
             label: {
               normal: {
                 show: true,
-                position: "right"
-              }
+                position: 'right',
+              },
             },
-            data: data
-          }
-        ]
+            data: data,
+          },
+        ],
       };
     };
 
     //listen for events and reload performance accordingly
-    $rootScope.$on("app:servicerequests:reload", function() {
+    $rootScope.$on('app:servicerequests:reload', function() {
       $scope.reload();
     });
 

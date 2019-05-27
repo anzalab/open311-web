@@ -3,18 +3,32 @@
 <!-- start header -->
 <div>
   <h4 title="Leaderboard">Area Standing</h4>
-  <small class="block text-muted" title="Area Rank Based on Number of Service Requests">
-          Area Rank Based on Number of Service Requests
-      </small>
+  <small
+    class="block text-muted"
+    title="Area Rank Based on Number of Service Requests"
+  >
+    Area Rank Based on Number of Service Requests
+  </small>
 </div>
 <!-- end header -->
 
 <div class="m-t-lg">
   <ul class="list inset m-a-0">
-    <li ng-if="leader" ng-repeat="leader in performances.jurisdictions" class="list-item">
+    <li
+      ng-if="leader"
+      ng-repeat="leader in performances.jurisdictions"
+      class="list-item"
+    >
       <a href class="list-left">
         <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
-        <letter-avatar title="{{leader.name}}" data="{{leader.name}}" height="40" width="40" shape="round" fontSize="15">
+        <letter-avatar
+          title="{{leader.name}}"
+          data="{{leader.name}}"
+          height="40"
+          width="40"
+          shape="round"
+          fontSize="15"
+        >
         </letter-avatar>
       </a>
       <div class="list-body">
@@ -23,10 +37,12 @@
           <span class="pull-right text-muted">{{leader.count | number:0}}</span>
         </div>
         <small class="text-muted text-ellipsis">
-                        {{leader.phone ? leader.phone :'N/A'}}
-                        / {{leader.email ? leader.email : 'N/A' }}
-                        <span class="pull-right label info" title="#{{$index+1}}">&nbsp;&nbsp;{{$index + 1}}&nbsp;&nbsp;</span>
-                    </small>
+          {{leader.phone ? leader.phone :'N/A'}} / {{leader.email ? leader.email
+          : 'N/A' }}
+          <span class="pull-right label info" title="#{{$index+1}}"
+            >&nbsp;&nbsp;{{$index + 1}}&nbsp;&nbsp;</span
+          >
+        </small>
       </div>
     </li>
   </ul>

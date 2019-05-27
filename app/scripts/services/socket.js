@@ -7,23 +7,19 @@
  * # socket
  * Factory in the ng311.
  */
-angular
-  .module('ng311')
-  .factory('socket', function (ENV, Utils, socketFactory) {
+angular.module('ng311').factory('socket', function(ENV, Utils, socketFactory) {
+  //no op socket
+  var socket = {};
 
-    //no op socket
-    var socket = {};
+  if (ENV && ENV.socketEnable) {
+    //socket endpoint
+    var socketEndPoint = ENV.socketEndPoint || {}.web || Utils.asLink('');
 
-    if (ENV && ENV.socketEnable) {
-      //socket endpoint
-      var socketEndPoint = (ENV.socketEndPoint || {}.web) || Utils.asLink('');
+    //initialize socket.io
+    socket = socketFactory({
+      ioSocket: io(socketEndPoint),
+    });
+  }
 
-      //initialize socket.io
-      socket = socketFactory({
-        ioSocket: io(socketEndPoint)
-      });
-    }
-
-    return socket;
-
-  });
+  return socket;
+});

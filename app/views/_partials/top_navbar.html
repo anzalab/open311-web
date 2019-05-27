@@ -1,36 +1,51 @@
 <!-- top navigation bar -->
 <nav class="site-navbar navbar navbar-default navbar-mega" role="navigation">
-    <div class="navbar-header">
-        <div class="navbar-brand navbar-brand-center">
-            <span class="navbar-brand-text">ShuleDirect</span>
-        </div>
+  <div class="navbar-header">
+    <div class="navbar-brand navbar-brand-center">
+      <span class="navbar-brand-text">ShuleDirect</span>
     </div>
-    <div class="navbar-container container-fluid">
-        <!-- Navbar Toolbar Right -->
-        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-            <li>
-                <a title="Notifications" aria-expanded="false" role="button">
-                    <i class="icon ti-bell" aria-hidden="true"></i>
-                    <span class="badge badge-danger up">5</span>
-                </a>
-            </li>
-            <li>
-                <a title="Messages" aria-expanded="false" data-animation="scale-up" role="button">
-                    <i class="icon ti-email" aria-hidden="true"></i>
-                    <span class="badge badge-info up">3</span>
-                </a>
-            </li>
-            <li>
-                <a class="letter-avatar navbar-avatar" uib-tooltip="Profile" tooltip-placement="bottom">
-                    <span class="avatar avatar-online">
-                    <letter-avatar data="{{party.name}}" fontFamily="Lato" height="40" width="40" shape="round">
-                    </letter-avatar>
-                <i></i>
-                </span>
-                </a>
-            </li>
-        </ul>
-        <!-- End Navbar Toolbar Right -->
-    </div>
+  </div>
+  <div class="navbar-container container-fluid">
+    <!-- Navbar Toolbar Right -->
+    <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+      <li>
+        <a title="Notifications" aria-expanded="false" role="button">
+          <i class="icon ti-bell" aria-hidden="true"></i>
+          <span class="badge badge-danger up">5</span>
+        </a>
+      </li>
+      <li>
+        <a
+          title="Messages"
+          aria-expanded="false"
+          data-animation="scale-up"
+          role="button"
+        >
+          <i class="icon ti-email" aria-hidden="true"></i>
+          <span class="badge badge-info up">3</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="letter-avatar navbar-avatar"
+          uib-tooltip="Profile"
+          tooltip-placement="bottom"
+        >
+          <span class="avatar avatar-online">
+            <letter-avatar
+              data="{{party.name}}"
+              fontFamily="Lato"
+              height="40"
+              width="40"
+              shape="round"
+            >
+            </letter-avatar>
+            <i></i>
+          </span>
+        </a>
+      </li>
+    </ul>
+    <!-- End Navbar Toolbar Right -->
+  </div>
 </nav>
 <!-- End top navigation bar -->
