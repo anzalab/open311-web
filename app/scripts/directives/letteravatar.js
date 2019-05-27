@@ -7,6 +7,8 @@
  * # LetterAvatar
  */
 angular.module('ng311').directive('letterAvatar', function() {
+  /* jshint ignore:start */
+
   //default settings
   var defaultSettings = {
     alphabetcolors: [
@@ -173,7 +175,6 @@ angular.module('ng311').directive('letterAvatar', function() {
         .element('<div>')
         .append(svg.clone())
         .html();
-      /*global unescape:false*/
       var svgHtml = window.btoa(unescape(encodeURIComponent(lvcomponent)));
       var component;
       var base = defaultSettings.base;
@@ -213,4 +214,5 @@ angular.module('ng311').directive('letterAvatar', function() {
       element.replaceWith(component);
     },
   };
+  /* jshint ignore:end */
 });
