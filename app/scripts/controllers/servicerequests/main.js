@@ -14,6 +14,7 @@ angular
     $scope,
     $state,
     $stateParams,
+    $uibModal,
     prompt,
     leafletBoundsHelpers,
     Party,
@@ -37,14 +38,38 @@ angular
     $scope.total = 0;
     $scope.note = {};
     $scope.updated = false;
+    $scope.dateFilters = {
+      reportedAt: {
+        from: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+        to: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+      },
+      resolvedAt: {
+        from: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+        to: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+      },
+    };
 
     $scope.search = {};
     $scope.map = {};
+    $scope.assignees = [];
+    $scope.isOperatorFilter = true;
 
     //signal create mode
     $scope.create = false;
 
-    //track current misc fillter(all, inbox, unattended, unresolved, resolved)
+    //track current misc filter(all, inbox, unattended, unresolved, resolved)
     $scope.misc = 'inbox';
 
     //bind states
@@ -134,7 +159,7 @@ angular
           };
         }
 
-        //ensure attachements has correct data for displaying
+        //ensure attachments has correct data for displaying
         var hasAttachments =
           servicerequest &&
           servicerequest.attachments &&
@@ -204,6 +229,7 @@ angular
           //update changelog
           var _id = $scope.servicerequest._id;
           ServiceRequest.changelog(_id, changelog).then(function(response) {
+            $scope.modal.close();
             // $scope.servicerequest = response;
             $scope.select(response);
             $scope.updated = true;
@@ -398,7 +424,7 @@ angular
      * Initialize new issue attending with operator details
      */
     $scope.onAttend = function() {
-      //prevent attachements and changelogs on attending
+      //prevent attachments and changelogs on attending
       var servicerequest = _.omit($scope.servicerequest, [
         'attachments',
         'changelogs',
@@ -456,7 +482,7 @@ angular
     };
 
     /**
-     * search assignes
+     * search assignees
      * @return {[type]} [description]
      */
     $scope.onSearchAssignees = function() {
@@ -565,13 +591,13 @@ angular
         .then(function(response) {
           //update scope with servicerequests when done loading
           $scope.servicerequests = response.servicerequests;
-          $scope.total = response.total;
-          $scope.spin = false;
           if ($scope.updated) {
             $scope.updated = false;
           } else {
             $scope.select(_.first($scope.servicerequests));
           }
+          $scope.total = response.total;
+          $scope.spin = false;
         })
         .catch(function(error) {
           $scope.spin = false;
@@ -623,6 +649,120 @@ angular
       return _.isEmpty(value);
     };
 
+    /**
+     * @function
+     * @name showResolvedAtFilter
+     * @description Open modal window to show resolved at date filter
+     */
+    $scope.showResolvedAtFilter = function() {
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/resolve_time_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showReportedAtFilter
+     * @description Open modal window to show reported at date filter
+     */
+    $scope.showReportedAtFilter = function() {
+      $scope.modal = $uibModal.open({
+        templateUrl:
+          'views/servicerequests/_partials/reported_time_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showOperatorFilter
+     * @description Open modal window for selecting operator for filtering workspace
+     */
+    $scope.showOperatorFilter = function() {
+      $scope.isOperatorFilter = true;
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/operator_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showAssigneeFilter
+     * @description Open modal window for selecting assignee for filtering workspace
+     */
+    $scope.showAssigneeFilter = function() {
+      $scope.isOperatorFilter = false;
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/operator_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showAssigneeFilter
+     * @description Open modal window for selecting assignee for filtering workspace
+     */
+    $scope.showAssigneeModal = function() {
+      if (!$scope.servicerequest.resolvedAt) {
+        $scope.modal = $uibModal.open({
+          templateUrl: 'views/servicerequests/_partials/assignee_modal.html',
+          scope: $scope,
+          size: 'lg',
+        });
+
+        $scope.modal.result.then(
+          function onClose() {},
+          function onDismissed() {}
+        );
+      }
+    };
+
+    /**
+     * @function
+     * @name filterByWorker
+     * @description Filter Workspace service request by worker either assignee or operator
+     */
+    $scope.filterByWorker = function(party) {
+      if ($scope.isOperatorFilter) {
+        $scope.operator = party;
+      } else {
+        $scope.assignee = party;
+      }
+
+      console.log(party);
+
+      $scope.modal.close();
+      // reset flag back to it's initial value
+      $scope.isOperatorFilter = true;
+    };
+
     //pre load un resolved servicerequests on state activation
     $scope.find({
       operator: party._id,
@@ -646,7 +786,7 @@ angular
 
     //reload summaries
     $rootScope.$on('app:servicerequests:reload', function() {
-      //TODO pass params based on fillter
+      //TODO pass params based on filter
       Summary.issues().then(function(summaries) {
         $scope.summaries = summaries;
       });

@@ -1,4 +1,4 @@
-<!-- start servicerequests side subnav -->
+<!-- start service requests side subnav -->
 <div class="row-col bg b-r">
   <!-- start title -->
   <div class="b-b">
@@ -133,6 +133,92 @@
           </div>
         </div>
         <!-- end priorities menu -->
+        <!-- start reportedAt date -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">
+            <a ng-click="showReportedAtFilter()"
+              >Reported Date
+              <i class="icon-calendar pull-right"></i>
+            </a>
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-link text-muted block">
+                From :
+                <span class="pull-right text-sm">
+                  {{ dateFilters.reportedAt.from | date: 'dd-MM-yyyy' }}
+                </span>
+              </li>
+              <li class="nav-link text-muted block">
+                To :
+                <span class="pull-right text-sm">
+                  {{ dateFilters.reportedAt.to | date: 'dd-MM-yyyy' }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end reportedAt date -->
+
+        <!-- start resolvedAt date inputs -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">
+            <a ng-click="showResolvedAtFilter()"
+              >Resolved Date
+              <i class="icon-calendar pull-right"></i>
+            </a>
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li class="nav-link text-muted block">
+                From :
+                <span class="pull-right text-sm">
+                  {{ dateFilters.resolvedAt.from | date: 'dd-MM-yyyy' }}
+                </span>
+              </li>
+              <li class="nav-link text-muted block">
+                To :
+                <span class="pull-right text-sm">
+                  {{ dateFilters.resolvedAt.to | date: 'dd-MM-yyyy' }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end resolvedAt date inputs -->
+
+        <!-- start Workers inputs -->
+        <div class="p-a-md">
+          <div class="m-b text-muted text-xs">
+            <span ng-click=""
+              >Workers
+              <i class="icon-user pull-right"></i>
+            </span>
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li
+                class="nav-link text-muted block"
+                ng-click="showOperatorFilter()"
+              >
+                Operator :
+                <span class="pull-right text-sm">
+                  {{ operator ? operator.name : 'N/A' }}
+                </span>
+              </li>
+              <li
+                class="nav-link text-muted block"
+                ng-click="showAssigneeFilter()"
+              >
+                Assignee :
+                <span class="pull-right text-sm">
+                  {{ assignee ? assignee.name : 'N/A' }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end Workers inputs -->
         <!-- start services menu -->
         <div class="p-a-md">
           <div class="m-b text-muted text-xs">Services</div>
@@ -191,4 +277,4 @@
   </div>
   <!-- end body -->
 </div>
-<!-- end servicerequests side subnav -->
+<!-- end service requests side subnav -->

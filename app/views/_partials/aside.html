@@ -3,7 +3,7 @@
   <!-- start brand details -->
   <div class="navbar no-radius">
     <a
-      title="{{ENV.title}} | {{ENV.description}}"
+      title="{{ ENV.title }} | {{ ENV.description }}"
       ui-sref="app.servicerequests.list"
       class="navbar-brand"
     >
@@ -104,6 +104,18 @@
                   <span class="nav-text">Comparison</span>
                 </a>
                 </li> -->
+
+        <!-- operation navigation menu -->
+        <li ui-sref-active="active">
+          <a ui-sref="app.operations" title="Operations Reports">
+            <span class="nav-icon">
+              <i class="ion-ios-people"></i>
+            </span>
+            <span class="nav-text">Operations</span>
+          </a>
+        </li>
+        <!-- end operation navigation menu -->
+
         <li
           ui-sref-active="active"
           show-if-has-any-permit="servicerequest:export"
@@ -115,6 +127,7 @@
             <span class="nav-text">Exports</span>
           </a>
         </li>
+
         <li
           show-if-has-any-permit="jurisdiction:view, servicegroup:view, service:view, priority:view, status:view, user:view, role:view"
           ui-sref-active="active"
@@ -132,13 +145,13 @@
   <!-- end menu actions -->
   <!-- start profile actions -->
   <div data-flex-no-shrink>
-    <div uib-dropdown class="nav-fold dropup" title="{{party.name}}">
+    <div uib-dropdown class="nav-fold dropup" title="{{ party.name }}">
       <a uib-dropdown-toggle data-toggle="dropdown">
         <div class="pull-left">
           <div class="inline">
             <letter-avatar
-              title="{{party.name}}"
-              data="{{party.name}}"
+              title="{{ party.name }}"
+              data="{{ party.name }}"
               height="60"
               width="60"
               shape="round"

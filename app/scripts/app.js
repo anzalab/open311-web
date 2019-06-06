@@ -85,6 +85,48 @@ angular
           },
         },
       })
+      .state('app.manage', {
+        abstract: true,
+        templateUrl: 'views/manage/main.html',
+      })
+      .state('app.overviews', {
+        url: '/overviews',
+        templateUrl: 'views/dashboards/overviews/index.html',
+        controller: 'DashboardOverviewCtrl',
+        data: {
+          authenticated: true,
+        },
+        resolve: {
+          endpoints: function(Summary) {
+            return Summary.endpoints({
+              filter: {
+                deletedAt: {
+                  $eq: null,
+                },
+              },
+            });
+          },
+        },
+      })
+      .state('app.standings', {
+        url: '/standings',
+        templateUrl: 'views/dashboards/standings.html',
+        controller: 'DashboardStandingCtrl',
+        data: {
+          authenticated: true,
+        },
+        resolve: {
+          endpoints: function(Summary) {
+            return Summary.endpoints({
+              filter: {
+                deletedAt: {
+                  $eq: null,
+                },
+              },
+            });
+          },
+        },
+      })
       .state('app.comparison', {
         //TODO refactor to reports states
         url: '/comparison',
@@ -118,33 +160,15 @@ angular
           },
         },
       })
-      .state('app.manage', {
-        abstract: true,
-        templateUrl: 'views/manage/main.html',
-      })
-      .state('app.overviews', {
-        url: '/overviews',
-        templateUrl: 'views/dashboards/overviews/index.html',
-        controller: 'DashboardOverviewCtrl',
-        data: {
-          authenticated: true,
+      .state('app.operations', {
+        url: '/operations',
+        templateUrl: 'views/dashboards/operation/index.html',
+        controller: 'DashboardOperationCtrl',
+        params: {
+          jurisdiction: null,
+          startedAt: null,
+          endedAt: null,
         },
-        resolve: {
-          endpoints: function(Summary) {
-            return Summary.endpoints({
-              filter: {
-                deletedAt: {
-                  $eq: null,
-                },
-              },
-            });
-          },
-        },
-      })
-      .state('app.standings', {
-        url: '/standings',
-        templateUrl: 'views/dashboards/standings.html',
-        controller: 'DashboardStandingCtrl',
         data: {
           authenticated: true,
         },

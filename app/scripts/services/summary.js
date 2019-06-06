@@ -98,6 +98,7 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
     //initialize query
     var query = {};
 
+    /* jshint ignore:start */
     //1. ensure start and end dates
     //1.0 ensure start date
     params.startedAt = params.startedAt
@@ -115,6 +116,8 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
       : moment()
           .utc()
           .endOf('date');
+    /* jshint ignore:end */
+
     //1.2 ensure start is less than end
     var startedAt = params.startedAt;
     if (params.startedAt.isAfter(params.endedAt)) {

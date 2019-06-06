@@ -34,23 +34,62 @@
   <!-- start profile summary and service request pipelines -->
   <ng-include src="'views/auth/_partials/profile_summary.html'"></ng-include>
   <!-- end profile summary and service request pipelines -->
-  <!-- start service request counts -->
+
+  <!-- start overall and pipeline summary -->
+  <div class="row no-gutter">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <!-- start of area overall summary -->
+      <ng-include
+        ng-if="performances.overall"
+        src="'views/auth/_partials/overall_summary.html'"
+      >
+      </ng-include>
+      <!-- end of area overall summary -->
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <!-- start area service pipeline -->
+      <ng-include
+        ng-if="performances.pipelines && performances.pipelines.length > 0"
+        src="'views/auth/_partials/pipeline_summary.html'"
+      ></ng-include>
+      <!-- end area service pipeline -->
+    </div>
+  </div>
+  <!-- start overall and pipeline summary -->
+
+  <!-- start overall and pipeline summary -->
+  <div class="row no-gutter">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <!-- start of area overall summary -->
+      <ng-include
+        ng-if="performances.attendTime"
+        src="'views/auth/_partials/attend_time_summary.html'"
+      >
+      </ng-include>
+      <!-- end of area overall summary -->
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <!-- start area service pipeline -->
+      <ng-include
+        ng-if="performances.resolveTime"
+        src="'views/auth/_partials/resolve_time_summary.html'"
+      ></ng-include>
+      <!-- end area service pipeline -->
+    </div>
+  </div>
+  <!-- start overall and pipeline summary -->
+
   <ng-include
-    ng-if="performances.works"
-    src="'views/auth/_partials/service_request_counts.html'"
-  ></ng-include>
-  <!-- end service request counts -->
-  <!-- start service request durations -->
-  <ng-include
-    ng-if="performances.durations"
-    src="'views/auth/_partials/service_request_durations.html'"
-  ></ng-include>
-  <!-- end service request durations -->
-  <!-- start service request leaderboard -->
+    ng-if="performances.breakdown"
+    src="'views/auth/_partials/service_requests_breakdown_summary.html'"
+  >
+  </ng-include>
+
+  <!-- start service request leader board -->
   <ng-include
     ng-if="performances.leaderboard"
     src="'views/auth/_partials/service_request_leaderboard.html'"
   ></ng-include>
-  <!-- end service request leaderboard -->
+  <!-- end service request leader board -->
 </div>
 <!-- end app body -->
