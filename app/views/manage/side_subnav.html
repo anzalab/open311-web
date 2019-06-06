@@ -15,15 +15,6 @@
   <div class="row-row">
     <div class="row-body scrollable hover">
       <div class="row-inner">
-        <!-- start view all -->
-        <!-- <div class="p-a-md nav-active-white" style="padding-bottom: 0rem;padding-left: 1.2rem">
-                    <ul class="nav">
-                        <li class="nav-item m-b-xs">
-                            <a hre="#" class="nav-link text-muted block" title="My Profile">My Profile</a>
-                        </li>
-                    </ul>
-                </div> -->
-        <!-- end view all -->
         <!-- start services menu -->
         <div class="p-a-md">
           <div class="m-b text-muted text-xs" title="System Settings">
@@ -41,6 +32,15 @@
                   class="nav-link text-muted block"
                 >
                   Jurisdictions
+                </a>
+              </li>
+              <li
+                show-if-has-any-permit="zone:view"
+                ui-sref-active="active"
+                class="nav-item m-b-xs"
+              >
+                <a ui-sref="app.manage.zones" class="nav-link text-muted block">
+                  Zones
                 </a>
               </li>
               <li
@@ -92,7 +92,7 @@
                 </a>
               </li>
               <li
-                show-if-has-any-permit="status:view"
+                show-if-has-any-permit="item:view"
                 ui-sref-active="active"
                 class="nav-item m-b-xs"
               >
@@ -132,11 +132,6 @@
                   Roles
                 </a>
               </li>
-              <!-- <li ui-sref-active="active" class="nav-item m-b-xs">
-                                <a hre="#" class="nav-link text-muted block">
-                                Configuration
-                                </a>
-                            </li> -->
             </ul>
           </div>
         </div>

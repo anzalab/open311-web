@@ -1,34 +1,34 @@
-<!-- start item details -->
+<!-- start zone details -->
 <div class="row-col">
   <div class="white b-b bg">
-    <!-- start item detail action bar -->
+    <!-- start zone detail action bar -->
     <div
-      ng-include="'views/items/_partials/action_bar.html'"
+      ng-include="'views/zones/_partials/action_bar.html'"
       class="navbar"
     ></div>
-    <!-- end item details action bar -->
+    <!-- end zone details action bar -->
   </div>
-  <!-- start item body -->
+  <!-- start zone body -->
   <div class="row-row">
     <div class="row-body">
       <div class="row-inner">
         <div class="padding">
           <form
             ng-submit="save()"
-            name="itemForm"
+            name="zoneForm"
             role="form"
             autocomplete="off"
             novalidate
           >
             <div class="box">
               <div class="box-body">
-                <div class="m-b" title="Item Code">
+                <div class="m-b" title="Zone Code">
                   <div class="form-group">
-                    <label title="Item Code" class="floating-label">Code</label>
+                    <label title="Zone Code" class="floating-label">Code</label>
                     <input
-                      title="Item Code"
+                      title="Zone Code"
                       ng-disabled="!edit"
-                      ng-model="item.code"
+                      ng-model="zone.code"
                       ng-required
                       ng-minlength="1"
                       type="text"
@@ -37,13 +37,13 @@
                     />
                   </div>
                 </div>
-                <div class="m-t-lg" title="Item Name">
+                <div class="m-t-lg" title="Zone Name">
                   <div class="form-group">
-                    <label title="Item Name" class="floating-label">Name</label>
+                    <label title="Zone Name" class="floating-label">Name</label>
                     <input
-                      title="Item Name"
+                      title="Zone Name"
                       ng-disabled="!edit"
-                      ng-model="item.name"
+                      ng-model="zone.name"
                       ng-required
                       ng-minlength="2"
                       type="text"
@@ -52,32 +52,17 @@
                     />
                   </div>
                 </div>
-                <div class="m-t-lg" title="Item Unit">
-                  <div class="form-group">
-                    <label title="Item Unit" class="floating-label">Unit</label>
-                    <input
-                      title="Item Unit"
-                      ng-disabled="!edit"
-                      ng-model="item.properties.unit"
-                      ng-required
-                      ng-minlength="2"
-                      type="text"
-                      name="unit"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-                <div class="m-t-lg" title="Item Color">
-                  <color-picker ng-model="item.color"> </color-picker>
+                <div class="m-t-lg" title="Zone Color">
+                  <color-picker ng-model="zone.color"> </color-picker>
                   <div class="m-t-lg">
                     <div class="form-group">
-                      <label title="Item Color" class="floating-label"
-                        >Item Color(HEX)</label
+                      <label title="Zone Color" class="floating-label"
+                        >Zone Color(HEX)</label
                       >
                       <input
-                        title="Item Color"
+                        title="Zone Color"
                         ng-disabled="!edit"
-                        ng-model="item.color"
+                        ng-model="zone.color"
                         ng-required
                         ng-minlength="1"
                         type="text"
@@ -87,13 +72,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="m-t-lg" title="Item Description">
+                <div class="m-t-lg" title="Zone Description">
                   <div class="form-group">
                     <label class="floating-label">Description</label>
                     <textarea
-                      title="Item Description"
+                      title="Zone Description"
                       ng-disabled="!edit"
-                      ng-model="item.description"
+                      ng-model="zone.description"
                       msd-elastic
                       name="description"
                       class="form-control"
@@ -109,6 +94,6 @@
       </div>
     </div>
   </div>
-  <!-- end item body -->
+  <!-- end zone body -->
 </div>
-<!-- end item details -->
+<!-- end zone details -->
