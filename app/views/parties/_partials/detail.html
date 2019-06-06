@@ -31,7 +31,7 @@
                       ng-required
                       ng-minlength="2"
                       type="text"
-                      name="area"
+                      name="jurisdiction"
                       class="form-control"
                     />
                   </div>
@@ -41,8 +41,33 @@
                       ng-model="party.jurisdiction"
                       placeholder="Select Area"
                       class="form-control"
+                      oi-select-options="{cleanModel: true}"
                     ></oi-select>
                     <label title="Area" class="floating-label">Area</label>
+                  </div>
+                </div>
+                <div class="m-b m-t-lg" title="Zone">
+                  <div ng-show="!edit" class="form-group">
+                    <label title="Zone" class="floating-label">Zone</label>
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="party.zone.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="zone"
+                      class="form-control"
+                    />
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select
+                      oi-options="item.name for item in zones track by item._id"
+                      ng-model="party.zone"
+                      placeholder="Select Zone"
+                      class="form-control"
+                      oi-select-options="{cleanModel: true}"
+                    ></oi-select>
+                    <label title="Zone" class="floating-label">Zone</label>
                   </div>
                 </div>
                 <div class="row m-t-lg">

@@ -29,6 +29,16 @@ angular.module('ng311').config(function($stateProvider) {
               },
             });
           },
+          zones: function(Zone) {
+            return Zone.find({
+              limit: 1000,
+              filter: {
+                deletedAt: {
+                  $eq: null,
+                },
+              },
+            });
+          },
         },
       },
     },

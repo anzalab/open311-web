@@ -17,6 +17,7 @@ angular
     Party,
     jurisdictions,
     roles,
+    zones,
     party
   ) {
     $scope.edit = false;
@@ -24,6 +25,7 @@ angular
     $scope.passwordDontMatch = false;
     $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.roles = roles.roles;
+    $scope.zones = zones.zones;
 
     $scope.workspaces = party.settings.party.relation.workspaces;
 
