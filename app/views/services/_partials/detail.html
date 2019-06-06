@@ -1,92 +1,190 @@
 <!-- start service details -->
 <div class="row-col">
-    <div class="white b-b bg">
-        <!-- start service detail action bar -->
-        <div ng-include="'views/services/_partials/action_bar.html'" class="navbar"></div>
-        <!-- end service details action bar -->
-    </div>
-    <!-- start service body -->
-    <div class="row-row">
-        <div class="row-body">
-            <div class="row-inner">
-                <div class="padding">
-                    <form ng-submit="save()" name="serviceForm" role="form" autocomplete="off" novalidate>
-                        <div class="box">
-                            <div class="box-body">
-                                <!-- start service group -->
-                                <div class="m-b" title="Service Group">
-                                    <div ng-show="!edit" class="form-group">
-                                        <label title="Group" class="floating-label">Group</label>
-                                        <input ng-disabled="!edit" ng-model="service.group.name" ng-required ng-minlength="2" type="text" name="group" class="form-control" />
-                                    </div>
-                                    <div ng-show="edit" class="form-group form-material floating">
-                                        <oi-select oi-options="item.name for item in servicegroups track by item.id" ng-model="service.group" placeholder="Select Group" class="form-control"></oi-select>
-                                        <label title="Group" class="floating-label">Group</label>
-                                    </div>
-                                </div>
-                                <!-- end service group -->
-                                <!-- start service priority -->
-                                <div class="m-t-lg" title="Service Priority">
-                                    <div ng-show="!edit" class="form-group">
-                                        <label title="Priority" class="floating-label">Priority</label>
-                                        <input ng-disabled="!edit" ng-model="service.priority.name" ng-required ng-minlength="2" type="text" name="priority" class="form-control" />
-                                    </div>
-                                    <div ng-show="edit" class="form-group form-material floating">
-                                        <oi-select oi-options="item.name for item in priorities track by item.id" ng-model="service.priority" placeholder="Select Priority" class="form-control"></oi-select>
-                                        <label title="Priority" class="floating-label">Priority</label>
-                                    </div>
-                                </div>
-                                <!-- end service priority -->
-                                <div class="m-t-lg" title="Service Code">
-                                    <div class="form-group">
-                                        <label title="Service Code" class="floating-label">Code</label>
-                                        <input title="Service Code" ng-disabled="!edit" ng-model="service.code" ng-required ng-minlength="1" type="text" name="code" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Name">
-                                    <div class="form-group">
-                                        <label title="Service Name" class="floating-label">Name</label>
-                                        <input title="Service Name" ng-disabled="!edit" ng-model="service.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Level Agreement">
-                                    <div class="form-group">
-                                        <label title="Service Level Agreement" class="floating-label">Service Level Agreement</label>
-                                        <input title="Service Level Agreement" ng-disabled="!edit" ng-model="service.sla.ttr" min="0" ng-step="1" type="number" name="ttr" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Color">
-                                    <color-picker ng-model="service.color">
-                                    </color-picker>
-                                    <div class="m-t-lg">
-                                        <div class="form-group">
-                                            <label title="Service Color" class="floating-label">Service Color(HEX)</label>
-                                            <input title="Service Color" ng-disabled="!edit" ng-model="service.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Description">
-                                    <div class="form-group">
-                                        <label class="floating-label">Description</label>
-                                        <textarea title="Service Description" ng-disabled="!edit" ng-model="service.description" msd-elastic name="about" class="form-control" rows="3">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="External Reporting Method Support">
-                                    <div class="form-group">
-                                        <div class="checkbox-custom checkbox-primary">
-                                            <label title="External Reporting Method Support">Support External Reporting Methods</label>
-                                            <input ng-show="edit" type="checkbox" ng-model="service.isExternal">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+  <div class="white b-b bg">
+    <!-- start service detail action bar -->
+    <div
+      ng-include="'views/services/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end service details action bar -->
+  </div>
+  <!-- start service body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="serviceForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <!-- start service group -->
+                <div class="m-b" title="Service Group">
+                  <div ng-show="!edit" class="form-group">
+                    <label title="Group" class="floating-label">Group</label>
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="service.group.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="group"
+                      class="form-control"
+                    />
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select
+                      oi-options="item.name for item in servicegroups track by item.id"
+                      ng-model="service.group"
+                      placeholder="Select Group"
+                      class="form-control"
+                    ></oi-select>
+                    <label title="Group" class="floating-label">Group</label>
+                  </div>
                 </div>
+                <!-- end service group -->
+                <!-- start service priority -->
+                <div class="m-t-lg" title="Service Priority">
+                  <div ng-show="!edit" class="form-group">
+                    <label title="Priority" class="floating-label"
+                      >Priority</label
+                    >
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="service.priority.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="priority"
+                      class="form-control"
+                    />
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select
+                      oi-options="item.name for item in priorities track by item.id"
+                      ng-model="service.priority"
+                      placeholder="Select Priority"
+                      class="form-control"
+                    ></oi-select>
+                    <label title="Priority" class="floating-label"
+                      >Priority</label
+                    >
+                  </div>
+                </div>
+                <!-- end service priority -->
+                <div class="m-t-lg" title="Service Code">
+                  <div class="form-group">
+                    <label title="Service Code" class="floating-label"
+                      >Code</label
+                    >
+                    <input
+                      title="Service Code"
+                      ng-disabled="!edit"
+                      ng-model="service.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Name">
+                  <div class="form-group">
+                    <label title="Service Name" class="floating-label"
+                      >Name</label
+                    >
+                    <input
+                      title="Service Name"
+                      ng-disabled="!edit"
+                      ng-model="service.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Level Agreement">
+                  <div class="form-group">
+                    <label
+                      title="Service Level Agreement"
+                      class="floating-label"
+                      >Service Level Agreement</label
+                    >
+                    <input
+                      title="Service Level Agreement"
+                      ng-disabled="!edit"
+                      ng-model="service.sla.ttr"
+                      min="0"
+                      ng-step="1"
+                      type="number"
+                      name="ttr"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Color">
+                  <color-picker ng-model="service.color"> </color-picker>
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Service Color" class="floating-label"
+                        >Service Color(HEX)</label
+                      >
+                      <input
+                        title="Service Color"
+                        ng-disabled="!edit"
+                        ng-model="service.color"
+                        ng-required
+                        ng-minlength="1"
+                        type="text"
+                        name="color"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      title="Service Description"
+                      ng-disabled="!edit"
+                      ng-model="service.description"
+                      msd-elastic
+                      name="about"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="External Reporting Method Support">
+                  <div class="form-group">
+                    <div class="checkbox-custom checkbox-primary">
+                      <label title="External Reporting Method Support"
+                        >Support External Reporting Methods</label
+                      >
+                      <input
+                        ng-show="edit"
+                        type="checkbox"
+                        ng-model="service.isExternal"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
-    <!-- end service body -->
+  </div>
+  <!-- end service body -->
 </div>
 <!-- end service details -->

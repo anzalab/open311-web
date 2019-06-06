@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @ngdoc function
@@ -7,10 +7,13 @@
  * Alert Main Controller
  */
 angular
-  .module("ng311")
-  .controller("AlertMainCtrl", function(
-    $rootScope, $scope, $uibModal,
-    endpoints, Alert
+  .module('ng311')
+  .controller('AlertMainCtrl', function(
+    $rootScope,
+    $scope,
+    $uibModal,
+    endpoints,
+    Alert
   ) {
     $scope.page = 1;
     $scope.limit = 10;
@@ -21,34 +24,34 @@ angular
 
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.methods = [
-      { name: "SMS" },
-      { name: "Email" },
-      { name: "Push Notification" }
+      { name: 'SMS' },
+      { name: 'Email' },
+      { name: 'Push Notification' },
     ];
 
     $scope.priorities = [
-      { name: "High", count: 100 },
-      { name: "Normal", count: 100 },
-      { name: "Low", count: 100 }
+      { name: 'High', count: 100 },
+      { name: 'Normal', count: 100 },
+      { name: 'Low', count: 100 },
     ];
 
     $scope.statuses = [
-      { name: "Sent", count: 100 },
-      { name: "Failed", count: 100 },
-      { name: "Delivered", count: 100 }
+      { name: 'Sent', count: 100 },
+      { name: 'Failed', count: 100 },
+      { name: 'Delivered', count: 100 },
     ];
 
     $scope.methods = [
-      { name: "SMS", count: 100 },
-      { name: "Email", count: 100 },
-      { name: "Push Notification", count: 100 }
+      { name: 'SMS', count: 100 },
+      { name: 'Email', count: 100 },
+      { name: 'Push Notification', count: 100 },
     ];
 
     $scope.receivers = [
-      { name: "Reporters" },
-      { name: "Customers" },
-      { name: "Subscribers" },
-      { name: "Employees" }
+      { name: 'Reporters' },
+      { name: 'Customers' },
+      { name: 'Subscribers' },
+      { name: 'Employees' },
     ];
 
     /**
@@ -63,14 +66,14 @@ angular
     $scope.compose = function() {
       //open performance reports filter modal
       $scope.modal = $uibModal.open({
-        templateUrl: "views/alerts/_partials/compose.html",
+        templateUrl: 'views/alerts/_partials/compose.html',
         scope: $scope,
-        size: "lg"
+        size: 'lg',
       });
 
       //handle modal close and dismissed
       $scope.modal.result.then(
-        function onClose( /*selectedItem*/ ) {},
+        function onClose(/*selectedItem*/) {},
         function onDismissed() {}
       );
     };
@@ -90,15 +93,14 @@ angular
       // $scope.alert.methods = $scope.channels.map(function(method) {
       //   return method.toUpperCase();
       // });
-      $scope.alert.methods = ["SMS"]; // fix SMS as the type of alert that will be sent
+      $scope.alert.methods = ['SMS']; // fix SMS as the type of alert that will be sent
 
       var alert = new Alert($scope.alert);
 
       // save an alert
       alert
         .$save()
-        .then(function( /*response*/ ) {
-
+        .then(function(/*response*/) {
           //reset alert & dismiss modal
           $scope.alert = $scope._alert;
           $scope.modal.dismiss();
@@ -106,13 +108,11 @@ angular
           //TODO avoid collision with alert.message
           var response = {};
 
-          response.message =
-            response.message || 'Alert Saved Successfully';
+          response.message = response.message || 'Alert Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
           $rootScope.$broadcast('app:alerts:reload');
-
         })
         .catch(function(error) {
           $rootScope.$broadcast('appError', error);
@@ -131,16 +131,17 @@ angular
     $scope.find = function() {
       Alert.find({
         sort: {
-          createdAt: -1
+          createdAt: -1,
         },
         page: $scope.page,
-        q: $scope.q
+        q: $scope.q,
       }).then(function(results) {
         $scope.alerts = results.alerts.map(function(alert) {
-          var areas =
-            _.map([].concat(alert.jurisdictions), function(jurisdiction) {
-              return jurisdiction.name;
-            });
+          var areas = _.map([].concat(alert.jurisdictions), function(
+            jurisdiction
+          ) {
+            return jurisdiction.name;
+          });
 
           return _.merge({}, alert, { areas: areas.toString() });
         });
@@ -188,5 +189,4 @@ angular
       $scope.alert = $scope._alert;
       $scope.find();
     });
-
   });

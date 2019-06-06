@@ -1,81 +1,108 @@
 <!-- start dashboard header -->
 <div class="app-header bg b-b bg-white">
+  <!-- start navbar -->
+  <div class="navbar">
+    <!-- start report title -->
+    <div class="navbar-item pull-left h5 text-md">
+      Overview - Reports
+    </div>
+    <!-- end report title -->
 
-    <!-- start navbar -->
-    <div class="navbar">
+    <!-- start report actions -->
+    <ul class="nav navbar-nav pull-right">
+      <!-- start filter -->
+      <li class="nav-item">
+        <a
+          ng-click="showFilter()"
+          class="nav-link"
+          aria-expanded="false"
+          title="Click to Filter Report"
+        >
+          <i
+            class="ion-android-funnel w-24"
+            title="Click To Filter Reports"
+          ></i>
+        </a>
+      </li>
+      <!-- end filter -->
 
-        <!-- start report title -->
-        <div class="navbar-item pull-left h5 text-md">
-            Overview - Reports
-        </div>
-        <!-- end report title -->
-
-        <!-- start report actions -->
-        <ul class="nav navbar-nav pull-right">
-
-            <!-- start filter -->
-            <li class="nav-item">
-                <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">
-                  <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
-                </a>
-            </li>
-            <!-- end filter -->
-
-            <!-- start download -->
-            <!-- <li class="nav-item" ng-if="overviews && overviews.length > 0">
+      <!-- start download -->
+      <!-- <li class="nav-item" ng-if="overviews && overviews.length > 0">
                 <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="overviews.csv">
                   <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
                 </a>
             </li> -->
-            <!-- end download -->
-
-        </ul>
-        <!-- end report actions -->
-
-    </div>
-    <!-- end navbar -->
-
+      <!-- end download -->
+    </ul>
+    <!-- end report actions -->
+  </div>
+  <!-- end navbar -->
 </div>
 <!-- end dashboard header -->
 
 <!-- start overview body -->
 <div class="app-body">
-    <div class="app-body-inner">
+  <div class="app-body-inner">
+    <!-- start overall summary -->
+    <ng-include
+      ng-if="overviews.overall"
+      src="'views/dashboards/overviews/_partials/overall_summary.html'"
+    ></ng-include>
+    <!-- end overall summary -->
 
-        <!-- start overall summary -->
-        <ng-include ng-if="overviews.overall" src="'views/dashboards/overviews/_partials/overall_summary.html'"></ng-include>
-        <!-- end overall summary -->
+    <!-- start jurisdictions summary -->
+    <ng-include
+      ng-if="overviews.jurisdictions && overviews.jurisdictions.length > 1"
+      src="'views/dashboards/overviews/_partials/jurisdictions_summary.html'"
+    ></ng-include>
+    <!-- end jurisdictions summary -->
 
-        <!-- start jurisdictions summary -->
-        <ng-include ng-if="overviews.jurisdictions && overviews.jurisdictions.length > 1" src="'views/dashboards/overviews/_partials/jurisdictions_summary.html'"></ng-include>
-        <!-- end jurisdictions summary -->
+    <!-- start service groups summary -->
+    <ng-include
+      ng-if="overviews.groups && overviews.groups.length > 0"
+      src="'views/dashboards/overviews/_partials/service_groups_summary.html'"
+    ></ng-include>
+    <!-- end service groups summary -->
 
-        <!-- start service groups summary -->
-        <ng-include ng-if="overviews.groups && overviews.groups.length > 0" src="'views/dashboards/overviews/_partials/service_groups_summary.html'"></ng-include>
-        <!-- end service groups summary -->
+    <!-- start services summary -->
+    <ng-include
+      ng-if="overviews.services  && overviews.services.length > 0"
+      src="'views/dashboards/overviews/_partials/services_summary.html'"
+    ></ng-include>
+    <!-- end services summary -->
 
-        <!-- start services summary -->
-        <ng-include ng-if="overviews.services  && overviews.services.length > 0" src="'views/dashboards/overviews/_partials/services_summary.html'"></ng-include>
-        <!-- end services summary -->
+    <!-- start methods summary -->
+    <ng-include
+      ng-if="overviews.methods  && overviews.methods.length > 0"
+      src="'views/dashboards/overviews/_partials/methods_summary.html'"
+    ></ng-include>
+    <!-- end methods summary -->
 
-        <!-- start methods summary -->
-        <ng-include ng-if="overviews.methods  && overviews.methods.length > 0" src="'views/dashboards/overviews/_partials/methods_summary.html'"></ng-include>
-        <!-- end methods summary -->
+    <!-- start workspaces summary -->
+    <ng-include
+      ng-if="overviews.workspaces  && overviews.workspaces.length > 0"
+      src="'views/dashboards/overviews/_partials/workspaces_summary.html'"
+    ></ng-include>
+    <!-- end workspaces summary -->
 
-        <!-- start workspaces summary -->
-        <ng-include ng-if="overviews.workspaces  && overviews.workspaces.length > 0" src="'views/dashboards/overviews/_partials/workspaces_summary.html'"></ng-include>
-        <!-- end workspaces summary -->
-
-        <!-- start no data description -->
-        <div ng-if="!overviews.overall" class="row-col h-v">
-            <div class="row-cell v-m">
-                <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
-                    <p class="text-muted m-y-lg">No Data Found. Please update your filters.</p>
-                    <button ng-click="showFilter()" class="btn btn-outline b-grey text-grey" title="Click to update filters">Update Filters</button>
-                </div>
-            </div>
+    <!-- start no data description -->
+    <div ng-if="!overviews.overall" class="row-col h-v">
+      <div class="row-cell v-m">
+        <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+          <p class="text-muted m-y-lg">
+            No Data Found. Please update your filters.
+          </p>
+          <button
+            ng-click="showFilter()"
+            class="btn btn-outline b-grey text-grey"
+            title="Click to update filters"
+          >
+            Update Filters
+          </button>
         </div>
-        <!-- end no data description -->
+      </div>
     </div>
+    <!-- end no data description -->
+  </div>
 </div>
 <!-- end overview body -->

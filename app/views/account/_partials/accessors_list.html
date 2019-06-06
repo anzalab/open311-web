@@ -1,61 +1,85 @@
 <!-- modal header -->
 <div class="modal-header">
-    <div class="b-b">
-        <button type="button" class="close pull-right" ng-click="$close()" aria-hidden="true">×</button>
-        <h4 class="modal-title">Account Accessors</h4>
-    </div>
+  <div class="b-b">
+    <button
+      type="button"
+      class="close pull-right"
+      ng-click="$close()"
+      aria-hidden="true"
+    >
+      ×
+    </button>
+    <h4 class="modal-title">Account Accessors</h4>
+  </div>
 </div>
 <!-- end modal header -->
 
 <div class="modal-body">
-    <!-- account accessors list -->
+  <!-- account accessors list -->
 
-    <div class="box">
-        <div class="box-header">
-            <div class="row">
-                <div class="col-md-9">
-                    <small>List of people who can access this account billing information</small>
-                </div>
-                <div class="col-md-3">
-                    <a class="btn white pull-right" ng-click="addAccessor()"> <i class="ti-plus"></i>&nbsp;Add new</a>
-                </div>
-            </div>
+  <div class="box">
+    <div class="box-header">
+      <div class="row">
+        <div class="col-md-9">
+          <small
+            >List of people who can access this account billing
+            information</small
+          >
         </div>
-        <table class="table b-t">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Email</th>
-                    <th>Verified</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="accessor in accessors">
-                    <td>{{accessor.name}}</td>
-                    <td>{{accessor.phone}}</td>
-                    <td>{{accessor.email}}</td>
-                    <td>{{accessor.verified ? 'Yes':'No'}}</td>
-                    <!-- actions -->
-                    <td>
-                        <div class="row">
-                            <a class="btn" title="Verify" ng-click="verifyAccessor(accessor.phone)"><i class="ti-check-box text-green-500"></i></a>
-                            <a class="btn" title="Edit" ng-click="editAccessor(accessor)"><i class="ti-pencil-alt text-blue-500"></i></a>
-                            <a class="btn" title="Remove" ng-click="removeAccessor(accessor.phone)"><i class="ti-trash text-red-500"></i></a>
-                        </div>
-                    </td>
-                    <!-- end actions -->
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md-3">
+          <a class="btn white pull-right" ng-click="addAccessor()">
+            <i class="ti-plus"></i>&nbsp;Add new</a
+          >
+        </div>
+      </div>
     </div>
-    <!-- end account accessors list -->
+    <table class="table b-t">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>Verified</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="accessor in accessors">
+          <td>{{accessor.name}}</td>
+          <td>{{accessor.phone}}</td>
+          <td>{{accessor.email}}</td>
+          <td>{{accessor.verified ? 'Yes':'No'}}</td>
+          <!-- actions -->
+          <td>
+            <div class="row">
+              <a
+                class="btn"
+                title="Verify"
+                ng-click="verifyAccessor(accessor.phone)"
+                ><i class="ti-check-box text-green-500"></i
+              ></a>
+              <a class="btn" title="Edit" ng-click="editAccessor(accessor)"
+                ><i class="ti-pencil-alt text-blue-500"></i
+              ></a>
+              <a
+                class="btn"
+                title="Remove"
+                ng-click="removeAccessor(accessor.phone)"
+                ><i class="ti-trash text-red-500"></i
+              ></a>
+            </div>
+          </td>
+          <!-- end actions -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- end account accessors list -->
 </div>
 
 <!-- start filter footer -->
 <div class="modal-footer">
-    <button class="btn btn-default" ng-click="$close()">Cancel</button>
-    <button class="btn btn-primary" ng-click="openAccountDetails()">Back</button>
+  <button class="btn btn-default" ng-click="$close()">Cancel</button>
+  <button class="btn btn-primary" ng-click="openAccountDetails()">Back</button>
 </div>
 <!-- end footer filter -->

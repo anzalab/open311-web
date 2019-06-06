@@ -10,16 +10,33 @@
     <ul class="nav navbar-nav pull-right">
       <!-- start filter -->
       <li class="nav-item">
-        <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">      
-            <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
+        <a
+          ng-click="showFilter()"
+          class="nav-link"
+          aria-expanded="false"
+          title="Click to Filter Report"
+        >
+          <i
+            class="ion-android-funnel w-24"
+            title="Click To Filter Reports"
+          ></i>
         </a>
       </li>
       <!-- end filter -->
       <!-- start download -->
       <li class="nav-item" ng-if="overviews && overviews.length > 0">
-        <a title="Click To Export Reports" class="nav-link" ng-csv="export" csv-header="exports.headers" filename="overviews.csv">
-                <i class="icon-cloud-download w-24" title="Click To Export Reports"></i>
-            </a>
+        <a
+          title="Click To Export Reports"
+          class="nav-link"
+          ng-csv="export"
+          csv-header="exports.headers"
+          filename="overviews.csv"
+        >
+          <i
+            class="icon-cloud-download w-24"
+            title="Click To Export Reports"
+          ></i>
+        </a>
       </li>
       <!-- end download -->
     </ul>
@@ -42,11 +59,14 @@
               <div class="box-header">
                 <h3>Issue per Service Group</h3>
                 <small class="block text-muted">
-                               Count of Reported Issues by Their Service Group
-                              </small>
+                  Count of Reported Issues by Their Service Group
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perGroupConfig" options="perGroupOptions"></echart>
+                <echart
+                  config="perGroupConfig"
+                  options="perGroupOptions"
+                ></echart>
               </div>
             </div>
           </div>
@@ -61,11 +81,15 @@
               <div class="box-header">
                 <h3>Issue per Service</h3>
                 <small class="block text-muted">
-                                 Count of Reported Issues by Their Service
-                                </small>
+                  Count of Reported Issues by Their Service
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart ng-repeat="options in perPerServiceOptions" config="perPerServiceConfig" options="options"></echart>
+                <echart
+                  ng-repeat="options in perPerServiceOptions"
+                  config="perPerServiceConfig"
+                  options="options"
+                ></echart>
               </div>
             </div>
           </div>
@@ -80,11 +104,14 @@
               <div class="box-header">
                 <h3>Issue per Status</h3>
                 <small class="block text-muted">
-                              Count of Reported Issues by Their Status
-                              </small>
+                  Count of Reported Issues by Their Status
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perStatusConfig" options="perStatusOptions"></echart>
+                <echart
+                  config="perStatusConfig"
+                  options="perStatusOptions"
+                ></echart>
               </div>
             </div>
           </div>
@@ -99,11 +126,14 @@
               <div class="box-header">
                 <h3>Issue per Priority</h3>
                 <small class="block text-muted">
-                              Count of Reported Issues by Their Priorities
-                              </small>
+                  Count of Reported Issues by Their Priorities
+                </small>
               </div>
               <div class="box-body p-l-none p-r-none">
-                <echart config="perPriorityConfig" options="perPriorityOptions"></echart>
+                <echart
+                  config="perPriorityConfig"
+                  options="perPriorityOptions"
+                ></echart>
               </div>
             </div>
           </div>

@@ -21,19 +21,30 @@
         <!-- start statuses menu -->
         <div class="p-a-md">
           <div class="m-b-md">
-            <button class="btn btn-fw info" ng-click="compose()">Compose</button>
+            <button class="btn btn-fw info" ng-click="compose()">
+              Compose
+            </button>
           </div>
           <div class="m-b text-muted text-xs">Status</div>
           <div class="nav-active-white">
             <ul class="nav">
               <li ng-class="{active:misc == 'all'}" class="nav-item m-b-xs">
-                <a ng-click="load({resetPage:true, reset:true, misc:'all'})"
-                  class="nav-link text-muted block" title="All Reported Issues">
+                <a
+                  ng-click="load({resetPage:true, reset:true, misc:'all'})"
+                  class="nav-link text-muted block"
+                  title="All Reported Issues"
+                >
                   All
                 </a>
               </li>
-              <li class="nav-item m-b-xs" ng-repeat="status in statuses | orderBy:'weight'">
-                <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
+              <li
+                class="nav-item m-b-xs"
+                ng-repeat="status in statuses | orderBy:'weight'"
+              >
+                <a
+                  ng-click="load({'status':status._id, resetPage:true})"
+                  class="nav-link text-muted block"
+                >
                   <!-- <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
                     {{summaries.statuses[status._id]}}
                   </span> -->
@@ -49,8 +60,14 @@
           <div class="m-b text-muted text-xs">Priority</div>
           <div class="nav-active-white">
             <ul class="nav">
-              <li class="nav-item m-b-xs" ng-repeat="priority in priorities | orderBy:'weight'">
-                <a ng-click="load({'status':status._id, resetPage:true})" class="nav-link text-muted block">
+              <li
+                class="nav-item m-b-xs"
+                ng-repeat="priority in priorities | orderBy:'weight'"
+              >
+                <a
+                  ng-click="load({'status':status._id, resetPage:true})"
+                  class="nav-link text-muted block"
+                >
                   <!-- <span class="pull-right text-sm label danger rounded" style="background-color: greenyellow">
                     {{summaries.statuses[status._id]}}
                   </span> -->

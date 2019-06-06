@@ -9,10 +9,15 @@
  */
 angular
   .module('ng311')
-  .controller('DashboardStandingCtrl', function (
-    $rootScope, $scope, $state, $uibModal, Summary, endpoints, party
+  .controller('DashboardStandingCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    $uibModal,
+    Summary,
+    endpoints,
+    party
   ) {
-
     //initialize scope attributes
     $scope.maxDate = new Date();
 
@@ -24,29 +29,37 @@ angular
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
 
-
     //bind filters
     var defaultFilters = {
-      startedAt: moment().utc().startOf('date').toDate(),
-      endedAt: moment().utc().endOf('date').toDate(),
+      startedAt: moment()
+        .utc()
+        .startOf('date')
+        .toDate(),
+      endedAt: moment()
+        .utc()
+        .endOf('date')
+        .toDate(),
       statuses: [],
       priorities: [],
       servicegroups: [],
       jurisdictions: [],
-      workspaces: []
+      workspaces: [],
     };
 
     $scope.filters = defaultFilters;
-
 
     //bind exports
     $scope.maxDate = new Date();
     $scope.exports = {
       filename: 'standing_reports_' + Date.now() + '.csv',
       headers: [
-        'Area', 'Service Group', 'Service',
-        'Status', 'Priority', 'Count'
-      ]
+        'Area',
+        'Service Group',
+        'Service',
+        'Status',
+        'Priority',
+        'Count',
+      ],
     };
 
     //initialize standings
@@ -55,27 +68,24 @@ angular
     /**
      * Exports current standing data
      */
-    $scope.export = function () {
-      var _exports =
-        _.map($scope.standings, function (standing) {
-          return {
-            jurisdiction: standing.jurisdiction.name,
-            servicegroup: standing.group.name,
-            service: standing.service.name,
-            status: standing.status.name,
-            priority: standing.priority.name,
-            count: standing.count
-          };
-        });
+    $scope.export = function() {
+      var _exports = _.map($scope.standings, function(standing) {
+        return {
+          jurisdiction: standing.jurisdiction.name,
+          servicegroup: standing.group.name,
+          service: standing.service.name,
+          status: standing.status.name,
+          priority: standing.priority.name,
+          count: standing.count,
+        };
+      });
       return _exports;
     };
-
 
     /**
      * Open overview reports filter
      */
-    $scope.showFilter = function () {
-
+    $scope.showFilter = function() {
       //open overview reports filter modal
       $scope.modal = $uibModal.open({
         templateUrl: 'views/dashboards/_partials/standings_filter.html',
@@ -84,17 +94,17 @@ angular
       });
 
       //handle modal close and dismissed
-      $scope.modal.result.then(function onClose( /*selectedItem*/ ) {},
-        function onDismissed() {});
-
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {}
+      );
     };
-
 
     /**
      * Filter overview reports based on on current selected filters
      * @param {Boolean} [reset] whether to clear and reset filter
      */
-    $scope.filter = function (reset) {
+    $scope.filter = function(reset) {
       if (reset) {
         $scope.filters = defaultFilters;
       }
@@ -109,25 +119,23 @@ angular
       $scope.modal.close();
     };
 
-
     /**
      * Filter service based on selected service group
      */
-    $scope.filterServices = function () {
+    $scope.filterServices = function() {
       //check for service group filter activation
       var filterHasServiceGroups =
-        ($scope.filters.servicegroups &&
-          $scope.filters.servicegroups.length > 0);
+        $scope.filters.servicegroups && $scope.filters.servicegroups.length > 0;
 
       //pick only service of selected group
       if (filterHasServiceGroups) {
         //filter services based on service group(s)
-        $scope.services =
-          _.filter(endpoints.services.services, function (service) {
-            var group =
-              _.get(service, 'group._id', _.get(service, 'group'));
-            return _.includes($scope.filters.servicegroups, group);
-          });
+        $scope.services = _.filter(endpoints.services.services, function(
+          service
+        ) {
+          var group = _.get(service, 'group._id', _.get(service, 'group'));
+          return _.includes($scope.filters.servicegroups, group);
+        });
       }
       //use all services
       else {
@@ -135,12 +143,10 @@ angular
       }
     };
 
-
     /**
      * Prepare standing reports for display
      */
-    $scope.prepare = function () {
-
+    $scope.prepare = function() {
       //notify no data loaded
       // if (!$scope.standings || $scope.standings.length <= 0) {
       //   $rootScope.$broadcast('appWarning', {
@@ -157,9 +163,7 @@ angular
       $scope.prepareIssuePerJurisdictionPerService();
       $scope.prepareIssuePerJurisdictionPerPriority();
       $scope.prepareIssuePerJurisdictionPerStatus();
-
     };
-
 
     /**
      * prepare per jurisdiction
@@ -168,8 +172,7 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareIssuePerJurisdiction = function () {
-
+    $scope.prepareIssuePerJurisdiction = function() {
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
         .map('jurisdiction')
@@ -184,44 +187,40 @@ angular
       var legends = _.map(categories, 'name');
 
       //prepare bar chart series data
-      var data =
-        _.map(categories, function (category) {
-
-          //obtain all standings of specified jurisdiction(category)
-          var value =
-            _.filter($scope.standings, function (standing) {
-              return standing.jurisdiction.name === category.name;
-            });
-          value = value ? _.sumBy(value, 'count') : 0;
-          var serie = {
-            name: category.name,
-            value: value,
-            itemStyle: {
-              normal: {
-                color: category.color
-              }
-            }
-          };
-
-          return serie;
-
+      var data = _.map(categories, function(category) {
+        //obtain all standings of specified jurisdiction(category)
+        var value = _.filter($scope.standings, function(standing) {
+          return standing.jurisdiction.name === category.name;
         });
+        value = value ? _.sumBy(value, 'count') : 0;
+        var serie = {
+          name: category.name,
+          value: value,
+          itemStyle: {
+            normal: {
+              color: category.color,
+            },
+          },
+        };
+
+        return serie;
+      });
 
       //prepare chart config
       $scope.perJurisdictionConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perJurisdictionOptions = {
         color: colors,
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         tooltip: {
           trigger: 'item',
-          formatter: '{b} : {c}'
+          formatter: '{b} : {c}',
         },
         toolbox: {
           show: true,
@@ -229,47 +228,51 @@ angular
             saveAsImage: {
               name: 'Issue per Area-' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
+              show: true,
+            },
+          },
         },
         calculable: true,
-        xAxis: [{
-          type: 'category',
-          data: _.map(categories, 'name'),
-          axisTick: {
-            alignWithLabel: true
-          }
-        }],
-        yAxis: [{
-          type: 'value'
-        }],
-        series: [{
-          type: 'bar',
-          barWidth: '70%',
-          label: {
-            normal: {
-              show: true
-            }
+        xAxis: [
+          {
+            type: 'category',
+            data: _.map(categories, 'name'),
+            axisTick: {
+              alignWithLabel: true,
+            },
           },
-          markPoint: { // show area with maximum and minimum
-            data: [
-              { name: 'Maximum', type: 'max' },
-              { name: 'Minimum', type: 'min' }
-            ]
+        ],
+        yAxis: [
+          {
+            type: 'value',
           },
-          markLine: { //add average line
-            precision: 0,
-            data: [
-              { type: 'average', name: 'Average' }
-            ]
+        ],
+        series: [
+          {
+            type: 'bar',
+            barWidth: '70%',
+            label: {
+              normal: {
+                show: true,
+              },
+            },
+            markPoint: {
+              // show area with maximum and minimum
+              data: [
+                { name: 'Maximum', type: 'max' },
+                { name: 'Minimum', type: 'min' },
+              ],
+            },
+            markLine: {
+              //add average line
+              precision: 0,
+              data: [{ type: 'average', name: 'Average' }],
+            },
+            data: data,
           },
-          data: data
-        }]
+        ],
       };
-
     };
-
 
     /**
      * prepare per jurisdiction per service group bar chart
@@ -278,8 +281,7 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareIssuePerJurisdictionPerServiceGroup = function () {
-
+    $scope.prepareIssuePerJurisdictionPerServiceGroup = function() {
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
         .map('jurisdiction')
@@ -302,35 +304,36 @@ angular
 
       //prepare bar chart series
       var series = {};
-      _.forEach(categories, function (category) {
-        _.forEach(groups, function (group) {
+      _.forEach(categories, function(category) {
+        _.forEach(groups, function(group) {
           var serie = series[group.name] || {
             name: group.name,
             type: 'bar',
             label: {
               normal: {
                 show: true,
-                position: 'top'
-              }
+                position: 'top',
+              },
             },
-            data: []
+            data: [],
           };
 
           //obtain all standings of specified jurisdiction(category)
           //and group
-          var value =
-            _.filter($scope.standings, function (standing) {
-              return (standing.jurisdiction.name === category &&
-                standing.group.name === group.name);
-            });
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.jurisdiction.name === category &&
+              standing.group.name === group.name
+            );
+          });
           value = value ? _.sumBy(value, 'count') : 0;
           serie.data.push({
             value: value,
             itemStyle: {
               normal: {
-                color: group.color
-              }
-            }
+                color: group.color,
+              },
+            },
           });
           series[group.name] = serie;
         });
@@ -340,14 +343,14 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceGroupConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perJurisdictionPerServiceGroupOptions = {
         color: colors,
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         tooltip: {
           trigger: 'item',
@@ -357,7 +360,7 @@ angular
           orient: 'horizontal',
           x: 'center',
           y: 'top',
-          data: legends
+          data: legends,
         },
         toolbox: {
           show: true,
@@ -365,23 +368,25 @@ angular
             saveAsImage: {
               name: 'Issue per Area Per Service Group-' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
+              show: true,
+            },
+          },
         },
         calculable: true,
-        xAxis: [{
-          type: 'category',
-          data: categories
-        }],
-        yAxis: [{
-          type: 'value'
-        }],
-        series: series
+        xAxis: [
+          {
+            type: 'category',
+            data: categories,
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+          },
+        ],
+        series: series,
       };
-
     };
-
 
     /**
      * prepare per jurisdiction per service bar chart
@@ -390,8 +395,7 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareIssuePerJurisdictionPerService = function () {
-
+    $scope.prepareIssuePerJurisdictionPerService = function() {
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
         .map('jurisdiction')
@@ -409,7 +413,7 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerServiceConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
       //prepare chart options
       $scope.perJurisdictionPerServiceOptions = [];
@@ -417,8 +421,7 @@ angular
       //chunk services for better charting display
       var chunks = _.chunk(services, 4);
       var chunksSize = _.size(chunks);
-      _.forEach(chunks, function (_services, index) {
-
+      _.forEach(chunks, function(_services, index) {
         //prepare unique service color for bar chart and legends color
         var colors = _.map(_services, 'color');
 
@@ -427,36 +430,36 @@ angular
 
         //prepare bar chart series
         var series = {};
-        _.forEach(categories, function (category) {
-          _.forEach(_services, function (service) {
+        _.forEach(categories, function(category) {
+          _.forEach(_services, function(service) {
             var serie = series[service.name] || {
               name: service.name,
               type: 'bar',
               label: {
                 normal: {
                   show: true,
-                  position: 'top'
-                }
+                  position: 'top',
+                },
               },
-              data: []
+              data: [],
             };
 
             //obtain all standings of specified jurisdiction(category)
             //and service
-            var value =
-              _.filter($scope.standings, function (standing) {
-                return (standing.jurisdiction.name ===
-                  category &&
-                  standing.service.name === service.name);
-              });
+            var value = _.filter($scope.standings, function(standing) {
+              return (
+                standing.jurisdiction.name === category &&
+                standing.service.name === service.name
+              );
+            });
             value = value ? _.sumBy(value, 'count') : 0;
             serie.data.push({
               value: value,
               itemStyle: {
                 normal: {
-                  color: service.color
-                }
-              }
+                  color: service.color,
+                },
+              },
             });
             series[service.name] = serie;
           });
@@ -464,54 +467,59 @@ angular
         series = _.values(series);
 
         //ensure bottom margin for top charts
-        var chart = (index === (chunksSize - 1)) ? {} : {
-          grid: {
-            bottom: '30%'
-          }
-        };
+        var chart =
+          index === chunksSize - 1
+            ? {}
+            : {
+                grid: {
+                  bottom: '30%',
+                },
+              };
 
         //prepare chart options
-        $scope.perJurisdictionPerServiceOptions.push(_.merge(chart, {
-          color: colors,
-          textStyle: {
-            fontFamily: 'Lato'
-          },
-          tooltip: {
-            trigger: 'item',
-            // formatter: '{b} : {c}'
-          },
-          legend: {
-            orient: 'horizontal',
-            x: 'center',
-            y: 'top',
-            data: legends
-          },
-          toolbox: {
-            show: true,
-            feature: {
-              saveAsImage: {
-                name: 'Issue per Area Per Service-' + new Date().getTime(),
-                title: 'Save',
-                show: true
-              }
-            }
-          },
-          calculable: true,
-          xAxis: [{
-            type: 'category',
-            data: categories
-          }],
-          yAxis: [{
-            type: 'value'
-          }],
-          series: series
-        }));
-
+        $scope.perJurisdictionPerServiceOptions.push(
+          _.merge(chart, {
+            color: colors,
+            textStyle: {
+              fontFamily: 'Lato',
+            },
+            tooltip: {
+              trigger: 'item',
+              // formatter: '{b} : {c}'
+            },
+            legend: {
+              orient: 'horizontal',
+              x: 'center',
+              y: 'top',
+              data: legends,
+            },
+            toolbox: {
+              show: true,
+              feature: {
+                saveAsImage: {
+                  name: 'Issue per Area Per Service-' + new Date().getTime(),
+                  title: 'Save',
+                  show: true,
+                },
+              },
+            },
+            calculable: true,
+            xAxis: [
+              {
+                type: 'category',
+                data: categories,
+              },
+            ],
+            yAxis: [
+              {
+                type: 'value',
+              },
+            ],
+            series: series,
+          })
+        );
       });
-
     };
-
-
 
     /**
      * prepare per jurisdiction per status bar chart
@@ -520,8 +528,7 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareIssuePerJurisdictionPerStatus = function () {
-
+    $scope.prepareIssuePerJurisdictionPerStatus = function() {
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
         .map('jurisdiction')
@@ -545,36 +552,36 @@ angular
 
       //prepare bar chart series
       var series = {};
-      _.forEach(categories, function (category) {
-        _.forEach(statuses, function (status) {
+      _.forEach(categories, function(category) {
+        _.forEach(statuses, function(status) {
           var serie = series[status.name] || {
             name: status.name,
             type: 'bar',
             label: {
               normal: {
                 show: true,
-                position: 'top'
-              }
+                position: 'top',
+              },
             },
-            data: []
+            data: [],
           };
 
           //obtain all standings of specified jurisdiction(category)
           //and status
-          var value =
-            _.filter($scope.standings, function (standing) {
-              return (standing.jurisdiction.name ===
-                category &&
-                standing.status.name === status.name);
-            });
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.jurisdiction.name === category &&
+              standing.status.name === status.name
+            );
+          });
           value = value ? _.sumBy(value, 'count') : 0;
           serie.data.push({
             value: value,
             itemStyle: {
               normal: {
-                color: status.color
-              }
-            }
+                color: status.color,
+              },
+            },
           });
           series[status.name] = serie;
         });
@@ -584,14 +591,14 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerStatusConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perJurisdictionPerStatusOptions = {
         color: colors,
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         tooltip: {
           trigger: 'item',
@@ -601,7 +608,7 @@ angular
           orient: 'horizontal',
           x: 'center',
           y: 'top',
-          data: legends
+          data: legends,
         },
         toolbox: {
           show: true,
@@ -609,23 +616,25 @@ angular
             saveAsImage: {
               name: 'Issue per Area Per Status-' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
+              show: true,
+            },
+          },
         },
         calculable: true,
-        xAxis: [{
-          type: 'category',
-          data: categories
-        }],
-        yAxis: [{
-          type: 'value'
-        }],
-        series: series
+        xAxis: [
+          {
+            type: 'category',
+            data: categories,
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+          },
+        ],
+        series: series,
       };
-
     };
-
 
     /**
      * prepare per jurisdiction per priority bar chart
@@ -634,8 +643,7 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareIssuePerJurisdictionPerPriority = function () {
-
+    $scope.prepareIssuePerJurisdictionPerPriority = function() {
       //prepare unique jurisdictions for bar chart categories
       var categories = _.chain($scope.standings)
         .map('jurisdiction')
@@ -659,36 +667,36 @@ angular
 
       //prepare bar chart series
       var series = {};
-      _.forEach(categories, function (category) {
-        _.forEach(prioroties, function (priority) {
+      _.forEach(categories, function(category) {
+        _.forEach(prioroties, function(priority) {
           var serie = series[priority.name] || {
             name: priority.name,
             type: 'bar',
             label: {
               normal: {
                 show: true,
-                position: 'top'
-              }
+                position: 'top',
+              },
             },
-            data: []
+            data: [],
           };
 
           //obtain all standings of specified jurisdiction(category)
           //and priority
-          var value =
-            _.filter($scope.standings, function (standing) {
-              return (standing.jurisdiction.name ===
-                category &&
-                standing.priority.name === priority.name);
-            });
+          var value = _.filter($scope.standings, function(standing) {
+            return (
+              standing.jurisdiction.name === category &&
+              standing.priority.name === priority.name
+            );
+          });
           value = value ? _.sumBy(value, 'count') : 0;
           serie.data.push({
             value: value,
             itemStyle: {
               normal: {
-                color: priority.color
-              }
-            }
+                color: priority.color,
+              },
+            },
           });
           series[priority.name] = serie;
         });
@@ -698,14 +706,14 @@ angular
       //prepare chart config
       $scope.perJurisdictionPerPriorityConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perJurisdictionPerPriorityOptions = {
         color: colors,
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         tooltip: {
           trigger: 'item',
@@ -715,7 +723,7 @@ angular
           orient: 'horizontal',
           x: 'center',
           y: 'top',
-          data: legends
+          data: legends,
         },
         toolbox: {
           show: true,
@@ -723,45 +731,43 @@ angular
             saveAsImage: {
               name: 'Issue per Area Per Priority-' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
+              show: true,
+            },
+          },
         },
         calculable: true,
-        xAxis: [{
-          type: 'category',
-          data: categories
-        }],
-        yAxis: [{
-          type: 'value'
-        }],
-        series: series
+        xAxis: [
+          {
+            type: 'category',
+            data: categories,
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+          },
+        ],
+        series: series,
       };
-
     };
 
     /**
      * Reload standing reports
      */
-    $scope.reload = function () {
-      Summary
-        .standings({ filter: $scope.params })
-        .then(function (standings) {
-          $scope.standings = standings;
-          $scope.prepare();
-        });
+    $scope.reload = function() {
+      Summary.standings({ filter: $scope.params }).then(function(standings) {
+        $scope.standings = standings;
+        $scope.prepare();
+      });
     };
 
     //listen for events and reload overview accordingly
-    $rootScope.$on('app:servicerequests:reload', function () {
+    $rootScope.$on('app:servicerequests:reload', function() {
       $scope.reload();
     });
-
 
     //pre-load reports
     //prepare overview details
     $scope.params = Summary.prepareQuery($scope.filters);
     $scope.reload();
-
-
   });

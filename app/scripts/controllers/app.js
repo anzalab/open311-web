@@ -9,7 +9,7 @@
  */
 angular
   .module('ng311')
-  .controller('AppCtrl', function ($rootScope, $scope, ENV, party) {
+  .controller('AppCtrl', function($rootScope, $scope, ENV, party) {
     //show app aside
     $rootScope.showAside = true;
 
@@ -23,8 +23,7 @@ angular
     $rootScope.settings = angular.merge({}, ENV.settings, party.settings);
     $scope.settings = $rootScope.settings;
 
-    $scope.$watch('$root.settings', function () {
+    $scope.$watch('$root.settings', function() {
       $scope.settings = $rootScope.settings;
     });
-
   });

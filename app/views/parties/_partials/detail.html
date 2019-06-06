@@ -2,7 +2,10 @@
 <div class="row-col">
   <div class="white b-b bg">
     <!-- start party detail action bar -->
-    <div ng-include="'views/parties/_partials/action_bar.html'" class="navbar"></div>
+    <div
+      ng-include="'views/parties/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
     <!-- end party details action bar -->
   </div>
   <!-- start party body -->
@@ -10,58 +13,103 @@
     <div class="row-body">
       <div class="row-inner">
         <div class="padding">
-          <form ng-submit="save()" name="partyForm" role="form" autocomplete="off"
-            novalidate>
+          <form
+            ng-submit="save()"
+            name="partyForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
             <div class="box">
               <div class="box-body">
                 <div class="m-b" title="Area">
                   <div ng-show="!edit" class="form-group">
                     <label title="Area" class="floating-label">Area</label>
-                    <input ng-disabled="!edit" ng-model="party.jurisdiction.name"
-                      ng-required ng-minlength="2" type="text" name="area"
-                      class="form-control" />
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="party.jurisdiction.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="area"
+                      class="form-control"
+                    />
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
-                    <oi-select oi-options="item.name for item in jurisdictions track by item.id"
-                      ng-model="party.jurisdiction" placeholder="Select Area"
-                      class="form-control"></oi-select>
+                    <oi-select
+                      oi-options="item.name for item in jurisdictions track by item.id"
+                      ng-model="party.jurisdiction"
+                      placeholder="Select Area"
+                      class="form-control"
+                    ></oi-select>
                     <label title="Area" class="floating-label">Area</label>
                   </div>
                 </div>
                 <div class="row m-t-lg">
                   <div class="col-sm-6" title="Party Name">
                     <div class="form-group">
-                      <label title="Party Name" class="floating-label">Name</label>
-                      <input ng-disabled="!edit" ng-model="party.name"
-                        ng-required ng-minlength="2" type="text" name="name"
-                        class="form-control" />
+                      <label title="Party Name" class="floating-label"
+                        >Name</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="party.name"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                   <div class="col-sm-6" title="Party Phone">
                     <div class="form-group">
-                      <label title="Mobile Phone Number" class="floating-label">Phone</label>
-                      <input ng-disabled="!edit" ng-model="party.phone"
-                        ng-required ng-minlength="2" type="text" name="phone"
-                        class="form-control" />
+                      <label title="Mobile Phone Number" class="floating-label"
+                        >Phone</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="party.phone"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="phone"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                 </div>
                 <div class="row m-t-lg">
                   <div class="col-sm-6" title="Party Email">
                     <div class="form-group">
-                      <label title="Email Address" class="floating-label">Email</label>
-                      <input ng-disabled="!edit" ng-model="party.email"
-                        ng-required ng-minlength="2" type="text" name="email"
-                        class="form-control" />
+                      <label title="Email Address" class="floating-label"
+                        >Email</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="party.email"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="email"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                   <div class="col-sm-6" title="SIP Number">
                     <div class="form-group">
-                      <label title="SIP Phone Number" class="floating-label">SIP
-                        Number</label>
-                      <input ng-disabled="!edit" ng-model="party.sipNumber"
-                        ng-required ng-minlength="2" type="text" name="sipNumber"
-                        class="form-control" />
+                      <label title="SIP Phone Number" class="floating-label"
+                        >SIP Number</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="party.sipNumber"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="sipNumber"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                 </div>
@@ -69,26 +117,53 @@
                 <div ng-show="edit" class="row m-t-lg">
                   <div class="col-sm-6" title="Party Password">
                     <div class="form-group">
-                      <label title="Password" class="floating-label">Password</label>
-                      <input ng-change="onPasswordChange()" ng-disabled="!edit"
-                        ng-model="party.password" ng-required ng-minlength="2"
-                        type="password" name="password" class="form-control" />
-                      <span ng-show="party.password && party.password.length < 8"
-                        class="help-block text-red-700 font-weight-400">Password
-                        length must be atleast 8 characters</span>
+                      <label title="Password" class="floating-label"
+                        >Password</label
+                      >
+                      <input
+                        ng-change="onPasswordChange()"
+                        ng-disabled="!edit"
+                        ng-model="party.password"
+                        ng-required
+                        ng-minlength="2"
+                        type="password"
+                        name="password"
+                        class="form-control"
+                      />
+                      <span
+                        ng-show="party.password && party.password.length < 8"
+                        class="help-block text-red-700 font-weight-400"
+                        >Password length must be atleast 8 characters</span
+                      >
                       <!-- <span ng-show="!edit" class="help-block help-block-password font-size-20">****************</span> -->
                     </div>
                   </div>
-                  <div ng-show="party.password && party.password.length >= 8"
-                    class="col-sm-6" title="Password Confirmation">
+                  <div
+                    ng-show="party.password && party.password.length >= 8"
+                    class="col-sm-6"
+                    title="Password Confirmation"
+                  >
                     <div class="form-group">
-                      <label title="Password Confirmation" class="floating-label">Password
-                        Confirm</label>
-                      <input ng-change="onConfirmPassword()" ng-disabled="!edit"
-                        ng-model="party.confirm" ng-required ng-minlength="2"
-                        type="password" name="confirm" class="form-control" />
-                      <span ng-show="passwordDontMatch" class="help-block text-red-700 font-weight-400">Password
-                        does not match</span>
+                      <label
+                        title="Password Confirmation"
+                        class="floating-label"
+                        >Password Confirm</label
+                      >
+                      <input
+                        ng-change="onConfirmPassword()"
+                        ng-disabled="!edit"
+                        ng-model="party.confirm"
+                        ng-required
+                        ng-minlength="2"
+                        type="password"
+                        name="confirm"
+                        class="form-control"
+                      />
+                      <span
+                        ng-show="passwordDontMatch"
+                        class="help-block text-red-700 font-weight-400"
+                        >Password does not match</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -97,18 +172,32 @@
                 <div class="row m-t-lg">
                   <div class="col-sm-12">
                     <div ng-show="!edit" class="form-group">
-                      <label title="Workspace" class="floating-label">Workspace</label>
-                      <input ng-disabled="!edit" ng-model="party.relation.workspace"
-                        ng-required ng-minlength="2" type="text" name="workspace"
-                        class="form-control" />
+                      <label title="Workspace" class="floating-label"
+                        >Workspace</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="party.relation.workspace"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="workspace"
+                        class="form-control"
+                      />
                     </div>
                     <div ng-show="edit" class="form-inputs">
                       <div class="form-group">
                         <label class="floating-label">Workspace</label>
-                        <div class="radio-custom radio-primary" ng-repeat="workspace in workspaces">
-                          <input type="radio" ng-model="party.relation.workspace"
-                          ng-value="workspace">
+                        <div
+                          class="radio-custom radio-primary"
+                          ng-repeat="workspace in workspaces"
+                        >
                           <label>{{workspace}}</label>
+                          <input
+                            type="radio"
+                            ng-model="party.relation.workspace"
+                            ng-value="workspace"
+                          />
                         </div>
                       </div>
                     </div>
@@ -120,16 +209,28 @@
                   <div class="col-sm-12">
                     <div ng-show="!edit" class="form-group">
                       <label title="Roles" class="floating-label">Roles</label>
-                      <input ng-disabled="!edit" ng-model="party._roles"
-                        ng-required ng-minlength="2" type="text" name="_roles"
-                        class="form-control" />
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="party._roles"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="_roles"
+                        class="form-control"
+                      />
                     </div>
                     <div ng-show="edit" class="form-inputs">
                       <div class="form-group">
                         <label class="floating-label">Roles</label>
-                        <div class="checkbox-custom checkbox-primary" ng-repeat="role in roles">
-                          <input type="checkbox" checklist-model="party._assigned"
-                            checklist-value="role._id">
+                        <div
+                          class="checkbox-custom checkbox-primary"
+                          ng-repeat="role in roles"
+                        >
+                          <input
+                            type="checkbox"
+                            checklist-model="party._assigned"
+                            checklist-value="role._id"
+                          />
                           <label>{{role.name}}</label>
                         </div>
                       </div>
@@ -138,6 +239,7 @@
                 </div>
                 <!-- end party roles -->
               </div>
+            </div>
           </form>
         </div>
       </div>

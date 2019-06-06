@@ -23,7 +23,12 @@
               From
             </h6>
           </div>
-          <div pickadate ng-model="filters.startedAt" max-date="maxDate" class="p-a p-l-none"></div>
+          <div
+            pickadate
+            ng-model="filters.startedAt"
+            max-date="maxDate"
+            class="p-a p-l-none"
+          ></div>
         </div>
         <!-- end start date filter -->
         <!-- start end date filter -->
@@ -33,7 +38,12 @@
               To
             </h6>
           </div>
-          <div pickadate ng-model="filters.endedAt" max-date="maxDate" class="p-a p-l-none"></div>
+          <div
+            pickadate
+            ng-model="filters.endedAt"
+            max-date="maxDate"
+            class="p-a p-l-none"
+          ></div>
         </div>
         <!-- end end date filter -->
       </div>
@@ -49,8 +59,14 @@
         </div>
         <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions">
           <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.jurisdictions" checklist-value="jurisdiction._id">
-            <label class="text-muted" title="{{jurisdiction.name}}">{{jurisdiction.name}}</label>
+            <input
+              type="checkbox"
+              checklist-model="filters.jurisdictions"
+              checklist-value="jurisdiction._id"
+            />
+            <label class="text-muted" title="{{jurisdiction.name}}"
+              >{{jurisdiction.name}}</label
+            >
           </div>
         </div>
       </div>
@@ -66,8 +82,15 @@
         </div>
         <div class="col-md-3" ng-repeat="servicegroup in servicegroups">
           <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.servicegroups" checklist-value="servicegroup._id" checklist-change="filterServices()">
-            <label class="text-muted" title="{{servicegroup.name}}">{{servicegroup.name}}</label>
+            <input
+              type="checkbox"
+              checklist-model="filters.servicegroups"
+              checklist-value="servicegroup._id"
+              checklist-change="filterServices()"
+            />
+            <label class="text-muted" title="{{servicegroup.name}}"
+              >{{servicegroup.name}}</label
+            >
           </div>
         </div>
       </div>
@@ -83,8 +106,14 @@
         </div>
         <div class="col-md-3" ng-repeat="service in services">
           <div class="checkbox-custom checkbox-primary p-a p-b-none">
-            <input type="checkbox" checklist-model="filters.services" checklist-value="service._id">
-            <label class="text-muted" title="{{service.name}}">{{service.name}}</label>
+            <input
+              type="checkbox"
+              checklist-model="filters.services"
+              checklist-value="service._id"
+            />
+            <label class="text-muted" title="{{service.name}}"
+              >{{service.name}}</label
+            >
           </div>
         </div>
       </div>
@@ -100,8 +129,14 @@
         </div>
         <div class="col-md-2" ng-repeat="status in statuses">
           <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.statuses" checklist-value="status._id">
-            <label class="text-muted" title="{{status.name}}">{{status.name}}</label>
+            <input
+              type="checkbox"
+              checklist-model="filters.statuses"
+              checklist-value="status._id"
+            />
+            <label class="text-muted" title="{{status.name}}"
+              >{{status.name}}</label
+            >
           </div>
         </div>
       </div>
@@ -117,8 +152,14 @@
         </div>
         <div class="col-md-2" ng-repeat="priority in priorities">
           <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.priorities" checklist-value="priority._id">
-            <label class="text-muted" title="{{priority.name}}">{{priority.name}}</label>
+            <input
+              type="checkbox"
+              checklist-model="filters.priorities"
+              checklist-value="priority._id"
+            />
+            <label class="text-muted" title="{{priority.name}}"
+              >{{priority.name}}</label
+            >
           </div>
         </div>
       </div>
@@ -134,8 +175,14 @@
         </div>
         <div class="col-md-2" ng-repeat="workspace in workspaces">
           <div class="checkbox-custom checkbox-primary p-a">
-            <input type="checkbox" checklist-model="filters.workspaces" checklist-value="workspace">
-            <label class="text-muted" title="{{workspace}}">{{workspace}}</label>
+            <input
+              type="checkbox"
+              checklist-model="filters.workspaces"
+              checklist-value="workspace"
+            />
+            <label class="text-muted" title="{{workspace}}"
+              >{{workspace}}</label
+            >
           </div>
         </div>
       </div>
@@ -145,7 +192,9 @@
         <div class="col-md-12">
           <div class="pull-right">
             <button class="btn btn-primary" ng-click="export()">Export</button>
-            <button class="btn btn-default m-l-sm" ng-click="export(true)">Clear&nbsp;</button>
+            <button class="btn btn-default m-l-sm" ng-click="export(true)">
+              Clear&nbsp;
+            </button>
           </div>
         </div>
       </div>

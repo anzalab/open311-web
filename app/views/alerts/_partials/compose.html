@@ -1,8 +1,14 @@
 <!-- modal header -->
 <div class="modal-header">
   <div class="b-b">
-    <button type="button" class="close pull-right" ng-click="$close()"
-      aria-hidden="true">×</button>
+    <button
+      type="button"
+      class="close pull-right"
+      ng-click="$close()"
+      aria-hidden="true"
+    >
+      ×
+    </button>
     <h4 class="modal-title">Compose An Alert</h4>
   </div>
 </div>
@@ -14,7 +20,6 @@
   <div class="box">
     <div class="m-l-lg m-r-lg">
       <form role="form">
-
         <!-- start subject input -->
         <div class="row m-t-sm">
           <div class="col-md-12">
@@ -25,8 +30,14 @@
             </div>
           </div>
           <div class="col-md-12">
-            <input type="text" ng-model="alert.subject" class="form-control"
-              name="subject" placeholder="Subject" required>
+            <input
+              type="text"
+              ng-model="alert.subject"
+              class="form-control"
+              name="subject"
+              placeholder="Subject"
+              required
+            />
           </div>
         </div>
         <!-- end subject input -->
@@ -41,8 +52,14 @@
             </div>
           </div>
           <div class="col-md-12">
-            <textarea rows="5" ng-model="alert.message" class="form-control"
-              name="message" placeholder="Message ..." required></textarea>
+            <textarea
+              rows="5"
+              ng-model="alert.message"
+              class="form-control"
+              name="message"
+              placeholder="Message ..."
+              required
+            ></textarea>
           </div>
         </div>
         <!-- end message input -->
@@ -56,11 +73,18 @@
               </h6>
             </div>
           </div>
-          <div class="col-md-3" ng-repeat="jurisdiction in jurisdictions | orderBy:'name'">
+          <div
+            class="col-md-3"
+            ng-repeat="jurisdiction in jurisdictions | orderBy:'name'"
+          >
             <div class="p-a p-b-none p-l-none">
               <label class="md-check text-muted" title="{{jurisdiction.name}}">
-                <input type="checkbox" checklist-model="alert.jurisdictions"
-                  checklist-value="jurisdiction._id"> <i class="blue"></i>
+                <input
+                  type="checkbox"
+                  checklist-model="alert.jurisdictions"
+                  checklist-value="jurisdiction._id"
+                />
+                <i class="blue"></i>
                 {{jurisdiction.name}}
               </label>
             </div>
@@ -98,18 +122,24 @@
               </h6>
             </div>
           </div>
-          <div class="col-md-3" ng-repeat="receiver in receivers | orderBy:'name'">
+          <div
+            class="col-md-3"
+            ng-repeat="receiver in receivers | orderBy:'name'"
+          >
             <div class="p-a p-b-none p-l-none">
               <label class="md-check text-muted" title="{{receiver.name}}">
-                <input type="checkbox" checklist-value="receiver.name"
-                  checklist-model="alert.receivers"> <i class="blue"></i>
+                <input
+                  type="checkbox"
+                  checklist-value="receiver.name"
+                  checklist-model="alert.receivers"
+                />
+                <i class="blue"></i>
                 {{receiver.name}}
               </label>
             </div>
           </div>
         </div>
         <!-- end alert audience type inputs -->
-
       </form>
     </div>
     <!-- end account accessor list -->

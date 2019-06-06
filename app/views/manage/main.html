@@ -1,20 +1,27 @@
 <!-- start manage layout -->
 <div class="app-body">
-    <div class="app-body-inner">
-        <!-- start main manage content -->
-        <div class="row-col">
-            <!-- start side subnav -->
-            <div ng-include="'views/manage/side_subnav.html'" class="col-xs-3 w modal fade aside aside-md manages-aside" id="subnav"></div>
-            <!-- end side subnav -->
-            <!-- start list view -->
-            <div ui-view="list" class="col-xs-3 w-xl modal fade aside aside-sm b-r" id="list">
-            </div>
-            <!-- end list view -->
-            <!-- start detail view -->
-            <div ui-view="detail" class="col-xs-6 bg" id="detail"></div>
-            <!-- end detail view -->
-        </div>
-        <!-- end main manage content -->
+  <div class="app-body-inner">
+    <!-- start main manage content -->
+    <div class="row-col">
+      <!-- start side subnav -->
+      <div
+        ng-include="'views/manage/side_subnav.html'"
+        class="col-xs-3 w modal fade aside aside-md manages-aside"
+        id="subnav"
+      ></div>
+      <!-- end side subnav -->
+      <!-- start list view -->
+      <div
+        ui-view="list"
+        class="col-xs-3 w-xl modal fade aside aside-sm b-r"
+        id="list"
+      ></div>
+      <!-- end list view -->
+      <!-- start detail view -->
+      <div ui-view="detail" class="col-xs-6 bg" id="detail"></div>
+      <!-- end detail view -->
     </div>
+    <!-- end main manage content -->
+  </div>
 </div>
 <!-- end manage layout -->

@@ -1,61 +1,106 @@
 <!-- start issue comment -->
 <div class="padding b-t">
-    <h6 class="m-b" title="Internal Notes & Comments">Internal Notes</h6>
-    <div class="p-a">
-        <div print-hide ng-if="!servicerequest.resolvedAt" class="p-a p-y-sm b-t b-b m-b">
-            <form>
-                <div class="input-group b-a b-transparent">
-                    <input ng-enter="comment()" ng-model="note.content" type="text" class="form-control no-border font-size-12" placeholder="Write your note" id="internal-comment-box">
-                    <span class="input-group-btn">
-                        <button ng-click="comment()" class="btn no-bg no-shadow" type="button">
-                            <i class="fa fa-send text-success"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
+  <h6 class="m-b" title="Internal Notes & Comments">Internal Notes</h6>
+  <div class="p-a">
+    <div
+      print-hide
+      ng-if="!servicerequest.resolvedAt"
+      class="p-a p-y-sm b-t b-b m-b"
+    >
+      <form>
+        <div class="input-group b-a b-transparent">
+          <input
+            ng-enter="comment()"
+            ng-model="note.content"
+            type="text"
+            class="form-control no-border font-size-12"
+            placeholder="Write your note"
+            id="internal-comment-box"
+          />
+          <span class="input-group-btn">
+            <button
+              ng-click="comment()"
+              class="btn no-bg no-shadow"
+              type="button"
+            >
+              <i class="fa fa-send text-success"></i>
+            </button>
+          </span>
         </div>
-        <div class="streamline m-b">
-            <div class="sl-item" ng-style="comment.color ? {'border-color': comment.color} : {}" ng-repeat="comment in comments">
-                <div class="sl-content">
-                    <div class="sl-date text-muted">
-                        <span class="text-info">
-                        {{comment.changer.name}}
-                        </span> on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}</div>
-                    <p ng-if="comment.comment">{{comment.comment}}</p>
-                    <p ng-if="comment.status && comment.status.name">
-                     Change status to
-                        <span class="label rounded success pos-rlt m-l-xs b-a-xs" ng-style="comment.status ? {'background-color': comment.status.color} : {}">
-                            <b class="arrow left b-success pull-in" ng-style="comment.status ? {'border-color': comment.status.color} : {}"></b>
-                            {{comment.status.name}}
-                        </span>
-                    </p>
-                    <p ng-if="comment.priority && comment.priority.name">
-                     Change priority to
-                        <span class="label rounded success pos-rlt m-l-xs b-a-xs" ng-style="comment.priority ? {'background-color': comment.priority.color} : {}">
-                            <b class="arrow left b-success pull-in" ng-style="comment.priority ? {'border-color': comment.priority.color} : {}"></b>
-                            {{comment.priority.name}}
-                        </span>
-                    </p>
-                    <p ng-if="comment.assignee && comment.assignee.name">
-                     Assignee to {{comment.assignee.name}}
-                    </p>
-                    <p ng-if="comment.resolvedAt">
-                     Change status to
-                     <span class="label rounded success pos-rlt m-l-xs b-a-xs" style="background-color: #4CAF50;">
-                            <b class="arrow left b-success pull-in" style="border-color: #4CAF50;"></b>
-                            Resolved
-                        </span>
-                    </p>
-                    <p ng-if="comment.reopenedAt">
-                     Change status to
-                     <span class="label rounded success pos-rlt m-l-xs b-a-xs" style="background-color: #F44336;">
-                            <b class="arrow left b-success pull-in" style="border-color: #F44336;"></b>
-                            Reopened
-                        </span>
-                    </p>
-                    <!-- TODO show attachment changelog -->
-                </div>
-            </div>
-        </div>
+      </form>
     </div>
+    <div class="streamline m-b">
+      <div
+        class="sl-item"
+        ng-style="comment.color ? {'border-color': comment.color} : {}"
+        ng-repeat="comment in comments"
+      >
+        <div class="sl-content">
+          <div class="sl-date text-muted">
+            <span class="text-info">
+              {{comment.changer.name}}
+            </span>
+            on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}
+          </div>
+          <p ng-if="comment.comment">{{comment.comment}}</p>
+          <p ng-if="comment.status && comment.status.name">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              ng-style="comment.status ? {'background-color': comment.status.color} : {}"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                ng-style="comment.status ? {'border-color': comment.status.color} : {}"
+              ></b>
+              {{comment.status.name}}
+            </span>
+          </p>
+          <p ng-if="comment.priority && comment.priority.name">
+            Change priority to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              ng-style="comment.priority ? {'background-color': comment.priority.color} : {}"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                ng-style="comment.priority ? {'border-color': comment.priority.color} : {}"
+              ></b>
+              {{comment.priority.name}}
+            </span>
+          </p>
+          <p ng-if="comment.assignee && comment.assignee.name">
+            Assignee to {{comment.assignee.name}}
+          </p>
+          <p ng-if="comment.resolvedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #4CAF50;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #4CAF50;"
+              ></b>
+              Resolved
+            </span>
+          </p>
+          <p ng-if="comment.reopenedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #F44336;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #F44336;"
+              ></b>
+              Reopened
+            </span>
+          </p>
+          <!-- TODO show attachment changelog -->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

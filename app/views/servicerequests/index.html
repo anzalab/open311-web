@@ -1,19 +1,35 @@
 <!-- start parties list -->
 <!--start header-->
-<div class="page-header padding-top-0" ng-include="'views/parties/_partials/header.html'">
-</div>
+<div
+  class="page-header padding-top-0"
+  ng-include="'views/parties/_partials/header.html'"
+></div>
 <!--end header-->
 <!--start page content-->
 <div class="page-content page-content-table">
-    <!--start toolbar actions-->
-    <div class="page-content-actions padding-left-10" ng-include="'views/parties/_partials/actions.html'">
-    </div>
-    <!--end toolbar actions-->
-    <!--start main content-->
-    <table class="table" data-plugin="animateList" data-animate="fade" data-child="tr" ng-include="'views/parties/_partials/parties.html'">
-    </table>
-    <uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" align="false"></uib-pager>
-    <!--end main content-->
+  <!--start toolbar actions-->
+  <div
+    class="page-content-actions padding-left-10"
+    ng-include="'views/parties/_partials/actions.html'"
+  ></div>
+  <!--end toolbar actions-->
+  <!--start main content-->
+  <table
+    class="table"
+    data-plugin="animateList"
+    data-animate="fade"
+    data-child="tr"
+    ng-include="'views/parties/_partials/parties.html'"
+  ></table>
+  <uib-pager
+    ng-show="willPaginate()"
+    total-items="total"
+    ng-model="page"
+    items-per-page="limit"
+    ng-change="find()"
+    align="false"
+  ></uib-pager>
+  <!--end main content-->
 </div>
 <!--end page content-->
 <!-- end parties list -->

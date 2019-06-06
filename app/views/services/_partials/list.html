@@ -1,56 +1,83 @@
 <!-- start services list -->
 <div class="row-col lt">
-    <!-- start services list search -->
-    <div class="p-a b-b list-search">
-        <form>
-            <div class="input-group">
-                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Services ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm no-shadow" type="button">
-                        <i class="ti-search"></i>
-                    </button>
-                </span>
+  <!-- start services list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Services ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end service list search -->
+  <!-- start service listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(service)"
+            class="list-item list-item-padded"
+            ng-repeat="service in services"
+            title="{{service.description}}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Service Code"
+                  data="{{service.code}}"
+                  height="60"
+                  width="60"
+                  color="{{service.color}}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
             </div>
-        </form>
-    </div>
-    <!-- end service list search -->
-    <!-- start service listing -->
-    <div class="row-row">
-        <div class="row-body scrollable hover">
-            <div class="row-inner">
-                <div class="list" data-ui-list="info">
-                    <div ng-click="select(service)" class="list-item list-item-padded" ng-repeat="service in services" title="{{service.description}}">
-                        <div class="list-left">
-                            <span class="w-40 avatar circle">
-                                <letter-avatar title="Service Code" 
-                                data="{{service.code}}" 
-                                    height="60" width="60" color="{{service.color}}" shape="round">
-                                </letter-avatar>
-                            </span>
-                        </div>
-                        <div class="list-body">
-                            <span title="Service Code" class="pull-right text-xs text-muted">
-                                {{service.code}}
-                            </span>
-                            <div class="item-title">
-                                <span title="Service Name" class="_500">{{service.name}}</span>
-                            </div>
-                            <p title="Service Description" class="block text-muted text-ellipsis">
-                                {{service.description}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="list-body">
+              <span title="Service Code" class="pull-right text-xs text-muted">
+                {{service.code}}
+              </span>
+              <div class="item-title">
+                <span title="Service Name" class="_500">{{service.name}}</span>
+              </div>
+              <p
+                title="Service Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{service.description}}
+              </p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- end service listing -->
-    <!-- start pagination -->
-    <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" template-url="views/_partials/list_pager.html">
-        </div>
-        <span class="text-sm text-muted">Total: {{total}}</span>
-    </div>
-    <!-- end pagination -->
+  </div>
+  <!-- end service listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end pagination -->
 </div>
 <!-- end services list -->
