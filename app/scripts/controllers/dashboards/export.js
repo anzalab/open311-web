@@ -87,7 +87,7 @@ angular
      */
     $scope.download = function () {
       var link = Utils.asLink(['reports', 'exports']);
-      link = link + '?query=' + angular.toJson($scope.params);
+      link = link + '?filter=' + angular.toJson($scope.params);
       link = link + '&token=' + token;
       $window.open(link, '_blank');
     };
