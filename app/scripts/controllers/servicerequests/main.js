@@ -315,21 +315,22 @@ angular
 
           //update changelog
           var _id = $scope.servicerequest._id;
-          ServiceRequest.changelog(_id, changelog).then(function(
-            response) {
-            // $scope.servicerequest = response;
-            $scope.select(response);
-            $scope.updated = true;
-            $rootScope.$broadcast('app:servicerequests:reload');
+          ServiceRequest
+            .changelog(_id, changelog)
+            .then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
 
-            response = response || {};
+              response = response || {};
 
-            response.message =
-              response.message || 'Issue Marked As Resolved';
+              response.message =
+                response.message || 'Issue Marked As Resolved';
 
-            $rootScope.$broadcast('appSuccess', response);
+              $rootScope.$broadcast('appSuccess', response);
 
-          });
+            });
         }
       }).catch(function() {});
     };
@@ -358,21 +359,22 @@ angular
 
           //update changelog
           var _id = $scope.servicerequest._id;
-          ServiceRequest.changelog(_id, changelog).then(function(
-            response) {
-            // $scope.servicerequest = response;
-            $scope.select(response);
-            $scope.updated = true;
-            $rootScope.$broadcast('app:servicerequests:reload');
+          ServiceRequest
+            .changelog(_id, changelog)
+            .then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
 
-            response = response || {};
+              response = response || {};
 
-            response.message =
-              response.message || 'Issue Re-Open Successfully';
+              response.message =
+                response.message || 'Issue Re-Open Successfully';
 
-            $rootScope.$broadcast('appSuccess', response);
+              $rootScope.$broadcast('appSuccess', response);
 
-          });
+            });
         }
       }).catch(function() {});
     };
@@ -627,7 +629,7 @@ angular
     //pre load un resolved servicerequests on state activation
     $scope.find({
       operator: party._id,
-      resolvedAt: null,
+      resolvedAt: { $eq: null },
       resetPage: true,
       reset: true,
       misc: $scope.misc
@@ -639,7 +641,7 @@ angular
       //re-load current operator service requests(inbox)
       $scope.find({
         $or: [{ operator: party._id }, { assignee: party._id }],
-        resolvedAt: null,
+        resolvedAt: { $eq: null },
         resetPage: true,
         reset: true,
         misc: $scope.misc

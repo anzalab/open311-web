@@ -28,17 +28,17 @@
                                 </a>
                             </li>
                             <li ng-class="{active:misc == 'inbox'}" class="nav-item m-b-xs">
-                                <a ng-click="load({$or: [{ operator: party._id }, { assignee: party._id }], resolvedAt:null, resetPage:true, reset:true, misc: 'inbox'})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
+                                <a ng-click="load({$or: [{ operator: party._id }, { assignee: party._id }], resolvedAt:{$eq: null}, resetPage:true, reset:true, misc: 'inbox'})" class="nav-link text-muted block" title="My Pending Reported & Assigned Issues">
                                 Inbox
                                 </a>
                             </li>
                             <li ng-class="{active:misc == 'unattended'}" class="nav-item m-b-xs">
-                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:null, resetPage:true, reset:true, misc:'unattended'})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
+                                <a show-if-has-permit="servicerequest:attend" ng-click="load({operator:{$eq:null}, resetPage:true, reset:true, misc:'unattended'})" class="nav-link text-muted block" title="Reported Issues Using Other Method Than Call Center">
                                 Un-Attended
                                 </a>
                             </li>
                             <li ng-class="{active:misc == 'unresolved'}" class="nav-item m-b-xs">
-                                <a ng-click="load({resolvedAt:null, operator:{$ne:null}, resetPage:true, reset:true, misc: 'unresolved'})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
+                                <a ng-click="load({resolvedAt:{$eq:null}, operator:{$ne:null}, resetPage:true, reset:true, misc: 'unresolved'})" class="nav-link text-muted block" title="Reported Issues Currently Not Resolved">
                                 Un-Resolved
                                 </a>
                             </li>
