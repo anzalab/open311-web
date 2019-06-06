@@ -745,7 +745,7 @@ angular
      */
     $scope.reload = function () {
       Summary
-        .standings({ query: $scope.params })
+        .standings({ filter: $scope.params })
         .then(function (standings) {
           $scope.standings = standings;
           $scope.prepare();

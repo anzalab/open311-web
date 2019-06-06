@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name ng311.states:Service
  * @description
- * Service states configuration of ng311 
+ * Service states configuration of ng311
  */
 angular
   .module('ng311')
@@ -25,7 +25,7 @@ angular
             resolve: {
               endpoints: function (Summary) {
                 return Summary.endpoints({
-                  query: {
+                  filter: {
                     deletedAt: {
                       $eq: null
                     }

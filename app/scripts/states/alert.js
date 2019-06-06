@@ -17,7 +17,7 @@ angular
         resolve: {
           endpoints: function (Summary) {
             return Summary.endpoints({
-              query: {
+              filter: {
                 deletedAt: {
                   $eq: null
                 }

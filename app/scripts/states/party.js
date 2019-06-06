@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name ng311.states:Party
  * @description
- * Party states configuration of ng311 
+ * Party states configuration of ng311
  */
 angular
   .module('ng311')
@@ -26,7 +26,7 @@ angular
               jurisdictions: function (Jurisdiction) {
                 return Jurisdiction.find({
                   limit: 1000,
-                  query: {
+                  filter: {
                     deletedAt: {
                       $eq: null
                     }
@@ -42,7 +42,7 @@ angular
         resolve: {
           roles: function (Role) {
             return Role.find({
-              query: {
+              filter: {
                 deletedAt: {
                   $eq: null
                 }

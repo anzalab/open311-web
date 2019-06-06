@@ -134,7 +134,7 @@ angular
 
       Summary
         .performances({
-          query: $scope.params
+          filter: $scope.params
         })
         .then(function (performances) {
 

@@ -47,7 +47,7 @@ angular
         sort: {
           name: 1
         },
-        query: {
+        filter: {
           'relation.name': 'Internal'
         },
         q: $scope.q

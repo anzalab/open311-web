@@ -63,7 +63,7 @@ angular
         sort: {
           name: 1
         },
-        query: {},
+        filter: {},
         q: $scope.q
       }).then(function (response) {
         //update scope with priorities when done loading

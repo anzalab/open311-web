@@ -462,7 +462,7 @@ angular
       //TODO allow party where jurisdiction = null
       if ($scope.search.party && $scope.search.party.length >= 2) {
         Party.find({
-          query: {
+          filter: {
             deletedAt: {
               $eq: null
             }
@@ -557,7 +557,7 @@ angular
         sort: {
           createdAt: -1
         },
-        query: $scope.query,
+        filter: $scope.query,
         q: $scope.q
       }).then(function(response) {
         //update scope with servicerequests when done loading

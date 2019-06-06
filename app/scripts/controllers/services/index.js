@@ -63,7 +63,7 @@ angular
         sort: {
           name: 1
         },
-        query: {},
+        filter: {},
         q: $scope.q
       }).then(function (response) {
         //update scope with services when done loading
@@ -87,7 +87,6 @@ angular
         ($scope.services && $scope.total && $scope.total > $scope.limit);
       return willPaginate;
     };
-
 
     //pre load services on state activation
     $scope.find();

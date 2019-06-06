@@ -651,7 +651,7 @@ angular
 
       Summary
         .overviews({
-          query: $scope.params
+          filter: $scope.params
         })
         .then(function (overviews) {
           $scope.overviews = overviews;
