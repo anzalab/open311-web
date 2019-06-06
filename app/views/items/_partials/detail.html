@@ -1,0 +1,99 @@
+<!-- start item details -->
+<div class="row-col">
+  <div class="white b-b bg">
+    <!-- start item detail action bar -->
+    <div
+      ng-include="'views/items/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end item details action bar -->
+  </div>
+  <!-- start item body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="itemForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-t-lg" title="Item Code">
+                  <div class="form-group">
+                    <label title="Item Code" class="floating-label">Code</label>
+                    <input
+                      title="Item Code"
+                      ng-disabled="!edit"
+                      ng-model="item.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Item Name">
+                  <div class="form-group">
+                    <label title="Item Name" class="floating-label">Name</label>
+                    <input
+                      title="Item Name"
+                      ng-disabled="!edit"
+                      ng-model="item.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Item Color">
+                  <color-picker ng-model="item.color"> </color-picker>
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Item Color" class="floating-label"
+                        >Item Color(HEX)</label
+                      >
+                      <input
+                        title="Item Color"
+                        ng-disabled="!edit"
+                        ng-model="item.color"
+                        ng-required
+                        ng-minlength="1"
+                        type="text"
+                        name="color"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Item Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      title="Item Description"
+                      ng-disabled="!edit"
+                      ng-model="item.description"
+                      msd-elastic
+                      name="about"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end item body -->
+</div>
+<!-- end item details -->
