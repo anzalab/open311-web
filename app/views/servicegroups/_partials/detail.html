@@ -1,54 +1,100 @@
 <!-- start servicegroup details -->
 <div class="row-col">
-    <div class="white b-b bg">
-        <!-- start servicegroup detail action bar -->
-        <div ng-include="'views/servicegroups/_partials/action_bar.html'" class="navbar"></div>
-        <!-- end servicegroup details action bar -->
-    </div>
-    <!-- start servicegroup body -->
-    <div class="row-row">
-        <div class="row-body">
-            <div class="row-inner">
-                <div class="padding">
-                    <form ng-submit="save()" name="servicegroupForm" role="form" autocomplete="off" novalidate>
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="m-b" title="Service Group Name">
-                                    <div class="form-group">
-                                        <label title="Service Group Code" class="floating-label">Code</label>
-                                        <input ng-disabled="!edit" ng-model="servicegroup.code" ng-required ng-minlength="1" type="text" name="code" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Group Name">
-                                    <div class="form-group">
-                                        <label title="Service Group Name" class="floating-label">Name</label>
-                                        <input ng-disabled="!edit" ng-model="servicegroup.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Group Weight">
-                                    <div class="form-group">
-                                        <label class="floating-label">Description</label>
-                                        <textarea ng-disabled="!edit" ng-model="servicegroup.description" msd-elastic name="about" class="form-control" rows="3">
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Service Group Color">
-                                    <color-picker ng-model="servicegroup.color">
-                                    </color-picker>
-                                    <div class="m-t-lg">
-                                        <div class="form-group">
-                                            <label title="Service Group Color" class="floating-label">Service Group Color(HEX)</label>
-                                            <input title="Service Group Color" ng-disabled="!edit" ng-model="servicegroup.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+  <div class="white b-b bg">
+    <!-- start servicegroup detail action bar -->
+    <div
+      ng-include="'views/servicegroups/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end servicegroup details action bar -->
+  </div>
+  <!-- start servicegroup body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="servicegroupForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Service Group Name">
+                  <div class="form-group">
+                    <label title="Service Group Code" class="floating-label"
+                      >Code</label
+                    >
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="servicegroup.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
                 </div>
+                <div class="m-t-lg" title="Service Group Name">
+                  <div class="form-group">
+                    <label title="Service Group Name" class="floating-label"
+                      >Name</label
+                    >
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="servicegroup.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Group Weight">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      ng-disabled="!edit"
+                      ng-model="servicegroup.description"
+                      msd-elastic
+                      name="about"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Group Color">
+                  <color-picker ng-model="servicegroup.color"> </color-picker>
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Service Group Color" class="floating-label"
+                        >Service Group Color(HEX)</label
+                      >
+                      <input
+                        title="Service Group Color"
+                        ng-disabled="!edit"
+                        ng-model="servicegroup.color"
+                        ng-required
+                        ng-minlength="1"
+                        type="text"
+                        name="color"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
-    <!-- end servicegroup body -->
+  </div>
+  <!-- end servicegroup body -->
 </div>
 <!-- end servicegroup details -->

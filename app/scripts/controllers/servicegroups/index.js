@@ -9,10 +9,12 @@
  */
 angular
   .module('ng311')
-  .controller('ServiceGroupIndexCtrl', function (
-    $rootScope, $scope, $state, ServiceGroup
+  .controller('ServiceGroupIndexCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    ServiceGroup
   ) {
-
     //groups in the scope
     $scope.spin = false;
     $scope.servicegroups = [];
@@ -22,7 +24,7 @@ angular
 
     $scope.search = {};
 
-    $scope.onSearch = function () {
+    $scope.onSearch = function() {
       if ($scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -35,8 +37,7 @@ angular
     /**
      * set current service request
      */
-    $scope.select = function (servicegroup) {
-
+    $scope.select = function(servicegroup) {
       //sort comments in desc order
       if (servicegroup && servicegroup._id) {
         //update scope service request ref
@@ -45,14 +46,12 @@ angular
       }
 
       $scope.create = false;
-
     };
-
 
     /**
      * @description load groups
      */
-    $scope.find = function () {
+    $scope.find = function() {
       //start sho spinner
       $scope.spin = true;
 
@@ -60,40 +59,39 @@ angular
         page: $scope.page,
         limit: $scope.limit,
         sort: {
-          name: 1
+          name: 1,
         },
-        query: {},
-        q: $scope.q
-      }).then(function (response) {
-        //update scope with groups when done loading
-        $scope.servicegroups = response.servicegroups;
-        if ($scope.updated) {
-          $scope.updated = false;
-        } else {
-          $scope.select(_.first($scope.servicegroups));
-        }
-        $scope.total = response.total;
-        $scope.spin = false;
-      }).catch(function (error) {
-        $scope.spin = false;
-      });
+        filter: {},
+        q: $scope.q,
+      })
+        .then(function(response) {
+          //update scope with groups when done loading
+          $scope.servicegroups = response.servicegroups;
+          if ($scope.updated) {
+            $scope.updated = false;
+          } else {
+            $scope.select(_.first($scope.servicegroups));
+          }
+          $scope.total = response.total;
+          $scope.spin = false;
+        })
+        .catch(function(error) {
+          $scope.spin = false;
+        });
     };
-
 
     //check whether groups will paginate
-    $scope.willPaginate = function () {
+    $scope.willPaginate = function() {
       var willPaginate =
-        ($scope.servicegroups && $scope.total && $scope.total > $scope.limit);
+        $scope.servicegroups && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
-
 
     //pre load groups on state activation
     $scope.find();
 
     //listen for events
-    $rootScope.$on('app:servicegroups:reload', function () {
+    $rootScope.$on('app:servicegroups:reload', function() {
       $scope.find();
     });
-
   });

@@ -9,9 +9,12 @@
  */
 angular
   .module('ng311')
-  .controller('ServiceRequestIndexCtrl', function (
-    $rootScope, $scope, $state, ServiceRequest) {
-
+  .controller('ServiceRequestIndexCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    ServiceRequest
+  ) {
     //servicerequests in the scope
     $scope.spin = false;
     $scope.busy = false;
@@ -22,7 +25,7 @@ angular
 
     $scope.search = {};
 
-    $scope.onSearch = function () {
+    $scope.onSearch = function() {
       if ($scope.search.q && $scope.search.q.length >= 2) {
         $scope.q = $scope.search.q;
         $scope.find();
@@ -32,11 +35,10 @@ angular
       }
     };
 
-
     /**
      * @description load servicerequests
      */
-    $scope.find = function () {
+    $scope.find = function() {
       //start show spinner
       $scope.spin = true;
       $scope.busy = true;
@@ -45,40 +47,39 @@ angular
         page: $scope.page,
         limit: $scope.limit,
         sort: {
-          name: 1
+          name: 1,
         },
-        query: {
-          'relation.name': 'Internal'
+        filter: {
+          'relation.name': 'Internal',
         },
-        q: $scope.q
-      }).then(function (response) {
-        //update scope with servicerequests when done loading
-        $scope.servicerequests = response.servicerequests;
-        $scope.total = response.total;
-        $scope.page = response.page;
-        $scope.spin = false;
-        $scope.busy = false;
-      }).catch(function (error) {
-        $scope.spin = false;
-        $scope.busy = false;
-      });
+        q: $scope.q,
+      })
+        .then(function(response) {
+          //update scope with servicerequests when done loading
+          $scope.servicerequests = response.servicerequests;
+          $scope.total = response.total;
+          $scope.page = response.page;
+          $scope.spin = false;
+          $scope.busy = false;
+        })
+        .catch(function(error) {
+          $scope.spin = false;
+          $scope.busy = false;
+        });
     };
-
 
     //check whether servicerequests will paginate
-    $scope.willPaginate = function () {
+    $scope.willPaginate = function() {
       var willPaginate =
-        ($scope.servicerequests && $scope.total && $scope.total > $scope.limit);
+        $scope.servicerequests && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
-
 
     //pre load servicerequests on state activation
     $scope.find();
 
     //listen for events
-    $rootScope.$on('app:servicerequests:reload', function () {
+    $rootScope.$on('app:servicerequests:reload', function() {
       $scope.find();
     });
-
   });

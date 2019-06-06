@@ -1,87 +1,120 @@
 <!-- start report header -->
 <div class="app-header bg b-b bg-white">
-    <div class="navbar">
-        <!-- start report title -->
-        <div class="navbar-item pull-left h5 text-md">
-            Performance
-        </div>
-        <!-- end report title -->
-        <!-- start report actions -->
-        <ul class="nav navbar-nav pull-right">
-
-            <!-- start filter -->
-            <li class="nav-item">
-                <a ng-click="showFilter()" class="nav-link" aria-expanded="false" title="Click to Filter Report">
-                  <i class="ion-android-funnel w-24" title="Click To Filter Reports"></i>
-                </a>
-            </li>
-            <!-- end filter -->
-
-        </ul>
-        <!-- end report actions -->
+  <div class="navbar">
+    <!-- start report title -->
+    <div class="navbar-item pull-left h5 text-md">
+      Performance
     </div>
+    <!-- end report title -->
+    <!-- start report actions -->
+    <ul class="nav navbar-nav pull-right">
+      <!-- start filter -->
+      <li class="nav-item">
+        <a
+          ng-click="showFilter()"
+          class="nav-link"
+          aria-expanded="false"
+          title="Click to Filter Report"
+        >
+          <i
+            class="ion-android-funnel w-24"
+            title="Click To Filter Reports"
+          ></i>
+        </a>
+      </li>
+      <!-- end filter -->
+    </ul>
+    <!-- end report actions -->
+  </div>
 </div>
 <!-- end report header -->
 <!-- start app body -->
 <div class="app-body">
-    <div class="app-body-inner">
+  <div class="app-body-inner">
+    <!-- start jurisdiction summary and (ttr & att) -->
+    <ng-include
+      ng-if="performances && performances.overall"
+      src="'views/dashboards/performance/_partials/jurisdiction_summary.html'"
+    ></ng-include>
+    <!-- end jurisdiction summary and (ttr & att) -->
 
-        <!-- start jurisdiction summary and (ttr & att) -->
-        <ng-include ng-if="performances && performances.overall" src="'views/dashboards/performance/_partials/jurisdiction_summary.html'"></ng-include>
-        <!-- end jurisdiction summary and (ttr & att) -->
-
-        <!-- start overal and pipeline summary -->
-        <div class="row no-gutter">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <!-- start of area overall summary -->
-                <ng-include ng-if="performances && performances.overall" src="'views/dashboards/performance/_partials/overall_summary.html'"></ng-include>
-                <!-- end of area overall summary -->
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <!-- start area service pipeline -->
-                <ng-include ng-if="performances.statuses && performances.statuses.length > 0" src="'views/dashboards/performance/_partials/pipeline_summary.html'"></ng-include>
-                <!-- end area service pipeline -->
-            </div>
-        </div>
-        <!-- start overal and pipeline summary -->
-
-        <!-- start service groups summary -->
-        <ng-include ng-if="performances.groups && performances.groups.length > 0" src="'views/dashboards/performance/_partials/service_groups_summary.html'"></ng-include>
-        <!-- end service groups summary -->
-
-        <!-- start services summary -->
-        <ng-include ng-if="performances.services  && performances.services.length > 0" src="'views/dashboards/performance/_partials/services_summary.html'"></ng-include>
-        <!-- end services summary -->
-
-        <!-- <hr> -->
-        <div class="padding" style="display: none">
-            <!-- start of leader's board section -->
-            <div class="row m-t-lg">
-                <div class="col-sm-12 col-md-5 col-lg-5">
-                    <!-- start of staff leaderboard -->
-                    <ng-include ng-if="performances.operators" src="'views/dashboards/_partials/service_request_leaderboard.html'" />
-                    <!-- end of staff leaderboard -->
-                </div>
-                <div class="col-sm-12 col-md-5 col-lg-5 offset-md-1">
-                    <!-- start of area leaderboard -->
-                    <ng-include ng-if="performances.jurisdictions" src="'views/dashboards/_partials/service_request_area_leaderboard.html'" />
-                    <!-- end of area leaderboard -->
-                </div>
-            </div>
-            <!-- end of leader's board section -->
-        </div>
-
-        <!-- start no data description -->
-        <div ng-if="!performances.overall" class="row-col h-v">
-            <div class="row-cell v-m">
-                <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
-                    <p class="text-muted m-y-lg">No Data Found. Please update your filters.</p>
-                    <button ng-click="showFilter()" class="btn btn-outline b-grey text-grey" title="Click to update filters">Update Filters</button>
-                </div>
-            </div>
-        </div>
-        <!-- end no data description -->
-
+    <!-- start overal and pipeline summary -->
+    <div class="row no-gutter">
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <!-- start of area overall summary -->
+        <ng-include
+          ng-if="performances && performances.overall"
+          src="'views/dashboards/performance/_partials/overall_summary.html'"
+        ></ng-include>
+        <!-- end of area overall summary -->
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <!-- start area service pipeline -->
+        <ng-include
+          ng-if="performances.statuses && performances.statuses.length > 0"
+          src="'views/dashboards/performance/_partials/pipeline_summary.html'"
+        ></ng-include>
+        <!-- end area service pipeline -->
+      </div>
     </div>
+    <!-- start overal and pipeline summary -->
+
+    <!-- start service groups summary -->
+    <ng-include
+      ng-if="performances.groups && performances.groups.length > 0"
+      src="'views/dashboards/performance/_partials/service_groups_summary.html'"
+    ></ng-include>
+    <!-- end service groups summary -->
+
+    <!-- start services summary -->
+    <ng-include
+      ng-if="performances.services  && performances.services.length > 0"
+      src="'views/dashboards/performance/_partials/services_summary.html'"
+    ></ng-include>
+    <!-- end services summary -->
+
+    <!-- <hr> -->
+    <div class="padding" style="display: none">
+      <!-- start of leader's board section -->
+      <div class="row m-t-lg">
+        <div class="col-sm-12 col-md-5 col-lg-5">
+          <!-- start of staff leaderboard -->
+          <ng-include
+            ng-if="performances.operators"
+            src="'views/dashboards/_partials/service_request_leaderboard.html'"
+          />
+          <!-- end of staff leaderboard -->
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 offset-md-1">
+          <!-- start of area leaderboard -->
+          <ng-include
+            ng-if="performances.jurisdictions"
+            src="'views/dashboards/_partials/service_request_area_leaderboard.html'"
+          />
+          <!-- end of area leaderboard -->
+        </div>
+      </div>
+      <!-- end of leader's board section -->
+    </div>
+
+    <!-- start no data description -->
+    <div ng-if="!performances.overall" class="row-col h-v">
+      <div class="row-cell v-m">
+        <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+          <p class="text-muted m-y-lg">
+            No Data Found. Please update your filters.
+          </p>
+          <button
+            ng-click="showFilter()"
+            class="btn btn-outline b-grey text-grey"
+            title="Click to update filters"
+          >
+            Update Filters
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end no data description -->
+  </div>
 </div>
 <!-- end app body -->

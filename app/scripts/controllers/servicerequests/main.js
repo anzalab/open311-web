@@ -10,32 +10,66 @@
 angular
   .module('ng311')
   .controller('ServiceRequestMainCtrl', function(
-    $rootScope, $scope, $state, $stateParams, prompt, leafletBoundsHelpers,
-    Party, ServiceRequest, Comment, Summary, endpoints, party
+    $rootScope,
+    $scope,
+    $state,
+    $stateParams,
+    $uibModal,
+    prompt,
+    leafletBoundsHelpers,
+    Party,
+    ServiceRequest,
+    Comment,
+    Summary,
+    endpoints,
+    party
   ) {
-
     //servicerequests in the scope
     $scope.spin = false;
     $scope.servicerequests = [];
     $scope.comments = [];
     $scope.servicerequest = new ServiceRequest({
       call: {
-        startedAt: new Date()
-      }
+        startedAt: new Date(),
+      },
     });
     $scope.page = 1;
     $scope.limit = 10;
     $scope.total = 0;
     $scope.note = {};
     $scope.updated = false;
+    $scope.dateFilters = {
+      reportedAt: {
+        from: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+        to: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+      },
+      resolvedAt: {
+        from: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+        to: moment()
+          .utc()
+          .startOf('date')
+          .toDate(),
+      },
+    };
 
     $scope.search = {};
     $scope.map = {};
+    $scope.assignees = [];
+    $scope.isOperatorFilter = true;
 
     //signal create mode
     $scope.create = false;
 
-    //track current misc fillter(all, inbox, unattended, unresolved, resolved)
+    //track current misc filter(all, inbox, unattended, unresolved, resolved)
     $scope.misc = 'inbox';
 
     //bind states
@@ -47,13 +81,12 @@ angular
     // $scope.assignees = assignee.parties;
     $scope.summaries = endpoints.summaries;
 
-
     //listen for create event
     $rootScope.$on('servicerequest:create', function() {
       $scope.servicerequest = new ServiceRequest({
         call: {
-          startedAt: new Date()
-        }
+          startedAt: new Date(),
+        },
       });
       $scope.create = true;
     });
@@ -67,24 +100,22 @@ angular
      * listen for received call picked events and filter
      * issue list based on reporter details(i.e phone number)
      */
-    var callPickedDeregister = $rootScope.$on('call picked', function(event,
-      data) {
-
+    var callPickedDeregister = $rootScope.$on('call picked', function(
+      event,
+      data
+    ) {
       if (data && data.phone) {
         $scope.filterByReporter(data.phone, {
-          'reporter.phone': data.phone
+          'reporter.phone': data.phone,
         });
       }
-
     });
     $scope.$on('$destroy', callPickedDeregister);
-
 
     /**
      * set current service request
      */
     $scope.select = function(servicerequest) {
-
       //clear note
       $scope.note = {};
 
@@ -100,13 +131,11 @@ angular
 
         //update markers & map center
         if (servicerequest.longitude && servicerequest.latitude) {
-
           //prepare bounds
           var bounds = leafletBoundsHelpers.createBoundsFromArray([
             [servicerequest.latitude + 0.029, servicerequest.longitude],
-            [servicerequest.latitude - 0.029, servicerequest.longitude]
+            [servicerequest.latitude - 0.029, servicerequest.longitude],
           ]);
-
 
           //set marker point
           $scope.map = {
@@ -116,35 +145,37 @@ angular
                 lat: servicerequest.latitude,
                 lng: servicerequest.longitude,
                 focus: true,
-                draggable: false
-              }
+                draggable: false,
+              },
             },
             center: {
               lat: servicerequest.latitude,
               lng: servicerequest.longitude,
-              zoom: 1
+              zoom: 1,
             },
             defaults: {
-              scrollWheelZoom: false
-            }
+              scrollWheelZoom: false,
+            },
           };
-
         }
 
-        //ensure attachements has correct data for displaying
-        var hasAttachments = (servicerequest && servicerequest.attachments &&
-          servicerequest.attachments.length > 0);
+        //ensure attachments has correct data for displaying
+        var hasAttachments =
+          servicerequest &&
+          servicerequest.attachments &&
+          servicerequest.attachments.length > 0;
         if (hasAttachments) {
-          servicerequest.attachments =
-            _.map(servicerequest.attachments, function(attachment) {
-
-
+          servicerequest.attachments = _.map(
+            servicerequest.attachments,
+            function(attachment) {
               //obtain media thumb url from base64 encoded image
               if (!_.isEmpty(attachment.content)) {
                 if (!_.startsWith(attachment.content, 'data:')) {
-                  attachment.thumb = ['data:', attachment.mime,
+                  attachment.thumb = [
+                    'data:',
+                    attachment.mime,
                     ';base64,',
-                    attachment.content
+                    attachment.content,
                   ].join('');
                 } else {
                   attachment.thumb = attachment.content;
@@ -152,25 +183,25 @@ angular
               }
 
               //obtain media thumb from url
-              if (!_.isEmpty(attachment.url) && _.startsWith(attachment.url,
-                  'http')) {
+              if (
+                !_.isEmpty(attachment.url) &&
+                _.startsWith(attachment.url, 'http')
+              ) {
                 attachment.thumb = attachment.url;
               }
 
               attachment.description = attachment.caption;
 
               return attachment;
-
-            });
+            }
+          );
         }
 
         //load service request comments
         $scope.loadComment(servicerequest);
-
       }
 
       $scope.create = false;
-
     };
 
     /**
@@ -189,15 +220,16 @@ angular
       if (assignee) {
         $scope.servicerequest.assignee = assignee._id;
         if (!$scope.servicerequest.resolvedAt) {
-
-          var changelog = { //TODO flag internal or public
+          var changelog = {
+            //TODO flag internal or public
             changer: party._id,
-            assignee: $scope.servicerequest.assignee
+            assignee: $scope.servicerequest.assignee,
           };
 
           //update changelog
           var _id = $scope.servicerequest._id;
           ServiceRequest.changelog(_id, changelog).then(function(response) {
+            $scope.modal.close();
             // $scope.servicerequest = response;
             $scope.select(response);
             $scope.updated = true;
@@ -211,33 +243,31 @@ angular
      * comment on the issues
      */
     $scope.comment = function() {
-
       //TODO notify about the comment saved
       if ($scope.note && $scope.note.content) {
-
-        var changelog = { //TODO flag internal or public
+        var changelog = {
+          //TODO flag internal or public
           changer: party._id,
-          comment: $scope.note.content
+          comment: $scope.note.content,
         };
 
         //update changelog
         var _id = $scope.servicerequest._id;
-        ServiceRequest.changelog(_id, changelog).then(function(response) {
-          //TODO notify success
-          $scope.note = {};
-          $scope.select(response);
-          $scope.updated = true;
-        }).catch(function(error) {
-          //TODO notify error
-          console.log(error);
-        });
-
+        ServiceRequest.changelog(_id, changelog)
+          .then(function(response) {
+            //TODO notify success
+            $scope.note = {};
+            $scope.select(response);
+            $scope.updated = true;
+          })
+          .catch(function(error) {
+            //TODO notify error
+            // console.log(error);
+          });
       }
-
     };
 
     $scope.changePriority = function(priority) {
-
       if (priority._id === $scope.servicerequest.priority._id) {
         return;
       }
@@ -246,12 +276,11 @@ angular
         $scope.servicerequest.priority = priority;
       }
 
-
       if (!$scope.servicerequest.resolvedAt) {
-
-        var changelog = { //TODO flag internal or public
+        var changelog = {
+          //TODO flag internal or public
           changer: party._id,
-          priority: $scope.servicerequest.priority
+          priority: $scope.servicerequest.priority,
         };
         var _id = $scope.servicerequest._id;
 
@@ -262,11 +291,9 @@ angular
           $rootScope.$broadcast('app:servicerequests:reload');
         });
       }
-
     };
 
     $scope.changeStatus = function(status) {
-
       if (status._id === $scope.servicerequest.status._id) {
         return;
       }
@@ -276,9 +303,10 @@ angular
       }
 
       if (!$scope.servicerequest.resolvedAt) {
-        var changelog = { //TODO flag internal or public
+        var changelog = {
+          //TODO flag internal or public
           changer: party._id,
-          status: $scope.servicerequest.status
+          status: $scope.servicerequest.status,
         };
         var _id = $scope.servicerequest._id;
 
@@ -298,40 +326,42 @@ angular
       prompt({
         title: 'Resolve Issue',
         message: 'Are you sure you want to mark this issue as resolved?',
-        buttons: [{
-          label: 'Yes',
-          primary: true,
-        }, {
-          label: 'No',
-          cancel: true
-        }]
-      }).then(function() {
-        if (!$scope.servicerequest.resolvedAt) {
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.resolvedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              resolvedAt: new Date(),
+            };
 
-          var changelog = { //TODO flag internal or public
-            changer: party._id,
-            resolvedAt: new Date()
-          };
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
 
-          //update changelog
-          var _id = $scope.servicerequest._id;
-          ServiceRequest.changelog(_id, changelog).then(function(
-            response) {
-            // $scope.servicerequest = response;
-            $scope.select(response);
-            $scope.updated = true;
-            $rootScope.$broadcast('app:servicerequests:reload');
+              response = response || {};
 
-            response = response || {};
+              response.message = response.message || 'Issue Marked As Resolved';
 
-            response.message =
-              response.message || 'Issue Marked As Resolved';
-
-            $rootScope.$broadcast('appSuccess', response);
-
-          });
-        }
-      }).catch(function() {});
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
     };
 
     /**
@@ -341,42 +371,44 @@ angular
       prompt({
         title: 'Re-Open Issue',
         message: 'Are you sure you want to re-open this issue?',
-        buttons: [{
-          label: 'Yes',
-          primary: true,
-        }, {
-          label: 'No',
-          cancel: true
-        }]
-      }).then(function() {
-        if ($scope.servicerequest.resolvedAt) {
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if ($scope.servicerequest.resolvedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              resolvedAt: null,
+            };
 
-          var changelog = { //TODO flag internal or public
-            changer: party._id,
-            resolvedAt: null
-          };
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
 
-          //update changelog
-          var _id = $scope.servicerequest._id;
-          ServiceRequest.changelog(_id, changelog).then(function(
-            response) {
-            // $scope.servicerequest = response;
-            $scope.select(response);
-            $scope.updated = true;
-            $rootScope.$broadcast('app:servicerequests:reload');
+              response = response || {};
 
-            response = response || {};
+              response.message =
+                response.message || 'Issue Re-Open Successfully';
 
-            response.message =
-              response.message || 'Issue Re-Open Successfully';
-
-            $rootScope.$broadcast('appSuccess', response);
-
-          });
-        }
-      }).catch(function() {});
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
     };
-
 
     /**
      * Initialize new issue creation with reporter details
@@ -384,7 +416,7 @@ angular
     $scope.onCopy = function() {
       $state.go('app.create_servicerequests', {
         reporter: $scope.servicerequest.reporter,
-        jurisdiction: $scope.servicerequest.jurisdiction
+        jurisdiction: $scope.servicerequest.jurisdiction,
       });
     };
 
@@ -392,9 +424,11 @@ angular
      * Initialize new issue attending with operator details
      */
     $scope.onAttend = function() {
-      //prevent attachements and changelogs on attending
-      var servicerequest =
-        _.omit($scope.servicerequest, ['attachments', 'changelogs']);
+      //prevent attachments and changelogs on attending
+      var servicerequest = _.omit($scope.servicerequest, [
+        'attachments',
+        'changelogs',
+      ]);
       $state.go('app.create_servicerequests', servicerequest);
     };
 
@@ -405,30 +439,23 @@ angular
       servicerequest
         .$delete()
         .then(function(response) {
-
           response = response || {};
 
-          response.message =
-            response.message || 'Issue Deleted Successfully';
+          response.message = response.message || 'Issue Deleted Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('servicerequest:delete:success',
-            response);
+          $rootScope.$broadcast('servicerequest:delete:success', response);
 
           $rootScope.$broadcast('app:servicerequests:reload');
-
         })
         .catch(function(error) {
           if (error) {
             $rootScope.$broadcast('appError', error);
-            $rootScope.$broadcast('servicerequest:delete:error',
-              error);
-
+            $rootScope.$broadcast('servicerequest:delete:error', error);
           }
         });
     };
-
 
     /**
      * search servicerequests
@@ -455,27 +482,28 @@ angular
     };
 
     /**
-     * search assignes
+     * search assignees
      * @return {[type]} [description]
      */
     $scope.onSearchAssignees = function() {
       //TODO allow party where jurisdiction = null
       if ($scope.search.party && $scope.search.party.length >= 2) {
         Party.find({
-          query: {
+          filter: {
             deletedAt: {
-              $eq: null
-            }
+              $eq: null,
+            },
           },
-          q: $scope.search.party
-        }).then(function(response) {
-          $scope.assignees = response.parties;
-        }).catch(function( /*error*/ ) {
-          $scope.assignees = [];
-        });
+          q: $scope.search.party,
+        })
+          .then(function(response) {
+            $scope.assignees = response.parties;
+          })
+          .catch(function(/*error*/) {
+            $scope.assignees = [];
+          });
       }
     };
-
 
     $scope.load = function(query, skipClearSearch) {
       if (!skipClearSearch) {
@@ -486,14 +514,17 @@ angular
     };
 
     $scope.loadComment = function(servicerequest) {
-      var comments =
-        _.orderBy($scope.servicerequest.changelogs, 'createdAt', 'desc');
+      var comments = _.orderBy(
+        $scope.servicerequest.changelogs,
+        'createdAt',
+        'desc'
+      );
       comments = _.map(comments, function(comment) {
         comment.color = undefined;
-        comment.color =
-          (comment.status ? comment.status.color : comment.color);
-        comment.color =
-          (comment.priority ? comment.priority.color : comment.color);
+        comment.color = comment.status ? comment.status.color : comment.color;
+        comment.color = comment.priority
+          ? comment.priority.color
+          : comment.color;
         comment.color = comment.reopenedAt ? '#F44336' : comment.color;
         comment.color = comment.resolvedAt ? '#4CAF50' : comment.color;
         return comment;
@@ -515,9 +546,8 @@ angular
      * @description load servicerequests
      */
     $scope.find = function(query) {
-
       //ensure query
-      var isSearchable = ($scope.search.q && $scope.search.q.length >= 2);
+      var isSearchable = $scope.search.q && $scope.search.q.length >= 2;
       var extras = isSearchable ? $scope.query : {};
       query = _.merge({}, { misc: $scope.misc }, extras, query);
 
@@ -542,11 +572,9 @@ angular
 
       //track active ui based on query
       if (query.reset) {
-
         delete query.reset;
 
         $scope.query = query;
-
       } else {
         $scope.query = _.merge({}, $scope.query, query);
       }
@@ -555,104 +583,212 @@ angular
         page: $scope.page,
         limit: $scope.limit,
         sort: {
-          createdAt: -1
+          createdAt: -1,
         },
-        query: $scope.query,
-        q: $scope.q
-      }).then(function(response) {
-        //update scope with servicerequests when done loading
-        $scope.servicerequests = response.servicerequests;
-        if ($scope.updated) {
-          $scope.updated = false;
-        } else {
-          $scope.select(_.first($scope.servicerequests));
-        }
-        $scope.total = response.total;
-        $scope.spin = false;
-      }).catch(function(error) {
-        $scope.spin = false;
-      });
+        filter: $scope.query,
+        q: $scope.q,
+      })
+        .then(function(response) {
+          //update scope with servicerequests when done loading
+          $scope.servicerequests = response.servicerequests;
+          if ($scope.updated) {
+            $scope.updated = false;
+          } else {
+            $scope.select(_.first($scope.servicerequests));
+          }
+          $scope.total = response.total;
+          $scope.spin = false;
+        })
+        .catch(function(error) {
+          $scope.spin = false;
+        });
     };
-
 
     //check whether servicerequests will paginate
     $scope.willPaginate = function() {
       var willPaginate =
-        ($scope.servicerequests && $scope.total && $scope.total >
-          $scope.limit);
+        $scope.servicerequests && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
 
     //export current filtered issues
     $scope.export = function() {
-      var _exports =
-        _.map($scope.servicerequests, function(servicerequest) {
-          return {
-            code: servicerequest.code,
-            reportedAt: servicerequest.createdAt,
-            callStart: (servicerequest.call || {}).startedAt,
-            callEnd: (servicerequest.call || {}).endedAt,
-            callDurationMinutes: ((servicerequest.call || {}).duration || {})
-              .minutes,
-            callDurationSeconds: ((servicerequest.call || {}).duration || {})
-              .seconds,
-            reporterName: (servicerequest.reporter || {}).name,
-            reporterPhone: (servicerequest.reporter || {}).phone,
-            reporterAccount: (servicerequest.reporter || {}).account,
-            operator: (servicerequest.operator || {}).name,
-            area: (servicerequest.jurisdiction || {}).name,
-            group: (servicerequest.group || {}).name,
-            service: (servicerequest.service || {}).name,
-            assignee: (servicerequest.assignee || {}).name,
-            description: servicerequest.description,
-            address: servicerequest.address,
-            status: (servicerequest.status || {}).name,
-            priority: (servicerequest.priority || {}).name,
-            resolvedAt: servicerequest.resolvedAt,
-            ttrDays: (servicerequest.ttr || {}).days,
-            ttrHours: (servicerequest.ttr || {}).hours,
-            ttrMinutes: (servicerequest.ttr || {}).minutes,
-            ttrSeconds: (servicerequest.ttr || {}).seconds
-          };
-        });
+      var _exports = _.map($scope.servicerequests, function(servicerequest) {
+        return {
+          code: servicerequest.code,
+          reportedAt: servicerequest.createdAt,
+          callStart: (servicerequest.call || {}).startedAt,
+          callEnd: (servicerequest.call || {}).endedAt,
+          callDurationMinutes: ((servicerequest.call || {}).duration || {})
+            .minutes,
+          callDurationSeconds: ((servicerequest.call || {}).duration || {})
+            .seconds,
+          reporterName: (servicerequest.reporter || {}).name,
+          reporterPhone: (servicerequest.reporter || {}).phone,
+          reporterAccount: (servicerequest.reporter || {}).account,
+          operator: (servicerequest.operator || {}).name,
+          area: (servicerequest.jurisdiction || {}).name,
+          group: (servicerequest.group || {}).name,
+          service: (servicerequest.service || {}).name,
+          assignee: (servicerequest.assignee || {}).name,
+          description: servicerequest.description,
+          address: servicerequest.address,
+          status: (servicerequest.status || {}).name,
+          priority: (servicerequest.priority || {}).name,
+          resolvedAt: servicerequest.resolvedAt,
+          ttrDays: (servicerequest.ttr || {}).days,
+          ttrHours: (servicerequest.ttr || {}).hours,
+          ttrMinutes: (servicerequest.ttr || {}).minutes,
+          ttrSeconds: (servicerequest.ttr || {}).seconds,
+        };
+      });
       return _exports;
     };
-
 
     $scope.isEmpty = function(value) {
       return _.isEmpty(value);
     };
 
+    /**
+     * @function
+     * @name showResolvedAtFilter
+     * @description Open modal window to show resolved at date filter
+     */
+    $scope.showResolvedAtFilter = function() {
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/resolve_time_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showReportedAtFilter
+     * @description Open modal window to show reported at date filter
+     */
+    $scope.showReportedAtFilter = function() {
+      $scope.modal = $uibModal.open({
+        templateUrl:
+          'views/servicerequests/_partials/reported_time_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showOperatorFilter
+     * @description Open modal window for selecting operator for filtering workspace
+     */
+    $scope.showOperatorFilter = function() {
+      $scope.isOperatorFilter = true;
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/operator_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showAssigneeFilter
+     * @description Open modal window for selecting assignee for filtering workspace
+     */
+    $scope.showAssigneeFilter = function() {
+      $scope.isOperatorFilter = false;
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/operator_filter.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      $scope.modal.result.then(
+        function onClose() {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * @function
+     * @name showAssigneeFilter
+     * @description Open modal window for selecting assignee for filtering workspace
+     */
+    $scope.showAssigneeModal = function() {
+      if (!$scope.servicerequest.resolvedAt) {
+        $scope.modal = $uibModal.open({
+          templateUrl: 'views/servicerequests/_partials/assignee_modal.html',
+          scope: $scope,
+          size: 'lg',
+        });
+
+        $scope.modal.result.then(
+          function onClose() {},
+          function onDismissed() {}
+        );
+      }
+    };
+
+    /**
+     * @function
+     * @name filterByWorker
+     * @description Filter Workspace service request by worker either assignee or operator
+     */
+    $scope.filterByWorker = function(party) {
+      if ($scope.isOperatorFilter) {
+        $scope.operator = party;
+      } else {
+        $scope.assignee = party;
+      }
+
+      console.log(party);
+
+      $scope.modal.close();
+      // reset flag back to it's initial value
+      $scope.isOperatorFilter = true;
+    };
 
     //pre load un resolved servicerequests on state activation
     $scope.find({
       operator: party._id,
-      resolvedAt: null,
+      resolvedAt: { $eq: null },
       resetPage: true,
       reset: true,
-      misc: $scope.misc
+      misc: $scope.misc,
     });
 
     //listen for events
     $rootScope.$on('app:servicerequests:reload', function() {
-
       //re-load current operator service requests(inbox)
       $scope.find({
         $or: [{ operator: party._id }, { assignee: party._id }],
-        resolvedAt: null,
+        resolvedAt: { $eq: null },
         resetPage: true,
         reset: true,
-        misc: $scope.misc
+        misc: $scope.misc,
       });
-
     });
 
     //reload summaries
     $rootScope.$on('app:servicerequests:reload', function() {
-      //TODO pass params based on fillter
+      //TODO pass params based on filter
       Summary.issues().then(function(summaries) {
         $scope.summaries = summaries;
       });
     });
-
   });

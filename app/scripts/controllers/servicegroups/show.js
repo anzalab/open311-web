@@ -9,46 +9,49 @@
  */
 angular
   .module('ng311')
-  .controller('ServiceGroupShowCtrl', function (
-    $rootScope, $scope, $state, $stateParams, ServiceGroup
+  .controller('ServiceGroupShowCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    $stateParams,
+    ServiceGroup
   ) {
-
     $scope.edit = false;
 
-    $scope.onEdit = function () {
+    $scope.onEdit = function() {
       $scope.edit = true;
     };
 
-    $scope.onCancel = function () {
+    $scope.onCancel = function() {
       $scope.edit = false;
       $rootScope.$broadcast('app:servicegroups:reload');
     };
 
-    $scope.onNew = function () {
+    $scope.onNew = function() {
       $scope.servicegroup = new ServiceGroup({});
       $scope.edit = true;
     };
 
     //TODO show empty state if no servicegroup selected
     //listen for selected servicegroup
-    $rootScope.$on('servicegroup:selected', function (event, servicegroup) {
+    $rootScope.$on('servicegroup:selected', function(event, servicegroup) {
       $scope.servicegroup = servicegroup;
     });
 
     /**
      * @description save created servicegroup
      */
-    $scope.save = function () {
+    $scope.save = function() {
       //TODO show input prompt
       //TODO show loading mask
 
       //try update or save servicegroup
-      var updateOrSave =
-        (!$scope.servicegroup._id ?
-          $scope.servicegroup.$save() : $scope.servicegroup.$update());
+      var updateOrSave = !$scope.servicegroup._id
+        ? $scope.servicegroup.$save()
+        : $scope.servicegroup.$update();
 
-      updateOrSave.then(function (response) {
-
+      updateOrSave
+        .then(function(response) {
           response = response || {};
 
           response.message =
@@ -59,11 +62,9 @@ angular
           $rootScope.$broadcast('app:servicegroups:reload');
 
           $scope.edit = false;
-
         })
-        .catch(function (error) {
+        .catch(function(error) {
           $rootScope.$broadcast('appError', error);
         });
     };
-
   });

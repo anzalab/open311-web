@@ -9,11 +9,16 @@
  */
 angular
   .module('ng311')
-  .controller('DashboardOverviewCtrl', function (
-    $rootScope, $scope, $filter, $state, $uibModal,
-    Summary, endpoints, party
+  .controller('DashboardOverviewCtrl', function(
+    $rootScope,
+    $scope,
+    $filter,
+    $state,
+    $uibModal,
+    Summary,
+    endpoints,
+    party
   ) {
-
     //initialize scope attributes
     $scope.maxDate = new Date();
 
@@ -27,13 +32,19 @@ angular
 
     //bind filters
     var defaultFilters = {
-      startedAt: moment().utc().startOf('date').toDate(),
-      endedAt: moment().utc().endOf('date').toDate(),
+      startedAt: moment()
+        .utc()
+        .startOf('date')
+        .toDate(),
+      endedAt: moment()
+        .utc()
+        .endOf('date')
+        .toDate(),
       statuses: [],
       priorities: [],
       servicegroups: [],
       jurisdictions: [],
-      workspaces: []
+      workspaces: [],
     };
 
     //TODO persist filter to local storage
@@ -44,92 +55,104 @@ angular
       jurisdictions: {
         filename: 'areas_overview_reports_' + Date.now() + '.csv',
         headers: [
-          'Area', 'Total', 'Pending', 'Resolved',
-          'Late', 'Average Attend Time (Call Duration)',
-          'Average Resolve Time'
-        ]
+          'Area',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
       },
       groups: {
         filename: 'service_groups_overview_reports_' + Date.now() + '.csv',
         headers: [
-          'Service Group', 'Total', 'Pending', 'Resolved',
-          'Late', 'Average Attend Time (Call Duration)',
-          'Average Resolve Time'
-        ]
+          'Service Group',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
       },
       services: {
         filename: 'services_overview_reports_' + Date.now() + '.csv',
         headers: [
-          'Service', 'Total', 'Pending', 'Resolved',
-          'Late', 'Average Attend Time (Call Duration)',
-          'Average Resolve Time'
-        ]
+          'Service',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
       },
       methods: {
-        filename: 'reporting_methods_overview_reports_' + Date.now() +
-          '.csv',
-        headers: [
-          'Name', 'Total'
-        ]
+        filename: 'reporting_methods_overview_reports_' + Date.now() + '.csv',
+        headers: ['Name', 'Total'],
       },
       workspaces: {
         filename: 'workspaces_overview_reports_' + Date.now() + '.csv',
-        headers: [
-          'Name', 'Total'
-        ]
-      }
+        headers: ['Name', 'Total'],
+      },
     };
 
     //initialize overviews
     $scope.overviews = {};
 
-
     /**
      * Exports current overview data
      */
-    $scope.export = function (type) {
-      var _exports =
-        _.map($scope.overviews[type], function (overview) {
+    $scope.export = function(type) {
+      var _exports = _.map($scope.overviews[type], function(overview) {
+        overview = {
+          name: overview.name,
+          total: overview.count,
+          pending: overview.pending,
+          resolved: overview.resolved,
+          late: overview.late,
+          averageAttendTime: overview.averageAttendTime
+            ? [
+                overview.averageAttendTime.days,
+                ' days, ',
+                overview.averageAttendTime.hours,
+                ' hrs, ',
+                overview.averageAttendTime.minutes,
+                ' mins, ',
+                overview.averageAttendTime.seconds,
+                ' secs',
+              ].join('')
+            : undefined,
+          averageResolveTime: overview.averageResolveTime
+            ? [
+                overview.averageResolveTime.days,
+                'days, ',
+                overview.averageResolveTime.hours,
+                'hrs, ',
+                overview.averageResolveTime.minutes,
+                'mins, ',
+                overview.averageResolveTime.seconds,
+                'secs, ',
+              ].join('')
+            : undefined,
+        };
 
-          overview = {
-            name: overview.name,
-            total: overview.count,
-            pending: overview.pending,
-            resolved: overview.resolved,
-            late: overview.late,
-            averageAttendTime: overview.averageAttendTime ? [
-              overview.averageAttendTime.days, ' days, ',
-              overview.averageAttendTime.hours, ' hrs, ',
-              overview.averageAttendTime.minutes, ' mins, ',
-              overview.averageAttendTime.seconds, ' secs'
-            ].join('') : undefined,
-            averageResolveTime: overview.averageResolveTime ? [
-              overview.averageResolveTime.days, 'days, ',
-              overview.averageResolveTime.hours, 'hrs, ',
-              overview.averageResolveTime.minutes, 'mins, ',
-              overview.averageResolveTime.seconds, 'secs, '
-            ].join('') : undefined,
-          };
+        //reshape for workspace and method
+        if (type === 'methods' || type === 'workspaces') {
+          overview = _.pick(overview, ['name', 'total']);
+        }
 
-          //reshape for workspace and method
-          if (type === 'methods' || type === 'workspaces') {
-            overview = _.pick(overview, ['name', 'total']);
-          }
-
-          return overview;
-
-        });
+        return overview;
+      });
 
       return _exports;
-
     };
-
 
     /**
      * Open overview reports filter
      */
-    $scope.showFilter = function () {
-
+    $scope.showFilter = function() {
       //open overview reports filter modal
       $scope.modal = $uibModal.open({
         templateUrl: 'views/dashboards/_partials/overviews_filter.html',
@@ -138,17 +161,17 @@ angular
       });
 
       //handle modal close and dismissed
-      $scope.modal.result.then(function onClose( /*selectedItem*/ ) {},
-        function onDismissed() {});
-
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {}
+      );
     };
-
 
     /**
      * Filter overview reports based on on current selected filters
      * @param {Boolean} [reset] whether to clear and reset filter
      */
-    $scope.filter = function (reset) {
+    $scope.filter = function(reset) {
       if (reset) {
         $scope.filters = defaultFilters;
       }
@@ -166,22 +189,20 @@ angular
     /**
      * Filter service based on selected service group
      */
-    $scope.filterServices = function () {
-
+    $scope.filterServices = function() {
       //check for service group filter activation
       var filterHasServiceGroups =
-        ($scope.filters.servicegroups &&
-          $scope.filters.servicegroups.length > 0);
+        $scope.filters.servicegroups && $scope.filters.servicegroups.length > 0;
 
       //pick only service of selected group
       if (filterHasServiceGroups) {
         //filter services based on service group(s)
-        $scope.services =
-          _.filter(endpoints.services.services, function (service) {
-            var group =
-              _.get(service, 'group._id', _.get(service, 'group'));
-            return _.includes($scope.filters.servicegroups, group);
-          });
+        $scope.services = _.filter(endpoints.services.services, function(
+          service
+        ) {
+          var group = _.get(service, 'group._id', _.get(service, 'group'));
+          return _.includes($scope.filters.servicegroups, group);
+        });
       }
       //use all services
       else {
@@ -189,9 +210,7 @@ angular
       }
     };
 
-
-    $scope.prepare = function () {
-
+    $scope.prepare = function() {
       //update export filename
       $scope.exports.filename = 'overview_reports_' + Date.now() + '.csv';
 
@@ -206,7 +225,6 @@ angular
       $scope.prepareWorkspaceVisualization();
     };
 
-
     /**
      * prepare percentages for pending,resolved and late service requests in respect to total
      * service requests
@@ -214,25 +232,30 @@ angular
      * @since 0.1.0
      * @author Benson Maruchu<benmaruchu@gmail.com>
      */
-    $scope.prepareOverallPercentages = function () {
-
+    $scope.prepareOverallPercentages = function() {
       var overallExists = _.get($scope.overviews, 'overall', false);
 
       // check if overall data exists
       if (overallExists) {
-
         var percentages = {
-          percentageResolved: ($scope.overviews.overall.resolved / $scope
-            .overviews.overall.count) * 100,
-          percentagePending: ($scope.overviews.overall.pending / $scope.overviews
-            .overall.count) * 100,
-          percentageLate: ($scope.overviews.overall.late / $scope.overviews
-            .overall.count) * 100,
+          percentageResolved:
+            ($scope.overviews.overall.resolved /
+              $scope.overviews.overall.count) *
+            100,
+          percentagePending:
+            ($scope.overviews.overall.pending /
+              $scope.overviews.overall.count) *
+            100,
+          percentageLate:
+            ($scope.overviews.overall.late / $scope.overviews.overall.count) *
+            100,
         };
 
-        $scope.overviews.overall = _.merge({}, $scope.overviews.overall,
-          percentages);
-
+        $scope.overviews.overall = _.merge(
+          {},
+          $scope.overviews.overall,
+          percentages
+        );
       }
     };
 
@@ -243,8 +266,7 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareServiceVisualization = function (column) {
-
+    $scope.prepareServiceVisualization = function(column) {
       //ensure column
       column = column || 'count';
 
@@ -255,22 +277,19 @@ angular
         .value();
 
       //prepare bar chart series data
-      var data =
-        _.map($scope.overviews.services, function (service) {
+      var data = _.map($scope.overviews.services, function(service) {
+        var serie = {
+          name: service.name,
+          value: service[column],
+          itemStyle: {
+            normal: {
+              color: service.color,
+            },
+          },
+        };
 
-          var serie = {
-            name: service.name,
-            value: service[column],
-            itemStyle: {
-              normal: {
-                color: service.color
-              }
-            }
-          };
-
-          return serie;
-
-        });
+        return serie;
+      });
 
       //sort data by their value
       data = _.orderBy(data, 'value', 'asc');
@@ -278,18 +297,18 @@ angular
       //prepare chart config
       $scope.perServiceConfig = {
         height: '1100',
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perServiceOptions = {
         color: _.map(data, 'itemStyle.normal.color'),
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         tooltip: {
           trigger: 'item',
-          formatter: '{b} : {c}'
+          formatter: '{b} : {c}',
         },
         toolbox: {
           show: true,
@@ -297,55 +316,59 @@ angular
             saveAsImage: {
               name: 'Services Overview - ' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
+              show: true,
+            },
+          },
         },
         calculable: true,
-        yAxis: [{
-          type: 'category',
-          data: _.map(data, 'name'),
-          boundaryGap: true,
-          axisTick: {
-            alignWithLabel: true
-          },
-          axisLabel: {
-            rotate: 60,
-          },
-          axisLine: {
-            show: true
-          }
-        }],
-        xAxis: [{
-          type: 'value',
-          scale: true,
-          position: 'top',
-          boundaryGap: true,
-          axisTick: {
-            show: false,
-            lineStyle: {
-              color: '#ddd'
-            }
-          },
-          splitLine: {
-            show: false
-          }
-        }],
-        series: [{
-          type: 'bar',
-          barWidth: '55%',
-          label: {
-            normal: {
+        yAxis: [
+          {
+            type: 'category',
+            data: _.map(data, 'name'),
+            boundaryGap: true,
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLabel: {
+              rotate: 60,
+            },
+            axisLine: {
               show: true,
-              position: 'right'
-            }
+            },
           },
-          data: data
-        }]
+        ],
+        xAxis: [
+          {
+            type: 'value',
+            scale: true,
+            position: 'top',
+            boundaryGap: true,
+            axisTick: {
+              show: false,
+              lineStyle: {
+                color: '#ddd',
+              },
+            },
+            splitLine: {
+              show: false,
+            },
+          },
+        ],
+        series: [
+          {
+            type: 'bar',
+            barWidth: '55%',
+            label: {
+              normal: {
+                show: true,
+                position: 'right',
+              },
+            },
+            data: data,
+          },
+        ],
       };
-
     };
-
 
     /**
      * prepare jurisdiction overview visualization
@@ -354,46 +377,44 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareJurisdictionVisualization = function (column) {
-
+    $scope.prepareJurisdictionVisualization = function(column) {
       //ensure column
       column = column || 'count';
 
-
       //prepare chart series data
-      var data = _.map($scope.overviews.jurisdictions, function (
-        jurisdiction) {
+      var data = _.map($scope.overviews.jurisdictions, function(jurisdiction) {
         return {
           name: jurisdiction.name,
-          value: jurisdiction[column]
+          value: jurisdiction[column],
         };
       });
 
       //prepare chart config
       $scope.perJurisdictionConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perJurisdictionOptions = {
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         title: {
-          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
           subtext: $filter('number')(_.sumBy(data, 'value'), 0),
           x: 'center',
           y: 'center',
           textStyle: {
             fontWeight: 'normal',
-            fontSize: 16
-          }
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
           trigger: 'item',
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
@@ -401,26 +422,26 @@ angular
             saveAsImage: {
               name: 'Areas Overview - ' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
-        },
-        series: [{
-          type: 'pie',
-          selectedMode: 'single',
-          radius: ['45%', '55%'],
-          color: _.map($scope.overviews.jurisdictions, 'color'),
-          label: {
-            normal: {
-              formatter: '{b}\n{d}%\n( {c} )',
-            }
+              show: true,
+            },
           },
-          data: data
-        }]
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.overviews.jurisdictions, 'color'),
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
       };
-
     };
-
 
     /**
      * prepare service group overview visualization
@@ -429,44 +450,44 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareServiceGroupVisualization = function (column) {
-
+    $scope.prepareServiceGroupVisualization = function(column) {
       //ensure column
       column = column || 'count';
 
       //prepare chart series data
-      var data = _.map($scope.overviews.groups, function (group) {
+      var data = _.map($scope.overviews.groups, function(group) {
         return {
           name: group.name,
-          value: group[column]
+          value: group[column],
         };
       });
 
       //prepare chart config
       $scope.perServiceGroupConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perServiceGroupOptions = {
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         title: {
-          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
           subtext: $filter('number')(_.sumBy(data, 'value'), 0),
           x: 'center',
           y: 'center',
           textStyle: {
             fontWeight: 'normal',
-            fontSize: 16
-          }
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
           trigger: 'item',
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
@@ -474,27 +495,27 @@ angular
             saveAsImage: {
               name: 'Service Groups Overview - ' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
-        },
-        series: [{
-          type: 'pie',
-          selectedMode: 'single',
-          radius: ['45%', '55%'],
-          color: _.map($scope.overviews.groups, 'color'),
-
-          label: {
-            normal: {
-              formatter: '{b}\n{d}%\n( {c} )',
-            }
+              show: true,
+            },
           },
-          data: data
-        }]
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.overviews.groups, 'color'),
+
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
       };
-
     };
-
 
     /**
      * prepare method overview visualization
@@ -503,45 +524,44 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareMethodVisualization = function (column) {
-
+    $scope.prepareMethodVisualization = function(column) {
       //ensure column
       column = column || 'count';
 
-
       //prepare chart series data
-      var data = _.map($scope.overviews.methods, function (method) {
+      var data = _.map($scope.overviews.methods, function(method) {
         return {
           name: method.name,
-          value: method[column]
+          value: method[column],
         };
       });
 
       //prepare chart config
       $scope.perMethodConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perMethodOptions = {
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         title: {
-          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
           subtext: $filter('number')(_.sumBy(data, 'value'), 0),
           x: 'center',
           y: 'center',
           textStyle: {
             fontWeight: 'normal',
-            fontSize: 16
-          }
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
           trigger: 'item',
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
@@ -549,24 +569,25 @@ angular
             saveAsImage: {
               name: 'Reporting Methods Overview - ' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
-        },
-        series: [{
-          type: 'pie',
-          selectedMode: 'single',
-          radius: ['45%', '55%'],
-          color: _.map($scope.overviews.services, 'color'),
-          label: {
-            normal: {
-              formatter: '{b}\n{d}%\n( {c} )',
-            }
+              show: true,
+            },
           },
-          data: data
-        }]
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.overviews.services, 'color'),
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
       };
-
     };
 
     /**
@@ -576,45 +597,44 @@ angular
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareWorkspaceVisualization = function (column) {
-
+    $scope.prepareWorkspaceVisualization = function(column) {
       //ensure column
       column = column || 'count';
 
-
       //prepare chart series data
-      var data = _.map($scope.overviews.workspaces, function (workspace) {
+      var data = _.map($scope.overviews.workspaces, function(workspace) {
         return {
           name: workspace.name,
-          value: workspace[column]
+          value: workspace[column],
         };
       });
 
       //prepare chart config
       $scope.perWorkspaceConfig = {
         height: 400,
-        forceClear: true
+        forceClear: true,
       };
 
       //prepare chart options
       $scope.perWorkspaceOptions = {
         textStyle: {
-          fontFamily: 'Lato'
+          fontFamily: 'Lato',
         },
         title: {
-          text: column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
           subtext: $filter('number')(_.sumBy(data, 'value'), 0),
           x: 'center',
           y: 'center',
           textStyle: {
             fontWeight: 'normal',
-            fontSize: 16
-          }
+            fontSize: 16,
+          },
         },
         tooltip: {
           show: true,
           trigger: 'item',
-          formatter: "{b}:<br/> Count: {c} <br/> Percent: ({d}%)"
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
         },
         toolbox: {
           show: true,
@@ -622,52 +642,46 @@ angular
             saveAsImage: {
               name: 'Workspaces Overview - ' + new Date().getTime(),
               title: 'Save',
-              show: true
-            }
-          }
-        },
-        series: [{
-          type: 'pie',
-          selectedMode: 'single',
-          radius: ['45%', '55%'],
-          color: _.reverse(_.map($scope.overviews.services,
-            'color')),
-          label: {
-            normal: {
-              formatter: '{b}\n{d}%\n( {c} )',
-            }
+              show: true,
+            },
           },
-          data: data
-        }]
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.reverse(_.map($scope.overviews.services, 'color')),
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
       };
-
     };
-
 
     /**
      * Reload overview reports
      */
-    $scope.reload = function () {
-
-      Summary
-        .overviews({
-          query: $scope.params
-        })
-        .then(function (overviews) {
-          $scope.overviews = overviews;
-          $scope.prepare();
-        });
+    $scope.reload = function() {
+      Summary.overviews({
+        filter: $scope.params,
+      }).then(function(overviews) {
+        $scope.overviews = overviews;
+        $scope.prepare();
+      });
     };
 
     //listen for events and reload overview accordingly
-    $rootScope.$on('app:servicerequests:reload', function () {
+    $rootScope.$on('app:servicerequests:reload', function() {
       $scope.reload();
     });
-
 
     //pre-load reports
     //prepare overview details
     $scope.params = Summary.prepareQuery($scope.filters);
     $scope.reload();
-
   });

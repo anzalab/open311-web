@@ -1,59 +1,104 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app="ng311">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ENV.title}} | {{ENV.description}}</title>
+    <meta name="description" content="Citizen Feedback System" />
+    <meta name="author" content="{{ENV.author}}" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-barstyle"
+      content="black-translucent"
+    />
+    <link rel="apple-touch-icon" href="images/logo_lg.png" />
+    <meta name="apple-mobile-web-app-title" content="{{ENV.title}}" />
+    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" sizes="196x196" href="images/logo_lg.png" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link
+      rel="stylesheet"
+      href="bower_components/angular-loading-bar/build/loading-bar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/simple-line-icons/css/simple-line-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/ng-notify/src/styles/ng-notify.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/themify-icons/css/themify-icons.css"
+    />
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
+    <link
+      rel="stylesheet"
+      href="bower_components/bootstrap/dist/css/bootstrap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+    />
+    <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
+    <link
+      rel="stylesheet"
+      href="bower_components/font-awesome/css/font-awesome.css"
+    />
+    <link rel="stylesheet" href="bower_components/oi.select/dist/select.css" />
+    <link
+      rel="stylesheet"
+      href="bower_components/angular-color-picker/angular-color-picker.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/angularPrint/angularPrint.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/web-icons/css/web-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="bower_components/angular-pickadate/dist/angular-pickadate.css"
+    />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/theme.css" />
+    <link rel="stylesheet" href="styles/dropbox-material.css" />
+    <link rel="stylesheet" href="styles/ng-gallery.css" />
+    <link rel="stylesheet" href="styles/file-upload.css" />
+    <link rel="stylesheet" href="styles/ng-gallery.css" />
+    <link rel="stylesheet" href="styles/dropbox-color.css" />
+    <link rel="stylesheet" href="styles/dropbox-font-size.css" />
+    <link rel="stylesheet" href="styles/dropbox-radio-checkbox.css" />
+    <link rel="stylesheet" href="styles/theme-overrides.css" />
+    <!-- endbuild -->
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <title>{{ENV.title}} | {{ENV.description}}</title>
-  <meta name="description" content="Citizen Feedback System" />
-  <meta name="author" content="{{ENV.author}}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- for ios 7 style, multi-resolution icon of 152x152 -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
-  <link rel="apple-touch-icon" href="images/logo_lg.png">
-  <meta name="apple-mobile-web-app-title" content="{{ENV.title}}">
-  <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" sizes="196x196" href="images/logo_lg.png">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
-  <link rel="stylesheet" href="bower_components/simple-line-icons/css/simple-line-icons.css" />
-  <link rel="stylesheet" href="bower_components/ng-notify/src/styles/ng-notify.css" />
-  <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
-  <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
-  <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-  <link rel="stylesheet" href="bower_components/oi.select/dist/select.css" />
-  <link rel="stylesheet" href="bower_components/angular-color-picker/angular-color-picker.css" />
-  <link rel="stylesheet" href="bower_components/angularPrint/angularPrint.css" />
-  <link rel="stylesheet" href="bower_components/web-icons/css/web-icons.css" />
-  <link rel="stylesheet" href="bower_components/angular-pickadate/dist/angular-pickadate.css" />
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/theme.css">
-  <link rel="stylesheet" href="styles/dropbox-material.css">
-  <link rel="stylesheet" href="styles/ng-gallery.css">
-  <link rel="stylesheet" href="styles/file-upload.css">
-  <link rel="stylesheet" href="styles/ng-gallery.css">
-  <link rel="stylesheet" href="styles/dropbox-color.css">
-  <link rel="stylesheet" href="styles/dropbox-font-size.css">
-  <link rel="stylesheet" href="styles/dropbox-radio-checkbox.css">
-  <link rel="stylesheet" href="styles/theme-overrides.css">
-  <!-- endbuild -->
-</head>
-
-<body ng-controller="MainCtrl">
-  <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <body ng-controller="MainCtrl">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      </p>
     <![endif]-->
     <div class="app" ui-view></div>
     <!-- build:js(.) scripts/vendor.js -->
@@ -194,9 +239,10 @@
     <script src="scripts/controllers/dashboards/standing.js"></script>
     <script src="scripts/controllers/dashboards/export.js"></script>
     <script src="scripts/controllers/dashboards/performance.js"></script>
+    <script src="scripts/controllers/dashboards/operation.js"></script>
     <script src="scripts/controllers/dashboards/comparison.js"></script>
     <!-- end dashboard -->
     <!-- endbuild -->
-</body>
-<toast></toast>
+  </body>
+  <toast></toast>
 </html>

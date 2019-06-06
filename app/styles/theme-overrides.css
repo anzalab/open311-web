@@ -3,7 +3,6 @@
  * Copyright (c) 2016 lykmapipo, CodeTanzania & Contributors
  */
 
-
 /*normalize font family, font size and font weight*/
 
 html,
@@ -92,7 +91,8 @@ input,
 button,
 select,
 textarea .normal {
-  font-family: Lato, "Helvetica Neue", "HelveticaNeue-Light", Helvetica, Arial, sans-serif;
+  font-family: Lato, 'Helvetica Neue', 'HelveticaNeue-Light', Helvetica, Arial,
+    sans-serif;
 }
 
 html,
@@ -109,7 +109,6 @@ body {
   content: none;
 }
 
-
 /**support angular bootstrap*/
 
 .nav,
@@ -118,7 +117,6 @@ body {
 .panel-title a {
   cursor: pointer;
 }
-
 
 /*settings style*/
 
@@ -178,29 +176,29 @@ body {
   /*opacity: .1;*/
 }
 
-.list>.list-item:hover:not(.active) {
+.list > .list-item:hover:not(.active) {
   background-color: #f9f9f9;
   cursor: pointer;
   -webkit-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in;
 }
 
-.nav>.nav-item:hover:not(.active) {
+.nav > .nav-item:hover:not(.active) {
   font-weight: bold;
   cursor: pointer;
   -webkit-transition: font-weight 0.2s ease-in;
   transition: font-weight 0.2s ease-in;
 }
 
-.list>.list-item.active,
-.list>.list-item:active,
-.list>.list-item:focus {
+.list > .list-item.active,
+.list > .list-item:active,
+.list > .list-item:focus {
   background-color: #f9f9f9;
 }
 
-.nav>.nav-item.active,
-.nav>.nav-item:active,
-.nav>.nav-item:focus {
+.nav > .nav-item.active,
+.nav > .nav-item:active,
+.nav > .nav-item:focus {
   font-weight: bold;
 }
 
@@ -247,12 +245,11 @@ body {
   border-radius: 0 !important;
 }
 
-
 /*aside subnav*/
 
-.nav>.nav-item.active .text-muted,
-.nav>.nav-item:active .text-muted,
-.nav>.nav-item:focus .text-muted {
+.nav > .nav-item.active .text-muted,
+.nav > .nav-item:active .text-muted,
+.nav > .nav-item:focus .text-muted {
   opacity: 1;
 }
 
@@ -281,10 +278,10 @@ svg text {
   margin-bottom: 0 !important;
 }
 
-.list-pager .disabled>a,
-.list-pager .disabled>a:focus,
-.list-pager .disabled>a:hover,
-.list-pager .disabled>span {
+.list-pager .disabled > a,
+.list-pager .disabled > a:focus,
+.list-pager .disabled > a:hover,
+.list-pager .disabled > span {
   color: #777;
   cursor: not-allowed;
 }
@@ -312,15 +309,15 @@ svg text {
 }
 
 .streamline .label {
-  padding: .4em .5em;
-  color: #FFFFFF;
+  padding: 0.4em 0.5em;
+  color: #ffffff;
 }
 
 /*custom checkbox overrides*/
 
-.checkbox-primary input[type="checkbox"]:checked+label::before,
-.checkbox-primary input[type="radio"]:checked+label::before {
-  background-color: #008CCD !important;
+.checkbox-primary input[type='checkbox']:checked + label::before,
+.checkbox-primary input[type='radio']:checked + label::before {
+  background-color: #008ccd !important;
 }
 
 /*ng-notify ovverides*/
@@ -338,22 +335,22 @@ svg text {
 
 .table-tabular tr:last-child td {
   font-weight: bold;
-  background-color: rgba(120, 130, 140, .045);
+  background-color: rgba(120, 130, 140, 0.045);
 }
 
 .table-tabular td:last-child {
   font-weight: bold;
-  background-color: rgba(120, 130, 140, .045);
+  background-color: rgba(120, 130, 140, 0.045);
 }
 
 .table-tabular th:last-child {
   font-weight: bold;
-  background-color: rgba(120, 130, 140, .045);
+  background-color: rgba(120, 130, 140, 0.045);
 }
 
 .table-tabular td,
 th {
-  font-size: .76rem;
+  font-size: 0.76rem;
 }
 
 .table-stats th {
@@ -363,8 +360,6 @@ th {
 .table-stats tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.065);
 }
-
-
 
 /* displays */
 
@@ -395,10 +390,10 @@ th {
 /* md form & inputs */
 .md-input.focus,
 .md-input:focus {
-  border-color: #62A8EA;
+  border-color: #62a8ea;
 }
 
-.md-input.focus~label,
-.md-input:focus~label {
-  color: #62A8EA;
+.md-input.focus ~ label,
+.md-input:focus ~ label {
+  color: #62a8ea;
 }

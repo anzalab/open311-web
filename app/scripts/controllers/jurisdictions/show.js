@@ -9,40 +9,43 @@
  */
 angular
   .module('ng311')
-  .controller('JurisdictionShowCtrl', function (
-    $rootScope, $scope, $state, $stateParams, Jurisdiction
+  .controller('JurisdictionShowCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    $stateParams,
+    Jurisdiction
   ) {
-
     $scope.edit = false;
 
-    $scope.onEdit = function () {
+    $scope.onEdit = function() {
       $scope.edit = true;
     };
 
-    $scope.onCancel = function () {
+    $scope.onCancel = function() {
       $scope.edit = false;
       $rootScope.$broadcast('app:jurisdictions:reload');
     };
 
-    $scope.onNew = function () {
+    $scope.onNew = function() {
       $scope.jurisdiction = new Jurisdiction({
         location: {
-          coordinates: [0, 0]
-        }
+          coordinates: [0, 0],
+        },
       });
       $scope.edit = true;
     };
 
     //TODO show empty state if no jurisdiction selected
     //listen for selected jurisdiction
-    $rootScope.$on('jurisdiction:selected', function (event, jurisdiction) {
+    $rootScope.$on('jurisdiction:selected', function(event, jurisdiction) {
       $scope.jurisdiction = jurisdiction;
     });
 
     /**
      * @description save created jurisdiction
      */
-    $scope.save = function () {
+    $scope.save = function() {
       //TODO show input prompt
       //TODO show loading mask
 
@@ -51,17 +54,17 @@ angular
         type: 'Point',
         coordinates: [
           $scope.jurisdiction.longitude || 0,
-          $scope.jurisdiction.latitude || 0
-        ]
+          $scope.jurisdiction.latitude || 0,
+        ],
       };
 
       //try update or save jurisdiction
-      var updateOrSave =
-        (!$scope.jurisdiction._id ?
-          $scope.jurisdiction.$save() : $scope.jurisdiction.$update());
+      var updateOrSave = !$scope.jurisdiction._id
+        ? $scope.jurisdiction.$save()
+        : $scope.jurisdiction.$update();
 
-      updateOrSave.then(function (response) {
-
+      updateOrSave
+        .then(function(response) {
           response = response || {};
 
           response.message =
@@ -72,11 +75,9 @@ angular
           $rootScope.$broadcast('app:jurisdictions:reload');
 
           $scope.edit = false;
-
         })
-        .catch(function (error) {
+        .catch(function(error) {
           $rootScope.$broadcast('appError', error);
         });
     };
-
   });

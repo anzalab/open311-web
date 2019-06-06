@@ -1,0 +1,67 @@
+<!-- start operator pipeline summary -->
+<div class="padding m-t-md">
+  <!-- start report box -->
+  <div class="box b-a p-l-0">
+    <!-- start header -->
+    <div class="box-header b-b p-t-md p-b-md" title="Work Pipeline">
+      <h3>Work Pipeline</h3>
+      <!-- <small>Sub title goes here with small font</small> -->
+    </div>
+    <!-- end header -->
+
+    <!-- start toolbox -->
+    <div class="box-tool">
+      <!-- start time filters -->
+      <ul class="nav">
+        <!-- start export -->
+        <li class="nav-item inline">
+          <a
+            title="Click To Export"
+            class="btn btn-xs rounded white"
+            aria-expanded="false"
+            ng-csv="export('services')"
+            csv-header="exports.services.headers"
+            filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+          >
+            Export
+          </a>
+        </li>
+        <!-- end export -->
+      </ul>
+      <!-- end time filters -->
+    </div>
+    <!-- end toolbox -->
+
+    <!-- start body -->
+    <div>
+      <!-- start pipeline -->
+
+      <!-- start pipeline counts -->
+      <div class="row no-gutter">
+        <!-- start open -->
+        <div
+          ng-repeat="status in performances.pipelines"
+          class="col-xs-6 col-sm-3 b-r b-b"
+          title="{{status.label.name}} Service Requests"
+        >
+          <div class="p-a-sm">
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{status.count}}
+              </h4>
+              <p class="text-muted m-b-md">
+                {{status.label.name}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- end open -->
+      </div>
+      <!-- end pipeline counts -->
+      <!-- end pipeline -->
+    </div>
+    <!-- end body -->
+  </div>
+  <!-- end report box -->
+</div>
+<!-- end operator pipeline summary -->

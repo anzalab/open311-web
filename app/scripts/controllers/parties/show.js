@@ -10,10 +10,15 @@
 angular
   .module('ng311')
   .controller('PartyShowCtrl', function(
-    $rootScope, $scope, $state, $stateParams, Party,
-    jurisdictions, roles, party
+    $rootScope,
+    $scope,
+    $state,
+    $stateParams,
+    Party,
+    jurisdictions,
+    roles,
+    party
   ) {
-
     $scope.edit = false;
     $scope.canSave = true;
     $scope.passwordDontMatch = false;
@@ -35,7 +40,7 @@ angular
       $scope.party = new Party({
         relation: {},
         roles: [],
-        _assigned: []
+        _assigned: [],
       });
       $scope.edit = true;
     };
@@ -50,7 +55,6 @@ angular
       $scope.party.lockedAt = new Date();
       $scope.save();
     };
-
 
     /**
      * @description unblock created party
@@ -89,11 +93,12 @@ angular
       if (!$scope.party.confirm || !$scope.party.password) {
         $scope.passwordDontMatch = false;
       } else {
-        $scope.passwordDontMatch = !($scope.party.password === $scope.party
-          .confirm);
+        $scope.passwordDontMatch = !(
+          $scope.party.password === $scope.party.confirm
+        );
         $scope.canSave =
-          ($scope.party.password.length >= 8) &&
-          ($scope.party.password === $scope.party.confirm);
+          $scope.party.password.length >= 8 &&
+          $scope.party.password === $scope.party.confirm;
       }
     };
 
@@ -105,8 +110,8 @@ angular
         $scope.canSave = true;
       } else {
         $scope.canSave =
-          ($scope.party.password.length >= 8) &&
-          ($scope.party.password === $scope.party.confirm);
+          $scope.party.password.length >= 8 &&
+          $scope.party.password === $scope.party.confirm;
       }
     };
 
@@ -121,15 +126,15 @@ angular
       $scope.party.roles = $scope.party._assigned;
 
       //try update or save party
-      var updateOrSave =
-        (!$scope.party._id ? $scope.party.$save() : $scope.party.$update());
+      var updateOrSave = !$scope.party._id
+        ? $scope.party.$save()
+        : $scope.party.$update();
 
-      updateOrSave.then(function(response) {
-
+      updateOrSave
+        .then(function(response) {
           response = response || {};
 
-          response.message =
-            response.message || 'Party Saved Successfully';
+          response.message = response.message || 'Party Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
@@ -139,11 +144,9 @@ angular
           // $rootScope.$broadcast('party:selected', $scope.party);
 
           $scope.edit = false;
-
         })
         .catch(function(error) {
           $rootScope.$broadcast('appError', error);
         });
     };
-
   });

@@ -1,0 +1,87 @@
+<div>
+  <!-- start modal header -->
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close pull-right"
+      ng-click="$dismiss()"
+      aria-hidden="true"
+    >
+      ×
+    </button>
+    <h4 class="modal-title">
+      Assign Service Request To:
+    </h4>
+  </div>
+  <!-- end modal header -->
+
+  <div class="modal-body">
+    <div class="container-fluid">
+      <!-- start operator list -->
+      <div class="row-col lt">
+        <!-- start operator list search -->
+        <div class="list-search">
+          <form>
+            <div class="input-group">
+              <input
+                type="text"
+                ng-change="onSearchAssignees()"
+                ng-model="search.party"
+                class="form-control form-control-sm"
+                placeholder="Search Assignee ..."
+              />
+              <span class="input-group-btn">
+                <button
+                  ng-click="onSearchAssignees()"
+                  class="btn btn-default btn-sm no-shadow"
+                  type="button"
+                >
+                  <i class="ti-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <!-- end operator list search -->
+
+        <!-- start operator listing -->
+        <div class="row-row">
+          <div class="row-body hover">
+            <div class="list" data-ui-list="info">
+              <div
+                class="list-item"
+                ng-repeat="assignee in assignees"
+                title="{{assignee.name}}"
+                ng-click="assign(assignee)"
+              >
+                <div class="list-left">
+                  <span class="w-40 avatar circle">
+                    <letter-avatar
+                      title="{{assignee.name}}"
+                      data="{{assignee.name}}"
+                      height="60"
+                      width="60"
+                      shape="round"
+                    >
+                    </letter-avatar>
+                  </span>
+                </div>
+                <div class="list-body">
+                  <div class="item-title">
+                    {{assignee.name}}
+                    <br />
+                    <span class="text-sm text-muted">
+                      {{assignee.relation.type}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end operator listing -->
+      </div>
+      <!-- end operators list -->
+    </div>
+  </div>
+</div>

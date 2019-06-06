@@ -9,12 +9,17 @@
  */
 angular
   .module('ng311')
-  .controller('MainCtrl', function ($rootScope, $scope, $state,
-    ngNotify, ngToast, socket) {
-
+  .controller('MainCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    ngNotify,
+    ngToast,
+    socket
+  ) {
     //TODO show signin progress
 
-    $scope.onAllIssues = function () {
+    $scope.onAllIssues = function() {
       $rootScope.$broadcast('servicerequest:list');
     };
 
@@ -23,7 +28,6 @@ angular
 
     //handle fired error events
     function onError(event, error) {
-
       var message = 'Operation failed';
 
       if (error.status === -1) {
@@ -36,15 +40,12 @@ angular
 
       ngNotify.set(message, {
         position: 'top',
-        type: 'warn'
+        type: 'warn',
       });
-
     }
-
 
     //handle fired success events
     function onSuccess(event, success) {
-
       var message = 'Operation occured successfully';
 
       try {
@@ -53,14 +54,12 @@ angular
 
       ngNotify.set(message, {
         position: 'top',
-        type: 'success'
+        type: 'success',
       });
-
     }
 
     //handle fired warning events
     function onWarning(event, warning) {
-
       var message = 'Operation Not Completed';
 
       try {
@@ -72,9 +71,8 @@ angular
         type: 'warn',
         button: true,
         sticky: true,
-        dismissButton: true
+        dismissButton: true,
       });
-
     }
 
     //listen errors and notify
@@ -93,8 +91,7 @@ angular
     /**
      * @description show and hide application aside
      */
-    $scope.switch = function () {
-
+    $scope.switch = function() {
       var pageAside = angular.element('.page-aside');
       var isOpen = pageAside.hasClass('open');
 
@@ -108,32 +105,27 @@ angular
     /**
      * listen to signin success event
      */
-    $rootScope.$on('signinSuccess', function (event, response) {
-
+    $rootScope.$on('signinSuccess', function(event, response) {
       //obtain signin party(user)
       var party = _.get(response, 'data.party');
 
       //if party is operator and has sipNumber
       //subscribe to web socket for call picked events
       if (socket && party && socket.on && party.sipNumber) {
-
         //ensure socket connection
         // socket.connect();
 
         //prepare sip socket event name
-        $rootScope.sipEvent = [
-          'socket:',
-          party.sipNumber,
-          '-call-picked'
-        ].join('');
+        $rootScope.sipEvent = ['socket:', party.sipNumber, '-call-picked'].join(
+          ''
+        );
 
-        socket.on($rootScope.sipEvent, function (data) {
-
+        socket.on($rootScope.sipEvent, function(data) {
           //notify new call
           ngToast.create({
             className: 'info',
             content: 'New Call Received',
-            dismissButton: true
+            dismissButton: true,
           });
 
           //broadcast call picked
@@ -141,20 +133,16 @@ angular
 
           //TODO save latest call data on local storage for new
           //call creation
-
         });
-
       }
-
     });
 
     /**
      * listen to signout success event
      */
-    $rootScope.$on('signoutSuccess', function () {
+    $rootScope.$on('signoutSuccess', function() {
       //disconnect from call picked socket event
       if (socket && socket.disconnect) {
-
         if ($rootScope.sipEvent) {
           socket.removeListener($rootScope.sipEvent);
         }
@@ -162,8 +150,6 @@ angular
         // socket.removeAllListeners();
 
         // socket.disconnect();
-
       }
     });
-
   });
