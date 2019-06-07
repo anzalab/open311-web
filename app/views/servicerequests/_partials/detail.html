@@ -224,7 +224,10 @@
         </div>
         <!-- end issue description -->
         <!-- start issue worklog(used material & equipment) -->
-        <div ng-include="'views/servicerequests/_partials/worklog.html'"></div>
+        <div
+          ng-show="worklogs && worklogs.length > 0"
+          ng-include="'views/servicerequests/_partials/worklog.html'"
+        ></div>
         <!-- end issue worklog(used material & equipment) -->
         <!-- start issue map -->
         <div

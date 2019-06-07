@@ -28,6 +28,7 @@ angular
     $scope.spin = false;
     $scope.servicerequests = [];
     $scope.comments = [];
+    $scope.worklogs = [];
     $scope.servicerequest = new ServiceRequest({
       call: {
         startedAt: new Date(),
@@ -122,6 +123,9 @@ angular
       //clear comments
       $scope.comments = [];
 
+      // clear worklogs
+      $scope.worklogs = [];
+
       //sort comments in desc order
       if (servicerequest && servicerequest._id) {
         //update scope service request ref
@@ -199,6 +203,9 @@ angular
 
         //load service request comments
         $scope.loadComment(servicerequest);
+
+        // load service request worklogs
+        $scope.loadWorkLog(servicerequest);
       }
 
       $scope.create = false;
@@ -670,6 +677,22 @@ angular
         return comment;
       });
       $scope.comments = comments;
+    };
+
+    /**
+     * @description prepare worklog of specified service request
+     */
+    $scope.loadWorkLog = function(servicerequest) {
+      // filter only with item
+      var worklogs = _.filter(servicerequest.changelogs, function(changelog) {
+        return !_.isEmpty(changelog.item);
+      });
+
+      // sort by latest dates
+      worklogs = _.orderBy(worklogs, 'createdAt', 'asc');
+
+      // return work logs
+      $scope.worklogs = worklogs;
     };
 
     /**
