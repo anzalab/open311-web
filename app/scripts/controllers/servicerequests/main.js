@@ -321,6 +321,142 @@ angular
     };
 
     /**
+     * complete issue and signal work done
+     */
+    $scope.onComplete = function() {
+      prompt({
+        title: 'Complete Issue',
+        message: 'Are you sure you want to mark this issue as completed?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.completedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              completedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message =
+                response.message || 'Issue Marked As Completed';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
+     * verify issue and signal work done is ok
+     */
+    $scope.onVerify = function() {
+      prompt({
+        title: 'Verify Issue',
+        message: 'Are you sure you want to mark this issue as verified?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.vefifiedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              verifiedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message = response.message || 'Issue Marked As Verified';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
+     * approve issue and signal work done final
+     */
+    $scope.onApprove = function() {
+      prompt({
+        title: 'Approve Issue',
+        message: 'Are you sure you want to mark this issue as approved?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.vefifiedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              approvedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message = response.message || 'Issue Marked As Approved';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
      * close and resolve issue
      */
     $scope.onClose = function() {
@@ -344,6 +480,9 @@ angular
               //TODO flag internal or public
               changer: party._id,
               resolvedAt: new Date(),
+              // completedAt: new Date(),
+              // verifiedAt: new Date(),
+              // approvedAt: new Date(),
             };
 
             //update changelog

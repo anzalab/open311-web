@@ -25,6 +25,51 @@
     </a>
   </li>
   <li
+    ng-if="servicerequest.operator && servicerequest.assignee && !servicerequest.completedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:complete"
+      ng-click="onComplete()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Complete"
+    >
+      <span class="nav-text">
+        <i class="ti-check-box"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.completedAt && !servicerequest.verifiedAt && !servicerequest.verifiedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:verify"
+      ng-click="onVerify()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Verified"
+    >
+      <span class="nav-text">
+        <i class="ti-eye"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.completedAt && servicerequest.verifiedAt && !servicerequest.approvedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:approve"
+      ng-click="onApprove()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Approve"
+    >
+      <span class="nav-text">
+        <i class="ti-ink-pen"></i>
+      </span>
+    </a>
+  </li>
+  <li
     ng-if="servicerequest.operator && !servicerequest.resolvedAt"
     class="nav-item b-l p-l"
   >
