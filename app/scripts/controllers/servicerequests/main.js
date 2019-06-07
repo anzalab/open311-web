@@ -459,7 +459,7 @@ angular
     /**
      * close and resolve issue
      */
-    $scope.onClose = function() {
+    $scope.onResolve = function() {
       prompt({
         title: 'Resolve Issue',
         message: 'Are you sure you want to mark this issue as resolved?',
@@ -480,9 +480,6 @@ angular
               //TODO flag internal or public
               changer: party._id,
               resolvedAt: new Date(),
-              // completedAt: new Date(),
-              // verifiedAt: new Date(),
-              // approvedAt: new Date(),
             };
 
             //update changelog
@@ -899,8 +896,6 @@ angular
         $scope.assignee = party;
       }
 
-      console.log(party);
-
       $scope.modal.close();
       // reset flag back to it's initial value
       $scope.isOperatorFilter = true;
@@ -912,7 +907,7 @@ angular
       resolvedAt: { $eq: null },
       resetPage: true,
       reset: true,
-      misc: $scope.misc,
+      misc: 'unresolved',
     });
 
     //listen for events
@@ -923,7 +918,7 @@ angular
         resolvedAt: { $eq: null },
         resetPage: true,
         reset: true,
-        misc: $scope.misc,
+        misc: 'inbox',
       });
     });
 
