@@ -77,7 +77,7 @@
       show-if-has-permit="servicerequest:complete"
       ng-click="showWorklogModal()"
       class="nav-link text-muted no-border"
-      title="Click to Record Worklog(Material & Equipment Used)"
+      title="Click to Record Material & Equipment Used"
     >
       <span class="nav-text">
         <i class="icon-basket-loaded"></i>
@@ -87,10 +87,20 @@
   <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
     <a
       class="nav-link text-muted no-border"
-      title="Click To Attach More Images"
+      title="Click To Attach Supporting Images"
     >
       <span class="nav-text">
         <i class="icon-camera"></i>
+      </span>
+    </a>
+  </li>
+  <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
+    <a
+      class="nav-link text-muted no-border"
+      title="Click To Attach Supporting Documents"
+    >
+      <span class="nav-text">
+        <i class="icon-paper-clip"></i>
       </span>
     </a>
   </li>
