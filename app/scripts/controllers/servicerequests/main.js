@@ -224,6 +224,7 @@ angular
             //TODO flag internal or public
             changer: party._id,
             assignee: $scope.servicerequest.assignee,
+            //TODO: set notify to true
           };
 
           //update changelog
@@ -527,6 +528,9 @@ angular
           : comment.color;
         comment.color = comment.reopenedAt ? '#F44336' : comment.color;
         comment.color = comment.resolvedAt ? '#4CAF50' : comment.color;
+        comment.color = comment.completedAt ? '#0D47A3' : comment.color;
+        comment.color = comment.verifiedAt ? '#EF6C01' : comment.color;
+        comment.color = comment.approvedAt ? '#1B5E1F' : comment.color;
         return comment;
       });
       $scope.comments = comments;

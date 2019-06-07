@@ -98,6 +98,45 @@
               Reopened
             </span>
           </p>
+          <p ng-if="comment.completedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #0D47A3;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #0D47A3;"
+              ></b>
+              Completed
+            </span>
+          </p>
+          <p ng-if="comment.verifiedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #EF6C01;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #EF6C01;"
+              ></b>
+              Verified
+            </span>
+          </p>
+          <p ng-if="comment.approvedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #1B5E1F;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #1B5E1F;"
+              ></b>
+              Verified
+            </span>
+          </p>
           <!-- TODO show attachment changelog -->
         </div>
       </div>

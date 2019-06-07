@@ -54,6 +54,32 @@
                 </a>
               </li>
               <li
+                ng-class="{active:misc == 'unverified'}"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  show-if-has-permit="servicerequest:verify"
+                  ng-click="load({operator:{$eq:null}, resetPage:true, reset:true, misc:'unverified'})"
+                  class="nav-link text-muted block"
+                  title="Completed Issues Waiting Verification"
+                >
+                  Un-Verified
+                </a>
+              </li>
+              <li
+                ng-class="{active:misc == 'unapproved'}"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  show-if-has-permit="servicerequest:approve"
+                  ng-click="load({operator:{$eq:null}, resetPage:true, reset:true, misc:'unapproved'})"
+                  class="nav-link text-muted block"
+                  title="Verified Issues Waiting Approval"
+                >
+                  Un-Approved
+                </a>
+              </li>
+              <li
                 ng-class="{active:misc == 'unresolved'}"
                 class="nav-item m-b-xs"
               >
