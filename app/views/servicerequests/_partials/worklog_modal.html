@@ -19,6 +19,29 @@
   <div class="box">
     <div class="m-l-lg m-r-lg">
       <form role="form">
+        <!-- start item input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Item
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group form-material" title="Select Item">
+              <oi-select
+                oi-options="item.name for item in items track by item._id"
+                ng-model="worklog.item"
+                placeholder="Select Item"
+                class="form-control"
+                oi-select-options="{cleanModel: true}"
+              ></oi-select>
+            </div>
+          </div>
+        </div>
+        <!-- end item input -->
+
         <!-- start quantity input -->
         <div class="row m-t-sm">
           <div class="col-md-12">
@@ -29,14 +52,16 @@
             </div>
           </div>
           <div class="col-md-12">
-            <input
-              type="text"
-              ng-model="worklog.quantity"
-              class="form-control"
-              name="quantity"
-              placeholder="Quantity"
-              required
-            />
+            <div class="form-group">
+              <input
+                type="text"
+                ng-model="worklog.quantity"
+                class="form-control"
+                name="quantity"
+                placeholder="Quantity"
+                required
+              />
+            </div>
           </div>
         </div>
         <!-- end quantity input -->
@@ -51,14 +76,15 @@
             </div>
           </div>
           <div class="col-md-12">
-            <textarea
-              rows="2"
-              ng-model="worklog.comment"
-              class="form-control"
-              name="comment"
-              placeholder="Comment"
-              required
-            ></textarea>
+            <div class="form-group">
+              <textarea
+                ng-model="worklog.comment"
+                class="form-control"
+                name="comment"
+                placeholder="Comment"
+                rows="3"
+              ></textarea>
+            </div>
           </div>
         </div>
         <!-- end comment input -->
@@ -78,7 +104,7 @@
     <button
       class="btn btn-primary"
       title="Click to Save Worklog"
-      ng-click="onWorkLog()"
+      ng-click="onWorklog()"
     >
       Save
     </button>

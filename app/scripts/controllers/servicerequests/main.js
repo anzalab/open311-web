@@ -22,7 +22,8 @@ angular
     Comment,
     Summary,
     endpoints,
-    party
+    party,
+    items
   ) {
     //servicerequests in the scope
     $scope.spin = false;
@@ -79,6 +80,7 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.items = items.items;
     $scope.party = party;
     // $scope.assignees = assignee.parties;
     $scope.summaries = endpoints.summaries;
@@ -960,14 +962,18 @@ angular
         };
 
         //update changelog
-        var _id = $scope.servicerequest._id;
-        ServiceRequest.changelog(_id, changelog).then(function(response) {
+        if (changelog.item && changelog.quantity > 0) {
+          var _id = $scope.servicerequest._id;
+          ServiceRequest.changelog(_id, changelog).then(function(response) {
+            $scope.modal.close();
+            // $scope.servicerequest = response;
+            $scope.select(response);
+            $scope.updated = true;
+            $rootScope.$broadcast('app:servicerequests:reload');
+          });
+        } else {
           $scope.modal.close();
-          // $scope.servicerequest = response;
-          $scope.select(response);
-          $scope.updated = true;
-          $rootScope.$broadcast('app:servicerequests:reload');
-        });
+        }
       }
     };
 
