@@ -29,6 +29,7 @@ angular
     $scope.servicerequests = [];
     $scope.comments = [];
     $scope.worklogs = [];
+    $scope.worklog = {};
     $scope.servicerequest = new ServiceRequest({
       call: {
         startedAt: new Date(),
@@ -122,6 +123,9 @@ angular
 
       //clear comments
       $scope.comments = [];
+
+      // clear worklog
+      $scope.worklog = {};
 
       // clear worklogs
       $scope.worklogs = [];
@@ -852,7 +856,8 @@ angular
     /**
      * @function
      * @name showOperatorFilter
-     * @description Open modal window for selecting operator for filtering workspace
+     * @description Open modal window for selecting operator for filtering
+     * workspace
      */
     $scope.showOperatorFilter = function() {
       $scope.isOperatorFilter = true;
@@ -871,7 +876,8 @@ angular
     /**
      * @function
      * @name showAssigneeFilter
-     * @description Open modal window for selecting assignee for filtering workspace
+     * @description Open modal window for selecting assignee for filtering
+     * workspace
      */
     $scope.showAssigneeFilter = function() {
       $scope.isOperatorFilter = false;
@@ -890,7 +896,8 @@ angular
     /**
      * @function
      * @name showAssigneeFilter
-     * @description Open modal window for selecting assignee for filtering workspace
+     * @description Open modal window for selecting assignee for filtering
+     * workspace
      */
     $scope.showAssigneeModal = function() {
       if (!$scope.servicerequest.resolvedAt) {
@@ -910,7 +917,8 @@ angular
     /**
      * @function
      * @name filterByWorker
-     * @description Filter Workspace service request by worker either assignee or operator
+     * @description Filter Workspace service request by worker either
+     * assignee or operator
      */
     $scope.filterByWorker = function(party) {
       if ($scope.isOperatorFilter) {
@@ -922,6 +930,45 @@ angular
       $scope.modal.close();
       // reset flag back to it's initial value
       $scope.isOperatorFilter = true;
+    };
+
+    /**
+     * @description Present worklog modal
+     */
+    $scope.showWorklogModal = function() {
+      //open worklog modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/worklog_modal.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {}
+      );
+    };
+
+    $scope.onWorklog = function() {
+      //ensure service request
+      if ($scope.servicerequest && !$scope.servicerequest.resolvedAt) {
+        var changelog = {
+          item: $scope.worklog.item,
+          quantity: $scope.worklog.quantity,
+          comment: $scope.worklog.comment,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog).then(function(response) {
+          $scope.modal.close();
+          // $scope.servicerequest = response;
+          $scope.select(response);
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+        });
+      }
     };
 
     //pre load un resolved servicerequests on state activation

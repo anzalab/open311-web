@@ -17,7 +17,7 @@
       ng-if="mailTo"
       href="{{mailTo}}"
       class="nav-link text-muted"
-      title="Send Issue to Area"
+      title="Click to Send Issue to Area"
     >
       <span class="nav-text">
         <i class="icon-action-redo"></i>
@@ -66,6 +66,21 @@
     >
       <span class="nav-text">
         <i class="ti-ink-pen"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:complete"
+      ng-click="showWorklogModal()"
+      class="nav-link text-muted no-border"
+      title="Click to Record Worklog(Material & Equipment Used)"
+    >
+      <span class="nav-text">
+        <i class="icon-basket-loaded"></i>
       </span>
     </a>
   </li>
