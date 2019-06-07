@@ -43,6 +43,10 @@
             on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}
           </div>
           <p ng-if="comment.comment">{{comment.comment}}</p>
+          <p ng-if="comment.item">
+            Used {{comment.quantity}} - {{comment.item.properties.unit}} of
+            {{comment.item.name}}
+          </p>
           <p ng-if="comment.status && comment.status.name">
             Change status to
             <span

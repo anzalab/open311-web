@@ -670,6 +670,7 @@ angular
         'desc'
       );
       comments = _.map(comments, function(comment) {
+        console.log(comment);
         comment.color = undefined;
         comment.color = comment.status ? comment.status.color : comment.color;
         comment.color = comment.priority
@@ -680,6 +681,11 @@ angular
         comment.color = comment.completedAt ? '#0D47A3' : comment.color;
         comment.color = comment.verifiedAt ? '#EF6C01' : comment.color;
         comment.color = comment.approvedAt ? '#1B5E1F' : comment.color;
+        if (comment.item) {
+          comment.item = _.merge({}, comment.item, {
+            properties: { unit: 'PCS' }, // TODO: fix unit not found
+          });
+        }
         return comment;
       });
       $scope.comments = comments;
@@ -696,6 +702,14 @@ angular
 
       // sort by latest dates
       worklogs = _.orderBy(worklogs, 'createdAt', 'asc');
+
+      // ensure unit
+      worklogs = _.map(worklogs, function(worklog) {
+        worklog = _.merge({}, worklog, {
+          item: { properties: { unit: 'PCS' } }, // TODO: fix unit not found
+        });
+        return worklog;
+      });
 
       // return work logs
       $scope.worklogs = worklogs;
