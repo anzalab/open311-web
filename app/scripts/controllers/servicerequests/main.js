@@ -903,11 +903,11 @@ angular
 
     //pre load un resolved servicerequests on state activation
     $scope.find({
-      operator: party._id,
+      $or: [{ operator: party._id }, { assignee: party._id }],
       resolvedAt: { $eq: null },
       resetPage: true,
       reset: true,
-      misc: 'unresolved',
+      misc: 'inbox',
     });
 
     //listen for events
