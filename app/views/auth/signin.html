@@ -14,20 +14,19 @@
         role="form"
         autocomplete="new-password"
       >
-        <!--start email input-->
+        <!--start username input-->
         <div class="md-form-group float-label">
           <input
             class="md-input"
-            type="email"
-            name="email"
-            ng-model="user.email"
-            focus-if="!user.email"
+            name="username"
+            ng-model="user.username"
+            focus-if="!user.username"
             ng-required
-            title="Enter your email"
+            title="Enter your username"
           />
-          <label>Email</label>
+          <label>Username</label>
         </div>
-        <!--start email input-->
+        <!--start username input-->
         <!--start password input-->
         <div class="md-form-group float-label">
           <input
@@ -43,7 +42,7 @@
         <!--end password input-->
         <!--start signin button-->
         <button
-          ng-disabled="signinForm.$invalid || !user.email || !user.password"
+          ng-disabled="signinForm.$invalid || !user.username || !user.password"
           type="submit"
           class="btn btn-primary btn-block m-t-sm"
         >
