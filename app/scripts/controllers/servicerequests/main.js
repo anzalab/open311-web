@@ -170,14 +170,17 @@ angular
           };
         }
 
-        //ensure attachments has correct data for displaying
+        // load service request worklogs
+        $scope.loadWorkLog(servicerequest);
+
+        //load service request images
         $scope.loadImages(servicerequest);
+
+        //load service request documents
+        $scope.loadDocuments(servicerequest);
 
         //load service request comments
         $scope.loadComment(servicerequest);
-
-        // load service request worklogs
-        $scope.loadWorkLog(servicerequest);
       }
 
       $scope.create = false;
@@ -256,6 +259,33 @@ angular
           //TODO flag internal or public
           changer: party._id,
           image: image,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog)
+          .then(function(response) {
+            //TODO notify success
+            $scope.note = {};
+            $scope.select(response);
+            $scope.updated = true;
+          })
+          .catch(function(error) {
+            //TODO notify error
+            // console.log(error);
+          });
+      }
+    };
+
+    /**
+     * attach document on issues
+     */
+    $scope.onDocument = function(doc) {
+      if (document) {
+        var changelog = {
+          //TODO flag internal or public
+          changer: party._id,
+          document: doc,
         };
 
         //update changelog
@@ -663,11 +693,8 @@ angular
     };
 
     $scope.loadComment = function(servicerequest) {
-      var comments = _.orderBy(
-        $scope.servicerequest.changelogs,
-        'createdAt',
-        'desc'
-      );
+      var changelogs = [].concat(servicerequest.changelogs);
+      var comments = _.orderBy(changelogs, 'createdAt', 'desc');
       comments = _.map(comments, function(comment) {
         comment.color = undefined;
         comment.color = comment.status ? comment.status.color : comment.color;
@@ -685,7 +712,18 @@ angular
           });
         }
         if (comment.image) {
-          comment.image.stream = Utils.asLink(['v1', comment.image.stream]);
+          if (!_.startsWith(comment.image.stream, 'http')) {
+            comment.image.stream = Utils.asLink(['v1', comment.image.stream]);
+          }
+        }
+
+        if (comment.document) {
+          if (!_.startsWith(comment.document.download, 'http')) {
+            comment.document.download = Utils.asLink([
+              'v1',
+              comment.document.download,
+            ]);
+          }
         }
         return comment;
       });
@@ -697,7 +735,8 @@ angular
      */
     $scope.loadWorkLog = function(servicerequest) {
       // filter only with item
-      var worklogs = _.filter(servicerequest.changelogs, function(changelog) {
+      var changelogs = [].concat(servicerequest.changelogs);
+      var worklogs = _.filter(changelogs, function(changelog) {
         return !_.isEmpty(changelog.item);
       });
 
@@ -717,11 +756,12 @@ angular
     };
 
     /**
-     * @description prepare worklog of specified service request
+     * @description prepare images of specified service request
      */
     $scope.loadImages = function(servicerequest) {
       // filter only with image
-      var worklogs = _.filter(servicerequest.changelogs, function(changelog) {
+      var changelogs = [].concat(servicerequest.changelogs);
+      var worklogs = _.filter(changelogs, function(changelog) {
         return !_.isEmpty(changelog.image);
       });
 
@@ -737,8 +777,12 @@ angular
 
       // format for gallery view
       images = _.map(images, function(image) {
+        var thumb = image.stream;
+        if (!_.startsWith(image.stream, 'http')) {
+          thumb = Utils.asLink(['v1', image.stream]);
+        }
         return {
-          thumb: Utils.asLink(['v1', image.stream]),
+          thumb: thumb,
           description: image.filename,
         };
       });
@@ -747,10 +791,50 @@ angular
       images = _.compact(images);
 
       // update gallery attachments
-      if (!_.isEmpty(images)) {
-        servicerequest.attachments = images;
-      }
-      return images;
+      return ($scope.images = images);
+    };
+
+    /**
+     * @description prepare documents of specified service request
+     */
+    $scope.loadDocuments = function(servicerequest) {
+      // filter only with document
+      var changelogs = [].concat(servicerequest.changelogs);
+      var worklogs = _.filter(changelogs, function(changelog) {
+        return !_.isEmpty(changelog.document);
+      });
+
+      // sort by latest dates
+      worklogs = _.orderBy(worklogs, 'createdAt', 'desc');
+
+      // map to documents
+      var documents = _.compact(_.map(worklogs, 'document'));
+
+      // merge original service request document
+      documents = _.uniqBy(
+        [].concat(servicerequest.document).concat(documents),
+        '_id'
+      );
+      documents = _.compact(documents);
+
+      // format for gallery view
+      documents = _.map(documents, function(doc) {
+        doc.type = _.toUpper(_.last(_.split(doc.filename, '.')));
+        // doc.size = doc.length * 0.001;
+        if (!_.startsWith(doc.stream, 'http')) {
+          doc.stream = Utils.asLink(['v1', doc.stream]);
+        }
+        if (!_.startsWith(doc.download, 'http')) {
+          doc.download = Utils.asLink(['v1', doc.download]);
+        }
+        return doc;
+      });
+
+      // compact documents
+      documents = _.compact(documents);
+
+      // update gallery attachments
+      $scope.documents = documents;
     };
 
     /**

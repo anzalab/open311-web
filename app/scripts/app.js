@@ -32,6 +32,7 @@ angular
     'ui-leaflet',
     'ngNumeraljs',
     'ngFileUpload',
+    'prettyBytes',
   ])
   .config(function(
     $stateProvider,

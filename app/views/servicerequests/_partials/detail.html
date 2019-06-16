@@ -247,15 +247,32 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue map -->
-        <!-- start issue attachments -->
-        <div
-          class="padding b-t"
-          ng-show="servicerequest.attachments && servicerequest.attachments.length > 0"
-        >
+        <!-- start issue images -->
+        <div class="padding b-t" ng-show="images && images.length > 0">
           <h6 class="m-b" title="Issue Images">Images</h6>
-          <ng-gallery images="servicerequest.attachments"></ng-gallery>
+          <ng-gallery images="images"></ng-gallery>
         </div>
-        <!-- end issue attachements -->
+        <!-- end issue images -->
+        <!-- start issue documents -->
+        <div class="padding b-t" ng-show="documents && documents.length > 0">
+          <h6 class="m-b" title="Issue Images">Documents</h6>
+          <div>
+            <a
+              ng-repeat="document in documents"
+              href="{{document.download}}"
+              class="block m-b-xs"
+              target="_blank"
+              title="{{document.filename}}"
+            >
+              <span class="label">{{document.type}}</span>
+              {{document.filename}}
+              <small class="m-l text-muted">
+                {{document.length | prettyBytes}}
+              </small>
+            </a>
+          </div>
+        </div>
+        <!-- end issue documents -->
         <!-- start issue comment -->
         <div
           ng-if="servicerequest.operator"

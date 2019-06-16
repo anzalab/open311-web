@@ -142,8 +142,24 @@
             </span>
           </p>
           <p ng-if="comment.image && comment.image.stream">
-            <a href="{{comment.image.stream}}" target="_blank">
+            <a
+              href="{{comment.image.stream}}"
+              target="_blank"
+              title="{{comment.image.filename}}"
+            >
               <img data-ng-src="{{comment.image.stream}}" height="50px;" />
+            </a>
+          </p>
+          <p ng-if="comment.document && comment.document.download">
+            Attached
+            <a
+              href="{{comment.document.download}}"
+              target="_blank"
+              title="{{comment.document.filename}}"
+            >
+              <span class="text-muted">
+                {{comment.document.filename}}
+              </span>
             </a>
           </p>
           <!-- TODO show attachment changelog -->
