@@ -65,7 +65,7 @@ angular
     ServiceRequest.changelog = function(id, changelog) {
       var url = Utils.asLink(['servicerequests', id, 'changelogs']);
 
-      return $http.patch(url, changelog).then(function(response) {
+      return $http.post(url, changelog).then(function(response) {
         return new ServiceRequest(response.data);
       });
     };
