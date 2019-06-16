@@ -17,6 +17,7 @@ angular
     $uibModal,
     prompt,
     leafletBoundsHelpers,
+    Utils,
     Party,
     ServiceRequest,
     Comment,
@@ -170,42 +171,7 @@ angular
         }
 
         //ensure attachments has correct data for displaying
-        var hasAttachments =
-          servicerequest &&
-          servicerequest.attachments &&
-          servicerequest.attachments.length > 0;
-        if (hasAttachments) {
-          servicerequest.attachments = _.map(
-            servicerequest.attachments,
-            function(attachment) {
-              //obtain media thumb url from base64 encoded image
-              if (!_.isEmpty(attachment.content)) {
-                if (!_.startsWith(attachment.content, 'data:')) {
-                  attachment.thumb = [
-                    'data:',
-                    attachment.mime,
-                    ';base64,',
-                    attachment.content,
-                  ].join('');
-                } else {
-                  attachment.thumb = attachment.content;
-                }
-              }
-
-              //obtain media thumb from url
-              if (
-                !_.isEmpty(attachment.url) &&
-                _.startsWith(attachment.url, 'http')
-              ) {
-                attachment.thumb = attachment.url;
-              }
-
-              attachment.description = attachment.caption;
-
-              return attachment;
-            }
-          );
-        }
+        $scope.loadImages(servicerequest);
 
         //load service request comments
         $scope.loadComment(servicerequest);
@@ -281,6 +247,36 @@ angular
       }
     };
 
+    /**
+     * attach image on issues
+     */
+    $scope.onImage = function(image) {
+      if (image) {
+        var changelog = {
+          //TODO flag internal or public
+          changer: party._id,
+          image: image,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog)
+          .then(function(response) {
+            //TODO notify success
+            $scope.note = {};
+            $scope.select(response);
+            $scope.updated = true;
+          })
+          .catch(function(error) {
+            //TODO notify error
+            // console.log(error);
+          });
+      }
+    };
+
+    /**
+     * change issue priority
+     */
     $scope.changePriority = function(priority) {
       if (priority._id === $scope.servicerequest.priority._id) {
         return;
@@ -307,6 +303,9 @@ angular
       }
     };
 
+    /**
+     * change issue status
+     */
     $scope.changeStatus = function(status) {
       if (status._id === $scope.servicerequest.status._id) {
         return;
@@ -670,7 +669,6 @@ angular
         'desc'
       );
       comments = _.map(comments, function(comment) {
-        console.log(comment);
         comment.color = undefined;
         comment.color = comment.status ? comment.status.color : comment.color;
         comment.color = comment.priority
@@ -713,6 +711,35 @@ angular
 
       // return work logs
       $scope.worklogs = worklogs;
+    };
+
+    /**
+     * @description prepare worklog of specified service request
+     */
+    $scope.loadImages = function(servicerequest) {
+      // filter only with image
+      var worklogs = _.filter(servicerequest.changelogs, function(changelog) {
+        return !_.isEmpty(changelog.image);
+      });
+
+      // sort by latest dates
+      worklogs = _.orderBy(worklogs, 'createdAt', 'desc');
+
+      // map to images
+      var images = _.compact(_.map(worklogs, 'image'));
+
+      // format for gallery view
+      images = _.map(images, function(image) {
+        return {
+          thumb: Utils.asLink(['v1', image.stream]),
+          description: image.filename,
+        };
+      });
+      images = _.compact(images);
+      if (!_.isEmpty(images)) {
+        servicerequest.attachments = images;
+      }
+      return images;
     };
 
     /**
