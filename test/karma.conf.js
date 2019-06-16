@@ -56,6 +56,7 @@ module.exports = function(config) {
       'bower_components/ui-leaflet/dist/ui-leaflet.js',
       'bower_components/numeral/numeral.js',
       'bower_components/angular-numeraljs/dist/angular-numeraljs.js',
+      'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
