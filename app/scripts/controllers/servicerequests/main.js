@@ -728,6 +728,10 @@ angular
       // map to images
       var images = _.compact(_.map(worklogs, 'image'));
 
+      // merge original service request image
+      images = _.uniqBy([].concat(servicerequest.image).concat(images), '_id');
+      images = _.compact(images);
+
       // format for gallery view
       images = _.map(images, function(image) {
         return {
@@ -735,7 +739,11 @@ angular
           description: image.filename,
         };
       });
+
+      // compact images
       images = _.compact(images);
+
+      // update gallery attachments
       if (!_.isEmpty(images)) {
         servicerequest.attachments = images;
       }
