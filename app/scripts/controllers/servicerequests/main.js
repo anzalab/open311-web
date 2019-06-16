@@ -701,7 +701,7 @@ angular
       });
 
       // sort by latest dates
-      worklogs = _.orderBy(worklogs, 'createdAt', 'asc');
+      worklogs = _.orderBy(worklogs, 'createdAt', 'desc');
 
       // ensure unit
       worklogs = _.map(worklogs, function(worklog) {
