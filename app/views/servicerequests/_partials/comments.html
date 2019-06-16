@@ -141,6 +141,11 @@
               Approved
             </span>
           </p>
+          <p ng-if="comment.image && comment.image.stream">
+            <a href="{{comment.image.stream}}" target="_blank">
+              <img data-ng-src="{{comment.image.stream}}" height="50px;" />
+            </a>
+          </p>
           <!-- TODO show attachment changelog -->
         </div>
       </div>

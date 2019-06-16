@@ -684,6 +684,9 @@ angular
             properties: { unit: 'PCS' }, // TODO: fix unit not found
           });
         }
+        if (comment.image) {
+          comment.image.stream = Utils.asLink(['v1', comment.image.stream]);
+        }
         return comment;
       });
       $scope.comments = comments;
