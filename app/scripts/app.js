@@ -31,6 +31,7 @@ angular
     'pickadate',
     'ui-leaflet',
     'ngNumeraljs',
+    'ngFileUpload',
   ])
   .config(function(
     $stateProvider,
