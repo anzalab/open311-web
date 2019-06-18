@@ -76,6 +76,7 @@
           </div>
           <!-- start call details -->
           <div
+            print-hide
             class="p-y b-t"
             ng-show="servicerequest.call.startedAt && servicerequest.call.endedAt"
           >
@@ -104,7 +105,11 @@
           </div>
           <!-- end call details -->
           <!-- start resolve details -->
-          <div class="p-b" ng-class="{'p-y b-t':!servicerequest.call}">
+          <div
+            print-hide
+            class="p-b"
+            ng-class="{'p-y b-t':!servicerequest.call}"
+          >
             <span title="Date Issue Reported">
               <span class="text-muted font-size-12">Reported: </span>
               <span class="font-size-12"
@@ -231,6 +236,7 @@
         <!-- end issue worklog(used material & equipment) -->
         <!-- start issue map -->
         <div
+          print-hide
           class="padding b-t"
           ng-show="servicerequest.longitude && servicerequest.latitude"
         >
@@ -248,13 +254,21 @@
         </div>
         <!-- end issue map -->
         <!-- start issue images -->
-        <div class="padding b-t" ng-show="images && images.length > 0">
+        <div
+          print-hide
+          class="padding b-t"
+          ng-show="images && images.length > 0"
+        >
           <h6 class="m-b" title="Issue Images">Images</h6>
           <ng-gallery images="images"></ng-gallery>
         </div>
         <!-- end issue images -->
         <!-- start issue documents -->
-        <div class="padding b-t" ng-show="documents && documents.length > 0">
+        <div
+          print-hide
+          class="padding b-t"
+          ng-show="documents && documents.length > 0"
+        >
           <h6 class="m-b" title="Issue Images">Documents</h6>
           <div>
             <a
@@ -275,6 +289,7 @@
         <!-- end issue documents -->
         <!-- start issue comment -->
         <div
+          print-hide
           ng-if="servicerequest.operator"
           ng-include="'views/servicerequests/_partials/comments.html'"
         ></div>

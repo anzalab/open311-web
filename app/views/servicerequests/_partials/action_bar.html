@@ -25,7 +25,23 @@
     </a>
   </li>
   <li
-    ng-if="servicerequest.operator && servicerequest.assignee && !servicerequest.completedAt && !servicerequest.resolvedAt"
+    ng-if="servicerequest.operator && servicerequest.assignee && !servicerequest.attendedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:attend"
+      ng-click="onAttended()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Attended"
+    >
+      <span class="nav-text">
+        <i class="icon-crop"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee &&
+    servicerequest.attendedAt && !servicerequest.completedAt && !servicerequest.resolvedAt"
     class="nav-item b-l p-l"
   >
     <a
@@ -40,7 +56,7 @@
     </a>
   </li>
   <li
-    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.completedAt && !servicerequest.verifiedAt && !servicerequest.verifiedAt"
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.attendedAt && servicerequest.completedAt && !servicerequest.verifiedAt && !servicerequest.resolvedAt"
     class="nav-item b-l p-l"
   >
     <a
@@ -55,7 +71,7 @@
     </a>
   </li>
   <li
-    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.completedAt && servicerequest.verifiedAt && !servicerequest.approvedAt && !servicerequest.resolvedAt"
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.attendedAt && servicerequest.completedAt && servicerequest.verifiedAt && !servicerequest.approvedAt && !servicerequest.resolvedAt"
     class="nav-item b-l p-l"
   >
     <a
@@ -65,12 +81,13 @@
       title="Click To Mark Issue as Approve"
     >
       <span class="nav-text">
-        <i class="ti-ink-pen"></i>
+        <!--<i class="ti-ink-pen"></i>-->
+        <i class="ti-new-window"></i>
       </span>
     </a>
   </li>
   <li
-    ng-if="servicerequest.operator && servicerequest.assignee && !servicerequest.resolvedAt"
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.attendedAt && !servicerequest.resolvedAt"
     class="nav-item b-l p-l"
   >
     <a
@@ -84,7 +101,10 @@
       </span>
     </a>
   </li>
-  <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
+  <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
     <a
       ngf-select="onImage($file)"
       class="nav-link text-muted no-border"
@@ -95,7 +115,10 @@
       </span>
     </a>
   </li>
-  <li ng-if="!servicerequest.resolvedAt" class="nav-item b-l p-l">
+  <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
     <a
       ngf-select="onDocument($file)"
       class="nav-link text-muted no-border"
