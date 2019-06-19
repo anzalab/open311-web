@@ -409,6 +409,51 @@ angular
     };
 
     /**
+     * attend issue and signal work in progress
+     */
+    $scope.onAttended = function() {
+      prompt({
+        title: 'Attend Issue',
+        message: 'Are you sure you want to attend this issue?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.attendedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              attendedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message = response.message || 'Issue Marked As Attended';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
      * verify issue and signal work done is ok
      */
     $scope.onVerify = function() {
@@ -703,6 +748,7 @@ angular
           : comment.color;
         comment.color = comment.reopenedAt ? '#F44336' : comment.color;
         comment.color = comment.resolvedAt ? '#4CAF50' : comment.color;
+        comment.color = comment.attendedAt ? '#F9A825' : comment.color;
         comment.color = comment.completedAt ? '#0D47A3' : comment.color;
         comment.color = comment.verifiedAt ? '#EF6C01' : comment.color;
         comment.color = comment.approvedAt ? '#1B5E1F' : comment.color;

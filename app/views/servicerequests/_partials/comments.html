@@ -102,17 +102,17 @@
               Reopened
             </span>
           </p>
-          <p ng-if="comment.completedAt">
+          <p ng-if="comment.approvedAt">
             Change status to
             <span
               class="label rounded success pos-rlt m-l-xs b-a-xs"
-              style="background-color: #0D47A3;"
+              style="background-color: #1B5E1F;"
             >
               <b
                 class="arrow left b-success pull-in"
-                style="border-color: #0D47A3;"
+                style="border-color: #1B5E1F;"
               ></b>
-              Completed
+              Approved
             </span>
           </p>
           <p ng-if="comment.verifiedAt">
@@ -128,17 +128,30 @@
               Verified
             </span>
           </p>
-          <p ng-if="comment.approvedAt">
+          <p ng-if="comment.completedAt">
             Change status to
             <span
               class="label rounded success pos-rlt m-l-xs b-a-xs"
-              style="background-color: #1B5E1F;"
+              style="background-color: #0D47A3;"
             >
               <b
                 class="arrow left b-success pull-in"
-                style="border-color: #1B5E1F;"
+                style="border-color: #0D47A3;"
               ></b>
-              Approved
+              Completed
+            </span>
+          </p>
+          <p ng-if="comment.attendedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #F9A825;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #F9A825;"
+              ></b>
+              Attended
             </span>
           </p>
           <p ng-if="comment.image && comment.image.stream">
