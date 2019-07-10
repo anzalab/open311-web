@@ -28,7 +28,7 @@
                     <label title="Group" class="floating-label">Group</label>
                     <input
                       ng-disabled="!edit"
-                      ng-model="service.group.name"
+                      ng-model="service.group.name.en"
                       ng-required
                       ng-minlength="2"
                       type="text"
@@ -56,7 +56,7 @@
                     >
                     <input
                       ng-disabled="!edit"
-                      ng-model="service.priority.name"
+                      ng-model="service.priority.name.en"
                       ng-required
                       ng-minlength="2"
                       type="text"
@@ -96,20 +96,40 @@
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Name">
-                  <div class="form-group">
-                    <label title="Service Name" class="floating-label"
-                      >Name</label
-                    >
-                    <input
-                      title="Service Name"
-                      ng-disabled="!edit"
-                      ng-model="service.name"
-                      ng-required
-                      ng-minlength="2"
-                      type="text"
-                      name="name"
-                      class="form-control"
-                    />
+                  <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label title="Service Name" class="floating-label"
+                        >Name</label
+                      >
+                      <input
+                        title="Service Name"
+                        ng-disabled="!edit"
+                        ng-model="service.name.en"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label
+                        title="Service Name in Swahili"
+                        class="floating-label"
+                        >Jina</label
+                      >
+                      <input
+                        title="Service Name"
+                        ng-disabled="!edit"
+                        ng-model="service.name.sw"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Level Agreement">
@@ -152,18 +172,34 @@
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Description">
-                  <div class="form-group">
-                    <label class="floating-label">Description</label>
-                    <textarea
-                      title="Service Description"
-                      ng-disabled="!edit"
-                      ng-model="service.description"
-                      msd-elastic
-                      name="about"
-                      class="form-control"
-                      rows="3"
-                    >
-                    </textarea>
+                  <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label class="floating-label">Description</label>
+                      <textarea
+                        title="Service Description"
+                        ng-disabled="!edit"
+                        ng-model="service.description.en"
+                        msd-elastic
+                        name="about"
+                        class="form-control"
+                        rows="3"
+                      >
+                      </textarea>
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label class="floating-label">Maelezo</label>
+                      <textarea
+                        title="Service Description"
+                        ng-disabled="!edit"
+                        ng-model="service.description.sw"
+                        msd-elastic
+                        name="about"
+                        class="form-control"
+                        rows="3"
+                      >
+                      </textarea>
+                    </div>
                   </div>
                 </div>
                 <div class="m-t-lg" title="External Reporting Method Support">

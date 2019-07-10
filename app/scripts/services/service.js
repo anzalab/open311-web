@@ -10,7 +10,7 @@
 angular.module('ng311').factory('Service', function($http, $resource, Utils) {
   //create service resource
   var Service = $resource(
-    Utils.asLink(['services', ':id']),
+    Utils.asLink(['v1', 'services', ':id']),
     {
       id: '@_id',
     },
@@ -33,12 +33,12 @@ angular.module('ng311').factory('Service', function($http, $resource, Utils) {
     });
 
     return $http
-      .get(Utils.asLink('services'), {
+      .get(Utils.asLink(['v1', 'services']), {
         params: params,
       })
       .then(function(response) {
         //map plain service object to resource instances
-        var services = response.data.services.map(function(service) {
+        var services = response.data.data.map(function(service) {
           //create service as a resource instance
           return new Service(service);
         });
