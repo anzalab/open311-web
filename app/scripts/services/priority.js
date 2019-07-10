@@ -10,7 +10,7 @@
 angular.module('ng311').factory('Priority', function($http, $resource, Utils) {
   //create priority resource
   var Priority = $resource(
-    Utils.asLink(['priorities', ':id']),
+    Utils.asLink(['v1', 'priorities', ':id']),
     {
       id: '@_id',
     },
@@ -28,12 +28,12 @@ angular.module('ng311').factory('Priority', function($http, $resource, Utils) {
    */
   Priority.find = function(params) {
     return $http
-      .get(Utils.asLink('priorities'), {
+      .get(Utils.asLink(['v1', 'priorities']), {
         params: params,
       })
       .then(function(response) {
         //map plain priority object to resource instances
-        var priorities = response.data.priorities.map(function(priority) {
+        var priorities = response.data.data.map(function(priority) {
           //create priority as a resource instance
           return new Priority(priority);
         });
