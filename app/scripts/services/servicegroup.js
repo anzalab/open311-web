@@ -12,7 +12,7 @@ angular
   .factory('ServiceGroup', function($http, $resource, Utils) {
     //create servicegroup resource
     var ServiceGroup = $resource(
-      Utils.asLink(['servicegroups', ':id']),
+      Utils.asLink(['v1', 'servicegroups', ':id']),
       {
         id: '@_id',
       },
@@ -30,14 +30,12 @@ angular
      */
     ServiceGroup.find = function(params) {
       return $http
-        .get(Utils.asLink('servicegroups'), {
+        .get(Utils.asLink(['v1', 'servicegroups']), {
           params: params,
         })
         .then(function(response) {
           //map plain servicegroup object to resource instances
-          var servicegroups = response.data.servicegroups.map(function(
-            servicegroup
-          ) {
+          var servicegroups = response.data.data.map(function(servicegroup) {
             //create servicegroup as a resource instance
             return new ServiceGroup(servicegroup);
           });
