@@ -141,11 +141,15 @@ angular
         $scope.mailTo = ServiceRequest.toEmail(servicerequest);
 
         //update markers & map center
-        if (servicerequest.longitude && servicerequest.latitude) {
+        if (servicerequest.location && servicerequest.location.coordinates) {
+          // obtain longitude and latitude
+          var longitude = servicerequest.location.coordinates[0];
+          var latitude = servicerequest.location.coordinates[1];
+
           //prepare bounds
           var bounds = leafletBoundsHelpers.createBoundsFromArray([
-            [servicerequest.latitude + 0.029, servicerequest.longitude],
-            [servicerequest.latitude - 0.029, servicerequest.longitude],
+            [latitude + 0.029, longitude],
+            [latitude - 0.029, longitude],
           ]);
 
           //set marker point
@@ -153,15 +157,15 @@ angular
             bounds: bounds,
             markers: {
               servicerequest: {
-                lat: servicerequest.latitude,
-                lng: servicerequest.longitude,
+                lat: latitude,
+                lng: longitude,
                 focus: true,
                 draggable: false,
               },
             },
             center: {
-              lat: servicerequest.latitude,
-              lng: servicerequest.longitude,
+              lat: latitude,
+              lng: longitude,
               zoom: 1,
             },
             defaults: {
