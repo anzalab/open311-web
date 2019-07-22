@@ -36,7 +36,7 @@
   <!-- end profile summary and service request pipelines -->
 
   <!-- start overall and pipeline summary -->
-  <div class="row no-gutter">
+  <div class="row no-gutter" style="display:none">
     <div class="col-xs-12 col-sm-6 col-md-6">
       <!-- start of area overall summary -->
       <ng-include
@@ -46,7 +46,7 @@
       </ng-include>
       <!-- end of area overall summary -->
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6" style="display:none">
       <!-- start area service pipeline -->
       <ng-include
         ng-if="performances.pipelines && performances.pipelines.length > 0"
@@ -59,7 +59,7 @@
 
   <!-- start overall and pipeline summary -->
   <div class="row no-gutter">
-    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6" style="display:none">
       <!-- start of area overall summary -->
       <ng-include
         ng-if="performances.attendTime"
@@ -68,7 +68,7 @@
       </ng-include>
       <!-- end of area overall summary -->
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6" style="display:none">
       <!-- start area service pipeline -->
       <ng-include
         ng-if="performances.resolveTime"
@@ -82,6 +82,7 @@
   <ng-include
     ng-if="performances.breakdown"
     src="'views/auth/_partials/service_requests_breakdown_summary.html'"
+    style="display:none"
   >
   </ng-include>
 
@@ -89,6 +90,7 @@
   <ng-include
     ng-if="performances.leaderboard"
     src="'views/auth/_partials/service_request_leaderboard.html'"
+    style="display:none"
   ></ng-include>
   <!-- end service request leader board -->
 </div>
