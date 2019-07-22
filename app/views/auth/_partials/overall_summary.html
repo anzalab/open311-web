@@ -1,0 +1,134 @@
+<!-- start overall area  summary -->
+<div class="padding m-t-md">
+  <!-- start report box -->
+  <div class="box b-a p-l-0">
+    <!-- start header -->
+    <div class="box-header b-b p-t-md p-b-md" title="Overview Summary">
+      <h3>Overview Summary</h3>
+      <!-- <small>Sub title goes here with small font</small> -->
+    </div>
+    <!-- end header -->
+
+    <!-- start toolbox -->
+    <div class="box-tool">
+      <!-- start time filters -->
+      <ul class="nav">
+        <!-- start export -->
+        <li class="nav-item inline">
+          <a
+            title="Click To Export"
+            class="btn btn-xs rounded white"
+            aria-expanded="false"
+            ng-csv="export('services')"
+            csv-header="exports.services.headers"
+            filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+          >
+            Export
+          </a>
+        </li>
+        <!-- end export -->
+      </ul>
+      <!-- end time filters -->
+    </div>
+    <!-- end toolbox -->
+
+    <!-- start body -->
+    <div>
+      <!-- start overall stats -->
+
+      <!-- start operator overall performance summary -->
+      <div class="row no-gutter">
+        <!-- start total -->
+        <div
+          class="col-xs-6 col-sm-3 b-r b-b"
+          title="Total Service Requests Received"
+        >
+          <div class="p-a-sm">
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{performances.overall.count | number:0}}
+              </h4>
+              <p class="text-muted m-b-md">Total</p>
+            </div>
+          </div>
+        </div>
+        <!-- end total -->
+
+        <!-- start pending -->
+        <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
+          <div class="p-a-sm">
+            <!-- <div>
+              <span class="pull-right text-xs"
+                ng-class="performances.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'">{{performances.overall.percentagePending | number:2}}%</span>
+            </div> -->
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{performances.overall.pending | number:0}}
+              </h4>
+              <p class="text-muted m-b-md">Pending</p>
+            </div>
+          </div>
+        </div>
+        <!-- end pending -->
+
+        <!-- start resolved -->
+        <div
+          class="col-xs-6 col-sm-2 b-r b-b"
+          title="Resolved Service Requests"
+        >
+          <div class="p-a-sm">
+            <!-- <div>
+              <span class="pull-right text-xs"
+                ng-class="performances.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'">{{performances.overall.percentageResolved | number:2}}%</span>
+            </div> -->
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{performances.overall.resolved | number:0}}
+              </h4>
+              <p class="text-muted m-b-md">Resolved</p>
+            </div>
+          </div>
+        </div>
+        <!-- end resolved -->
+
+        <!-- start late -->
+        <div
+          class="col-xs-6 col-sm-2 b-r b-b"
+          title="Late(Past SLA Time) Service Requests"
+        >
+          <div class="p-a-sm">
+            <!-- <div>
+              <span class="pull-right text-xs"
+                ng-class="performances.overall.percentageLate > 0 ? 'text-danger' : 'text-success'">{{performances.overall.percentageLate | number:2}}%</span>
+            </div> -->
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{performances.overall.late | number:0}}
+              </h4>
+              <p class="text-muted m-b-md">Late</p>
+            </div>
+          </div>
+        </div>
+        <!-- end late  -->
+
+        <!-- start escalated -->
+        <div class="col-xs-6 col-sm-3 b-b" title="Overall Target to be reached">
+          <div class="p-a-sm">
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{performances.overall.target | number:0}}
+              </h4>
+              <p class="text-muted m-b-md">Target</p>
+            </div>
+          </div>
+        </div>
+        <!-- end escalated  -->
+      </div>
+      <!-- end operator overall performance summary -->
+      <!-- end overall stats -->
+    </div>
+    <!-- end body -->
+  </div>
+  <!-- end report box -->
+</div>
+<!-- end overall area summary -->

@@ -1,56 +1,88 @@
 <!-- start jurisdictions list -->
 <div class="row-col lt">
-    <!-- start jurisdictions list search -->
-    <div class="p-a b-b list-search">
-        <form>
-            <div class="input-group">
-                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Jurisdictions ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm no-shadow" type="button">
-                        <i class="ti-search"></i>
-                    </button>
-                </span>
+  <!-- start jurisdictions list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Jurisdictions ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end jurisdiction list search -->
+  <!-- start jurisdiction listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(jurisdiction)"
+            class="list-item list-item-padded"
+            ng-repeat="jurisdiction in jurisdictions"
+            title="{{jurisdiction.about}}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Jurisdiction Code"
+                  data="{{jurisdiction.code}}"
+                  height="60"
+                  width="60"
+                  color="{{jurisdiction.color}}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
             </div>
-        </form>
-    </div>
-    <!-- end jurisdiction list search -->
-    <!-- start jurisdiction listing -->
-    <div class="row-row">
-        <div class="row-body scrollable hover">
-            <div class="row-inner">
-                <div class="list" data-ui-list="info">
-                    <div ng-click="select(jurisdiction)" class="list-item list-item-padded" ng-repeat="jurisdiction in jurisdictions" title="{{jurisdiction.about}}">
-                        <div class="list-left">
-                            <span class="w-40 avatar circle">
-                                <letter-avatar title="Jurisdiction Code" 
-                                data="{{jurisdiction.code}}" 
-                                    height="60" width="60" color="{{jurisdiction.color}}" shape="round">
-                                </letter-avatar>
-                            </span>
-                        </div>
-                        <div class="list-body">
-                            <span title="Jurisdiction Phone Number" class="pull-right text-xs text-muted">
-                                {{jurisdiction.phone}}
-                            </span>
-                            <div class="item-title">
-                                <span title="Jurisdiction Name" class="_500">{{jurisdiction.name}}</span>
-                            </div>
-                            <p title="Jurisdiction Details" class="block text-muted text-ellipsis">
-                                {{jurisdiction.about}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="list-body">
+              <span
+                title="Jurisdiction Phone Number"
+                class="pull-right text-xs text-muted"
+              >
+                {{jurisdiction.phone}}
+              </span>
+              <div class="item-title">
+                <span title="Jurisdiction Name" class="_500"
+                  >{{jurisdiction.name}}</span
+                >
+              </div>
+              <p
+                title="Jurisdiction Details"
+                class="block text-muted text-ellipsis"
+              >
+                {{jurisdiction.about}}
+              </p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- end jurisdiction listing -->
-    <!-- start pagination -->
-    <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" template-url="views/_partials/list_pager.html">
-        </div>
-        <span class="text-sm text-muted">Total: {{total}}</span>
-    </div>
-    <!-- end pagination -->
+  </div>
+  <!-- end jurisdiction listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end pagination -->
 </div>
 <!-- end jurisdictions list -->

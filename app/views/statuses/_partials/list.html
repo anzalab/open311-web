@@ -1,56 +1,83 @@
 <!-- start statuses list -->
 <div class="row-col lt">
-    <!-- start statuses list search -->
-    <div class="p-a b-b list-search">
-        <form>
-            <div class="input-group">
-                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Statuses ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm no-shadow" type="button">
-                        <i class="ti-search"></i>
-                    </button>
-                </span>
+  <!-- start statuses list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Statuses ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end status list search -->
+  <!-- start status listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(status)"
+            class="list-item list-item-padded"
+            ng-repeat="status in statuses"
+            title="{{ status.about }}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Status Visual Color"
+                  data="{{ status.name.en }}"
+                  height="60"
+                  width="60"
+                  color="{{ status.color }}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
             </div>
-        </form>
-    </div>
-    <!-- end status list search -->
-    <!-- start status listing -->
-    <div class="row-row">
-        <div class="row-body scrollable hover">
-            <div class="row-inner">
-                <div class="list" data-ui-list="info">
-                    <div ng-click="select(status)" class="list-item list-item-padded" ng-repeat="status in statuses" title="{{status.about}}">
-                        <div class="list-left">
-                            <span class="w-40 avatar circle">
-                                <letter-avatar title="Status Visual Color" 
-                                data="{{status.name}}" 
-                                    height="60" width="60" color="{{status.color}}" shape="round">
-                                </letter-avatar>
-                            </span>
-                        </div>
-                        <div class="list-body">
-                            <span title="Status Weight" class="pull-right text-xs text-muted">
-                                {{status.weight}}
-                            </span>
-                            <div class="item-title" title="Status Name">
-                                <span class="_500">{{status.name}}</span>
-                            </div>
-                            <p title="Status Description" class="block text-muted text-ellipsis">
-                                {{status.name}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="list-body">
+              <span title="Status Weight" class="pull-right text-xs text-muted">
+                {{ status.weight }}
+              </span>
+              <div class="item-title" title="Status Name">
+                <span class="_500">{{ status.name.en }}</span>
+              </div>
+              <p
+                title="Status Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{ status.name.en }}
+              </p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- end status listing -->
-    <!-- start pagination -->
-    <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" template-url="views/_partials/list_pager.html">
-        </div>
-        <span class="text-sm text-muted">Total: {{total}}</span>
-    </div>
-    <!-- end pagination -->
+  </div>
+  <!-- end status listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{ total }}</span>
+  </div>
+  <!-- end pagination -->
 </div>
 <!-- end statuses list -->

@@ -9,10 +9,7 @@
  */
 angular
   .module('ng311')
-  .controller('PartyIndexCtrl', function(
-    $rootScope, $scope, $state, Party
-  ) {
-
+  .controller('PartyIndexCtrl', function($rootScope, $scope, $state, Party) {
     //parties in the scope
     $scope.spin = false;
     $scope.parties = [];
@@ -32,19 +29,17 @@ angular
       }
     };
 
-
     /**
      * set current service request
      */
     $scope.select = function(party) {
-
       //sort comments in desc order
       if (party && party._id) {
-
         //prepare displayable roles
-        party._roles = party.roles && !_.isEmpty(party.roles) ?
-          _.join(_.map(party.roles, 'name'), ', ') :
-          'N/A';
+        party._roles =
+          party.roles && !_.isEmpty(party.roles)
+            ? _.join(_.map(party.roles, 'name'), ', ')
+            : 'N/A';
 
         //deduce assigned roles
         party._assigned = _.map(party.roles, '_id');
@@ -57,11 +52,8 @@ angular
         $rootScope.$broadcast('party:selected', party);
       }
 
-
       $scope.create = false;
-
     };
-
 
     /**
      * @description load parties
@@ -74,33 +66,33 @@ angular
         page: $scope.page,
         limit: $scope.limit,
         sort: {
-          name: 1
+          name: 1,
         },
-        query: {},
-        q: $scope.q
-      }).then(function(response) {
-        //update scope with parties when done loading
-        $scope.parties = response.parties;
-        if ($scope.updated) {
-          $scope.updated = false;
-        } else {
-          $scope.select(_.first($scope.parties));
-        }
-        $scope.total = response.total;
-        $scope.spin = false;
-      }).catch(function(error) {
-        $scope.spin = false;
-      });
+        filter: {},
+        q: $scope.q,
+      })
+        .then(function(response) {
+          //update scope with parties when done loading
+          $scope.parties = response.parties;
+          if ($scope.updated) {
+            $scope.updated = false;
+          } else {
+            $scope.select(_.first($scope.parties));
+          }
+          $scope.total = response.total;
+          $scope.spin = false;
+        })
+        .catch(function(error) {
+          $scope.spin = false;
+        });
     };
-
 
     //check whether parties will paginate
     $scope.willPaginate = function() {
       var willPaginate =
-        ($scope.parties && $scope.total && $scope.total > $scope.limit);
+        $scope.parties && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
-
 
     //pre load parties on state activation
     $scope.find();
@@ -109,5 +101,4 @@ angular
     $rootScope.$on('app:parties:reload', function() {
       $scope.find();
     });
-
   });

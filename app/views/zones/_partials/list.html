@@ -1,0 +1,83 @@
+<!-- start zones list -->
+<div class="row-col lt">
+  <!-- start zones list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Zones ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end zone list search -->
+  <!-- start zone listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(zone)"
+            class="list-item list-item-padded"
+            ng-repeat="zone in zones"
+            title="{{zone.description.en}}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Zone Code"
+                  data="{{zone.code}}"
+                  height="60"
+                  width="60"
+                  color="{{zone.color}}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
+            </div>
+            <div class="list-body">
+              <span title="Zone Code" class="pull-right text-xs text-muted">
+                {{zone.code}}
+              </span>
+              <div class="item-title">
+                <span title="Zone Name" class="_500">{{zone.name.en}}</span>
+              </div>
+              <p
+                title="Zone Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{zone.description.en}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end zone listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end pagination -->
+</div>
+<!-- end zones list -->

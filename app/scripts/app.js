@@ -30,14 +30,18 @@ angular
     'focus-if',
     'pickadate',
     'ui-leaflet',
-    'ngNumeraljs'
+    'ngNumeraljs',
+    'ngFileUpload',
+    'prettyBytes',
   ])
-  .config(function (
-    $stateProvider, $urlRouterProvider,
-    $authProvider, cfpLoadingBarProvider,
-    $numeraljsConfigProvider, ENV
+  .config(function(
+    $stateProvider,
+    $urlRouterProvider,
+    $authProvider,
+    cfpLoadingBarProvider,
+    $numeraljsConfigProvider,
+    ENV
   ) {
-
     //configure ngAA
     //see https://github.com/lykmapipo/ngAA
     $authProvider.afterSigninRedirectTo = 'app.servicerequests.list';
@@ -59,7 +63,7 @@ angular
 
     //configure numeraljs formating
     $numeraljsConfigProvider.register('locale', ENV.settings.locale, {
-      abbreviations: ENV.settings.abbreviations
+      abbreviations: ENV.settings.abbreviations,
     });
 
     //switch locale to sw
@@ -75,21 +79,64 @@ angular
         templateUrl: 'views/app.html',
         controller: 'AppCtrl',
         resolve: {
-          party: function ($auth) {
+          party: function($auth) {
             return $auth.getProfile();
           },
-          token: function ($q, ngAAToken) {
+          token: function($q, ngAAToken) {
             return $q.resolve(ngAAToken.getToken());
-          }
-        }
+          },
+        },
       })
-      .state('app.comparison', { //TODO refactor to reports states
+      .state('app.manage', {
+        abstract: true,
+        templateUrl: 'views/manage/main.html',
+      })
+      .state('app.overviews', {
+        url: '/overviews',
+        templateUrl: 'views/dashboards/overviews/index.html',
+        controller: 'DashboardOverviewCtrl',
+        data: {
+          authenticated: true,
+        },
+        resolve: {
+          endpoints: function(Summary) {
+            return Summary.endpoints({
+              filter: {
+                deletedAt: {
+                  $eq: null,
+                },
+              },
+            });
+          },
+        },
+      })
+      .state('app.standings', {
+        url: '/standings',
+        templateUrl: 'views/dashboards/standings.html',
+        controller: 'DashboardStandingCtrl',
+        data: {
+          authenticated: true,
+        },
+        resolve: {
+          endpoints: function(Summary) {
+            return Summary.endpoints({
+              filter: {
+                deletedAt: {
+                  $eq: null,
+                },
+              },
+            });
+          },
+        },
+      })
+      .state('app.comparison', {
+        //TODO refactor to reports states
         url: '/comparison',
         templateUrl: 'views/dashboards/comparison.html',
         controller: 'DashboardComparisonCtrl',
         data: {
-          authenticated: true
-        }
+          authenticated: true,
+        },
       })
       .state('app.performances', {
         url: '/performances',
@@ -98,96 +145,76 @@ angular
         params: {
           jurisdiction: null,
           startedAt: null,
-          endedAt: null
+          endedAt: null,
         },
         data: {
-          authenticated: true
+          authenticated: true,
         },
         resolve: {
-          endpoints: function (Summary) {
+          endpoints: function(Summary) {
             return Summary.endpoints({
-              query: {
+              filter: {
                 deletedAt: {
-                  $eq: null
-                }
-              }
+                  $eq: null,
+                },
+              },
             });
-          }
-        }
+          },
+        },
       })
-      .state('app.manage', {
-        abstract: true,
-        templateUrl: 'views/manage/main.html'
-      })
-      .state('app.overviews', {
-        url: '/overviews',
-        templateUrl: 'views/dashboards/overviews/index.html',
-        controller: 'DashboardOverviewCtrl',
+      .state('app.operations', {
+        url: '/operations',
+        templateUrl: 'views/dashboards/operation/index.html',
+        controller: 'DashboardOperationCtrl',
+        params: {
+          jurisdiction: null,
+          startedAt: null,
+          endedAt: null,
+        },
         data: {
-          authenticated: true
+          authenticated: true,
         },
         resolve: {
-          endpoints: function (Summary) {
+          endpoints: function(Summary) {
             return Summary.endpoints({
-              query: {
+              filter: {
                 deletedAt: {
-                  $eq: null
-                }
-              }
+                  $eq: null,
+                },
+              },
             });
-          }
-        }
+          },
+        },
       })
-      .state('app.standings', {
-        url: '/standings',
-        templateUrl: 'views/dashboards/standings.html',
-        controller: 'DashboardStandingCtrl',
-        data: {
-          authenticated: true
-        },
-        resolve: {
-          endpoints: function (Summary) {
-            return Summary.endpoints({
-              query: {
-                deletedAt: {
-                  $eq: null
-                }
-              }
-            });
-          }
-        }
-      }).state('app.exports', {
+      .state('app.exports', {
         url: '/exports',
         templateUrl: 'views/dashboards/exports.html',
         controller: 'DashboardExportCtrl',
         data: {
-          authenticated: true
+          authenticated: true,
         },
         resolve: {
-          endpoints: function (Summary) {
+          endpoints: function(Summary) {
             return Summary.endpoints({
-              query: {
+              filter: {
                 deletedAt: {
-                  $eq: null
-                }
-              }
+                  $eq: null,
+                },
+              },
             });
-          }
-        }
+          },
+        },
       });
-
   })
-  .run(function ($rootScope, ngNotify, ENV) {
-
+  .run(function($rootScope, ngNotify, ENV) {
     //expose environment to $rootScope
     $rootScope.ENV = ENV;
 
     //configure ngNotify
     ngNotify.config({
       position: 'top',
-      duration: 5000,
+      duration: 2000,
       button: true,
-      theme: 'pastel'
+      theme: 'pastel',
     });
-
   });

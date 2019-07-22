@@ -9,11 +9,18 @@
  */
 angular
   .module('ng311')
-  .controller('DashboardExportCtrl', function (
-    $window, $location, $rootScope, $scope, $state, Utils, Summary, endpoints,
-    token, party
+  .controller('DashboardExportCtrl', function(
+    $window,
+    $location,
+    $rootScope,
+    $scope,
+    $state,
+    Utils,
+    Summary,
+    endpoints,
+    token,
+    party
   ) {
-
     //initialize scope attributes
     $scope.maxDate = new Date();
 
@@ -27,28 +34,32 @@ angular
 
     //bind filters
     var defaultFilters = {
-      startedAt: moment().utc().startOf('date').toDate(),
-      endedAt: moment().utc().endOf('date').toDate(),
+      startedAt: moment()
+        .utc()
+        .startOf('date')
+        .toDate(),
+      endedAt: moment()
+        .utc()
+        .endOf('date')
+        .toDate(),
       statuses: [],
       priorities: [],
       servicegroups: [],
       jurisdictions: [],
-      workspaces: []
+      workspaces: [],
     };
 
     $scope.filters = defaultFilters;
-
 
     /**
      * Filter overview reports based on on current selected filters
      * @param {Boolean} [reset] whether to clear and reset filter
      */
-    $scope.export = function (reset) {
+    $scope.export = function(reset) {
       if (reset) {
         $scope.filters = defaultFilters;
         return;
       } else {
-
         //prepare query
         $scope.params = Summary.prepareQuery($scope.filters);
 
@@ -57,22 +68,20 @@ angular
       }
     };
 
-
     /**
      * Filter service based on selected service group
      */
-    $scope.filterServices = function () {
+    $scope.filterServices = function() {
       var filterHasServiceGroups =
-        ($scope.filters.servicegroups && $scope.filters.servicegroups.length >
-          0);
+        $scope.filters.servicegroups && $scope.filters.servicegroups.length > 0;
       //pick only service of selected group
       if (filterHasServiceGroups) {
         //filter services based on service group(s)
-        $scope.services =
-          _.filter(endpoints.services.services, function (service) {
-            return _.includes($scope.filters.servicegroups, service.group
-              ._id);
-          });
+        $scope.services = _.filter(endpoints.services.services, function(
+          service
+        ) {
+          return _.includes($scope.filters.servicegroups, service.group._id);
+        });
       }
       //use all services
       else {
@@ -80,17 +89,13 @@ angular
       }
     };
 
-
-
     /**
      * download service requests
      */
-    $scope.download = function () {
+    $scope.download = function() {
       var link = Utils.asLink(['reports', 'exports']);
-      link = link + '?query=' + angular.toJson($scope.params);
+      link = link + '?filter=' + angular.toJson($scope.params);
       link = link + '&token=' + token;
       $window.open(link, '_blank');
     };
-
-
   });

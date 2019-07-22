@@ -1,0 +1,99 @@
+<!-- start zone details -->
+<div class="row-col">
+  <div class="white b-b bg">
+    <!-- start zone detail action bar -->
+    <div
+      ng-include="'views/zones/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end zone details action bar -->
+  </div>
+  <!-- start zone body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="zoneForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Zone Code">
+                  <div class="form-group">
+                    <label title="Zone Code" class="floating-label">Code</label>
+                    <input
+                      title="Zone Code"
+                      ng-disabled="!edit"
+                      ng-model="zone.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Zone Name">
+                  <div class="form-group">
+                    <label title="Zone Name" class="floating-label">Name</label>
+                    <input
+                      title="Zone Name"
+                      ng-disabled="!edit"
+                      ng-model="zone.name.en"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Zone Color">
+                  <color-picker ng-model="zone.color"> </color-picker>
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Zone Color" class="floating-label"
+                        >Zone Color(HEX)</label
+                      >
+                      <input
+                        title="Zone Color"
+                        ng-disabled="!edit"
+                        ng-model="zone.color"
+                        ng-required
+                        ng-minlength="1"
+                        type="text"
+                        name="color"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Zone Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      title="Zone Description"
+                      ng-disabled="!edit"
+                      ng-model="zone.description.en"
+                      msd-elastic
+                      name="description"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end zone body -->
+</div>
+<!-- end zone details -->

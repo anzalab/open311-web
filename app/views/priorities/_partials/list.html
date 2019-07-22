@@ -1,56 +1,86 @@
 <!-- start priorities list -->
 <div class="row-col lt">
-    <!-- start priorities list search -->
-    <div class="p-a b-b list-search">
-        <form>
-            <div class="input-group">
-                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Priorities ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm no-shadow" type="button">
-                        <i class="ti-search"></i>
-                    </button>
-                </span>
+  <!-- start priorities list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Priorities ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end priority list search -->
+  <!-- start priority listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(priority)"
+            class="list-item list-item-padded"
+            ng-repeat="priority in priorities"
+            title="{{ priority.about }}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Priority Visual Color"
+                  data="{{ priority.name.en }}"
+                  height="60"
+                  width="60"
+                  color="{{ priority.color }}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
             </div>
-        </form>
-    </div>
-    <!-- end priority list search -->
-    <!-- start priority listing -->
-    <div class="row-row">
-        <div class="row-body scrollable hover">
-            <div class="row-inner">
-                <div class="list" data-ui-list="info">
-                    <div ng-click="select(priority)" class="list-item list-item-padded" ng-repeat="priority in priorities" title="{{priority.about}}">
-                        <div class="list-left">
-                            <span class="w-40 avatar circle">
-                                <letter-avatar title="Priority Visual Color" 
-                                data="{{priority.name}}" 
-                                    height="60" width="60" color="{{priority.color}}" shape="round">
-                                </letter-avatar>
-                            </span>
-                        </div>
-                        <div class="list-body">
-                            <span title="Priority Weight" class="pull-right text-xs text-muted">
-                                {{priority.weight}}
-                            </span>
-                            <div class="item-title" title="Priority Name">
-                                <span class="_500">{{priority.name}}</span>
-                            </div>
-                            <p title="Priority Description" class="block text-muted text-ellipsis">
-                                {{priority.name}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="list-body">
+              <span
+                title="Priority Weight"
+                class="pull-right text-xs text-muted"
+              >
+                {{ priority.weight }}
+              </span>
+              <div class="item-title" title="Priority Name">
+                <span class="_500">{{ priority.name.en }}</span>
+              </div>
+              <p
+                title="Priority Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{ priority.name.en }}
+              </p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- end priority listing -->
-    <!-- start pagination -->
-    <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" template-url="views/_partials/list_pager.html">
-        </div>
-        <span class="text-sm text-muted">Total: {{total}}</span>
-    </div>
-    <!-- end pagination -->
+  </div>
+  <!-- end priority listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{ total }}</span>
+  </div>
+  <!-- end pagination -->
 </div>
 <!-- end priorities list -->

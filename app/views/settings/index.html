@@ -1,34 +1,52 @@
 <!-- begin settings layout -->
 <!--start header-->
 <div class="container settings">
-    <div class="row">
-        <div class="col-md-offset-1">
-            <div class="page-header margin-top-30 padding-left-20">
-                <div class="page-header-actions">
-                    <button ng-click="onEdit()" ng-hide="edit" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Click to edit settings">
-                        <i class="icon icon-pencil" aria-hidden="true"></i>
-                    </button>
-                    <button ng-click="save()" ng-show="edit" type="button" class="btn btn-primary btn-md empty-btn" title="Click to save settings">
-                        Save
-                    </button>
-                    <button ng-click="onClose()" ng-show="edit" type="button" class="btn btn-outline btn-default btn-md empty-btn" title="Cancel settings edits">
-                        <i class="icon ti-close" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-            <!--end header-->
-            <!--start page content-->
-            <div class="page-content page-content-table margin-top-20">
-                <!--start settings details-->
-                <div class="container">
-                    <div class="row">
-                        <div ng-include="'views/settings/_partials/settings.html'"></div>
-                    </div>
-                </div>
-                <!--end settings details-->
-            </div>
+  <div class="row">
+    <div class="col-md-offset-1">
+      <div class="page-header margin-top-30 padding-left-20">
+        <div class="page-header-actions">
+          <button
+            ng-click="onEdit()"
+            ng-hide="edit"
+            type="button"
+            class="btn btn-outline btn-default btn-md empty-btn"
+            title="Click to edit settings"
+          >
+            <i class="icon icon-pencil" aria-hidden="true"></i>
+          </button>
+          <button
+            ng-click="save()"
+            ng-show="edit"
+            type="button"
+            class="btn btn-primary btn-md empty-btn"
+            title="Click to save settings"
+          >
+            Save
+          </button>
+          <button
+            ng-click="onClose()"
+            ng-show="edit"
+            type="button"
+            class="btn btn-outline btn-default btn-md empty-btn"
+            title="Cancel settings edits"
+          >
+            <i class="icon ti-close" aria-hidden="true"></i>
+          </button>
         </div>
+      </div>
+      <!--end header-->
+      <!--start page content-->
+      <div class="page-content page-content-table margin-top-20">
+        <!--start settings details-->
+        <div class="container">
+          <div class="row">
+            <div ng-include="'views/settings/_partials/settings.html'"></div>
+          </div>
+        </div>
+        <!--end settings details-->
+      </div>
     </div>
+  </div>
 </div>
 <!--end page content-->
 <!-- end settings layout -->

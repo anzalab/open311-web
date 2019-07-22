@@ -9,70 +9,77 @@
  */
 angular
   .module('ng311')
-  .factory('ServiceRequest', function (
-    $http, $resource, $filter, Utils, Mailto
+  .factory('ServiceRequest', function(
+    $http,
+    $resource,
+    $filter,
+    Utils,
+    Mailto,
+    Upload
   ) {
-
     //create servicerequest resource
-    var ServiceRequest = $resource(Utils.asLink(['servicerequests', ':id']), {
-      id: '@_id'
-    }, {
+    var ServiceRequest = $resource(
+      Utils.asLink(['servicerequests', ':id']),
+      {
+        id: '@_id',
+      },
+      {
         update: {
-          method: 'PUT'
+          method: 'PUT',
         },
-      });
-
+      }
+    );
 
     /**
      * @description find servicerequest with pagination
      * @param  {[type]} params [description]
      * @return {[type]}        [description]
      */
-    ServiceRequest.find = function (params) {
-      return $http.get(Utils.asLink('servicerequests'), {
-        params: params
-      })
-        .then(function (response) {
-
+    ServiceRequest.find = function(params) {
+      return $http
+        .get(Utils.asLink('servicerequests'), {
+          params: params,
+        })
+        .then(function(response) {
           //map plain servicerequest object to resource instances
-          var servicerequests = response.data.servicerequests.map(
-            function (servicerequest) {
-              //create servicerequest as a resource instance
-              return new ServiceRequest(servicerequest);
-            });
+          var servicerequests = response.data.servicerequests.map(function(
+            servicerequest
+          ) {
+            //create servicerequest as a resource instance
+            return new ServiceRequest(servicerequest);
+          });
 
           //return paginated response
           return {
             servicerequests: servicerequests,
             total: response.data.count,
-            pages: response.data.pages
+            pages: response.data.pages,
           };
         });
     };
-
 
     /**
      * @description patch service request with specific changes
      * @param  {[type]} params [description]
      * @return {[type]}        [description]
      */
-    ServiceRequest.changelog = function (id, changelog) {
-
+    ServiceRequest.changelog = function(id, changelog) {
       var url = Utils.asLink(['servicerequests', id, 'changelogs']);
 
-      return $http.patch(url, changelog).then(function (response) {
+      return Upload.upload({
+        url: url,
+        data: changelog,
+      }).then(function(response) {
         return new ServiceRequest(response.data);
       });
-
     };
-
 
     /**
      * @description convert a report to email
      * @param  {Object} report current report in the scope
      * @return {String} valid mailto string to bind into href
      */
-    ServiceRequest.toEmail = function (issue) {
+    ServiceRequest.toEmail = function(issue) {
       /*jshint camelcase:false */
 
       //prepare complaint address
@@ -93,7 +100,7 @@ angular
       try {
         time = $filter('date')(issue.createdAt, 'hh:mm:ss a');
         date = $filter('date')(issue.createdAt, 'dd/MM/yyyy');
-      } catch (error) { }
+      } catch (error) {}
 
       //prepare e-mail body
       var body = [
@@ -127,97 +134,107 @@ angular
         'Complaint Details: ',
         issue.description || 'N/A',
         '\n\n',
-        'Regards.'
+        'Regards.',
       ].join('');
 
       //add internal notes
-      var changelogs =
-        _.orderBy([].concat(issue.changelogs), 'createdAt', 'desc');
-      var notes = _.map(changelogs, function (changelog) {
+      var changelogs = _.orderBy(
+        [].concat(issue.changelogs),
+        'createdAt',
+        'desc'
+      );
+      var notes = _.map(changelogs, function(changelog) {
         var note = [];
 
         //handle changelog
         if (changelog.comment) {
-          note = note.concat([
-            changelog.changer.name,
-            ' on ',
-            $filter('date')(changelog.createdAt,
-              'dd MMM yyyy hh:mm:ss a'),
-            ': ',
-            'Write: ',
-            changelog.comment,
-          ].join(''));
+          note = note.concat(
+            [
+              changelog.changer.name,
+              ' on ',
+              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
+              ': ',
+              'Write: ',
+              changelog.comment,
+            ].join('')
+          );
         }
 
         //handle status
         if (changelog.status) {
-          note = note.concat([
-            changelog.changer.name,
-            ' on ',
-            $filter('date')(changelog.createdAt,
-              'dd MMM yyyy hh:mm:ss a'),
-            ': ',
-            'Change status to ',
-            changelog.status.name,
-          ].join(''));
+          note = note.concat(
+            [
+              changelog.changer.name,
+              ' on ',
+              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
+              ': ',
+              'Change status to ',
+              changelog.status.name,
+            ].join('')
+          );
         }
 
         //handle priority
         if (changelog.priority) {
-          note = note.concat([
-            changelog.changer.name,
-            ' on ',
-            $filter('date')(changelog.createdAt,
-              'dd MMM yyyy hh:mm:ss a'),
-            ': ',
-            'Change priority to ',
-            changelog.priority.name,
-          ].join(''));
+          note = note.concat(
+            [
+              changelog.changer.name,
+              ' on ',
+              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
+              ': ',
+              'Change priority to ',
+              changelog.priority.name,
+            ].join('')
+          );
         }
 
         //handle assignee
         if (changelog.assignee) {
-          note = note.concat([
-            changelog.changer.name,
-            ' on ',
-            $filter('date')(changelog.createdAt,
-              'dd MMM yyyy hh:mm:ss a'),
-            ': ',
-            'Assignee to ',
-            changelog.assignee.name,
-          ].join(''));
+          note = note.concat(
+            [
+              changelog.changer.name,
+              ' on ',
+              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
+              ': ',
+              'Assignee to ',
+              changelog.assignee.name,
+            ].join('')
+          );
         }
 
         //handle resolved
         if (changelog.resolvedAt) {
-          note = note.concat([
-            changelog.changer.name,
-            ' on ',
-            $filter('date')(changelog.createdAt,
-              'dd MMM yyyy hh:mm:ss a'),
-            ': ',
-            'Change status to ',
-            'Resolved',
-          ].join(''));
+          note = note.concat(
+            [
+              changelog.changer.name,
+              ' on ',
+              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
+              ': ',
+              'Change status to ',
+              'Resolved',
+            ].join('')
+          );
         }
 
         //handle resolved
         if (changelog.reopenedAt) {
-          note = note.concat([
-            changelog.changer.name,
-            ' on ',
-            $filter('date')(changelog.createdAt,
-              'dd MMM yyyy hh:mm:ss a'),
-            ': ',
-            'Change status to ',
-            'Reopened',
-          ].join(''));
+          note = note.concat(
+            [
+              changelog.changer.name,
+              ' on ',
+              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
+              ': ',
+              'Change status to ',
+              'Reopened',
+            ].join('')
+          );
         }
 
-        note = _.filter(note, function (line) { return !_.isEmpty(line); });
+        note = _.filter(note, function(line) {
+          return !_.isEmpty(line);
+        });
         note = note.length > 0 ? note.join(',\n') : undefined;
         return note;
-
       });
 
       notes = _.compact(notes);
@@ -230,7 +247,7 @@ angular
       var recipient = _.get(issue, 'jurisdiction.email', '');
       var options = {
         subject: [issue.service.name, issue.code].join(' - #'),
-        body: body
+        body: body,
       };
       /*jshint camelcase:true*/
 
@@ -240,5 +257,4 @@ angular
     };
 
     return ServiceRequest;
-
   });

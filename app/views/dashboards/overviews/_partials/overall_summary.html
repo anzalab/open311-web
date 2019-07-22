@@ -1,106 +1,123 @@
 <!-- start overview summary -->
 <div class="row no-gutter">
-
-    <!-- start total -->
-    <div class="col-xs-6 col-sm-2 b-r b-b" title="Total Service Requests">
-        <div class="padding">
-            <div class="text-center">
-                <h2 class="text-center _600 m-t-md">
-                    {{overviews.overall.count | number:0}}
-                </h2>
-                <p class="text-muted m-b-md">Total</p>
-            </div>
-        </div>
+  <!-- start total -->
+  <div class="col-xs-6 col-sm-2 b-r b-b" title="Total Service Requests">
+    <div class="padding">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{overviews.overall.count | number:0}}
+        </h2>
+        <p class="text-muted m-b-md">Total</p>
+      </div>
     </div>
-    <!-- end total -->
+  </div>
+  <!-- end total -->
 
-    <!-- start pending -->
-    <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
-        <div class="padding">
-            <div>
-                <span class="pull-right" ng-class="overviews.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'">{{overviews.overall.percentagePending | number:2}}%</span>
-            </div>
-            <div class="text-center">
-                <h2 class="text-center _600 m-t-md">
-                    {{overviews.overall.pending | number:0}}
-                </h2>
-                <p class="text-muted m-b-md">Pending</p>
-            </div>
-        </div>
+  <!-- start pending -->
+  <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
+    <div class="padding">
+      <div>
+        <span
+          class="pull-right"
+          ng-class="overviews.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'"
+          >{{overviews.overall.percentagePending | number:2}}%</span
+        >
+      </div>
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{overviews.overall.pending | number:0}}
+        </h2>
+        <p class="text-muted m-b-md">Pending</p>
+      </div>
     </div>
-    <!-- end pending -->
+  </div>
+  <!-- end pending -->
 
-    <!-- start resolved -->
-    <div class="col-xs-6 col-sm-2 b-r b-b" title="Resolved Service Requests">
-        <div class="padding">
-            <div>
-                <span class="pull-right" ng-class="overviews.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'">{{overviews.overall.percentageResolved | number:2}}%</span>
-            </div>
-            <div class="text-center">
-                <h2 class="text-center _600 m-t-md">
-                    {{overviews.overall.resolved | number:0}}
-                </h2>
-                <p class="text-muted m-b-md">Resolved</p>
-            </div>
-        </div>
+  <!-- start resolved -->
+  <div class="col-xs-6 col-sm-2 b-r b-b" title="Resolved Service Requests">
+    <div class="padding">
+      <div>
+        <span
+          class="pull-right"
+          ng-class="overviews.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'"
+          >{{overviews.overall.percentageResolved | number:2}}%</span
+        >
+      </div>
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{overviews.overall.resolved | number:0}}
+        </h2>
+        <p class="text-muted m-b-md">Resolved</p>
+      </div>
     </div>
-    <!-- end resolved -->
+  </div>
+  <!-- end resolved -->
 
-    <!-- start late -->
-    <div class="col-xs-6 col-sm-2 b-r b-b" title="Late(Past SLA Time) Service Requests">
-        <div class="padding">
-            <div>
-                <span class="pull-right" ng-class="overviews.overall.percentageLate > 0 ? 'text-danger' : 'text-success'">{{overviews.overall.percentageLate | number:2}}%</span>
-            </div>
-            <div class="text-center">
-                <h2 class="text-center _600 m-t-md">
-                    {{overviews.overall.late | number:0}}
-                </h2>
-                <p class="text-muted m-b-md">Late</p>
-            </div>
-        </div>
+  <!-- start late -->
+  <div
+    class="col-xs-6 col-sm-2 b-r b-b"
+    title="Late(Past SLA Time) Service Requests"
+  >
+    <div class="padding">
+      <div>
+        <span
+          class="pull-right"
+          ng-class="overviews.overall.percentageLate > 0 ? 'text-danger' : 'text-success'"
+          >{{overviews.overall.percentageLate | number:2}}%</span
+        >
+      </div>
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{overviews.overall.late | number:0}}
+        </h2>
+        <p class="text-muted m-b-md">Late</p>
+      </div>
     </div>
-    <!-- end late  -->
+  </div>
+  <!-- end late  -->
 
-    <!-- start average attend time -->
-    <div class="col-xs-6 col-sm-2 b-r b-b" title="Average Attend Time(Call Duration)">
-        <div class="padding">
-            <div class="text-center">
-                <h2 class="text-center _600 m-t-md">
-                    <span title="Average Attend Time(Call Duration) - Minutes Spent">
-                      {{overviews.overall.averageAttendTime.minutes}}
-                      <span class="text-muted text-xs">mins</span>
-                    </span>
-                    <span title="Average Attend Time(Call Duration) - Seconds Spent">
-                        {{overviews.overall.averageAttendTime.seconds}}
-                    <span class="text-muted text-xs">secs</span>
-                    </span>
-                </h2>
-                <p class="text-muted m-b-md">Average Attend Time</p>
-            </div>
-        </div>
+  <!-- start average attend time -->
+  <div
+    class="col-xs-6 col-sm-2 b-r b-b"
+    title="Average Attend Time(Call Duration)"
+  >
+    <div class="padding">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          <span title="Average Attend Time(Call Duration) - Minutes Spent">
+            {{overviews.overall.averageAttendTime.minutes}}
+            <span class="text-muted text-xs">mins</span>
+          </span>
+          <span title="Average Attend Time(Call Duration) - Seconds Spent">
+            {{overviews.overall.averageAttendTime.seconds}}
+            <span class="text-muted text-xs">secs</span>
+          </span>
+        </h2>
+        <p class="text-muted m-b-md">Average Attend Time</p>
+      </div>
     </div>
-    <!-- end average attend time -->
+  </div>
+  <!-- end average attend time -->
 
-    <!-- start average resolve time -->
-    <div class="col-xs-6 col-sm-2 b-b" title="Average resolve Time">
-        <div class="padding">
-            <div class="text-center">
-                <h2 class="text-center _600 m-t-md">
-                    <span title="Average resolve Time - Hourss Spent">
-                        {{overviews.overall.averageResolveTime.hours + (overviews.overall.averageResolveTime.days * 24)}}
-                    <span class="text-muted text-xs">hrs</span>
-                    </span>
-                    <span title="Average resolve Time - Minutes Spent">
-                      {{overviews.overall.averageResolveTime.minutes}}
-                    <span class="text-muted text-xs">mins</span>
-                    </span>
-                </h2>
-                <p class="text-muted m-b-md">Average Resolve Time</p>
-            </div>
-        </div>
+  <!-- start average resolve time -->
+  <div class="col-xs-6 col-sm-2 b-b" title="Average resolve Time">
+    <div class="padding">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          <span title="Average resolve Time - Hourss Spent">
+            {{overviews.overall.averageResolveTime.hours +
+            (overviews.overall.averageResolveTime.days * 24)}}
+            <span class="text-muted text-xs">hrs</span>
+          </span>
+          <span title="Average resolve Time - Minutes Spent">
+            {{overviews.overall.averageResolveTime.minutes}}
+            <span class="text-muted text-xs">mins</span>
+          </span>
+        </h2>
+        <p class="text-muted m-b-md">Average Resolve Time</p>
+      </div>
     </div>
-    <!-- end average resolve time -->
-
+  </div>
+  <!-- end average resolve time -->
 </div>
 <!-- end overview summary -->

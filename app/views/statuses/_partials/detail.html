@@ -1,47 +1,104 @@
 <!-- start status details -->
 <div class="row-col">
-    <div class="white b-b bg">
-        <!-- start status detail action bar -->
-        <div ng-include="'views/statuses/_partials/action_bar.html'" class="navbar"></div>
-        <!-- end status details action bar -->
-    </div>
-    <!-- start status body -->
-    <div class="row-row">
-        <div class="row-body">
-            <div class="row-inner">
-                <div class="padding">
-                    <form ng-submit="save()" name="statusForm" role="form" autocomplete="off" novalidate>
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="m-b" title="Status Name">
-                                    <div class="form-group">
-                                        <label title="Status Name" class="floating-label">Name</label>
-                                        <input ng-disabled="!edit" ng-model="status.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Status Weight">
-                                    <div class="form-group">
-                                        <label title="Status Weight" class="floating-label">Weight</label>
-                                        <input ng-disabled="!edit" ng-model="status.weight" ng-required type="number" name="name" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="m-t-lg" title="Status Color">
-                                    <color-picker ng-model="status.color">
-                                    </color-picker>
-                                    <div class="m-t-lg">
-                                        <div class="form-group">
-                                            <label title="Status Color" class="floating-label">Status Color(HEX)</label>
-                                            <input title="Status Color" ng-disabled="!edit" ng-model="status.color" ng-required ng-minlength="1" type="text" name="color" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+  <div class="white b-b bg">
+    <!-- start status detail action bar -->
+    <div
+      ng-include="'views/statuses/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end status details action bar -->
+  </div>
+  <!-- start status body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="statusForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Status Name">
+                  <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label title="Status Name" class="floating-label"
+                        >Name</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="status.name.en"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label
+                        title="Status Name in Swahili"
+                        class="floating-label"
+                        >Jina</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="status.name.sw"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
                 </div>
+                <div class="m-t-lg" title="Status Weight">
+                  <div class="form-group">
+                    <label title="Status Weight" class="floating-label"
+                      >Weight</label
+                    >
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="status.weight"
+                      ng-required
+                      type="number"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Status Color">
+                  <color-picker ng-model="status.color"> </color-picker>
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Status Color" class="floating-label"
+                        >Status Color(HEX)</label
+                      >
+                      <input
+                        title="Status Color"
+                        ng-disabled="!edit"
+                        ng-model="status.color"
+                        ng-required
+                        ng-minlength="1"
+                        type="text"
+                        name="color"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
-    <!-- end status body -->
+  </div>
+  <!-- end status body -->
 </div>
 <!-- end status details -->

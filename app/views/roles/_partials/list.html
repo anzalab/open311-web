@@ -1,53 +1,80 @@
 <!-- start roles list -->
 <div class="row-col lt">
-    <!-- start roles list search -->
-    <div class="p-a b-b list-search">
-        <form>
-            <div class="input-group">
-                <input type="text" ng-change="onSearch()" ng-model="search.q" class="form-control form-control-sm" placeholder="Search Roles ...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default btn-sm no-shadow" type="button">
-                        <i class="ti-search"></i>
-                    </button>
-                </span>
+  <!-- start roles list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Roles ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end role list search -->
+  <!-- start role listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(role)"
+            class="list-item list-item-padded"
+            ng-repeat="role in roles"
+            title="{{role.description}}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Role Visual Color"
+                  data="{{role.name}}"
+                  height="60"
+                  width="60"
+                  color="{{role.color}}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
             </div>
-        </form>
-    </div>
-    <!-- end role list search -->
-    <!-- start role listing -->
-    <div class="row-row">
-        <div class="row-body scrollable hover">
-            <div class="row-inner">
-                <div class="list" data-ui-list="info">
-                    <div ng-click="select(role)" class="list-item list-item-padded" ng-repeat="role in roles" title="{{role.description}}">
-                        <div class="list-left">
-                            <span class="w-40 avatar circle">
-                                <letter-avatar title="Role Visual Color" 
-                                data="{{role.name}}" 
-                                    height="60" width="60" color="{{role.color}}" shape="round">
-                                </letter-avatar>
-                            </span>
-                        </div>
-                        <div class="list-body">
-                            <div class="item-title" title="Role Name">
-                                <span class="_500">{{role.name}}</span>
-                            </div>
-                            <p title="Role Description" class="block text-muted text-ellipsis">
-                                {{role.description}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="list-body">
+              <div class="item-title" title="Role Name">
+                <span class="_500">{{role.name}}</span>
+              </div>
+              <p
+                title="Role Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{role.description}}
+              </p>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- end role listing -->
-    <!-- start pagination -->
-    <div class="p-x-md p-y">
-        <div class="btn-group pull-right list-pager" uib-pager ng-show="willPaginate()" total-items="total" ng-model="page" items-per-page="limit" ng-change="find()" template-url="views/_partials/list_pager.html">
-        </div>
-        <span class="text-sm text-muted">Total: {{total}}</span>
-    </div>
-    <!-- end pagination -->
+  </div>
+  <!-- end role listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end pagination -->
 </div>
 <!-- end roles list -->

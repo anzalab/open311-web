@@ -14,7 +14,12 @@
     <div class="row-body">
       <div class="row-inner">
         <div class="padding">
-          <form ng-submit="save()" name="servicerequestForm" role="form" autocomplete="off">
+          <form
+            ng-submit="save()"
+            name="servicerequestForm"
+            role="form"
+            autocomplete="off"
+          >
             <div class="box">
               <div class="box-header">
                 <h6 title="Reporter or Customer Details">
@@ -29,7 +34,16 @@
                       <label title="Reporter or Customer Phone Number">
                         Phone
                       </label>
-                      <input ng-model="servicerequest.reporter.phone" ng-required ng-minlength="2" focus-if="!servicerequest.reporter.phone" type="text" name="phone" class="form-control" title="Reporter or Customer Phone Number" />
+                      <input
+                        ng-model="servicerequest.reporter.phone"
+                        ng-required
+                        ng-minlength="2"
+                        focus-if="!servicerequest.reporter.phone"
+                        type="text"
+                        name="phone"
+                        class="form-control"
+                        title="Reporter or Customer Phone Number"
+                      />
                     </div>
                   </div>
                   <!--end phone input-->
@@ -39,7 +53,15 @@
                       <label title="Reporter or Customer Name">
                         Name
                       </label>
-                      <input ng-model="servicerequest.reporter.name" ng-required ng-minlength="2" type="text" name="name" class="form-control" title="Reporter or Customer Name" />
+                      <input
+                        ng-model="servicerequest.reporter.name"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        title="Reporter or Customer Name"
+                      />
                     </div>
                   </div>
                   <!--end name input-->
@@ -52,9 +74,21 @@
                     </label>
                     <div class="form-group">
                       <div class="input-group">
-                        <input ng-model="servicerequest.reporter.account" type="text" name="account" class="form-control" title="Reporter or Customer Account Number" />
+                        <input
+                          ng-model="servicerequest.reporter.account"
+                          type="text"
+                          name="account"
+                          class="form-control"
+                          title="Reporter or Customer Account Number"
+                        />
                         <span class="input-group-btn">
-                          <button  ng-disabled="!servicerequest.reporter.account" ng-click="openLookupModal()" class="btn btn-secondary" type="button"  title="Click to Lookup for Customer Account Details">
+                          <button
+                            ng-disabled="!servicerequest.reporter.account"
+                            ng-click="openLookupModal()"
+                            class="btn btn-secondary"
+                            type="button"
+                            title="Click to Lookup for Customer Account Details"
+                          >
                             <i class="icon-magnifier"></i>
                           </button>
                         </span>
@@ -68,7 +102,13 @@
                       <label title="Reporter or Customer Email Address">
                         Email
                       </label>
-                      <input ng-model="servicerequest.reporter.email" type="email" name="email" class="form-control" title="Reporter or Customer Email Address" />
+                      <input
+                        ng-model="servicerequest.reporter.email"
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        title="Reporter or Customer Email Address"
+                      />
                     </div>
                   </div>
                   <!--end email input input-->
@@ -80,10 +120,19 @@
                 </div>
                 <div class="row m-b">
                   <!--start communication method input-->
-                  <div class="col-sm-1" ng-repeat="method in methods">
+                  <div class="col-sm-2 m-b" ng-repeat="method in methods">
                     <div>
-                      <label class="md-check text-muted" title="Method of Communication used by Reporter">
-                        <input type="radio" ng-model="servicerequest.method.name" ng-value="method" name="method"> <i class="blue"></i> {{method}}
+                      <label
+                        class="md-check"
+                        title="Method of Communication used by Reporter"
+                      >
+                        <input
+                          type="radio"
+                          ng-model="servicerequest.method.name"
+                          ng-value="method"
+                          name="method"
+                        />
+                        <i class="blue"></i> {{method}}
                       </label>
                     </div>
                   </div>
@@ -97,15 +146,33 @@
                 <div class="row m-b">
                   <!--start service input-->
                   <div class="col-sm-6">
-                    <div class="form-group form-material floating" title="Select Service">
-                      <oi-select oi-options="item.name for item in services track by item.id" ng-model="servicerequest.service" ng-required placeholder="Select Service" class="form-control"></oi-select>
+                    <div
+                      class="form-group form-material floating"
+                      title="Select Service"
+                    >
+                      <oi-select
+                        oi-options="item.name for item in services track by item.id"
+                        ng-model="servicerequest.service"
+                        ng-required
+                        placeholder="Select Service"
+                        class="form-control"
+                      ></oi-select>
                     </div>
                   </div>
                   <!--end service input-->
                   <!--start jurisdiction input-->
                   <div class="col-sm-6">
-                    <div class="form-group form-material floating" title="Select Area">
-                      <oi-select oi-options="item.name for item in jurisdictions track by item.id" ng-model="servicerequest.jurisdiction" ng-required placeholder="Select Area" class="form-control"></oi-select>
+                    <div
+                      class="form-group form-material floating"
+                      title="Select Area"
+                    >
+                      <oi-select
+                        oi-options="item.name for item in jurisdictions track by item.id"
+                        ng-model="servicerequest.jurisdiction"
+                        ng-required
+                        placeholder="Select Area"
+                        class="form-control"
+                      ></oi-select>
                     </div>
                   </div>
                 </div>
@@ -117,7 +184,15 @@
                       <label title="Reporter or Customer Address">
                         Address
                       </label>
-                      <textarea ng-model="servicerequest.address" ng-required msd-elastic name="address" class="form-control" rows="2" title="Reporter or Customer Address">
+                      <textarea
+                        ng-model="servicerequest.address"
+                        ng-required
+                        msd-elastic
+                        name="address"
+                        class="form-control"
+                        rows="2"
+                        title="Reporter or Customer Address"
+                      >
                       </textarea>
                     </div>
                   </div>
@@ -130,7 +205,15 @@
                       <label title="Issue Details or Description">
                         Description
                       </label>
-                      <textarea ng-model="servicerequest.description" ng-required msd-elastic name="description" class="form-control" rows="2" title="Issue Details or Description">
+                      <textarea
+                        ng-model="servicerequest.description"
+                        ng-required
+                        msd-elastic
+                        name="description"
+                        class="form-control"
+                        rows="2"
+                        title="Issue Details or Description"
+                      >
                       </textarea>
                     </div>
                   </div>
@@ -139,8 +222,23 @@
               <!--end description input-->
               <!--start form actions -->
               <div class="p-a text-right">
-                <button ui-sref="app.servicerequests.list" type="button" ng-click="cancel()" class="btn" title="Click to Cancel">Cancel</button>
-                <button ng-disabled="servicerequestForm.$invalid || !servicerequest.reporter.phone || !servicerequest.reporter.name || !servicerequest.service || !servicerequest.jurisdiction || !servicerequest.address || !servicerequest.description" type="submit" class="btn info" title="Click to Submit">Submit</button>
+                <button
+                  ui-sref="app.servicerequests.list"
+                  type="button"
+                  ng-click="cancel()"
+                  class="btn"
+                  title="Click to Cancel"
+                >
+                  Cancel
+                </button>
+                <button
+                  ng-disabled="servicerequestForm.$invalid || !servicerequest.reporter.phone || !servicerequest.reporter.name || !servicerequest.service || !servicerequest.jurisdiction || !servicerequest.address || !servicerequest.description"
+                  type="submit"
+                  class="btn info"
+                  title="Click to Submit"
+                >
+                  Submit
+                </button>
               </div>
               <!--end form actions -->
             </div>

@@ -1,46 +1,184 @@
 <!-- start servicerequest detail action bar -->
 <ul class="nav navbar-nav">
   <li ng-if="!servicerequest.operator" class="nav-item b-r p-r">
-    <a show-if-has-permit="servicerequest:attend" class="nav-link text-muted no-border" title="Click To Attend Issue" ng-click="onAttend()">
-            <span class="nav-text">
-                <i class="ion-ios-shuffle-strong"></i>
-            </span>
-        </a>
+    <a
+      show-if-has-permit="servicerequest:attend"
+      class="nav-link text-muted no-border"
+      title="Click To Attend Issue"
+      ng-click="onAttend()"
+    >
+      <span class="nav-text">
+        <i class="ion-ios-shuffle-strong"></i>
+      </span>
+    </a>
   </li>
   <li ng-if="servicerequest.operator" class="nav-item">
-    <a ng-if="mailTo" href="{{mailTo}}" class="nav-link text-muted" title="Send Issue to Area">
-            <span class="nav-text">
-                <i class="icon-action-redo"></i>
-            </span>
-        </a>
+    <a
+      ng-if="mailTo"
+      href="{{mailTo}}"
+      class="nav-link text-muted"
+      title="Click to Send Issue to Area"
+    >
+      <span class="nav-text">
+        <i class="icon-action-redo"></i>
+      </span>
+    </a>
   </li>
-  <li ng-if="servicerequest.operator && !servicerequest.resolvedAt" class="nav-item b-l p-l">
-    <a show-if-has-permit="servicerequest:resolve" ng-click="onClose()" class="nav-link text-muted no-border" title="Click To Resolve and Signal Feedback Provided To Reporter">
-            <span class="nav-text">
-                <i class="icon-call-out"></i>
-            </span>
-        </a>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && !servicerequest.attendedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:attend"
+      ng-click="onAttended()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Attended"
+    >
+      <span class="nav-text">
+        <i class="icon-crop"></i>
+      </span>
+    </a>
   </li>
-  <li ng-if="servicerequest.operator && servicerequest.resolvedAt" class="nav-item b-l p-l">
-    <a ng-click="onReOpen()" class="nav-link text-muted no-border" title="Click To Re-Open The Issue">
-            <span class="nav-text">
-                <i class="icon-call-in"></i>
-            </span>
-        </a>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee &&
+    servicerequest.attendedAt && !servicerequest.completedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:complete"
+      ng-click="onComplete()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Complete"
+    >
+      <span class="nav-text">
+        <i class="ti-check-box"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.attendedAt && servicerequest.completedAt && !servicerequest.verifiedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:verify"
+      ng-click="onVerify()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Verified"
+    >
+      <span class="nav-text">
+        <i class="ti-eye"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.attendedAt && servicerequest.completedAt && servicerequest.verifiedAt && !servicerequest.approvedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:approve"
+      ng-click="onApprove()"
+      class="nav-link text-muted no-border"
+      title="Click To Mark Issue as Approve"
+    >
+      <span class="nav-text">
+        <!--<i class="ti-ink-pen"></i>-->
+        <i class="ti-new-window"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.assignee && servicerequest.attendedAt && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:complete"
+      ng-click="showWorklogModal()"
+      class="nav-link text-muted no-border"
+      title="Click to Record Material & Equipment Used"
+    >
+      <span class="nav-text">
+        <i class="icon-basket-loaded"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      ngf-select="onImage($file)"
+      class="nav-link text-muted no-border"
+      title="Click To Attach Supporting Images"
+    >
+      <span class="nav-text">
+        <i class="icon-camera"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      ngf-select="onDocument($file)"
+      class="nav-link text-muted no-border"
+      title="Click To Attach Supporting Documents"
+    >
+      <span class="nav-text">
+        <i class="icon-paper-clip"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:resolve"
+      ng-click="onResolve()"
+      class="nav-link text-muted no-border"
+      title="Click To Resolve and Signal Feedback Provided To Reporter"
+    >
+      <span class="nav-text">
+        <i class="icon-call-out"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+  >
+    <a
+      ng-click="onReOpen()"
+      class="nav-link text-muted no-border"
+      title="Click To Re-Open The Issue"
+    >
+      <span class="nav-text">
+        <i class="icon-call-in"></i>
+      </span>
+    </a>
   </li>
   <li ng-if="servicerequest.operator" class="nav-item b-l p-l">
-    <a ng-click="onCopy()" class="nav-link text-muted no-border" title="Click To Copy Reporter Information & Create New Issue">
-            <span class="nav-text">
-                <i class="ti-cut"></i>
-            </span>
-        </a>
+    <a
+      ng-click="onCopy()"
+      class="nav-link text-muted no-border"
+      title="Click To Copy Reporter Information & Create New Issue"
+    >
+      <span class="nav-text">
+        <i class="ti-cut"></i>
+      </span>
+    </a>
   </li>
   <li ng-if="servicerequest.operator" class="nav-item b-l p-l p-r">
-    <a print-btn class="nav-link text-muted no-border" title="Click To Print Issue">
-            <span class="nav-text">
-                <i class="icon-printer"></i>
-            </span>
-        </a>
+    <a
+      print-btn
+      class="nav-link text-muted no-border"
+      title="Click To Print Issue"
+    >
+      <span class="nav-text">
+        <i class="icon-printer"></i>
+      </span>
+    </a>
   </li>
 </ul>
 <!-- end servicerequest detail action bar -->
