@@ -29,7 +29,7 @@
             ng-click="select(zone)"
             class="list-item list-item-padded"
             ng-repeat="zone in zones"
-            title="{{zone.description}}"
+            title="{{zone.description.en}}"
           >
             <div class="list-left">
               <span class="w-40 avatar circle">
@@ -49,13 +49,13 @@
                 {{zone.code}}
               </span>
               <div class="item-title">
-                <span title="Zone Name" class="_500">{{zone.name}}</span>
+                <span title="Zone Name" class="_500">{{zone.name.en}}</span>
               </div>
               <p
                 title="Zone Description"
                 class="block text-muted text-ellipsis"
               >
-                {{zone.description}}
+                {{zone.description.en}}
               </p>
             </div>
           </div>

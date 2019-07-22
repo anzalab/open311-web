@@ -29,7 +29,7 @@
             ng-click="select(item)"
             class="list-item list-item-padded"
             ng-repeat="item in items"
-            title="{{item.description}}"
+            title="{{item.description.en}}"
           >
             <div class="list-left">
               <span class="w-40 avatar circle">
@@ -49,13 +49,13 @@
                 {{item.code}}
               </span>
               <div class="item-title">
-                <span title="Item Name" class="_500">{{item.name}}</span>
+                <span title="Item Name" class="_500">{{item.name.en}}</span>
               </div>
               <p
                 title="Item Description"
                 class="block text-muted text-ellipsis"
               >
-                {{item.description}}
+                {{item.description.en}}
               </p>
             </div>
           </div>
