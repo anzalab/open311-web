@@ -39,33 +39,70 @@
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Group Name">
-                  <div class="form-group">
-                    <label title="Service Group Name" class="floating-label"
-                      >Name</label
-                    >
-                    <input
-                      ng-disabled="!edit"
-                      ng-model="servicegroup.name"
-                      ng-required
-                      ng-minlength="2"
-                      type="text"
-                      name="name"
-                      class="form-control"
-                    />
+                  <div class="row">
+                    <div class="form-group  col-xs-12 col-sm-6">
+                      <label title="Service Group Name" class="floating-label"
+                        >Name</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="servicegroup.name.en"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group  col-xs-12 col-sm-6">
+                      <label
+                        title="Service Group Name in Swahili"
+                        class="floating-label"
+                        >Jina</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="servicegroup.name.sw"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Group Weight">
-                  <div class="form-group">
-                    <label class="floating-label">Description</label>
-                    <textarea
-                      ng-disabled="!edit"
-                      ng-model="servicegroup.description"
-                      msd-elastic
-                      name="about"
-                      class="form-control"
-                      rows="3"
-                    >
-                    </textarea>
+                  <div class="row">
+                    <!-- english description field -->
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label class="floating-label">Description</label>
+                      <textarea
+                        ng-disabled="!edit"
+                        ng-model="servicegroup.description.en"
+                        msd-elastic
+                        name="about"
+                        class="form-control"
+                        rows="3"
+                      >
+                      </textarea>
+                    </div>
+                    <!-- english description field -->
+
+                    <!-- swahili description field -->
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label class="floating-label">Maelezo</label>
+                      <textarea
+                        ng-disabled="!edit"
+                        ng-model="servicegroup.description.sw"
+                        msd-elastic
+                        name="about"
+                        class="form-control"
+                        rows="3"
+                      >
+                      </textarea>
+                    </div>
+                    <!-- swahili description field -->
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Group Color">

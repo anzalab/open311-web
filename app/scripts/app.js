@@ -31,6 +31,8 @@ angular
     'pickadate',
     'ui-leaflet',
     'ngNumeraljs',
+    'ngFileUpload',
+    'prettyBytes',
   ])
   .config(function(
     $stateProvider,
@@ -211,7 +213,7 @@ angular
     //configure ngNotify
     ngNotify.config({
       position: 'top',
-      duration: 5000,
+      duration: 2000,
       button: true,
       theme: 'pastel',
     });

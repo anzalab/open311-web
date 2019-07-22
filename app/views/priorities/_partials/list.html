@@ -29,16 +29,16 @@
             ng-click="select(priority)"
             class="list-item list-item-padded"
             ng-repeat="priority in priorities"
-            title="{{priority.about}}"
+            title="{{ priority.about }}"
           >
             <div class="list-left">
               <span class="w-40 avatar circle">
                 <letter-avatar
                   title="Priority Visual Color"
-                  data="{{priority.name}}"
+                  data="{{ priority.name.en }}"
                   height="60"
                   width="60"
-                  color="{{priority.color}}"
+                  color="{{ priority.color }}"
                   shape="round"
                 >
                 </letter-avatar>
@@ -49,16 +49,16 @@
                 title="Priority Weight"
                 class="pull-right text-xs text-muted"
               >
-                {{priority.weight}}
+                {{ priority.weight }}
               </span>
               <div class="item-title" title="Priority Name">
-                <span class="_500">{{priority.name}}</span>
+                <span class="_500">{{ priority.name.en }}</span>
               </div>
               <p
                 title="Priority Description"
                 class="block text-muted text-ellipsis"
               >
-                {{priority.name}}
+                {{ priority.name.en }}
               </p>
             </div>
           </div>
@@ -79,7 +79,7 @@
       ng-change="find()"
       template-url="views/_partials/list_pager.html"
     ></div>
-    <span class="text-sm text-muted">Total: {{total}}</span>
+    <span class="text-sm text-muted">Total: {{ total }}</span>
   </div>
   <!-- end pagination -->
 </div>

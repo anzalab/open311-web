@@ -14,7 +14,8 @@ angular
     $resource,
     $filter,
     Utils,
-    Mailto
+    Mailto,
+    Upload
   ) {
     //create servicerequest resource
     var ServiceRequest = $resource(
@@ -65,7 +66,10 @@ angular
     ServiceRequest.changelog = function(id, changelog) {
       var url = Utils.asLink(['servicerequests', id, 'changelogs']);
 
-      return $http.patch(url, changelog).then(function(response) {
+      return Upload.upload({
+        url: url,
+        data: changelog,
+      }).then(function(response) {
         return new ServiceRequest(response.data);
       });
     };

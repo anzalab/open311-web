@@ -54,6 +54,32 @@
                 </a>
               </li>
               <li
+                ng-class="{active:misc == 'unverified'}"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  show-if-has-permit="servicerequest:verify"
+                  ng-click="load({operator:{$ne:null}, assignee:{$ne:null}, completedAt:{$ne:null}, verifiedAt:{$eq:null}, resolvedAt:{$eq:null}, resetPage:true, reset:true, misc:'unverified'})"
+                  class="nav-link text-muted block"
+                  title="Completed Issues Waiting Verification"
+                >
+                  Un-Verified
+                </a>
+              </li>
+              <li
+                ng-class="{active:misc == 'unapproved'}"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  show-if-has-permit="servicerequest:approve"
+                  ng-click="load({operator:{$ne:null}, assignee:{$ne:null}, verifiedAt:{$ne:null}, approvedAt:{$eq:null}, resolvedAt:{$eq:null}, resetPage:true, reset:true, misc:'unapproved'})"
+                  class="nav-link text-muted block"
+                  title="Verified Issues Waiting Approval"
+                >
+                  Un-Approved
+                </a>
+              </li>
+              <li
                 ng-class="{active:misc == 'unresolved'}"
                 class="nav-item m-b-xs"
               >
@@ -97,10 +123,10 @@
                 >
                   <span
                     class="pull-right text-sm label danger rounded"
-                    style="background-color: {{status.color}}"
+                    style="background-color: {{ status.color }}"
                   >
-                    {{summaries.statuses[status._id]}} </span
-                  >{{status.name}}</a
+                    {{ summaries.statuses[status._id] }} </span
+                  >{{ status.name }}</a
                 >
               </li>
             </ul>
@@ -123,10 +149,10 @@
                 >
                   <span
                     class="pull-right text-sm label danger rounded"
-                    style="background-color: {{priority.color}}"
+                    style="background-color: {{ priority.color }}"
                   >
-                    {{summaries.priorities[priority._id]}} </span
-                  >{{priority.name}}</a
+                    {{ summaries.priorities[priority._id] }} </span
+                  >{{ priority.name }}</a
                 >
               </li>
             </ul>
@@ -134,7 +160,7 @@
         </div>
         <!-- end priorities menu -->
         <!-- start reportedAt date -->
-        <div class="p-a-md">
+        <div class="p-a-md" style="display: none">
           <div class="m-b text-muted text-xs">
             <a ng-click="showReportedAtFilter()"
               >Reported Date
@@ -161,7 +187,7 @@
         <!-- end reportedAt date -->
 
         <!-- start resolvedAt date inputs -->
-        <div class="p-a-md">
+        <div class="p-a-md" style="display: none">
           <div class="m-b text-muted text-xs">
             <a ng-click="showResolvedAtFilter()"
               >Resolved Date
@@ -188,7 +214,7 @@
         <!-- end resolvedAt date inputs -->
 
         <!-- start Workers inputs -->
-        <div class="p-a-md">
+        <div class="p-a-md" style="display: none">
           <div class="m-b text-muted text-xs">
             <span ng-click=""
               >Workers
@@ -235,11 +261,11 @@
                 >
                   <span
                     class="pull-right text-sm label danger rounded"
-                    style="background-color: {{service.color}}"
+                    style="background-color: {{ service.color }}"
                   >
-                    {{summaries.services[service._id]}}
+                    {{ summaries.services[service._id] }}
                   </span>
-                  {{service.name}}
+                  {{ service.name }}
                 </a>
               </li>
             </ul>
@@ -262,10 +288,10 @@
                 >
                   <span
                     class="pull-right text-sm label danger rounded"
-                    style="background-color: {{jurisdiction.color}}"
+                    style="background-color: {{ jurisdiction.color }}"
                   >
-                    {{summaries.jurisdictions[jurisdiction._id]}} </span
-                  >{{jurisdiction.name}}</a
+                    {{ summaries.jurisdictions[jurisdiction._id] }} </span
+                  >{{ jurisdiction.name }}</a
                 >
               </li>
             </ul>

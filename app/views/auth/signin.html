@@ -1,9 +1,9 @@
 <!-- start signing -->
 <div class="b-t">
-  <div class="center-block w-xxl w-auto-xs p-y-md text-center">
+  <div class="center-block w-xxl w-auto-xs p-y-lg">
     <div class="p-a-md">
       <!-- start app logo -->
-      <div class="brand m-t-lg m-b-lg">
+      <div class="brand m-t-lg m-b-lg text-center">
         <img src="images/logo_md.png" alt="." width="84" />
       </div>
       <!-- end app logo -->
@@ -14,36 +14,37 @@
         role="form"
         autocomplete="new-password"
       >
-        <!--start email input-->
-        <div class="md-form-group float-label">
+        <!--start username input-->
+        <div class="form-group">
           <input
-            class="md-input"
-            type="email"
-            name="email"
-            ng-model="user.email"
-            focus-if="!user.email"
+            id="username"
+            class="form-control"
+            name="username"
+            ng-model="user.username"
+            focus-if="!user.username"
             ng-required
-            title="Enter your email"
+            title="Enter your email or phone number"
+            placeholder="Username"
           />
-          <label>Email</label>
         </div>
-        <!--start email input-->
+        <!--start username input-->
         <!--start password input-->
-        <div class="md-form-group float-label">
+        <div class="form-group">
           <input
-            class="md-input"
+            id="password"
+            class="form-control"
             type="password"
             name="password"
             ng-model="user.password"
             ng-required
             title="Enter your password"
+            placeholder="Password"
           />
-          <label>Password</label>
         </div>
         <!--end password input-->
         <!--start signin button-->
         <button
-          ng-disabled="signinForm.$invalid || !user.email || !user.password"
+          ng-disabled="signinForm.$invalid || !user.username || !user.password"
           type="submit"
           class="btn btn-primary btn-block m-t-sm"
         >

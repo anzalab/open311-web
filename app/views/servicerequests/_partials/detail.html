@@ -76,6 +76,7 @@
           </div>
           <!-- start call details -->
           <div
+            print-hide
             class="p-y b-t"
             ng-show="servicerequest.call.startedAt && servicerequest.call.endedAt"
           >
@@ -104,7 +105,11 @@
           </div>
           <!-- end call details -->
           <!-- start resolve details -->
-          <div class="p-b" ng-class="{'p-y b-t':!servicerequest.call}">
+          <div
+            print-hide
+            class="p-b"
+            ng-class="{'p-y b-t':!servicerequest.call}"
+          >
             <span title="Date Issue Reported">
               <span class="text-muted font-size-12">Reported: </span>
               <span class="font-size-12"
@@ -223,10 +228,16 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue description -->
+        <!-- start issue worklog(used material & equipment) -->
+        <div
+          ng-show="worklogs && worklogs.length > 0"
+          ng-include="'views/servicerequests/_partials/worklog.html'"
+        ></div>
+        <!-- end issue worklog(used material & equipment) -->
         <!-- start issue map -->
         <div
           class="padding b-t"
-          ng-show="servicerequest.longitude && servicerequest.latitude"
+          ng-show="servicerequest.location && servicerequest.location.coordinates"
         >
           <h6 class="m-b" title="Issue Map">Map</h6>
           <leaflet
@@ -241,17 +252,43 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue map -->
-        <!-- start issue attachments -->
+        <!-- start issue images -->
         <div
+          print-hide
           class="padding b-t"
-          ng-show="servicerequest.attachments && servicerequest.attachments.length > 0"
+          ng-show="images && images.length > 0"
         >
-          <h6 class="m-b" title="Issue Attachements">Attachments</h6>
-          <ng-gallery images="servicerequest.attachments"></ng-gallery>
+          <h6 class="m-b" title="Issue Images">Images</h6>
+          <ng-gallery images="images"></ng-gallery>
         </div>
-        <!-- end issue attachements -->
+        <!-- end issue images -->
+        <!-- start issue documents -->
+        <div
+          print-hide
+          class="padding b-t"
+          ng-show="documents && documents.length > 0"
+        >
+          <h6 class="m-b" title="Issue Images">Documents</h6>
+          <div>
+            <a
+              ng-repeat="document in documents"
+              href="{{document.download}}"
+              class="block m-b-xs"
+              target="_blank"
+              title="{{document.filename}}"
+            >
+              <span class="label">{{document.type}}</span>
+              {{document.filename}}
+              <small class="m-l text-muted">
+                {{document.length | prettyBytes}}
+              </small>
+            </a>
+          </div>
+        </div>
+        <!-- end issue documents -->
         <!-- start issue comment -->
         <div
+          print-hide
           ng-if="servicerequest.operator"
           ng-include="'views/servicerequests/_partials/comments.html'"
         ></div>

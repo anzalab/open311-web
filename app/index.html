@@ -28,54 +28,21 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link
-      rel="stylesheet"
-      href="bower_components/angular-loading-bar/build/loading-bar.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/simple-line-icons/css/simple-line-icons.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/ng-notify/src/styles/ng-notify.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/themify-icons/css/themify-icons.css"
-    />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="bower_components/ng-notify/src/styles/ng-notify.css" />
+    <link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
     <link rel="stylesheet" href="bower_components/lato/css/lato.css" />
-    <link
-      rel="stylesheet"
-      href="bower_components/bootstrap/dist/css/bootstrap.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
-    />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
     <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
-    <link
-      rel="stylesheet"
-      href="bower_components/font-awesome/css/font-awesome.css"
-    />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/oi.select/dist/select.css" />
-    <link
-      rel="stylesheet"
-      href="bower_components/angular-color-picker/angular-color-picker.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/angularPrint/angularPrint.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/web-icons/css/web-icons.css"
-    />
-    <link
-      rel="stylesheet"
-      href="bower_components/angular-pickadate/dist/angular-pickadate.css"
-    />
+    <link rel="stylesheet" href="bower_components/angular-color-picker/angular-color-picker.css" />
+    <link rel="stylesheet" href="bower_components/angularPrint/angularPrint.css" />
+    <link rel="stylesheet" href="bower_components/web-icons/css/web-icons.css" />
+    <link rel="stylesheet" href="bower_components/angular-pickadate/dist/angular-pickadate.css" />
     <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -136,6 +103,9 @@
     <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
     <script src="bower_components/numeral/numeral.js"></script>
     <script src="bower_components/angular-numeraljs/dist/angular-numeraljs.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/pretty-bytes/pretty-bytes.js"></script>
+    <script src="bower_components/angular-pretty-bytes/angular-pretty-bytes.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -216,6 +186,18 @@
     <script src="scripts/controllers/jurisdictions/show.js"></script>
     <script src="scripts/states/jurisdiction.js"></script>
     <!-- end jurisdiction resources -->
+    <!-- start item resources -->
+    <script src="scripts/services/item.js"></script>
+    <script src="scripts/controllers/items/index.js"></script>
+    <script src="scripts/controllers/items/show.js"></script>
+    <script src="scripts/states/item.js"></script>
+    <!-- end item resources -->
+    <!-- start zone resources -->
+    <script src="scripts/services/zone.js"></script>
+    <script src="scripts/controllers/zones/index.js"></script>
+    <script src="scripts/controllers/zones/show.js"></script>
+    <script src="scripts/states/zone.js"></script>
+    <!-- end zone resources -->
     <!-- start role resources -->
     <script src="scripts/services/role.js"></script>
     <script src="scripts/controllers/roles/index.js"></script>

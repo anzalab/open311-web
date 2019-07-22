@@ -29,16 +29,16 @@
             ng-click="select(status)"
             class="list-item list-item-padded"
             ng-repeat="status in statuses"
-            title="{{status.about}}"
+            title="{{ status.about }}"
           >
             <div class="list-left">
               <span class="w-40 avatar circle">
                 <letter-avatar
                   title="Status Visual Color"
-                  data="{{status.name}}"
+                  data="{{ status.name.en }}"
                   height="60"
                   width="60"
-                  color="{{status.color}}"
+                  color="{{ status.color }}"
                   shape="round"
                 >
                 </letter-avatar>
@@ -46,16 +46,16 @@
             </div>
             <div class="list-body">
               <span title="Status Weight" class="pull-right text-xs text-muted">
-                {{status.weight}}
+                {{ status.weight }}
               </span>
               <div class="item-title" title="Status Name">
-                <span class="_500">{{status.name}}</span>
+                <span class="_500">{{ status.name.en }}</span>
               </div>
               <p
                 title="Status Description"
                 class="block text-muted text-ellipsis"
               >
-                {{status.name}}
+                {{ status.name.en }}
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@
       ng-change="find()"
       template-url="views/_partials/list_pager.html"
     ></div>
-    <span class="text-sm text-muted">Total: {{total}}</span>
+    <span class="text-sm text-muted">Total: {{ total }}</span>
   </div>
   <!-- end pagination -->
 </div>

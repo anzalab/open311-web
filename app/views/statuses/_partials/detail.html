@@ -23,19 +23,38 @@
             <div class="box">
               <div class="box-body">
                 <div class="m-b" title="Status Name">
-                  <div class="form-group">
-                    <label title="Status Name" class="floating-label"
-                      >Name</label
-                    >
-                    <input
-                      ng-disabled="!edit"
-                      ng-model="status.name"
-                      ng-required
-                      ng-minlength="2"
-                      type="text"
-                      name="name"
-                      class="form-control"
-                    />
+                  <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label title="Status Name" class="floating-label"
+                        >Name</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="status.name.en"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="form-group col-xs-12 col-sm-6">
+                      <label
+                        title="Status Name in Swahili"
+                        class="floating-label"
+                        >Jina</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="status.name.sw"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="m-t-lg" title="Status Weight">

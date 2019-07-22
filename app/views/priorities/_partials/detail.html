@@ -23,19 +23,38 @@
             <div class="box">
               <div class="box-body">
                 <div class="m-b" title="Priority Name">
-                  <div class="form-group">
-                    <label title="Priority Name" class="floating-label"
-                      >Name</label
-                    >
-                    <input
-                      ng-disabled="!edit"
-                      ng-model="priority.name"
-                      ng-required
-                      ng-minlength="2"
-                      type="text"
-                      name="name"
-                      class="form-control"
-                    />
+                  <div class="row">
+                    <div class="form-group col-sm-6">
+                      <label title="Priority Name" class="floating-label"
+                        >Name</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="priority.name.en"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                      <label
+                        title="Priority Name in Swahili"
+                        class="floating-label"
+                        >Jina</label
+                      >
+                      <input
+                        ng-disabled="!edit"
+                        ng-model="priority.name.sw"
+                        ng-required
+                        ng-minlength="2"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="m-t-lg" title="Priority Weight">

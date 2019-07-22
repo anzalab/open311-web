@@ -43,6 +43,14 @@
             on {{comment.createdAt | date:'dd MMM yyyy hh:mm:ss a'}}
           </div>
           <p ng-if="comment.comment">{{comment.comment}}</p>
+          <p ng-if="comment.item">
+            Used {{comment.quantity}} - {{comment.item.properties.unit}} of
+            {{comment.item.name}}
+          </p>
+          <p ng-if="comment.location && comment.location.coordinates">
+            Change location to longitude: {{comment.location.coordinates[0]}},
+            latitude: {{comment.location.coordinates[1]}}
+          </p>
           <p ng-if="comment.status && comment.status.name">
             Change status to
             <span
@@ -97,6 +105,79 @@
               ></b>
               Reopened
             </span>
+          </p>
+          <p ng-if="comment.approvedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #1B5E1F;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #1B5E1F;"
+              ></b>
+              Approved
+            </span>
+          </p>
+          <p ng-if="comment.verifiedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #EF6C01;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #EF6C01;"
+              ></b>
+              Verified
+            </span>
+          </p>
+          <p ng-if="comment.completedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #0D47A3;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #0D47A3;"
+              ></b>
+              Completed
+            </span>
+          </p>
+          <p ng-if="comment.attendedAt">
+            Change status to
+            <span
+              class="label rounded success pos-rlt m-l-xs b-a-xs"
+              style="background-color: #F9A825;"
+            >
+              <b
+                class="arrow left b-success pull-in"
+                style="border-color: #F9A825;"
+              ></b>
+              Attended
+            </span>
+          </p>
+          <p ng-if="comment.image && comment.image.stream">
+            <a
+              href="{{comment.image.stream}}"
+              target="_blank"
+              title="{{comment.image.filename}}"
+            >
+              <img data-ng-src="{{comment.image.stream}}" height="50px;" />
+            </a>
+          </p>
+          <p ng-if="comment.document && comment.document.download">
+            Attached
+            <a
+              href="{{comment.document.download}}"
+              target="_blank"
+              title="{{comment.document.filename}}"
+            >
+              <span class="text-muted">
+                {{comment.document.filename}}
+              </span>
+            </a>
           </p>
           <!-- TODO show attachment changelog -->
         </div>

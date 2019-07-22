@@ -366,5 +366,5 @@ angular
       $scope.modal.close();
     };
 
-    $scope.performance();
+    // $scope.performance();
   });

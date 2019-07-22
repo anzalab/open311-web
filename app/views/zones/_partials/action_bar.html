@@ -1,0 +1,46 @@
+<!-- start zone detail action bar -->
+<ul class="nav navbar-nav">
+  <li ng-if="edit" class="nav-item">
+    <a
+      ng-click="onCancel()"
+      class="nav-link text-muted"
+      title="Click to Cancel Zone Edit"
+    >
+      <span class="nav-text">
+        <i class="icon ti-close" aria-hidden="true"></i>
+      </span>
+    </a>
+  </li>
+  <li ng-if="!edit" class="nav-item">
+    <a
+      ng-click="onNew()"
+      class="nav-link text-muted"
+      title="Click to Add New Zone"
+    >
+      <span class="nav-text">
+        <i class="icon ti-plus" aria-hidden="true"></i>
+      </span>
+    </a>
+  </li>
+  <li ng-if="!edit" class="nav-item b-l p-l p-r">
+    <a
+      ng-click="onEdit()"
+      class="nav-link text-muted no-border"
+      title="Click to edit zone"
+    >
+      <span class="nav-text">
+        <i class="icon-pencil" aria-hidden="true"></i>
+      </span>
+    </a>
+  </li>
+  <li ng-if="edit" class="nav-item b-l p-l p-r">
+    <a
+      ng-click="save()"
+      class="nav-link text-muted no-border"
+      title="Click to save zone"
+    >
+      Save
+    </a>
+  </li>
+</ul>
+<!-- end zone detail action bar -->

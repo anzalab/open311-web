@@ -17,17 +17,21 @@ angular
     $uibModal,
     prompt,
     leafletBoundsHelpers,
+    Utils,
     Party,
     ServiceRequest,
     Comment,
     Summary,
     endpoints,
-    party
+    party,
+    items
   ) {
     //servicerequests in the scope
     $scope.spin = false;
     $scope.servicerequests = [];
     $scope.comments = [];
+    $scope.worklogs = [];
+    $scope.worklog = {};
     $scope.servicerequest = new ServiceRequest({
       call: {
         startedAt: new Date(),
@@ -77,6 +81,7 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.items = items.items;
     $scope.party = party;
     // $scope.assignees = assignee.parties;
     $scope.summaries = endpoints.summaries;
@@ -122,6 +127,12 @@ angular
       //clear comments
       $scope.comments = [];
 
+      // clear worklog
+      $scope.worklog = {};
+
+      // clear worklogs
+      $scope.worklogs = [];
+
       //sort comments in desc order
       if (servicerequest && servicerequest._id) {
         //update scope service request ref
@@ -130,11 +141,15 @@ angular
         $scope.mailTo = ServiceRequest.toEmail(servicerequest);
 
         //update markers & map center
-        if (servicerequest.longitude && servicerequest.latitude) {
+        if (servicerequest.location && servicerequest.location.coordinates) {
+          // obtain longitude and latitude
+          var longitude = servicerequest.location.coordinates[0];
+          var latitude = servicerequest.location.coordinates[1];
+
           //prepare bounds
           var bounds = leafletBoundsHelpers.createBoundsFromArray([
-            [servicerequest.latitude + 0.029, servicerequest.longitude],
-            [servicerequest.latitude - 0.029, servicerequest.longitude],
+            [latitude + 0.029, longitude],
+            [latitude - 0.029, longitude],
           ]);
 
           //set marker point
@@ -142,15 +157,15 @@ angular
             bounds: bounds,
             markers: {
               servicerequest: {
-                lat: servicerequest.latitude,
-                lng: servicerequest.longitude,
+                lat: latitude,
+                lng: longitude,
                 focus: true,
                 draggable: false,
               },
             },
             center: {
-              lat: servicerequest.latitude,
-              lng: servicerequest.longitude,
+              lat: latitude,
+              lng: longitude,
               zoom: 1,
             },
             defaults: {
@@ -159,43 +174,14 @@ angular
           };
         }
 
-        //ensure attachments has correct data for displaying
-        var hasAttachments =
-          servicerequest &&
-          servicerequest.attachments &&
-          servicerequest.attachments.length > 0;
-        if (hasAttachments) {
-          servicerequest.attachments = _.map(
-            servicerequest.attachments,
-            function(attachment) {
-              //obtain media thumb url from base64 encoded image
-              if (!_.isEmpty(attachment.content)) {
-                if (!_.startsWith(attachment.content, 'data:')) {
-                  attachment.thumb = [
-                    'data:',
-                    attachment.mime,
-                    ';base64,',
-                    attachment.content,
-                  ].join('');
-                } else {
-                  attachment.thumb = attachment.content;
-                }
-              }
+        // load service request worklogs
+        $scope.loadWorkLog(servicerequest);
 
-              //obtain media thumb from url
-              if (
-                !_.isEmpty(attachment.url) &&
-                _.startsWith(attachment.url, 'http')
-              ) {
-                attachment.thumb = attachment.url;
-              }
+        //load service request images
+        $scope.loadImages(servicerequest);
 
-              attachment.description = attachment.caption;
-
-              return attachment;
-            }
-          );
-        }
+        //load service request documents
+        $scope.loadDocuments(servicerequest);
 
         //load service request comments
         $scope.loadComment(servicerequest);
@@ -224,6 +210,7 @@ angular
             //TODO flag internal or public
             changer: party._id,
             assignee: $scope.servicerequest.assignee,
+            //TODO: set notify to true
           };
 
           //update changelog
@@ -267,6 +254,63 @@ angular
       }
     };
 
+    /**
+     * attach image on issues
+     */
+    $scope.onImage = function(image) {
+      if (image) {
+        var changelog = {
+          //TODO flag internal or public
+          changer: party._id,
+          image: image,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog)
+          .then(function(response) {
+            //TODO notify success
+            $scope.note = {};
+            $scope.select(response);
+            $scope.updated = true;
+          })
+          .catch(function(error) {
+            //TODO notify error
+            // console.log(error);
+          });
+      }
+    };
+
+    /**
+     * attach document on issues
+     */
+    $scope.onDocument = function(doc) {
+      if (document) {
+        var changelog = {
+          //TODO flag internal or public
+          changer: party._id,
+          document: doc,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog)
+          .then(function(response) {
+            //TODO notify success
+            $scope.note = {};
+            $scope.select(response);
+            $scope.updated = true;
+          })
+          .catch(function(error) {
+            //TODO notify error
+            // console.log(error);
+          });
+      }
+    };
+
+    /**
+     * change issue priority
+     */
     $scope.changePriority = function(priority) {
       if (priority._id === $scope.servicerequest.priority._id) {
         return;
@@ -293,6 +337,9 @@ angular
       }
     };
 
+    /**
+     * change issue status
+     */
     $scope.changeStatus = function(status) {
       if (status._id === $scope.servicerequest.status._id) {
         return;
@@ -320,9 +367,190 @@ angular
     };
 
     /**
+     * complete issue and signal work done
+     */
+    $scope.onComplete = function() {
+      prompt({
+        title: 'Complete Issue',
+        message: 'Are you sure you want to mark this issue as completed?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.completedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              completedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message =
+                response.message || 'Issue Marked As Completed';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
+     * attend issue and signal work in progress
+     */
+    $scope.onAttended = function() {
+      prompt({
+        title: 'Attend Issue',
+        message: 'Are you sure you want to attend this issue?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.attendedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              attendedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message = response.message || 'Issue Marked As Attended';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
+     * verify issue and signal work done is ok
+     */
+    $scope.onVerify = function() {
+      prompt({
+        title: 'Verify Issue',
+        message: 'Are you sure you want to mark this issue as verified?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.vefifiedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              verifiedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message = response.message || 'Issue Marked As Verified';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
+     * approve issue and signal work done final
+     */
+    $scope.onApprove = function() {
+      prompt({
+        title: 'Approve Issue',
+        message: 'Are you sure you want to mark this issue as approved?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      })
+        .then(function() {
+          if (!$scope.servicerequest.vefifiedAt) {
+            var changelog = {
+              //TODO flag internal or public
+              changer: party._id,
+              approvedAt: new Date(),
+            };
+
+            //update changelog
+            var _id = $scope.servicerequest._id;
+            ServiceRequest.changelog(_id, changelog).then(function(response) {
+              // $scope.servicerequest = response;
+              $scope.select(response);
+              $scope.updated = true;
+              $rootScope.$broadcast('app:servicerequests:reload');
+
+              response = response || {};
+
+              response.message = response.message || 'Issue Marked As Approved';
+
+              $rootScope.$broadcast('appSuccess', response);
+            });
+          }
+        })
+        .catch(function() {});
+    };
+
+    /**
      * close and resolve issue
      */
-    $scope.onClose = function() {
+    $scope.onResolve = function() {
       prompt({
         title: 'Resolve Issue',
         message: 'Are you sure you want to mark this issue as resolved?',
@@ -514,11 +742,8 @@ angular
     };
 
     $scope.loadComment = function(servicerequest) {
-      var comments = _.orderBy(
-        $scope.servicerequest.changelogs,
-        'createdAt',
-        'desc'
-      );
+      var changelogs = [].concat(servicerequest.changelogs);
+      var comments = _.orderBy(changelogs, 'createdAt', 'desc');
       comments = _.map(comments, function(comment) {
         comment.color = undefined;
         comment.color = comment.status ? comment.status.color : comment.color;
@@ -527,9 +752,139 @@ angular
           : comment.color;
         comment.color = comment.reopenedAt ? '#F44336' : comment.color;
         comment.color = comment.resolvedAt ? '#4CAF50' : comment.color;
+        comment.color = comment.attendedAt ? '#F9A825' : comment.color;
+        comment.color = comment.completedAt ? '#0D47A3' : comment.color;
+        comment.color = comment.verifiedAt ? '#EF6C01' : comment.color;
+        comment.color = comment.approvedAt ? '#1B5E1F' : comment.color;
+        if (comment.item) {
+          comment.item = _.merge({}, comment.item, {
+            properties: { unit: 'PCS' }, // TODO: fix unit not found
+          });
+        }
+        if (comment.image) {
+          if (!_.startsWith(comment.image.stream, 'http')) {
+            comment.image.stream = Utils.asLink(['v1', comment.image.stream]);
+          }
+        }
+
+        if (comment.document) {
+          if (!_.startsWith(comment.document.download, 'http')) {
+            comment.document.download = Utils.asLink([
+              'v1',
+              comment.document.download,
+            ]);
+          }
+        }
         return comment;
       });
       $scope.comments = comments;
+    };
+
+    /**
+     * @description prepare worklog of specified service request
+     */
+    $scope.loadWorkLog = function(servicerequest) {
+      // filter only with item
+      var changelogs = [].concat(servicerequest.changelogs);
+      var worklogs = _.filter(changelogs, function(changelog) {
+        return !_.isEmpty(changelog.item);
+      });
+
+      // sort by latest dates
+      worklogs = _.orderBy(worklogs, 'createdAt', 'desc');
+
+      // ensure unit
+      worklogs = _.map(worklogs, function(worklog) {
+        worklog = _.merge({}, worklog, {
+          item: { properties: { unit: 'PCS' } }, // TODO: fix unit not found
+        });
+        return worklog;
+      });
+
+      // return work logs
+      $scope.worklogs = worklogs;
+    };
+
+    /**
+     * @description prepare images of specified service request
+     */
+    $scope.loadImages = function(servicerequest) {
+      // filter only with image
+      var changelogs = [].concat(servicerequest.changelogs);
+      var worklogs = _.filter(changelogs, function(changelog) {
+        return !_.isEmpty(changelog.image);
+      });
+
+      // sort by latest dates
+      worklogs = _.orderBy(worklogs, 'createdAt', 'desc');
+
+      // map to images
+      var images = _.compact(_.map(worklogs, 'image'));
+
+      // merge original service request image
+      images = _.uniqBy([].concat(servicerequest.image).concat(images), '_id');
+      images = _.compact(images);
+
+      // format for gallery view
+      images = _.map(images, function(image) {
+        var thumb = image.stream;
+        if (!_.startsWith(image.stream, 'http')) {
+          thumb = Utils.asLink(['v1', image.stream]);
+        }
+        return {
+          thumb: thumb,
+          description: image.filename,
+        };
+      });
+
+      // compact images
+      images = _.compact(images);
+
+      // update gallery attachments
+      return ($scope.images = images);
+    };
+
+    /**
+     * @description prepare documents of specified service request
+     */
+    $scope.loadDocuments = function(servicerequest) {
+      // filter only with document
+      var changelogs = [].concat(servicerequest.changelogs);
+      var worklogs = _.filter(changelogs, function(changelog) {
+        return !_.isEmpty(changelog.document);
+      });
+
+      // sort by latest dates
+      worklogs = _.orderBy(worklogs, 'createdAt', 'desc');
+
+      // map to documents
+      var documents = _.compact(_.map(worklogs, 'document'));
+
+      // merge original service request document
+      documents = _.uniqBy(
+        [].concat(servicerequest.document).concat(documents),
+        '_id'
+      );
+      documents = _.compact(documents);
+
+      // format for gallery view
+      documents = _.map(documents, function(doc) {
+        doc.type = _.toUpper(_.last(_.split(doc.filename, '.')));
+        // doc.size = doc.length * 0.001;
+        if (!_.startsWith(doc.stream, 'http')) {
+          doc.stream = Utils.asLink(['v1', doc.stream]);
+        }
+        if (!_.startsWith(doc.download, 'http')) {
+          doc.download = Utils.asLink(['v1', doc.download]);
+        }
+        return doc;
+      });
+
+      // compact documents
+      documents = _.compact(documents);
+
+      // update gallery attachments
+      $scope.documents = documents;
     };
 
     /**
@@ -689,7 +1044,8 @@ angular
     /**
      * @function
      * @name showOperatorFilter
-     * @description Open modal window for selecting operator for filtering workspace
+     * @description Open modal window for selecting operator for filtering
+     * workspace
      */
     $scope.showOperatorFilter = function() {
       $scope.isOperatorFilter = true;
@@ -708,7 +1064,8 @@ angular
     /**
      * @function
      * @name showAssigneeFilter
-     * @description Open modal window for selecting assignee for filtering workspace
+     * @description Open modal window for selecting assignee for filtering
+     * workspace
      */
     $scope.showAssigneeFilter = function() {
       $scope.isOperatorFilter = false;
@@ -727,7 +1084,8 @@ angular
     /**
      * @function
      * @name showAssigneeFilter
-     * @description Open modal window for selecting assignee for filtering workspace
+     * @description Open modal window for selecting assignee for filtering
+     * workspace
      */
     $scope.showAssigneeModal = function() {
       if (!$scope.servicerequest.resolvedAt) {
@@ -747,7 +1105,8 @@ angular
     /**
      * @function
      * @name filterByWorker
-     * @description Filter Workspace service request by worker either assignee or operator
+     * @description Filter Workspace service request by worker either
+     * assignee or operator
      */
     $scope.filterByWorker = function(party) {
       if ($scope.isOperatorFilter) {
@@ -756,20 +1115,61 @@ angular
         $scope.assignee = party;
       }
 
-      console.log(party);
-
       $scope.modal.close();
       // reset flag back to it's initial value
       $scope.isOperatorFilter = true;
     };
 
+    /**
+     * @description Present worklog modal
+     */
+    $scope.showWorklogModal = function() {
+      //open worklog modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/worklog_modal.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {}
+      );
+    };
+
+    $scope.onWorklog = function() {
+      //ensure service request
+      if ($scope.servicerequest && !$scope.servicerequest.resolvedAt) {
+        var changelog = {
+          item: $scope.worklog.item,
+          quantity: $scope.worklog.quantity,
+          comment: $scope.worklog.comment,
+        };
+
+        //update changelog
+        if (changelog.item && changelog.quantity > 0) {
+          var _id = $scope.servicerequest._id;
+          ServiceRequest.changelog(_id, changelog).then(function(response) {
+            $scope.modal.close();
+            // $scope.servicerequest = response;
+            $scope.select(response);
+            $scope.updated = true;
+            $rootScope.$broadcast('app:servicerequests:reload');
+          });
+        } else {
+          $scope.modal.close();
+        }
+      }
+    };
+
     //pre load un resolved servicerequests on state activation
     $scope.find({
-      operator: party._id,
+      $or: [{ operator: party._id }, { assignee: party._id }],
       resolvedAt: { $eq: null },
       resetPage: true,
       reset: true,
-      misc: $scope.misc,
+      misc: 'inbox',
     });
 
     //listen for events
@@ -780,7 +1180,7 @@ angular
         resolvedAt: { $eq: null },
         resetPage: true,
         reset: true,
-        misc: $scope.misc,
+        misc: 'inbox',
       });
     });
 

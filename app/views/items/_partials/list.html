@@ -1,6 +1,6 @@
-<!-- start servicegroups list -->
+<!-- start items list -->
 <div class="row-col lt">
-  <!-- start servicegroups list search -->
+  <!-- start items list search -->
   <div class="p-a b-b list-search">
     <form>
       <div class="input-group">
@@ -9,7 +9,7 @@
           ng-change="onSearch()"
           ng-model="search.q"
           class="form-control form-control-sm"
-          placeholder="Search Service Groups ..."
+          placeholder="Search Items ..."
         />
         <span class="input-group-btn">
           <button class="btn btn-default btn-sm no-shadow" type="button">
@@ -19,43 +19,43 @@
       </div>
     </form>
   </div>
-  <!-- end servicegroup list search -->
-  <!-- start servicegroup listing -->
+  <!-- end item list search -->
+  <!-- start item listing -->
   <div class="row-row">
     <div class="row-body scrollable hover">
       <div class="row-inner">
         <div class="list" data-ui-list="info">
           <div
-            ng-click="select(servicegroup)"
+            ng-click="select(item)"
             class="list-item list-item-padded"
-            ng-repeat="servicegroup in servicegroups"
-            title="{{ servicegroup.description.en }}"
+            ng-repeat="item in items"
+            title="{{item.description.en}}"
           >
             <div class="list-left">
               <span class="w-40 avatar circle">
                 <letter-avatar
-                  title="Service Group Code"
-                  data="{{ servicegroup.code }}"
+                  title="Item Code"
+                  data="{{item.code}}"
                   height="60"
                   width="60"
-                  color="{{ servicegroup.color }}"
+                  color="{{item.color}}"
                   shape="round"
                 >
                 </letter-avatar>
               </span>
             </div>
             <div class="list-body">
-              <span
-                title="Service Group Code"
-                class="pull-right text-xs text-muted"
-              >
-                {{ servicegroup.code }}
+              <span title="Item Code" class="pull-right text-xs text-muted">
+                {{item.code}}
               </span>
-              <div title="Service Group Name" class="item-title">
-                <span class="_500">{{ servicegroup.name.en }}</span>
+              <div class="item-title">
+                <span title="Item Name" class="_500">{{item.name.en}}</span>
               </div>
-              <p class="block text-muted text-ellipsis">
-                {{ servicegroup.description.en }}
+              <p
+                title="Item Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{item.description.en}}
               </p>
             </div>
           </div>
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  <!-- end servicegroup listing -->
+  <!-- end item listing -->
   <!-- start pagination -->
   <div class="p-x-md p-y">
     <div
@@ -76,8 +76,8 @@
       ng-change="find()"
       template-url="views/_partials/list_pager.html"
     ></div>
-    <span class="text-sm text-muted">Total: {{ total }}</span>
+    <span class="text-sm text-muted">Total: {{total}}</span>
   </div>
   <!-- end pagination -->
 </div>
-<!-- end servicegroups list -->
+<!-- end items list -->

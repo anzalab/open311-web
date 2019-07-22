@@ -1,0 +1,114 @@
+<!-- modal header -->
+<div class="modal-header">
+  <div class="b-b">
+    <button
+      type="button"
+      class="close pull-right"
+      ng-click="$close()"
+      aria-hidden="true"
+    >
+      ×
+    </button>
+    <h4 class="modal-title">Record Worklog</h4>
+  </div>
+</div>
+<!-- end modal header -->
+
+<!-- modal body -->
+<div class="modal-body">
+  <div class="box">
+    <div class="m-l-lg m-r-lg">
+      <form role="form">
+        <!-- start item input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Item
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group form-material" title="Select Item">
+              <oi-select
+                oi-options="item.name for item in items track by item._id"
+                ng-model="worklog.item"
+                placeholder="Select Item"
+                class="form-control"
+                oi-select-options="{cleanModel: true}"
+              ></oi-select>
+            </div>
+          </div>
+        </div>
+        <!-- end item input -->
+
+        <!-- start quantity input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Quantity
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <input
+                type="text"
+                ng-model="worklog.quantity"
+                class="form-control"
+                name="quantity"
+                placeholder="Quantity"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <!-- end quantity input -->
+
+        <!-- start comment input  -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Comment
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <textarea
+                ng-model="worklog.comment"
+                class="form-control"
+                name="comment"
+                placeholder="Comment"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- end comment input -->
+      </form>
+    </div>
+    <!-- end account accessor list -->
+  </div>
+  <!-- start filter footer -->
+  <div class="modal-footer">
+    <button
+      class="btn btn-default"
+      title="Click to Cancel Worklog"
+      ng-click="$dismiss()"
+    >
+      Cancel
+    </button>
+    <button
+      class="btn btn-primary"
+      title="Click to Save Worklog"
+      ng-click="onWorklog()"
+    >
+      Save
+    </button>
+  </div>
+  <!-- end footer filter -->
+</div>
+<!-- end modal body -->

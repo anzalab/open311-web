@@ -1,0 +1,33 @@
+<!-- start issue worklog -->
+<div class="padding b-t">
+  <h6 class="m-b" title="Issue WorkLog">Materials</h6>
+  <table class="table table-bordered table-stats">
+    <thead>
+      <tr>
+        <th title="Item(Material or Equipment)">
+          Item
+        </th>
+        <th title="Quantity Used">
+          Quantity
+        </th>
+        <th title="Unit of Measure">
+          Unit
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="worklog in worklogs">
+        <td title="{{worklog.item.name}}">
+          {{worklog.item.name}}
+        </td>
+        <td title="{{worklog.quantity}}">
+          {{worklog.quantity}}
+        </td>
+        <td title="{{worklog.item.properties.unit}}">
+          {{worklog.item.properties.unit}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- end issue worklog -->
