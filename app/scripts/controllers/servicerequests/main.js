@@ -938,7 +938,7 @@ angular
         page: $scope.page,
         limit: $scope.limit,
         sort: {
-          createdAt: -1,
+          updatedAt: -1,
         },
         filter: $scope.query,
         q: $scope.q,

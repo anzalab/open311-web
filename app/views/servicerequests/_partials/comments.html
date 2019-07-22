@@ -45,7 +45,7 @@
           <p ng-if="comment.comment">{{comment.comment}}</p>
           <p ng-if="comment.item">
             Used {{comment.quantity}} - {{comment.item.properties.unit}} of
-            {{comment.item.name}}
+            {{comment.item.name.en}}
           </p>
           <p ng-if="comment.location && comment.location.coordinates">
             Change location to longitude: {{comment.location.coordinates[0]}},
