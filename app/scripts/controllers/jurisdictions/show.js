@@ -18,12 +18,32 @@ angular
   ) {
     $scope.edit = false;
 
+    /**
+     * @function
+     * @name setColorPickerOptions
+     * @description Set or Update color picker options when need to change
+     *
+     * @version  0.1.0
+     * @since 0.1.0
+     */
+    var setColorPickerOptions = function() {
+      $scope.colorPickerOptions = {
+        swatchPos: 'right',
+        disabled: !$scope.edit,
+        inputClass: 'form-control',
+        format: 'hexString',
+        round: true,
+      };
+    };
+
     $scope.onEdit = function() {
       $scope.edit = true;
+      setColorPickerOptions();
     };
 
     $scope.onCancel = function() {
       $scope.edit = false;
+      setColorPickerOptions();
       $rootScope.$broadcast('app:jurisdictions:reload');
     };
 
@@ -34,6 +54,7 @@ angular
         },
       });
       $scope.edit = true;
+      setColorPickerOptions();
     };
 
     //TODO show empty state if no jurisdiction selected
@@ -59,6 +80,7 @@ angular
       };
 
       //try update or save jurisdiction
+      /* jshint ignore:start */
       var updateOrSave = !$scope.jurisdiction._id
         ? $scope.jurisdiction.$save()
         : $scope.jurisdiction.$update();
@@ -75,9 +97,13 @@ angular
           $rootScope.$broadcast('app:jurisdictions:reload');
 
           $scope.edit = false;
+          setColorPickerOptions();
         })
         .catch(function(error) {
           $rootScope.$broadcast('appError', error);
         });
+      /* jshint ignore:end */
     };
+
+    setColorPickerOptions();
   });

@@ -106,22 +106,16 @@
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Group Color">
-                  <color-picker ng-model="servicegroup.color"> </color-picker>
                   <div class="m-t-lg">
                     <div class="form-group">
                       <label title="Service Group Color" class="floating-label"
                         >Service Group Color(HEX)</label
                       >
-                      <input
-                        title="Service Group Color"
-                        ng-disabled="!edit"
+                      <color-picker
                         ng-model="servicegroup.color"
-                        ng-required
-                        ng-minlength="1"
-                        type="text"
-                        name="color"
-                        class="form-control"
-                      />
+                        options="colorPickerOptions"
+                      >
+                      </color-picker>
                     </div>
                   </div>
                 </div>

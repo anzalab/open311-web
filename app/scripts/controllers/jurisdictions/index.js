@@ -52,13 +52,14 @@ angular
      * @description load jurisdictions
      */
     $scope.find = function() {
-      //start sho spinner
+      //start show spinner
       $scope.spin = true;
 
       Jurisdiction.find({
         page: $scope.page,
         limit: $scope.limit,
         sort: {
+          updatedAt: -1,
           name: 1,
         },
         filter: {},
