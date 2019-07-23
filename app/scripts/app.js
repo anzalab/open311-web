@@ -23,7 +23,7 @@ angular
     'monospaced.elastic',
     'oi.select',
     'uz.mailto',
-    'mp.colorPicker',
+    'color.picker',
     'AngularPrint',
     'angular-echarts',
     'btford.socket-io',

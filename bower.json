@@ -28,7 +28,7 @@
     "font-awesome": "fontawesome#^4.7.0",
     "oi.select": "^0.2.21",
     "angular-mailto": "^0.1.0",
-    "angular-color-picker": "^1.0.10",
+    "angular-color-picker": "angularjs-color-picker#^3.4.8",
     "angularPrint": "angular-print#^0.3.8",
     "echarts": "^3.6.2",
     "angular-socket-io": "^0.7.0",
