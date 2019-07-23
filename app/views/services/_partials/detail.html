@@ -152,22 +152,16 @@
                   </div>
                 </div>
                 <div class="m-t-lg" title="Service Color">
-                  <color-picker ng-model="service.color"> </color-picker>
                   <div class="m-t-lg">
                     <div class="form-group">
                       <label title="Service Color" class="floating-label"
                         >Service Color(HEX)</label
                       >
-                      <input
-                        title="Service Color"
-                        ng-disabled="!edit"
+                      <color-picker
                         ng-model="service.color"
-                        ng-required
-                        ng-minlength="1"
-                        type="text"
-                        name="color"
-                        class="form-control"
-                      />
+                        options="colorPickerOptions"
+                      >
+                      </color-picker>
                     </div>
                   </div>
                 </div>

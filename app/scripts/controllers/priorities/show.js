@@ -18,22 +18,43 @@ angular
   ) {
     $scope.edit = false;
 
+    /**
+     * @function
+     * @name setColorPickerOptions
+     * @description Set or Update color picker options when need to change
+     *
+     * @version  0.1.0
+     * @since 0.1.0
+     */
+    var setColorPickerOptions = function() {
+      $scope.colorPickerOptions = {
+        swatchPos: 'right',
+        disabled: !$scope.edit,
+        inputClass: 'form-control',
+        format: 'hexString',
+        round: true,
+      };
+    };
+
     $scope.onEdit = function() {
       $scope.edit = true;
+      setColorPickerOptions();
     };
 
     $scope.onCancel = function() {
       $scope.edit = false;
+      setColorPickerOptions();
       $rootScope.$broadcast('app:priorities:reload');
     };
 
     $scope.onNew = function() {
       $scope.priority = new Priority({ weight: 0, color: '#FF9800' });
       $scope.edit = true;
+      setColorPickerOptions();
     };
 
     //TODO show empty state if no priority selected
-    //listen for selected juridiction
+    //listen for selected jurisdiction
     $rootScope.$on('priority:selected', function(event, priority) {
       $scope.priority = priority;
     });
@@ -61,9 +82,12 @@ angular
           $rootScope.$broadcast('app:priorities:reload');
 
           $scope.edit = false;
+          setColorPickerOptions();
         })
         .catch(function(error) {
           $rootScope.$broadcast('appError', error);
         });
     };
+
+    setColorPickerOptions();
   });
