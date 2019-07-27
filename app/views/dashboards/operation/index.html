@@ -39,26 +39,19 @@
     ></ng-include>
     <!-- end jurisdiction summary and (ttr & att) -->
 
-    <!-- start overall and pipeline summary -->
-    <div class="row no-gutter">
-      <!-- start of area overall summary -->
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <ng-include
-          ng-if="performances && performances.overall"
-          src="'views/dashboards/performance/_partials/overall_summary.html'"
-        ></ng-include>
-      </div>
-      <!-- end of area overall summary -->
-      <!-- start area service pipeline -->
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <ng-include
-          ng-if="performances.statuses && performances.statuses.length > 0"
-          src="'views/dashboards/performance/_partials/pipeline_summary.html'"
-        ></ng-include>
-      </div>
-      <!-- end area service pipeline -->
-    </div>
-    <!-- end overall and pipeline summary -->
+    <!-- start overall area summary -->
+    <ng-include
+      ng-if="performances && performances.overall"
+      src="'views/dashboards/operation/_partials/overall_summary.html'"
+    ></ng-include>
+    <!-- end of overall area summary -->
+
+    <!-- start zone summary -->
+    <ng-include
+      ng-if="performances.services  && performances.services.length > 0"
+      src="'views/dashboards/operation/_partials/jurisdiction_zone_summary.html'"
+    ></ng-include>
+    <!-- end zone summary -->
 
     <!-- start service groups summary -->
     <!-- <ng-include ng-if="performances.groups && performances.groups.length > 0" src="'views/dashboards/performance/_partials/service_groups_summary.html'"></ng-include> -->
@@ -67,16 +60,9 @@
     <!-- start services summary -->
     <ng-include
       ng-if="performances.services  && performances.services.length > 0"
-      src="'views/dashboards/performance/_partials/services_summary.html'"
+      src="'views/dashboards/operation/_partials/services_summary.html'"
     ></ng-include>
     <!-- end services summary -->
-
-    <!-- start zone summary -->
-    <ng-include
-      ng-if="performances.services  && performances.services.length > 0"
-      src="'views/dashboards/operation/_partials/jurisdiction_zone_summary.html'"
-    ></ng-include>
-    <!-- end zone summary -->
 
     <!-- start material used summary -->
     <ng-include
