@@ -46,6 +46,13 @@
     ></ng-include>
     <!-- end of overall area summary -->
 
+    <!-- start blocked service requests summary -->
+    <ng-include
+      ng-if="performances.services  && performances.services.length > 0"
+      src="'views/dashboards/operation/_partials/blocked_service_requests_summary.html'"
+    ></ng-include>
+    <!-- end blocked service requests summary -->
+
     <!-- start zone summary -->
     <ng-include
       ng-if="performances.services  && performances.services.length > 0"

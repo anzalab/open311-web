@@ -51,6 +51,11 @@ angular
       { name: 'Air Valve 3"Double Acting (GS)', quantity: 1 },
       { name: 'Air Valve 3"Single Acting (GS)', quantity: 1 },
     ];
+    $scope.reasons = [
+      { name: 'No Transport', count: 3 },
+      { name: 'No Materials', count: 10 },
+      { name: 'Other Works', count: 13 },
+    ];
     $scope.zones = [
       {
         name: 'Zone A',
@@ -480,10 +485,10 @@ angular
       column = column || 'count';
 
       //prepare unique services for bar chart categories
-      var categories = _.chain($scope.performances)
-        .map('services')
-        .uniqBy('name')
-        .value();
+      // var categories = _.chain($scope.performances)
+      //   .map('services')
+      //   .uniqBy('name')
+      //   .value();
 
       //prepare bar chart series data
       var data = _.map($scope.performances.services, function(service) {
