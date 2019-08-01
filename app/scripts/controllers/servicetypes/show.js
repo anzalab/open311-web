@@ -2,27 +2,21 @@
 
 /**
  * @ngdoc function
- * @name ng311.controller:ServiceShowCtrl
+ * @name ng311.controller:ServiceTypeShowCtrl
  * @description
- * # ServiceShowCtrl
- * Service show controller of ng311
+ * # ServiceTypeShowCtrl
+ * ServiceType show controller of ng311
  */
 angular
   .module('ng311')
-  .controller('ServiceShowCtrl', function(
+  .controller('ServiceTypeShowCtrl', function(
     $rootScope,
     $scope,
     $state,
     $stateParams,
-    Service,
-    endpoints,
-    servicetypes
+    ServiceType
   ) {
     $scope.edit = false;
-    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
-    $scope.servicegroups = endpoints.servicegroups.servicegroups;
-    $scope.servicetypes = servicetypes.servicetypes;
-    $scope.priorities = endpoints.priorities.priorities;
 
     /**
      * @function
@@ -50,42 +44,43 @@ angular
     $scope.onCancel = function() {
       $scope.edit = false;
       setColorPickerOptions();
-      $rootScope.$broadcast('app:services:reload');
+      $rootScope.$broadcast('app:servicetypes:reload');
     };
 
     $scope.onNew = function() {
-      $scope.service = new Service({});
+      $scope.servicetype = new ServiceType({});
       $scope.edit = true;
       setColorPickerOptions();
     };
 
-    //TODO show empty state if no service selected
-    //listen for selected service
-    $rootScope.$on('service:selected', function(event, service) {
-      $scope.service = service;
+    //TODO show empty state if no servicetype selected
+    //listen for selected servicetype
+    $rootScope.$on('servicetype:selected', function(event, servicetype) {
+      $scope.servicetype = servicetype;
     });
 
     /**
-     * @description save created service
+     * @description save created servicetype
      */
     $scope.save = function() {
       //TODO show input prompt
       //TODO show loading mask
 
-      //try update or save service
-      var updateOrSave = !$scope.service._id
-        ? $scope.service.$save()
-        : $scope.service.$update();
+      //try update or save servicetype
+      var updateOrSave = !$scope.servicetype._id
+        ? $scope.servicetype.$save()
+        : $scope.servicetype.$update();
 
       updateOrSave
         .then(function(response) {
           response = response || {};
 
-          response.message = response.message || 'Service Saved Successfully';
+          response.message =
+            response.message || 'Service Type Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('app:services:reload');
+          $rootScope.$broadcast('app:servicetypes:reload');
 
           $scope.edit = false;
           setColorPickerOptions();

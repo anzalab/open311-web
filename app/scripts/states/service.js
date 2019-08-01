@@ -28,6 +28,16 @@ angular.module('ng311').config(function($stateProvider) {
               },
             });
           },
+          servicetypes: function(ServiceType) {
+            return ServiceType.find({
+              limit: 1000,
+              filter: {
+                deletedAt: {
+                  $eq: null,
+                },
+              },
+            });
+          },
         },
       },
     },

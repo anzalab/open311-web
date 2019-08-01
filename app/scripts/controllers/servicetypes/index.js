@@ -2,17 +2,22 @@
 
 /**
  * @ngdoc function
- * @name ng311.controller:ItemIndexCtrl
+ * @name ng311.controller:ServiceTypeIndexCtrl
  * @description
- * # ItemIndexCtrl
- * Item list controller of ng311
+ * # ServiceTypeIndexCtrl
+ * ServiceType list controller of ng311
  */
 angular
   .module('ng311')
-  .controller('ItemIndexCtrl', function($rootScope, $scope, $state, Item) {
-    //items in the scope
+  .controller('ServiceTypeIndexCtrl', function(
+    $rootScope,
+    $scope,
+    $state,
+    ServiceType
+  ) {
+    //servicetypes in the scope
     $scope.spin = false;
-    $scope.items = [];
+    $scope.servicetypes = [];
     $scope.page = 1;
     $scope.limit = 10;
     $scope.total = 0;
@@ -30,27 +35,27 @@ angular
     };
 
     /**
-     * set current item request
+     * set current servicetype request
      */
-    $scope.select = function(item) {
+    $scope.select = function(servicetype) {
       //sort comments in desc order
-      if (item && item._id) {
-        //update scope item request ref
-        $scope.item = item;
-        $rootScope.$broadcast('item:selected', item);
+      if (servicetype && servicetype._id) {
+        //update scope servicetype request ref
+        $scope.servicetype = servicetype;
+        $rootScope.$broadcast('servicetype:selected', servicetype);
       }
 
       $scope.create = false;
     };
 
     /**
-     * @description load items
+     * @description load servicetypes
      */
     $scope.find = function() {
       //start sho spinner
       $scope.spin = true;
 
-      Item.find({
+      ServiceType.find({
         page: $scope.page,
         limit: $scope.limit,
         sort: {
@@ -60,12 +65,12 @@ angular
         q: $scope.q,
       })
         .then(function(response) {
-          //update scope with items when done loading
-          $scope.items = response.items;
+          //update scope with servicetypes when done loading
+          $scope.servicetypes = response.servicetypes;
           if ($scope.updated) {
             $scope.updated = false;
           } else {
-            $scope.select(_.first($scope.items));
+            $scope.select(_.first($scope.servicetypes));
           }
           $scope.total = response.total;
           $scope.spin = false;
@@ -75,18 +80,18 @@ angular
         });
     };
 
-    //check whether items will paginate
+    //check whether servicetypes will paginate
     $scope.willPaginate = function() {
       var willPaginate =
-        $scope.items && $scope.total && $scope.total > $scope.limit;
+        $scope.servicetypes && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
 
-    //pre load items on state activation
+    //pre load servicetypes on state activation
     $scope.find();
 
     //listen for events
-    $rootScope.$on('app:items:reload', function() {
+    $rootScope.$on('app:servicetypes:reload', function() {
       $scope.find();
     });
   });

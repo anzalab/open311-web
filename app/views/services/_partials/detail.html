@@ -38,7 +38,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name for item in servicegroups track by item.id"
+                      oi-options="item.name.en for item in servicegroups track by item.id"
                       ng-model="service.group"
                       placeholder="Select Group"
                       class="form-control"
@@ -48,6 +48,32 @@
                   </div>
                 </div>
                 <!-- end service group -->
+                <!-- start service type -->
+                <div class="m-t-lg" title="Service Type">
+                  <div ng-show="!edit" class="form-group">
+                    <label title="Type" class="floating-label">Type</label>
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="service.type.name.en"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="group"
+                      class="form-control"
+                    />
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select
+                      oi-options="item.name.en for item in servicetypes track by item.id"
+                      ng-model="service.type"
+                      placeholder="Select Type"
+                      class="form-control"
+                      oi-select-options="{cleanModel: true}"
+                    ></oi-select>
+                    <label title="Type" class="floating-label">Type</label>
+                  </div>
+                </div>
+                <!-- end service type -->
                 <!-- start service priority -->
                 <div class="m-t-lg" title="Service Priority">
                   <div ng-show="!edit" class="form-group">
@@ -199,14 +225,28 @@
                 <div class="m-t-lg" title="External Reporting Method Support">
                   <div class="form-group">
                     <div class="checkbox-custom checkbox-primary">
-                      <label title="External Reporting Method Support"
-                        >Support External Reporting Methods</label
-                      >
                       <input
                         ng-show="edit"
                         type="checkbox"
-                        ng-model="service.isExternal"
+                        ng-model="service.flags.external"
                       />
+                      <label title="External Reporting Method Support"
+                        >Support External Reporting Methods</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-md" title="Require Account Number">
+                  <div class="form-group">
+                    <div class="checkbox-custom checkbox-primary">
+                      <input
+                        ng-show="edit"
+                        type="checkbox"
+                        ng-model="service.flags.account"
+                      />
+                      <label title="Require Account Number"
+                        >Require Account Number</label
+                      >
                     </div>
                   </div>
                 </div>
