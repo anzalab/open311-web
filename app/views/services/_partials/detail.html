@@ -38,7 +38,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name for item in servicegroups track by item.id"
+                      oi-options="item.name.en for item in servicegroups track by item.id"
                       ng-model="service.group"
                       placeholder="Select Group"
                       class="form-control"
