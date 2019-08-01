@@ -934,6 +934,11 @@ angular
         $scope.query = _.merge({}, $scope.query, query);
       }
 
+      // rebind search
+      if (isSearchable) {
+        $scope.q = $scope.search.q;
+      }
+
       ServiceRequest.find({
         page: $scope.page,
         limit: $scope.limit,
