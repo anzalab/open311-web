@@ -27,9 +27,9 @@ angular
     $scope.groups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.services = endpoints.services.services;
-    $scope.methods = party.settings.servicerequest.methods;
+    $scope.methods = party.settings.servicerequest.webMethods;
 
-    //instantiate new servicerequest
+    //instantiate new service request
     var servicerequest = _.merge(
       {},
       {
