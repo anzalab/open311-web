@@ -56,6 +56,18 @@
                 </a>
               </li>
               <li
+                show-if-has-any-permit="servicetype:view"
+                ui-sref-active="active"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  ui-sref="app.manage.servicetypes"
+                  class="nav-link text-muted block"
+                >
+                  Types
+                </a>
+              </li>
+              <li
                 show-if-has-any-permit="service:view"
                 ui-sref-active="active"
                 class="nav-item m-b-xs"

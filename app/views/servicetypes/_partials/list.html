@@ -1,0 +1,88 @@
+<!-- start servicetypes list -->
+<div class="row-col lt">
+  <!-- start servicetypes list search -->
+  <div class="p-a b-b list-search">
+    <form>
+      <div class="input-group">
+        <input
+          type="text"
+          ng-change="onSearch()"
+          ng-model="search.q"
+          class="form-control form-control-sm"
+          placeholder="Search Service Types ..."
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default btn-sm no-shadow" type="button">
+            <i class="ti-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <!-- end servicetypes list search -->
+  <!-- start servicetypes listing -->
+  <div class="row-row">
+    <div class="row-body scrollable hover">
+      <div class="row-inner">
+        <div class="list" data-ui-list="info">
+          <div
+            ng-click="select(servicetype)"
+            class="list-item list-item-padded"
+            ng-repeat="servicetype in servicetypes"
+            title="{{servicetype.description.en}}"
+          >
+            <div class="list-left">
+              <span class="w-40 avatar circle">
+                <letter-avatar
+                  title="Service Type Code"
+                  data="{{servicetype.code}}"
+                  height="60"
+                  width="60"
+                  color="{{servicetype.color}}"
+                  shape="round"
+                >
+                </letter-avatar>
+              </span>
+            </div>
+            <div class="list-body">
+              <span
+                title="Service Type Code"
+                class="pull-right text-xs text-muted"
+              >
+                {{servicetype.code}}
+              </span>
+              <div class="item-title">
+                <span title="Service Type Name" class="_500"
+                  >{{servicetype.name.en}}</span
+                >
+              </div>
+              <p
+                title="Service Type Description"
+                class="block text-muted text-ellipsis"
+              >
+                {{servicetype.description.en}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end servicetypes listing -->
+  <!-- start pagination -->
+  <div class="p-x-md p-y">
+    <div
+      class="btn-group pull-right list-pager"
+      uib-pager
+      ng-show="willPaginate()"
+      total-items="total"
+      ng-model="page"
+      items-per-page="limit"
+      ng-change="find()"
+      template-url="views/_partials/list_pager.html"
+    ></div>
+    <span class="text-sm text-muted">Total: {{total}}</span>
+  </div>
+  <!-- end pagination -->
+</div>
+<!-- end servicetypes list -->

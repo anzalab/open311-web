@@ -199,14 +199,28 @@
                 <div class="m-t-lg" title="External Reporting Method Support">
                   <div class="form-group">
                     <div class="checkbox-custom checkbox-primary">
-                      <label title="External Reporting Method Support"
-                        >Support External Reporting Methods</label
-                      >
                       <input
                         ng-show="edit"
                         type="checkbox"
-                        ng-model="service.isExternal"
+                        ng-model="service.flags.external"
                       />
+                      <label title="External Reporting Method Support"
+                        >Support External Reporting Methods</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-md" title="Require Account Number">
+                  <div class="form-group">
+                    <div class="checkbox-custom checkbox-primary">
+                      <input
+                        ng-show="edit"
+                        type="checkbox"
+                        ng-model="service.flags.account"
+                      />
+                      <label title="Require Account Number"
+                        >Require Account Number</label
+                      >
                     </div>
                   </div>
                 </div>
