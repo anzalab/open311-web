@@ -48,6 +48,32 @@
                   </div>
                 </div>
                 <!-- end service group -->
+                <!-- start service type -->
+                <div class="m-t-lg" title="Service Type">
+                  <div ng-show="!edit" class="form-group">
+                    <label title="Type" class="floating-label">Type</label>
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="service.type.name.en"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="group"
+                      class="form-control"
+                    />
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select
+                      oi-options="item.name.en for item in servicetypes track by item.id"
+                      ng-model="service.type"
+                      placeholder="Select Type"
+                      class="form-control"
+                      oi-select-options="{cleanModel: true}"
+                    ></oi-select>
+                    <label title="Type" class="floating-label">Type</label>
+                  </div>
+                </div>
+                <!-- end service type -->
                 <!-- start service priority -->
                 <div class="m-t-lg" title="Service Priority">
                   <div ng-show="!edit" class="form-group">

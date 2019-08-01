@@ -15,11 +15,13 @@ angular
     $state,
     $stateParams,
     Service,
-    endpoints
+    endpoints,
+    servicetypes
   ) {
     $scope.edit = false;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
+    $scope.servicetypes = servicetypes.servicetypes;
     $scope.priorities = endpoints.priorities.priorities;
 
     /**
