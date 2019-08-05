@@ -1168,6 +1168,23 @@ angular
       }
     };
 
+    /**
+     * @function
+     * @name onRefresh
+     * @description Refresh selected service request
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.onRefresh = function() {
+      if ($scope.servicerequest) {
+        $scope.servicerequest.$get().then(function(response) {
+          $scope.servicerequest = new ServiceRequest(response);
+          $scope.loadComment($scope.servicerequest);
+        });
+      }
+    };
+
     //pre load un resolved servicerequests on state activation
     $scope.find({
       $or: [{ operator: party._id }, { assignee: party._id }],
