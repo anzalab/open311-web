@@ -30,14 +30,12 @@ angular
      */
     Jurisdiction.find = function(params) {
       return $http
-        .get(Utils.asLink('jurisdictions'), {
+        .get(Utils.asLink('v1/jurisdictions'), {
           params: params,
         })
         .then(function(response) {
           //map plain jurisdiction object to resource instances
-          var jurisdictions = response.data.jurisdictions.map(function(
-            jurisdiction
-          ) {
+          var jurisdictions = response.data.data.map(function(jurisdiction) {
             //create jurisdiction as a resource instance
             return new Jurisdiction(jurisdiction);
           });

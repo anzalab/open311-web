@@ -132,7 +132,7 @@
                           ng-value="method"
                           name="method"
                         />
-                        <i class="blue"></i> {{method}}
+                        <i class="blue"></i> {{ method }}
                       </label>
                     </div>
                   </div>
@@ -151,7 +151,7 @@
                       title="Select Service"
                     >
                       <oi-select
-                        oi-options="item.name for item in services track by item.id"
+                        oi-options="item.name.en for item in searchServices($query) track by item.id"
                         ng-model="servicerequest.service"
                         ng-required
                         placeholder="Select Service"
@@ -167,7 +167,7 @@
                       title="Select Area"
                     >
                       <oi-select
-                        oi-options="item.name for item in jurisdictions track by item.id"
+                        oi-options="item.name for item in searchJurisdictions($query) track by item.id"
                         ng-model="servicerequest.jurisdiction"
                         ng-required
                         placeholder="Select Area"

@@ -38,7 +38,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name.en for item in servicegroups track by item.id"
+                      oi-options="item.name.en for item in searchServiceGroups($query) track by item.id"
                       ng-model="service.group"
                       placeholder="Select Group"
                       class="form-control"
@@ -64,7 +64,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name.en for item in servicetypes track by item.id"
+                      oi-options="item.name.en for item in searchServiceTypes($query) track by item.id"
                       ng-model="service.type"
                       placeholder="Select Type"
                       class="form-control"
@@ -92,7 +92,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name for item in priorities track by item.id"
+                      oi-options="item.name.en for item in searchPriorities($query) track by item.id"
                       ng-model="service.priority"
                       placeholder="Select Priority"
                       class="form-control"
