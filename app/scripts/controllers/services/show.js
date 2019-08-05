@@ -50,7 +50,7 @@ angular
      * @since 0.1.0
      */
     $scope.searchServiceGroups = function(query) {
-      return ServiceGroup.find({ name: query }).then(function(response) {
+      return ServiceGroup.find({ q: query }).then(function(response) {
         return response.servicegroups;
       });
     };
@@ -64,7 +64,7 @@ angular
      * @since 0.1.0
      */
     $scope.searchPriorities = function(query) {
-      return Priority.find({ name: query }).then(function(response) {
+      return Priority.find({ q: query }).then(function(response) {
         return response.priorities;
       });
     };
@@ -78,7 +78,7 @@ angular
      * @since 0.1.0
      */
     $scope.searchServiceTypes = function(query) {
-      return ServiceType.find({ name: query }).then(function(response) {
+      return ServiceType.find({ q: query }).then(function(response) {
         return response.servicetypes;
       });
     };
