@@ -16,13 +16,12 @@ angular
     $stateParams,
     Service,
     endpoints,
-    servicetypes
+    ServiceGroup,
+    Priority,
+    ServiceType
   ) {
     $scope.edit = false;
-    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
-    $scope.servicegroups = endpoints.servicegroups.servicegroups;
-    $scope.servicetypes = servicetypes.servicetypes;
-    $scope.priorities = endpoints.priorities.priorities;
+    // $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
 
     /**
      * @function
@@ -40,6 +39,48 @@ angular
         format: 'hexString',
         round: true,
       };
+    };
+
+    /**
+     * @function
+     * @name searchServiceGroup
+     * @description Search service group by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchServiceGroups = function(query) {
+      return ServiceGroup.find({ name: query }).then(function(response) {
+        return response.servicegroups;
+      });
+    };
+
+    /**
+     * @function
+     * @name searchPriorities
+     * @description Search priorities by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchPriorities = function(query) {
+      return Priority.find({ name: query }).then(function(response) {
+        return response.priorities;
+      });
+    };
+
+    /**
+     * @function
+     * @name searchServiceTypes
+     * @description Search service types by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchServiceTypes = function(query) {
+      return ServiceType.find({ name: query }).then(function(response) {
+        return response.servicetypes;
+      });
     };
 
     $scope.onEdit = function() {
