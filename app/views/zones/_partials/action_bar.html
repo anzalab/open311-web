@@ -11,7 +11,7 @@
       </span>
     </a>
   </li>
-  <li ng-if="!edit" class="nav-item">
+  <li ng-if="!edit " class="nav-item">
     <a
       ng-click="onNew()"
       class="nav-link text-muted"
@@ -22,7 +22,7 @@
       </span>
     </a>
   </li>
-  <li ng-if="!edit" class="nav-item b-l p-l p-r">
+  <li ng-if="!edit && zone._id" class="nav-item b-l p-l p-r">
     <a
       ng-click="onEdit()"
       class="nav-link text-muted no-border"
