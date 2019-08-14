@@ -41,7 +41,7 @@ angular.module('ng311').factory('Status', function($http, $resource, Utils) {
         //return paginated response
         return {
           statuses: statuses,
-          total: response.data.count,
+          total: response.data.total,
         };
       });
   };

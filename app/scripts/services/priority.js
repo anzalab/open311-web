@@ -41,7 +41,7 @@ angular.module('ng311').factory('Priority', function($http, $resource, Utils) {
         //return paginated response
         return {
           priorities: priorities,
-          total: response.data.count,
+          total: response.data.total,
         };
       });
   };

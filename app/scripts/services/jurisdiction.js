@@ -43,7 +43,7 @@ angular
           //return paginated response
           return {
             jurisdictions: jurisdictions,
-            total: response.data.count,
+            total: response.data.total,
           };
         });
     };
