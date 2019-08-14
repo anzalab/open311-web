@@ -48,6 +48,7 @@ angular.module('ng311').config(function($stateProvider) {
     resolve: {
       roles: function(Role) {
         return Role.find({
+          limit: 1000,
           filter: {
             deletedAt: {
               $eq: null,
