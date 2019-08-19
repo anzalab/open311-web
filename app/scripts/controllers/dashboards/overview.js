@@ -279,7 +279,7 @@ angular
       //prepare bar chart series data
       var data = _.map($scope.overviews.services, function(service) {
         var serie = {
-          name: service.name,
+          name: service.name.en,
           value: service[column],
           itemStyle: {
             normal: {
