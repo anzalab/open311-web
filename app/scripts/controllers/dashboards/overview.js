@@ -76,6 +76,18 @@ angular
           'Average Resolve Time',
         ],
       },
+      types: {
+        filename: 'service_types_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service Type',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
       services: {
         filename: 'services_overview_reports_' + Date.now() + '.csv',
         headers: [
@@ -141,6 +153,10 @@ angular
         //reshape for workspace and method
         if (type === 'methods' || type === 'workspaces') {
           overview = _.pick(overview, ['name', 'total']);
+        }
+
+        if (type === 'services' || type === 'types') {
+          overview = _.merge({}, overview, { name: overview.name.en });
         }
 
         return overview;
@@ -221,6 +237,7 @@ angular
       $scope.prepareServiceVisualization();
       $scope.prepareJurisdictionVisualization();
       $scope.prepareServiceGroupVisualization();
+      $scope.prepareServiceTypeVisualization();
       $scope.prepareMethodVisualization();
       $scope.prepareWorkspaceVisualization();
     };
@@ -505,6 +522,80 @@ angular
             selectedMode: 'single',
             radius: ['45%', '55%'],
             color: _.map($scope.overviews.groups, 'color'),
+
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+    };
+
+    /**
+     * prepare service type overview visualization
+     * @return {object} echart bar chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author Benson Maruchu<benmaruchu@gmail.com>
+     */
+    $scope.prepareServiceTypeVisualization = function(column) {
+      //ensure column
+      column = column || 'count';
+
+      //prepare chart series data
+      var data = _.map($scope.overviews.types, function(type) {
+        return {
+          name: type.name.en,
+          value: type[column],
+        };
+      });
+
+      //prepare chart config
+      $scope.perServiceTypeConfig = {
+        height: 400,
+        forceClear: true,
+      };
+
+      //prepare chart options
+      $scope.perServiceTypeOptions = {
+        textStyle: {
+          fontFamily: 'Lato',
+        },
+        title: {
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16,
+          },
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Service Types Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.map($scope.overviews.types, 'color'),
 
             label: {
               normal: {
