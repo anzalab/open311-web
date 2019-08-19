@@ -48,7 +48,7 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
    */
   Summary.overviews = function(params) {
     return $http
-      .get(Utils.asLink(['v1', 'reports', 'overview']), {
+      .get(Utils.asLink(['v1', 'reports', 'overviews']), {
         params: params,
       })
       .then(function(response) {
@@ -78,11 +78,11 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
    */
   Summary.performances = function(params) {
     return $http
-      .get(Utils.asLink(['reports', 'performances']), {
+      .get(Utils.asLink(['v1', 'reports', 'performances']), {
         params: params,
       })
       .then(function(response) {
-        return response.data;
+        return response.data.data;
       });
   };
 

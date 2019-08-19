@@ -278,7 +278,7 @@ angular
       //prepare chart series data
       var data = _.map($scope.performances.statuses, function(status) {
         return {
-          name: status.name,
+          name: status.name.en,
           value: status.count,
         };
       });
@@ -430,7 +430,7 @@ angular
       //prepare bar chart series data
       var data = _.map($scope.performances.services, function(service) {
         var serie = {
-          name: service.name,
+          name: service.name.en,
           value: service[column],
           itemStyle: {
             normal: {

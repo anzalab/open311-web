@@ -21,7 +21,9 @@
             aria-expanded="false"
             ng-csv="export('services')"
             csv-header="exports.services.headers"
-            filename="services_performance_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="services_performance_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -115,39 +117,39 @@
             </thead>
             <tbody>
               <tr ng-repeat="service in performances.services">
-                <td title="{{service.name}}">
-                  {{service.name}}
+                <td title="{{ service.name }}">
+                  {{ service.name.en }}
                 </td>
-                <td title="{{service.count | number:0}}">
-                  {{service.count | number:0}}
+                <td title="{{ service.count | number: 0 }}">
+                  {{ service.count | number: 0 }}
                 </td>
-                <td title=" {{service.pending | number:0}}">
-                  {{service.pending | number:0}}
+                <td title=" {{ service.pending | number: 0 }}">
+                  {{ service.pending | number: 0 }}
                 </td>
-                <td title=" {{service.resolved | number:0}}">
-                  {{service.resolved | number:0}}
+                <td title=" {{ service.resolved | number: 0 }}">
+                  {{ service.resolved | number: 0 }}
                 </td>
-                <td title=" {{service.late | number:0}}">
-                  {{service.late | number:0}}
+                <td title=" {{ service.late | number: 0 }}">
+                  {{ service.late | number: 0 }}
                 </td>
                 <td>
                   <span>
-                    {{service.averageAttendTime.minutes}}
+                    {{ service.averageAttendTime.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                   <span>
-                    {{service.averageAttendTime.seconds}}
+                    {{ service.averageAttendTime.seconds }}
                     <span class="text-muted text-xs">secs</span>
                   </span>
                 </td>
                 <td>
                   <span>
-                    {{performances.overall.averageResolveTime.hours +
-                    (performances.overall.averageResolveTime.days * 24)}}
+                    {{ performances.overall.averageResolveTime.hours +
+                    performances.overall.averageResolveTime.days * 24 }}
                     <span class="text-muted text-xs">hrs</span>
                   </span>
                   <span>
-                    {{service.averageAttendTime.minutes}}
+                    {{ service.averageAttendTime.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                 </td>

@@ -19,9 +19,11 @@
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
-            ng-csv="export('services')"
-            csv-header="exports.services.headers"
-            filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            ng-csv="export('statuses')"
+            csv-header="exports.statuses.headers"
+            filename="services_overview_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -64,15 +66,15 @@
         <div
           ng-repeat="status in performances.statuses"
           class="col-xs-6 col-sm-3 b-r b-b"
-          title="{{status.name}} Service Requests"
+          title="{{ status.name.en }} Service Requests"
         >
           <div class="p-a-sm">
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
-                {{status.count}}
+                {{ status.count }}
               </h4>
               <p class="text-muted m-b-md">
-                {{status.name}}
+                {{ status.name.en }}
               </p>
             </div>
           </div>
