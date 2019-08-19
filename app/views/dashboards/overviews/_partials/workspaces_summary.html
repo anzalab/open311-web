@@ -24,7 +24,9 @@
             aria-expanded="false"
             ng-csv="export('workspaces')"
             csv-header="exports.workspaces.headers"
-            filename="workspaces_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="workspaces_overview_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -77,15 +79,27 @@
                 >
                   Total
                 </th>
+                <th title="Total Pending Count of Service Requests">
+                  Pending
+                </th>
+                <th title="Total Resolved Count of Service Requests">
+                  Resolved
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="workspace in overviews.workspaces">
-                <td title="{{workspace.name}}">
-                  {{workspace.name}}
+                <td title="{{ workspace.name }}">
+                  {{ workspace.name }}
                 </td>
-                <td title="{{workspace.count | number:0}}">
-                  {{workspace.count | number:0}}
+                <td title="{{ workspace.count | number: 0 }}">
+                  {{ workspace.count | number: 0 }}
+                </td>
+                <td title="{{ workspace.pending | number: 0 }}">
+                  {{ workspace.pending | number: 0 }}
+                </td>
+                <td title="{{ workspace.resolved | number: 0 }}">
+                  {{ workspace.resolved | number: 0 }}
                 </td>
               </tr>
             </tbody>

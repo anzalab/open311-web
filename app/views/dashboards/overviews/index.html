@@ -64,6 +64,13 @@
     ></ng-include>
     <!-- end service groups summary -->
 
+    <!-- start service types summary -->
+    <ng-include
+      ng-if="overviews.groups && overviews.types.length > 0"
+      src="'views/dashboards/overviews/_partials/service_types_summary.html'"
+    ></ng-include>
+    <!-- end service types summary -->
+
     <!-- start services summary -->
     <ng-include
       ng-if="overviews.services  && overviews.services.length > 0"
