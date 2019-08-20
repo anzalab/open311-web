@@ -29,8 +29,10 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
+    $scope.servicetypes = endpoints.servicetypes.data;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
+    $scope.methods = party.settings.servicerequest.methods;
 
     //set default jurisdiction
     $scope.jurisdiction =
@@ -52,6 +54,8 @@ angular
           .toDate(),
       jurisdictions: $scope.jurisdiction._id,
       workspaces: [],
+      servicetypes: [],
+      methods: [],
     };
 
     //TODO persist filter to local storage
@@ -278,7 +282,7 @@ angular
       //prepare chart series data
       var data = _.map($scope.performances.statuses, function(status) {
         return {
-          name: status.name,
+          name: status.name.en,
           value: status.count,
         };
       });
@@ -430,7 +434,7 @@ angular
       //prepare bar chart series data
       var data = _.map($scope.performances.services, function(service) {
         var serie = {
-          name: service.name,
+          name: service.name.en,
           value: service[column],
           itemStyle: {
             normal: {

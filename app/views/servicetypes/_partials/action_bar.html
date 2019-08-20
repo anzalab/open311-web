@@ -1,32 +1,32 @@
-<!-- start zone detail action bar -->
+<!-- start servicetype detail action bar -->
 <ul class="nav navbar-nav">
   <li ng-if="edit" class="nav-item">
     <a
       ng-click="onCancel()"
       class="nav-link text-muted"
-      title="Click to Cancel Zone Edit"
+      title="Click to Cancel Service Type Edit"
     >
       <span class="nav-text">
         <i class="icon ti-close" aria-hidden="true"></i>
       </span>
     </a>
   </li>
-  <li ng-if="!edit " class="nav-item">
+  <li ng-if="!edit" class="nav-item">
     <a
       ng-click="onNew()"
       class="nav-link text-muted"
-      title="Click to Add New Zone"
+      title="Click to Add New Service Type"
     >
       <span class="nav-text">
         <i class="icon ti-plus" aria-hidden="true"></i>
       </span>
     </a>
   </li>
-  <li ng-if="!edit && zone._id" class="nav-item b-l p-l p-r">
+  <li ng-if="!edit && servicetype._id" class="nav-item b-l p-l p-r">
     <a
       ng-click="onEdit()"
       class="nav-link text-muted no-border"
-      title="Click to edit zone"
+      title="Click to edit service type"
     >
       <span class="nav-text">
         <i class="icon-pencil" aria-hidden="true"></i>
@@ -37,10 +37,10 @@
     <a
       ng-click="save()"
       class="nav-link text-muted no-border"
-      title="Click to save zone"
+      title="Click to save service type"
     >
       Save
     </a>
   </li>
 </ul>
-<!-- end zone detail action bar -->
+<!-- end servicetype detail action bar -->

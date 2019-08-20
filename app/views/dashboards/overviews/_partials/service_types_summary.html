@@ -1,16 +1,16 @@
-<!-- start services summary -->
-<div class="padding m-t-md m-b-lg">
+<!-- start service groups summary -->
+<div class="padding m-t-md">
   <!-- start report box -->
   <div class="box b-a p-l-0">
     <!-- start header -->
-    <div class="box-header b-b p-t-md p-b-md" title="Services Summary">
-      <h3>Services Summary</h3>
+    <div class="box-header b-b p-t-md  p-b-md" title="Areas Summary">
+      <h3>Service Types Summary</h3>
       <!-- <small>Sub title goes here with small font</small> -->
     </div>
     <!-- end header -->
 
     <!-- start toolbox -->
-    <div class="box-tool">
+    <div class="box-tool p-t-sm">
       <!-- start time filters -->
       <ul class="nav">
         <!-- start export -->
@@ -19,9 +19,9 @@
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
-            ng-csv="export('services')"
-            csv-header="exports.services.headers"
-            filename="services_performance_reports_{{
+            ng-csv="export('types')"
+            csv-header="exports.groups.headers"
+            filename="service_types_overview_reports_{{
               filters.startedAt | date: settings.dateFormat
             }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
@@ -60,47 +60,47 @@
     <div>
       <div class="row-col">
         <!-- start visual stats -->
-        <div class="col-sm-6 b-r lt">
+        <div class="col-sm-5 b-r lt">
           <div class="p-a-md">
             <echart
-              config="perServiceConfig"
-              options="perServiceOptions"
+              config="perServiceTypeConfig"
+              options="perServiceTypeOptions"
             ></echart>
           </div>
         </div>
         <!-- end visual starts -->
 
         <!-- start tabular stats -->
-        <div class="col-sm-6">
+        <div class="col-sm-7">
           <table class="table table-bordered table-stats">
             <thead>
               <tr>
                 <th
-                  ng-click="prepareServiceVisualization('count')"
-                  title="Area"
+                  ng-click="prepareServiceTypeVisualization('count')"
+                  title="Service Type"
                 >
-                  Service
+                  Service Type
                 </th>
                 <th
-                  ng-click="prepareServiceVisualization('count')"
+                  ng-click="prepareServiceTypeVisualization('count')"
                   title="Total Count of Service Requests"
                 >
                   Total
                 </th>
                 <th
-                  ng-click="prepareServiceVisualization('pending')"
+                  ng-click="prepareServiceTypeVisualization('pending')"
                   title="Total Count of Pending Service Requests"
                 >
                   Pending
                 </th>
                 <th
-                  ng-click="prepareServiceVisualization('resolved')"
+                  ng-click="prepareServiceTypeVisualization('resolved')"
                   title="Total Count of Resolved Service Requests"
                 >
                   Resolved
                 </th>
                 <th
-                  ng-click="prepareServiceVisualization('late')"
+                  ng-click="prepareServiceTypeVisualization('late')"
                   title="Total Count of Service Requests Past SLA Resolve Time"
                 >
                   Late
@@ -116,40 +116,40 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="service in performances.services">
-                <td title="{{ service.name }}">
-                  {{ service.name.en }}
+              <tr ng-repeat="type in overviews.types">
+                <td title="{{ type.name.en }}">
+                  {{ type.name.en }}
                 </td>
-                <td title="{{ service.count | number: 0 }}">
-                  {{ service.count | number: 0 }}
+                <td title="{{ type.count | number: 0 }}">
+                  {{ type.count | number: 0 }}
                 </td>
-                <td title=" {{ service.pending | number: 0 }}">
-                  {{ service.pending | number: 0 }}
+                <td title=" {{ type.pending | number: 0 }}">
+                  {{ type.pending | number: 0 }}
                 </td>
-                <td title=" {{ service.resolved | number: 0 }}">
-                  {{ service.resolved | number: 0 }}
+                <td title=" {{ type.resolved | number: 0 }}">
+                  {{ type.resolved | number: 0 }}
                 </td>
-                <td title=" {{ service.late | number: 0 }}">
-                  {{ service.late | number: 0 }}
+                <td title=" {{ type.late | number: 0 }}">
+                  {{ type.late | number: 0 }}
                 </td>
                 <td>
                   <span>
-                    {{ service.averageAttendTime.minutes }}
+                    {{ type.averageAttendTime.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                   <span>
-                    {{ service.averageAttendTime.seconds }}
+                    {{ type.averageAttendTime.seconds }}
                     <span class="text-muted text-xs">secs</span>
                   </span>
                 </td>
                 <td>
                   <span>
-                    {{ performances.overall.averageResolveTime.hours +
-                    performances.overall.averageResolveTime.days * 24 }}
+                    {{ type.averageResolveTime.hours +
+                    type.averageResolveTime.days * 24 }}
                     <span class="text-muted text-xs">hrs</span>
                   </span>
                   <span>
-                    {{ service.averageAttendTime.minutes }}
+                    {{ type.averageResolveTime.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                 </td>
@@ -164,4 +164,4 @@
   </div>
   <!-- end report box -->
 </div>
-<!-- end services summary -->
+<!-- end service groups summary -->

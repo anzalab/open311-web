@@ -15,7 +15,7 @@
   <li ng-if="servicerequest.operator" class="nav-item">
     <a
       ng-if="mailTo"
-      href="{{mailTo}}"
+      href="{{ mailTo }}"
       class="nav-link text-muted"
       title="Click to Send Issue to Area"
     >
@@ -177,6 +177,17 @@
     >
       <span class="nav-text">
         <i class="icon-printer"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator"
+    class="nav-item b-l p-l p-r b-r"
+    title="Click To Refresh Issue"
+  >
+    <a ng-click="onRefresh()" class="nav-link text-muted no-border">
+      <span class="nav-text">
+        <i class="icon-reload"></i>
       </span>
     </a>
   </li>

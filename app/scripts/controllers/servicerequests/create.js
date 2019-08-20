@@ -17,7 +17,9 @@ angular
     Account,
     ServiceRequest,
     endpoints,
-    party
+    party,
+    Jurisdiction,
+    Service
   ) {
     //action performed by this controller
     $scope.action = 'Create';
@@ -25,11 +27,9 @@ angular
     $scope.edit = true;
 
     $scope.groups = endpoints.servicegroups.servicegroups;
-    $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
-    $scope.services = endpoints.services.services;
-    $scope.methods = party.settings.servicerequest.methods;
+    $scope.methods = party.settings.servicerequest.webMethods;
 
-    //instantiate new servicerequest
+    //instantiate new service request
     var servicerequest = _.merge(
       {},
       {
@@ -89,6 +89,22 @@ angular
           $rootScope.$broadcast('appError', error);
           $rootScope.$broadcast('servicerequest:create:error', error);
         });
+    };
+
+    $scope.searchJurisdictions = function(query) {
+      console.log(query);
+      return Jurisdiction.find({
+        q: query,
+      }).then(function(response) {
+        console.log(response.jurisdictions);
+        return response.jurisdictions;
+      });
+    };
+
+    $scope.searchServices = function(query) {
+      return Service.find({ q: query }).then(function(response) {
+        return response.services;
+      });
     };
 
     /**

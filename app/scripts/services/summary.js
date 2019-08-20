@@ -48,11 +48,11 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
    */
   Summary.overviews = function(params) {
     return $http
-      .get(Utils.asLink(['reports', 'overviews']), {
+      .get(Utils.asLink(['v1', 'reports', 'overviews']), {
         params: params,
       })
       .then(function(response) {
-        return response.data;
+        return response.data.data;
       });
   };
 
@@ -78,11 +78,11 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
    */
   Summary.performances = function(params) {
     return $http
-      .get(Utils.asLink(['reports', 'performances']), {
+      .get(Utils.asLink(['v1', 'reports', 'performances']), {
         params: params,
       })
       .then(function(response) {
-        return response.data;
+        return response.data.data;
       });
   };
 
@@ -159,6 +159,21 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
       }
     }
 
+    //ensure service types
+    //3. ensure service types
+    //3.0 normalize & compact service types
+    params.servicetypes = _.uniq(_.compact([].concat(params.servicetypes)));
+    //3.1 build group criteria
+    if (params.servicetypes.length >= 1) {
+      if (params.servicetypes.length > 1) {
+        //use $in criteria
+        query.type = { $in: params.servicetypes };
+      } else {
+        //use $eq criteria
+        query.type = _.first(params.servicetypes);
+      }
+    }
+
     //ensure services
     //4. ensure services
     //4.0 normalize & compact services
@@ -217,6 +232,22 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
       } else {
         //use $eq criteria
         query['method.workspace'] = _.first(params.workspaces);
+      }
+    }
+
+    //ensure methods
+    //7. ensure methods
+    //7.0 normalize & compact methods
+    params.methods = _.uniq(_.compact([].concat(params.methods)));
+    //7.1 build reporting method criteria
+    if (params.methods.length >= 1) {
+      // query.method = {};
+      if (params.methods.length > 1) {
+        //use $in criteria
+        query['method.name'] = { $in: params.methods };
+      } else {
+        //use $eq criteria
+        query['method.name'] = _.first(params.methods);
       }
     }
 

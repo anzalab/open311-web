@@ -37,7 +37,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name for item in jurisdictions track by item.id"
+                      oi-options="item.name for item in searchJurisdictions($query) track by item.id"
                       ng-model="party.jurisdiction"
                       placeholder="Select Area"
                       class="form-control"
@@ -61,7 +61,7 @@
                   </div>
                   <div ng-show="edit" class="form-group form-material floating">
                     <oi-select
-                      oi-options="item.name.en for item in zones track by item._id"
+                      oi-options="item.name.en for item in searchZones($query) track by item._id"
                       ng-model="party.zone"
                       placeholder="Select Zone"
                       class="form-control"

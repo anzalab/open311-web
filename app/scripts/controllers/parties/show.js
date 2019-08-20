@@ -12,20 +12,16 @@ angular
   .controller('PartyShowCtrl', function(
     $rootScope,
     $scope,
-    $state,
-    $stateParams,
     Party,
-    jurisdictions,
     roles,
-    zones,
-    party
+    party,
+    Jurisdiction,
+    Zone
   ) {
     $scope.edit = false;
     $scope.canSave = true;
     $scope.passwordDontMatch = false;
-    $scope.jurisdictions = jurisdictions.jurisdictions;
     $scope.roles = roles.roles;
-    $scope.zones = zones.zones;
 
     $scope.workspaces = party.settings.party.relation.workspaces;
 
@@ -115,6 +111,34 @@ angular
           $scope.party.password.length >= 8 &&
           $scope.party.password === $scope.party.confirm;
       }
+    };
+
+    /**
+     * @function
+     * @name searchJurisdictions
+     * @description Search jurisdictions by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchJurisdictions = function(query) {
+      return Jurisdiction.find({ q: query }).then(function(response) {
+        return response.jurisdictions;
+      });
+    };
+
+    /**
+     * @function
+     * @name searchZones
+     * @description Search zones by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchZones = function(query) {
+      return Zone.find({ q: query }).then(function(response) {
+        return response.zones;
+      });
     };
 
     /**

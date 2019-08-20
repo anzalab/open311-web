@@ -1,0 +1,109 @@
+<!-- start servicetype details -->
+<div class="row-col">
+  <div class="white b-b bg">
+    <!-- start servicetype detail action bar -->
+    <div
+      ng-include="'views/servicetypes/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end servicetype details action bar -->
+  </div>
+  <!-- start servicetype body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="servicetypeForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Service Type Code">
+                  <div class="form-group">
+                    <label title="Service Type Code" class="floating-label"
+                      >Code</label
+                    >
+                    <input
+                      title="Service Type Code"
+                      ng-disabled="!edit"
+                      ng-model="servicetype.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Type Name">
+                  <div class="form-group">
+                    <label title="Service Type Name" class="floating-label"
+                      >Name</label
+                    >
+                    <input
+                      title="Service Type Name"
+                      ng-disabled="!edit"
+                      ng-model="servicetype.name.en"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Type Color">
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Service Type Color" class="floating-label"
+                        >Service Type Color(HEX)</label
+                      >
+                      <color-picker
+                        ng-model="servicetype.color"
+                        options="colorPickerOptions"
+                      >
+                      </color-picker>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Service Type Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      title="Service Type Description"
+                      ng-disabled="!edit"
+                      ng-model="servicetype.description.en"
+                      msd-elastic
+                      name="description"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Is Default">
+                  <div class="form-group">
+                    <div class="checkbox-custom checkbox-primary">
+                      <input
+                        ng-show="edit"
+                        type="checkbox"
+                        ng-model="servicetype.default"
+                      />
+                      <label title="Is Default">Is Default</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end servicetype body -->
+</div>
+<!-- end servicetype details -->
