@@ -222,6 +222,29 @@
         </div>
       </div>
       <!-- end workspace filters -->
+      <!-- start reporting method filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Reporting Method
+            </h6>
+          </div>
+        </div>
+        <div class="col-md-3" ng-repeat="method in methods">
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{ method }}">
+              <input
+                type="checkbox"
+                checklist-model="filters.methods"
+                checklist-value="method"
+              />
+              <i class="blue"></i>{{ method }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- end reporting method filters -->
     </div>
   </div>
   <!-- end filter body -->

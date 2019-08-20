@@ -29,6 +29,7 @@ angular
     $scope.servicetypes = endpoints.servicetypes.data;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
+    $scope.methods = party.settings.servicerequest.methods;
 
     //bind filters
     var defaultFilters = {
@@ -46,6 +47,7 @@ angular
       servicetypes: [],
       jurisdictions: [],
       workspaces: [],
+      methods: [],
     };
 
     $scope.filters = defaultFilters;

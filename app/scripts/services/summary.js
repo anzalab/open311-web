@@ -235,6 +235,22 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
       }
     }
 
+    //ensure methods
+    //7. ensure methods
+    //7.0 normalize & compact methods
+    params.methods = _.uniq(_.compact([].concat(params.methods)));
+    //7.1 build reporting method criteria
+    if (params.methods.length >= 1) {
+      // query.method = {};
+      if (params.methods.length > 1) {
+        //use $in criteria
+        query['method.name'] = { $in: params.methods };
+      } else {
+        //use $eq criteria
+        query['method.name'] = _.first(params.methods);
+      }
+    }
+
     return query;
   };
 

@@ -32,6 +32,7 @@ angular
     $scope.servicetypes = endpoints.servicetypes.data;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
+    $scope.methods = party.settings.servicerequest.methods;
 
     //set default jurisdiction
     $scope.jurisdiction =
@@ -54,6 +55,7 @@ angular
       jurisdictions: $scope.jurisdiction._id,
       workspaces: [],
       servicetypes: [],
+      methods: [],
     };
 
     //TODO persist filter to local storage
