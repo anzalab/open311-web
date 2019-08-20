@@ -63,18 +63,45 @@
           ng-repeat="jurisdiction in jurisdictions | orderBy:'name'"
         >
           <div class="p-a p-b-none">
-            <label class="md-check text-muted" title="{{jurisdiction.name}}">
+            <label class="md-check text-muted" title="{{ jurisdiction.name }}">
               <input
                 type="radio"
                 ng-model="filters.jurisdictions"
                 ng-value="jurisdiction._id"
               />
-              <i class="blue"></i> {{jurisdiction.name}}
+              <i class="blue"></i> {{ jurisdiction.name }}
             </label>
           </div>
         </div>
       </div>
       <!-- end jurisdiction filters -->
+
+      <!-- start service type filters -->
+      <div class="row m-t-md">
+        <div class="col-md-12">
+          <div class="p-a p-l-none">
+            <h6 class="m-a-0">
+              Service Type
+            </h6>
+          </div>
+        </div>
+        <div
+          class="col-md-3"
+          ng-repeat="type in servicetypes | orderBy:'name.en'"
+        >
+          <div class="p-a p-b-none">
+            <label class="md-check text-muted" title="{{ type.name.en }}">
+              <input
+                type="checkbox"
+                checklist-model="filters.servicetypes"
+                checklist-value="type._id"
+              />
+              <i class="blue"></i>{{ type.name.en }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- end service type filters -->
 
       <!-- start workspace filters -->
       <div class="row m-t-md">
@@ -87,13 +114,13 @@
         </div>
         <div class="col-md-3" ng-repeat="workspace in workspaces">
           <div class="p-a p-b-none">
-            <label class="md-check text-muted" title="{{workspace}}">
+            <label class="md-check text-muted" title="{{ workspace }}">
               <input
                 type="checkbox"
                 checklist-model="filters.workspaces"
                 checklist-value="workspace"
               />
-              <i class="blue"></i>{{workspace}}
+              <i class="blue"></i>{{ workspace }}
             </label>
           </div>
         </div>
