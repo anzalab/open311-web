@@ -27,6 +27,7 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
+    $scope.servicetypes = endpoints.servicetypes.data;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
 
@@ -43,6 +44,7 @@ angular
       statuses: [],
       priorities: [],
       servicegroups: [],
+      servicetypes: [],
       jurisdictions: [],
       workspaces: [],
     };

@@ -159,6 +159,21 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
       }
     }
 
+    //ensure service types
+    //3. ensure service types
+    //3.0 normalize & compact service types
+    params.servicetypes = _.uniq(_.compact([].concat(params.servicetypes)));
+    //3.1 build group criteria
+    if (params.servicetypes.length >= 1) {
+      if (params.servicetypes.length > 1) {
+        //use $in criteria
+        query.type = { $in: params.servicetypes };
+      } else {
+        //use $eq criteria
+        query.type = _.first(params.servicetypes);
+      }
+    }
+
     //ensure services
     //4. ensure services
     //4.0 normalize & compact services
