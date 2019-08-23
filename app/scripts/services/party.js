@@ -112,11 +112,8 @@ angular.module('ng311').factory('Party', function($http, $resource, Utils) {
    * @return {[type]}        [description]
    */
   Party.performances = function(params) {
-    var _id = params._id;
-    params = _.omit(params, '_id');
-
     return $http
-      .get(Utils.asLink(['parties', _id, 'performances']), {
+      .get(Utils.asLink(['v1', 'reports', 'operators']), {
         params: params,
       })
       .then(function(response) {
