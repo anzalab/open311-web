@@ -18,6 +18,7 @@
         <ul class="list inset m-a-0">
           <li
             ng-if="operator.name"
+            ui-sref="app.profile({id: operator._id})"
             ng-repeat="operator in overviews.operators"
             class="list-item"
           >
