@@ -35,30 +35,23 @@
   <ng-include src="'views/auth/_partials/profile_summary.html'"></ng-include>
   <!-- end profile summary and service request pipelines -->
 
-  <!-- start overall and pipeline summary -->
-  <div class="row no-gutter">
-    <div class="col-xs-12 col-sm-6 col-md-6">
-      <!-- start of area overall summary -->
-      <ng-include
-        ng-if="performances.overall"
-        src="'views/auth/_partials/overall_summary.html'"
-      >
-      </ng-include>
-      <!-- end of area overall summary -->
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-6">
-      <!-- start area service pipeline -->
-      <ng-include
-        ng-if="performances.pipelines && performances.pipelines.length > 0"
-        src="'views/auth/_partials/pipeline_summary.html'"
-      ></ng-include>
-      <!-- end area service pipeline -->
-    </div>
-  </div>
-  <!-- start overall and pipeline summary -->
+  <!-- start of area overall summary -->
+  <ng-include
+    ng-if="performances.overall"
+    src="'views/auth/_partials/overall_summary.html'"
+  >
+  </ng-include>
+  <!-- end of area overall summary -->
+
+  <!-- start area service pipeline -->
+  <ng-include
+    ng-if="performances.pipelines && performances.pipelines.length > 0"
+    src="'views/auth/_partials/pipeline_summary.html'"
+  ></ng-include>
+  <!-- end area service pipeline -->
 
   <!-- start overall and pipeline summary -->
-  <div class="row no-gutter">
+  <div class="row no-gutter" style="display: none">
     <div class="col-xs-12 col-sm-6 col-md-6">
       <!-- start of area overall summary -->
       <ng-include
@@ -80,16 +73,35 @@
   <!-- start overall and pipeline summary -->
 
   <ng-include
-    ng-if="performances.breakdown"
-    src="'views/auth/_partials/service_requests_breakdown_summary.html'"
+    ng-if="performances.services"
+    src="'views/auth/_partials/service_summary.html'"
   >
   </ng-include>
 
   <!-- start service request leader board -->
   <ng-include
-    ng-if="performances.leaderboard"
+    ng-if="performances.operators"
     src="'views/auth/_partials/service_request_leaderboard.html'"
   ></ng-include>
   <!-- end service request leader board -->
+
+  <!-- start no data description -->
+  <div ng-if="!performances.overall" class="row-col h-v">
+    <div class="row-cell v-s">
+      <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+        <p class="text-muted m-y-lg">
+          No Data Found. Please update your filters.
+        </p>
+        <button
+          ng-click="showFilter()"
+          class="btn btn-outline b-grey text-grey"
+          title="Click to update filters"
+        >
+          Update Filters
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- end no data description -->
 </div>
 <!-- end app body -->

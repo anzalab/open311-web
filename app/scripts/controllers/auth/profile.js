@@ -29,6 +29,33 @@ angular
     //use only editable properties
     $scope.party = new Party($rootScope.party);
 
+    $scope.exports = {
+      types: {
+        filename: 'service_types_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service Type',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
+      services: {
+        filename: 'services_overview_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
+    };
+
     // create initial default filters
     var defaultFilters = {
       startedAt:
@@ -118,6 +145,58 @@ angular
       },
     };
 
+    /**
+     * Exports current overview data
+     */
+    $scope.export = function(type) {
+      var _exports = _.map($scope.performances[type], function(overview) {
+        overview = {
+          name: overview.name,
+          total: overview.count,
+          pending: overview.pending,
+          resolved: overview.resolved,
+          late: overview.late,
+          averageAttendTime: overview.averageAttendTime
+            ? [
+                overview.averageAttendTime.days,
+                ' days, ',
+                overview.averageAttendTime.hours,
+                ' hrs, ',
+                overview.averageAttendTime.minutes,
+                ' mins, ',
+                overview.averageAttendTime.seconds,
+                ' secs',
+              ].join('')
+            : undefined,
+          averageResolveTime: overview.averageResolveTime
+            ? [
+                overview.averageResolveTime.days,
+                'days, ',
+                overview.averageResolveTime.hours,
+                'hrs, ',
+                overview.averageResolveTime.minutes,
+                'mins, ',
+                overview.averageResolveTime.seconds,
+                'secs, ',
+              ].join('')
+            : undefined,
+        };
+
+        //reshape for workspace and method
+        if (type === 'methods' || type === 'workspaces') {
+          overview = _.pick(overview, ['name', 'total']);
+        }
+
+        if (type === 'services' || type === 'types') {
+          overview = _.merge({}, overview, { name: overview.name.en });
+        }
+
+        return overview;
+      });
+
+      return _exports;
+    };
+
     $scope.onEdit = function() {
       $scope.edit = true;
     };
@@ -191,142 +270,29 @@ angular
     };
 
     $scope.performance = function() {
-      var params = _.merge(
-        {},
-        { filter: $scope.params },
-        {
-          _id: $scope.party._id,
-        }
-      );
+      var params = { filter: $scope.params };
+
+      params.filter.operator = $scope.party._id;
 
       Party.performances(params).then(function(response) {
         //TODO comment
-        response.pipelines = _.chain(response.pipelines)
-          .orderBy('label.weight', 'asc')
-          .map(function(pipeline) {
-            return _.merge(
-              {},
-              {
-                displayColor:
-                  _.get(pipeline, 'label.color', '#4BC0C0') + '!important',
-              },
-              pipeline
-            );
-          })
-          .value();
+        // response.pipelines = _.chain(response.pipelines)
+        //   .orderBy('label.weight', 'asc')
+        //   .map(function(pipeline) {
+        //     return _.merge(
+        //       {},
+        //       {
+        //         displayColor:
+        //           _.get(pipeline, 'label.color', '#4BC0C0') + '!important',
+        //       },
+        //       pipeline
+        //     );
+        //   })
+        //   .value();
 
-        response.leaderboard = _.orderBy(response.leaderboard, 'count', 'desc');
+        // response.leaderboard = _.orderBy(response.leaderboard, 'count', 'desc');
 
-        $scope.performances = response;
-        $scope.performances.overall = {
-          count: 10,
-          pending: 5,
-          resolved: 5,
-          late: 0,
-          target: 0,
-        };
-        $scope.performances.attendTime = {
-          max: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-          min: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-          average: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-          target: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-        };
-        $scope.performances.resolveTime = {
-          max: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-          min: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-          average: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-          target: { days: 0, hours: 0, minutes: 0, seconds: 0 },
-        };
-        $scope.performances.breakdown = [
-          {
-            name: 'Billing',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Water Leakage',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Adjustment BTN',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Un registered Customer',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'New Connection',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Wrong Reading',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Wrong Reading',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Wrong Reading',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Wrong Reading',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Wrong Reading',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-          {
-            name: 'Wrong Reading',
-            total: 14,
-            open: 2,
-            inprogress: 5,
-            close: 2,
-            resolved: 5,
-          },
-        ];
+        $scope.performances = response.data;
       });
     };
 
