@@ -1,0 +1,58 @@
+<!-- start leader board -->
+<div class="padding m-t-md">
+  <div class="box b-a p-l-0">
+    <!-- start header -->
+    <div class="box-header b-b p-t-md p-d-md">
+      <h3 title="Leader board">Operators Leader board</h3>
+      <small
+        class="block text-muted"
+        title="Rank Based on Attending Service Requests"
+      >
+        Rank Based on Attending Service Requests
+      </small>
+    </div>
+    <!-- end header -->
+
+    <div>
+      <div class="row-col">
+        <ul class="list inset m-a-0">
+          <li
+            ng-if="operator.name"
+            ng-repeat="operator in overviews.operators"
+            class="list-item"
+          >
+            <a href class="list-left">
+              <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
+              <letter-avatar
+                title="{{ operator.name }}"
+                data="{{ operator.name }}"
+                height="40"
+                width="40"
+                shape="round"
+                fontSize="15"
+              >
+              </letter-avatar>
+            </a>
+            <div class="list-body">
+              <div>
+                <a href>{{ operator.name }}</a>
+                <span class="pull-right text-muted"
+                  >{{ operator.count | number: 0 }}</span
+                >
+              </div>
+              <small class="text-muted text-ellipsis">
+                {{ operator.relation.name ? operator.relation.name : 'N/A' }} /
+                {{ operator.relation.workspace ? operator.relation.workspace :
+                'N/A' }}
+                <span class="pull-right label info" title="#{{ $index + 1 }}"
+                  >&nbsp;&nbsp;{{ $index + 1 }}&nbsp;&nbsp;</span
+                >
+              </small>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end leader board -->
