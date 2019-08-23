@@ -92,24 +92,31 @@
     ></ng-include>
     <!-- end workspaces summary -->
 
-    <!-- start no data description -->
-    <div ng-if="!overviews.overall" class="row-col h-v">
-      <div class="row-cell v-m">
-        <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
-          <p class="text-muted m-y-lg">
-            No Data Found. Please update your filters.
-          </p>
-          <button
-            ng-click="showFilter()"
-            class="btn btn-outline b-grey text-grey"
-            title="Click to update filters"
-          >
-            Update Filters
-          </button>
-        </div>
+    <!-- start operators leader board -->
+    <ng-include
+      ng-if="overviews.operators && overviews.operators.length > 0"
+      src="'views/dashboards/overviews/_partials/operators_leaderboard.html'"
+    ></ng-include>
+    <!-- end operators leader board -->
+  </div>
+
+  <!-- start no data description -->
+  <div ng-if="!overviews.overall" class="row-col h-v">
+    <div class="row-cell v-m">
+      <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+        <p class="text-muted m-y-lg">
+          No Data Found. Please update your filters.
+        </p>
+        <button
+          ng-click="showFilter()"
+          class="btn btn-outline b-grey text-grey"
+          title="Click to update filters"
+        >
+          Update Filters
+        </button>
       </div>
     </div>
-    <!-- end no data description -->
   </div>
+  <!-- end no data description -->
 </div>
 <!-- end overview body -->
