@@ -14,8 +14,7 @@
   </li>
   <li ng-if="servicerequest.operator" class="nav-item">
     <a
-      ng-if="mailTo"
-      href="{{ mailTo }}"
+      ng-click="onSend()"
       class="nav-link text-muted"
       title="Click to Send Issue to Area"
     >

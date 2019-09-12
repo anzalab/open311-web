@@ -79,7 +79,7 @@ angular
      * @param  {Object} report current report in the scope
      * @return {String} valid mailto string to bind into href
      */
-    ServiceRequest.toEmail = function(issue) {
+    ServiceRequest.toEmail = function(issue, sender) {
       /*jshint camelcase:false */
 
       //prepare complaint address
@@ -105,155 +105,57 @@ angular
       //prepare e-mail body
       var body = [
         'Hello,',
-        '\n\n',
+        '\r\n\r\n',
         'Please assist in resolving customer complaint #',
         issue.code || 'N/A',
         '.',
-        '\n\n',
+        '\r\n\r\n',
         'Time: ',
         time || 'N/A',
-        '\n',
+        '\r\n',
         'Date: ',
         date || 'N/A',
-        '\n',
+        '\r\n',
         'Account Number/Location: ',
         address || 'N/A',
-        '\n',
+        '\r\n',
         'Area: ',
         (issue.jurisdiction || {}).name || 'N/A',
-        '\n',
+        '\r\n',
         'Customer Name: ',
         issue.reporter.name || 'N/A',
-        '\n',
+        '\r\n',
         'Phone No.: ',
         issue.reporter.phone || 'N/A',
-        '\n',
+        '\r\n',
         'Nature of Complaint: ',
         issue.service.name || 'N/A',
-        '\n',
+        '\r\n',
         'Complaint Details: ',
         issue.description || 'N/A',
-        '\n\n',
-        'Regards.',
+        '\r\n\r\n',
+        'Regards,',
+        '\r\n',
+        sender.name,
+        '.',
       ].join('');
-
-      //add internal notes
-      var changelogs = _.orderBy(
-        [].concat(issue.changelogs),
-        'createdAt',
-        'desc'
-      );
-      var notes = _.map(changelogs, function(changelog) {
-        var note = [];
-
-        //handle changelog
-        if (changelog.comment) {
-          note = note.concat(
-            [
-              changelog.changer.name,
-              ' on ',
-              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
-              ': ',
-              'Write: ',
-              changelog.comment,
-            ].join('')
-          );
-        }
-
-        //handle status
-        if (changelog.status) {
-          note = note.concat(
-            [
-              changelog.changer.name,
-              ' on ',
-              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
-              ': ',
-              'Change status to ',
-              changelog.status.name,
-            ].join('')
-          );
-        }
-
-        //handle priority
-        if (changelog.priority) {
-          note = note.concat(
-            [
-              changelog.changer.name,
-              ' on ',
-              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
-              ': ',
-              'Change priority to ',
-              changelog.priority.name,
-            ].join('')
-          );
-        }
-
-        //handle assignee
-        if (changelog.assignee) {
-          note = note.concat(
-            [
-              changelog.changer.name,
-              ' on ',
-              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
-              ': ',
-              'Assignee to ',
-              changelog.assignee.name,
-            ].join('')
-          );
-        }
-
-        //handle resolved
-        if (changelog.resolvedAt) {
-          note = note.concat(
-            [
-              changelog.changer.name,
-              ' on ',
-              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
-              ': ',
-              'Change status to ',
-              'Resolved',
-            ].join('')
-          );
-        }
-
-        //handle resolved
-        if (changelog.reopenedAt) {
-          note = note.concat(
-            [
-              changelog.changer.name,
-              ' on ',
-              $filter('date')(changelog.createdAt, 'dd MMM yyyy hh:mm:ss a'),
-              ': ',
-              'Change status to ',
-              'Reopened',
-            ].join('')
-          );
-        }
-
-        note = _.filter(note, function(line) {
-          return !_.isEmpty(line);
-        });
-        note = note.length > 0 ? note.join(',\n') : undefined;
-        return note;
-      });
-
-      notes = _.compact(notes);
-
-      body = body + '\n\n' + 'Change Logs: ' + '\n\n' + notes.join(',\n');
 
       //TODO add a link to actual problem
 
       //prepare e-mail send option
       var recipient = _.get(issue, 'jurisdiction.email', '');
       var options = {
+        to: recipient,
         subject: [issue.service.name, issue.code].join(' - #'),
         body: body,
+        type: 'EMAIL',
+        bulk: issue._id,
       };
       /*jshint camelcase:true*/
 
-      var href = Mailto.url(recipient, options);
+      // var href = Mailto.url(recipient, options);
 
-      return href;
+      return options;
     };
 
     return ServiceRequest;
