@@ -145,6 +145,7 @@ angular
       //prepare e-mail send option
       var recipient = _.get(issue, 'jurisdiction.email', '');
       var options = {
+        sender: sender.email,
         to: recipient,
         subject: [issue.service.name, issue.code].join(' - #'),
         body: body,

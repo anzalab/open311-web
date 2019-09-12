@@ -440,10 +440,10 @@ angular
 
       // normalize fields
       message.cc = _.map([].concat($scope.message.cc), function(cc) {
-        return cc.email;
+        return cc && cc.email;
       });
       message.bcc = _.map([].concat($scope.message.bcc), function(bcc) {
-        return bcc.email;
+        return bcc && bcc.email;
       });
       message
         .$save()
