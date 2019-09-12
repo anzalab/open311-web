@@ -437,6 +437,14 @@ angular
     // send issue via well know channels i.e sms or email
     $scope.send = function() {
       var message = new Message($scope.message);
+
+      // normalize fields
+      message.cc = _.map([].concat($scope.message.cc), function(cc) {
+        return cc.email;
+      });
+      message.bcc = _.map([].concat($scope.message.bcc), function(bcc) {
+        return bcc.email;
+      });
       message
         .$save()
         .then(function(response) {
@@ -745,6 +753,34 @@ angular
     $scope.filterByReporter = function(q, query) {
       $scope.search.q = q;
       $scope.load(query, true);
+    };
+
+    /**
+     * @function
+     * @name searchServiceGroup
+     * @description Search service group by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchParties = function(query) {
+      return Party.find({
+        filter: {
+          deletedAt: {
+            $eq: null,
+          },
+          email: {
+            $ne: null,
+          },
+        },
+        q: query,
+      }).then(function(response) {
+        var parties = _.map([].concat(response.parties), function(party) {
+          party.label = party.name + ' <' + party.email + '>';
+          return party;
+        });
+        return parties;
+      });
     };
 
     /**

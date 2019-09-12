@@ -24,7 +24,7 @@
         <div class="row m-t-sm">
           <div class="col-md-12">
             <div class="p-a p-l-none">
-              <h6 class="m-a-0">
+              <h6 class="m-a-0" title="Primary receiver of the message">
                 To
               </h6>
             </div>
@@ -41,11 +41,51 @@
           </div>
         </div>
         <!-- end message to input -->
+        <!-- start message cc input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0" title="Other people to receive the message">
+                Cc
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <oi-select
+              oi-options="item.label for item in searchParties($query) track by item.id"
+              ng-model="message.cc"
+              multiple
+              placeholder="Select Cc'ed"
+              oi-select-options="{cleanModel: true}"
+            ></oi-select>
+          </div>
+        </div>
+        <!-- end message cc input -->
+        <!-- start message bcc input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0" title="Other people to receive the message">
+                Bcc
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <oi-select
+              oi-options="item.label for item in searchParties($query) track by item.id"
+              ng-model="message.bcc"
+              multiple
+              placeholder="Select Bcc'ed"
+              oi-select-options="{cleanModel: true}"
+            ></oi-select>
+          </div>
+        </div>
+        <!-- end message cc input -->
         <!-- start message subject input -->
         <div class="row m-t-sm">
           <div class="col-md-12">
             <div class="p-a p-l-none">
-              <h6 class="m-a-0">
+              <h6 class="m-a-0" title="Message subject">
                 Subject
               </h6>
             </div>
@@ -67,7 +107,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="p-a p-l-none">
-              <h6 class="m-a-0">
+              <h6 class="m-a-0" title="Message body or content">
                 Message
               </h6>
             </div>
@@ -93,8 +133,16 @@
   </div>
   <!-- start message modal footer -->
   <div class="modal-footer m-l-lg m-r-lg">
-    <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-    <button class="btn btn-primary" ng-click="send()">Send</button>
+    <button
+      class="btn btn-default"
+      ng-click="$dismiss()"
+      title="Click to cancel"
+    >
+      Cancel
+    </button>
+    <button class="btn btn-primary" ng-click="send()" title="Click to send">
+      Send
+    </button>
   </div>
   <!-- end message modal footer -->
 </div>
