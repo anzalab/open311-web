@@ -169,6 +169,17 @@
       </span>
     </a>
   </li>
+  <li
+    ng-if="servicerequest.operator"
+    class="nav-item b-l p-l"
+    title="Click To Refresh Issue"
+  >
+    <a ng-click="onRefresh()" class="nav-link text-muted no-border">
+      <span class="nav-text">
+        <i class="icon-reload"></i>
+      </span>
+    </a>
+  </li>
   <li ng-if="servicerequest.operator" class="nav-item b-l p-l p-r">
     <a
       print-btn
@@ -177,17 +188,6 @@
     >
       <span class="nav-text">
         <i class="icon-printer"></i>
-      </span>
-    </a>
-  </li>
-  <li
-    ng-if="servicerequest.operator"
-    class="nav-item b-l p-l p-r b-r"
-    title="Click To Refresh Issue"
-  >
-    <a ng-click="onRefresh()" class="nav-link text-muted no-border">
-      <span class="nav-text">
-        <i class="icon-reload"></i>
       </span>
     </a>
   </li>
