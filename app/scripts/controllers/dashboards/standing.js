@@ -26,8 +26,10 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
+    $scope.servicetypes = endpoints.servicetypes.data;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
+    $scope.methods = party.settings.servicerequest.methods;
 
     //bind filters
     var defaultFilters = {
@@ -42,8 +44,10 @@ angular
       statuses: [],
       priorities: [],
       servicegroups: [],
+      servicetypes: [],
       jurisdictions: [],
       workspaces: [],
+      methods: [],
     };
 
     $scope.filters = defaultFilters;

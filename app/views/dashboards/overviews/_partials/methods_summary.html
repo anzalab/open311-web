@@ -21,7 +21,9 @@
             aria-expanded="false"
             ng-csv="export('methods')"
             csv-header="exports.methods.headers"
-            filename="methods_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="methods_overview_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -85,15 +87,27 @@
                 >
                   Total
                 </th>
+                <th title="Total Pending Count  of Service Requests">
+                  Pending
+                </th>
+                <th title="Total Resolved Count of Service Requests">
+                  Resolved
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="method in overviews.methods">
-                <td title="{{method.name}}">
-                  {{method.name}}
+                <td title="{{ method.name }}">
+                  {{ method.name }}
                 </td>
-                <td title="{{method.count | number:0}}">
-                  {{method.count | number:0}}
+                <td title="{{ method.count | number: 0 }}">
+                  {{ method.count | number: 0 }}
+                </td>
+                <td title="{{ method.pending | number: 0 }}">
+                  {{ method.pending | number: 0 }}
+                </td>
+                <td title="{{ method.resolved | number: 0 }}">
+                  {{ method.resolved | number: 0 }}
                 </td>
               </tr>
             </tbody>
