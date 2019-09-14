@@ -108,7 +108,7 @@
                 <th
                   title="Average Time Taken to Attend a Customer(Call) Service Request"
                 >
-                  Average Attend Time
+                  Average Call Time
                 </th>
                 <th title="Average Time Taken to a Resolve Service Request">
                   Average Resolve Time
@@ -134,22 +134,22 @@
                 </td>
                 <td>
                   <span>
-                    {{ type.averageAttendTime.minutes }}
+                    {{ type.callTime.average.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                   <span>
-                    {{ type.averageAttendTime.seconds }}
+                    {{ type.callTime.average.seconds }}
                     <span class="text-muted text-xs">secs</span>
                   </span>
                 </td>
                 <td>
                   <span>
-                    {{ type.averageResolveTime.hours +
-                    type.averageResolveTime.days * 24 }}
+                    {{ type.resolveTime.average.hours +
+                    type.resolveTime.average.days * 24 }}
                     <span class="text-muted text-xs">hrs</span>
                   </span>
                   <span>
-                    {{ type.averageResolveTime.minutes }}
+                    {{ type.resolveTime.average.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                 </td>

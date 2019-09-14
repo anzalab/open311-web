@@ -21,7 +21,9 @@
             aria-expanded="false"
             ng-csv="export('jurisdictions')"
             csv-header="exports.jurisdictions.headers"
-            filename="jurisdictions_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="jurisdictions_overview_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -106,7 +108,7 @@
                 <th
                   title="Average Time Taken to Attend a Customer(Call) Service Request"
                 >
-                  Average Attend Time
+                  Average Call Time
                 </th>
                 <th title="Average Time Taken to a Resolve Service Request">
                   Average Resolve Time
@@ -118,39 +120,39 @@
                 ng-repeat="jurisdiction in overviews.jurisdictions"
                 ui-sref="app.performances({jurisdiction:jurisdiction,startedAt:filters.startedAt,endedAt:filters.endedAt})"
               >
-                <td title="{{jurisdiction.name}}">
-                  {{jurisdiction.name}}
+                <td title="{{ jurisdiction.name }}">
+                  {{ jurisdiction.name }}
                 </td>
-                <td title="{{jurisdiction.count | number:0}}">
-                  {{jurisdiction.count | number:0}}
+                <td title="{{ jurisdiction.count | number: 0 }}">
+                  {{ jurisdiction.count | number: 0 }}
                 </td>
-                <td title=" {{jurisdiction.pending | number:0}}">
-                  {{jurisdiction.pending | number:0}}
+                <td title=" {{ jurisdiction.pending | number: 0 }}">
+                  {{ jurisdiction.pending | number: 0 }}
                 </td>
-                <td title=" {{jurisdiction.resolved | number:0}}">
-                  {{jurisdiction.resolved | number:0}}
+                <td title=" {{ jurisdiction.resolved | number: 0 }}">
+                  {{ jurisdiction.resolved | number: 0 }}
                 </td>
-                <td title=" {{jurisdiction.late | number:0}}">
-                  {{jurisdiction.late | number:0}}
+                <td title=" {{ jurisdiction.late | number: 0 }}">
+                  {{ jurisdiction.late | number: 0 }}
                 </td>
                 <td>
                   <span>
-                    {{jurisdiction.averageAttendTime.minutes}}
+                    {{ jurisdiction.callTime.average.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                   <span>
-                    {{jurisdiction.averageAttendTime.seconds}}
+                    {{ jurisdiction.callTime.average.seconds }}
                     <span class="text-muted text-xs">secs</span>
                   </span>
                 </td>
                 <td>
                   <span>
-                    {{jurisdiction.averageResolveTime.hours +
-                    (jurisdiction.averageResolveTime.days * 24)}}
+                    {{ jurisdiction.resolveTime.average.hours +
+                    jurisdiction.resolveTime.average.days * 24 }}
                     <span class="text-muted text-xs">hrs</span>
                   </span>
                   <span>
-                    {{jurisdiction.averageResolveTime.minutes}}
+                    {{ jurisdiction.resolveTime.average.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                 </td>
