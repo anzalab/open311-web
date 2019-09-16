@@ -8,8 +8,8 @@
           <span>
             <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
             <letter-avatar
-              title="{{jurisdiction.name}}"
-              data="{{jurisdiction.name}}"
+              title="{{ jurisdiction.name }}"
+              data="{{ jurisdiction.name }}"
               height="96"
               width="96"
               shape="round"
@@ -23,7 +23,7 @@
         <!-- start jurisdiction details -->
         <div class="clear m-b">
           <!-- start jurisdiction name -->
-          <h4 class="m-a-0 m-b-sm" title="Name">{{jurisdiction.name}}</h4>
+          <h4 class="m-a-0 m-b-sm" title="Name">{{ jurisdiction.name }}</h4>
           <!-- end jurisdiction name -->
           <div class="block clearfix m-t-md m-b">
             <span>
@@ -33,7 +33,7 @@
               </a>
               <!-- TODO should initiate call -->
               <span title="Phone Number" class="text-muted">
-                {{jurisdiction.phone ? jurisdiction.phone : 'N/A'}}
+                {{ jurisdiction.phone ? jurisdiction.phone : 'N/A' }}
               </span>
             </span>
             <span class="m-l-md">
@@ -43,7 +43,7 @@
               </a>
               <!-- TODO should initiate email -->
               <span title="Email Address" class="text-muted">
-                {{jurisdiction.email ? jurisdiction.email : 'N/A'}}
+                {{ jurisdiction.email ? jurisdiction.email : 'N/A' }}
               </span>
             </span>
           </div>
