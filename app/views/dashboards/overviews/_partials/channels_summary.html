@@ -1,10 +1,13 @@
-<!-- start methods summary -->
+<!-- start channels summary -->
 <div class="padding m-t-md">
   <!-- start report box -->
   <div class="box b-a p-l-0">
     <!-- start header -->
-    <div class="box-header b-b p-t-md p-b-md" title="Reporting Methods Summary">
-      <h3>Reporting Methods Summary</h3>
+    <div
+      class="box-header b-b p-t-md p-b-md"
+      title="Reporting Channels Summary"
+    >
+      <h3>Reporting Channels Summary</h3>
       <!-- <small>Sub title goes here with small font</small> -->
     </div>
     <!-- end header -->
@@ -19,9 +22,9 @@
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
-            ng-csv="export('methods')"
-            csv-header="exports.methods.headers"
-            filename="methods_overview_reports_{{
+            ng-csv="export('channels')"
+            csv-header="exports.channels.headers"
+            filename="channels_overview_reports_{{
               filters.startedAt | date: settings.dateFormat
             }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
@@ -63,8 +66,8 @@
         <div class="col-sm-5 b-r lt">
           <div class="p-a-md">
             <echart
-              config="perMethodConfig"
-              options="perMethodOptions"
+              config="perChannelConfig"
+              options="perChannelOptions"
             ></echart>
           </div>
         </div>
@@ -76,13 +79,13 @@
             <thead>
               <tr>
                 <th
-                  ng-click="prepareMethodVisualization('count')"
-                  title="Reporting Method"
+                  ng-click="prepareChannelVisualization('count')"
+                  title="Reporting Channel"
                 >
-                  Method
+                  Channel
                 </th>
                 <th
-                  ng-click="prepareMethodVisualization('count')"
+                  ng-click="prepareChannelVisualization('count')"
                   title="Total Count of Service Requests"
                 >
                   Total
@@ -96,18 +99,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="method in overviews.methods">
-                <td title="{{ method.name }}">
-                  {{ method.name }}
+              <tr ng-repeat="channel in overviews.channels">
+                <td title="{{ channel.name }}">
+                  {{ channel.name }}
                 </td>
-                <td title="{{ method.count | number: 0 }}">
-                  {{ method.count | number: 0 }}
+                <td title="{{ channel.count | number: 0 }}">
+                  {{ channel.count | number: 0 }}
                 </td>
-                <td title="{{ method.pending | number: 0 }}">
-                  {{ method.pending | number: 0 }}
+                <td title="{{ channel.pending | number: 0 }}">
+                  {{ channel.pending | number: 0 }}
                 </td>
-                <td title="{{ method.resolved | number: 0 }}">
-                  {{ method.resolved | number: 0 }}
+                <td title="{{ channel.resolved | number: 0 }}">
+                  {{ channel.resolved | number: 0 }}
                 </td>
               </tr>
             </tbody>
@@ -120,4 +123,4 @@
   </div>
   <!-- end report box -->
 </div>
-<!-- end methods summary -->
+<!-- end channels summary -->

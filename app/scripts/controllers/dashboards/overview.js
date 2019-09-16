@@ -30,7 +30,7 @@ angular
     $scope.servicetypes = endpoints.servicetypes.data;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
-    $scope.methods = party.settings.servicerequest.methods;
+    $scope.channels = party.settings.servicerequest.channels;
 
     //bind filters
     var defaultFilters = {
@@ -48,7 +48,7 @@ angular
       servicetypes: [],
       jurisdictions: [],
       workspaces: [],
-      methods: [],
+      channels: [],
     };
 
     //TODO persist filter to local storage
@@ -104,8 +104,8 @@ angular
           'Average Resolve Time',
         ],
       },
-      methods: {
-        filename: 'reporting_methods_overview_reports_' + Date.now() + '.csv',
+      channels: {
+        filename: 'reporting_channels_overview_reports_' + Date.now() + '.csv',
         headers: ['Name', 'Total'],
       },
       workspaces: {
@@ -154,8 +154,8 @@ angular
             : undefined,
         };
 
-        //reshape for workspace and method
-        if (type === 'methods' || type === 'workspaces') {
+        //reshape for workspace and channel
+        if (type === 'channels' || type === 'workspaces') {
           overview = _.pick(overview, ['name', 'total']);
         }
 
@@ -242,7 +242,7 @@ angular
       $scope.prepareJurisdictionVisualization();
       $scope.prepareServiceGroupVisualization();
       $scope.prepareServiceTypeVisualization();
-      $scope.prepareMethodVisualization();
+      $scope.prepareChannelVisualization();
       $scope.prepareWorkspaceVisualization();
     };
 
@@ -613,32 +613,32 @@ angular
     };
 
     /**
-     * prepare method overview visualization
+     * prepare channel overview visualization
      * @return {object} echart pie chart configurations
      * @version 0.1.0
      * @since  0.1.0
      * @author lally elias<lallyelias87@gmail.com>
      */
-    $scope.prepareMethodVisualization = function(column) {
+    $scope.prepareChannelVisualization = function(column) {
       //ensure column
       column = column || 'count';
 
       //prepare chart series data
-      var data = _.map($scope.overviews.methods, function(method) {
+      var data = _.map($scope.overviews.channels, function(channel) {
         return {
-          name: method.name,
-          value: method[column],
+          name: channel.name,
+          value: channel[column],
         };
       });
 
       //prepare chart config
-      $scope.perMethodConfig = {
+      $scope.perChannelConfig = {
         height: 400,
         forceClear: true,
       };
 
       //prepare chart options
-      $scope.perMethodOptions = {
+      $scope.perChannelOptions = {
         textStyle: {
           fontFamily: 'Lato',
         },
@@ -662,7 +662,7 @@ angular
           show: true,
           feature: {
             saveAsImage: {
-              name: 'Reporting Methods Overview - ' + new Date().getTime(),
+              name: 'Reporting Channels Overview - ' + new Date().getTime(),
               title: 'Save',
               show: true,
             },
