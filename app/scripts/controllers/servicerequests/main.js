@@ -21,6 +21,7 @@ angular
     Party,
     ServiceRequest,
     Comment,
+    Message,
     Summary,
     endpoints,
     party,
@@ -138,7 +139,7 @@ angular
         //update scope service request ref
         $scope.servicerequest = servicerequest;
 
-        $scope.mailTo = ServiceRequest.toEmail(servicerequest);
+        // $scope.mailTo = ServiceRequest.toEmail(servicerequest);
 
         //update markers & map center
         if (servicerequest.location && servicerequest.location.coordinates) {
@@ -410,6 +411,51 @@ angular
           }
         })
         .catch(function() {});
+    };
+
+    /**
+     * launch issue send modal
+     */
+    $scope.onSend = function() {
+      // prepare send message
+      $scope.message = ServiceRequest.toEmail($scope.servicerequest, party);
+
+      //open send modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/message.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {}
+      );
+    };
+
+    // send issue via well know channels i.e sms or email
+    $scope.send = function() {
+      var message = new Message($scope.message);
+
+      // normalize fields
+      message.cc = _.map([].concat($scope.message.cc), function(cc) {
+        return cc && cc.email;
+      });
+      message.bcc = _.map([].concat($scope.message.bcc), function(bcc) {
+        return bcc && bcc.email;
+      });
+      message
+        .$save()
+        .then(function(response) {
+          $scope.modal.dismiss();
+          response = response || {};
+          response.message = response.message || 'Message Sent Successfully';
+          $rootScope.$broadcast('appSuccess', response);
+        })
+        .catch(function(error) {
+          $rootScope.$broadcast('appError', error);
+        });
     };
 
     /**
@@ -707,6 +753,34 @@ angular
     $scope.filterByReporter = function(q, query) {
       $scope.search.q = q;
       $scope.load(query, true);
+    };
+
+    /**
+     * @function
+     * @name searchServiceGroup
+     * @description Search service group by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchParties = function(query) {
+      return Party.find({
+        filter: {
+          deletedAt: {
+            $eq: null,
+          },
+          email: {
+            $ne: null,
+          },
+        },
+        q: query,
+      }).then(function(response) {
+        var parties = _.map([].concat(response.parties), function(party) {
+          party.label = party.name + ' <' + party.email + '>';
+          return party;
+        });
+        return parties;
+      });
     };
 
     /**

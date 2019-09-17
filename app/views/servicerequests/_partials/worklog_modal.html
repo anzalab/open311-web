@@ -31,7 +31,7 @@
           <div class="col-md-12">
             <div class="form-group form-material" title="Select Item">
               <oi-select
-                oi-options="item.name for item in items track by item._id"
+                oi-options="item.name.en for item in items track by item._id"
                 ng-model="worklog.item"
                 placeholder="Select Item"
                 class="form-control"

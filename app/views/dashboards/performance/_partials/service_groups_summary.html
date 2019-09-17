@@ -21,7 +21,9 @@
             aria-expanded="false"
             ng-csv="export('groups')"
             csv-header="exports.groups.headers"
-            filename="service_groups_performance_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="service_groups_performance_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -95,7 +97,7 @@
                 <th
                   title="Average Time Taken to Attend a Customer(Call) Service Request"
                 >
-                  Average Attend Time
+                  Average Call Time
                 </th>
                 <th title="Average Time Taken to a Resolve Service Request">
                   Average Resolve Time
@@ -104,39 +106,39 @@
             </thead>
             <tbody>
               <tr ng-repeat="group in performances.groups">
-                <td title="{{group.name}}">
-                  {{group.name}}
+                <td title="{{ group.name }}">
+                  {{ group.name }}
                 </td>
-                <td title="{{group.count | number:0}}">
-                  {{group.count | number:0}}
+                <td title="{{ group.count | number: 0 }}">
+                  {{ group.count | number: 0 }}
                 </td>
-                <td title=" {{group.pending | number:0}}">
-                  {{group.pending | number:0}}
+                <td title=" {{ group.pending | number: 0 }}">
+                  {{ group.pending | number: 0 }}
                 </td>
-                <td title=" {{group.resolved | number:0}}">
-                  {{group.resolved | number:0}}
+                <td title=" {{ group.resolved | number: 0 }}">
+                  {{ group.resolved | number: 0 }}
                 </td>
-                <td title=" {{group.late | number:0}}">
-                  {{group.late | number:0}}
+                <td title=" {{ group.late | number: 0 }}">
+                  {{ group.late | number: 0 }}
                 </td>
                 <td>
                   <span>
-                    {{group.averageAttendTime.minutes}}
+                    {{ group.callTime.average.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                   <span>
-                    {{group.averageAttendTime.seconds}}
+                    {{ group.callTime.average.seconds }}
                     <span class="text-muted text-xs">secs</span>
                   </span>
                 </td>
                 <td>
                   <span>
-                    {{group.averageResolveTime.hours +
-                    (group.averageResolveTime.days * 24)}}
+                    {{ group.resolveTime.average.hours +
+                    group.resolveTime.average.days * 24 }}
                     <span class="text-muted text-xs">hrs</span>
                   </span>
                   <span>
-                    {{group.averageAttendTime.minutes}}
+                    {{ group.resolveTime.average.minutes }}
                     <span class="text-muted text-xs">mins</span>
                   </span>
                 </td>

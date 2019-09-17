@@ -46,7 +46,7 @@ angular.module('ng311').factory('Service', function($http, $resource, Utils) {
         //return paginated response
         return {
           services: services,
-          total: response.data.count,
+          total: response.data.total,
         };
       });
   };
