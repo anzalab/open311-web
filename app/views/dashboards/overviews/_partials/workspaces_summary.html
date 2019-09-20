@@ -79,10 +79,16 @@
                 >
                   Total
                 </th>
-                <th title="Total Pending Count of Service Requests">
+                <th
+                  ng-click="prepareWorkspaceVisualization('pending')"
+                  title="Total Pending Count of Service Requests"
+                >
                   Pending
                 </th>
-                <th title="Total Resolved Count of Service Requests">
+                <th
+                  ng-click="prepareWorkspaceVisualization('resolved')"
+                  title="Total Resolved Count of Service Requests"
+                >
                   Resolved
                 </th>
               </tr>

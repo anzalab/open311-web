@@ -90,10 +90,16 @@
                 >
                   Total
                 </th>
-                <th title="Total Pending Count  of Service Requests">
+                <th
+                  ng-click="prepareChannelVisualization('pending')"
+                  title="Total Pending Count  of Service Requests"
+                >
                   Pending
                 </th>
-                <th title="Total Resolved Count of Service Requests">
+                <th
+                  ng-click="prepareChannelVisualization('resolved')"
+                  title="Total Resolved Count of Service Requests"
+                >
                   Resolved
                 </th>
               </tr>
