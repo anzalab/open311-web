@@ -73,14 +73,14 @@
   <!-- start overall and pipeline summary -->
 
   <ng-include
-    ng-if="performances.services"
+    ng-if="performances.services && performances.services.length > 0"
     src="'views/auth/_partials/service_summary.html'"
   >
   </ng-include>
 
   <!-- start service request leader board -->
   <ng-include
-    ng-if="performances.operators"
+    ng-if="performances.operators && performances.operators.length > 0"
     src="'views/auth/_partials/service_request_leaderboard.html'"
   ></ng-include>
   <!-- end service request leader board -->
