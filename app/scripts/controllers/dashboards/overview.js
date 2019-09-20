@@ -112,6 +112,10 @@ angular
         filename: 'workspaces_overview_reports_' + Date.now() + '.csv',
         headers: ['Name', 'Total'],
       },
+      operators: {
+        filename: 'operators_overview_reports_' + Date.now() + '.csv',
+        headers: ['Name', 'Total', 'Pending', 'Resolved'],
+      },
     };
 
     //initialize overviews

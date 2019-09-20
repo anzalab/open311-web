@@ -106,23 +106,23 @@
             </td>
             <td>
               <span>
-                {{ service.averageAttendTime.minutes }}
+                {{ service.attendTime.average.minutes }}
                 <span class="text-muted text-xs">mins</span>
               </span>
               <span>
-                {{ service.averageAttendTime.seconds }}
+                {{ service.attendTime.average.seconds }}
                 <span class="text-muted text-xs">secs</span>
               </span>
             </td>
             <td>
               <!-- Fix here-->
               <span>
-                {{ service.averageResolveTime.hours +
-                service.averageResolveTime.days * 24 }}
+                {{ service.resolveTime.average.hours +
+                service.resolveTime.average.days * 24 }}
                 <span class="text-muted text-xs">hrs</span>
               </span>
               <span>
-                {{ service.averageResolveTime.minutes }}
+                {{ service.resolveTime.average.minutes }}
                 <span class="text-muted text-xs">mins</span>
               </span>
             </td>
