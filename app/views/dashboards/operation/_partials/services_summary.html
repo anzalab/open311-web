@@ -21,7 +21,7 @@
             aria-expanded="false"
             ng-csv="export('services')"
             csv-header="exports.services.headers"
-            filename="services_performance_reports_{{
+            filename="services_operational_reports_{{
               filters.startedAt | date: settings.dateFormat
             }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
@@ -122,8 +122,8 @@
             </td>
             <td>
               <span>
-                {{ service.lateTime.average.hours +
-                service.lateTime.average.days * 24 }}
+                {{ service.attendTime.average.hours +
+                service.attendTime.average.days * 24 }}
                 <span class="text-muted text-xs">hrs</span>
               </span>
               <span>
@@ -134,8 +134,8 @@
 
             <td>
               <span>
-                {{ service.lateTime.average.hours +
-                service.lateTime.average.days * 24 }}
+                {{ service.resolveTime.average.hours +
+                service.resolveTime.average.days * 24 }}
                 <span class="text-muted text-xs">hrs</span>
               </span>
               <span>

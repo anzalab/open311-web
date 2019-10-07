@@ -122,6 +122,87 @@ angular
     //initialize performances
     $scope.operations = {};
 
+    $scope.exports = {
+      services: {
+        headers: [
+          'Service',
+          'Assigned',
+          'Attending',
+          'Completed',
+          'Verified',
+          'Approved',
+          'Average Attend Time',
+          'Average Resolution Time',
+          'Average Late Time(Past SLA)',
+        ],
+      },
+    };
+
+    /**
+     * Exports current operation data
+     */
+    $scope.export = function(type) {
+      var _exports = _.map($scope.operations[type], function(operation) {
+        operation = {
+          name: operation.name,
+          assigned: operation.assigned,
+          attending: operation.attended,
+          completed: operation.completed,
+          verified: operation.verified,
+          approved: operation.approved,
+          averageAttendTime: operation.attendTime.average
+            ? [
+                operation.attendTime.average.days,
+                ' days, ',
+                operation.attendTime.average.hours,
+                ' hrs, ',
+                operation.attendTime.average.minutes,
+                ' mins, ',
+                operation.attendTime.average.seconds,
+                ' secs',
+              ].join('')
+            : undefined,
+          averageResolveTime: operation.resolveTime
+            ? [
+                operation.resolveTime.average.days,
+                'days, ',
+                operation.resolveTime.average.hours,
+                'hrs, ',
+                operation.resolveTime.average.minutes,
+                'mins, ',
+                operation.resolveTime.average.seconds,
+                'secs, ',
+              ].join('')
+            : undefined,
+          averageLateTime: operation.lateTime
+            ? [
+                operation.lateTime.average.days,
+                'days, ',
+                operation.lateTime.average.hours,
+                'hrs, ',
+                operation.lateTime.average.minutes,
+                'mins, ',
+                operation.lateTime.average.seconds,
+                'secs, ',
+              ].join('')
+            : undefined,
+        };
+
+        //reshape for workspace and channel
+        if (type === 'channels' || type === 'workspaces') {
+          operation = _.pick(operation, ['name', 'total']);
+        }
+
+        if (type === 'services' || type === 'types') {
+          operation = _.merge({}, operation, { name: operation.name.en });
+        }
+
+        return operation;
+      });
+
+      return _exports;
+    };
+
     /**
      * Open performance reports filter
      */
