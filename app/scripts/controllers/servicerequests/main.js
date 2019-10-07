@@ -1172,6 +1172,7 @@ angular
           templateUrl: 'views/servicerequests/_partials/assignee_modal.html',
           scope: $scope,
           size: 'lg',
+          backdrop: 'static',
         });
 
         $scope.modal.result.then(
