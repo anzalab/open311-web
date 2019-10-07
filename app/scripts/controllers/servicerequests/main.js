@@ -1183,6 +1183,20 @@ angular
 
     /**
      * @function
+     * @description Stringify party roles name
+     * @param  {[type]} party [description]
+     * @return {[type]}       [description]
+     */
+    $scope.showPartyRoles = function(party) {
+      if (party && party.roles) {
+        var roles = _.map(party.roles, 'name');
+        return roles.join(', ');
+      }
+      return '';
+    };
+
+    /**
+     * @function
      * @name filterByWorker
      * @description Filter Workspace service request by worker either
      * assignee or operator
