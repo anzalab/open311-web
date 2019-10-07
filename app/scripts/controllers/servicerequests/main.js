@@ -1172,6 +1172,7 @@ angular
           templateUrl: 'views/servicerequests/_partials/assignee_modal.html',
           scope: $scope,
           size: 'lg',
+          backdrop: 'static',
         });
 
         $scope.modal.result.then(
@@ -1179,6 +1180,20 @@ angular
           function onDismissed() {}
         );
       }
+    };
+
+    /**
+     * @function
+     * @description Stringify party roles name
+     * @param  {[type]} party [description]
+     * @return {[type]}       [description]
+     */
+    $scope.showPartyRoles = function(party) {
+      if (party && party.roles) {
+        var roles = _.map(party.roles, 'name');
+        return roles.join(', ');
+      }
+      return '';
     };
 
     /**

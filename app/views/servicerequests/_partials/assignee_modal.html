@@ -10,7 +10,7 @@
       ×
     </button>
     <h4 class="modal-title">
-      Assign Service Request To:
+      Assign Issue
     </h4>
   </div>
   <!-- end modal header -->
@@ -67,11 +67,29 @@
                   </span>
                 </div>
                 <div class="list-body">
-                  <div class="item-title">
+                  <div class="item-title" title="Name">
                     {{assignee.name}}
                     <br />
-                    <span class="text-sm text-muted">
-                      {{assignee.relation.type}}
+                    <span
+                      class="text-sm text-muted"
+                      title="Roles"
+                      ng-if="assignee.roles"
+                    >
+                      {{showPartyRoles(assignee)}}
+                    </span>
+                    <span
+                      class="text-sm text-muted"
+                      title="Area"
+                      ng-if="assignee.jurisdiction"
+                    >
+                      | {{assignee.jurisdiction.name}}
+                    </span>
+                    <span
+                      class="text-sm text-muted"
+                      title="Zone"
+                      ng-if="assignee.zone"
+                    >
+                      | {{assignee.zone.name.en}}
                     </span>
                   </div>
                 </div>

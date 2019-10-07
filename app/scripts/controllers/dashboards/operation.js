@@ -29,7 +29,9 @@ angular
     $scope.services = endpoints.services.services;
     $scope.servicegroups = endpoints.servicegroups.servicegroups;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
+    $scope.servicetypes = endpoints.servicetypes.data;
     $scope.workspaces = party.settings.party.relation.workspaces;
+    $scope.methods = party.settings.servicerequest.methods;
     $scope.materials = [
       { name: 'Adaptor Flange 10’’ PVC', quantity: 1 },
       { name: 'Adaptor Flange 10’’ GS', quantity: 1 },
