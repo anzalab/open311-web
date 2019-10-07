@@ -1,0 +1,222 @@
+<!-- start overall area  summary -->
+<div class="padding m-t-md">
+  <!-- start report box -->
+  <div class="box b-a p-l-0">
+    <!-- start header -->
+    <div class="box-header b-b p-t-md p-b-md" title="Overview Time Summary">
+      <h3>Overview Time Summary</h3>
+      <!-- <small>Sub title goes here with small font</small> -->
+    </div>
+    <!-- end header -->
+
+    <!-- start toolbox -->
+    <div class="box-tool">
+      <!-- start time filters -->
+      <ul class="nav">
+        <!-- start export -->
+        <li class="nav-item inline">
+          <a
+            title="Click To Export"
+            class="btn btn-xs rounded white"
+            aria-expanded="false"
+            ng-csv="export('services')"
+            csv-header="exports.services.headers"
+            filename="services_overview_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
+          >
+            Export
+          </a>
+        </li>
+        <!-- end export -->
+
+        <!-- start date filters -->
+        <li uib-dropdown class="nav-item inline dropdown" style="display:none">
+          <a
+            uib-dropdown-toggle
+            class="btn btn-xs rounded white dropdown-toggle"
+            aria-expanded="false"
+            >Today</a
+          >
+          <div
+            uib-dropdown-menu
+            class="dropdown-menu dropdown-menu-scale pull-right"
+          >
+            <a class="dropdown-item" href="">Last 24 hours</a>
+            <a class="dropdown-item" href="">Last 7 days</a>
+            <a class="dropdown-item" href="">Last month</a>
+            <a class="dropdown-item" href="">Last Year</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">Today</a>
+          </div>
+        </li>
+        <!-- end date filters -->
+      </ul>
+      <!-- end time filters -->
+    </div>
+    <!-- end toolbox -->
+
+    <!-- start body -->
+    <div>
+      <!-- start overall stats -->
+
+      <div class="row no-gutter">
+        <!-- start avg assign time -->
+        <div class="col-xs-6 col-sm-2 b-r" title="Average Assign Time">
+          <div class="padding">
+            <div class="text-center">
+              <h3 class="text-center _600 m-t-md">
+                <span title="Average Assign Time - Days Spent">
+                  {{ operations.overall.assignTime.average.days }}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average Assign Time - Hours Spent">
+                  {{ operations.overall.assignTime.average.hours }}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average Assign Time - Minutes Spent">
+                  {{ operations.overall.assignTime.average.minutes }}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h3>
+              <p class="text-muted m-b-md">Average Assign Time</p>
+            </div>
+          </div>
+        </div>
+        <!-- end avg assign time -->
+
+        <!-- start avg attending time -->
+        <div class="col-xs-6 col-sm-2 b-r" title="Average Attend Time">
+          <div class="padding">
+            <div class="text-center">
+              <h3 class="text-center _600 m-t-md">
+                <span title="Average Attend Time - Days Spent">
+                  {{ operations.overall.attendTime.average.days }}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average Attend Time - Hours Spent">
+                  {{ operations.overall.attendTime.average.hours }}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average Attend Time - Minutes Spent">
+                  {{ operations.overall.attendTime.average.minutes }}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h3>
+              <p class="text-muted m-b-md">Average Attend Time</p>
+            </div>
+          </div>
+        </div>
+        <!-- end avg attending time -->
+
+        <!-- start avg completion time -->
+        <div class="col-xs-6 col-sm-2 b-r" title="Average Completion Time">
+          <div class="padding">
+            <div class="text-center">
+              <h3 class="text-center _600 m-t-md">
+                <span title="Average Completion Time - Days Spent">
+                  {{ operations.overall.completeTime.average.days }}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average Completion Time - Hours Spent">
+                  {{ operations.overall.completeTime.average.hours }}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average Completion Time - Minutes Spent">
+                  {{ operations.overall.completeTime.average.minutes }}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h3>
+              <p class="text-muted m-b-md">Average Completion Time</p>
+            </div>
+          </div>
+        </div>
+        <!-- end avg completion time -->
+
+        <!-- start avg verification time -->
+        <div class="col-xs-6 col-sm-2" title="Average Verification Time">
+          <div class="padding">
+            <div class="text-center">
+              <h3 class="text-center _600 m-t-md">
+                <span title="Average Verification Time - Days Spent">
+                  {{ operations.overall.verifyTime.average.days }}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average Verification Time - Hours Spent">
+                  {{ operations.overall.verifyTime.average.hours }}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average Verification Time - Minutes Spent">
+                  {{ operations.overall.verifyTime.average.minutes }}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h3>
+              <p class="text-muted m-b-md">Average Verification Time</p>
+            </div>
+          </div>
+        </div>
+        <!-- end avg verification time  -->
+
+        <!-- start avg approval time -->
+        <div class="col-xs-6 col-sm-2 b-l" title="Average Approval Time">
+          <div class="padding">
+            <div class="text-center">
+              <h3 class="text-center _600 m-t-md">
+                <span title="Average Approval Time - Days Spent">
+                  {{ operations.overall.approveTime.average.days }}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average Approval Time - Hours Spent">
+                  {{ operations.overall.approveTime.average.hours }}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average Approval Time - Minutes Spent">
+                  {{ operations.overall.approveTime.average.minutes }}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h3>
+              <p class="text-muted m-b-md">Average Approval Time</p>
+            </div>
+          </div>
+        </div>
+        <!-- end avg approval time  -->
+
+        <!-- start approved -->
+        <div class="col-xs-6 col-sm-2 b-l" title="Average Late Time">
+          <div class="padding">
+            <div class="text-center">
+              <h3 class="text-center _600 m-t-md">
+                <span title="Average Late Time - Days Spent">
+                  {{ operations.overall.lateTime.average.days }}
+                  <span class="text-muted text-xs">days</span>
+                </span>
+                <span title="Average Late Time - Hours Spent">
+                  {{ operations.overall.lateTime.average.hours }}
+                  <span class="text-muted text-xs">hrs</span>
+                </span>
+                <span title="Average Late Time - Minutes Spent">
+                  {{ operations.overall.lateTime.average.minutes }}
+                  <span class="text-muted text-xs">mins</span>
+                </span>
+              </h3>
+              <p class="text-muted m-b-md">Average Late Time</p>
+            </div>
+          </div>
+        </div>
+        <!-- end approved  -->
+      </div>
+      <!-- end jurisdiction performance summary -->
+
+      <!-- start visualization chart -->
+      <!-- <div class="p-a-md">
+        <echart config="perSummaryConfig" options="perSummaryOptions"></echart>
+      </div> -->
+      <!-- end visualization chart -->
+
+      <!-- end overall stats -->
+    </div>
+    <!-- end body -->
+  </div>
+  <!-- end report box -->
+</div>
+<!-- end overall area summary -->

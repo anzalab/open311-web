@@ -114,14 +114,13 @@ angular
           .endOf('date')
           .toDate(),
       jurisdictions: $scope.jurisdiction._id,
-      workspaces: [],
     };
 
     //TODO persist filter to local storage
     $scope.filters = defaultFilters;
 
     //initialize performances
-    $scope.performances = {};
+    $scope.operations = {};
 
     /**
      * Open performance reports filter
@@ -170,20 +169,20 @@ angular
     //TODO make api to return data
     $scope.prepareSummaries = function() {
       //prepare summary
-      $scope.performances.summaries = [
+      $scope.operations.summaries = [
         {
           name: 'Resolved',
-          count: _.get($scope.performances, 'overall.resolved', 0),
+          count: _.get($scope.operations, 'overall.resolved', 0),
           color: '#8BC34A',
         },
         {
           name: 'Pending',
-          count: _.get($scope.performances, 'overall.pending', 0),
+          count: _.get($scope.operations, 'overall.pending', 0),
           color: '#00BCD4',
         },
         {
           name: 'Late',
-          count: _.get($scope.performances, 'overall.late', 0),
+          count: _.get($scope.operations, 'overall.late', 0),
           color: '#009688',
         },
       ];
@@ -207,21 +206,15 @@ angular
      * Reload performance reports
      */
     $scope.reload = function() {
-      Summary.performances({
+      Summary.operations({
         filter: $scope.params,
-      }).then(function(performances) {
-        $scope.performances = performances;
+      }).then(function(operations) {
+        $scope.operations = operations;
 
         //ensure performances loaded
-        if ($scope.performances) {
+        if ($scope.operations) {
           //ensure status are sorted by weight
-          $scope.performances.statuses = _.orderBy(
-            performances.statuses,
-            'weight',
-            'asc'
-          );
-
-          $scope.prepare();
+          // $scope.prepare();
         }
       });
     };
@@ -234,28 +227,27 @@ angular
      * @author Benson Maruchu<benmaruchu@gmail.com>
      */
     $scope.prepareOverallPercentages = function() {
-      var overallExists = _.get($scope.performances, 'overall', false);
+      var overallExists = _.get($scope.operations, 'overall', false);
 
       // check if overall data exists
       if (overallExists) {
         var percentages = {
           percentageResolved:
-            ($scope.performances.overall.resolved /
-              $scope.performances.overall.count) *
+            ($scope.operations.overall.resolved /
+              $scope.operations.overall.count) *
             100,
           percentagePending:
-            ($scope.performances.overall.pending /
-              $scope.performances.overall.count) *
+            ($scope.operations.overall.pending /
+              $scope.operations.overall.count) *
             100,
           percentageLate:
-            ($scope.performances.overall.late /
-              $scope.performances.overall.count) *
+            ($scope.operations.overall.late / $scope.operations.overall.count) *
             100,
         };
 
-        $scope.performances.overall = _.merge(
+        $scope.operations.overall = _.merge(
           {},
-          $scope.performances.overall,
+          $scope.operations.overall,
           percentages
         );
       }
@@ -270,7 +262,7 @@ angular
      */
     $scope.prepareSummaryVisualization = function() {
       //prepare chart series data
-      var data = _.map($scope.performances.summaries, function(summary) {
+      var data = _.map($scope.operations.summaries, function(summary) {
         return {
           name: summary.name,
           value: summary.count,
@@ -318,7 +310,7 @@ angular
             type: 'pie',
             selectedMode: 'single',
             radius: ['45%', '55%'],
-            color: _.map($scope.performances.summaries, 'color'),
+            color: _.map($scope.operations.summaries, 'color'),
             label: {
               normal: {
                 formatter: '{b}\n{d}%\n( {c} )',
@@ -339,7 +331,7 @@ angular
      */
     $scope.prepareStatusesVisualization = function() {
       //prepare chart series data
-      var data = _.map($scope.performances.statuses, function(status) {
+      var data = _.map($scope.operations.statuses, function(status) {
         return {
           name: status.name,
           value: status.count,
@@ -387,7 +379,7 @@ angular
             type: 'pie',
             selectedMode: 'single',
             radius: ['45%', '55%'],
-            color: _.map($scope.performances.statuses, 'color'),
+            color: _.map($scope.operations.statuses, 'color'),
             label: {
               normal: {
                 formatter: '{b}\n{d}%\n( {c} )',
@@ -411,7 +403,7 @@ angular
       column = column || 'count';
 
       //prepare chart series data
-      var data = _.map($scope.performances.groups, function(group) {
+      var data = _.map($scope.operations.groups, function(group) {
         return {
           name: group.name,
           value: group[column],
@@ -460,7 +452,7 @@ angular
             type: 'pie',
             selectedMode: 'single',
             radius: ['45%', '55%'],
-            color: _.map($scope.performances.groups, 'color'),
+            color: _.map($scope.operations.groups, 'color'),
 
             label: {
               normal: {
@@ -485,13 +477,13 @@ angular
       column = column || 'count';
 
       //prepare unique services for bar chart categories
-      // var categories = _.chain($scope.performances)
+      // var categories = _.chain($scope.operations)
       //   .map('services')
       //   .uniqBy('name')
       //   .value();
 
       //prepare bar chart series data
-      var data = _.map($scope.performances.services, function(service) {
+      var data = _.map($scope.operations.services, function(service) {
         var serie = {
           name: service.name,
           value: service[column],
