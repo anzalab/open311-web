@@ -210,7 +210,7 @@ angular
     $scope.showFilter = function() {
       //open performance reports filter modal
       $scope.modal = $uibModal.open({
-        templateUrl: 'views/dashboards/_partials/performances_filter.html',
+        templateUrl: 'views/dashboards/_partials/operations_filter.html',
         scope: $scope,
         size: 'lg',
       });
