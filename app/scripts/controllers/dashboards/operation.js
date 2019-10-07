@@ -133,8 +133,8 @@ angular
           'Verified',
           'Approved',
           'Average Attend Time',
+          'Average Work Time',
           'Average Resolution Time',
-          'Average Late Time(Past SLA)',
         ],
       },
     };
@@ -151,16 +151,29 @@ angular
           completed: operation.completed,
           verified: operation.verified,
           approved: operation.approved,
-          averageAttendTime: operation.attendTime.average
+          averageAssignTime: operation.assignTime.average
             ? [
-                operation.attendTime.average.days,
+                operation.assignTime.average.days,
                 ' days, ',
-                operation.attendTime.average.hours,
+                operation.assignTime.average.hours,
                 ' hrs, ',
-                operation.attendTime.average.minutes,
+                operation.assignTime.average.minutes,
                 ' mins, ',
-                operation.attendTime.average.seconds,
+                operation.assignTime.average.seconds,
                 ' secs',
+              ].join('')
+            : undefined,
+
+          averageWorkTime: operation.workTime
+            ? [
+                operation.workTime.average.days,
+                'days, ',
+                operation.workTime.average.hours,
+                'hrs, ',
+                operation.workTime.average.minutes,
+                'mins, ',
+                operation.workTime.average.seconds,
+                'secs, ',
               ].join('')
             : undefined,
           averageResolveTime: operation.resolveTime
@@ -172,18 +185,6 @@ angular
                 operation.resolveTime.average.minutes,
                 'mins, ',
                 operation.resolveTime.average.seconds,
-                'secs, ',
-              ].join('')
-            : undefined,
-          averageLateTime: operation.lateTime
-            ? [
-                operation.lateTime.average.days,
-                'days, ',
-                operation.lateTime.average.hours,
-                'hrs, ',
-                operation.lateTime.average.minutes,
-                'mins, ',
-                operation.lateTime.average.seconds,
                 'secs, ',
               ].join('')
             : undefined,

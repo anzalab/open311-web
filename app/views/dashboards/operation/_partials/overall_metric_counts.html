@@ -1,7 +1,7 @@
 <!-- start operational summary -->
 <div class="row no-gutter">
   <!-- start total -->
-  <div class="col-xs-6 col-sm-4 b-r b-l b-t b-b" title="Total Service Requests">
+  <div class="col-xs-6 col-sm-3 b-r b-l b-t b-b" title="Total Service Requests">
     <div class="p-a-sm">
       <div class="text-center">
         <h2 class="text-center _600 m-t-md">
@@ -14,7 +14,7 @@
   <!-- end total -->
 
   <!-- start pending -->
-  <div class="col-xs-6 col-sm-4 b-r b-t b-b" title="Pending Service Requests">
+  <div class="col-xs-6 col-sm-3 b-r b-t b-b" title="Pending Service Requests">
     <div class="p-a-sm">
       <div class="text-center">
         <h2 class="text-center _600 m-t-md">
@@ -27,7 +27,7 @@
   <!-- end pending -->
 
   <!-- start resolved -->
-  <div class="col-xs-6 col-sm-4 b-r b-t b-b" title="Resolved Service Requests">
+  <div class="col-xs-6 col-sm-3 b-r b-t b-b" title="Resolved Service Requests">
     <div class="p-a-sm">
       <div class="text-center">
         <h2 class="text-center _600 m-t-md">
@@ -38,5 +38,18 @@
     </div>
   </div>
   <!-- end resolved -->
+
+  <!-- start late -->
+  <div class="col-xs-6 col-sm-3 b-r b-t b-b" title="Past SLA Service Requests">
+    <div class="p-a-sm">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{ operations.overall.late | number: 0 }}
+        </h2>
+        <p class="text-muted m-b-md">Late</p>
+      </div>
+    </div>
+  </div>
+  <!-- end late -->
 </div>
 <!-- end operational summary -->

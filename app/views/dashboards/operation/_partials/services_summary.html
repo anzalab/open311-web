@@ -61,42 +61,39 @@
       <table class="table table-bordered table-stats">
         <thead>
           <tr>
-            <th ng-click="prepareServiceVisualization('count')" title="Area">
+            <th title="Service">
               Service
             </th>
-            <th
-              ng-click="prepareServiceVisualization('pending')"
-              title="Total Count of Pending Service Requests"
-            >
+            <th title="Total Count of Service Requests in Waiting State">
+              Waiting
+            </th>
+            <th title="Total Count of Service Requests in Assigned State">
               Assigned
             </th>
-            <th
-              ng-click="prepareServiceVisualization('resolved')"
-              title="Total Count of Resolved Service Requests"
-            >
+            <th title="Total Count of Service Requests in Attending State">
               Attending
             </th>
-            <th
-              title="Average Time Taken to Attend a Customer(Call) Service Request"
-            >
+            <th title="Total Count of Service Requests in Completed State">
               Completed
             </th>
-            <th title="Average Time Taken to a Resolve Service Request">
+            <th title="Total Count of Service Requests in Verified State">
               Verified
             </th>
-            <th title="Average Time Taken to a Resolve Service Request">
+            <th title="Total Count of Service Requests in Approved State">
               Approved
             </th>
             <th
-              title="Average Time Taken from Assign to start Attending Service Request"
+              title="Average Time Taken from Confirmation of Service Request to Assign Service Request"
             >
-              Average Attend Time
+              Average Assign Time
             </th>
-            <th title="Average Time Taken to a Resolve Service Request">
+            <th
+              title="Average Time Taken to work on a Service Request(completeTime - Assign Time)"
+            >
+              Average Work Time
+            </th>
+            <th title="Average Time Taken to Resolve Service Request">
               Average Resolution Time
-            </th>
-            <th title="Average Late Time for Service Requests per Service">
-              Average Late Time
             </th>
           </tr>
         </thead>
@@ -105,33 +102,47 @@
             <td title="{{ service.name }}">
               {{ service.name.en }}
             </td>
-            <td title="{{ service.count | number: 0 }}">
+            <td title="{{ service.new | number: 0 }}">
+              {{ service.new | number: 0 }}
+            </td>
+            <td title="{{ service.new | number: 0 }}">
               {{ service.assigned | number: 0 }}
             </td>
-            <td title=" {{ service.pending | number: 0 }}">
+            <td title=" {{ service.attended | number: 0 }}">
               {{ service.attended | number: 0 }}
             </td>
-            <td title=" {{ service.resolved | number: 0 }}">
+            <td title=" {{ service.completed | number: 0 }}">
               {{ service.completed | number: 0 }}
             </td>
-            <td title=" {{ service.late | number: 0 }}">
+            <td title=" {{ service.verified | number: 0 }}">
               {{ service.verified | number: 0 }}
             </td>
-            <td title=" {{ service.late | number: 0 }}">
+            <td title=" {{ service.approved | number: 0 }}">
               {{ service.approved | number: 0 }}
             </td>
             <td>
               <span>
-                {{ service.attendTime.average.hours +
-                service.attendTime.average.days * 24 }}
+                {{ service.assignTime.average.hours +
+                service.assignTime.average.days * 24 }}
                 <span class="text-muted text-xs">hrs</span>
               </span>
               <span>
-                {{ service.attendTime.average.minutes }}
+                {{ service.assignTime.average.minutes }}
                 <span class="text-muted text-xs">mins</span>
               </span>
             </td>
 
+            <td>
+              <span>
+                {{ service.workTime.average.hours +
+                service.workTime.average.days * 24 }}
+                <span class="text-muted text-xs">hrs</span>
+              </span>
+              <span>
+                {{ service.workTime.average.minutes }}
+                <span class="text-muted text-xs">mins</span>
+              </span>
+            </td>
             <td>
               <span>
                 {{ service.resolveTime.average.hours +
@@ -140,17 +151,6 @@
               </span>
               <span>
                 {{ service.resolveTime.average.minutes }}
-                <span class="text-muted text-xs">mins</span>
-              </span>
-            </td>
-            <td>
-              <span>
-                {{ service.lateTime.average.hours +
-                service.lateTime.average.days * 24 }}
-                <span class="text-muted text-xs">hrs</span>
-              </span>
-              <span>
-                {{ service.lateTime.average.minutes }}
                 <span class="text-muted text-xs">mins</span>
               </span>
             </td>
