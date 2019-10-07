@@ -1,0 +1,42 @@
+<!-- start operational summary -->
+<div class="row no-gutter">
+  <!-- start total -->
+  <div class="col-xs-6 col-sm-4 b-r b-l b-t b-b" title="Total Service Requests">
+    <div class="padding">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{ operations.overall.count | number: 0 }}
+        </h2>
+        <p class="text-muted m-b-md">Total</p>
+      </div>
+    </div>
+  </div>
+  <!-- end total -->
+
+  <!-- start pending -->
+  <div class="col-xs-6 col-sm-4 b-r b-t b-b" title="Pending Service Requests">
+    <div class="padding">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{ operations.overall.pending | number: 0 }}
+        </h2>
+        <p class="text-muted m-b-md">Pending</p>
+      </div>
+    </div>
+  </div>
+  <!-- end pending -->
+
+  <!-- start resolved -->
+  <div class="col-xs-6 col-sm-4 b-r b-t b-b" title="Resolved Service Requests">
+    <div class="padding">
+      <div class="text-center">
+        <h2 class="text-center _600 m-t-md">
+          {{ operations.overall.resolved | number: 0 }}
+        </h2>
+        <p class="text-muted m-b-md">Resolved</p>
+      </div>
+    </div>
+  </div>
+  <!-- end resolved -->
+</div>
+<!-- end operational summary -->
