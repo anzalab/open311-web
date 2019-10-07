@@ -31,6 +31,7 @@ angular
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
     $scope.workspaces = party.settings.party.relation.workspaces;
     $scope.channels = party.settings.servicerequest.channels;
+    $scope.methods = party.settings.servicerequest.methods;
 
     //bind filters
     var defaultFilters = {
