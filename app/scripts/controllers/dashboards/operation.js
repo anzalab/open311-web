@@ -13,7 +13,6 @@ angular
   .controller('DashboardOperationCtrl', function(
     $rootScope,
     $scope,
-    $state,
     $filter,
     $stateParams,
     $uibModal,
