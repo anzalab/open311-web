@@ -34,55 +34,55 @@
   <div class="app-body-inner">
     <!-- start jurisdiction summary and (ttr & att) -->
     <ng-include
-      ng-if="performances && performances.overall"
-      src="'views/dashboards/performance/_partials/jurisdiction_summary.html'"
+      ng-if="operations && operations.overall"
+      src="'views/dashboards/operation/_partials/jurisdiction_summary.html'"
     ></ng-include>
     <!-- end jurisdiction summary and (ttr & att) -->
 
-    <!-- start overall and pipeline summary -->
-    <div class="row no-gutter">
-      <!-- start of area overall summary -->
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <ng-include
-          ng-if="performances && performances.overall"
-          src="'views/dashboards/performance/_partials/overall_summary.html'"
-        ></ng-include>
-      </div>
-      <!-- end of area overall summary -->
-      <!-- start area service pipeline -->
-      <div class="col-xs-12 col-sm-6 col-md-6">
-        <ng-include
-          ng-if="performances.statuses && performances.statuses.length > 0"
-          src="'views/dashboards/performance/_partials/pipeline_summary.html'"
-        ></ng-include>
-      </div>
-      <!-- end area service pipeline -->
-    </div>
-    <!-- end overall and pipeline summary -->
-
-    <!-- start service groups summary -->
-    <!-- <ng-include ng-if="performances.groups && performances.groups.length > 0" src="'views/dashboards/performance/_partials/service_groups_summary.html'"></ng-include> -->
-    <!-- end service groups summary -->
-
-    <!-- start services summary -->
+    <!-- start overall area summary -->
     <ng-include
-      ng-if="performances.services  && performances.services.length > 0"
-      src="'views/dashboards/performance/_partials/services_summary.html'"
+      ng-if="operations && operations.overall"
+      src="'views/dashboards/operation/_partials/overall_summary.html'"
     ></ng-include>
-    <!-- end services summary -->
+    <!-- end of overall area summary -->
+
+    <!-- start overall area time summary -->
+    <ng-include
+      ng-if="operations && operations.overall"
+      src="'views/dashboards/operation/_partials/overall_time_summary.html'"
+    ></ng-include>
+    <!-- end of overall area time summary -->
+
+    <!-- start blocked service requests summary -->
+    <!-- <ng-include
+      ng-if="operations.services  && operations.services.length > 0"
+      src="'views/dashboards/operation/_partials/blocked_service_requests_summary.html'"
+    ></ng-include> -->
+    <!-- end blocked service requests summary -->
 
     <!-- start zone summary -->
     <ng-include
-      ng-if="performances.services  && performances.services.length > 0"
+      ng-if="operations.zones  && operations.zones.length > 0"
       src="'views/dashboards/operation/_partials/jurisdiction_zone_summary.html'"
     ></ng-include>
     <!-- end zone summary -->
 
-    <!-- start material used summary -->
+    <!-- start service groups summary -->
+    <!-- <ng-include ng-if="operations.groups && operations.groups.length > 0" src="'views/dashboards/performance/_partials/service_groups_summary.html'"></ng-include> -->
+    <!-- end service groups summary -->
+
+    <!-- start services summary -->
     <ng-include
-      ng-if="performances.services  && performances.services.length > 0"
-      src="'views/dashboards/operation/_partials/material_used_summary.html'"
+      ng-if="operations.services  && operations.services.length > 0"
+      src="'views/dashboards/operation/_partials/services_summary.html'"
     ></ng-include>
+    <!-- end services summary -->
+
+    <!-- start material used summary -->
+    <!-- <ng-include
+      ng-if="operations.services  && operations.services.length > 0"
+      src="'views/dashboards/operation/_partials/material_used_summary.html'"
+    ></ng-include> -->
     <!-- end material used summary -->
 
     <!-- <hr> -->
@@ -92,7 +92,7 @@
         <div class="col-sm-12 col-md-5 col-lg-5">
           <!-- start of staff leaderboard -->
           <ng-include
-            ng-if="performances.operators"
+            ng-if="operations.operators"
             src="'views/dashboards/_partials/service_request_leaderboard.html'"
           ></ng-include>
           <!-- end of staff leaderboard -->
@@ -100,7 +100,7 @@
         <div class="col-sm-12 col-md-5 col-lg-5 offset-md-1">
           <!-- start of area leaderboard -->
           <ng-include
-            ng-if="performances.jurisdictions"
+            ng-if="operations.jurisdictions"
             src="'views/dashboards/_partials/service_request_area_leaderboard.html'"
           ></ng-include>
           <!-- end of area leaderboard -->
@@ -110,7 +110,7 @@
     </div>
 
     <!-- start no data description -->
-    <div ng-if="!performances.overall" class="row-col h-v">
+    <div ng-if="!operations.overall" class="row-col h-v">
       <div class="row-cell v-m">
         <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
           <p class="text-muted m-y-lg">

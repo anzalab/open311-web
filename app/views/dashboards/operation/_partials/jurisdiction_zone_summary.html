@@ -81,22 +81,25 @@
                 <th title="Total Count of Service Requests">
                   Total
                 </th>
-                <th title="Total Count of Pending Service Requests">
-                  In Progress
+                <th title="Total Count of Assigned Service Requests">
+                  Assigned
                 </th>
-                <th title="Total Count of Done Service Requests">
-                  Done
+                <th title="Total Count of Attending Service Requests">
+                  Attending
                 </th>
-                <th title="Total Count of Verified Service Requests">
-                  Verified
+                <th title="Total Count of Blocked Service Requests">
+                  Blocked
                 </th>
                 <th
-                  title="Total Count of Approved and Closed Zone Service Requests"
+                  title="Total Count of Completed and Closed Zone Service Requests"
                 >
-                  Closed
+                  Completed
                 </th>
-                <th title="Total Count of Late Zone Service Requests">
-                  Late
+                <th title="Total Count of Verified Zone Service Requests">
+                  Verified
+                </th>
+                <th title="Total Count of Approved Zone Service Requests">
+                  Approved
                 </th>
               </tr>
             </thead>
@@ -105,21 +108,31 @@
                 <td title="{{ zone.name }}">
                   {{ zone.name }}
                 </td>
+
                 <td title="{{ zone.total | number: 0 }}">
                   {{ zone.total | number: 0 }}
                 </td>
+
                 <td title=" {{ zone.inProgress | number: 0 }}">
                   {{ zone.inProgress | number: 0 }}
                 </td>
+
                 <td title=" {{ zone.done | number: 0 }}">
                   {{ zone.done | number: 0 }}
                 </td>
+
                 <td title=" {{ zone.verified | number: 0 }}">
                   {{ zone.verified | number: 0 }}
                 </td>
+
                 <td title=" {{ zone.closed | number: 0 }}">
                   {{ zone.closed | number: 0 }}
                 </td>
+
+                <td title=" {{ zone.late | number: 0 }}">
+                  {{ zone.late | number: 0 }}
+                </td>
+
                 <td title=" {{ zone.late | number: 0 }}">
                   {{ zone.late | number: 0 }}
                 </td>

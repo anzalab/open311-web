@@ -87,6 +87,21 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
   };
 
   /**
+   * @description Load current operations report
+   * @param {object} params additional params
+   * @return {object}
+   */
+  Summary.operations = function(params) {
+    return $http
+      .get(Utils.asLink(['v1', 'reports', 'operations']), {
+        params: params,
+      })
+      .then(function(response) {
+        return response.data.data;
+      });
+  };
+
+  /**
    * Build params as per API filtering, sorting and paging
    * @param  {Object} [params] reports filters
    * @return {Object}

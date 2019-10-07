@@ -14,18 +14,20 @@
       <!-- start time filters -->
       <ul class="nav">
         <!-- start export -->
-        <li class="nav-item inline">
+        <!-- <li class="nav-item inline">
           <a
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
             ng-csv="export('services')"
             csv-header="exports.services.headers"
-            filename="services_overview_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="services_overview_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
-        </li>
+        </li> -->
         <!-- end export -->
 
         <!-- start date filters -->
@@ -60,107 +62,150 @@
 
       <!-- start jurisdiction performance summary -->
       <div class="row no-gutter">
-        <!-- start total -->
-        <div class="col-xs-6 col-sm-3 b-r b-b" title="Total Service Requests">
-          <div class="p-a-sm">
-            <div class="text-center">
-              <h4 class="text-center _600 m-t-md">
-                {{performances.overall.count | number:0}}
-              </h4>
-              <p class="text-muted m-b-md">Total</p>
-            </div>
-          </div>
-        </div>
-        <!-- end total -->
-
-        <!-- start pending -->
-        <div class="col-xs-6 col-sm-2 b-r b-b" title="Pending Service Requests">
-          <div class="p-a-sm">
+        <!-- start waiting -->
+        <div
+          class="col-xs-6 col-sm-2 b-r"
+          title="Service Requests in Waiting State"
+        >
+          <div class="padding">
             <div>
               <span
                 class="pull-right text-xs"
-                ng-class="performances.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'"
-                >{{performances.overall.percentagePending | number:2}}%</span
+                ng-class="operations.overall.percentageWaiting <= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageWaiting | number: 2 }}%</span
               >
             </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
-                {{performances.overall.pending | number:0}}
+                {{ operations.overall.new | number: 0 }}
               </h4>
-              <p class="text-muted m-b-md">Pending</p>
+              <p class="text-muted m-b-md">Waiting</p>
             </div>
           </div>
         </div>
-        <!-- end pending -->
+        <!-- end waiting -->
 
-        <!-- start resolved -->
+        <!-- start assigned -->
         <div
-          class="col-xs-6 col-sm-2 b-r b-b"
-          title="Resolved Service Requests"
+          class="col-xs-6 col-sm-2 b-r"
+          title="Service Requests in Assigned State"
         >
-          <div class="p-a-sm">
+          <div class="padding">
             <div>
               <span
                 class="pull-right text-xs"
-                ng-class="performances.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'"
-                >{{performances.overall.percentageResolved | number:2}}%</span
+                ng-class="operations.overall.percentageAssigned <= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageAssigned | number: 2 }}%</span
               >
             </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
-                {{performances.overall.resolved | number:0}}
+                {{ operations.overall.assigned | number: 0 }}
               </h4>
-              <p class="text-muted m-b-md">Resolved</p>
+              <p class="text-muted m-b-md">Assigned</p>
             </div>
           </div>
         </div>
-        <!-- end resolved -->
+        <!-- end assigned -->
 
-        <!-- start late -->
+        <!-- start attending -->
         <div
-          class="col-xs-6 col-sm-2 b-r b-b"
-          title="Late(Past SLA Time) Service Requests"
+          class="col-xs-6 col-sm-2 b-r"
+          title="Service Requests in Attending State"
         >
-          <div class="p-a-sm">
+          <div class="padding">
             <div>
               <span
                 class="pull-right text-xs"
-                ng-class="performances.overall.percentageLate > 0 ? 'text-danger' : 'text-success'"
-                >{{performances.overall.percentageLate | number:2}}%</span
+                ng-class="operations.overall.percentageAttending >= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageAttending | number: 2 }}%</span
               >
             </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
-                {{performances.overall.late | number:0}}
+                {{ operations.overall.attended | number: 0 }}
               </h4>
-              <p class="text-muted m-b-md">Late</p>
+              <p class="text-muted m-b-md">Attending</p>
             </div>
           </div>
         </div>
-        <!-- end late  -->
+        <!-- end attending -->
 
-        <!-- start escallated -->
+        <!-- start completed -->
         <div
-          class="col-xs-6 col-sm-3 b-b"
-          title="Late(Past SLA Time) Service Requests"
+          class="col-xs-6 col-sm-2 b-r"
+          title="Service Requests in Completed State"
         >
-          <div class="p-a-sm">
+          <div class="padding">
+            <div>
+              <span
+                class="pull-right text-xs"
+                ng-class="operations.overall.percentageCompleted >= 50 ? 'text-danger' : 'text-success'"
+                >{{ operations.overall.percentageCompleted | number: 2 }}%</span
+              >
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
-                {{performances.overall.late | number:0}}
+                {{ operations.overall.completed | number: 0 }}
               </h4>
-              <p class="text-muted m-b-md">Escallated</p>
+              <p class="text-muted m-b-md">Completed</p>
             </div>
           </div>
         </div>
-        <!-- end escallated  -->
+        <!-- end completed  -->
+
+        <!-- start verified -->
+        <div
+          class="col-xs-6 col-sm-2"
+          title="Service Requests in Verified State"
+        >
+          <div class="padding">
+            <div>
+              <span
+                class="pull-right text-xs"
+                ng-class="operations.overall.percentageVerified >= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageVerified | number: 2 }}%</span
+              >
+            </div>
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{ operations.overall.verified | number: 0 }}
+              </h4>
+              <p class="text-muted m-b-md">Verified</p>
+            </div>
+          </div>
+        </div>
+        <!-- end verified  -->
+
+        <!-- start approved -->
+        <div
+          class="col-xs-6 col-sm-2 b-l"
+          title="Service Requests in Approved State"
+        >
+          <div class="padding">
+            <div>
+              <span
+                class="pull-right text-xs"
+                ng-class="operations.overall.percentageApproved >= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageApproved | number: 2 }}%</span
+              >
+            </div>
+            <div class="text-center">
+              <h4 class="text-center _600 m-t-md">
+                {{ operations.overall.approved | number: 0 }}
+              </h4>
+              <p class="text-muted m-b-md">Approved</p>
+            </div>
+          </div>
+        </div>
+        <!-- end approved  -->
       </div>
       <!-- end jurisdiction performance summary -->
 
       <!-- start visualization chart -->
-      <div class="p-a-md">
+      <!-- <div class="p-a-md">
         <echart config="perSummaryConfig" options="perSummaryOptions"></echart>
-      </div>
+      </div> -->
       <!-- end visualization chart -->
 
       <!-- end overall stats -->

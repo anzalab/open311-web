@@ -2674,6 +2674,10 @@ body {
   .switcher {
     display: none;
   }
+
+  .printSection .row-inner {
+    overflow: hidden !important;
+  }
 }
 
 .ie9 .app-aside {
