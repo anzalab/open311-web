@@ -277,12 +277,6 @@ angular
 
       // prepare percentages for overall summary
       $scope.prepareOverallPercentages();
-
-      //prepare visualization
-      $scope.prepareSummaryVisualization();
-      $scope.prepareStatusesVisualization();
-      $scope.prepareServiceGroupVisualization();
-      $scope.prepareServiceVisualization();
     };
 
     /**
@@ -297,7 +291,7 @@ angular
         //ensure performances loaded
         if ($scope.operations) {
           //ensure status are sorted by weight
-          // $scope.prepare();
+          $scope.prepare();
         }
       });
     };
@@ -311,6 +305,16 @@ angular
      */
     $scope.prepareOverallPercentages = function() {
       var overallExists = _.get($scope.operations, 'overall', false);
+
+      var operationTotal =
+        $scope.operations.overall.new +
+        $scope.operations.overall.assigned +
+        $scope.operations.overall.attended +
+        $scope.operations.overall.completed +
+        $scope.operations.overall.verified +
+        $scope.operations.overall.approved;
+
+      console.log(operationTotal);
 
       // check if overall data exists
       if (overallExists) {
@@ -326,6 +330,18 @@ angular
           percentageLate:
             ($scope.operations.overall.late / $scope.operations.overall.count) *
             100,
+          percentageWaiting:
+            ($scope.operations.overall.new / operationTotal) * 100,
+          percentageAssigned:
+            ($scope.operations.overall.assigned / operationTotal) * 100,
+          percentageAttending:
+            ($scope.operations.overall.attended / operationTotal) * 100,
+          percentageCompleted:
+            ($scope.operations.overall.completed / operationTotal) * 100,
+          percentageVerified:
+            ($scope.operations.overall.verified / operationTotal) * 100,
+          percentageApproved:
+            ($scope.operations.overall.approved / operationTotal) * 100,
         };
 
         $scope.operations.overall = _.merge(
@@ -334,329 +350,6 @@ angular
           percentages
         );
       }
-    };
-
-    /**
-     * prepare summary visualization
-     * @return {object} echart donut chart configurations
-     * @version 0.1.0
-     * @since  0.1.0
-     * @author lally elias<lallyelias87@gmail.com>
-     */
-    $scope.prepareSummaryVisualization = function() {
-      //prepare chart series data
-      var data = _.map($scope.operations.summaries, function(summary) {
-        return {
-          name: summary.name,
-          value: summary.count,
-        };
-      });
-
-      //prepare chart config
-      $scope.perSummaryConfig = {
-        height: 400,
-        forceClear: true,
-      };
-
-      //prepare chart options
-      $scope.perSummaryOptions = {
-        textStyle: {
-          fontFamily: 'Lato',
-        },
-        title: {
-          text: 'Total',
-          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
-          x: 'center',
-          y: 'center',
-          textStyle: {
-            fontWeight: 'normal',
-            fontSize: 16,
-          },
-        },
-        tooltip: {
-          show: true,
-          trigger: 'item',
-          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            saveAsImage: {
-              name: 'Area Overview - ' + new Date().getTime(),
-              title: 'Save',
-              show: true,
-            },
-          },
-        },
-        series: [
-          {
-            type: 'pie',
-            selectedMode: 'single',
-            radius: ['45%', '55%'],
-            color: _.map($scope.operations.summaries, 'color'),
-            label: {
-              normal: {
-                formatter: '{b}\n{d}%\n( {c} )',
-              },
-            },
-            data: data,
-          },
-        ],
-      };
-    };
-
-    /**
-     * prepare statuses visualization
-     * @return {object} echart donut chart configurations
-     * @version 0.1.0
-     * @since  0.1.0
-     * @author lally elias<lallyelias87@gmail.com>
-     */
-    $scope.prepareStatusesVisualization = function() {
-      //prepare chart series data
-      var data = _.map($scope.operations.statuses, function(status) {
-        return {
-          name: status.name,
-          value: status.count,
-        };
-      });
-
-      //prepare chart config
-      $scope.perStatusesConfig = {
-        height: 400,
-        forceClear: true,
-      };
-
-      //prepare chart options
-      $scope.perStatusesOptions = {
-        textStyle: {
-          fontFamily: 'Lato',
-        },
-        title: {
-          text: 'Total',
-          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
-          x: 'center',
-          y: 'center',
-          textStyle: {
-            fontWeight: 'normal',
-            fontSize: 16,
-          },
-        },
-        tooltip: {
-          show: true,
-          trigger: 'item',
-          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            saveAsImage: {
-              name: 'Area Status Overview - ' + new Date().getTime(),
-              title: 'Save',
-              show: true,
-            },
-          },
-        },
-        series: [
-          {
-            type: 'pie',
-            selectedMode: 'single',
-            radius: ['45%', '55%'],
-            color: _.map($scope.operations.statuses, 'color'),
-            label: {
-              normal: {
-                formatter: '{b}\n{d}%\n( {c} )',
-              },
-            },
-            data: data,
-          },
-        ],
-      };
-    };
-
-    /**
-     * prepare service group performance visualization
-     * @return {object} echart bar chart configurations
-     * @version 0.1.0
-     * @since  0.1.0
-     * @author lally elias<lallyelias87@gmail.com>
-     */
-    $scope.prepareServiceGroupVisualization = function(column) {
-      //ensure column
-      column = column || 'count';
-
-      //prepare chart series data
-      var data = _.map($scope.operations.groups, function(group) {
-        return {
-          name: group.name,
-          value: group[column],
-        };
-      });
-
-      //prepare chart config
-      $scope.perServiceGroupConfig = {
-        height: 400,
-        forceClear: true,
-      };
-
-      //prepare chart options
-      $scope.perServiceGroupOptions = {
-        textStyle: {
-          fontFamily: 'Lato',
-        },
-        title: {
-          text:
-            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
-          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
-          x: 'center',
-          y: 'center',
-          textStyle: {
-            fontWeight: 'normal',
-            fontSize: 16,
-          },
-        },
-        tooltip: {
-          show: true,
-          trigger: 'item',
-          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            saveAsImage: {
-              name: 'Service Groups Overview - ' + new Date().getTime(),
-              title: 'Save',
-              show: true,
-            },
-          },
-        },
-        series: [
-          {
-            type: 'pie',
-            selectedMode: 'single',
-            radius: ['45%', '55%'],
-            color: _.map($scope.operations.groups, 'color'),
-
-            label: {
-              normal: {
-                formatter: '{b}\n{d}%\n( {c} )',
-              },
-            },
-            data: data,
-          },
-        ],
-      };
-    };
-
-    /**
-     * prepare per service bar chart
-     * @return {object} echart bar chart configurations
-     * @version 0.1.0
-     * @since  0.1.0
-     * @author lally elias<lallyelias87@gmail.com>
-     */
-    $scope.prepareServiceVisualization = function(column) {
-      //ensure column
-      column = column || 'count';
-
-      //prepare unique services for bar chart categories
-      // var categories = _.chain($scope.operations)
-      //   .map('services')
-      //   .uniqBy('name')
-      //   .value();
-
-      //prepare bar chart series data
-      var data = _.map($scope.operations.services, function(service) {
-        var serie = {
-          name: service.name,
-          value: service[column],
-          itemStyle: {
-            normal: {
-              color: service.color,
-            },
-          },
-        };
-
-        return serie;
-      });
-
-      //sort data by their value
-      data = _.orderBy(data, 'value', 'asc');
-
-      //prepare chart config
-      $scope.perServiceConfig = {
-        height: '1100',
-        forceClear: true,
-      };
-
-      //prepare chart options
-      $scope.perServiceOptions = {
-        color: _.map(data, 'itemStyle.normal.color'),
-        textStyle: {
-          fontFamily: 'Lato',
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{b} : {c}',
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            saveAsImage: {
-              name: 'Area Services Overview - ' + new Date().getTime(),
-              title: 'Save',
-              show: true,
-            },
-          },
-        },
-        calculable: true,
-        yAxis: [
-          {
-            type: 'category',
-            data: _.map(data, 'name'),
-            boundaryGap: true,
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLabel: {
-              rotate: 60,
-            },
-            axisLine: {
-              show: true,
-            },
-          },
-        ],
-        xAxis: [
-          {
-            type: 'value',
-            scale: true,
-            position: 'top',
-            boundaryGap: true,
-            axisTick: {
-              show: false,
-              lineStyle: {
-                color: '#ddd',
-              },
-            },
-            splitLine: {
-              show: false,
-            },
-          },
-        ],
-        series: [
-          {
-            type: 'bar',
-            barWidth: '55%',
-            label: {
-              normal: {
-                show: true,
-                position: 'right',
-              },
-            },
-            data: data,
-          },
-        ],
-      };
     };
 
     //listen for events and reload performance accordingly

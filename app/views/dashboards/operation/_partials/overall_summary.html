@@ -68,13 +68,13 @@
           title="Service Requests in Waiting State"
         >
           <div class="padding">
-            <!-- <div>
-             <span
-               class="pull-right text-xs"
-               ng-class="operations.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'"
-               >{{ operations.overall.percentagePending | number: 2 }}%</span
-             >
-           </div> -->
+            <div>
+              <span
+                class="pull-right text-xs"
+                ng-class="operations.overall.percentageWaiting <= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageWaiting | number: 2 }}%</span
+              >
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
                 {{ operations.overall.new | number: 0 }}
@@ -91,13 +91,13 @@
           title="Service Requests in Assigned State"
         >
           <div class="padding">
-            <!-- <div>
+            <div>
               <span
                 class="pull-right text-xs"
-                ng-class="operations.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'"
-                >{{ operations.overall.percentagePending | number: 2 }}%</span
+                ng-class="operations.overall.percentageAssigned <= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageAssigned | number: 2 }}%</span
               >
-            </div> -->
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
                 {{ operations.overall.assigned | number: 0 }}
@@ -114,13 +114,13 @@
           title="Service Requests in Attending State"
         >
           <div class="padding">
-            <!-- <div>
+            <div>
               <span
                 class="pull-right text-xs"
-                ng-class="operations.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'"
-                >{{ operations.overall.percentagePending | number: 2 }}%</span
+                ng-class="operations.overall.percentageAttending >= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageAttending | number: 2 }}%</span
               >
-            </div> -->
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
                 {{ operations.overall.attended | number: 0 }}
@@ -137,13 +137,13 @@
           title="Service Requests in Completed State"
         >
           <div class="padding">
-            <!-- <div>
+            <div>
               <span
                 class="pull-right text-xs"
-                ng-class="operations.overall.percentageLate > 0 ? 'text-danger' : 'text-success'"
-                >{{ operations.overall.percentageLate | number: 2 }}%</span
+                ng-class="operations.overall.percentageCompleted >= 50 ? 'text-danger' : 'text-success'"
+                >{{ operations.overall.percentageCompleted | number: 2 }}%</span
               >
-            </div> -->
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
                 {{ operations.overall.completed | number: 0 }}
@@ -160,6 +160,13 @@
           title="Service Requests in Verified State"
         >
           <div class="padding">
+            <div>
+              <span
+                class="pull-right text-xs"
+                ng-class="operations.overall.percentageVerified >= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageVerified | number: 2 }}%</span
+              >
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
                 {{ operations.overall.verified | number: 0 }}
@@ -176,6 +183,13 @@
           title="Service Requests in Approved State"
         >
           <div class="padding">
+            <div>
+              <span
+                class="pull-right text-xs"
+                ng-class="operations.overall.percentageApproved >= 50 ? 'text-success' : 'text-danger'"
+                >{{ operations.overall.percentageApproved | number: 2 }}%</span
+              >
+            </div>
             <div class="text-center">
               <h4 class="text-center _600 m-t-md">
                 {{ operations.overall.approved | number: 0 }}

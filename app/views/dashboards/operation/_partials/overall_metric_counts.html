@@ -16,6 +16,13 @@
   <!-- start pending -->
   <div class="col-xs-6 col-sm-3 b-r b-t b-b" title="Pending Service Requests">
     <div class="p-a-sm">
+      <div>
+        <span
+          class="pull-right text-xs"
+          ng-class="operations.overall.percentagePending <= 50 ? 'text-success' : 'text-danger'"
+          >{{ operations.overall.percentagePending | number: 2 }}%</span
+        >
+      </div>
       <div class="text-center">
         <h2 class="text-center _600 m-t-md">
           {{ operations.overall.pending | number: 0 }}
@@ -29,6 +36,13 @@
   <!-- start resolved -->
   <div class="col-xs-6 col-sm-3 b-r b-t b-b" title="Resolved Service Requests">
     <div class="p-a-sm">
+      <div>
+        <span
+          class="pull-right text-xs"
+          ng-class="operations.overall.percentageResolved >= 50 ? 'text-success' : 'text-danger'"
+          >{{ operations.overall.percentageResolved | number: 2 }}%</span
+        >
+      </div>
       <div class="text-center">
         <h2 class="text-center _600 m-t-md">
           {{ operations.overall.resolved | number: 0 }}
@@ -42,6 +56,13 @@
   <!-- start late -->
   <div class="col-xs-6 col-sm-3 b-r b-t b-b" title="Past SLA Service Requests">
     <div class="p-a-sm">
+      <div>
+        <span
+          class="pull-right text-xs"
+          ng-class="operations.overall.percentageLate >= 50 ? 'text-danger' : 'text-success'"
+          >{{ operations.overall.percentageLate | number: 2 }}%</span
+        >
+      </div>
       <div class="text-center">
         <h2 class="text-center _600 m-t-md">
           {{ operations.overall.late | number: 0 }}
