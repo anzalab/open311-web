@@ -107,11 +107,7 @@
           </div>
           <!-- end call details -->
           <!-- start resolve details -->
-          <div
-            print-hide
-            class="p-b"
-            ng-class="{'p-y b-t':!servicerequest.call}"
-          >
+          <div class="p-b" ng-class="{'p-y b-t':!servicerequest.call}">
             <span title="Date Issue Reported">
               <span class="text-muted font-size-12">Reported: </span>
               <span class="font-size-12"
@@ -238,6 +234,7 @@
         <!-- end issue worklog(used material & equipment) -->
         <!-- start issue map -->
         <div
+          print-hide
           class="padding b-t"
           ng-show="servicerequest.location && servicerequest.location.coordinates"
         >
