@@ -21,7 +21,9 @@
             aria-expanded="false"
             ng-csv="export('services')"
             csv-header="exports.services.headers"
-            filename="services_performance_reports_{{filters.startedAt | date:settings.dateFormat}}_{{filters.endedAt | date:settings.dateFormat}}.csv"
+            filename="services_performance_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
             Export
           </a>
@@ -63,12 +65,6 @@
               Service
             </th>
             <th
-              ng-click="prepareServiceVisualization('count')"
-              title="Total Count of Service Requests"
-            >
-              Total
-            </th>
-            <th
               ng-click="prepareServiceVisualization('pending')"
               title="Total Count of Pending Service Requests"
             >
@@ -81,12 +77,6 @@
               Attending
             </th>
             <th
-              ng-click="prepareServiceVisualization('late')"
-              title="Total Count of Service Requests Past SLA Resolve Time"
-            >
-              Blocked
-            </th>
-            <th
               title="Average Time Taken to Attend a Customer(Call) Service Request"
             >
               Completed
@@ -97,72 +87,70 @@
             <th title="Average Time Taken to a Resolve Service Request">
               Approved
             </th>
-            <th title="Average Time Taken to a Resolve Service Request">
-              Average Block Time
-            </th>
-            <th title="Average Time Taken to a Resolve Service Request">
-              Average Work Time
+            <th
+              title="Average Time Taken from Assign to start Attending Service Request"
+            >
+              Average Attend Time
             </th>
             <th title="Average Time Taken to a Resolve Service Request">
               Average Resolution Time
             </th>
+            <th title="Average Late Time for Service Requests per Service">
+              Average Late Time
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="service in performances.services">
-            <td title="{{service.name}}">
-              {{service.name}}
+          <tr ng-repeat="service in operations.services">
+            <td title="{{ service.name }}">
+              {{ service.name.en }}
             </td>
-            <td title="{{service.count | number:0}}">
-              {{service.count | number:0}}
+            <td title="{{ service.count | number: 0 }}">
+              {{ service.assigned | number: 0 }}
             </td>
-            <td title=" {{service.pending | number:0}}">
-              {{service.pending | number:0}}
+            <td title=" {{ service.pending | number: 0 }}">
+              {{ service.attended | number: 0 }}
             </td>
-            <td title=" {{service.resolved | number:0}}">
-              {{service.resolved | number:0}}
+            <td title=" {{ service.resolved | number: 0 }}">
+              {{ service.completed | number: 0 }}
             </td>
-            <td title=" {{service.late | number:0}}">
-              {{service.late | number:0}}
+            <td title=" {{ service.late | number: 0 }}">
+              {{ service.verified | number: 0 }}
             </td>
-            <td title=" {{service.late | number:0}}">
-              {{service.late | number:0}}
-            </td>
-            <td title=" {{service.late | number:0}}">
-              {{service.late | number:0}}
-            </td>
-            <td title=" {{service.late | number:0}}">
-              {{service.late | number:0}}
+            <td title=" {{ service.late | number: 0 }}">
+              {{ service.approved | number: 0 }}
             </td>
             <td>
               <span>
-                {{service.averageAttendTime.minutes}}
-                <span class="text-muted text-xs">mins</span>
+                {{ service.lateTime.average.hours +
+                service.lateTime.average.days * 24 }}
+                <span class="text-muted text-xs">hrs</span>
               </span>
               <span>
-                {{service.averageAttendTime.seconds}}
-                <span class="text-muted text-xs">secs</span>
+                {{ service.attendTime.average.minutes }}
+                <span class="text-muted text-xs">mins</span>
               </span>
             </td>
 
             <td>
               <span>
-                {{service.averageAttendTime.minutes}}
-                <span class="text-muted text-xs">mins</span>
+                {{ service.lateTime.average.hours +
+                service.lateTime.average.days * 24 }}
+                <span class="text-muted text-xs">hrs</span>
               </span>
               <span>
-                {{service.averageAttendTime.seconds}}
-                <span class="text-muted text-xs">secs</span>
+                {{ service.resolveTime.average.minutes }}
+                <span class="text-muted text-xs">mins</span>
               </span>
             </td>
             <td>
               <span>
-                {{performances.overall.averageResolveTime.hours +
-                (performances.overall.averageResolveTime.days * 24)}}
+                {{ service.lateTime.average.hours +
+                service.lateTime.average.days * 24 }}
                 <span class="text-muted text-xs">hrs</span>
               </span>
               <span>
-                {{service.averageAttendTime.minutes}}
+                {{ service.lateTime.average.minutes }}
                 <span class="text-muted text-xs">mins</span>
               </span>
             </td>
