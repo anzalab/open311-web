@@ -760,6 +760,14 @@ angular
      */
     $scope.reload = function() {
       Summary.standings({ filter: $scope.params }).then(function(standings) {
+        standings = _.map(standings, function(standing) {
+          standing.group.name = standing.group.name.en;
+          standing.service.name = standing.service.name.en;
+          standing.priority.name = standing.priority.name.en;
+          standing.status.name = standing.status.name.en;
+          return standing;
+        });
+
         $scope.standings = standings;
         $scope.prepare();
       });
