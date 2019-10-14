@@ -50,7 +50,7 @@
     <!-- start reports -->
     <div class="padding">
       <!-- start per jurisdiction count standing -->
-      <div>
+      <div ng-if="perJurisdictionOptions.series[0].data.length > 0">
         <div class="row">
           <div class="col-sm-12">
             <div class="box">
@@ -72,7 +72,7 @@
       </div>
       <!-- end per jurisdiction count standing -->
       <!-- start per jurisdiction per service group count standing -->
-      <div>
+      <div ng-if="perJurisdictionPerServiceGroupOptions.series.length > 0">
         <div class="row">
           <div class="col-sm-12">
             <div class="box">
@@ -97,7 +97,7 @@
       </div>
       <!-- end per jurisdiction per service group count standing -->
       <!-- start per jurisdiction per service count standing -->
-      <div>
+      <div ng-if="perJurisdictionPerServiceOptions.length > 0">
         <div class="row">
           <div class="col-sm-12">
             <div class="box">
@@ -120,7 +120,7 @@
       </div>
       <!-- end per jurisdiction per service count standing -->
       <!-- start per jurisdiction per priority count standing -->
-      <div>
+      <div ng-if="perJurisdictionPerPriorityOptions.series.length > 0">
         <div class="row">
           <div class="col-sm-12">
             <div class="box">
@@ -142,7 +142,7 @@
       </div>
       <!-- end per jurisdiction per priority count standing -->
       <!-- start per jurisdiction per status count standing -->
-      <div>
+      <div ng-if="perJurisdictionPerStatusOptions.series.length > 0">
         <div class="row">
           <div class="col-sm-12">
             <div class="box">
@@ -165,6 +165,28 @@
       <!-- end per jurisdiction per status count standing -->
     </div>
     <!-- end reports -->
+
+    <!-- start no data description -->
+    <div
+      ng-if="perJurisdictionOptions.series[0].data.length === 0"
+      class="row-col h-v"
+    >
+      <div class="row-cell v-m">
+        <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
+          <p class="text-muted m-y-lg">
+            No Data Found. Please update your filters.
+          </p>
+          <button
+            ng-click="showFilter()"
+            class="btn btn-outline b-grey text-grey"
+            title="Click to update filters"
+          >
+            Update Filters
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end no data description -->
   </div>
 </div>
 <!-- end standing body -->
