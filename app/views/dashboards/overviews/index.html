@@ -45,7 +45,7 @@
   <div class="app-body-inner">
     <!-- start overall summary -->
     <ng-include
-      ng-if="overviews.overall"
+      ng-if="overviews.services && overviews.services.length > 1"
       src="'views/dashboards/overviews/_partials/overall_summary.html'"
     ></ng-include>
     <!-- end overall summary -->
@@ -101,7 +101,10 @@
   </div>
 
   <!-- start no data description -->
-  <div ng-if="!overviews.overall" class="row-col h-v">
+  <div
+    ng-if="overviews.services && overviews.services.length === 0"
+    class="row-col h-v"
+  >
     <div class="row-cell v-m">
       <div class="text-center col-sm-6 offset-sm-3 p-y-lg">
         <p class="text-muted m-y-lg">
