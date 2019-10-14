@@ -32,26 +32,6 @@ angular
     $scope.servicetypes = endpoints.servicetypes.data;
     $scope.workspaces = party.settings.party.relation.workspaces;
     $scope.methods = party.settings.servicerequest.methods;
-    $scope.materials = [
-      { name: 'Adaptor Flange 10’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 10’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 12’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 12’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 3’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 3’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 4’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 4’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 6’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 6’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 8’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 8’’ PVC', quantity: 1 },
-      { name: 'Air Valve 1" Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 1" Single Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 2"Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 2"Single Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 3"Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 3"Single Acting (GS)', quantity: 1 },
-    ];
     $scope.reasons = [
       { name: 'No Transport', count: 3 },
       { name: 'No Materials', count: 10 },
@@ -137,6 +117,9 @@ angular
           'Average Resolution Time',
         ],
       },
+      items: {
+        headers: ['Material', 'Quantity'],
+      },
     };
 
     /**
@@ -144,6 +127,12 @@ angular
      */
     $scope.export = function(type) {
       var _exports = _.map($scope.operations[type], function(operation) {
+        if (type === 'items') {
+          operation = _.pick(operation, ['name', 'count']);
+
+          return _.merge({}, operation, { name: operation.name.en });
+        }
+
         operation = {
           name: operation.name,
           assigned: operation.assigned,
@@ -313,8 +302,6 @@ angular
         $scope.operations.overall.completed +
         $scope.operations.overall.verified +
         $scope.operations.overall.approved;
-
-      console.log(operationTotal);
 
       // check if overall data exists
       if (overallExists) {

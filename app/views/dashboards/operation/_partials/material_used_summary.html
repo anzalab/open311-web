@@ -19,9 +19,9 @@
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
-            ng-csv="export('groups')"
-            csv-header="exports.groups.headers"
-            filename="service_groups_performance_reports_{{
+            ng-csv="export('items')"
+            csv-header="exports.items.headers"
+            filename="area_material_usage_reports_{{
               filters.startedAt | date: settings.dateFormat
             }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
@@ -64,27 +64,21 @@
           <table class="table table-bordered table-stats">
             <thead>
               <tr>
-                <th
-                  ng-click="prepareServiceGroupVisualization('count')"
-                  title="Area"
-                >
+                <th title="Material Name">
                   Material
                 </th>
-                <th
-                  ng-click="prepareServiceGroupVisualization('count')"
-                  title="Total Count of Service Requests"
-                >
+                <th title="Quantity of material used">
                   Quantity
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="item in materials">
+              <tr ng-repeat="item in operations.items">
                 <td title="{{ group.name }}">
-                  {{ item.name }}
+                  {{ item.name.en }}
                 </td>
                 <td title="{{ group.count | number: 0 }}">
-                  {{ item.quantity | number: 0 }}
+                  {{ item.count | number: 0 }}
                 </td>
               </tr>
             </tbody>
