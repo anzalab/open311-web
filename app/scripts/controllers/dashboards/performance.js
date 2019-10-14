@@ -64,6 +64,123 @@ angular
     //initialize performances
     $scope.performances = {};
 
+    //bind exports
+    $scope.exports = {
+      jurisdictions: {
+        filename: 'areas_performance_reports_' + Date.now() + '.csv',
+        headers: [
+          'Area',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
+      groups: {
+        filename: 'service_groups_performance_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service Group',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
+      types: {
+        filename: 'service_types_performance_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service Type',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Attend Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
+      services: {
+        filename: 'services_performance_reports_' + Date.now() + '.csv',
+        headers: [
+          'Service',
+          'Total',
+          'Pending',
+          'Resolved',
+          'Late',
+          'Average Call Time (Call Duration)',
+          'Average Resolve Time',
+        ],
+      },
+      channels: {
+        filename:
+          'reporting_channels_performance_reports_' + Date.now() + '.csv',
+        headers: ['Name', 'Total'],
+      },
+      workspaces: {
+        filename: 'workspaces_performance_reports_' + Date.now() + '.csv',
+        headers: ['Name', 'Total'],
+      },
+      operators: {
+        filename: 'operators_performance_reports_' + Date.now() + '.csv',
+        headers: ['Name', 'Total', 'Pending', 'Resolved'],
+      },
+    };
+
+    /**
+     * Exports current performance data
+     */
+    $scope.export = function(type) {
+      var _exports = _.map($scope.performances[type], function(performance) {
+        performance = {
+          name: performance.name,
+          total: performance.count,
+          pending: performance.pending,
+          resolved: performance.resolved,
+          late: performance.late,
+          averageCallTime: performance.callTime
+            ? [
+                performance.callTime.average.days,
+                ' days, ',
+                performance.callTime.average.hours,
+                ' hrs, ',
+                performance.callTime.average.minutes,
+                ' mins, ',
+                performance.callTime.average.seconds,
+                ' secs',
+              ].join('')
+            : undefined,
+          averageResolveTime: performance.resolveTime
+            ? [
+                performance.resolveTime.average.days,
+                'days, ',
+                performance.resolveTime.average.hours,
+                'hrs, ',
+                performance.resolveTime.average.minutes,
+                'mins, ',
+                performance.resolveTime.average.seconds,
+                'secs, ',
+              ].join('')
+            : undefined,
+        };
+
+        //reshape for workspace and channel
+        if (type === 'channels' || type === 'workspaces') {
+          performance = _.pick(performance, ['name', 'total']);
+        }
+
+        if (type === 'services' || type === 'types' || type === 'groups') {
+          performance = _.merge({}, performance, { name: performance.name.en });
+        }
+
+        return performance;
+      });
+
+      return _exports;
+    };
+
     /**
      * Open performance reports filter
      */
