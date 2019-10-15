@@ -138,6 +138,14 @@ angular
           authenticated: true,
         },
       })
+      .state('app.trending', {
+        url: '/trendings',
+        templateUrl: 'views/dashboards/trending/index.html',
+        controller: 'DashboardTrendingCtrl',
+        data: {
+          authenticated: true,
+        },
+      })
       .state('app.performances', {
         url: '/performances',
         templateUrl: 'views/dashboards/performance/index.html',

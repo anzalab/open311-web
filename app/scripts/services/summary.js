@@ -102,6 +102,21 @@ angular.module('ng311').factory('Summary', function($http, $resource, Utils) {
   };
 
   /**
+   * @description load trending reports
+   * @param  {object} params additional params
+   * @return {object}
+   */
+  Summary.trendings = function(params) {
+    return $http
+      .get(Utils.asLink(['v1', 'reports', 'trendings']), {
+        params: params,
+      })
+      .then(function(response) {
+        return response.data.data;
+      });
+  };
+
+  /**
    * Build params as per API filtering, sorting and paging
    * @param  {Object} [params] reports filters
    * @return {Object}

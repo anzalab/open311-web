@@ -111,6 +111,18 @@
 
         <li
           ui-sref-active="active"
+          show-if-has-any-permit="view:operational report"
+        >
+          <a ui-sref="app.trending" title="Trending Reports">
+            <span class="nav-icon">
+              <i class="icon-graph"></i>
+            </span>
+            <span class="nav-text">Trending</span>
+          </a>
+        </li>
+
+        <li
+          ui-sref-active="active"
           show-if-has-any-permit="servicerequest:export"
         >
           <a ui-sref="app.exports" title="Exports">
