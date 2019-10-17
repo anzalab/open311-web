@@ -30,7 +30,7 @@
     "angular-mailto": "^0.1.0",
     "angular-color-picker": "angularjs-color-picker#^3.4.8",
     "angularPrint": "angular-print#^0.3.8",
-    "echarts": "^3.6.2",
+    "echarts": "^4.4.0",
     "angular-socket-io": "^0.7.0",
     "socket.io-client": "^2.0.3",
     "ng-focus-if": "^1.0.7",
