@@ -205,7 +205,11 @@ angular
         },
         toolbox: {
           feature: {
-            saveAsImage: {},
+            saveAsImage: {
+              name: 'Issue per Month Per Year -' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
           },
         },
         xAxis: {
@@ -279,6 +283,15 @@ angular
       $scope.perQuarterPerYearOptions = {
         legend: {},
         tooltip: {},
+        toolbox: {
+          feature: {
+            saveAsImage: {
+              name: 'Issue per Quarter Per Year -' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
+        },
         dataset: {
           source: [legend, series1, series2, series3, series4],
         },
