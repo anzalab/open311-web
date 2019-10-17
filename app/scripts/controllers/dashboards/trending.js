@@ -229,7 +229,6 @@ angular
      * @since 0.1.0
      */
     $scope.prepareQuarterlyPerYearVisualization = function() {
-      console.log($scope.trending);
       var Q1 = [7, 8, 9];
       var Q2 = [10, 11, 12];
       var Q3 = [1, 2, 3];
@@ -245,9 +244,6 @@ angular
       });
 
       var legend = ['Years'].concat(years);
-      console.log(legend);
-
-      console.log(_.sortBy($scope.trending.countPerMonthPerYear, ['year']));
 
       _.forEach(
         _.sortBy($scope.trending.countPerMonthPerYear, ['year']),
@@ -279,8 +275,6 @@ angular
         height: 600,
         forceClear: true,
       };
-
-      console.log([legend, series1, series2, series3, series4]);
 
       $scope.perQuarterPerYearOptions = {
         legend: {},
