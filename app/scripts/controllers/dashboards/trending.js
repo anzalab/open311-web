@@ -288,9 +288,39 @@ angular
         dataset: {
           source: [legend, series1, series2, series3, series4],
         },
-        xAxis: { type: 'category' },
+        xAxis: {
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true,
+          },
+        },
         yAxis: { type: 'value' },
-        series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
+        series: [
+          {
+            type: 'bar',
+            markLine: {
+              //add average line
+              precision: 0,
+              data: [{ type: 'average', name: 'Average' }],
+            },
+          },
+          {
+            type: 'bar',
+            markLine: {
+              //add average line
+              precision: 0,
+              data: [{ type: 'average', name: 'Average' }],
+            },
+          },
+          {
+            type: 'bar',
+            markLine: {
+              //add average line
+              precision: 0,
+              data: [{ type: 'average', name: 'Average' }],
+            },
+          },
+        ],
       };
     };
 
