@@ -14,8 +14,6 @@ angular
     $scope.reload = function() {
       Summary.trendings().then(function(trending) {
         $scope.trending = trending;
-        console.log(trending);
-
         $scope.prepare();
       });
     };
@@ -124,8 +122,91 @@ angular
       };
     };
 
+    $scope.prepareCountPerMonthPerYearVisualization = function() {
+      var legend = _.map($scope.trending.countPerMonthPerYear, function(value) {
+        return { name: value.year.toString(), icon: 'circle' };
+      });
+
+      var series = _.map($scope.trending.countPerMonthPerYear, function(value) {
+        var monthlyCount = [
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+          '-',
+        ];
+        _.forEach(_.sortBy(value.months, ['month']), function(value) {
+          monthlyCount[value.month - 1] = value.count;
+        });
+
+        return {
+          name: value.year,
+          type: 'line',
+          smooth: true,
+          data: monthlyCount,
+        };
+      });
+
+      var months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+
+      $scope.perMonthPerYearConfig = {
+        height: 500,
+        forceClear: true,
+      };
+
+      $scope.perMonthPerYearOptions = {
+        tooltip: {
+          trigger: 'axis',
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
+        },
+        legend: {
+          data: legend,
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {},
+          },
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: months,
+        },
+        yAxis: {
+          type: 'value',
+        },
+        series: series,
+      };
+    };
+
     $scope.prepare = function() {
       $scope.prepareCountPerHourPerDayVisualization();
+      $scope.prepareCountPerMonthPerYearVisualization();
     };
 
     // reload trending data

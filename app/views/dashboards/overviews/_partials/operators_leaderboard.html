@@ -92,6 +92,13 @@
                 {{ operator.relation.name ? operator.relation.name : 'N/A' }} /
                 {{ operator.relation.workspace ? operator.relation.workspace :
                 'N/A' }}
+                <span
+                  class="text-sm text-muted"
+                  title="Area"
+                  ng-if="operator.jurisdiction"
+                >
+                  | {{ operator.jurisdiction.name }}
+                </span>
                 <span class="pull-right label info" title="#{{ $index + 1 }}"
                   >&nbsp;&nbsp;{{ $index + 1 }}&nbsp;&nbsp;</span
                 >
