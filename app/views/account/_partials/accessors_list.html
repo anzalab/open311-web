@@ -21,10 +21,9 @@
     <div class="box-header">
       <div class="row">
         <div class="col-md-9">
-          <small
-            >List of people who can access this account billing
-            information</small
-          >
+          <small>
+            List of people who can access this account billing information
+          </small>
         </div>
         <div class="col-md-3">
           <a class="btn white pull-right" ng-click="addAccessor()">
@@ -45,10 +44,10 @@
       </thead>
       <tbody>
         <tr ng-repeat="accessor in accessors">
-          <td>{{accessor.name}}</td>
-          <td>{{accessor.phone}}</td>
-          <td>{{accessor.email}}</td>
-          <td>{{accessor.verified ? 'Yes':'No'}}</td>
+          <td>{{ accessor.name }}</td>
+          <td>{{ accessor.phone }}</td>
+          <td>{{ accessor.email }}</td>
+          <td>{{ accessor.verified ? 'Yes' : 'No' }}</td>
           <!-- actions -->
           <td>
             <div class="row">
