@@ -18,6 +18,14 @@ angular
       });
     };
 
+    /**
+     * @function
+     * @name prepareCountPerHourPerDayVisualization
+     * @description Prepare heat map of reported issues per hour per day
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
     $scope.prepareCountPerHourPerDayVisualization = function() {
       var data = _.flatten(
         _.map($scope.trending.countPerHourPerDay, function(value) {
@@ -122,6 +130,14 @@ angular
       };
     };
 
+    /**
+     * @function
+     * @name prepareCountPerMonthPerYearVisualization
+     * @description Prepare trending line chart for reported issues per month per year
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
     $scope.prepareCountPerMonthPerYearVisualization = function() {
       var legend = _.map($scope.trending.countPerMonthPerYear, function(value) {
         return { name: value.year.toString(), icon: 'circle' };
@@ -204,9 +220,84 @@ angular
       };
     };
 
+    /**
+     * @function
+     * @name prepareQuarterlyPerYearVisualization
+     * @description Prepare visualization for quarterly reported issues per year
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.prepareQuarterlyPerYearVisualization = function() {
+      console.log($scope.trending);
+      var Q1 = [7, 8, 9];
+      var Q2 = [10, 11, 12];
+      var Q3 = [1, 2, 3];
+      var Q4 = [4, 5, 6];
+
+      var series1 = ['Quarter 1'];
+      var series2 = ['Quarter 2'];
+      var series3 = ['Quarter 3'];
+      var series4 = ['Quarter 4'];
+
+      var years = _.map($scope.trending.countPerMonthPerYear, function(value) {
+        return value.year.toString();
+      });
+
+      var legend = ['Years'].concat(years);
+      console.log(legend);
+
+      console.log(_.sortBy($scope.trending.countPerMonthPerYear, ['year']));
+
+      _.forEach(
+        _.sortBy($scope.trending.countPerMonthPerYear, ['year']),
+        function(value) {
+          var q1 = 0;
+          var q2 = 0;
+          var q3 = 0;
+          var q4 = 0;
+          _.forEach(value.months, function(value) {
+            if (Q1.includes(value.month)) {
+              q1 += value.count;
+            } else if (Q2.includes(value.month)) {
+              q2 += value.count;
+            } else if (Q3.includes(value.month)) {
+              q3 += value.count;
+            } else if (Q4.includes(value.month)) {
+              q4 += value.count;
+            }
+          });
+
+          series1.push(q1);
+          series2.push(q2);
+          series3.push(q3);
+          series4.push(q4);
+        }
+      );
+
+      $scope.perQuarterPerYearConfig = {
+        height: 600,
+        forceClear: true,
+      };
+
+      console.log([legend, series1, series2, series3, series4]);
+
+      $scope.perQuarterPerYearOptions = {
+        legend: {},
+        tooltip: {},
+        dataset: {
+          source: [legend, series1, series2, series3, series4],
+        },
+        xAxis: { type: 'category' },
+        yAxis: { type: 'value' },
+        series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
+      };
+    };
+
     $scope.prepare = function() {
       $scope.prepareCountPerHourPerDayVisualization();
       $scope.prepareCountPerMonthPerYearVisualization();
+      $scope.prepareQuarterlyPerYearVisualization();
     };
 
     // reload trending data
