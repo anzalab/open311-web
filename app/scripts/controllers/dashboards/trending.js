@@ -238,10 +238,10 @@ angular
       var Q3 = [1, 2, 3];
       var Q4 = [4, 5, 6];
 
-      var series1 = ['Quarter 1'];
-      var series2 = ['Quarter 2'];
-      var series3 = ['Quarter 3'];
-      var series4 = ['Quarter 4'];
+      var series1 = ['Quarter 1 (Jul, Aug, Sep)'];
+      var series2 = ['Quarter 2 (Oct, Nov , Dec)'];
+      var series3 = ['Quarter 3 (Jan, Feb, Mar)'];
+      var series4 = ['Quarter 4 (Apr, May, Jun)'];
 
       var years = _.map($scope.trending.countPerMonthPerYear, function(value) {
         return value.year.toString();
