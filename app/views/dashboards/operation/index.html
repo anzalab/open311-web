@@ -53,6 +53,13 @@
     ></ng-include>
     <!-- end of overall area time summary -->
 
+    <!-- start workspaces summary -->
+    <ng-include
+      ng-if="operations.workspaces  && operations.workspaces.length > 0"
+      src="'views/dashboards/operation/_partials/workspaces_summary.html'"
+    ></ng-include>
+    <!-- end workspaces summary -->
+
     <!-- start blocked service requests summary -->
     <!-- <ng-include
       ng-if="operations.services  && operations.services.length > 0"

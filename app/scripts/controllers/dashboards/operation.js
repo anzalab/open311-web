@@ -120,6 +120,9 @@ angular
       items: {
         headers: ['Material', 'Quantity'],
       },
+      workspaces: {
+        headers: ['Name', 'Total', 'Pending', 'Resolved'],
+      },
     };
 
     /**
@@ -131,6 +134,16 @@ angular
           operation = _.pick(operation, ['name', 'count']);
 
           return _.merge({}, operation, { name: operation.name.en });
+        }
+
+        //reshape for workspace
+        if (type === 'workspaces') {
+          return (operation = _.pick(operation, [
+            'name',
+            'count',
+            'pending',
+            'resolved',
+          ]));
         }
 
         operation = {
@@ -178,11 +191,6 @@ angular
               ].join('')
             : undefined,
         };
-
-        //reshape for workspace and channel
-        if (type === 'channels' || type === 'workspaces') {
-          operation = _.pick(operation, ['name', 'total']);
-        }
 
         if (type === 'services' || type === 'types') {
           operation = _.merge({}, operation, { name: operation.name.en });
@@ -260,9 +268,84 @@ angular
       ];
     };
 
+    /**
+     * prepare workspace overview visualization
+     * @return {object} echart pie chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareWorkspaceVisualization = function(column) {
+      //ensure column
+      column = column || 'count';
+
+      //prepare chart series data
+      var data = _.map($scope.operations.workspaces, function(workspace) {
+        return {
+          name: workspace.name,
+          value: workspace[column],
+        };
+      });
+
+      //prepare chart config
+      $scope.perWorkspaceConfig = {
+        height: 400,
+        forceClear: true,
+      };
+
+      //prepare chart options
+      $scope.perWorkspaceOptions = {
+        textStyle: {
+          fontFamily: 'Lato',
+        },
+        title: {
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16,
+          },
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Workspaces Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.reverse(_.map($scope.operations.services, 'color')),
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+    };
+
     $scope.prepare = function() {
       //shaping data
       $scope.prepareSummaries();
+
+      $scope.prepareWorkspaceVisualization();
 
       // prepare percentages for overall summary
       $scope.prepareOverallPercentages();
