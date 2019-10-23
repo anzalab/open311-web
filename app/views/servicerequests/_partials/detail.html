@@ -226,6 +226,12 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue description -->
+        <!-- start issue team -->
+        <div
+          ng-show="servicerequest.team && servicerequest.team.length > 0"
+          ng-include="'views/servicerequests/_partials/team.html'"
+        ></div>
+        <!-- end issue team -->
         <!-- start issue worklog(used material & equipment) -->
         <div
           ng-show="worklogs && worklogs.length > 0"
