@@ -38,6 +38,11 @@
                 {{servicerequest.jurisdiction.name}}
               </span>
               <br />
+              <span title="Zone Responsible">
+                <span class="text-muted font-size-10">Zone</span>
+                {{servicerequest.zone ? servicerequest.zone.name.en :'N/A'}}
+              </span>
+              <br />
               <span
                 ng-if="servicerequest.jurisdiction.phone && servicerequest.jurisdiction.phone != 'N/A'"
                 title="Area Phone Number"
