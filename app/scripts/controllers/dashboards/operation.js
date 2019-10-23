@@ -123,6 +123,9 @@ angular
       workspaces: {
         headers: ['Name', 'Total', 'Pending', 'Resolved'],
       },
+      assignees: {
+        headers: ['Name', 'Phone', 'Total', 'Pending', 'Resolved', 'Work Time'],
+      },
     };
 
     /**
@@ -144,6 +147,30 @@ angular
             'pending',
             'resolved',
           ]));
+        }
+
+        if (type === 'assignees') {
+          operation = _.pick(operation, [
+            'name',
+            'phone',
+            'count',
+            'pending',
+            'resolved',
+            'workTime',
+          ]);
+
+          operation.workTime = [
+            operation.workTime.days,
+            'days, ',
+            operation.workTime.hours,
+            'hrs, ',
+            operation.workTime.minutes,
+            'mins, ',
+            operation.workTime.seconds,
+            'secs, ',
+          ].join('');
+
+          return operation;
         }
 
         operation = {
