@@ -179,6 +179,10 @@
               </span>
             </a>
           </p>
+          <p ng-if="comment.changer && comment.member">
+            {{ comment.changer._id === comment.member._id ? 'Join' : 'Added
+            '+member.name }} to receive issue updates
+          </p>
           <!-- TODO show attachment changelog -->
         </div>
       </div>
