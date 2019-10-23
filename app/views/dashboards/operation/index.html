@@ -92,6 +92,13 @@
     ></ng-include>
     <!-- end material used summary -->
 
+    <!-- start assignees leader board used summary -->
+    <ng-include
+      ng-if="operations.assignees  && operations.assignees.length > 0"
+      src="'views/dashboards/operation/_partials/assignees_leaderboard.html'"
+    ></ng-include>
+    <!-- end assignees leader board used summary -->
+
     <!-- <hr> -->
     <div class="padding" style="display: none">
       <!-- start of leader's board section -->

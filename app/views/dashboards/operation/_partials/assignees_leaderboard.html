@@ -1,0 +1,108 @@
+<!-- start leader board -->
+<div class="padding m-t-md">
+  <div class="box b-a p-l-0">
+    <!-- start header -->
+    <div class="box-header b-b p-t-md p-d-md">
+      <h3 title="Leader board">Assignee Leader board</h3>
+      <small
+        class="block text-muted"
+        title="Rank Based on Attending Service Requests"
+      >
+        Rank Based on Assigned Service Requests
+      </small>
+    </div>
+    <!-- end header -->
+
+    <!-- start toolbox -->
+    <div class="box-tool p-t-sm">
+      <!-- start time filters -->
+      <ul class="nav">
+        <!-- start export -->
+        <li class="nav-item inline">
+          <a
+            title="Click To Export"
+            class="btn btn-xs rounded white"
+            aria-expanded="false"
+            ng-csv="export('assignees')"
+            csv-header="exports.assignees.headers"
+            filename="assignees_operation_reports_{{
+              filters.startedAt | date: settings.dateFormat
+            }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
+          >
+            Export
+          </a>
+        </li>
+        <!-- end export -->
+
+        <!-- start date filters -->
+        <li uib-dropdown class="nav-item inline dropdown" style="display:none">
+          <a
+            uib-dropdown-toggle
+            class="btn btn-xs rounded white dropdown-toggle"
+            aria-expanded="false"
+            >Today</a
+          >
+          <div
+            uib-dropdown-menu
+            class="dropdown-menu dropdown-menu-scale pull-right"
+          >
+            <a class="dropdown-item" href="">Last 24 hours</a>
+            <a class="dropdown-item" href="">Last 7 days</a>
+            <a class="dropdown-item" href="">Last month</a>
+            <a class="dropdown-item" href="">Last Year</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">Today</a>
+          </div>
+        </li>
+        <!-- end date filters -->
+      </ul>
+      <!-- end time filters -->
+    </div>
+    <!-- end toolbox -->
+
+    <div>
+      <div class="row-col">
+        <ul class="list inset m-a-0">
+          <li
+            ng-if="assignee.name"
+            ui-sref="app.profile({id: assignee._id})"
+            ng-repeat="assignee in operations.assignees"
+            class="list-item"
+          >
+            <a href class="list-left">
+              <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
+              <letter-avatar
+                title="{{ assignee.name }}"
+                data="{{ assignee.name }}"
+                height="40"
+                width="40"
+                shape="round"
+                fontSize="15"
+              >
+              </letter-avatar>
+            </a>
+            <div class="list-body">
+              <div>
+                <a href>{{ assignee.name }}</a>
+                <span class="pull-right text-muted"
+                  >{{ assignee.count | number: 0 }}</span
+                >
+              </div>
+              <small class="text-muted text-ellipsis">
+                {{ assignee.relation.name ? assignee.relation.name : 'N/A' }} /
+                {{ assignee.relation.workspace ? assignee.relation.workspace :
+                'N/A' }}
+                <span class="pull-right text-muted" title="Work Time(hrs)">
+                  Work Time &nbsp; {{ assignee.workTime.days * 24 +
+                  assignee.workTime.hours }} hrs : {{ assignee.workTime.minutes
+                  }} mins</span
+                >
+              </small>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end leader board -->
