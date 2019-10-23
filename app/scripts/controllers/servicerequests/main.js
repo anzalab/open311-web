@@ -697,7 +697,7 @@ angular
     /**
      * Initialize new issue attending with operator details
      */
-    $scope.onAttend = function() {
+    $scope.onConfirm = function() {
       //prevent attachments and changelogs on attending
       var servicerequest = _.omit($scope.servicerequest, [
         'attachments',
