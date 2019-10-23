@@ -192,6 +192,18 @@ angular
     };
 
     /**
+     * Check if current signin party can watch a service request
+     * @return {[type]} [description]
+     */
+    $scope.canWatch = function() {
+      var team = _.map([].concat($scope.servicerequest.team), function(member) {
+        return member && member._id;
+      });
+      var member = $scope.party && $scope.party._id;
+      return !_.includes(team, member);
+    };
+
+    /**
      * cancel create operation
      */
     $scope.cancel = function() {
@@ -256,6 +268,32 @@ angular
     };
 
     /**
+     * Watch a service request
+     */
+    $scope.onWatch = function() {
+      //TODO notify about the comment saved
+      if ($scope.party && $scope.servicerequest) {
+        var changelog = {
+          member: party._id,
+          changer: party._id,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog)
+          .then(function(response) {
+            //TODO notify success
+            $scope.select(response);
+            $scope.updated = true;
+          })
+          .catch(function(error) {
+            //TODO notify error
+            // console.log(error);
+          });
+      }
+    };
+
+    /**
      * attach image on issues
      */
     $scope.onImage = function(image) {
@@ -286,7 +324,7 @@ angular
      * attach document on issues
      */
     $scope.onDocument = function(doc) {
-      if (document) {
+      if (doc) {
         var changelog = {
           //TODO flag internal or public
           changer: party._id,
