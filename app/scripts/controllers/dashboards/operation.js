@@ -121,7 +121,7 @@ angular
         headers: ['Material', 'Quantity'],
       },
       workspaces: {
-        headers: ['Name', 'Total'],
+        headers: ['Name', 'Total', 'Pending', 'Resolved'],
       },
     };
 
@@ -138,7 +138,12 @@ angular
 
         //reshape for workspace
         if (type === 'workspaces') {
-          return (operation = _.pick(operation, ['name', 'count']));
+          return (operation = _.pick(operation, [
+            'name',
+            'count',
+            'pending',
+            'resolved',
+          ]));
         }
 
         operation = {
