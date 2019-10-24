@@ -65,10 +65,13 @@
             <thead>
               <tr>
                 <th title="Material Name">
-                  Material
+                  Item
                 </th>
                 <th title="Quantity of material used">
                   Quantity
+                </th>
+                <th title="Quantity of material used">
+                  Units
                 </th>
               </tr>
             </thead>
@@ -79,6 +82,9 @@
                 </td>
                 <td title="{{ group.count | number: 0 }}">
                   {{ item.count | number: 0 }}
+                </td>
+                <td>
+                  {{ item.properties.unit }}
                 </td>
               </tr>
             </tbody>
