@@ -62,45 +62,55 @@
 
     <div>
       <div class="row-col">
-        <ul class="list inset m-a-0">
-          <li
-            ng-if="assignee.name"
-            ui-sref="app.profile({id: assignee._id})"
-            ng-repeat="assignee in operations.assignees"
-            class="list-item"
-          >
-            <a href class="list-left">
-              <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
-              <letter-avatar
-                title="{{ assignee.name }}"
-                data="{{ assignee.name }}"
-                height="40"
-                width="40"
-                shape="round"
-                fontSize="15"
-              >
-              </letter-avatar>
-            </a>
-            <div class="list-body">
-              <div>
-                <a href>{{ assignee.name }}</a>
-                <span class="pull-right text-muted"
-                  >{{ assignee.count | number: 0 }}</span
-                >
-              </div>
-              <small class="text-muted text-ellipsis">
-                {{ assignee.relation.name ? assignee.relation.name : 'N/A' }} /
-                {{ assignee.relation.workspace ? assignee.relation.workspace :
-                'N/A' }}
-                <span class="pull-right text-muted" title="Work Time(hrs)">
-                  Work Time &nbsp; {{ assignee.workTime.days * 24 +
-                  assignee.workTime.hours }} hrs : {{ assignee.workTime.minutes
-                  }} mins</span
-                >
-              </small>
-            </div>
-          </li>
-        </ul>
+        <div class="col-sm-12">
+          <table class="table table-bordered table-stats">
+            <thead>
+              <tr>
+                <th title="Material Name">
+                  Name
+                </th>
+                <th title="Total Assigned Service Requests">
+                  Total
+                </th>
+                <th title="Pending Service Requests">
+                  Pending
+                </th>
+                <th title="Resolved Service Requests">
+                  Resolved
+                </th>
+                <th title="Time Taken to Complete Working on a Service Request">
+                  Work Time
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="assignee in operations.assignees">
+                <td>
+                  {{ assignee.name }}
+                </td>
+                <td>
+                  {{ assignee.count | number: 0 }}
+                </td>
+                <td>
+                  {{ assignee.pending | number: 0 }}
+                </td>
+                <td>
+                  {{ assignee.resolved | number: 0 }}
+                </td>
+                <td>
+                  <span>
+                    {{ assignee.workTime.days * 24 + assignee.workTime.hours }}
+                    <span class="text-muted text-xs">hrs</span>
+                  </span>
+                  <span>
+                    {{ assignee.workTime.minutes }}
+                    <span class="text-muted text-xs">mins</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
