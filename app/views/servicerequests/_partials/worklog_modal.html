@@ -9,7 +9,7 @@
     >
       ×
     </button>
-    <h4 class="modal-title">Record Worklog</h4>
+    <h4 class="modal-title">Record Material</h4>
   </div>
 </div>
 <!-- end modal header -->
@@ -31,7 +31,7 @@
           <div class="col-md-12">
             <div class="form-group form-material" title="Select Item">
               <oi-select
-                oi-options="item.name.en for item in items track by item._id"
+                oi-options="item.name.en for item in searchItems($query) track by item.id"
                 ng-model="worklog.item"
                 placeholder="Select Item"
                 class="form-control"

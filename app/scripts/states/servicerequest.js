@@ -23,16 +23,6 @@ angular.module('ng311').config(function($stateProvider) {
             },
           });
         },
-        items: function(Item) {
-          return Item.find({
-            limit: 1000,
-            filter: {
-              deletedAt: {
-                $eq: null,
-              },
-            },
-          });
-        },
       },
     })
     .state('app.servicerequests.list', {

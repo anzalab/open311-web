@@ -20,12 +20,12 @@ angular
     Utils,
     Party,
     ServiceRequest,
+    Item,
     Comment,
     Message,
     Summary,
     endpoints,
-    party,
-    items
+    party
   ) {
     //servicerequests in the scope
     $scope.spin = false;
@@ -82,7 +82,6 @@ angular
     $scope.statuses = endpoints.statuses.statuses;
     $scope.services = endpoints.services.services;
     $scope.jurisdictions = endpoints.jurisdictions.jurisdictions;
-    $scope.items = items.items;
     $scope.party = party;
     // $scope.assignees = assignee.parties;
     $scope.summaries = endpoints.summaries;
@@ -843,6 +842,27 @@ angular
             $scope.assignees = [];
           });
       }
+    };
+
+    /**
+     * @function
+     * @name searchItems
+     * @description Search items
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchItems = function(query) {
+      return Item.find({
+        filter: {
+          deletedAt: {
+            $eq: null,
+          },
+        },
+        q: query,
+      }).then(function(response) {
+        return response.items;
+      });
     };
 
     $scope.load = function(query, skipClearSearch) {
