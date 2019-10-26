@@ -141,7 +141,6 @@ angular
         filter.relations = {};
         filter.relations.jurisdiction = $scope.party.jurisdiction._id;
       }
-      console.log(filter);
       return Zone.find({ filter: filter, q: query }).then(function(response) {
         return response.zones;
       });

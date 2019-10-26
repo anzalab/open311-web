@@ -79,6 +79,9 @@
           </p>
           <p ng-if="comment.assignee && comment.assignee.name">
             Assign to {{ comment.assignee.name }}
+            <span ng-if="comment.zone && comment.zone.name">
+              of {{ comment.zone.name.en }} zone
+            </span>
           </p>
           <p ng-if="comment.resolvedAt">
             Change status to
