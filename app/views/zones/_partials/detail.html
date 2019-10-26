@@ -22,6 +22,30 @@
           >
             <div class="box">
               <div class="box-body">
+                <div class="m-b" title="Zone Area">
+                  <div ng-show="!edit" class="form-group">
+                    <label title="Zone Area" class="floating-label">Area</label>
+                    <input
+                      ng-disabled="!edit"
+                      ng-model="zone.relations.jurisdiction.name"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="jurisdiction"
+                      class="form-control"
+                    />
+                  </div>
+                  <div ng-show="edit" class="form-group form-material floating">
+                    <oi-select
+                      oi-options="item.name for item in searchJurisdictions($query) track by item.id"
+                      ng-model="zone.relations.jurisdiction"
+                      placeholder="Select Area"
+                      class="form-control"
+                      oi-select-options="{cleanModel: true}"
+                    ></oi-select>
+                    <label title="Area" class="floating-label">Area</label>
+                  </div>
+                </div>
                 <div class="m-b" title="Zone Code">
                   <div class="form-group">
                     <label title="Zone Code" class="floating-label">Code</label>
