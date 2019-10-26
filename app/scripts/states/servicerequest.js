@@ -60,6 +60,7 @@ angular.module('ng311').config(function($stateProvider) {
         authenticated: true,
       },
       resolve: {
+        // TODO: remove
         endpoints: function(Summary) {
           return Summary.endpoints({
             filter: {

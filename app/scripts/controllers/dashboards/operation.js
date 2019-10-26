@@ -449,11 +449,6 @@ angular
       }
     };
 
-    //listen for events and reload performance accordingly
-    $rootScope.$on('app:servicerequests:reload', function() {
-      $scope.reload();
-    });
-
     //pre-load reports
     //prepare performance details
     $scope.params = Summary.prepareQuery($scope.filters);

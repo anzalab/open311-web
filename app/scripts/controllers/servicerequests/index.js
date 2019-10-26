@@ -74,12 +74,4 @@ angular
         $scope.servicerequests && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
-
-    //pre load servicerequests on state activation
-    $scope.find();
-
-    //listen for events
-    $rootScope.$on('app:servicerequests:reload', function() {
-      $scope.find();
-    });
   });

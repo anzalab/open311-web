@@ -773,11 +773,6 @@ angular
       });
     };
 
-    //listen for events and reload overview accordingly
-    $rootScope.$on('app:servicerequests:reload', function() {
-      $scope.reload();
-    });
-
     //pre-load reports
     //prepare overview details
     $scope.params = Summary.prepareQuery($scope.filters);
