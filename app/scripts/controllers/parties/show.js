@@ -136,7 +136,13 @@ angular
      * @since 0.1.0
      */
     $scope.searchZones = function(query) {
-      return Zone.find({ q: query }).then(function(response) {
+      var filter = {};
+      if ($scope.party && $scope.party.jurisdiction) {
+        filter.relations = {};
+        filter.relations.jurisdiction = $scope.party.jurisdiction._id;
+      }
+      console.log(filter);
+      return Zone.find({ filter: filter, q: query }).then(function(response) {
         return response.zones;
       });
     };
