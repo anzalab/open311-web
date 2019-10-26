@@ -69,6 +69,7 @@ angular
     $scope.search = {};
     $scope.map = {};
     $scope.assignees = [];
+    $scope.team = [];
     $scope.isOperatorFilter = true;
 
     //signal create mode
@@ -824,7 +825,12 @@ angular
      * search assignees
      * @return {[type]} [description]
      */
-    $scope.onSearchAssignees = function() {
+    $scope.onSearchParties = function(target) {
+      // ensure scope target
+      if (!target) {
+        target = 'assignees';
+      }
+
       //TODO allow party where jurisdiction = null
       if ($scope.search.party && $scope.search.party.length >= 2) {
         Party.find({
@@ -836,10 +842,10 @@ angular
           q: $scope.search.party,
         })
           .then(function(response) {
-            $scope.assignees = response.parties;
+            $scope[target] = response.parties;
           })
           .catch(function(/*error*/) {
-            $scope.assignees = [];
+            $scope[target] = [];
           });
       }
     };
@@ -1290,6 +1296,9 @@ angular
       );
     };
 
+    /**
+     * Record worklog changes
+     */
     $scope.onWorklog = function() {
       //ensure service request
       if ($scope.servicerequest && !$scope.servicerequest.resolvedAt) {
@@ -1312,6 +1321,52 @@ angular
         } else {
           $scope.modal.close();
         }
+      }
+    };
+
+    /**
+     * @description Present team member selection modal
+     */
+    $scope.showTeamModal = function() {
+      //open team modal
+      $scope.modal = $uibModal.open({
+        templateUrl: 'views/servicerequests/_partials/team_modal.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {}
+      );
+    };
+
+    /**
+     * Add team member
+     * @param {[type]} member [description]
+     */
+    $scope.addTeamMember = function(member) {
+      //ensure service request
+      if (
+        member &&
+        $scope.servicerequest &&
+        !$scope.servicerequest.resolvedAt
+      ) {
+        var changelog = {
+          changer: party._id,
+          member: member._id,
+        };
+
+        //update changelog
+        var _id = $scope.servicerequest._id;
+        ServiceRequest.changelog(_id, changelog).then(function(response) {
+          $scope.modal.close();
+          // $scope.servicerequest = response;
+          $scope.select(response);
+          $scope.updated = true;
+          $rootScope.$broadcast('app:servicerequests:reload');
+        });
       }
     };
 

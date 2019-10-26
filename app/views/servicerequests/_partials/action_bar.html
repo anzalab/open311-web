@@ -179,6 +179,17 @@
     </a>
   </li>
   <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt"
+    class="nav-item b-l p-l"
+    title="Click To Add Team Member to Watch Issue & Receive Updates"
+  >
+    <a ng-click="showTeamModal()" class="nav-link text-muted no-border">
+      <span class="nav-text">
+        <i class="icon-user-follow"></i>
+      </span>
+    </a>
+  </li>
+  <li
     ng-if="servicerequest.operator"
     class="nav-item b-l p-l"
     title="Click To Refresh Issue"
