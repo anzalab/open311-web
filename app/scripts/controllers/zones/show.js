@@ -14,6 +14,7 @@ angular
     $scope,
     $state,
     $stateParams,
+    Jurisdiction,
     Zone
   ) {
     $scope.edit = false;
@@ -51,6 +52,20 @@ angular
       $scope.zone = new Zone({});
       $scope.edit = true;
       setColorPickerOptions();
+    };
+
+    /**
+     * @function
+     * @name searchJurisdictions
+     * @description Search jurisdictions by name
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchJurisdictions = function(query) {
+      return Jurisdiction.find({ q: query }).then(function(response) {
+        return response.jurisdictions;
+      });
     };
 
     //TODO show empty state if no zone selected

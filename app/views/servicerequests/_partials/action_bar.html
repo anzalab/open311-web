@@ -2,10 +2,10 @@
 <ul class="nav navbar-nav">
   <li ng-if="!servicerequest.operator" class="nav-item b-r p-r">
     <a
-      show-if-has-permit="servicerequest:attend"
+      show-if-has-permit="servicerequest:confirm"
       class="nav-link text-muted no-border"
-      title="Click To Attend Issue"
-      ng-click="onAttend()"
+      title="Click To Confirm Issue"
+      ng-click="onConfirm()"
     >
       <span class="nav-text">
         <i class="ion-ios-shuffle-strong"></i>
@@ -20,6 +20,17 @@
     >
       <span class="nav-text">
         <i class="icon-action-redo"></i>
+      </span>
+    </a>
+  </li>
+  <li ng-if="servicerequest.operator && canWatch()" class="nav-item b-l p-l">
+    <a
+      ng-click="onWatch()"
+      class="nav-link text-muted no-border"
+      title="Click to Watch Issue & Receive Updates"
+    >
+      <span class="nav-text">
+        <i class="ti-eye"></i>
       </span>
     </a>
   </li>
@@ -50,7 +61,7 @@
       title="Click To Mark Issue as Complete"
     >
       <span class="nav-text">
-        <i class="ti-check-box"></i>
+        <i class="ion-android-checkbox-outline"></i>
       </span>
     </a>
   </li>
@@ -65,7 +76,7 @@
       title="Click To Mark Issue as Verified"
     >
       <span class="nav-text">
-        <i class="ti-eye"></i>
+        <i class="ion-android-done-all"></i>
       </span>
     </a>
   </li>
@@ -80,8 +91,7 @@
       title="Click To Mark Issue as Approve"
     >
       <span class="nav-text">
-        <!--<i class="ti-ink-pen"></i>-->
-        <i class="ti-new-window"></i>
+        <i class="ion-android-checkmark-circle"></i>
       </span>
     </a>
   </li>

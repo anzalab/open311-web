@@ -1,10 +1,13 @@
-<!-- start service groups summary -->
+<!-- start workspaces summary -->
 <div class="padding m-t-md">
   <!-- start report box -->
   <div class="box b-a p-l-0">
     <!-- start header -->
-    <div class="box-header b-b p-t-md  p-b-md" title="Material Used Summary">
-      <h3>Material Used Summary</h3>
+    <div
+      class="box-header b-b p-t-md p-b-md"
+      title="Reporting Workspaces Summary"
+    >
+      <h3>Workspaces Summary</h3>
       <!-- <small>Sub title goes here with small font</small> -->
     </div>
     <!-- end header -->
@@ -19,9 +22,9 @@
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
-            ng-csv="export('items')"
-            csv-header="exports.items.headers"
-            filename="area_material_usage_reports_{{
+            ng-csv="export('workspaces')"
+            csv-header="exports.workspaces.headers"
+            filename="workspaces_operation_reports_{{
               filters.startedAt | date: settings.dateFormat
             }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
@@ -60,41 +63,70 @@
     <div>
       <div class="row-col">
         <!-- start tabular stats -->
-        <div class="col-sm-12">
+        <div class="col-sm-7">
           <table class="table table-bordered table-stats">
             <thead>
               <tr>
-                <th title="Material Name">
-                  Item
+                <th
+                  ng-click="prepareWorkspaceVisualization('count')"
+                  title="Workspace"
+                >
+                  Workspace
                 </th>
-                <th title="Quantity of material used">
-                  Quantity
+                <th
+                  ng-click="prepareWorkspaceVisualization('count')"
+                  title="Total Count of Service Requests"
+                >
+                  Total
                 </th>
-                <th title="Quantity of material used">
-                  Units
+                <th
+                  ng-click="prepareWorkspaceVisualization('pending')"
+                  title="Total Pending Count of Service Requests"
+                >
+                  Pending
+                </th>
+                <th
+                  ng-click="prepareWorkspaceVisualization('resolved')"
+                  title="Total Resolved Count of Service Requests"
+                >
+                  Resolved
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="item in operations.items">
-                <td title="{{ group.name }}">
-                  {{ item.name.en }}
+              <tr ng-repeat="workspace in operations.workspaces">
+                <td title="{{ workspace.name }}">
+                  {{ workspace.name }}
                 </td>
-                <td title="{{ group.count | number: 0 }}">
-                  {{ item.count | number: 0 }}
+                <td title="{{ workspace.count | number: 0 }}">
+                  {{ workspace.count | number: 0 }}
                 </td>
-                <td>
-                  {{ item.properties.unit }}
+                <td title="{{ workspace.pending | number: 0 }}">
+                  {{ workspace.pending | number: 0 }}
+                </td>
+                <td title="{{ workspace.resolved | number: 0 }}">
+                  {{ workspace.resolved | number: 0 }}
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <!-- end tabular stats -->
+
+        <!-- start visual stats -->
+        <div class="col-sm-5 b-l lt">
+          <div class="p-a-md">
+            <echart
+              config="perWorkspaceConfig"
+              options="perWorkspaceOptions"
+            ></echart>
+          </div>
+        </div>
+        <!-- end visual starts -->
       </div>
     </div>
     <!-- end body -->
   </div>
   <!-- end report box -->
 </div>
-<!-- end service groups summary -->
+<!-- end workspaces summary -->

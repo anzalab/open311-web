@@ -78,7 +78,18 @@
       items-per-page="limit"
       ng-change="find()"
       template-url="views/_partials/list_pager.html"
+      style="padding-left: 12px;"
+      role="group"
     ></div>
+    <div class="btn-group pull-right">
+      <a
+        title="Click To Refresh Priorities"
+        ng-click="find()"
+        class="btn btn-default btn-xs"
+      >
+        <i class="icon-reload"></i>
+      </a>
+    </div>
     <span class="text-sm text-muted">Total: {{ total }}</span>
   </div>
   <!-- end pagination -->

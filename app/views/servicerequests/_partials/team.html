@@ -1,0 +1,34 @@
+<!-- start issue team -->
+<div class="padding b-t">
+  <h6 class="m-b" title="Issue Team">Team</h6>
+  <ul class="list inset m-a-0">
+    <li
+      ng-if="member"
+      ng-repeat="member in servicerequest.team"
+      class="list-item"
+    >
+      <a href class="list-left">
+        <!-- TODO switch between actual image and letter avatar Use base64 uploader -->
+        <letter-avatar
+          title="{{member.name}}"
+          data="{{member.name}}"
+          height="40"
+          width="40"
+          shape="round"
+          fontSize="15"
+        >
+        </letter-avatar>
+      </a>
+      <div class="list-body">
+        <div>
+          <a href>{{member.name}}</a>
+        </div>
+        <small class="text-muted text-ellipsis">
+          {{member.relation.name ? member.relation.name :'N/A'}} /
+          {{member.relation.workspace ? member.relation.workspace : 'N/A' }}
+        </small>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- end issue team -->

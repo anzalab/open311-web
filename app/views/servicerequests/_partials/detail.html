@@ -38,6 +38,11 @@
                 {{servicerequest.jurisdiction.name}}
               </span>
               <br />
+              <span title="Zone Responsible">
+                <span class="text-muted font-size-10">Zone</span>
+                {{servicerequest.zone ? servicerequest.zone.name.en :'N/A'}}
+              </span>
+              <br />
               <span
                 ng-if="servicerequest.jurisdiction.phone && servicerequest.jurisdiction.phone != 'N/A'"
                 title="Area Phone Number"
@@ -226,6 +231,13 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue description -->
+        <!-- start issue team -->
+        <div
+          print-hide
+          ng-show="servicerequest.team && servicerequest.team.length > 0"
+          ng-include="'views/servicerequests/_partials/team.html'"
+        ></div>
+        <!-- end issue team -->
         <!-- start issue worklog(used material & equipment) -->
         <div
           ng-show="worklogs && worklogs.length > 0"

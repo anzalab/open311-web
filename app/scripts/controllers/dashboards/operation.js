@@ -32,26 +32,6 @@ angular
     $scope.servicetypes = endpoints.servicetypes.data;
     $scope.workspaces = party.settings.party.relation.workspaces;
     $scope.methods = party.settings.servicerequest.methods;
-    $scope.materials = [
-      { name: 'Adaptor Flange 10’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 10’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 12’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 12’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 3’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 3’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 4’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 4’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 6’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 6’’ PVC', quantity: 1 },
-      { name: 'Adaptor Flange 8’’ GS', quantity: 1 },
-      { name: 'Adaptor Flange 8’’ PVC', quantity: 1 },
-      { name: 'Air Valve 1" Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 1" Single Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 2"Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 2"Single Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 3"Double Acting (GS)', quantity: 1 },
-      { name: 'Air Valve 3"Single Acting (GS)', quantity: 1 },
-    ];
     $scope.reasons = [
       { name: 'No Transport', count: 3 },
       { name: 'No Materials', count: 10 },
@@ -137,6 +117,15 @@ angular
           'Average Resolution Time',
         ],
       },
+      items: {
+        headers: ['Material', 'Quantity'],
+      },
+      workspaces: {
+        headers: ['Name', 'Total', 'Pending', 'Resolved'],
+      },
+      assignees: {
+        headers: ['Name', 'Phone', 'Total', 'Pending', 'Resolved', 'Work Time'],
+      },
     };
 
     /**
@@ -144,6 +133,46 @@ angular
      */
     $scope.export = function(type) {
       var _exports = _.map($scope.operations[type], function(operation) {
+        if (type === 'items') {
+          operation = _.pick(operation, ['name', 'count']);
+
+          return _.merge({}, operation, { name: operation.name.en });
+        }
+
+        //reshape for workspace
+        if (type === 'workspaces') {
+          return (operation = _.pick(operation, [
+            'name',
+            'count',
+            'pending',
+            'resolved',
+          ]));
+        }
+
+        if (type === 'assignees') {
+          operation = _.pick(operation, [
+            'name',
+            'phone',
+            'count',
+            'pending',
+            'resolved',
+            'workTime',
+          ]);
+
+          operation.workTime = [
+            operation.workTime.days,
+            'days, ',
+            operation.workTime.hours,
+            'hrs, ',
+            operation.workTime.minutes,
+            'mins, ',
+            operation.workTime.seconds,
+            'secs, ',
+          ].join('');
+
+          return operation;
+        }
+
         operation = {
           name: operation.name,
           assigned: operation.assigned,
@@ -189,11 +218,6 @@ angular
               ].join('')
             : undefined,
         };
-
-        //reshape for workspace and channel
-        if (type === 'channels' || type === 'workspaces') {
-          operation = _.pick(operation, ['name', 'total']);
-        }
 
         if (type === 'services' || type === 'types') {
           operation = _.merge({}, operation, { name: operation.name.en });
@@ -271,9 +295,84 @@ angular
       ];
     };
 
+    /**
+     * prepare workspace overview visualization
+     * @return {object} echart pie chart configurations
+     * @version 0.1.0
+     * @since  0.1.0
+     * @author lally elias<lallyelias87@gmail.com>
+     */
+    $scope.prepareWorkspaceVisualization = function(column) {
+      //ensure column
+      column = column || 'count';
+
+      //prepare chart series data
+      var data = _.map($scope.operations.workspaces, function(workspace) {
+        return {
+          name: workspace.name,
+          value: workspace[column],
+        };
+      });
+
+      //prepare chart config
+      $scope.perWorkspaceConfig = {
+        height: 400,
+        forceClear: true,
+      };
+
+      //prepare chart options
+      $scope.perWorkspaceOptions = {
+        textStyle: {
+          fontFamily: 'Lato',
+        },
+        title: {
+          text:
+            column === 'count' ? 'Total' : _.upperFirst(column.toLowerCase()),
+          subtext: $filter('number')(_.sumBy(data, 'value'), 0),
+          x: 'center',
+          y: 'center',
+          textStyle: {
+            fontWeight: 'normal',
+            fontSize: 16,
+          },
+        },
+        tooltip: {
+          show: true,
+          trigger: 'item',
+          formatter: '{b}:<br/> Count: {c} <br/> Percent: ({d}%)',
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              name: 'Workspaces Overview - ' + new Date().getTime(),
+              title: 'Save',
+              show: true,
+            },
+          },
+        },
+        series: [
+          {
+            type: 'pie',
+            selectedMode: 'single',
+            radius: ['45%', '55%'],
+            color: _.reverse(_.map($scope.operations.services, 'color')),
+            label: {
+              normal: {
+                formatter: '{b}\n{d}%\n( {c} )',
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+    };
+
     $scope.prepare = function() {
       //shaping data
       $scope.prepareSummaries();
+
+      $scope.prepareWorkspaceVisualization();
 
       // prepare percentages for overall summary
       $scope.prepareOverallPercentages();
@@ -313,8 +412,6 @@ angular
         $scope.operations.overall.completed +
         $scope.operations.overall.verified +
         $scope.operations.overall.approved;
-
-      console.log(operationTotal);
 
       // check if overall data exists
       if (overallExists) {

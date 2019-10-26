@@ -1,11 +1,15 @@
-<!-- start service groups summary -->
+<!-- start leader board -->
 <div class="padding m-t-md">
-  <!-- start report box -->
   <div class="box b-a p-l-0">
     <!-- start header -->
-    <div class="box-header b-b p-t-md  p-b-md" title="Material Used Summary">
-      <h3>Material Used Summary</h3>
-      <!-- <small>Sub title goes here with small font</small> -->
+    <div class="box-header b-b p-t-md p-d-md">
+      <h3 title="Leader board">Assignee Leader board</h3>
+      <small
+        class="block text-muted"
+        title="Rank Based on Attending Service Requests"
+      >
+        Rank Based on Assigned Service Requests
+      </small>
     </div>
     <!-- end header -->
 
@@ -19,9 +23,9 @@
             title="Click To Export"
             class="btn btn-xs rounded white"
             aria-expanded="false"
-            ng-csv="export('items')"
-            csv-header="exports.items.headers"
-            filename="area_material_usage_reports_{{
+            ng-csv="export('assignees')"
+            csv-header="exports.assignees.headers"
+            filename="assignees_operation_reports_{{
               filters.startedAt | date: settings.dateFormat
             }}_{{ filters.endedAt | date: settings.dateFormat }}.csv"
           >
@@ -56,45 +60,59 @@
     </div>
     <!-- end toolbox -->
 
-    <!-- start body -->
     <div>
       <div class="row-col">
-        <!-- start tabular stats -->
         <div class="col-sm-12">
           <table class="table table-bordered table-stats">
             <thead>
               <tr>
                 <th title="Material Name">
-                  Item
+                  Name
                 </th>
-                <th title="Quantity of material used">
-                  Quantity
+                <th title="Total Assigned Service Requests">
+                  Total
                 </th>
-                <th title="Quantity of material used">
-                  Units
+                <th title="Pending Service Requests">
+                  Pending
+                </th>
+                <th title="Resolved Service Requests">
+                  Resolved
+                </th>
+                <th title="Time Taken to Complete Working on a Service Request">
+                  Work Time
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="item in operations.items">
-                <td title="{{ group.name }}">
-                  {{ item.name.en }}
-                </td>
-                <td title="{{ group.count | number: 0 }}">
-                  {{ item.count | number: 0 }}
+              <tr ng-repeat="assignee in operations.assignees">
+                <td>
+                  {{ assignee.name }}
                 </td>
                 <td>
-                  {{ item.properties.unit }}
+                  {{ assignee.count | number: 0 }}
+                </td>
+                <td>
+                  {{ assignee.pending | number: 0 }}
+                </td>
+                <td>
+                  {{ assignee.resolved | number: 0 }}
+                </td>
+                <td>
+                  <span>
+                    {{ assignee.workTime.days * 24 + assignee.workTime.hours }}
+                    <span class="text-muted text-xs">hrs</span>
+                  </span>
+                  <span>
+                    {{ assignee.workTime.minutes }}
+                    <span class="text-muted text-xs">mins</span>
+                  </span>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <!-- end tabular stats -->
       </div>
     </div>
-    <!-- end body -->
   </div>
-  <!-- end report box -->
 </div>
-<!-- end service groups summary -->
+<!-- end leader board -->
