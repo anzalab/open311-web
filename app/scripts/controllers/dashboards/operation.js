@@ -126,6 +126,20 @@ angular
       assignees: {
         headers: ['Name', 'Phone', 'Total', 'Pending', 'Resolved', 'Work Time'],
       },
+      zones: {
+        headers: [
+          'Zone',
+          'Total',
+          'Assigned',
+          'Attending',
+          'Completed',
+          'Verified',
+          'Approved',
+          'Average Attend Time',
+          'Average Work Time',
+          'Average Resolution Time',
+        ],
+      },
     };
 
     /**
@@ -175,6 +189,7 @@ angular
 
         operation = {
           name: operation.name,
+          total: operation.count,
           assigned: operation.assigned,
           attending: operation.attended,
           completed: operation.completed,
@@ -219,8 +234,15 @@ angular
             : undefined,
         };
 
-        if (type === 'services' || type === 'types') {
+        if (type === 'zones') {
           operation = _.merge({}, operation, { name: operation.name.en });
+        }
+
+        if (type === 'services' || type === 'types') {
+          operation = _.omit(
+            _.merge({}, operation, { name: operation.name.en }),
+            ['total']
+          );
         }
 
         return operation;
