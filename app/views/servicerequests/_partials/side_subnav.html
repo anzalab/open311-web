@@ -41,12 +41,12 @@
                 </a>
               </li>
               <li
-                ng-class="{active:misc == 'unattended'}"
+                ng-class="{active:misc == 'unconfirmed'}"
                 class="nav-item m-b-xs"
               >
                 <a
-                  show-if-has-permit="servicerequest:attend"
-                  ng-click="load({operator:{$eq:null}, resetPage:true, reset:true, misc:'unattended'})"
+                  show-if-has-permit="servicerequest:confirm"
+                  ng-click="load({operator:{$eq:null}, resetPage:true, reset:true, misc:'unconfirmed'})"
                   class="nav-link text-muted block"
                   title="Reported Issues Using Other Method Than Call Center"
                 >
@@ -79,12 +79,9 @@
                   Un-Approved
                 </a>
               </li>
-              <li
-                ng-class="{active:misc == 'unresolved'}"
-                class="nav-item m-b-xs"
-              >
+              <li ng-class="{active:misc == 'pending'}" class="nav-item m-b-xs">
                 <a
-                  ng-click="load({resolvedAt:{$eq:null}, operator:{$ne:null}, resetPage:true, reset:true, misc: 'unresolved'})"
+                  ng-click="load({resolvedAt:{$eq:null}, operator:{$ne:null}, resetPage:true, reset:true, misc: 'pending'})"
                   class="nav-link text-muted block"
                   title="Reported Issues Currently Not Resolved"
                 >

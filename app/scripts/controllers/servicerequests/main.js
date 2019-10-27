@@ -75,7 +75,7 @@ angular
     //signal create mode
     $scope.create = false;
 
-    //track current misc filter(all, inbox, unattended, unresolved, resolved)
+    //track current misc filter(all, inbox, unconfirmed, unverified, unapproved, pending, resolved)
     $scope.misc = 'inbox';
 
     //bind states
