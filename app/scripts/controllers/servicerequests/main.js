@@ -700,6 +700,7 @@ angular
               //TODO flag internal or public
               changer: party._id,
               resolvedAt: null,
+              reopenedAt: new Date(),
             };
 
             //update changelog

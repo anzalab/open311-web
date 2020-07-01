@@ -1,5 +1,28 @@
 <!-- start servicerequest detail action bar -->
 <ul class="nav navbar-nav">
+  <!--
+    ~ Action Order: (performed only once - performed often)
+    ~ Confirm
+    ~ Send|Share(ignored)
+    ~ Assign
+    ~ Watch
+    ~ Attend
+    ~ Complete
+    ~ Verify
+    ~ Approve
+    ~ Resolve
+    ~ Reopen
+    ~ Copy(ignored)
+    ~ Refresh(ignored)
+    ~ Log Material
+    ~ Attach Document(ignored)
+    ~ Take Picture|Photo
+    ~ Record Video(ignored)
+    ~ Change Location
+    ~ Add Member
+    ~ Comment
+    ~ Print(ignored)
+    -->
   <li ng-if="!servicerequest.operator" class="nav-item b-r p-r">
     <a
       show-if-has-permit="servicerequest:confirm"
@@ -23,7 +46,10 @@
       </span>
     </a>
   </li>
-  <li ng-if="servicerequest.operator && canWatch()" class="nav-item b-l p-l">
+  <li
+    ng-if="servicerequest.operator && !servicerequest.resolvedAt && canWatch()"
+    class="nav-item b-l p-l"
+  >
     <a
       ng-click="onWatch()"
       class="nav-link text-muted no-border"
@@ -158,6 +184,7 @@
     class="nav-item b-l p-l"
   >
     <a
+      show-if-has-permit="servicerequest:reopen"
       ng-click="onReOpen()"
       class="nav-link text-muted no-border"
       title="Click To Re-Open The Issue"
