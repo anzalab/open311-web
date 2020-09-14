@@ -80,18 +80,6 @@
                 </a>
               </li>
               <li
-                show-if-has-any-permit="priority:view"
-                ui-sref-active="active"
-                class="nav-item m-b-xs"
-              >
-                <a
-                  ui-sref="app.manage.priorities"
-                  class="nav-link text-muted block"
-                >
-                  Priorities
-                </a>
-              </li>
-              <li
                 show-if-has-any-permit="status:view"
                 ui-sref-active="active"
                 class="nav-item m-b-xs"
@@ -101,6 +89,18 @@
                   class="nav-link text-muted block"
                 >
                   Statuses
+                </a>
+              </li>
+              <li
+                show-if-has-any-permit="priority:view"
+                ui-sref-active="active"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  ui-sref="app.manage.priorities"
+                  class="nav-link text-muted block"
+                >
+                  Priorities
                 </a>
               </li>
               <li
@@ -116,6 +116,50 @@
           </div>
         </div>
         <!-- end services menu -->
+        <!-- start quality control menu -->
+        <div
+          class="p-a-md"
+          show-if-has-any-permit="qualitycause:view, qualitymeasure:view, qualityadvisory:view"
+        >
+          <div class="m-b text-muted text-xs" title="Quality Control Settings">
+            Quality Control
+          </div>
+          <div class="nav-active-white">
+            <ul class="nav">
+              <li
+                show-if-has-any-permit="qualitycause:view"
+                ui-sref-active="active"
+                class="nav-item m-b-xs"
+              >
+                <a
+                  ui-sref="app.manage.qualitycauses"
+                  class="nav-link text-muted block"
+                >
+                  Causes
+                </a>
+              </li>
+              <li
+                show-if-has-any-permit="qualitymeasure:view"
+                ui-sref-active="active"
+                class="nav-item m-b-xs"
+              >
+                <a ui-sref="app.manage.roles" class="nav-link text-muted block">
+                  Measures
+                </a>
+              </li>
+              <li
+                show-if-has-any-permit="qualityadvisory:view"
+                ui-sref-active="active"
+                class="nav-item m-b-xs"
+              >
+                <a ui-sref="app.manage.roles" class="nav-link text-muted block">
+                  Advisories
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- end quality control menu -->
         <!-- start statuses menu -->
         <div class="p-a-md" show-if-has-any-permit="user:view, role:view">
           <div class="m-b text-muted text-xs" title="General Settings">
