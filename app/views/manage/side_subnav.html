@@ -155,7 +155,10 @@
                 ui-sref-active="active"
                 class="nav-item m-b-xs"
               >
-                <a ui-sref="app.manage.roles" class="nav-link text-muted block">
+                <a
+                  ui-sref="app.manage.qualityadvisories"
+                  class="nav-link text-muted block"
+                >
                   Advisories
                 </a>
               </li>
@@ -165,8 +168,8 @@
         <!-- end quality control menu -->
         <!-- start statuses menu -->
         <div class="p-a-md" show-if-has-any-permit="user:view, role:view">
-          <div class="m-b text-muted text-xs" title="General Settings">
-            General
+          <div class="m-b text-muted text-xs" title="User Management">
+            User Management
           </div>
           <div class="nav-active-white">
             <ul class="nav">

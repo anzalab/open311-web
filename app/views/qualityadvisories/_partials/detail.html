@@ -1,0 +1,97 @@
+<!-- start qualityadvisory details -->
+<div class="row-col">
+  <div class="white b-b bg">
+    <!-- start qualityadvisory action bar -->
+    <div
+      ng-include="'views/qualityadvisories/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end qualityadvisory details action bar -->
+  </div>
+  <!-- start qualityadvisory body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="qualityAdvisoryForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Advisory Code">
+                  <div class="form-group">
+                    <label title="Advisory Code" class="floating-label"
+                      >Code</label
+                    >
+                    <input
+                      title="Advisory Code"
+                      ng-disabled="!edit"
+                      ng-model="qualityadvisory.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Advisory Name">
+                  <div class="form-group">
+                    <label title="Advisory Name" class="floating-label"
+                      >Name</label
+                    >
+                    <input
+                      title="Advisory Name"
+                      ng-disabled="!edit"
+                      ng-model="qualityadvisory.name.en"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Advisory Color">
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Advisory Color" class="floating-label"
+                        >Color(HEX)</label
+                      >
+                      <color-picker
+                        ng-model="qualityadvisory.color"
+                        options="colorPickerOptions"
+                      >
+                      </color-picker>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Advisory Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      title="Advisory Description"
+                      ng-disabled="!edit"
+                      ng-model="qualityadvisory.description.en"
+                      msd-elastic
+                      name="description"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end qualityadvisory body -->
+</div>
+<!-- end qualityadvisory details -->
