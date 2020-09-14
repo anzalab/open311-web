@@ -2,22 +2,22 @@
 
 /**
  * @ngdoc function
- * @name ng311.controller:QualityCauseIndexCtrl
+ * @name ng311.controller:QualityMeasureIndexCtrl
  * @description
- * # QualityCauseIndexCtrl
- * QualityCause list controller of ng311
+ * # QualityMeasureIndexCtrl
+ * QualityMeasure list controller of ng311
  */
 angular
   .module('ng311')
-  .controller('QualityCauseIndexCtrl', function(
+  .controller('QualityMeasureIndexCtrl', function(
     $rootScope,
     $scope,
     $state,
-    QualityCause
+    QualityMeasure
   ) {
-    //qualitycauses in the scope
+    //qualitymeasures in the scope
     $scope.spin = false;
-    $scope.qualitycauses = [];
+    $scope.qualitymeasures = [];
     $scope.page = 1;
     $scope.limit = 10;
     $scope.total = 0;
@@ -35,27 +35,27 @@ angular
     };
 
     /**
-     * set current qualitycause request
+     * set current qualitymeasure request
      */
-    $scope.select = function(qualitycause) {
+    $scope.select = function(qualitymeasure) {
       //sort comments in desc order
-      if (qualitycause && qualitycause._id) {
-        //update scope qualitycause request ref
-        $scope.qualitycause = qualitycause;
-        $rootScope.$broadcast('qualitycause:selected', qualitycause);
+      if (qualitymeasure && qualitymeasure._id) {
+        //update scope qualitymeasure request ref
+        $scope.qualitymeasure = qualitymeasure;
+        $rootScope.$broadcast('qualitymeasure:selected', qualitymeasure);
       }
 
       $scope.create = false;
     };
 
     /**
-     * @description load qualitycauses
+     * @description load qualitymeasures
      */
     $scope.find = function() {
       //start sho spinner
       $scope.spin = true;
 
-      QualityCause.find({
+      QualityMeasure.find({
         page: $scope.page,
         limit: $scope.limit,
         sort: {
@@ -65,12 +65,12 @@ angular
         q: $scope.q,
       })
         .then(function(response) {
-          //update scope with qualitycauses when done loading
-          $scope.qualitycauses = response.qualitycauses;
+          //update scope with qualitymeasures when done loading
+          $scope.qualitymeasures = response.qualitymeasures;
           if ($scope.updated) {
             $scope.updated = false;
           } else {
-            $scope.select(_.first($scope.qualitycauses));
+            $scope.select(_.first($scope.qualitymeasures));
           }
           $scope.total = response.total;
           $scope.spin = false;
@@ -80,18 +80,18 @@ angular
         });
     };
 
-    //check whether qualitycauses will paginate
+    //check whether qualitymeasures will paginate
     $scope.willPaginate = function() {
       var willPaginate =
-        $scope.qualitycauses && $scope.total && $scope.total > $scope.limit;
+        $scope.qualitymeasures && $scope.total && $scope.total > $scope.limit;
       return willPaginate;
     };
 
-    //pre load qualitycauses on state activation
+    //pre load qualitymeasures on state activation
     $scope.find();
 
     //listen for events
-    $rootScope.$on('app:qualitycauses:reload', function() {
+    $rootScope.$on('app:qualitymeasures:reload', function() {
       $scope.find();
     });
   });

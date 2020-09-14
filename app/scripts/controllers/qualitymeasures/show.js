@@ -2,19 +2,19 @@
 
 /**
  * @ngdoc function
- * @name ng311.controller:QualityCauseShowCtrl
+ * @name ng311.controller:QualityMeasureShowCtrl
  * @description
- * # QualityCauseShowCtrl
- * QualityCause show controller of ng311
+ * # QualityMeasureShowCtrl
+ * QualityMeasure show controller of ng311
  */
 angular
   .module('ng311')
-  .controller('QualityCauseShowCtrl', function(
+  .controller('QualityMeasureShowCtrl', function(
     $rootScope,
     $scope,
     $state,
     $stateParams,
-    QualityCause
+    QualityMeasure
   ) {
     $scope.edit = false;
 
@@ -44,43 +44,43 @@ angular
     $scope.onCancel = function() {
       $scope.edit = false;
       setColorPickerOptions();
-      $rootScope.$broadcast('app:qualitycauses:reload');
+      $rootScope.$broadcast('app:qualitymeasures:reload');
     };
 
     $scope.onNew = function() {
-      $scope.qualitycause = new QualityCause({});
+      $scope.qualitymeasure = new QualityMeasure({});
       $scope.edit = true;
       setColorPickerOptions();
     };
 
-    //TODO show empty state if no qualitycause selected
-    //listen for selected qualitycause
-    $rootScope.$on('qualitycause:selected', function(event, qualitycause) {
-      $scope.qualitycause = qualitycause;
+    //TODO show empty state if no qualitymeasure selected
+    //listen for selected qualitymeasure
+    $rootScope.$on('qualitymeasure:selected', function(event, qualitymeasure) {
+      $scope.qualitymeasure = qualitymeasure;
     });
 
     /**
-     * @description save created qualitycause
+     * @description save created qualitymeasure
      */
     $scope.save = function() {
       //TODO show input prompt
       //TODO show loading mask
 
-      //try update or save qualitycause
-      var updateOrSave = !$scope.qualitycause._id
-        ? $scope.qualitycause.$save()
-        : $scope.qualitycause.$update();
+      //try update or save qualitymeasure
+      var updateOrSave = !$scope.qualitymeasure._id
+        ? $scope.qualitymeasure.$save()
+        : $scope.qualitymeasure.$update();
 
       updateOrSave
         .then(function(response) {
           response = response || {};
 
           response.message =
-            response.message || 'Quality Cause Saved Successfully';
+            response.message || 'Quality Measure Saved Successfully';
 
           $rootScope.$broadcast('appSuccess', response);
 
-          $rootScope.$broadcast('app:qualitycauses:reload');
+          $rootScope.$broadcast('app:qualitymeasures:reload');
 
           $scope.edit = false;
           setColorPickerOptions();
