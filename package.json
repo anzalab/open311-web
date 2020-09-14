@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "homepage": "https://github.com/CodeTanzania/open311-web/",
   "scripts": {
+    "start": "grunt serve",
     "format": "prettier --write \"app/**/*.{html,css,js}\""
   },
   "bugs": {

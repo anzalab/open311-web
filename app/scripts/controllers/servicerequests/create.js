@@ -28,6 +28,11 @@ angular
 
     $scope.groups = endpoints.servicegroups.servicegroups;
     $scope.methods = party.settings.servicerequest.webMethods;
+    $scope.genders = party.settings.servicerequest.genders;
+    // $scope.genders = ['Male', 'Female', 'Unknown'];
+
+    //initialize scope attributes
+    $scope.maxDate = new Date();
 
     //instantiate new service request
     var servicerequest = _.merge(

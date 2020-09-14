@@ -9,7 +9,7 @@
           ng-enter="onSearch()"
           ng-model="search.q"
           class="form-control form-control-sm"
-          placeholder="Search Issues ..."
+          placeholder="Search services ..."
         />
         <span class="input-group-btn">
           <button
@@ -70,7 +70,7 @@
               <small class="block text-xs text-muted text-ellipsis">
                 <span title="Reporter Name">
                   <i class="icon-user"></i
-                  >&nbsp;&nbsp;{{(_servicerequest.reporter.name) || 'NA'}}
+                  >&nbsp;&nbsp;{{(_servicerequest.reporter.account) || 'NA'}}
                 </span>
                 <span class="pull-right" title="Reporter Phone Number">
                   <i class="icon-phone"></i

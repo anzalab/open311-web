@@ -4,7 +4,7 @@
   <div class="b-b bg">
     <div class="box-header" style="padding:1.2rem;">
       <h2>
-        Report New Issue
+        Record New Service
       </h2>
     </div>
   </div>
@@ -22,8 +22,8 @@
           >
             <div class="box">
               <div class="box-header">
-                <h6 title="Reporter or Customer Details">
-                  Reporter Details
+                <h6 title="Reporter or Client Details">
+                  Client Details
                 </h6>
               </div>
               <div class="box-body">
@@ -31,7 +31,7 @@
                   <!--start phone input-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label title="Reporter or Customer Phone Number">
+                      <label title="Reporter or Client Phone Number">
                         Phone
                       </label>
                       <input
@@ -42,79 +42,103 @@
                         type="text"
                         name="phone"
                         class="form-control"
-                        title="Reporter or Customer Phone Number"
+                        title="Reporter or Client Phone Number"
                       />
                     </div>
                   </div>
                   <!--end phone input-->
-                  <!--start name input-->
+                  <!--start client number-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label title="Reporter or Customer Name">
-                        Name
+                      <label title="Reporter or Client Number">
+                        Client Number
                       </label>
                       <input
-                        ng-model="servicerequest.reporter.name"
+                        ng-model="servicerequest.reporter.account"
                         ng-required
                         ng-minlength="2"
                         type="text"
-                        name="name"
+                        name="account"
                         class="form-control"
-                        title="Reporter or Customer Name"
+                        title="Reporter or Client Number"
                       />
                     </div>
                   </div>
-                  <!--end name input-->
+                  <!--end client number-->
                 </div>
                 <div class="row m-b">
-                  <!--start account input-->
+                  <!--start district input-->
                   <div class="col-sm-6">
-                    <label title="Reporter or Customer Account Number">
-                      Account
+                    <label title="Reporter or Client District">
+                      District
                     </label>
-                    <div class="form-group">
-                      <div class="input-group">
-                        <input
-                          ng-model="servicerequest.reporter.account"
-                          type="text"
-                          name="account"
-                          class="form-control"
-                          title="Reporter or Customer Account Number"
-                        />
-                        <span class="input-group-btn">
-                          <button
-                            ng-disabled="!servicerequest.reporter.account"
-                            ng-click="openLookupModal()"
-                            class="btn btn-secondary"
-                            type="button"
-                            title="Click to Lookup for Customer Account Details"
-                          >
-                            <i class="icon-magnifier"></i>
-                          </button>
-                        </span>
-                      </div>
+                    <div
+                      class="form-group form-material"
+                      title="Select District"
+                    >
+                      <oi-select
+                        oi-options="item.name for item in searchJurisdictions($query) track by item.id"
+                        ng-model="servicerequest.jurisdiction"
+                        ng-required
+                        placeholder="Select District"
+                        class="form-control"
+                      ></oi-select>
                     </div>
                   </div>
-                  <!--end account input-->
+                  <!--end district input-->
                   <!--start email input-->
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label title="Reporter or Customer Email Address">
-                        Email
+                      <label title="Reporter or Client Email Address">
+                        Age
                       </label>
                       <input
-                        ng-model="servicerequest.reporter.email"
-                        type="email"
-                        name="email"
+                        ng-model="servicerequest.reporter.age"
+                        type="number"
+                        name="age"
                         class="form-control"
-                        title="Reporter or Customer Email Address"
+                        title="Reporter or Client Email Address"
+                        min="0"
+                        step="1"
                       />
                     </div>
                   </div>
                   <!--end email input input-->
                 </div>
+                <!-- start: gender  -->
+                <div class="row m-b">
+                  <div class="col-sm-12">
+                    <label title="Reporter or Client Gender">
+                      Gender
+                    </label>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-2 m-b" ng-repeat="gender in genders">
+                          <div>
+                            <label class="md-check" title="Client Gender">
+                              <input
+                                type="radio"
+                                ng-model="servicerequest.reporter.gender"
+                                ng-value="gender"
+                                name="gender"
+                              />
+                              <i class="blue"></i> {{ gender }}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end: gender -->
+                <!-- start: screening form -->
+                <div
+                  ng-include="'views/servicerequests/_partials/screening_form.html'"
+                ></div>
+                <!-- end: screening form -->
+                <!-- start: communication method -->
                 <div class="p-t p-b" style="margin-top: 2rem;">
-                  <h6 title="Communication Method Used by Reporter To Report">
+                  <h6 title="Communication Method Used">
                     Communication Method
                   </h6>
                 </div>
@@ -124,7 +148,7 @@
                     <div>
                       <label
                         class="md-check"
-                        title="Method of Communication used by Reporter"
+                        title="Method of Communication Used"
                       >
                         <input
                           type="radio"
@@ -138,9 +162,11 @@
                   </div>
                   <!--end communication method input-->
                 </div>
+                <!-- end: communication method -->
+                <!-- start: service details -->
                 <div class="p-t p-b m-t" style="margin-top: 4rem;">
                   <h6 title="Issue Details">
-                    Issue Details
+                    Service Details
                   </h6>
                 </div>
                 <div class="row m-b">
@@ -181,7 +207,7 @@
                 <div class="row m-b">
                   <div class="col-sm-12">
                     <div class="form-group">
-                      <label title="Reporter or Customer Address">
+                      <label title="Reporter or Client Address">
                         Address
                       </label>
                       <textarea
@@ -191,7 +217,7 @@
                         name="address"
                         class="form-control"
                         rows="2"
-                        title="Reporter or Customer Address"
+                        title="Reporter or Client Address"
                       >
                       </textarea>
                     </div>
@@ -220,6 +246,7 @@
                 </div>
               </div>
               <!--end description input-->
+              <!-- end: service details -->
               <!--start form actions -->
               <div class="p-a text-right">
                 <button
@@ -232,7 +259,7 @@
                   Cancel
                 </button>
                 <button
-                  ng-disabled="servicerequestForm.$invalid || !servicerequest.reporter.phone || !servicerequest.reporter.name || !servicerequest.service || !servicerequest.jurisdiction || !servicerequest.address || !servicerequest.description"
+                  ng-disabled="servicerequestForm.$invalid || !servicerequest.reporter.phone || !servicerequest.service || !servicerequest.jurisdiction || !servicerequest.address || !servicerequest.description"
                   type="submit"
                   class="btn info"
                   title="Click to Submit"

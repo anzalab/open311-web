@@ -15,65 +15,37 @@
         <div class="padding">
           <!-- start servicerequest service -->
           <h4 class="_600">
-            <span title="Issue Nature">
+            <span title="Service Nature">
               {{servicerequest.service.name}}
             </span>
-            -
-            <span title="Issue Number">
-              #{{servicerequest.code}}
-            </span>
             <span class="pull-right font-size-14">
-              <span title="Issue Group/Category">
-                <span class="text-muted font-size-10">Group</span>
-                {{servicerequest.group.name}}
-              </span>
               <br />
-              <span title="Issue Type">
-                <span class="text-muted font-size-10">Type</span>
-                {{servicerequest.type.name.en}}
-              </span>
-              <br />
-              <span title="Area Responsible">
-                <span class="text-muted font-size-10">Area</span>
-                {{servicerequest.jurisdiction.name}}
-              </span>
-              <br />
-              <span title="Zone Responsible">
-                <span class="text-muted font-size-10">Zone</span>
-                {{servicerequest.zone ? servicerequest.zone.name.en :'N/A'}}
-              </span>
-              <br />
-              <span
-                ng-if="servicerequest.jurisdiction.phone && servicerequest.jurisdiction.phone != 'N/A'"
-                title="Area Phone Number"
-              >
-                <span class="text-muted font-size-10">Phone</span>
-                {{servicerequest.jurisdiction.phone}}
+              <span title="Ticket Number">
+                <span class="text-muted font-size-10">Ticket #: </span>
+                {{servicerequest.code}}
               </span>
             </span>
           </h4>
           <!-- end servicerequest service -->
           <div class="p-y">
-            <div title="Reporter Name">
-              <span class="text-muted font-size-12">From: </span>
-              <span ng-click="filterByReporter(servicerequest.reporter.name)"
-                >{{servicerequest.reporter.name}}</span
-              >
+            <div title="Client Number">
+              <span class="text-muted font-size-12">Client #: </span>
+              <span>{{servicerequest.reporter.account}}</span>
             </div>
-            <div title="Reporter Account Number">
-              <span class="text-muted font-size-12">Account #: </span>
-              <span ng-click="filterByReporter(servicerequest.reporter.account)"
-                >{{servicerequest.reporter.account}}</span
-              >
+            <div title="Gender">
+              <span class="text-muted font-size-12">Gender: </span>
+              <span>{{servicerequest.reporter.gender}}</span>
             </div>
-            <div title="Reporter Phone Number">
-              <span class="text-muted font-size-12">Phone #: </span>
-              <span ng-click="filterByReporter(servicerequest.reporter.phone)"
-                >{{servicerequest.reporter.phone}}</span
-              >
+            <div title="Age">
+              <span class="text-muted font-size-12">Age: </span>
+              <span>{{servicerequest.reporter.age}}</span>
             </div>
-            <div title="Reporter Address">
-              <span class="text-muted font-size-12">Address: </span>
+            <div title="Reporter District">
+              <span class="text-muted font-size-12">District: </span>
+              <span>{{servicerequest.jurisdiction.name}}</span>
+            </div>
+            <div title="Reporter Ward">
+              <span class="text-muted font-size-12">Ward: </span>
               <span>{{servicerequest.address}}</span>
             </div>
             <div title="Communication Method">
@@ -231,13 +203,6 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue description -->
-        <!-- start issue team -->
-        <div
-          print-hide
-          ng-show="servicerequest.team && servicerequest.team.length > 0"
-          ng-include="'views/servicerequests/_partials/team.html'"
-        ></div>
-        <!-- end issue team -->
         <!-- start issue worklog(used material & equipment) -->
         <div
           ng-show="worklogs && worklogs.length > 0"
@@ -263,40 +228,6 @@
           <p>&nbsp;</p>
         </div>
         <!-- end issue map -->
-        <!-- start issue images -->
-        <div
-          print-hide
-          class="padding b-t"
-          ng-show="images && images.length > 0"
-        >
-          <h6 class="m-b" title="Issue Images">Images</h6>
-          <ng-gallery images="images"></ng-gallery>
-        </div>
-        <!-- end issue images -->
-        <!-- start issue documents -->
-        <div
-          print-hide
-          class="padding b-t"
-          ng-show="documents && documents.length > 0"
-        >
-          <h6 class="m-b" title="Issue Images">Documents</h6>
-          <div>
-            <a
-              ng-repeat="document in documents"
-              href="{{document.download}}"
-              class="block m-b-xs"
-              target="_blank"
-              title="{{document.filename}}"
-            >
-              <span class="label">{{document.type}}</span>
-              {{document.filename}}
-              <small class="m-l text-muted">
-                {{document.length | prettyBytes}}
-              </small>
-            </a>
-          </div>
-        </div>
-        <!-- end issue documents -->
         <!-- start issue comment -->
         <div
           print-hide
