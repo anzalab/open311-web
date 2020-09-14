@@ -1,0 +1,97 @@
+<!-- start qualitymeasure details -->
+<div class="row-col">
+  <div class="white b-b bg">
+    <!-- start qualitymeasure action bar -->
+    <div
+      ng-include="'views/qualitymeasures/_partials/action_bar.html'"
+      class="navbar"
+    ></div>
+    <!-- end qualitymeasure details action bar -->
+  </div>
+  <!-- start qualitymeasure body -->
+  <div class="row-row">
+    <div class="row-body">
+      <div class="row-inner">
+        <div class="padding">
+          <form
+            ng-submit="save()"
+            name="qualityCauseForm"
+            role="form"
+            autocomplete="off"
+            novalidate
+          >
+            <div class="box">
+              <div class="box-body">
+                <div class="m-b" title="Measure Code">
+                  <div class="form-group">
+                    <label title="Measure Code" class="floating-label"
+                      >Code</label
+                    >
+                    <input
+                      title="Measure Code"
+                      ng-disabled="!edit"
+                      ng-model="qualitymeasure.code"
+                      ng-required
+                      ng-minlength="1"
+                      type="text"
+                      name="code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Measure Name">
+                  <div class="form-group">
+                    <label title="Measure Name" class="floating-label"
+                      >Name</label
+                    >
+                    <input
+                      title="Measure Name"
+                      ng-disabled="!edit"
+                      ng-model="qualitymeasure.name.en"
+                      ng-required
+                      ng-minlength="2"
+                      type="text"
+                      name="name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Measure Color">
+                  <div class="m-t-lg">
+                    <div class="form-group">
+                      <label title="Measure Color" class="floating-label"
+                        >Color(HEX)</label
+                      >
+                      <color-picker
+                        ng-model="qualitymeasure.color"
+                        options="colorPickerOptions"
+                      >
+                      </color-picker>
+                    </div>
+                  </div>
+                </div>
+                <div class="m-t-lg" title="Measure Description">
+                  <div class="form-group">
+                    <label class="floating-label">Description</label>
+                    <textarea
+                      title="Measure Description"
+                      ng-disabled="!edit"
+                      ng-model="qualitymeasure.description.en"
+                      msd-elastic
+                      name="description"
+                      class="form-control"
+                      rows="3"
+                    >
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end qualitymeasure body -->
+</div>
+<!-- end qualitymeasure details -->
