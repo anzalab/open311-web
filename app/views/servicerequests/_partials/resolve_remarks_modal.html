@@ -1,0 +1,113 @@
+<!-- modal header -->
+<div class="modal-header">
+  <div class="b-b">
+    <button
+      type="button"
+      class="close pull-right"
+      ng-click="$close()"
+      aria-hidden="true"
+    >
+      ×
+    </button>
+    <h4 class="modal-title">Quality Control</h4>
+  </div>
+</div>
+<!-- end modal header -->
+
+<!-- modal body -->
+<div class="modal-body">
+  <div class="box">
+    <div class="m-l-lg m-r-lg">
+      <form role="form">
+        <!-- start root cause input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Root Cause
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group form-material" title="Select Item">
+              <oi-select
+                oi-options="cause.name.en for cause in searchQualityCauses($query) track by cause.id"
+                ng-model="quality.cause"
+                placeholder="Select Root Cause"
+                class="form-control"
+                oi-select-options="{cleanModel: true}"
+              ></oi-select>
+            </div>
+          </div>
+        </div>
+        <!-- end root cause input -->
+
+        <!-- start action taken input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Action Taken
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group form-material" title="Select Item">
+              <oi-select
+                oi-options="measure.name.en for measure in searchQualityMeasures($query) track by measure.id"
+                ng-model="quality.measure"
+                placeholder="Select Action Taken"
+                class="form-control"
+                oi-select-options="{cleanModel: true}"
+              ></oi-select>
+            </div>
+          </div>
+        </div>
+        <!-- end action taken input -->
+
+        <!-- start way forward input -->
+        <div class="row m-t-sm">
+          <div class="col-md-12">
+            <div class="p-a p-l-none">
+              <h6 class="m-a-0">
+                Way Forward
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group form-material" title="Select Item">
+              <oi-select
+                oi-options="advisory.name.en for advisory in searchQualityAdvisories($query) track by advisory.id"
+                ng-model="quality.advisory"
+                placeholder="Select Way Forward"
+                class="form-control"
+                oi-select-options="{cleanModel: true}"
+              ></oi-select>
+            </div>
+          </div>
+        </div>
+        <!-- end way forward input -->
+      </form>
+    </div>
+    <!-- end account accessor list -->
+  </div>
+  <!-- start filter footer -->
+  <div class="modal-footer">
+    <button
+      class="btn btn-default"
+      title="Click to Cancel"
+      ng-click="$dismiss()"
+    >
+      Cancel
+    </button>
+    <button
+      class="btn btn-primary"
+      title="Click to Save Remarks"
+      ng-click="resolveWithRemarks()"
+    >
+      Save
+    </button>
+  </div>
+  <!-- end footer filter -->
+</div>
+<!-- end modal body -->

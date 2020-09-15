@@ -23,6 +23,9 @@ angular
     Item,
     Comment,
     Message,
+    QualityCause,
+    QualityMeasure,
+    QualityAdvisory,
     Summary,
     endpoints,
     party
@@ -33,6 +36,7 @@ angular
     $scope.comments = [];
     $scope.worklogs = [];
     $scope.worklog = {};
+    $scope.quality = {};
     $scope.servicerequest = new ServiceRequest({
       call: {
         startedAt: new Date(),
@@ -605,7 +609,7 @@ angular
         ],
       })
         .then(function() {
-          if (!$scope.servicerequest.vefifiedAt) {
+          if (!$scope.servicerequest.verifiedAt) {
             var changelog = {
               //TODO flag internal or public
               changer: party._id,
@@ -674,6 +678,158 @@ angular
           }
         })
         .catch(function() {});
+    };
+
+    /**
+     * @function
+     * @name onResolveWithRemarks
+     * @description Resolve service request with a room to provide quality measures
+     */
+    $scope.onResolveWithRemarks = function() {
+      prompt({
+        title: 'Resolve Issue',
+        message: 'Are you sure you want to mark this issue as resolved?',
+        buttons: [
+          {
+            label: 'Yes',
+            primary: true,
+          },
+          {
+            label: 'No',
+            cancel: true,
+          },
+        ],
+      }).then(function() {
+        $scope.showResolveRemarksModal();
+      });
+    };
+
+    /**
+     * @function
+     * @name showResolveRemarksModal
+     * @description Show modal window for input resolve remarks
+     */
+    $scope.showResolveRemarksModal = function() {
+      $scope.quality = {
+        cause: $scope.servicerequest.cause,
+        measure: $scope.servicerequest.measure,
+        advisory: $scope.servicerequest.advisory,
+      };
+
+      //open resolve remarks modal
+      $scope.modal = $uibModal.open({
+        templateUrl:
+          'views/servicerequests/_partials/resolve_remarks_modal.html',
+        scope: $scope,
+        size: 'lg',
+      });
+
+      //handle modal close and dismissed
+      $scope.modal.result.then(
+        function onClose(/*selectedItem*/) {},
+        function onDismissed() {
+          console.log('Dismissed');
+        }
+      );
+    };
+
+    /**
+     * @function
+     * @name searchQualityCauses
+     * @description Search Root causes
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchQualityCauses = function(query) {
+      return QualityCause.find({
+        filter: {
+          deletedAt: {
+            $eq: null,
+          },
+        },
+        q: query,
+      }).then(function(response) {
+        return response.qualitycauses;
+      });
+    };
+
+    /**
+     * @function
+     * @name searchQualityMeasures
+     * @description Search Measures/action taken
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchQualityMeasures = function(query) {
+      return QualityMeasure.find({
+        filter: {
+          deletedAt: {
+            $eq: null,
+          },
+        },
+        q: query,
+      }).then(function(response) {
+        return response.qualitymeasures;
+      });
+    };
+
+    /**
+     * @function
+     * @name searchQualityAdvisories
+     * @description Search Advisories/ Way forward
+     *
+     * @version 0.1.0
+     * @since 0.1.0
+     */
+    $scope.searchQualityAdvisories = function(query) {
+      return QualityAdvisory.find({
+        filter: {
+          deletedAt: {
+            $eq: null,
+          },
+        },
+        q: query,
+      }).then(function(response) {
+        return response.qualityadvisories;
+      });
+    };
+
+    /**
+     * @function
+     * @name resolveWithRemarks
+     * @description Close and resolve issue with remarks
+     */
+    $scope.resolveWithRemarks = function() {
+      var resolvedAt = $scope.servicerequest.resolvedAt;
+
+      var changelog = {
+        //TODO flag internal or public
+        changer: party._id,
+        cause: $scope.quality.cause,
+        measure: $scope.quality.measure,
+        advisory: $scope.quality.advisory,
+        resolvedAt: resolvedAt ? undefined : new Date(),
+      };
+
+      //update changelog
+      var _id = $scope.servicerequest._id;
+      ServiceRequest.changelog(_id, changelog).then(function(response) {
+        // $scope.servicerequest = response;
+        $scope.select(response);
+        $scope.updated = true;
+
+        $scope.modal.close();
+        $scope.quality = {};
+        $rootScope.$broadcast('app:servicerequests:reload');
+
+        response = response || {};
+
+        response.message = response.message || 'Issue Marked As Resolved';
+
+        $rootScope.$broadcast('appSuccess', response);
+      });
     };
 
     /**
