@@ -170,12 +170,27 @@
   >
     <a
       show-if-has-permit="servicerequest:resolve"
-      ng-click="onResolve()"
+      ng-click="onResolveWithRemarks()"
       class="nav-link text-muted no-border"
       title="Click To Resolve and Signal Feedback Provided To Reporter"
     >
       <span class="nav-text">
         <i class="icon-call-out"></i>
+      </span>
+    </a>
+  </li>
+  <li
+    ng-if="servicerequest.operator && servicerequest.resolvedAt && (!servicerequest.cause || !servicerequest.measure || !servicerequest.advisory)"
+    class="nav-item b-l p-l"
+  >
+    <a
+      show-if-has-permit="servicerequest:control quality"
+      ng-click="showResolveRemarksModal()"
+      class="nav-link text-muted no-border"
+      title="Click To Perform Quality Control Checks"
+    >
+      <span class="nav-text">
+        <i class="icon-tag"></i>
       </span>
     </a>
   </li>
