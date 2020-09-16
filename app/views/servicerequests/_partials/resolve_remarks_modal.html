@@ -101,6 +101,7 @@
       Cancel
     </button>
     <button
+      ng-disabled=" !quality.cause || !quality.measure"
       class="btn btn-primary"
       title="Click to Save Remarks"
       ng-click="resolveWithRemarks()"
