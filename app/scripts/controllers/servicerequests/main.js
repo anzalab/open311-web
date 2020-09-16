@@ -727,9 +727,7 @@ angular
       //handle modal close and dismissed
       $scope.modal.result.then(
         function onClose(/*selectedItem*/) {},
-        function onDismissed() {
-          console.log('Dismissed');
-        }
+        function onDismissed() {}
       );
     };
 
