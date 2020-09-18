@@ -1,0 +1,30 @@
+<!-- start quality control checks -->
+
+<!-- start issue cause -->
+<div class="padding b-t">
+  <h6 class="m-b" title="Root Cause">Root Cause</h6>
+  <p class="text-lt">
+    {{servicerequest.cause ? servicerequest.cause.name.en :'N/A'}}
+  </p>
+</div>
+<!-- end issue cause -->
+
+<!-- start issue measure -->
+<div class="padding b-t">
+  <h6 class="m-b" title="Action Taken">Action Taken</h6>
+  <p class="text-lt">
+    {{servicerequest.measure ? servicerequest.measure.name.en :'N/A'}}
+  </p>
+</div>
+<!-- end issue measure -->
+
+<!-- start issue advisory -->
+<div class="padding b-t">
+  <h6 class="m-b" title="Way Forward">Way Forward</h6>
+  <p class="text-lt">
+    {{servicerequest.advisory ? servicerequest.advisory.name.en :'N/A'}}
+  </p>
+</div>
+<!-- end issue advisory -->
+
+<!-- end quality control checks -->

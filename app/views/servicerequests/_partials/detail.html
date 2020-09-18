@@ -228,9 +228,15 @@
           <p class="text-lt">
             {{servicerequest.description}}
           </p>
-          <p>&nbsp;</p>
         </div>
         <!-- end issue description -->
+        <!-- start quality control checks -->
+        <div
+          print-hide
+          ng-show="servicerequest.resolvedAt"
+          ng-include="'views/servicerequests/_partials/quality_control_checks.html'"
+        ></div>
+        <!-- end quality control checks -->
         <!-- start issue team -->
         <div
           print-hide

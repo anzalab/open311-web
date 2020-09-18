@@ -83,6 +83,15 @@
               of {{ comment.zone.name.en }} zone
             </span>
           </p>
+          <p ng-if="comment.cause && comment.cause.name">
+            Change root cause to, {{ comment.cause.name.en }}
+          </p>
+          <p ng-if="comment.measure && comment.measure.name">
+            Change action taken to, {{ comment.measure.name.en }}
+          </p>
+          <p ng-if="comment.advisory && comment.advisory.name">
+            Change way foward to, {{ comment.advisory.name.en }}
+          </p>
           <p ng-if="comment.resolvedAt">
             Change status to
             <span
